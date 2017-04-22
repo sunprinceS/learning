@@ -1,0 +1,74 @@
+baseurl = "https://sunprinces.github.io/learning/"
+languageCode = "en-us"
+title = "Stay hungry. Stay foolish "
+theme = "blackburn"
+contentdir = "content"
+layoutdir = "layouts"
+publishdir = "public"
+author = "Jui-Yang Hsu"
+copyright = "&copy; 2017. All rights reserved."
+canonifyurls = true
+paginate = 10
+
+[indexes]
+  tag = "tags"
+  topic = "topics"
+
+[permalinks]
+  post = "/:year/:month/:title/"
+
+[params]
+  # Shown in the home page
+  subtitle = "Algorithm / Programming / Machine Learning"
+  brand = "hi<br>hi"
+  googleAnalytics = "UA-59748795-3"
+  disqus = "tonyhsu822"
+  katex = true
+  # CSS name for highlight.js
+  highlightjs = "monokai"
+  dateFormat = "02 Jan 2006"
+
+[menu]
+  # Shown in the side menu.
+  [[menu.main]]
+    name = "Home"
+    pre = "<i class='fa fa-home fa-fw'></i>"
+    weight = 0
+    identifier = "home"
+    url = "/"
+  [[menu.main]]
+    name = "About"
+    pre = "<i class='fa fa-user fa-fw'></i>"
+    weight = 1
+    identifier = "about"
+    url = "/about/"
+  [[menu.main]]
+    name = "Posts"
+    pre = "<i class='fa fa-list fa-fw'></i>"
+    weight = 2
+    identifier = "post"
+    url = "/post/"
+  [[menu.main]]
+    name = "Topics"
+    pre = "<i class='fa fa-folder fa-fw'></i>"
+    weight = 3
+    identifier = "topic"
+    url = "/topics/"
+  [[menu.main]]
+    name = "Tags"
+    pre = "<i class='fa fa-tags fa-fw'></i>"
+    weight = 4
+    identifier = "tag"
+    url = "/tags/"
+  [[menu.main]]
+    name = "Contact"
+    pre = "<i class='fa fa-phone-square fa-fw'></i>"
+    weight = 5
+    identifier = "contact"
+    url = "/contact/"
+
+[social]
+  # Link your social networking accouns to the side menu
+  # by entering your username or ID.
+  instagram = "sunprince822"
+  github = "sunprinceS"
