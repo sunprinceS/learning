@@ -2,23 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sunprinces.github.io/learning/2017/04/hello-world/</loc>
+    <lastmod>2017-04-22T12:35:32+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/about/</loc>
     <lastmod>2016-01-03T13:12:48+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://sunprinces.github.io/learning/tags/hugo/</loc>
+    <lastmod>2017-04-22T12:35:32+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/topics/misc/</loc>
+    <lastmod>2017-04-22T12:35:32+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/post/</loc>
+    <lastmod>2017-04-22T12:35:32+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/</loc>
-    <lastmod>2016-01-03T13:12:48+00:00</lastmod>
+    <lastmod>2017-04-22T12:35:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/</loc>
+    <lastmod>2017-04-22T12:35:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/</loc>
+    <lastmod>2017-04-22T12:35:32+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/tags/web-development/</loc>
+    <lastmod>2017-04-22T12:35:32+08:00</lastmod>
     <priority>0</priority>
   </url>
   
