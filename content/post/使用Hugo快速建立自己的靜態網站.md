@@ -28,7 +28,11 @@ hugo server --buildDrafts # 在local端同步顯示
 ```bash
 hugo undraft content/post/[文章名稱].md # 不再是草稿囉
 hugo # generate
+
+# 第一次需要，將generate出來的html跟src放在同個資料夾下，但在不同 branch上管理
 git worktree add -B gh-pages public origin/pages
-git commit
-git push origin gh-pages
+
+git add . & git commit -m "new post" & git push
+git checkout gh-pages
+git add . & git commit -m "new post" & git push
 ```
