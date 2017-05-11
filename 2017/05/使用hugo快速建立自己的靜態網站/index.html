@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="generator" content="Hugo 0.20.2" />
 
-  <title>Posts &middot; Stay hungry. Stay foolish </title>
+  <title>使用Hugo快速建立自己的靜態網站 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -36,8 +36,6 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
-  
-  <link rel="alternate" type="application/rss+xml" title="Stay hungry. Stay foolish " href="https://sunprinces.github.io/learning/post/index.xml" />
   
 
   
@@ -116,10 +114,6 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
-    </li>
     
 
     
@@ -229,41 +223,132 @@
 
 
 <div class="header">
-  <h1>Posts</h1>
+  <h1>使用Hugo快速建立自己的靜態網站</h1>
+  <h2></h2>
 </div>
 <div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>11 May 2017</time>
+  </div>
+
   
-  <h2>2017</h2>
-  <div class="pure-g">
+
   
-    <div class="pure-u-1-24">
-  &bull;
-</div>
-<div class="pure-u-16-24">
-  <a href="https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/">使用Hugo快速建立自己的靜態網站</a>
-</div>
-<div class="pure-u-2-24">
-  &nbsp;
-</div>
-<div class="pure-u-5-24">
-  <time>11 May 2017</time>
-</div>
   
-    <div class="pure-u-1-24">
-  &bull;
-</div>
-<div class="pure-u-16-24">
-  <a href="https://sunprinces.github.io/learning/2017/04/hello-world/">Hello World</a>
-</div>
-<div class="pure-u-2-24">
-  &nbsp;
-</div>
-<div class="pure-u-5-24">
-  <time>22 Apr 2017</time>
-</div>
   
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/%E7%B6%B2%E9%A0%81%E9%96%8B%E7%99%BC">網頁開發</a>
+    
   </div>
   
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/hugo">hugo</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/static-site-generator">static site generator</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  <p>一直以來，看到網路上許多大神的個人網站實在相當精彩，架一個自己個人網站的念頭一直都有。這學期剛好時間比較多，想說給自己先起個頭，紀錄一些學習上，思想上的思緒，算是個人的數位典藏吧XD。</p>
+
+<p></p>
+
+<p>仔細想了一下架構，覺得把像書評/影評之類的文章，與一些 Paper Report ，開放式課程的筆記放在一起有些混雜，故目前的規劃是有一個 <a href="https://sunprinces.github.io/">landing page</a> 當作最一開始的入口，上頭有一些 tab 分別連到其他網站，諸如 <a href="https://sunprincelife.wordpress.com/">life</a> 紀錄一些感悟，及書籍與電影的觀後感， <a href="https://sunprinces.github.io/#travel">travel</a> 使用了 Google Map API 最基本的功能，用來紀錄自己旅行的足跡，當中的每個小卡片可以連到 life 中的文章( Romance for engineer ♡ )，最後則是當前這個網站， learning ，用來紀錄自己專業上學習的一些筆記(數學，演算法等等)，而透由在網路上分享，更是一種精鍊的過程，也可以讓自己的理解更加穩固和透徹吧！於是便動手尋找適合的平台，一般的 blog 顯然不符合我的需求，至少得要有 code block ，還有讓我用美美的 <span>$\KaTeX$</span> 吧XD！有許多大牛的大陸 CSDN 博客覺得太醜，直接自己硬幹 html 又覺得許多時間會花在調適一下跟技術與知識無關的東西上頭@@，日前意外發現 LeoMao 大神 star 了一個 hugo 的 Repo ，研究了一下應該會拿來當日後的技術及學習筆記。希望這篇是一個好的開始 :D</p>
+
+<p>像 Hugo 這類 static site generator 的好處可以用簡單的語法(如 Markdown )來寫網站，後頭會根據寫好的模板，自己幫你渲染成 html ，而前人也已經寫好許多功能，如 topic , tag 管理等，算是集一般部落格的方便上手，與自幹 html 的 flexibility 於一身，而且整個網頁都是靜態的緣故，可以直接免費託管在 github page 上，可說是十分方便。</p>
+
+<p>以下是簡單的工作流程</p>
+
+<pre><code class="language-bash">hugo new post/[文章名稱].md # 產生一篇新的文章
+hugo server --buildDrafts # 在local端同步顯示
+</code></pre>
+
+<p>在確認我們的文章顯示與內容都符合我們的需求後，就可以正式 commit 了✌</p>
+
+<pre><code class="language-bash">hugo undraft content/post/[文章名稱].md # 不再是草稿囉
+hugo # generate
+git worktree add -B gh-pages public origin/pages
+git commit
+git push origin gh-pages
+</code></pre>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/04/hello-world/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/04/hello-world/">Hello World</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "\\(", right: "\\)", display: false},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+
+
 </div>
 
 </div>
