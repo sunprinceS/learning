@@ -33,6 +33,7 @@ hugo # generate
 git worktree add -B gh-pages public origin/pages
 
 git add . & git commit -m "new post" & git push
-git checkout gh-pages
+cd public
 git add . & git commit -m "new post" & git push
+
 ```
