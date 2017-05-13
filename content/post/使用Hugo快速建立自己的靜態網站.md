@@ -4,36 +4,82 @@ description = ""
 draft = false
 tags = ["hugo","static site generator"]
 title = "使用Hugo快速建立自己的靜態網站"
-topics = ["網頁開發"]
+topics = ["Web Development"]
 
 +++
 
-一直以來，看到網路上許多大神的個人網站實在相當精彩，架一個自己個人網站的念頭一直都有。這學期剛好時間比較多，想說給自己先起個頭，紀錄一些學習上，思想上的思緒，算是個人的數位典藏吧XD。
+
+像 Hugo 這類 static site generator 的好處是可以用簡單的語法(如 Markdown)來寫網站，其會根據寫好的模板，自己幫你渲染成 html ，而前人也已經寫好許多功能，如 topic , tag 管理等，算是集一般部落格的方便上手，與自幹 html 的 flexibility 於一身，而且整個網頁都是靜態的緣故，可以直接免費託管在 github page 等免費的網頁空間上，維護上可說是十分方便。
 
 <!--more-->
 
-仔細想了一下架構，覺得把像書評/影評之類的文章，與一些 Paper Report ，開放式課程的筆記放在一起有些混雜，故目前的規劃是有一個 [landing page](https://sunprinces.github.io/) 當作最一開始的入口，上頭有一些 tab 分別連到其他網站，諸如 [life](https://sunprincelife.wordpress.com/) 紀錄一些感悟，及書籍與電影的觀後感， [travel](https://sunprinces.github.io/#travel) 使用了 Google Map API 最基本的功能，用來紀錄自己旅行的足跡，當中的每個小卡片可以連到 life 中的文章( Romance for engineer ♡ )，最後則是當前這個網站， learning ，用來紀錄自己專業上學習的一些筆記(數學，演算法等等)，而透由在網路上分享，更是一種精鍊的過程，也可以讓自己的理解更加穩固和透徹吧！於是便動手尋找適合的平台，一般的 blog 顯然不符合我的需求，至少得要有 code block ，還有讓我用美美的 <span>$\KaTeX$</span> 吧XD！有許多大牛的大陸 CSDN 博客覺得太醜，直接自己硬幹 html 又覺得許多時間會花在調適一下跟技術與知識無關的東西上頭@@，日前意外發現 LeoMao 大神 star 了一個 hugo 的 Repo ，研究了一下應該會拿來當日後的技術及學習筆記。希望這篇是一個好的開始 :D
-
-像 Hugo 這類 static site generator 的好處可以用簡單的語法(如 Markdown )來寫網站，後頭會根據寫好的模板，自己幫你渲染成 html ，而前人也已經寫好許多功能，如 topic , tag 管理等，算是集一般部落格的方便上手，與自幹 html 的 flexibility 於一身，而且整個網頁都是靜態的緣故，可以直接免費託管在 github page 上，可說是十分方便。
-
-以下是簡單的工作流程
-
+## Basic
+我們利用以下指令建置一個簡單的 Hugo-managed website 的 scaffold (先裝好 Hugo)。
 ```bash
-hugo new post/[文章名稱].md # 產生一篇新的文章
-hugo server --buildDrafts # 在local端同步顯示
+hugo new site [資料夾名稱]
 ```
+其中的 **config.toml** 定義了一些會套用到整個網站的參數，可以自己去設定。
 
-在確認我們的文章顯示與內容都符合我們的需求後，就可以正式 commit 了✌
+**layout** 與 **themes** 資料夾下的眾 html ，則是定義了我們的 md 檔要如何被 render 成 html。
+
+Github 上已經有非常多漂亮的 themes 可供使用，也附帶了許多部落格該有的管理功能，在 themes 下把他們 clone下來，並在 config.toml 的 theme 中設定該主題的名稱。(我是使用 [blackburn](https://github.com/sunprinceS/blackburn) 這個主題，但通常想做一些客製化的更動，比方說加入 $\KaTeX$ 或是加自己的 icon 之類，所以就 fork 了一份來維護囉！)
+
+完成好基本的外觀設定後，我們可以利用以下指令新增文章
+```bash
+hugo new post/[文章名稱].md
+```
+如果打開剛剛產生的 md 檔，以現在這篇為例，會看到以下產生的內容
+```markdown
++++
+date = "2017-05-11T17:54:03+08:00"
+description = ""
+draft = true
+tags = []
+title = "文章名稱"
+topics = []
++++
+```
+依樣畫葫蘆地填上各欄位的 attribute， 其中 draft 若為 true 的話，在生成 html 的過程中，是不會被 render 的，工作流程如以下
 
 ```bash
+# 在 local 端同步顯示，確定文章顯示與內容符合所想
+hugo server --buildDrafts
 hugo undraft content/post/[文章名稱].md # 不再是草稿囉
-hugo # generate
-
-# 第一次需要，將generate出來的html跟src放在同個資料夾下，但在不同 branch上管理
-git worktree add -B gh-pages public origin/pages
-
-git add . & git commit -m "new post" & git push
-cd public
-git add . & git commit -m "new post" & git push
-
 ```
+
+## Git worktree
+為了方便管理我們原先的 source 檔案與生成的 html 檔，我們將生成的 html 都放在單一個資料夾下(在 config.toml 中的 publishdir 設定)，我們想在 master 這個 branch 管理各種設定檔與 markdown，而 gh-pages 則是管理生成的 html ，那如何在同一個 repo 下完成這件事情呢？這時候 **git worktree** 就派上用場了！他可以讓我們藉由 ``cd`` 到不同的資料夾， checkout 至不同的 branch 上。
+
+如前面所說，在 master 上，我們不希望 html 檔案們在這個 branch 被 track，所以先將 publishdir 加入 .gitignore 中。接著利用以下指令創建之後要用來管理 html 的 gh-pages 。
+```bash
+# gh-pages 和 master 是完全獨立的兩分支
+git checkout --orphan gh-pages
+git reset --hard
+git commit --allow-empty -m "Initializing gh-pages branch"
+git push origin gh-pages
+git checkout master # 回到 master 上做事
+```
+
+使用 worktree 來 maintain gh-pages 這個 branch
+```bash
+git worktree add -B gh-pages [publishdir] origin/gh-pages
+```
+到此準備完成，在確認完我們的文章顯示與內容都符合我們的需求後，就可以正式 publish 了✌
+
+## How to publish
+以下是每產生一篇新的文章後，將文章 publish 的流程
+```bash
+hugo # generate html，這時候 publishdir下會 generate 新文章的 html
+git add .
+git commit -m "add new post [文章名稱]"
+# publish on gh-pages
+cd [publishdir] # 你會發現你已經在不同 branch 上了
+git add .
+git commit -m "add new post [文章名稱]"
+cd ..
+git push origin gh-pages # 大功告成！
+```
+
+## Reference
+* [Quick Start](https://gohugo.io/overview/quickstart/)
+* [Hosting on GitHub Pages](https://gohugo.io/tutorials/github-pages-blog/)
