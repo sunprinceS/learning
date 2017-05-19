@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
+  <meta name="description" content="Introduction">
   <meta name="generator" content="Hugo 0.20.2" />
 
-  <title>Stay hungry. Stay foolish </title>
+  <title>Algorithmic Game Theory - Lecture1 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -36,8 +36,6 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
-  
-  <link rel="alternate" type="application/rss+xml" title="Stay hungry. Stay foolish " href="https://sunprinces.github.io/learning/index.xml" />
   
 
   
@@ -116,10 +114,6 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://sunprinces.github.io/learning/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
-    </li>
     
 
     
@@ -229,17 +223,12 @@
 
 
 <div class="header">
-  <h1>Stay hungry. Stay foolish </h1>
-  <h2>Algorithm / Programming / Machine Learning</h2>
+  <h1>Algorithmic Game Theory - Lecture1</h1>
+  <h2>Introduction</h2>
 </div>
-
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/">Algorithmic Game Theory - Lecture1</a></h2>
 
-    <div class="post-meta">
+  <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
@@ -280,136 +269,138 @@
 
 </div>
 
-  </header>
-
-  <p>
   <p>這學期因緣際會之下，選了商研所的賽局，上起課來的感覺跟 EECS 著實差異頗大，直白的文字敘述及直覺居多（課後作業還是電影欣賞），考試也多以申論為主(但即使這樣，期中考還是考了全班最高分XD)，碰巧在網路上找到了這門課程，覺得相當有趣，以資訊科學的角度出發， formulate 各種所謂「直覺」的經濟學想法，去解決現實世界的問題，聽了前兩堂課，感覺之後也會用到不少這學期修的高等演算法的概念，算是相輔相成，希望自己有毅力聽完，並整理筆記囉 :D</p>
-  </p>
 
-  
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
+<p>
+課程有以下三個部份</p>
 
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/">使用Hugo快速建立自己的靜態網站</a></h2>
+<h2 id="mechanism-design">Mechanism Design</h2>
 
-    <div class="post-meta">
+<p>We want to design a system for <strong>strategic</strong> participants with <strong>good</strong> performance.</p>
 
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>11 May 2017</time>
-  </div>
+<p><strong>strategic</strong> 表示 agent/participant 會以自己的利益為第一優先 (i.e the objective is to maximize their own benefit)，但是 <strong>good</strong> 與否則是由 designer 所定義的，而好的 mechanism 需要使 agent 與 designer 的 incentive 彼此間是互相 aligned 的，也就是說不好的 mechanism，會因 agent 追求自己的最大利益，而使結果不如 designer 預期。 (example: 2012 倫敦奧運的羽球放水事件)</p>
 
-  
+<p>以下這段話相當有意思，也點明了 mechanism design 的重要性。</p>
 
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/web-development">Web Development</a>
-    
-  </div>
-  
-  
+<blockquote>
+<p>“ The burden lies on the system designer to anticipate strategic behavior, not on the participants to behave against their own interest. ”</p>
+</blockquote>
 
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/hugo">hugo</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/static-site-generator">static site generator</a>
-    
-  </div>
-  
-  
+<p>像是說，如果沒有定義好股市的遊戲規則，那就不能怪罪有能力的商人去 exploit ，攫取自身的最大利益；又或是，若政府及企業沒有提供給人才適合的 pay 及發展環境，就不該冀望在人才外流時，他們還能能懷著愛國的情操留下來為國家奉獻一樣，&hellip;</p>
 
+<h2 id="can-selfish-behavior-be-near-optimal">Can selfish behavior be near optimal</h2>
+
+<p>我們定義 <strong>Price of Anarchy (POA)</strong> 來描述自利行為與最優解 (everything is under control) 之間的比例 (一個 approx. ratio 的概念)</p>
+
+<div>
+\[
+ POA = \frac{cost(REAL)}{cost(OPT)}
+\]
 </div>
 
-  </header>
+<p>當 POA 越趨近於 1，表示自利行為越接近 optimal。</p>
 
-  <p>
-  <p>像 Hugo 這類 static site generator 的好處是可以用簡單的語法(如 Markdown)來寫網站，其會根據寫好的模板，自己幫你渲染成 html ，而前人也已經寫好許多功能，如 topic , tag 管理等，算是集一般部落格的方便上手，與自幹 html 的 flexibility 於一身，而且整個網頁都是靜態的緣故，可以直接免費託管在 github page 等免費的網頁空間上，維護上可說是十分方便。</p>
+<h3 id="example-braess-s-paradox">Example : Braess&rsquo;s paradox</h3>
 
-<p></p>
-  </p>
+<p><img src="http://imgur.com/a/BE8o4" alt="Braess's Paradox" /></p>
+
+<p>(The figure is from <a href="http://theory.stanford.edu/~tim/f13/l/l1.pdf">here</a>)</p>
+
+<p>未加中間的通道之前為 <strong>everything is under control</strong> (i.e 禁止 agent 走此 teleport )，其中 <span>$c(x) = x$</span> 跟 <span>$c(x) = 1$</span> 相比，至少都是前者較好，所以每個 agent 在<strong>可以選擇</strong>的時候，都會湧向 <span>$c(x) = x$</span> 的道路。</p>
+
+<p>(此例的 <span>$POA = \frac{2}{1.5} = \frac{4}{3}$<span>)</p>
+
+<p>原因: Nash Eq. <span>$\neq$</span> 社會最優</p>
+
+<p>Corollary: Selfish routing <strong>DOESN&rsquo;T</strong> minimize commute time</p>
+
+<h2 id="how-do-strategic-players-reach-an-equilbrium">How do strategic players reach an equilbrium</h2>
+
+<p>在說明<strong>如何</strong>達到 eq. 之前，得先考慮該 eq. 是否存在</p>
+
+<h3 id="nash-existence-theorem">Nash Existence Theorem</h3>
+
+<blockquote>
+<p>If we allow <strong>mixed strategy</strong>, then every game with finite number of players who can choose finite number of actions has <strong>at least</strong> one Nash Eq.</p>
+</blockquote>
+
+<!--據此 Theorem，考慮 2-player game，我們有-->
+
+<!--Every bimatrix game has **at least** one Nash Eq.-->
+
+<p>確定了存在性，那 agent 該如何達到此 Eq. ?</p>
+
+<p>課堂上概略提到了幾個 facts:</p>
+
+<ul>
+<li>若是零和賽局，存在 <span>$\mathbf{POLY}$</span> 時間的演算法求出 Nash Eq.</li>
+
+<li><p>對非零和賽局而言，找 Nash Eq. 非 <span>$\mathbf{NP-hard}$</span> 除非 <span>$NP = coNP$</span></p>
+
+<p><span>$\rightarrow \mathbf{PPAD-hard}$</span></p></li>
+</ul>
+
+<p>我們利用 Nash Eq. 來作為預測 agent 行為的 predictor (同理，完全理性的 agent 在做出 action 時，也會考慮其他 agent based on 此而做出的的 action)。但第二個 fact 說明了一件事情，若我們承許 <span>$P \neq NP$</span> ，則 Turing Machine 不存在有效率的解法找到均衡點，那算力不如它的 agent 更不可能找到均衡點，所以把 Nash Eq. 當作 agent behavior 的 predictor 就顯得沒有意義了&hellip; ☹</p>
 
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/04/hello-world/">Hello World</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>22 Apr 2017</time>
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/"><i class="fa fa-chevron-left"></i></a>
+    
   </div>
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
+  <div class="pure-u-10-24">
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/misc">misc</a>
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/">使用Hugo快速建立自己的靜態網站</a>
+    </nav>
     
   </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/hugo">hugo</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/web-development">web development</a>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
     
   </div>
-  
-  
-
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
 </div>
 
-  </header>
 
-  <p>
-  <p>你好</p>
-
-<p></p>
-  </p>
 
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/04/hello-world/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
 
   
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "\\(", right: "\\)", display: false},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
 
-  
+
 
 
 </div>

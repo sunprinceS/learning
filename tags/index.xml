@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Thu, 11 May 2017 17:54:03 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 19 May 2017 19:49:52 +0800</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Algorithm</title>
+      <link>https://sunprinces.github.io/learning/tags/algorithm/</link>
+      <pubDate>Fri, 19 May 2017 19:49:52 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Game Theory</title>
+      <link>https://sunprinces.github.io/learning/tags/game-theory/</link>
+      <pubDate>Fri, 19 May 2017 19:49:52 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/tags/game-theory/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Hugo</title>
@@ -18,6 +36,24 @@
       <pubDate>Thu, 11 May 2017 17:54:03 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Open Course</title>
+      <link>https://sunprinces.github.io/learning/tags/open-course/</link>
+      <pubDate>Fri, 19 May 2017 19:49:52 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/tags/open-course/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Stanford</title>
+      <link>https://sunprinces.github.io/learning/tags/stanford/</link>
+      <pubDate>Fri, 19 May 2017 19:49:52 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/tags/stanford/</guid>
       <description></description>
     </item>
     

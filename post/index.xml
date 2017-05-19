@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Thu, 11 May 2017 17:54:03 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 19 May 2017 19:49:52 +0800</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Algorithmic Game Theory - Lecture1</title>
+      <link>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/</link>
+      <pubDate>Fri, 19 May 2017 19:49:52 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/</guid>
+      <description>&lt;p&gt;這學期因緣際會之下，選了商研所的賽局，上起課來的感覺跟 EECS 著實差異頗大，直白的文字敘述及直覺居多（課後作業還是電影欣賞），考試也多以申論為主(但即使這樣，期中考還是考了全班最高分XD)，碰巧在網路上找到了這門課程，覺得相當有趣，以資訊科學的角度出發， formulate 各種所謂「直覺」的經濟學想法，去解決現實世界的問題，聽了前兩堂課，感覺之後也會用到不少這學期修的高等演算法的概念，算是相輔相成，希望自己有毅力聽完，並整理筆記囉 :D&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>使用Hugo快速建立自己的靜態網站</title>
