@@ -1,6 +1,6 @@
 +++
 date = "2017-05-11T17:54:03+08:00"
-description = ""
+description = "Hugo 101"
 draft = false
 tags = ["hugo","static site generator"]
 title = "使用Hugo快速建立自己的靜態網站"
