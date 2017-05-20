@@ -1,5 +1,5 @@
 +++
-date = "2017-05-19T19:49:52+08:00"
+date = "2017-05-15T19:49:52+08:00"
 description = "Introduction"
 draft = false
 tags = ["Game Theory","Algorithm","Open Course","Stanford"]
@@ -16,13 +16,13 @@ topics = ["Algorithmic Game Theory"]
 ## Mechanism Design
 We want to design a system for **strategic** participants with **good** performance.
 
-**strategic** 表示 agent/participant 會以自己的利益為第一優先 (i.e the objective is to maximize their own benefit)，但是 **good** 與否則是由 designer 所定義的，而好的 mechanism 需要使 agent 與 designer 的 incentive 彼此間是互相 aligned 的，也就是說不好的 mechanism，會因 agent 追求自己的最大利益，而使結果不如 designer 預期。 (example: 2012 倫敦奧運的羽球放水事件)
+**strategic** 表示 agent/participant 會以自己的利益為第一優先 (i.e the objective is to maximize their own benefit)，但是 **good** 與否則是由 designer 所定義的，而好的 mechanism 需要使 agent 與 designer 的 incentive 彼此間是互相 aligned 的，也就是說不好的 mechanism，會因 agent 追求自己的最大利益，而使結果不如 designer 預期。 (example: 2012 倫敦奧運的羽球女雙放水事件)
 
 以下這段話相當有意思，也點明了 mechanism design 的重要性。
 
 > “ The burden lies on the system designer to anticipate strategic behavior, not on the participants to behave against their own interest. ”
 
-像是說，如果沒有定義好股市的遊戲規則，那就不能怪罪有能力的商人去 exploit ，攫取自身的最大利益；又或是，若政府及企業沒有提供給人才適合的 pay 及發展環境，就不該冀望在人才外流時，他們還能能懷著愛國的情操留下來為國家奉獻一樣，...
+像是說，如果沒有定義好股市的遊戲規則，那就不能怪罪有能力的商人去 exploit ，攫取自身的最大利益；又或是，若政府及企業沒有提供給人才適合的 pay 及發展環境，就不該冀望在人才外流時，他們還能能懷著愛國的情操留下來為國家奉獻一樣...
 
 ## Can selfish behavior be near optimal
 
@@ -37,13 +37,16 @@ We want to design a system for **strategic** participants with **good** performa
 當 POA 越趨近於 1，表示自利行為越接近 optimal。
 
 ### Example : Braess's paradox
-![Braess's Paradox](http://imgur.com/a/BE8o4)
+考慮一群人要從 <span>$ s \rightarrow t$</span>，有兩種 type 的道路可選，其中一條 cost 為 constant 1，另一條的 cost 則是根據在其上的 agent 之比例 (如果全部的agent都通過此，則 cost = 1)決定。
+
+{{% fluid_img src="/img/post/baraessParadox.png" alt="Braess's Paradox" %}}
+
 
 (The figure is from [here](http://theory.stanford.edu/~tim/f13/l/l1.pdf))
 
 未加中間的通道之前為 **everything is under control** (i.e 禁止 agent 走此 teleport )，其中 <span>$c(x) = x$</span> 跟 <span>$c(x) = 1$</span> 相比，至少都是前者較好，所以每個 agent 在**可以選擇**的時候，都會湧向 <span>$c(x) = x$</span> 的道路。
 
-(此例的 <span>$POA = \frac{2}{1.5} = \frac{4}{3}$<span>)
+(此例的 <span>$POA = \frac{1 + 1}{1 + 0.5} = \frac{4}{3}$<span>)
 
 原因: Nash Eq. <span>$\neq$</span> 社會最優
 
