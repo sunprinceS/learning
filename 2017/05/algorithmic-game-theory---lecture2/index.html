@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Introduction">
+  <meta name="description" content="Mechanism Design Basics">
   <meta name="generator" content="Hugo 0.20.2" />
 
-  <title>Algorithmic Game Theory - Lecture1 &middot; Stay hungry. Stay foolish </title>
+  <title>Algorithmic Game Theory - Lecture2 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -223,8 +223,8 @@
 
 
 <div class="header">
-  <h1>Algorithmic Game Theory - Lecture1</h1>
-  <h2>Introduction</h2>
+  <h1>Algorithmic Game Theory - Lecture2</h1>
+  <h2>Mechanism Design Basics</h2>
 </div>
 <div class="content">
 
@@ -232,7 +232,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>15 May 2017</time>
+    <time>20 May 2017</time>
   </div>
 
   
@@ -269,96 +269,115 @@
 
 </div>
 
-  <p>這學期因緣際會之下，選了商研所的賽局，上起課來的感覺跟 EECS 著實差異頗大，直白的文字敘述及直覺居多（課後作業還是電影欣賞），考試也多以申論為主(但即使這樣，期中考還是考了全班最高分XD)，碰巧在網路上找到了這門課程，覺得相當有趣，以資訊科學的角度出發， formulate 各種所謂「直覺」的經濟學想法，去解決現實世界的問題，聽了前兩堂課，感覺之後也會用到不少這學期修的高等演算法的概念，算是相輔相成，希望自己有毅力聽完，並整理筆記囉 :D</p>
+  <p>Lecture1 提到了我們需要透由好的 mechanism，使得 agent 與 designer 的 incentive 彼此 aligned。這講從最簡單的 <strong>Single-item Auction</strong> 開始，探討該如何設計合理的 mechanism。</p>
 
-<p>
-課程有以下三個部份</p>
+<p></p>
 
-<h2 id="mechanism-design">Mechanism Design</h2>
+<h3 id="single-item-auction">Single-Item Auction</h3>
 
-<p>We want to design a system for <strong>strategic</strong> participants with <strong>good</strong> performance.</p>
+<p>1 seller wants to sell 1 good.</p>
 
-<p><strong>strategic</strong> 表示 agent/participant 會以自己的利益為第一優先 (i.e the objective is to maximize their own benefit)，但是 <strong>good</strong> 與否則是由 designer 所定義的，而好的 mechanism 需要使 agent 與 designer 的 incentive 彼此間是互相 aligned 的，也就是說不好的 mechanism，會因 agent 追求自己的最大利益，而使結果不如 designer 預期。 (example: 2012 倫敦奧運的羽球女雙放水事件)</p>
+<p>There are n strategic bidders want to buy the good with their own preferences (unknown to the seller).</p>
 
-<p>以下這段話相當有意思，也點明了 mechanism design 的重要性。</p>
+<p>在討論之前，我們先以簡單的 model 來描述 bidder 的行為。</p>
 
-<blockquote>
-<p>“ The burden lies on the system designer to anticipate strategic behavior, not on the participants to behave against their own interest. ”</p>
-</blockquote>
+<p>Let <strong>valuation</strong> <span>$v_i$</span>: bidder i&rsquo;s max willingness-to-pay for the item</p>
 
-<p>像是說，如果沒有定義好股市的遊戲規則，那就不能怪罪有能力的商人去 exploit ，攫取自身的最大利益；又或是，若政府及企業沒有提供給人才適合的 pay 及發展環境，就不該冀望在人才外流時，他們還能能懷著愛國的情操留下來為國家奉獻一樣&hellip;</p>
-
-<h2 id="can-selfish-behavior-be-near-optimal">Can selfish behavior be near optimal</h2>
-
-<p>我們定義 <strong>Price of Anarchy (POA)</strong> 來描述自利行為與最優解 (everything is under control) 之間的比例 (一個 approx. ratio 的概念)</p>
+<p>定義 <em>quasilinear utility model</em> <span>$U$</span> 如以下</p>
 
 <div>
 \[
- POA = \frac{cost(REAL)}{cost(OPT)}
+U = \left\{ \begin{array}{ll}
+           0, \text{if not win} \\
+           v_i - p, \text{if wins at price} ~p
+        \end{array} \right.
 \]
 </div>
 
-<p>當 POA 越趨近於 1，表示自利行為越接近 optimal。</p>
+<p>而 bidder 的 objective is to maximize <span>$U$</span></p>
 
-<h3 id="example-braess-s-paradox">Example : Braess&rsquo;s paradox</h3>
+<h3 id="sealed-bid-auction">Sealed-Bid Auction</h3>
 
-<p>考慮一群人要從 <span>$ s \rightarrow t$</span>，有兩種 type 的道路可選，其中一條 cost 為 constant 1，另一條的 cost 則是根據在其上的 agent 之比例 (如果全部的agent都通過此，則 cost = 1)決定。</p>
+<p>對 designer (或是 seller) 而言，需要設計適合的機制。而這裡所謂適合，即是能獲得最大收益，而又理性的 bidder，不會喊價超過 <span>$v_i$</span> 。因此，只要能使 bidder <strong>誠實</strong>  report 他們的 valuation ，即是一個好的機制。</p>
 
+<p>而Sealed-Bid Auction 有以下幾個步驟:</p>
 
-<div class="pure-u-1">
-  <img class="pure-img" src="https://sunprinces.github.io/learning/img/post/baraessParadox.png" alt="Braess&#39;s Paradox">
+<ol>
+<li><p>Each bidder <span>$i$</span> <strong>privately</strong> communicates a bid <span>$b_i$</span> to the seller</p></li>
+
+<li><p>The seller decide who can get the good</p></li>
+
+<li><p>The seller decide the selling price</p></li>
+</ol>
+
+<p>(2) 很直觀來想，就是<strong>給出價最高的 bidder</strong> (more selection rule will come later)，
+這裡主要討論 (3), eBay的作法是以下的 second-price auction (得標者付第二高價的 bid 即可)。</p>
+
+<h3 id="second-price-vickery-auction">Second-Price (Vickery) Auction</h3>
+
+<ol>
+<li><p>[<strong>strong incentive guarantees</strong>] It is dominant-strategy incentive-compatible (<strong>DSIC</strong>)</p></li>
+
+<li><p>[<strong>strong performance guarantees</strong>] If bidder report truthfully, then the auction maximizes the social surplus</p></li>
+
+<li><p>[<strong>computational efficiency</strong>] The auction can be implemented in <span>$\mathbf{POLY}$</span> time (indeed, we want it to be <strong>linear</strong>)</p></li>
+</ol>
+
+<div>
+\[
+\sum\limits_{i=1}^n \mathbb{1}[\text{bidder i wins}],
+
+\text{the constraint is } \sum\limits_{i=1}^n \mathbb{1}[\text{bidder i wins}] \lneq 1
+\]
 </div>
 
+<p>回顧 <a href="http://localhost:1313/learning/2017/05/algorithmic-game-theory---lecture1/">Lecture1</a>，可以發現最一開始講到的 3 個部份一一對應 XD</p>
 
-<p>(The figure is from <a href="http://theory.stanford.edu/~tim/f13/l/l1.pdf">here</a>)</p>
+<p>從 bidder 的觀點來看， <strong>DSIC</strong> property，保證了誠實是最佳策略 (無論其他的 bidder 如何報價)，因此對 seller 來說，只要組成是<strong>完全理性</strong>的 bidder，便可預測其行為 (這裡先忽略 collusion 或非理性的情況 :p)。</p>
 
-<p>未加中間的通道之前為 <strong>everything is under control</strong> (i.e 禁止 agent 走此 teleport )，其中 <span>$c(x) = x$</span> 跟 <span>$c(x) = 1$</span> 相比，至少都是前者較好，所以每個 agent 在<strong>可以選擇</strong>的時候，都會湧向 <span>$c(x) = x$</span> 的道路。</p>
+<h4 id="u-claim-u"><u>Claim</u></h4>
 
-<p>(此例的 <span>$POA = \frac{1 + 1}{1 + 0.5} = \frac{4}{3}$<span>)</p>
+<h4 id="every-bidder-has-a-dominant-strategy-set-its-bid-span-b-i-v-i-span-and-guaranteed-to-have-utility-span-gneq-0-span">Every bidder has a dominant strategy: set its bid <span>$b_i = v_i$<span>, and guaranteed to have utility <span> $\gneq 0$</span>.</h4>
 
-<p>原因: Nash Eq. <span>$\neq$</span> 社會最優</p>
+<!--現在我們想證明此策略可 maximize <span>$U$</span>。-->
 
-<p>Corollary: Selfish routing <strong>DOESN&rsquo;T</strong> minimize commute time</p>
+<p>考慮 bidder i, let <span>$B = max_{j \neq i}b_j$</span></p>
 
-<h2 id="how-do-strategic-players-reach-an-equilbrium">How do strategic players reach an equilbrium</h2>
+<div>
+\[
+\text{payoff of bidder i} = \left\{ \begin{array}{ll}
+           v_i - B, \text{if} ~b_i > B \\
+           0, \text{otherwise}
+        \end{array} \right.
+\]
+</div>
 
-<p>在說明<strong>如何</strong>達到 eq. 之前，得先考慮該 eq. 是否存在</p>
+<p>若為了拿到 good，而高報 bid (i.e <span>$b_i &gt; v_i$<span>)，有以下 cases:</p>
 
-<h3 id="nash-existence-theorem">Nash Existence Theorem</h3>
+<ol>
+<li><p><span>$B &lt; v_i$</span> or <span>$B &gt; b_i$</span>，與誠實報的 payoff 相同。</p></li>
 
-<blockquote>
-<p>If we allow <strong>mixed strategy</strong>, then every game with finite number of players who can choose finite number of actions has <strong>at least</strong> one Nash Eq.</p>
-</blockquote>
+<li><p><span>$v_i &lt; B &lt; b_i$</span>， bidder 會贏得 good ，但 payoff 是負的☹，而誠實報的 payoff 為0 (然後輸掉)，故會選擇誠實。</p></li>
+</ol>
 
-<!--據此 Theorem，考慮 2-player game，我們有-->
+<p>同理，低報 bid 比不上誠實報 (直覺來想就是，低報可能使原先會贏的拍賣，到最後反而將商品拱手讓人 :p)</p>
 
-<!--Every bimatrix game has **at least** one Nash Eq.-->
+<p>對那些沒拿到 good 的人， <span>$U = 0$</span>; 而贏家 (imply <span>$v \gneq B$<span>) 的 utility <span>$~U = v -B \gneq 0 ~\blacksquare$</span></p>
 
-<p>確定了存在性，那 agent 該如何達到此 Eq. ?</p>
-
-<p>課堂上概略提到了幾個 facts:</p>
-
-<ul>
-<li>若是零和賽局，存在 <span>$\mathbf{POLY}$</span> 時間的演算法求出 Nash Eq.</li>
-
-<li><p>對非零和賽局而言，找 Nash Eq. 非 <span>$\mathbf{NP-hard}$</span> 除非 <span>$NP = coNP$</span></p>
-
-<p><span>$\rightarrow \mathbf{PPAD-hard}$</span></p></li>
-</ul>
-
-<p>我們利用 Nash Eq. 來作為預測 agent 行為的 predictor (同理，完全理性的 agent 在做出 action 時，也會考慮其他 agent based on 此而做出的的 action)。但第二個 fact 說明了一件事情，若我們承許 <span>$P \neq NP$</span> ，則 Turing Machine 不存在有效率的解法找到均衡點，那算力不如它的 agent 更不可能找到均衡點，所以把 Nash Eq. 當作 agent behavior 的 predictor 就顯得沒有意義了&hellip; ☹</p>
+<p>3 個 property的 (2) 可簡單地用 greedy 常見的方法證明，而 (3) 對seller而言只要簡單的掃過一遍 bid vector就可決定誰贏得 auction 及成交價格，複雜度為 <span>$\mathcal{O}(n)$</span>
+<!--若 <span>$v_i < B $<span>， bidder 會誠實 report <span>$b_i = v_i$</span> (事前不知道會輸，但如果低報，原先能拿到的 good 反而可能被搶走，所以想報越高越好); 若 <span>$v_i > B$</span>--></p>
 
   
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/">使用Hugo快速建立自己的靜態網站</a>
+      <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/">Algorithmic Game Theory - Lecture1</a>
     </nav>
     
   </div>
@@ -367,14 +386,8 @@
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/">Algorithmic Game Theory - Lecture2</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
