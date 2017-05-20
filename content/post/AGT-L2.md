@@ -38,7 +38,7 @@ U = \left\{ \begin{array}{ll}
 
 ### Sealed-Bid Auction
 
-對 designer (或是 seller) 而言，需要設計適合的機制。而這裡所謂適合，即是能獲得最大收益，而又理性的 bidder，不會喊價超過 <span>$v_i$</span> 。因此，只要能使 bidder **誠實**  report 他們的 valuation ，即是一個好的機制。
+對 designer 而言，需要設計適合的機制。而這裡所謂適合，即是能獲得整體[最大收益](#p2)(包括 seller 和 bidder)
 
 而Sealed-Bid Auction 有以下幾個步驟:
 
@@ -55,15 +55,17 @@ U = \left\{ \begin{array}{ll}
 
 1. [**strong incentive guarantees**] It is dominant-strategy incentive-compatible (**DSIC**)
 
-2. [**strong performance guarantees**] If bidder report truthfully, then the auction maximizes the social surplus
 
-3. [**computational efficiency**] The auction can be implemented in <span>$\mathbf{POLY}$</span> time (indeed, we want it to be **linear**)
+
+2. <a name="p2"><font color="#777">[**computational efficiency**]</font></a> The auction can be implemented in <span>$\mathbf{POLY}$</span> time (indeed, we want it to be **linear**)
+
+3. <a name="p3"><font color="#777">[**strong performance guarantees**]</font></a> If bidder report truthfully, then the auction maximizes the **social surplus**
 
 <div>
 \[
 \sum\limits_{i=1}^n \mathbb{1}[\text{bidder i wins}],
 
-\text{the constraint is } \sum\limits_{i=1}^n \mathbb{1}[\text{bidder i wins}] \lneq 1
+\text{subject to } \sum\limits_{i=1}^n \mathbb{1}[\text{bidder i wins}] \lneq 1
 \]
 </div>
 
@@ -96,5 +98,5 @@ U = \left\{ \begin{array}{ll}
 
 對那些沒拿到 good 的人， <span>$U = 0$</span>; 而贏家 (imply <span>$v \gneq B$<span>) 的 utility <span>$~U = v -B \gneq 0 ~\blacksquare$</span>
 
-3 個 property的 (2) 可簡單地用 greedy 常見的方法證明，而 (3) 對seller而言只要簡單的掃過一遍 bid vector就可決定誰贏得 auction 及成交價格，複雜度為 <span>$\mathcal{O}(n)$</span>
+3 個 property的 [(3)](#p3) 可簡單地用 greedy 常見的方法證明，而 [(2)](#p2) 對seller而言只要簡單的掃過一遍 bid vector就可決定誰贏得 auction 及成交價格，複雜度為 <span>$\mathcal{O}(n)$</span>
 <!--若 <span>$v_i < B $<span>， bidder 會誠實 report <span>$b_i = v_i$</span> (事前不知道會輸，但如果低報，原先能拿到的 good 反而可能被搶走，所以想報越高越好); 若 <span>$v_i > B$</span>-->
