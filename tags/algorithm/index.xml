@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 20 May 2017 09:51:12 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 19 May 2017 09:51:12 +0800</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Algorithmic Game Theory - Lecture2</title>
       <link>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/</link>
-      <pubDate>Sat, 20 May 2017 09:51:12 +0800</pubDate>
+      <pubDate>Fri, 19 May 2017 09:51:12 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/</guid>
       <description>&lt;p&gt;Lecture1 提到了我們需要透由好的 mechanism，使得 agent 與 designer 的 incentive 彼此 aligned。這講從最簡單的 &lt;strong&gt;Single-item Auction&lt;/strong&gt; 開始，探討該如何設計合理的 mechanism。&lt;/p&gt;

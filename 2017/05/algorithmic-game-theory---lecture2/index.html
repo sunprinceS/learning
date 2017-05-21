@@ -232,7 +232,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>20 May 2017</time>
+    <time>19 May 2017</time>
   </div>
 
   
@@ -364,7 +364,11 @@ U = \left\{ \begin{array}{ll}
 
 <p>對那些沒拿到 good 的人， <span>$U = 0$</span>; 而贏家 (imply <span>$v \gneq B$<span>) 的 utility <span>$~U = v -B \gneq 0 ~\blacksquare$</span></p>
 
-<p>3 個 property的 <a href="#p3">(3)</a> 可簡單地用 greedy 常見的方法證明，而 <a href="#p2">(2)</a> 對seller而言只要簡單的掃過一遍 bid vector就可決定誰贏得 auction 及成交價格，複雜度為 <span>$\mathcal{O}(n)$</span>
+<p>3 個 property的 <a href="#p3">(3)</a> 可簡單地用 greedy 常見的方法證明，而 <a href="#p2">(2)</a> 對seller而言只要簡單的掃過一遍 bid vector就可決定誰贏得 auction 及成交價格，複雜度為 <span>$\mathcal{O}(n)$</span></p>
+
+<h4 id="思考">思考</h4>
+
+<p>另一種可能的定價方式為 <strong>first-price auction</strong>，在這個情況下， winner 需付自己所喊的價碼，所以其傾向於會低報，但問題是該低報多少，又跟其他 bidder 有關&hellip; (留著之後來想XD)
 <!--若 <span>$v_i < B $<span>， bidder 會誠實 report <span>$b_i = v_i$</span> (事前不知道會輸，但如果低報，原先能拿到的 good 反而可能被搶走，所以想報越高越好); 若 <span>$v_i > B$</span>--></p>
 
   
@@ -386,8 +390,14 @@ U = \left\{ \begin{array}{ll}
   </div>
   <div class="pure-u-10-24">
     
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/05/reinforcement-learning-lecture1/">Reinforcement Learning Lecture1</a>
+    </nav>
+    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/05/reinforcement-learning-lecture1/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
