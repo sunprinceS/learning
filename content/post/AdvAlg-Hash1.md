@@ -1,0 +1,137 @@
++++
+date = "2017-05-24T08:52:55+08:00"
+description = "Intro & Analysis/ 2-Universal Family"
+draft = false
+tags = ["Algorithm","NTU","Advanced Algorithm"]
+title = "Advanced Algorithm - Hash Table - Lec1"
+topics = ["Advanced Algorithm"]
+
++++
+
+<!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。-->
+
+
+Hashing 可以想成是一種 **renaming** 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 **Hashing** 的方式，重新命名 key' ，並依據 key' 將資料放到 size 跟資料個數差不多的 Hash Table 中。
+
+<!--more-->
+
+## 定義
+
+Given each data with key in <span>$U = \lbrace 0,1, \cdots, t-1 \rbrace$</span>,
+
+A **Hash Table** is capable of performing the following operations in <span>$\mathcal{O}(1)$</span>
+
+1. ``Insert(x)``
+2. ``Delete(x)``
+3. ``Search(x)``
+
+<img src="/img/post/hashTable.png" width="400px">
+
+如同前面所述，<span>$m \ll |U|$</span>，所以hash function 必是 many-to-one mapping ，<br/>也就是說，會有 collision 發生。而通常以下圖所示的 **Chaining** 來處理。
+
+<img src="/img/post/chaining.png" height="350px">
+
+Hash Table 中所存的 element 為指向一個個 linked list 的 pointer。
+
+在考慮 Chaining ，做複雜度的分析前，先假設我們有一 uniform hash function <span>$h$</span>，滿足以下性質
+
+* <span>$\mathbb{P}[h(k) = x] = \frac{1}{m}, x \in \lbrace 0,1,\cdots, m-1 \rbrace$</span>
+* <span>$h(K_1),h(K_2),\cdots,h(K_n) \text{~are independent if} ~K_1,K_2,\cdots,K_n \text{~are independent}$</span>
+
+## Average time complexity 
+
+**[Theorem 1]** Assume Uniform Hashing, <span>$\mathbb{E}[op] = \mathcal{O}(\alpha)~~$</span> (Load Factor <span>$~\alpha = \frac{ |\text{elements}|}{ |\text{slots}|} = \frac{n}{m}$</span>)
+
+可以觀察到，若 m = <span>$\mathcal{O}(n)$</span>，則 <span>$\mathbb{E}[op] = \mathcal{O}(\alpha) = \mathcal{O}(1)$</span>，<br/>也就是說，只要 table size 跟元素個數是同個 order ，**平均** 來說，每個 operation 的 cost 還是 <span>$\mathcal{O}(1)$</span>。
+
+## Worst-case time complexity
+
+現在我們想考慮在**最差**情況下的複雜度，<br/>
+考慮一個類似的問題，將 <span>$n$</span> 顆球 uniformly at random 地分到 <span>$n$</span> 個 bin 中，<br/>“**the expected # of balls in the most loaded bin**” 為何 ？
+
+**[Theorem 2] The max # of balls in any bin <span>$\mathbf{\leq \frac{3\ln n}{\ln(\ln n)}}$</span> with probability <span>$\mathbf{\geq 1 - \frac{1}{n}}$</span>**
+
+<span>$\underline{~Proof.} ~~~Let~k = \frac{3 \ln n}{\ln(\ln n)}~ \text{and}~ [S]^k \triangleq \lbrace A \subseteq S~ | ~|A| = k \rbrace$</span>, <span>$S$</span> is the set of balls
+
+<div>
+\[
+
+\begin{aligned}
+\mathbb{P}[\text{Bin~} i \text{~has~} \geq k \text{~balls}] & \leq \sum_{A \in [S]^k} \mathbb{P}[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\
+& = \binom{n}{k} (\frac{1}{n})^k ~~(\because \textbf{uniform hashing}) \\\\
+& = \frac{n!}{k!(n-k)!} ~ \frac{1}{n^k} = \frac{1}{k!} ~ \frac{n!}{(n-k)!n^k} \\
+& \leq \frac{1}{k!} ~~(~\because~ \prod_{i=0}^{k-1}n-i \leq n^k) \\
+& \leq \frac{1}{n^2} ~~(~\because~ \textbf{ Stirling's approx. formula})
+\end{aligned}
+
+\]
+</div>
+
+**[Theorem 3] Stirling's approx. formula**
+
+<div>
+\[
+k! = \sqrt{2 \pi k}~ (\frac{k}{e})^k (1 + \mathcal{O}( \frac{1}{k} ))
+\]
+</div>
+
+## Uniform Hashing? 
+看起來很合理，但當中我們做的一個假設其實是不合理的，也就是存在 uniform hashing function <span>$h$</span> 這件事情，想完成這個條件只有以下兩種可能
+
+* input is random (**impossible !!**)
+* input is arbitary, but hash function is random
+
+random hash function? 意思是說，我們希望有一組 hash function 的集合 <span>$\mathcal{H}$</span>，當每次要用到 hashing 時，便從中抽一個 <span>$h: U \rightarrow \lbrace 0,1,\cdots,m-1 \rbrace$</span> 出來，可能結果很不好 ( collision 很嚴重)，在這種情況可以再重新抽，**平均而言** collision 發生的機率很小即可。
+
+我們希望 <span>$\mathcal{H}$</span> 有以下性質:<br/>
+<span>$\forall x_1,x_2,\cdots,x_n \in S,~ \text{and}~ a_1,a_2,\cdots,a_n \in \lbrace 0,1,\cdots,m-1 \rbrace$</span>
+
+* <span>$\mathbb{P}_{h \in \mathcal{H}}[h(x_1) = a_1] = \frac{1}{n}$</span>
+* <span>$\mathbb{P}_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ] = \frac{1}{n^2}$</span> **[Pairwise independence]**
+* <span>$\mathbb{P}_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ~\land~ \cdots ~\land~ h(x_n) = a_n ] = \frac{1}{n^k}$</span> **[k-wise independence]**
+
+若想有 k-wise indep. 性質，則我們需要 <span>$m^k$</span> 個 hash function <span>$h$</span>，需要 <span>$\log |\mathcal{H}| = k \log m$</span> 個 bits 去記 <span>$\mathcal{H}$</span> ，也就是說，若想要更好的隨機性， compute hashing 的成本就越高。
+
+<span>Let $L_x ~\text{be the length of linked list containing}~ x$</span>
+
+<div>
+\[
+I_y = \left\{ \begin{array}{ll}
+           1, ~\text{if}~ h(y) = h(x) \\
+           0, ~\text{otherwise}
+        \end{array} \right.
+\]
+</div>
+
+<div>
+\[
+\begin{aligned}
+
+& \text{Then},~ L_x = 1 + \sum_{y \in S ;y \neq x} I_y \\
+
+& \text{We know~} \mathbb{E}[L_x] = 1 + \sum_{y \in S ;y \neq x} \mathbb{E}[I_y] = 1 + \frac{n-1}{m} \approx \alpha
+\end{aligned}
+\]
+</div>
+
+上例不需要用到 k-wise independence 這麼強的性質， pairwise independence 即符合我們的需要，</br>也因此 **2-Universal Hash Family** 應運而生。
+
+## 2-Universal Hash Family
+
+<span>$\mathcal{H}$</span> is 2-Universal iff for and two elements <span>$x,y \in U ~\land~ x \neq y$</span>
+
+<div>
+\[
+\mathbb{P}_{h \in \mathcal{H}}[h(x) = h(y)] \leq \frac{1}{m} \Leftrightarrow |\mathcal{H'}| \leq \frac{|\mathcal{H}|}{m}_ , \mathcal{H'} = \lbrace h ~|~ h(x) = h(y) \rbrace 
+\]
+</div>
+
+_Example_: </br>
+Given <span>$x=x_0 x_1 \cdots x_r~,y=y_0 y_1 \cdots y_r$</span>, 
+<span>$a = \< a_1,a_2,\cdots,a_r\>,~a_i \in \lbrace 0,1,\cdots,m-1 \rbrace $</span>
+
+<div>
+\[
+h_a(x) = \sum_{i=0}^n a_i x_i \mod m
+\]
+</div>
