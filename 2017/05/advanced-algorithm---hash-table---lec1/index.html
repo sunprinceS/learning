@@ -232,7 +232,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>24 May 2017</time>
+    <time>21 May 2017</time>
   </div>
 
   
@@ -296,7 +296,7 @@
 <p>在考慮 Chaining ，做複雜度的分析前，先假設我們有一 uniform hash function <span>$h$</span>，滿足以下性質</p>
 
 <ul>
-<li><span>$\mathbb{P}[h(k) = x] = \frac{1}{m}, x \in \lbrace 0,1,\cdots, m-1 \rbrace$</span></li>
+<li><span>$\Pr[h(k) = x] = \frac{1}{m}, x \in \lbrace 0,1,\cdots, m-1 \rbrace$</span></li>
 <li><span>$h(K_1),h(K_2),\cdots,h(K_n) \text{~are independent if} ~K_1,K_2,\cdots,K_n \text{~are independent}$</span></li>
 </ul>
 
@@ -319,7 +319,7 @@
 \[
 
 \begin{aligned}
-\mathbb{P}[\text{Bin~} i \text{~has~} \geq k \text{~balls}] & \leq \sum_{A \in [S]^k} \mathbb{P}[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\
+\Pr[\text{Bin~} i \text{~has~} \geq k \text{~balls}] & \leq \sum_{A \in [S]^k} \Pr[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\
 & = \binom{n}{k} (\frac{1}{n})^k ~~(\because \textbf{uniform hashing}) \\\\
 & = \frac{n!}{k!(n-k)!} ~ \frac{1}{n^k} = \frac{1}{k!} ~ \frac{n!}{(n-k)!n^k} \\
 & \leq \frac{1}{k!} ~~(~\because~ \prod_{i=0}^{k-1}n-i \leq n^k) \\
@@ -352,9 +352,9 @@ k! = \sqrt{2 \pi k}~ (\frac{k}{e})^k (1 + \mathcal{O}( \frac{1}{k} ))
 <span>$\forall x_1,x_2,\cdots,x_n \in S,~ \text{and}~ a_1,a_2,\cdots,a_n \in \lbrace 0,1,\cdots,m-1 \rbrace$</span></p>
 
 <ul>
-<li><span>$\mathbb{P}_{h \in \mathcal{H}}[h(x_1) = a_1] = \frac{1}{n}$</span></li>
-<li><span>$\mathbb{P}_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ] = \frac{1}{n^2}$</span> <strong>[Pairwise independence]</strong></li>
-<li><span>$\mathbb{P}_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ~\land~ \cdots ~\land~ h(x_n) = a_n ] = \frac{1}{n^k}$</span> <strong>[k-wise independence]</strong></li>
+<li><span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1] = \frac{1}{m}$</span></li>
+<li><span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ] = \frac{1}{m^2}$</span> <strong>[Pairwise independence]</strong></li>
+<li><span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ~\land~ \cdots ~\land~ h(x_n) = a_n ] = \frac{1}{m^k}$</span> <strong>[k-wise independence]</strong></li>
 </ul>
 
 <p>若想有 k-wise indep. 性質，則我們需要 <span>$m^k$</span> 個 hash function <span>$h$</span>，需要 <span>$\log |\mathcal{H}| = k \log m$</span> 個 bits 去記 <span>$\mathcal{H}$</span> ，也就是說，若想要更好的隨機性， compute hashing 的成本就越高。</p>
@@ -376,7 +376,7 @@ I_y = \left\{ \begin{array}{ll}
 
 & \text{Then},~ L_x = 1 + \sum_{y \in S ;y \neq x} I_y \\
 
-& \text{We know~} \mathbb{E}[L_x] = 1 + \sum_{y \in S ;y \neq x} \mathbb{E}[I_y] = 1 + \frac{n-1}{m} \approx \alpha
+& \text{We know~} \mathbb{E}[L_x] = 1 + \sum_{y \in S ;y \neq x} \mathbb{E}[I_y] = 1 + \frac{n-1}{m} \leq 1 + \alpha
 \end{aligned}
 \]
 </div>
@@ -389,7 +389,7 @@ I_y = \left\{ \begin{array}{ll}
 
 <div>
 \[
-\mathbb{P}_{h \in \mathcal{H}}[h(x) = h(y)] \leq \frac{1}{m} \Leftrightarrow |\mathcal{H'}| \leq \frac{|\mathcal{H}|}{m}_ , \mathcal{H'} = \lbrace h ~|~ h(x) = h(y) \rbrace 
+\Pr_{h \in \mathcal{H}}[h(x) = h(y)] \leq \frac{1}{m} \Leftrightarrow |\mathcal{H'}| \leq \frac{|\mathcal{H}|}{m}_ ~,~ \mathcal{H'} = \lbrace h ~|~ h(x) = h(y) \rbrace 
 \]
 </div>
 
@@ -422,8 +422,14 @@ h_a(x) = \sum_{i=0}^n a_i x_i \mod m
   </div>
   <div class="pure-u-10-24">
     
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/">Algorithmic Game Theory - Lecture3</a>
+    </nav>
+    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

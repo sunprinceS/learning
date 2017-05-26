@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Fri, 19 May 2017 09:51:12 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 27 May 2017 00:27:07 +0800</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/open-course/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Algorithmic Game Theory - Lecture3</title>
+      <link>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/</link>
+      <pubDate>Sat, 27 May 2017 00:27:07 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/</guid>
+      <description>&lt;p&gt;上一講提到了怎樣的 auction 是設計者所希望看到的，有足夠的誘因使參與者做出我們希望看到的決策 (&lt;strong&gt;DSIC&lt;/strong&gt; property)，且此決策所造成的影響為設計者認定的 optimal ，同時又能簡單到能在多項式時間完成。接下來會提供一個更 general 的方式去設計機制，而不單單只是限定於 single-item auction 而已。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Algorithmic Game Theory - Lecture2</title>
