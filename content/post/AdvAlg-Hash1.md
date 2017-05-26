@@ -1,5 +1,5 @@
 +++
-date = "2017-05-24T08:52:55+08:00"
+date = "2017-05-21T08:52:55+08:00"
 description = "Intro & Analysis/ 2-Universal Family"
 draft = false
 tags = ["Algorithm","NTU","Advanced Algorithm"]
@@ -35,7 +35,7 @@ Hash Table 中所存的 element 為指向一個個 linked list 的 pointer。
 
 在考慮 Chaining ，做複雜度的分析前，先假設我們有一 uniform hash function <span>$h$</span>，滿足以下性質
 
-* <span>$\mathbb{P}[h(k) = x] = \frac{1}{m}, x \in \lbrace 0,1,\cdots, m-1 \rbrace$</span>
+* <span>$\Pr[h(k) = x] = \frac{1}{m}, x \in \lbrace 0,1,\cdots, m-1 \rbrace$</span>
 * <span>$h(K_1),h(K_2),\cdots,h(K_n) \text{~are independent if} ~K_1,K_2,\cdots,K_n \text{~are independent}$</span>
 
 ## Average time complexity 
@@ -57,7 +57,7 @@ Hash Table 中所存的 element 為指向一個個 linked list 的 pointer。
 \[
 
 \begin{aligned}
-\mathbb{P}[\text{Bin~} i \text{~has~} \geq k \text{~balls}] & \leq \sum_{A \in [S]^k} \mathbb{P}[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\
+\Pr[\text{Bin~} i \text{~has~} \geq k \text{~balls}] & \leq \sum_{A \in [S]^k} \Pr[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\
 & = \binom{n}{k} (\frac{1}{n})^k ~~(\because \textbf{uniform hashing}) \\\\
 & = \frac{n!}{k!(n-k)!} ~ \frac{1}{n^k} = \frac{1}{k!} ~ \frac{n!}{(n-k)!n^k} \\
 & \leq \frac{1}{k!} ~~(~\because~ \prod_{i=0}^{k-1}n-i \leq n^k) \\
@@ -86,9 +86,9 @@ random hash function? 意思是說，我們希望有一組 hash function 的集�
 我們希望 <span>$\mathcal{H}$</span> 有以下性質:<br/>
 <span>$\forall x_1,x_2,\cdots,x_n \in S,~ \text{and}~ a_1,a_2,\cdots,a_n \in \lbrace 0,1,\cdots,m-1 \rbrace$</span>
 
-* <span>$\mathbb{P}_{h \in \mathcal{H}}[h(x_1) = a_1] = \frac{1}{n}$</span>
-* <span>$\mathbb{P}_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ] = \frac{1}{n^2}$</span> **[Pairwise independence]**
-* <span>$\mathbb{P}_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ~\land~ \cdots ~\land~ h(x_n) = a_n ] = \frac{1}{n^k}$</span> **[k-wise independence]**
+* <span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1] = \frac{1}{m}$</span>
+* <span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ] = \frac{1}{m^2}$</span> **[Pairwise independence]**
+* <span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ~\land~ \cdots ~\land~ h(x_n) = a_n ] = \frac{1}{m^k}$</span> **[k-wise independence]**
 
 若想有 k-wise indep. 性質，則我們需要 <span>$m^k$</span> 個 hash function <span>$h$</span>，需要 <span>$\log |\mathcal{H}| = k \log m$</span> 個 bits 去記 <span>$\mathcal{H}$</span> ，也就是說，若想要更好的隨機性， compute hashing 的成本就越高。
 
@@ -109,7 +109,7 @@ I_y = \left\{ \begin{array}{ll}
 
 & \text{Then},~ L_x = 1 + \sum_{y \in S ;y \neq x} I_y \\
 
-& \text{We know~} \mathbb{E}[L_x] = 1 + \sum_{y \in S ;y \neq x} \mathbb{E}[I_y] = 1 + \frac{n-1}{m} \approx \alpha
+& \text{We know~} \mathbb{E}[L_x] = 1 + \sum_{y \in S ;y \neq x} \mathbb{E}[I_y] = 1 + \frac{n-1}{m} \leq 1 + \alpha
 \end{aligned}
 \]
 </div>
@@ -122,7 +122,7 @@ I_y = \left\{ \begin{array}{ll}
 
 <div>
 \[
-\mathbb{P}_{h \in \mathcal{H}}[h(x) = h(y)] \leq \frac{1}{m} \Leftrightarrow |\mathcal{H'}| \leq \frac{|\mathcal{H}|}{m}_ , \mathcal{H'} = \lbrace h ~|~ h(x) = h(y) \rbrace 
+\Pr_{h \in \mathcal{H}}[h(x) = h(y)] \leq \frac{1}{m} \Leftrightarrow |\mathcal{H'}| \leq \frac{|\mathcal{H}|}{m}_ ~,~ \mathcal{H'} = \lbrace h ~|~ h(x) = h(y) \rbrace 
 \]
 </div>
 

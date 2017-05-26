@@ -69,7 +69,7 @@ U = \left\{ \begin{array}{ll}
 \]
 </div>
 
-回顧 [Lecture1](http://localhost:1313/learning/2017/05/algorithmic-game-theory---lecture1/)，可以發現最一開始講到的 3 個部份一一對應 XD
+回顧 [Lecture1](https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/)，可以發現最一開始講到的 3 個部份一一對應 XD
 
 從 bidder 的觀點來看， **DSIC** property，保證了誠實是最佳策略 (無論其他的 bidder 如何報價)，因此對 seller 來說，只要組成是**完全理性**的 bidder，便可預測其行為 (這裡先忽略 collusion 或非理性的情況 :p)。
 #### <u>Claim</u> 
@@ -102,5 +102,5 @@ U = \left\{ \begin{array}{ll}
 
 #### 思考
 
-另一種可能的定價方式為 **first-price auction**，在這個情況下， winner 需付自己所喊的價碼，所以其傾向於會低報，但問題是該低報多少，又跟其他 bidder 有關... (留著之後來想XD)
+另一種可能的定價方式為 **first-price auction**，在這個情況下， winner 需付自己所喊的價碼，所以其傾向於會低報(誠實報保證了 payoff 為 0)，但問題是該低報多少，又跟其他 bidder 有關... (留著之後來想XD)
 <!--若 <span>$v_i < B $<span>， bidder 會誠實 report <span>$b_i = v_i$</span> (事前不知道會輸，但如果低報，原先能拿到的 good 反而可能被搶走，所以想報越高越好); 若 <span>$v_i > B$</span>-->
