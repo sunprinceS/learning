@@ -1,5 +1,5 @@
 +++
-date = "2017-05-27T00:27:07+08:00"
+date = "2017-05-24T00:27:07+08:00"
 description = "Myerson's Lemma"
 draft = false
 tags = ["Game Theory","Algorithm","Open Course","Stanford"]
@@ -8,9 +8,24 @@ topics = ["Algorithmic Game Theory"]
 
 +++
 
-上一講提到了怎樣的 auction 是設計者所希望看到的，有足夠的誘因使參與者做出我們希望看到的決策 (**DSIC** property)，且此決策所造成的影響為設計者認定的 optimal ，同時又能簡單到能在多項式時間完成。接下來會提供一個更 general 的方式去設計機制，而不單單只是限定於 single-item auction 而已。
+上一講提到了怎樣的 auction 是設計者所希望看到的，有足夠的誘因使參與者做出我們希望看到的決策 (**DSIC** property)，且此決策所造成的結果為設計者認定的 optimal ，同時又能簡單到能在多項式時間完成。接下來會提供一個更 general 的方式去設計機制，而不單單只是限定於 single-item auction 而已。
 
 <!--more-->
+
+### Property of Awesome Auction
+
+From [Lecture2](https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/)
+
+1. Incentive guarantee: DSIC property
+2. Computational efficiency: **POLY** time algorithm
+3. Performance guarantee: maximize the **social surplus**
+
+在設計 mechanism 時，我們拆成以下步驟: 
+
+1. 假設 bidder 會誠實報價，則我們該如何決定誰拿到 good (allocation rule) ，使得 (2), (3) 成立。
+2. 假設存在上述 rule ，那該如何定價 (payment rule) 使得 (1) 成立。
+
+而這個 lecture 探討的為 step2，同時也透露了怎樣的 allocation rule 才會使對應的 payment rule 存在。
 
 ### Single-Parameter Environments
 
@@ -59,8 +74,6 @@ Fix a single-parameter environment
 2. If <span>$\vec{x}$</span> is monotone, then <span>$\exists$</span> a **unique** payment tule such that the sealed-bid mechanism <span>$(\vec{x},\vec{p})$</span> is **DSIC** (WLOG, assume <span>$p_i(b_i) = 0$</span>)
 3. The payment rule is given by explicit formula
 
-<u>**Corollary**</u>: Here is an awesome auction for sponsored search (k-th bidder can get <span>$\alpha_k $</span> [k-th best item])
-
 ### Proof
 
 **利用 DSIC 的性質 (誠實為 dominant strategy)，去列出不等式**
@@ -92,13 +105,15 @@ Fix a single-parameter environment
 \]
 </div>
 
+> 利用夾擠定理，使得在某實數軸上每一點，[<span>$p(\cdotp)$</span>](#payment) 都只有唯一的值
+
 > '<span>$\Rightarrow$</span>'  : <span>$\vec{x}$</span> is monotone <span>$\Rightarrow$</span> x is implementable: <br/>
 
->> Fix <span>$z$</span> and take the limit <span>$y \rightarrow z$</span>, 假設 <span>$\vec{x}$</span> is piecewise constant function
+>> Fix <span>$z$</span> and take the limit <span>$y \rightarrow z$</span>, 假設 <span>$\vec{x}(\cdotp)$</span> is piecewise constant function
 
 >> If there is no jump in <span>$\vec{x}$</span> at <span>$z$</span>, <span>$\Delta p = 0$</span>
 
->> If there is a jump of magnitude <span>$h$</span> at <span>$z$</span>, &nbsp; (jump in <span>$p$</span> at <span>$z$</span>) = <span>$z \cdotp$</span> jump in <span>$x$</span> at <span>$z$</span>
+>> If there is a jump of magnitude <span>$h$</span> at <span>$z$</span>, &nbsp; (<span>$\Delta p$</span> at <span>$z$</span>) = (<span>$z \cdotp$</span> jump in <span>$x$</span> at <span>$z$</span>)
 
 >> monotone 保證了 jump > 0，所以可以寫下 payment formula 為
 
@@ -108,7 +123,9 @@ Fix a single-parameter environment
 \]
 </div>
 
->> [Note] 可以將 payment formula 推廣到一般的 non-decreasing <span>$\vec{x}$</span>
+>> 其中 <span>$z_1, z_2, \cdots, z_l$ 為 $x_i(\cdotp,$$b\scriptstyle{-i}$$)$</span> 在 <span>$[0, b\scriptstyle{-i}$$]$</span> 的跳躍點
+
+>> <a name="payment"><font color="#777">[Note]</font></a> 可以將 payment formula 推廣到一般的 non-decreasing <span>$\vec{x}(\cdotp)$</span>
 
 <div>
 \[
