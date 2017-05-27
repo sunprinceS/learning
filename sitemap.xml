@@ -2,8 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture4/</loc>
+    <lastmod>2017-05-27T17:06:53+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/</loc>
-    <lastmod>2017-05-27T00:27:07+08:00</lastmod>
+    <lastmod>2017-05-24T00:27:07+08:00</lastmod>
   </url>
   
   <url>
@@ -50,19 +55,19 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/algorithm/</loc>
-    <lastmod>2017-05-27T00:27:07+08:00</lastmod>
+    <lastmod>2017-05-27T17:06:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/algorithmic-game-theory/</loc>
-    <lastmod>2017-05-27T00:27:07+08:00</lastmod>
+    <lastmod>2017-05-27T17:06:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/game-theory/</loc>
-    <lastmod>2017-05-27T00:27:07+08:00</lastmod>
+    <lastmod>2017-05-27T17:06:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -86,19 +91,19 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/open-course/</loc>
-    <lastmod>2017-05-27T00:27:07+08:00</lastmod>
+    <lastmod>2017-05-27T17:06:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/post/</loc>
-    <lastmod>2017-05-27T00:27:07+08:00</lastmod>
+    <lastmod>2017-05-27T17:06:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/stanford/</loc>
-    <lastmod>2017-05-27T00:27:07+08:00</lastmod>
+    <lastmod>2017-05-27T17:06:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -110,7 +115,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/</loc>
-    <lastmod>2017-05-27T00:27:07+08:00</lastmod>
+    <lastmod>2017-05-27T17:06:53+08:00</lastmod>
     <priority>0</priority>
   </url>
   

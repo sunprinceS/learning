@@ -232,7 +232,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>27 May 2017</time>
+    <time>24 May 2017</time>
   </div>
 
   
@@ -269,9 +269,28 @@
 
 </div>
 
-  <p>上一講提到了怎樣的 auction 是設計者所希望看到的，有足夠的誘因使參與者做出我們希望看到的決策 (<strong>DSIC</strong> property)，且此決策所造成的影響為設計者認定的 optimal ，同時又能簡單到能在多項式時間完成。接下來會提供一個更 general 的方式去設計機制，而不單單只是限定於 single-item auction 而已。</p>
+  <p>上一講提到了怎樣的 auction 是設計者所希望看到的，有足夠的誘因使參與者做出我們希望看到的決策 (<strong>DSIC</strong> property)，且此決策所造成的結果為設計者認定的 optimal ，同時又能簡單到能在多項式時間完成。接下來會提供一個更 general 的方式去設計機制，而不單單只是限定於 single-item auction 而已。</p>
 
 <p></p>
+
+<h3 id="property-of-awesome-auction">Property of Awesome Auction</h3>
+
+<p>From <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/">Lecture2</a></p>
+
+<ol>
+<li>Incentive guarantee: DSIC property</li>
+<li>Computational efficiency: <strong>POLY</strong> time algorithm</li>
+<li>Performance guarantee: maximize the <strong>social surplus</strong></li>
+</ol>
+
+<p>在設計 mechanism 時，我們拆成以下步驟:</p>
+
+<ol>
+<li>假設 bidder 會誠實報價，則我們該如何決定誰拿到 good (allocation rule) ，使得 (2), (3) 成立。</li>
+<li>假設存在上述 rule ，那該如何定價 (payment rule) 使得 (1) 成立。</li>
+</ol>
+
+<p>而這個 lecture 探討的為 step2，同時也透露了怎樣的 allocation rule 才會使對應的 payment rule 存在。</p>
 
 <h3 id="single-parameter-environments">Single-Parameter Environments</h3>
 
@@ -330,8 +349,6 @@ the allocation rule <span>$x_i(z,b\scriptstyle{-i}$</span><span>$)$</span> to <s
 <li>The payment rule is given by explicit formula</li>
 </ol>
 
-<p><u><strong>Corollary</strong></u>: Here is an awesome auction for sponsored search (k-th bidder can get <span>$\alpha_k $</span> [k-th best item])</p>
-
 <h3 id="proof">Proof</h3>
 
 <p><strong>利用 DSIC 的性質 (誠實為 dominant strategy)，去列出不等式</strong></p>
@@ -369,14 +386,16 @@ the allocation rule <span>$x_i(z,b\scriptstyle{-i}$</span><span>$)$</span> to <s
 </div>
 
 <blockquote>
+<p>利用夾擠定理，使得在某實數軸上每一點，<a href="#payment"><span>$p(\cdotp)$</span></a> 都只有唯一的值</p>
+
 <p>&lsquo;<span>$\Rightarrow$</span>&rsquo;  : <span>$\vec{x}$</span> is monotone <span>$\Rightarrow$</span> x is implementable: <br/></p>
 
 <blockquote>
-<p>Fix <span>$z$</span> and take the limit <span>$y \rightarrow z$</span>, 假設 <span>$\vec{x}$</span> is piecewise constant function</p>
+<p>Fix <span>$z$</span> and take the limit <span>$y \rightarrow z$</span>, 假設 <span>$\vec{x}(\cdotp)$</span> is piecewise constant function</p>
 
 <p>If there is no jump in <span>$\vec{x}$</span> at <span>$z$</span>, <span>$\Delta p = 0$</span></p>
 
-<p>If there is a jump of magnitude <span>$h$</span> at <span>$z$</span>, &nbsp; (jump in <span>$p$</span> at <span>$z$</span>) = <span>$z \cdotp$</span> jump in <span>$x$</span> at <span>$z$</span></p>
+<p>If there is a jump of magnitude <span>$h$</span> at <span>$z$</span>, &nbsp; (<span>$\Delta p$</span> at <span>$z$</span>) = (<span>$z \cdotp$</span> jump in <span>$x$</span> at <span>$z$</span>)</p>
 
 <p>monotone 保證了 jump &gt; 0，所以可以寫下 payment formula 為</p>
 </blockquote>
@@ -390,7 +409,9 @@ the allocation rule <span>$x_i(z,b\scriptstyle{-i}$</span><span>$)$</span> to <s
 
 <blockquote>
 <blockquote>
-<p>[Note] 可以將 payment formula 推廣到一般的 non-decreasing <span>$\vec{x}$</span></p>
+<p>其中 <span>$z_1, z_2, \cdots, z_l$ 為 $x_i(\cdotp,$$b\scriptstyle{-i}$$)$</span> 在 <span>$[0, b\scriptstyle{-i}$$]$</span> 的跳躍點</p>
+
+<p><a name="payment"><font color="#777">[Note]</font></a> 可以將 payment formula 推廣到一般的 non-decreasing <span>$\vec{x}(\cdotp)$</span></p>
 </blockquote>
 </blockquote>
 
@@ -438,8 +459,14 @@ the allocation rule <span>$x_i(z,b\scriptstyle{-i}$</span><span>$)$</span> to <s
   </div>
   <div class="pure-u-10-24">
     
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture4/">Algorithmic Game Theory - Lecture4</a>
+    </nav>
+    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture4/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
+  <meta name="description" content="Algorithmic Mechanism Design">
   <meta name="generator" content="Hugo 0.20.2" />
 
-  <title>Game Theory &middot; Stay hungry. Stay foolish </title>
+  <title>Algorithmic Game Theory - Lecture4 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -36,8 +36,6 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
-  
-  <link rel="alternate" type="application/rss+xml" title="Stay hungry. Stay foolish " href="https://sunprinces.github.io/learning/tags/game-theory/index.xml" />
   
 
   
@@ -116,10 +114,6 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/game-theory/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
-    </li>
     
 
     
@@ -229,16 +223,12 @@
 
 
 <div class="header">
-  <h1>Game Theory</h1>
+  <h1>Algorithmic Game Theory - Lecture4</h1>
+  <h2>Algorithmic Mechanism Design</h2>
 </div>
-
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture4/">Algorithmic Game Theory - Lecture4</a></h2>
 
-    <div class="post-meta">
+  <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
@@ -279,201 +269,131 @@
 
 </div>
 
-  </header>
-
-  <p>
   <p>上一講利用<a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/">Myerson&rsquo;s Lemma</a>闡述了給定在「好」的 allocation rule 下，該如何定價，使得 auction 具有 DSIC property; 而這講則要說明該如何 derive 出「好」的 allocation rule。</p>
-  </p>
 
-  
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture4/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
+<p>
+<!--<u>**Corollary**</u>: Here is an awesome auction for sponsored search--></p>
 
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/">Algorithmic Game Theory - Lecture3</a></h2>
+<h3 id="knapsack-auction">Knapsack Auction</h3>
 
-    <div class="post-meta">
+<p>上一講定義了 single-parameter environment ，其中的 allocation set <span>$X$</span> 需滿足元素和 <span>$ \leq k$</span> (in single-item, <span>$k=1$</span>)。這裡再將此推廣成更一般的形式。</p>
 
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>24 May 2017</time>
-  </div>
+<ul>
+<li>bidder i has <strong>public</strong> size <span>$w_i$</span> and <strong>private</strong> valuation <span>$v_i$</span></li>
+<li>The allocation set <span>$X$</span> contains 0-1 vectors subject to <span>$\sum_{i=1}^n w_i \, x_i \leq W$</span></li>
+</ul>
 
-  
+<p>我們想要找的 allocation 需能最大化 social surplus</p>
 
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithmic-game-theory">Algorithmic Game Theory</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/game-theory">Game Theory</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/open-course">Open Course</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/stanford">Stanford</a>
-    
-  </div>
-  
-  
-
+<div>
+\[
+  \vec{x}(\vec{b}) = \arg \max_{\vec{x}} \sum_{i=1}^{n} b_i \, x_i
+\]
 </div>
 
-  </header>
+<p>若想說明其具備 DSIC property，我們可以先<strong>證明該 allocation rule 為 monotone</strong> ，再利用 Myerson&rsquo;s Lemma 得出其 payment rule</p>
 
-  <p>
-  <p>上一講提到了怎樣的 auction 是設計者所希望看到的，有足夠的誘因使參與者做出我們希望看到的決策 (<strong>DSIC</strong> property)，且此決策所造成的結果為設計者認定的 optimal ，同時又能簡單到能在多項式時間完成。接下來會提供一個更 general 的方式去設計機制，而不單單只是限定於 single-item auction 而已。</p>
+<p><strong>[Theorem]</strong></p>
 
-<p></p>
-  </p>
-
-  
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/">Algorithmic Game Theory - Lecture2</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>19 May 2017</time>
-  </div>
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithmic-game-theory">Algorithmic Game Theory</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/game-theory">Game Theory</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/open-course">Open Course</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/stanford">Stanford</a>
-    
-  </div>
-  
-  
-
+<div>
+\[
+ \text{If} \: \vec{x}(\cdotp,\vec{b}_{-i}) \: \text{is NOT monotome in } [0,b_{max}] \Rightarrow \exists \: \vec{x^{\prime}} \quad \text{s.t} \: \sum_{i=1}^{n} \: b_i \, x^{\prime}_i \: > \: \sum_{i=1}^{n} \: b_i \, x_i
+\]
 </div>
 
-  </header>
+<p><span>$\underline{~Proof.}$</span></p>
 
-  <p>
-  <p>Lecture1 提到了我們需要透由好的 mechanism，使得 agent 與 designer 的 incentive 彼此 aligned。這講從最簡單的 <strong>Single-item Auction</strong> 開始，探討該如何設計合理的 mechanism。</p>
-
-<p></p>
-  </p>
-
-  
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/">Algorithmic Game Theory - Lecture1</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>15 May 2017</time>
-  </div>
-
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithmic-game-theory">Algorithmic Game Theory</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/game-theory">Game Theory</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/open-course">Open Course</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/stanford">Stanford</a>
-    
-  </div>
-  
-  
-
+<div>
+\[
+\begin{aligned}
+& \text{For bidder} \, i, \text{we construct an example that} \, \beta_1 < \beta_2 = b_i \, \text{, but} \, \vec{x}(\beta_1) > \vec{x}(\beta_2) \\
+& \text{we pick} \, \vec{x^{\prime}}(\beta_2) = \vec{x}(\beta_1) \, \text{and} \, \vec{x^{\prime}}(\beta_1) = \vec{x}(\beta_2) \\
+& \text{It is easy to check that} \, \vec{x^{\prime}} \cdotp \vec{b} > \vec{x} \cdotp \vec{b}
+\end{aligned}
+\]
 </div>
 
-  </header>
+<p>但目前為止看起來非常完美，但真是如此嗎？別忘了我們希望整個 mechanism 能在 <strong>POLY</strong> time 內結束，然而，尋找 max allocation 的問題卻是一個 NPC &hellip;QQ，也就是說，對一般的 k-item auction 而言，不存在多項式時間的 mechanism。類似於在 approximation algorithm 所學的，我們的 objective 如以下。</p>
 
-  <p>
-  <p>這學期因緣際會之下，選了商研所的賽局，上起課來的感覺跟 EECS 著實差異頗大，直白的文字敘述及直覺居多（課後作業還是電影欣賞），考試也多以申論為主(但即使這樣，期中考還是考了全班最高分XD)，碰巧在網路上找到了這門課程，覺得相當有趣，以資訊科學的角度出發， formulate 各種所謂「直覺」的經濟學想法，去解決現實世界的問題，聽了前兩堂課，感覺之後也會用到不少這學期修的高等演算法的概念，算是相輔相成，希望自己有毅力聽完，並整理筆記囉 :D</p>
-  </p>
+<blockquote>
+<p><font color="blue">Relax optimal surplus constraint as little as possible, subject to DSIC and POLY-time constraint</font></p>
+</blockquote>
+
+<p>利用 Myerson&rsquo;s Lemma，以下敘述也等價</p>
+
+<blockquote>
+<p><font  color="blue"> Design POLY-time alg. and monotone allocation rule as close as possible to maximize the social surplus</font></p>
+</blockquote>
+
+<p>至此，在 approximation alg. 中學到的當前 state-of-the-art 的演算法，可用於解決 AGT 的問題，但有件事情需要注意</p>
+
+<blockquote>
+<p>The DSIC/monotone constraint that approx. mechanism should satisfy cause no additional surplus loss</p>
+</blockquote>
+
+<p><strong>[Theorem]</strong> The greedy allocation rule for Knapsack auction is monotone</p>
 
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/">Algorithmic Game Theory - Lecture3</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
 
   
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "\\(", right: "\\)", display: false},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+
+
 </div>
 
 </div>
@@ -496,3 +416,4 @@
 
 </body>
 </html>
+
