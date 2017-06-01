@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
   
@@ -45,7 +46,10 @@
   
   
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
-   
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -207,6 +211,14 @@
   <div class="small-print">
     <small>&copy; 2017. All rights reserved.</small>
   </div>
+<div>
+  <div class="small-print">
+    <small><span id="busuanzi_container_site_pv">view &nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div>
+  
+</div>
+</div>
   <div class="small-print">
     <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
     <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
@@ -233,8 +245,6 @@
   <div>
     <i class="fa fa-calendar fa-fw"></i>
     <time>27 May 2017</time>
-  </div>
-
   
 
   
@@ -268,6 +278,7 @@
   
 
 </div>
+
 
   <p>上一講利用 <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/">Myerson&rsquo;s Lemma</a> 闡述了給定在「好」的 allocation rule 下，該如何定價，使得 auction 具有 DSIC property; 而這講則要說明該如何 derive 出「好」的 allocation rule。</p>
 
@@ -313,7 +324,7 @@
 \]
 </div>
 
-<p>但目前為止看起來非常完美，但真是如此嗎？別忘了我們希望整個 mechanism 能在 <strong>POLY</strong> time 內結束，然而，尋找 max allocation 的問題卻是一個 NPC &hellip;QQ，也就是說，對一般的 k-item auction 而言，不存在多項式時間的 mechanism。所以類似於在 approximation algorithm 所學的，我們的 objective 如以下。</p>
+<p>但目前為止看起來非常完美，但真是如此嗎？別忘了我們希望整個 mechanism 能在 <strong>POLY</strong> time 內結束，然而，尋找 max allocation 的問題(等價於找到 Knapsack problem 的最佳解)卻是一個 NPC &hellip;QQ，也就是說，對一般的 k-item auction 而言，不存在多項式時間的 mechanism。所以類似於在 approximation algorithm 所學的，我們的 objective 如以下。</p>
 
 <blockquote>
 <p><font color="blue">Relax optimal surplus constraint as little as possible, subject to DSIC and POLY-time constraint</font></p>
@@ -347,6 +358,8 @@ pick <span>$max(v_1 + v_2 + \cdots +v_i,$ $v\scriptstyle{i+1}$$)$</span></p>
 <p>It is easy to check that such allocation rule for arbitary bidder <span>$i$</span> is monotone 0-1 curve 。<br/></p>
 </blockquote>
 
+    <span style="float:right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></span>
+  </div>
   
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
