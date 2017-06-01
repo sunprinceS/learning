@@ -50,7 +50,7 @@ topics = ["Algorithmic Game Theory"]
 \]
 </div>
 
-但目前為止看起來非常完美，但真是如此嗎？別忘了我們希望整個 mechanism 能在 **POLY** time 內結束，然而，尋找 max allocation 的問題卻是一個 NPC ...QQ，也就是說，對一般的 k-item auction 而言，不存在多項式時間的 mechanism。所以類似於在 approximation algorithm 所學的，我們的 objective 如以下。
+但目前為止看起來非常完美，但真是如此嗎？別忘了我們希望整個 mechanism 能在 **POLY** time 內結束，然而，尋找 max allocation 的問題(等價於找到 Knapsack problem 的最佳解)卻是一個 NPC ...QQ，也就是說，對一般的 k-item auction 而言，不存在多項式時間的 mechanism。所以類似於在 approximation algorithm 所學的，我們的 objective 如以下。
 
 > <font color="blue">Relax optimal surplus constraint as little as possible, subject to DSIC and POLY-time constraint</font>
 

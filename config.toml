@@ -27,6 +27,7 @@ paginate = 10
   # CSS name for highlight.js
   highlightjs = "monokai"
   dateFormat = "02 Jan 2006"
+  flow_stat = true
 
 [menu]
   # Shown in the side menu.
