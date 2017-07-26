@@ -4,8 +4,9 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:image" content="../../images/me.jpg"/>
   <meta name="description" content="Introduction">
-  <meta name="generator" content="Hugo 0.20.2" />
+  <meta name="generator" content="Hugo 0.25.1" />
 
   <title>Algorithmic Game Theory - Lecture1 &middot; Stay hungry. Stay foolish </title>
 
@@ -417,10 +418,28 @@
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
-     {left: "\\(", right: "\\)", display: false},
      {left: "$", right: "$", display: false},
    ]
  });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: ['\[\[','\]\]'],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
 
 
 

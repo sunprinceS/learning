@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 27 May 2017 17:06:53 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 26 Jul 2017 22:56:26 +0800</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Advanced Algorithm - Knapsack - Lec1</title>
+      <link>https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack---lec1/</link>
+      <pubDate>Wed, 26 Jul 2017 22:56:26 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack---lec1/</guid>
+      <description>背包問題為一個典型的最佳化問題，這裡我們考慮最基本的 0/1 - Knapsack Problem。簡單的formulation如下:
+We have $n$ items, each one with value $v_i$ and weight $w_i$. The weight limit of the backpack is $W$.
+ \[ \text{Goal: Select set of items } S \, \text{such that} \sum_{S}v_i \, \text{is maximized subject to } \sum_{S}w_i \leq W \]  2-Approx Algorithm 若今天物品是可分割的話，有一個簡單的 greedy 方法可以找到最佳解 (依據$\frac{v_i}{w_i}$作排序，選擇單位重量價值最高的物品，塞到背包塞不下為止)。而在 0/1 - Knapsack 中，也可利用此方法找到 2-Approx 的解。
+Algorithm Sort items according to $ \frac{v_i}{w_i}$ in decending order.</description>
+    </item>
     
     <item>
       <title>Algorithmic Game Theory - Lecture4</title>

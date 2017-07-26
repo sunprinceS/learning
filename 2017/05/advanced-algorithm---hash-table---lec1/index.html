@@ -4,8 +4,9 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:image" content="../../images/me.jpg"/>
   <meta name="description" content="Intro &amp; Analysis/ 2-Universal Family">
-  <meta name="generator" content="Hugo 0.20.2" />
+  <meta name="generator" content="Hugo 0.25.1" />
 
   <title>Advanced Algorithm - Hash Table - Lec1 &middot; Stay hungry. Stay foolish </title>
 
@@ -264,9 +265,9 @@
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/advanced-algorithm">Advanced Algorithm</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/advanced-algorithm">Advanced Algorithm</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
     
   </div>
   
@@ -354,10 +355,10 @@ k! = \sqrt{2 \pi k}~ (\frac{k}{e})^k (1 + \mathcal{O}( \frac{1}{k} ))
 <li>input is arbitary, but hash function is random</li>
 </ul>
 
-<p>random hash function? 意思是說，我們希望有一組 hash function 的集合 <span>$\mathcal{H}$</span>，當每次要用到 hashing 時，便從中抽一個 <span>$h: U \rightarrow \lbrace 0,1,\cdots,m-1 \rbrace$</span> 出來，可能結果很不好 ( collision 很嚴重)，在這種情況可以再重新抽，<strong>平均而言</strong> collision 發生的機率很小即可。</p>
+<p>random hash function? 意思是說，我們希望有一組 hash function 的集合 <span>$\mathcal{H}$</span>，當每次要用到 hashing 時，便從中抽一個 <span>$h: U \rightarrow \lbrace 0,1,\cdots,m-1 \rbrace$</span> 出來，可能結果很不好 ( collision 很嚴重， 可以想成總是可以構造出某些 input sequence ，讓特定的 <span>$h$</span> 壞掉)，在這種情況可以再重新抽，<strong>平均而言</strong> collision 發生的機率很小即可 (i.e 不用太常重抽)。</p>
 
 <p>我們希望 <span>$\mathcal{H}$</span> 有以下性質:<br/>
-<span>$\forall x_1,x_2,\cdots,x_n \in S,~ \text{and}~ a_1,a_2,\cdots,a_n \in \lbrace 0,1,\cdots,m-1 \rbrace$</span></p>
+<span>$\forall x_1,x_2,\cdots,x_n \in S,~S \subset U,~ \text{and}~ a_1,a_2,\cdots,a_n \in \lbrace 0,1,\cdots,m-1 \rbrace$</span></p>
 
 <ul>
 <li><span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1] = \frac{1}{m}$</span></li>
@@ -472,10 +473,28 @@ h_a(x) = \sum_{i=0}^n a_i x_i \mod m
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
-     {left: "\\(", right: "\\)", display: false},
      {left: "$", right: "$", display: false},
    ]
  });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: ['\[\[','\]\]'],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
 
 
 

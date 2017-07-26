@@ -5,10 +5,10 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
-  <meta name="description" content="hello world">
+  <meta name="description" content="Approximation Algorithm (Dynamic Programming)">
   <meta name="generator" content="Hugo 0.25.1" />
 
-  <title>Hello World &middot; Stay hungry. Stay foolish </title>
+  <title>Advanced Algorithm - Knapsack - Lec1 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -232,8 +232,8 @@
 
 
 <div class="header">
-  <h1>Hello World</h1>
-  <h2>hello world</h2>
+  <h1>Advanced Algorithm - Knapsack - Lec1</h1>
+  <h2>Approximation Algorithm (Dynamic Programming)</h2>
 </div>
 <div class="content">
 
@@ -241,7 +241,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>22 Apr 2017</time>
+    <time>26 Jul 2017</time>
     </div>
   
 
@@ -251,7 +251,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/misc">misc</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
     
   </div>
   
@@ -263,9 +263,11 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/hugo">hugo</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/web-development">web development</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/advanced-algorithm">Advanced Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
     
   </div>
   
@@ -274,44 +276,121 @@
 </div>
 
 
-  <p>你好</p>
+  
 
-<p></p>
+<p>背包問題為一個典型的最佳化問題，這裡我們考慮最基本的 0/1 - Knapsack Problem。簡單的formulation如下:</p>
 
-<h2 id="code-block">Code block</h2>
-
-<p>玩 static site 當然要有 code block 啊(？</p>
-
-<pre><code class="language-python">import numpy as np
-
-A = np.random.random((10, 10))
-B = np.random.random((10, 10))
-print(A @ B) # python 3.5+ new syntax
-</code></pre>
-
-<pre><code class="language-javascript">const a = { test: 123 };
-console.log('Hello World!');
-</code></pre>
-
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-
-int main()
-{
-  cout &lt;&lt; &quot;Hao 123&quot; &lt;&lt; endl;
-  return 0;
-}
-</code></pre>
-
-<h2 id="math">Math</h2>
-
-<p>不過我也想打點 <span>$\KaTeX$</span> (竟然不能打<code>\LaTeX</code>，不過真的滿快的)</p>
+<p>We have <span>$n$</span> items, each one with value <span>$v_i$</span> and
+weight <span>$w_i$</span>. The weight limit of the backpack is <span>$W$</span>.</p>
 
 <div>
 \[
-  \ln x = \int_{1}^x \frac{1}{t} \, dt
+\text{Goal: Select set of items } S \, \text{such that} \sum_{S}v_i \, \text{is
+maximized subject to } \sum_{S}w_i \leq W
 \]
 </div>
+
+<h2 id="2-approx-algorithm">2-Approx Algorithm</h2>
+
+<p>若今天物品是可分割的話，有一個簡單的 greedy 方法可以找到最佳解 (依據<span>$\frac{v_i}{w_i}$</span>作排序，選擇單位重量價值最高的物品，塞到背包塞不下為止)。而在 0/1 - Knapsack 中，也可利用此方法找到 2-Approx 的解。</p>
+
+<h3 id="algorithm">Algorithm</h3>
+
+<p>Sort items according to <span>$ \frac{v_i}{w_i}$</span> in decending order.
+Choose items in that order until constraint DOESN&rsquo;T satisfy, then
+pick <span>$max(v_1 + v_2 + \cdots +v_i,$ $v\scriptstyle{i+1}$$)$</span></p>
+
+<h2 id="dp-based-algorithm">DP-based Algorithm</h2>
+
+<p>概念是給定欲達到的價值(<span>$v$</span>)，從物品的子集(item 1 ~ i)中，找到所需重量最小的物品集合之重量 ( <span>$A[i,v]$</span> )</p>
+
+<h3 id="algorithm-1">Algorithm</h3>
+
+<p>Let <span>$A[i,v]$</span>: min. weight chosen from items 1 ~ i such that <span>$\sum \text{value} \geq
+v$</span></p>
+
+<p><strong>initial condition:</strong> <span>$A[0,v] = (v \leq 0\,)?\,0:\infty $</span></p>
+
+<p><strong>recursive relation</strong>: <span>$A[i,v] = \min(\stackrel{\color{blue}{i\,\text{is not picked}}}{A[i-1,v]},\stackrel{\color{blue}{i\,\text{is picked}}}{A[i-1,v-v_i]+w_i})$</span></p>
+
+<p>Then search the n-th column (along the value axis), <br/>
+we can find <span>$v^{\star} \; \text{such that}\; A[n,v^{\star}] \leq W \land
+A[n,v^{\star}+1] &gt; W$</span></p>
+
+<p>The time complexity is <span>$\Theta(n \, v^{\star})$</span></p>
+
+<p>然而，我們已知 Knapsack Problem 為 NPC 問題，目前並不存在已知的 polynomial-time
+的解法，但為何 DP 的複雜度卻不是指數呢？</p>
+
+<h3 id="psuedo-poly-algorithm-weakly-np-hard">Psuedo-Poly Algorithm [Weakly NP-Hard]</h3>
+
+<blockquote>
+<p>Running time is poly. in the input size under <strong>unary representation</strong> (not
+binary <span>$\uparrow$</span>)</p>
+</blockquote>
+
+<p>一般而言，我們會以二進位制儲存數字，所以 input size 應為 <span>$\sum \log{v_i} + \sum \log{w_i}$</span>，然而方才的演算法卻會一個一個地掃過 value axis ，直到找到解為止，最壞情況下(<span>$W$</span>相當寬鬆)，複雜度為 <span>$\Theta(n \, \sum{v_i})$</span></br>
+<span>$\Rightarrow$</span> Running time 為 input 的指數。<br />
+(另外，若想用 unary representation 來儲存 instance ，付出的代價即是空間複雜度變為
+原先input size 的指數)</p>
+
+<h3 id="strong-np-hard">Strong NP-Hard</h3>
+
+<blockquote>
+<p>NP-Hard even all numerical values are <strong>PLOY</strong>(sizeof input) <em>e.g</em> Exactly Set
+Cover</p>
+</blockquote>
+
+<h2 id="1-span-epsilon-span-approx-algorithm">(1+ <span>$\epsilon$</span>)-Approx Algorithm</h2>
+
+<p>剛剛 DP 的方法壞就壞在必須線性掃過 value axis, 我們是否能過不要檢查每一個
+<span>$v$</span> ，而是<strong>跳著檢查某些 <span>$v$</span> 值</strong>就好了呢？從上述的直覺，發展出 <strong>rounding</strong> 這個 scheme，犧牲一些精確度(<span>$1\,+\, \epsilon$</span>)，將複雜度壓回 polynomial。</p>
+
+<h3 id="algorithm-2">Algorithm</h3>
+
+<p>Let <span>$b = \frac{\epsilon}{2n}\max_i v_i$</span></p>
+
+<p>Now, consider the rounded instance <span style="color: green"><span>$\text{0-1 Knapsack}^{\prime}$</span></span> , <span>$\hat{w_i} = w_i \, , \hat{W} = W \, , \color{blue}{\hat{v_i} = \lceil \frac{v_i}{b} \rceil \cdotp b}$</span></p>
+
+<p><span>$\Rightarrow$</span> Running time for solving <span style="color: green"><span>$\text{0-1 Knapsack}^{\prime}$</span></span> is <span>$\Theta(n \cdotp \frac{v^{\star}}{b}) = \Theta(\frac{n^3}{\epsilon})$</span></p>
+
+<div>
+\[
+\because \frac{v^{\star}}{b} \leq \frac{\sum v_i}{b} \leq \frac{n \cdotp \max_i v_i}{b} =
+\frac{2n^2}{\epsilon}
+\]
+</div>
+
+<h4 id="correctness-check">Correctness Check</h4>
+
+<p>value(OPT) in 0-1 Knapsack<br />
+<span>$\leq$</span> value(OPT) in <span style="color: green"><span>$\text{0-1 Knapsack}^{\prime}$</span> </span> <span>$(\because$ 進位)</span><br />
+<span>$\leq \text{value}$</span> (<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) in <span style="color: green"><span>$\text{0-1 Knapsack}^{\prime}$</span> </span><br />
+<span>$\leq \text{value}$</span> (<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) in 0-1 Knapsack + <span>$nb$</span> (直接就加一
+個刻度)<br />
+= value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) +
+<span>$\frac{\epsilon}{2} \stackrel{\color{blue}{\leq \text{value(OPT)}}}{\max_i v_i}$</span></p>
+
+<p><span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (1-\frac{\epsilon}{2})$</span> value(OPT)<br />
+<span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (\frac{1}{1 + \epsilon})$</span> value(OPT) ( <span>$\because \color{red}{1-\frac{\epsilon}{2} \geq \frac{1}{1+\epsilon}}$</span> )</p>
+
+<h3 id="poly-time-approximation-scheme-ptas">Poly-time Approximation Scheme (<em>PTAS</em>)</h3>
+
+<blockquote>
+<p>Given <span>$\epsilon &gt; 0$</span>, can find (<span>$1 +
+\epsilon$</span>)-approx. algorithm w/ running time is poly. for
+constant <span>$\frac{1}{\epsilon}$</span></p>
+</blockquote>
+
+<h3 id="fully-poly-time-approximation-scheme-fptas">Fully Poly-time Approximation Scheme (<em>FPTAS</em>)</h3>
+
+<blockquote>
+<p>Given <span>$\epsilon &gt; 0$</span>, can find (<span>$1 +
+\epsilon$</span>)-approx. algorithm w/ running time is poly. for
+constant <span>$\frac{1}{\epsilon}$</span> and <span>$n$</span> <br />
+<em>e.g</em> 剛剛提到的 Rounded DP-based Algorithm</p>
+</blockquote>
+
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -319,8 +398,14 @@ int main()
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
+    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture4/"><i class="fa fa-chevron-left"></i></a>
+    
   </div>
   <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture4/">Algorithmic Game Theory - Lecture4</a>
+    </nav>
     
   </div>
   <div class="pure-u-2-24">
@@ -328,14 +413,8 @@ int main()
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/">使用Hugo快速建立自己的靜態網站</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
