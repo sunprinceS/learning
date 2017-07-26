@@ -70,7 +70,7 @@ topics = ["Algorithmic Game Theory"]
 
 > <u>2-approx Algorithm</u>: &nbsp; Sort bidders according to <span>$ \frac{b_i}{w_i}$</span> in decending order <br/>
 Choose bidders in that order until constranit DOESN'T satisfy,</br> then
-pick <span>$max(v_1 + v_2 + \cdots +v_i,$ $v\scriptstyle{i+1}$$)$</span>
+pick <span>$max(b_1 + b_2 + \cdots +b_i,$ $b\scriptstyle{i+1}$$)$</span>
 
 > For every bidder <span>$i$</span>, <span>$\exists$</span> critical bid <span> $b^{\star}$</span> (depending on its <span>$w_i$</span> and <span>$b\scriptstyle{-i}$</span>) s.t <span>$x_i$</span> jump from 0 to 1 。
 

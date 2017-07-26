@@ -2,12 +2,11 @@
 date = "2017-05-21T08:52:55+08:00"
 description = "Intro & Analysis/ 2-Universal Family"
 draft = false
-tags = ["Algorithm","NTU","Advanced Algorithm"]
+tags = ["Algorithm","Advanced Algorithm","NTU"]
 title = "Advanced Algorithm - Hash Table - Lec1"
 topics = ["Advanced Algorithm"]
 
 +++
-
 <!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。-->
 
 
@@ -81,10 +80,10 @@ k! = \sqrt{2 \pi k}~ (\frac{k}{e})^k (1 + \mathcal{O}( \frac{1}{k} ))
 * input is random (**impossible !!**)
 * input is arbitary, but hash function is random
 
-random hash function? 意思是說，我們希望有一組 hash function 的集合 <span>$\mathcal{H}$</span>，當每次要用到 hashing 時，便從中抽一個 <span>$h: U \rightarrow \lbrace 0,1,\cdots,m-1 \rbrace$</span> 出來，可能結果很不好 ( collision 很嚴重)，在這種情況可以再重新抽，**平均而言** collision 發生的機率很小即可。
+random hash function? 意思是說，我們希望有一組 hash function 的集合 <span>$\mathcal{H}$</span>，當每次要用到 hashing 時，便從中抽一個 <span>$h: U \rightarrow \lbrace 0,1,\cdots,m-1 \rbrace$</span> 出來，可能結果很不好 ( collision 很嚴重， 可以想成總是可以構造出某些 input sequence ，讓特定的 <span>$h$</span> 壞掉)，在這種情況可以再重新抽，**平均而言** collision 發生的機率很小即可 (i.e 不用太常重抽)。
 
 我們希望 <span>$\mathcal{H}$</span> 有以下性質:<br/>
-<span>$\forall x_1,x_2,\cdots,x_n \in S,~ \text{and}~ a_1,a_2,\cdots,a_n \in \lbrace 0,1,\cdots,m-1 \rbrace$</span>
+<span>$\forall x_1,x_2,\cdots,x_n \in S,~S \subset U,~ \text{and}~ a_1,a_2,\cdots,a_n \in \lbrace 0,1,\cdots,m-1 \rbrace$</span>
 
 * <span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1] = \frac{1}{m}$</span>
 * <span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ] = \frac{1}{m^2}$</span> **[Pairwise independence]**

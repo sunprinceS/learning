@@ -142,4 +142,3 @@ Fix a single-parameter environment
 
 下圖以圖示證明 mechanism <span>$(\vec{x},\vec{p})$</span> is **DSIC** (the figure is from the [lecture](http://theory.stanford.edu/~tim/f13/l/l3.pdf))
 {{% fluid_img src="/img/post/Myerson.png" alt="Myerson's Lemma" %}}
-

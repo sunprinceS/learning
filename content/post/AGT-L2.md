@@ -66,6 +66,7 @@ U = \left\{ \begin{array}{ll}
 \sum\limits_{i=1}^n \mathbb{1}[\text{bidder i wins}],
 
 \text{subject to } \sum\limits_{i=1}^n \mathbb{1}[\text{bidder i wins}] \lneq 1
+
 \]
 </div>
 

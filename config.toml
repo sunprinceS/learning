@@ -24,6 +24,7 @@ paginate = 10
   googleAnalytics = "UA-59748795-3"
   disqus = "tonyhsu822"
   katex = true
+  mathjax = true
   # CSS name for highlight.js
   highlightjs = "monokai"
   dateFormat = "02 Jan 2006"
