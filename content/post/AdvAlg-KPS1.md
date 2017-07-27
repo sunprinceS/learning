@@ -1,5 +1,5 @@
 +++
-date =  "2017-07-26T22:56:26+08:00"
+date =  "2017-07-01T22:56:26+08:00"
 description = "Approximation Algorithm (Dynamic Programming & Discretization)"
 tags = ["Algorithm","Advanced Algorithm","NTU"]
 title = "Advanced Algorithm - Knapsack Problem"
@@ -58,7 +58,7 @@ The time complexity is <span>$\Theta(n \, v^{\star})$</span>
 原先input size 的指數)
 
 ### Strong NP-Hard
-> NP-Hard even all numerical values are **PLOY**(sizeof input) *e.g* Exactly Set
+> NP-Hard even all numerical values are **POLY**(sizeof input) *e.g* Exactly Set
 > Cover
 
 ## (1+ <span>$\epsilon$</span>)-Approx Algorithm
