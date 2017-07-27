@@ -7,15 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 26 Jul 2017 22:56:26 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 11 Jul 2017 23:36:01 +0800</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/topics/advanced-algorithm/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Advanced Algorithm - Subset Sum Problem</title>
+      <link>https://sunprinces.github.io/learning/2017/07/advanced-algorithm---subset-sum-problem/</link>
+      <pubDate>Tue, 11 Jul 2017 23:36:01 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/07/advanced-algorithm---subset-sum-problem/</guid>
+      <description>&lt;p&gt;Subset Sum Problem 與 Knapsack Problem 相同，也是一個 NPC 問題(可以想成 Knapsack Problem weight 均為 1 的特例)。而在 Knapsack Problem 中，我們發展出&lt;strong&gt;等差&lt;/strong&gt; 的rounding 技巧，犧牲精確度去換取更低的時間複雜度，而這一講中，將利用&lt;strong&gt;等比&lt;/strong&gt;的方式去做 rounding 。
+&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Advanced Algorithm - Knapsack Problem</title>
       <link>https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/</link>
-      <pubDate>Wed, 26 Jul 2017 22:56:26 +0800</pubDate>
+      <pubDate>Sat, 01 Jul 2017 22:56:26 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/</guid>
       <description>&lt;p&gt;背包問題為一個典型的最佳化問題，這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:&lt;/p&gt;
