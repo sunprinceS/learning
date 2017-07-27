@@ -276,9 +276,9 @@
 </div>
 
 
-  
+  <p>背包問題為一個典型的最佳化問題，這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:</p>
 
-<p>背包問題為一個典型的最佳化問題，這裡我們考慮最基本的 0/1 - Knapsack Problem。簡單的formulation如下:</p>
+<p></p>
 
 <p>We have <span>$n$</span> items, each one with value <span>$v_i$</span> and
 weight <span>$w_i$</span>. The weight limit of the backpack is <span>$W$</span>.</p>
@@ -374,6 +374,18 @@ Cover</p>
 <p><span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (1-\frac{\epsilon}{2})$</span> value(OPT)<br />
 <span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (\frac{1}{1 + \epsilon})$</span> value(OPT) ( <span>$\because \color{red}{1-\frac{\epsilon}{2} \geq \frac{1}{1+\epsilon}}$</span> )</p>
 
+<h3 id="improvement-algorithm">Improvement Algorithm</h3>
+
+<p>上題的 <span>$b = \frac{\epsilon}{2n}\tilde{V}$</span> 可以想成離散化 <span>$v$</span> 值的刻度大小，我們可否在保持( <span>$ 1 + \epsilon$</span> ) - approx. ratio 的前提下，<strong>跳大格一點</strong>( <span>$b$</span> 取大一點)。從上式的推導可以發現，若想保持 approx. ratio ，<span>$\tilde{V}$</span> 必須小於 <span style="color: blue">value(OPT)</span>，而想降低 running 的 order ， <span>$\tilde{V}$</span> 需要跟 <span>$v^{\star}$</span> <strong>差不多</strong> order 。也就是我們需要<strong>估計</strong>一個比 value(OPT) 小，但不會差太多的 <span>$\tilde{V}$</span> , <span>$\tilde{V} = \Theta(v^{\star})$</span>。 (而且估計的 running time 不能高於之後 derive 出來的複雜度)</p>
+
+<h4 id="greedy-algorithm-to-estimate-span-tilde-v-span">Greedy Algorithm to estimate <span>$\tilde{V}$</span></h4>
+
+<div>
+\[
+ \text{Pick} \; \tilde{V} = \max(v_1 + v_2 + \cdots +v_i, v\scriptstyle{i+1})
+\]
+</div>
+
 <h3 id="poly-time-approximation-scheme-ptas">Poly-time Approximation Scheme (<em>PTAS</em>)</h3>
 
 <blockquote>
@@ -390,7 +402,6 @@ constant <span>$\frac{1}{\epsilon}$</span></p>
 constant <span>$\frac{1}{\epsilon}$</span> and <span>$n$</span> <br />
 <em>e.g</em> 剛剛提到的 Rounded DP-based Algorithm</p>
 </blockquote>
-
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -459,7 +470,7 @@ constant <span>$\frac{1}{\epsilon}$</span> and <span>$n$</span> <br />
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
-    inlineMath: ['\[\[','\]\]'],
+    inlineMath: [],
     displayMath: [['$$','$$']],
     processEscapes: true,
     processEnvironments: true,
