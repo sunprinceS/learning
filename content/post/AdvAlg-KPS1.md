@@ -1,12 +1,14 @@
 +++
 date =  "2017-07-26T22:56:26+08:00"
-description = "Approximation Algorithm (Dynamic Programming)"
+description = "Approximation Algorithm (Dynamic Programming & Discretization)"
 tags = ["Algorithm","Advanced Algorithm","NTU"]
-title = "Advanced Algorithm - Knapsack - Lec1"
+title = "Advanced Algorithm - Knapsack Problem"
 topics = ["Advanced Algorithm"]
 +++
 
-背包問題為一個典型的最佳化問題，這裡我們考慮最基本的 0/1 - Knapsack Problem。簡單的formulation如下:
+背包問題為一個典型的最佳化問題，這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:
+
+<!--more-->
 
 We have <span>$n$</span> items, each one with value <span>$v_i$</span> and
 weight <span>$w_i$</span>. The weight limit of the backpack is <span>$W$</span>.
@@ -90,6 +92,19 @@ value(OPT) in 0-1 Knapsack\\
 
 <span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (1-\frac{\epsilon}{2})$</span> value(OPT)\\
 <span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (\frac{1}{1 + \epsilon})$</span> value(OPT) ( <span>$\because \color{red}{1-\frac{\epsilon}{2} \geq \frac{1}{1+\epsilon}}$</span> )
+
+### Improvement Algorithm
+
+上題的 <span>$b = \frac{\epsilon}{2n}\tilde{V}$</span> 可以想成離散化 <span>$v$</span> 值的刻度大小，我們可否在保持( <span>$ 1 + \epsilon$</span> ) - approx. ratio 的前提下，**跳大格一點**( <span>$b$</span> 取大一點)。從上式的推導可以發現，若想保持 approx. ratio ，<span>$\tilde{V}$</span> 必須小於 <span style="color: blue">value(OPT)</span>，而想降低 running 的 order ， <span>$\tilde{V}$</span> 需要跟 <span>$v^{\star}$</span> **差不多** order 。也就是我們需要**估計**一個比 value(OPT) 小，但不會差太多的 <span>$\tilde{V}$</span> , <span>$\tilde{V} = \Theta(v^{\star})$</span>。 (而且估計的 running time 不能高於之後 derive 出來的複雜度)
+
+#### Greedy Algorithm to estimate <span>$\tilde{V}$</span>
+
+<div>
+\[
+ \text{Pick} \; \tilde{V} = \max(v_1 + v_2 + \cdots +v_i, v\scriptstyle{i+1})
+\]
+</div>
+
 
 ### Poly-time Approximation Scheme (*PTAS*)
 > Given <span>$\epsilon > 0$</span>, can find (<span>$1 +
