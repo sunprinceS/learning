@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
-  <meta name="description" content="Approximation Algorithm (Dynamic Programming &amp; Discretization)">
+  <meta name="description" content="Rounding Data &amp; Dynamic Programming ">
   <meta name="generator" content="Hugo 0.25.1" />
 
   <title>Advanced Algorithm - Knapsack Problem &middot; Stay hungry. Stay foolish </title>
@@ -233,7 +233,7 @@
 
 <div class="header">
   <h1>Advanced Algorithm - Knapsack Problem</h1>
-  <h2>Approximation Algorithm (Dynamic Programming &amp; Discretization)</h2>
+  <h2>Rounding Data &amp; Dynamic Programming </h2>
 </div>
 <div class="content">
 
@@ -265,7 +265,9 @@
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/advanced-algorithm">Advanced Algorithm</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rounding-data--dp">Rounding Data &amp; DP</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
     
@@ -374,7 +376,7 @@ Cover</p>
 <p><span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (1-\frac{\epsilon}{2})$</span> value(OPT)<br />
 <span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (\frac{1}{1 + \epsilon})$</span> value(OPT) ( <span>$\because \color{red}{1-\frac{\epsilon}{2} \geq \frac{1}{1+\epsilon}}$</span> )</p>
 
-<h3 id="improvement-algorithm">Improvement Algorithm</h3>
+<h3 id="improvement-version">Improvement version</h3>
 
 <p>上題的 <span>$b = \frac{\epsilon}{2n}\tilde{V}$</span> 可以想成離散化 <span>$v$</span> 值的刻度大小，我們可否在保持( <span>$ 1 + \epsilon$</span> ) - approx. ratio 的前提下，<strong>跳大格一點</strong>( <span>$b$</span> 取大一點)。從上式的推導可以發現，若想保持 approx. ratio ，<span>$\tilde{V}$</span> 必須小於 <span style="color: blue">value(OPT)</span>，而想降低 running 的 order ， <span>$\tilde{V}$</span> 需要跟 <span>$v^{\star}$</span> <strong>差不多</strong> order 。也就是我們需要<strong>估計</strong>一個比 value(OPT) 小，但不會差太多的 <span>$\tilde{V}$</span> , <span>$\tilde{V} = \Theta(v^{\star})$</span>。 (而且估計的 running time 不能高於之後 derive 出來的複雜度)</p>
 

@@ -5,10 +5,10 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
-  <meta name="description" content="Trimming">
+  <meta name="description" content="">
   <meta name="generator" content="Hugo 0.25.1" />
 
-  <title>Advanced Algorithm - Subset Sum Problem &middot; Stay hungry. Stay foolish </title>
+  <title>Approximation Algorithm &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -38,6 +38,8 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  
+  <link rel="alternate" type="application/rss+xml" title="Stay hungry. Stay foolish " href="https://sunprinces.github.io/learning/tags/approximation-algorithm/index.xml" />
   
 
   
@@ -119,6 +121,10 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/approximation-algorithm/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+    </li>
     
 
     
@@ -232,12 +238,16 @@
 
 
 <div class="header">
-  <h1>Advanced Algorithm - Subset Sum Problem</h1>
-  <h2>Trimming</h2>
+  <h1>Approximation Algorithm</h1>
 </div>
-<div class="content">
 
-  <div class="post-meta">
+<div class="content">
+  
+    <article>
+  <header>
+    <h2><a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---subset-sum-problem/">Advanced Algorithm - Subset Sum Problem</a></h2>
+
+    <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
@@ -278,150 +288,82 @@
 </div>
 
 
+  </header>
+
+  <p>
   <p>Subset Sum Problem 與 Knapsack Problem 相同，也是一個 NPC 問題(可以想成 Knapsack Problem weight 均為 1 的特例)。而在 Knapsack Problem 中，我們發展出<strong>等差</strong> 的rounding 技巧，犧牲精確度去換取更低的時間複雜度，而這一講中，將利用<strong>等比</strong>的方式去做 rounding 。
 </p>
+  </p>
 
-<h2 id="algorithm">Algorithm</h2>
+  
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---subset-sum-problem/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
 
-<p>Computer <span>$S_i$</span> : possible subset sum of {<span>$v_1, v_2, \cdots ,v_i$</span>}</p>
+  
+    <article>
+  <header>
+    <h2><a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/">Advanced Algorithm - Knapsack Problem</a></h2>
 
-<p><span>$S_0 = $</span>{<span>$0$</span>}</p>
+    <div class="post-meta">
 
-<p><span>$S_1 = $</span>{<span>$\color{red}{S_0}, \color{blue}{S_0+v_1}$</span>} = {<span>$\color{red}{0}, \color{blue}{v_1}$</span>}</p>
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>01 Jul 2017</time>
+    </div>
+  
 
-<p><span>$S_2 = $</span>{<span>$\color{red}{S_1}, \color{blue}{S_1+v_2}$</span>} = {<span>$\color{red}{0}, \color{red}{v_1}, \color{blue}{v_2}, \color{blue}{v_1+v_2}$</span>}</p>
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+    
+  </div>
+  
+  
 
-<p>.<br />
-.<br />
-.<br />
-<span>$S_{n} = $</span> <span>$\color{red}{S\scriptstyle{n-1}}$</span> <span>$\bigcup \, (\color{blue}{S\scriptstyle{n-1}}$</span> <span>$\color{blue}{+ \, v\scriptstyle{n-1}}$</span> <span>$)$</span></p>
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rounding-data--dp">Rounding Data &amp; DP</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
 
-<p>由 <span>$S_{i}$</span> 計算 <span>$S\scriptstyle{i+1}$</span> 以 <span>$\mathsf{MergeSort}$</span> 來實做，並移除 <span>$&gt;W$</span>的元素和 (複雜度為 <span>$\mathcal{O}(|S_i|)$</span>)，又 <span>$|S_i| &lt; W \, (\forall i=1 \sim n)$</span>， 所以 Running time 為 <span>$\mathcal{O}(nW)$</span>。</p>
-
-<p>可以發現複雜度與 <span>$W$</span> 成正比，故充其量這個 Algorithm 也只是 psuedo-polynomial 而已，與前面的想法類似，造成複雜度的主因在每一個 Merge 的過程中，我們留下了太多元素(而 Merge 的複雜度又與元素個數呈線性)，如果<strong>只取幾個代表性的元素</strong>(e.g <span>$|S_i| = \mathcal{O}(\log W)$</span>)，便可將複雜度再往下壓。</p>
-
-
-<div class="pure-u-1">
-  <img class="pure-img" src="https://sunprinces.github.io/learning/img/post/trim.png" alt="Trimming Procedure">
 </div>
 
 
-<p>Pick <span>$x_1$</span>, remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list (say, <span>$x_2 \, \text{and} \, x_3$</span>). <br />
-Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list. Repeat this procedure until the last element.</p>
+  </header>
 
-<h3 id="psuedocode-for-trimming">PsuedoCode for Trimming</h3>
+  <p>
+  <p>背包問題為一個典型的最佳化問題，這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:</p>
 
-<pre><code class="language-python">def trim(s_list,delta):
-  ret = [] # trimmed list
-  last = 0
-
-  for elm in s_list:
-    if elm &gt; last * delta:
-      ret.append(elm)
-      last = elm
-  return ret
-</code></pre>
-
-<p>Now, <span>$|S_i| \leq \log_M W = \mathcal{O}(\frac{n\ln W}{\epsilon})
-\Rightarrow \text{Total running time: } \mathcal{O}(\frac{n^2 \ln W}{\epsilon})$</span></p>
-
-<h3 id="correctness-check">Correctness Check</h3>
-
-
-<div class="pure-u-1">
-  <img class="pure-img" src="https://sunprinces.github.io/learning/img/post/trim_approx.png" alt="Trimming Approximation">
-</div>
-
-
-<p>可以將 Trimming 視為改小某一 range 中的元素們(將其改至該 range 內最小的元素)，OPT 在 trimming &amp; merge 的過程中不斷地被改小，最多最多會被等比縮小 <span>$n$</span> 次。</p>
-
-<div>
-\[
-  \text{Output} \, \geq \, \text{OPT} \cdotp (1-\frac{\epsilon}{n})^n \stackrel{\color{blue}{n=1}}{\geq} \, \text{OPT} \cdotp (1-\epsilon)
-\]
-</div>
-  
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+<p></p>
+  </p>
 
   
-<div class="prev-next-post pure-g">
-  <div class="pure-u-1-24" style="text-align: left;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/"><i class="fa fa-chevron-left"></i></a>
-    
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/">Advanced Algorithm - Knapsack Problem</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-2-24">
-    &nbsp;
-  </div>
-  <div class="pure-u-10-24">
-    
-  </div>
-  <div class="pure-u-1-24" style="text-align: right;">
-    
-  </div>
-</div>
-
-
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
 
   
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    if (window.location.hostname == "localhost")
-        return;
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'tonyhsu822';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-  
- <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
- <script>renderMathInElement(document.body, {
-   delimiters: [
-     {left: "\\[", right: "\\]", display: true},
-     {left: "$", right: "$", display: false},
-   ]
- });</script>
-
-
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-</script>
-
-
-
-
 </div>
 
 </div>
@@ -444,4 +386,3 @@ MathJax.Hub.Config({
 
 </body>
 </html>
-

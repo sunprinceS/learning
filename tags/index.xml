@@ -13,20 +13,29 @@
     
     
     <item>
-      <title>Advanced Algorithm</title>
-      <link>https://sunprinces.github.io/learning/tags/advanced-algorithm/</link>
-      <pubDate>Tue, 11 Jul 2017 23:36:01 +0800</pubDate>
-      
-      <guid>https://sunprinces.github.io/learning/tags/advanced-algorithm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Algorithm</title>
       <link>https://sunprinces.github.io/learning/tags/algorithm/</link>
       <pubDate>Tue, 11 Jul 2017 23:36:01 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Approximation Algorithm</title>
+      <link>https://sunprinces.github.io/learning/tags/approximation-algorithm/</link>
+      <pubDate>Tue, 11 Jul 2017 23:36:01 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/tags/approximation-algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Structure</title>
+      <link>https://sunprinces.github.io/learning/tags/data-structure/</link>
+      <pubDate>Sun, 21 May 2017 08:52:55 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/tags/data-structure/</guid>
       <description></description>
     </item>
     
@@ -63,6 +72,15 @@
       <pubDate>Sat, 27 May 2017 17:06:53 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/tags/open-course/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rounding Data  Dp</title>
+      <link>https://sunprinces.github.io/learning/tags/rounding-data--dp/</link>
+      <pubDate>Tue, 11 Jul 2017 23:36:01 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/tags/rounding-data--dp/</guid>
       <description></description>
     </item>
     

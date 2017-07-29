@@ -53,12 +53,6 @@
   </url>
   
   <url>
-    <loc>https://sunprinces.github.io/learning/tags/advanced-algorithm/</loc>
-    <lastmod>2017-07-11T23:36:01+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://sunprinces.github.io/learning/topics/advanced-algorithm/</loc>
     <lastmod>2017-07-11T23:36:01+08:00</lastmod>
     <priority>0</priority>
@@ -73,6 +67,18 @@
   <url>
     <loc>https://sunprinces.github.io/learning/topics/algorithmic-game-theory/</loc>
     <lastmod>2017-05-27T17:06:53+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/tags/approximation-algorithm/</loc>
+    <lastmod>2017-07-11T23:36:01+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/tags/data-structure/</loc>
+    <lastmod>2017-05-21T08:52:55+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -108,6 +114,12 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/post/</loc>
+    <lastmod>2017-07-11T23:36:01+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/tags/rounding-data--dp/</loc>
     <lastmod>2017-07-11T23:36:01+08:00</lastmod>
     <priority>0</priority>
   </url>
