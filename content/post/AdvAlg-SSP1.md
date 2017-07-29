@@ -1,7 +1,7 @@
 +++
 date =  "2017-07-11T23:36:01+08:00"
-description = "Trimming & Discretization "
-tags = ["Algorithm","Advanced Algorithm","NTU"]
+description = "Trimming"
+tags = ["Algorithm","Rounding Data & DP","Approximation Algorithm","NTU"]
 title =  "Advanced Algorithm - Subset Sum Problem"
 topics = ["Advanced Algorithm"]
 +++
@@ -31,7 +31,7 @@ Computer <span>$S_i$</span> : possible subset sum of \{<span>$v_1, v_2, \cdots ,
 {{% fluid_img src="/img/post/trim.png" alt="Trimming Procedure" %}}
 
 Pick <span>$x_1$</span>, remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list (say, <span>$x_2 \, \text{and} \, x_3$</span>). \\
-Then, pick <span>$x_4$</span> remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list. Repeat this procedure until the last element.
+Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list. Repeat this procedure until the last element.
 
 ### PsuedoCode for Trimming
 
@@ -54,7 +54,7 @@ Now, <span>$|S_i| \leq \log_M W = \mathcal{O}(\frac{n\ln W}{\epsilon})
 
 {{% fluid_img src="/img/post/trim_approx.png" alt="Trimming Approximation" %}}
 
-可以將 Trimming 視為改小某一 range 中的元素們(將其改至該 range 內第一個元素)，OPT 在 trimming & merge 的過程中不斷地被改小，最多最多會被等比縮小 <span>$n$</span> 次。
+可以將 Trimming 視為改小某一 range 中的元素們(將其改至該 range 內最小的元素)，OPT 在 trimming & merge 的過程中不斷地被改小，最多最多會被等比縮小 <span>$n$</span> 次。
 
 <div>
 \[

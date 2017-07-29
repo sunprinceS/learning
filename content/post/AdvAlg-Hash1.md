@@ -2,7 +2,7 @@
 date = "2017-05-21T08:52:55+08:00"
 description = "Intro & Analysis/ 2-Universal Family"
 draft = false
-tags = ["Algorithm","Advanced Algorithm","NTU"]
+tags = ["Algorithm","Data Structure","NTU"]
 title = "Advanced Algorithm - Hash Table - Lec1"
 topics = ["Advanced Algorithm"]
 

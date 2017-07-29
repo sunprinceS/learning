@@ -1,7 +1,7 @@
 +++
 date =  "2017-07-01T22:56:26+08:00"
-description = "Approximation Algorithm (Dynamic Programming & Discretization)"
-tags = ["Algorithm","Advanced Algorithm","NTU"]
+description = "Rounding Data & Dynamic Programming "
+tags = ["Algorithm","Rounding Data & DP","Approximation Algorithm","NTU"]
 title = "Advanced Algorithm - Knapsack Problem"
 topics = ["Advanced Algorithm"]
 +++
@@ -93,7 +93,7 @@ value(OPT) in 0-1 Knapsack\\
 <span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (1-\frac{\epsilon}{2})$</span> value(OPT)\\
 <span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (\frac{1}{1 + \epsilon})$</span> value(OPT) ( <span>$\because \color{red}{1-\frac{\epsilon}{2} \geq \frac{1}{1+\epsilon}}$</span> )
 
-### Improvement Algorithm
+### Improvement version
 
 上題的 <span>$b = \frac{\epsilon}{2n}\tilde{V}$</span> 可以想成離散化 <span>$v$</span> 值的刻度大小，我們可否在保持( <span>$ 1 + \epsilon$</span> ) - approx. ratio 的前提下，**跳大格一點**( <span>$b$</span> 取大一點)。從上式的推導可以發現，若想保持 approx. ratio ，<span>$\tilde{V}$</span> 必須小於 <span style="color: blue">value(OPT)</span>，而想降低 running 的 order ， <span>$\tilde{V}$</span> 需要跟 <span>$v^{\star}$</span> **差不多** order 。也就是我們需要**估計**一個比 value(OPT) 小，但不會差太多的 <span>$\tilde{V}$</span> , <span>$\tilde{V} = \Theta(v^{\star})$</span>。 (而且估計的 running time 不能高於之後 derive 出來的複雜度)
 
