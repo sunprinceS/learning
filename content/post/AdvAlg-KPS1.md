@@ -6,7 +6,9 @@ title = "Advanced Algorithm - Knapsack Problem"
 topics = ["Advanced Algorithm"]
 +++
 
-背包問題為一個典型的最佳化問題，這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:
+背包問題為一個典型的最佳化問題，想像你來到了一個寶庫，裡頭有一些寶物，都有各自的價值和重量，但你只帶了一個背包(而且負重還有限制)，要怎麼取寶物才能在背得走的前提下，帶走價值總和儘可能高的寶物們呢？
+
+這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:
 
 <!--more-->
 
