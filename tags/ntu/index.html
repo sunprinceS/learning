@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.25.1" />
+  <meta name="generator" content="Hugo 0.26" />
 
   <title>Ntu &middot; Stay hungry. Stay foolish </title>
 
@@ -245,6 +245,69 @@
   
     <article>
   <header>
+    <h2><a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---bin-packing-problem/">Advanced Algorithm - Bin Packing Problem</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>12 Aug 2017</time>
+    </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/roundeding-data--dp">Roundeding Data &amp; DP</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  </header>
+
+  <p>
+  <p>從前兩講關於<strong>分配</strong> (在一堆物品中，決定哪些是要拿的一群，哪些不拿) 的最佳化問題中，我們延伸出新的問題，<strong>Bin Packing Problem</strong>。不同於在 <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/">Knapsack Problem</a> 中，我們只有一個背包(可以想成你聘了一個工人背一個背包)；在Bin Packing 問題中，要取走<strong>所有</strong>寶物(所有寶物的重量都小於 1 單位)，而你需要聘請一些工人來搬，但今天每個工人都只帶了一個負重為 1 單位的包包，該如何分配這些寶物(雖說是寶物，但其實我們不care價值惹)，使得需要聘請的工人為最少？</p>
+
+<p>簡單的 formulation 如下：</p>
+
+<p></p>
+  </p>
+
+  
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---bin-packing-problem/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
     <h2><a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---subset-sum-problem/">Advanced Algorithm - Subset Sum Problem</a></h2>
 
     <div class="post-meta">
@@ -351,7 +414,9 @@
   </header>
 
   <p>
-  <p>背包問題為一個典型的最佳化問題，這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:</p>
+  <p>背包問題為一個典型的最佳化問題，想像你來到了一個寶庫，裡頭有一些寶物，都有各自的價值和重量，但你只帶了一個背包(而且負重還有限制)，要怎麼取寶物才能在背得走的前提下，帶走價值總和儘可能高的寶物們呢？</p>
+
+<p>這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:</p>
 
 <p></p>
   </p>
