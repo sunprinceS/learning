@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 12 Aug 2017 20:39:07 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 14 Aug 2017 20:36:01 +0200</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/approximation-algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Advanced Algorithm - Linear Programming</title>
+      <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/</link>
+      <pubDate>Mon, 14 Aug 2017 20:36:01 +0200</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Definition:&lt;/strong&gt;&lt;br/&gt;
+A linear programming is a problem of &lt;em&gt;maximizing&lt;/em&gt; or &lt;em&gt;minimizing&lt;/em&gt; a &lt;strong&gt;linear
+multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constraints&lt;/strong&gt;
+&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Advanced Algorithm - Bin Packing Problem</title>
@@ -18,7 +30,7 @@
       <pubDate>Sat, 12 Aug 2017 20:39:07 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---bin-packing-problem/</guid>
-      <description>&lt;p&gt;從前兩講關於&lt;strong&gt;分配&lt;/strong&gt; (在一堆物品中，決定哪些是要拿的一群，哪些不拿) 的最佳化問題中，我們延伸出新的問題，&lt;strong&gt;Bin Packing Problem&lt;/strong&gt;。不同於在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/&#34;&gt;Knapsack Problem&lt;/a&gt; 中，我們只有一個背包(可以想成你聘了一個工人背一個背包)；在Bin Packing 問題中，要取走&lt;strong&gt;所有&lt;/strong&gt;寶物(所有寶物的重量都小於 1 單位)，而你需要聘請一些工人來搬，但今天每個工人都只帶了一個負重為 1 單位的包包，該如何分配這些寶物(雖說是寶物，但其實我們不care價值惹)，使得需要聘請的工人為最少？&lt;/p&gt;
+      <description>&lt;p&gt;從前兩講關於&lt;strong&gt;分配&lt;/strong&gt; (在一堆物品中，決定哪些是要拿的一群，哪些不拿) 的最佳化問題中，我們延伸出新的問題，&lt;strong&gt;Bin Packing Problem&lt;/strong&gt;。不同於在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/&#34;&gt;Knapsack Problem&lt;/a&gt; 中，我們只有一個箱子(可以想成你聘了一個工人搬一個箱子)；在Bin Packing 問題中，要取走&lt;strong&gt;所有&lt;/strong&gt;寶物(所有寶物的重量都小於 1 單位)，而你需要聘請一些工人來搬，但今天每個工人都只帶了一個負重為 1 單位的箱子，該如何分配這些寶物(雖說是寶物，但其實我們不care價值惹)，使得需帶的箱子(聘請的工人)為最少？&lt;/p&gt;
 
 &lt;p&gt;簡單的 formulation 如下：&lt;/p&gt;
 
