@@ -6,7 +6,7 @@ title =  "Advanced Algorithm - Bin Packing Problem"
 topics = ["Advanced Algorithm"]
 +++
 
-從前兩講關於**分配** (在一堆物品中，決定哪些是要拿的一群，哪些不拿) 的最佳化問題中，我們延伸出新的問題，**Bin Packing Problem**。不同於在 [Knapsack Problem](https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/) 中，我們只有一個背包(可以想成你聘了一個工人背一個背包)；在Bin Packing 問題中，要取走**所有**寶物(所有寶物的重量都小於 1 單位)，而你需要聘請一些工人來搬，但今天每個工人都只帶了一個負重為 1 單位的包包，該如何分配這些寶物(雖說是寶物，但其實我們不care價值惹)，使得需要聘請的工人為最少？
+從前兩講關於**分配** (在一堆物品中，決定哪些是要拿的一群，哪些不拿) 的最佳化問題中，我們延伸出新的問題，**Bin Packing Problem**。不同於在 [Knapsack Problem](https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/) 中，我們只有一個箱子(可以想成你聘了一個工人搬一個箱子)；在Bin Packing 問題中，要取走**所有**寶物(所有寶物的重量都小於 1 單位)，而你需要聘請一些工人來搬，但今天每個工人都只帶了一個負重為 1 單位的箱子，該如何分配這些寶物(雖說是寶物，但其實我們不care價值惹)，使得需帶的箱子(聘請的工人)為最少？
 
 簡單的 formulation 如下：
 
@@ -71,7 +71,7 @@ Given an <span>$\epsilon > 0 \enspace \exists \, \text{algorithm} \, \mathcal{A}
 ## (<span>$1 + 2\epsilon$</span>)-Approx Algorithm
 
 與之前的想法一樣，我們希望透由將原先的 problem instance 轉成方便我們求解的 formulation ，同時保有不太差的 performance guarantee 。這裡我們一樣要用到 rounding 的技巧，但在介紹如何 rounding 之前，我們先來想一下如何將問題變得比較簡單。</br>
-這裡的想法是直接窮舉所有的可能解，並從中挑出所需箱數最少者，但解的數目如果不做處理會是**EXP**，所以我們先丟到某些 size 較小的物品( Intuitively, size 大者才會是 bottleneck 所在)，且同時減少不同的 item size (與之前 Knapsack, Subset Sum 在設計演算法時的想法相同)。
+這裡的想法是直接窮舉所有的可能解，並從中挑出所需箱數最少者，但解的數目如果不做處理會是**EXP**，所以我們先丟掉某些 size 較小的物品( Intuitively, size 大者才會是 bottleneck 所在)，且同時減少不同的 item size (與之前 Knapsack, Subset Sum 在設計演算法時的想法相同)。
 
 **Lemma:**<br/>If there only <span>$k$</span> different item sizes (且 size <span>$\geq \,\epsilon$</span>)，
 then exists poly-time algorithm can find the OPT
@@ -109,7 +109,7 @@ J^{\prime}: \text{將區間的元素縮小到同一群的 minimum (第一個區�
 <span>$OPT(I) \, \geq \, \sum_{I}size \, \geq \, n\epsilon$</span>\\
 <span>$\Rightarrow \epsilon \, OPT(I) \geq \lfloor n \epsilon^2 \rfloor$</span>
 
-<span>$OPT(I) \leq OPT(J)$</span> (<span>$\because J$</span> 是往上 rounding，所以在 <span>$J$</span> 合法的解在 <span>$I$</span> 中也會合法)
+<span>$OPT(I) \leq OPT(J)$</span> (<span>$\because J$</span> 是往上 rounding，所以在 <span>$J$</span> 合法的解在 <span>$I$</span> 中也會合法)\\
 <span>$= OPT(J^\prime) + \lfloor n \epsilon^2 \rfloor$</span>\\
 <span>$\leq OPT(I) + \lfloor n \epsilon^2 \rfloor$</span> (<span>$\because J^\prime$ 是往下 rounding</span>)\\
 <span>$\leq (1+\epsilon) OPT(I)$</span> (根據上一個推導)
@@ -119,15 +119,19 @@ J^{\prime}: \text{將區間的元素縮小到同一群的 minimum (第一個區�
 接下來要把這些物品一個個加回去，使用我們前面的 2-Approx. algorithm:
 **First-Fit**
 
-1. First-Fit do not require any new bins <span>$\Rightarrow OPT(J) \, \leq \, (1+\epsilon)OPT(\color{green}{\tilde{I}})$</span>
+1. First-Fit do not require any new bins <span>$\Rightarrow OPT(J) \, \leq \, (1+\epsilon)\color{green}{OPT(\tilde{I})}$</span>
 
 2. First-Fit uses <span>$\geq \, 1$</span> extra bins，<br/>
-假設最後用了 <span>$L$</span> 個 bins ，那麼 all but the last bin must
-<span>$\geq \, 1 - \epsilon$</span> <br/>
-<span>$\Rightarrow OPT \, \geq \,\sum_{\color{green}{\tilde{I}}}size > (L-1)(1-\epsilon)$</span>\\
-<span>$\Rightarrow \frac{OPT}{1 - \epsilon} > L - 1$</span>\\
-<span>$\Rightarrow L \leq \frac{OPT}{1-\epsilon} + 1 \leq (1+2\epsilon) + 1 \, \square$</span>
+假設最後用了 <span>$L$</span> 個 bins ，那麼 **all but the last bin must**
+<span>$\mathbf{\geq \, 1 - \epsilon}$</span> (否則可放至前面的 bins 中)<br/>
+<span>$\Rightarrow \color{green}{OPT(\tilde{I})} \, \geq \,\sum_{\color{green}{\tilde{I}}}size > (L-1)(1-\epsilon)$</span>\\
+<span>$\Rightarrow \frac{\color{green}{OPT(\tilde{I})}}{1 - \epsilon} > L - 1$</span>\\
+<span>$\Rightarrow L \leq \frac{\color{green}{OPT(\tilde{I})}}{1-\epsilon} + 1 \leq (1+2\epsilon)\color{green}{OPT(\tilde{I})} + 1 \, \square$</span>
 
 ## 延伸問題
 
-考慮另一個 NP-hard 問題，Minimum Makespan Scheduling Problem ，不同於BP 的 constraint在背包負重固定，希望 minimize 背包的數目；MSP則是在可用的背包固定，但希望負重最大的包包負重不要太大。
+考慮另一個 NP-hard 問題，[Minimum Makespan Scheduling Problem](http://www.cs.toronto.edu/~lalla/373s16/notes/makespan.pdf) ，不同於 BP 的 constraint 在背包/箱子負重固定，希望 minimize 背包/箱子的數目；MSP 則是在可用的背包/箱子固定，但希望負重最大者負重不要太大。
+
+## Reference
+
+* [Lecture in Wisconsin](http://pages.cs.wisc.edu/~shuchi/courses/880-S07/scribe-notes/lecture05.pdf)
