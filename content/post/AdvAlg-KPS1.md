@@ -119,3 +119,11 @@ value(OPT) in 0-1 Knapsack\\
 > \epsilon$</span>)-approx. algorithm w/ running time is poly. for
 > constant <span>$\frac{1}{\epsilon}$</span> and <span>$n$</span> \\
 > *e.g* 剛剛提到的 Rounded DP-based Algorithm
+
+## Psuedo-Poly Implementation
+* <span>$\Theta(n \, v^{\star})$</span>
+<script src="https://gist.github.com/sunprinceS/a0b5dff9c95de9112c9f21f437fde989.js"></script>
+* <span>$\Theta(n \, W)$</span> ，[Online Judge](https://kth.kattis.com/problems/knapsack)
+<script src="https://gist.github.com/sunprinceS/1339f47fe17c716dbddaa38d10f50330.js"></script>
+
+視題目所給的測資範圍，選擇running time 較小的實做方式。

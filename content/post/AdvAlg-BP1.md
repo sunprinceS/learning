@@ -1,7 +1,7 @@
 +++
 date =  "2017-08-12T20:39:07+02:00"
 description = "Rounding Data & Asymptotic PTAS"
-tags = ["Algorithm","Roundeding Data & DP","Approximation Algorithm","NTU"]
+tags = ["Algorithm","Rounding Data & DP","Approximation Algorithm","NTU"]
 title =  "Advanced Algorithm - Bin Packing Problem"
 topics = ["Advanced Algorithm"]
 +++
@@ -28,12 +28,15 @@ overflow issue :p )
 def first_fit(s_list):
   bin_ls = [0]
   for it in s_list:
+    b_fit = False
     for bin in bin_ls:
       if bin + it.weight <= 1:
         bin += it.weight # put a_i into current bin
+        b_fit = True
         break
     # no bins fit, open new one
-    bin_ls.append(it.weight)
+    if not b_fit:
+      bin_ls.append(it.weight)
   return len(bin_ls) # of bins used
 ```
 

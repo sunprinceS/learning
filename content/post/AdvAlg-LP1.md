@@ -84,9 +84,9 @@ objective function 的係數，如以下
 
 <div>
 \[
- \text{Need} \; \color{red}{y_1}, \color{red}{y_2} \quad \text{s.t} \enspace 7x_1 +
- x_2 + 5x_3 \geq (x_1 - x_2 + 3x_3) \times \color{red}{y_1} + (5x_1 + 2x_2 -
- x_3) \times \color{red}{y_2} \geq 10 \, \color{red}{y_1} + 6 \, \color{red}{y_2}
+ \text{Need} \; \color{green}{y_1}, \color{green}{y_2} \quad \text{s.t} \enspace 7x_1 +
+ x_2 + 5x_3 \geq (x_1 - x_2 + 3x_3) \times \color{green}{y_1} + (5x_1 + 2x_2 -
+ x_3) \times \color{green}{y_2} \geq 10 \, \color{green}{y_1} + 6 \, \color{green}{y_2}
 \]
 </div>
 
