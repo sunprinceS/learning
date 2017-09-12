@@ -265,7 +265,7 @@
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/roundeding-data--dp">Roundeding Data &amp; DP</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rounding-data--dp">Rounding Data &amp; DP</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
     
@@ -300,12 +300,15 @@ overflow issue :p )</p>
 <pre><code class="language-python">def first_fit(s_list):
   bin_ls = [0]
   for it in s_list:
+    b_fit = False
     for bin in bin_ls:
       if bin + it.weight &lt;= 1:
         bin += it.weight # put a_i into current bin
+        b_fit = True
         break
     # no bins fit, open new one
-    bin_ls.append(it.weight)
+    if not b_fit:
+      bin_ls.append(it.weight)
   return len(bin_ls) # of bins used
 </code></pre>
 
