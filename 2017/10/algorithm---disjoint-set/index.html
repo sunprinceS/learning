@@ -5,10 +5,10 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
-  <meta name="description" content="Intro &amp; Analysis/ 2-Universal Family">
+  <meta name="description" content="Implementation &amp; Analysis">
   <meta name="generator" content="Hugo 0.29" />
 
-  <title>Advanced Algorithm - Hash Table - Lec1 &middot; Stay hungry. Stay foolish </title>
+  <title>Algorithm - Disjoint Set &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -232,8 +232,8 @@
 
 
 <div class="header">
-  <h1>Advanced Algorithm - Hash Table - Lec1</h1>
-  <h2>Intro &amp; Analysis/ 2-Universal Family</h2>
+  <h1>Algorithm - Disjoint Set</h1>
+  <h2>Implementation &amp; Analysis</h2>
 </div>
 <div class="content">
 
@@ -241,7 +241,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>21 May 2017</time>
+    <time>29 Oct 2017</time>
     </div>
   
 
@@ -251,7 +251,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
     
   </div>
   
@@ -267,7 +267,7 @@
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/data-structure">Data Structure</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/mtu">MTU</a>
     
   </div>
   
@@ -276,141 +276,93 @@
 </div>
 
 
-  <!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。-->
-
-<p>Hashing 可以想成是一種 <strong>renaming</strong> 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 <strong>Hashing</strong> 的方式，重新命名 key&rsquo; ，並依據 key&rsquo; 將資料放到 size 跟資料個數差不多的 Hash Table 中。</p>
+  <p>Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets <span>$S_1,S_2,\cdots,S_k$</span>，而每個 <span>$S_i$</span> (每個 category) 以一個代表值 (<em>representative</em>) 去紀錄。
+<!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--></p>
 
 <p></p>
 
-<h2 id="定義">定義</h2>
-
-<p>Given each data with key in <span>$U = \lbrace 0,1, \cdots, t-1 \rbrace$</span>,</p>
-
-<p>A <strong>Hash Table</strong> is capable of performing the following operations in <span>$\mathcal{O}(1)$</span></p>
+<h2 id="支援的-operations">支援的 Operations</h2>
 
 <ol>
-<li><code>Insert(x)</code></li>
-<li><code>Delete(x)</code></li>
-<li><code>Search(x)</code></li>
+<li><code>Make-Set(x)</code>: create a new set {<span>$x$</span>}</li>
+<li><code>Find(x)</code>: Find the leader of <span>$x$</span>&rsquo;s set</li>
+<li><code>Union(x,y)</code>: Union <span>$x$</span>&rsquo;s set and <span>$y$</span>&rsquo;s set</li>
 </ol>
 
-<p><img src="https://sunprinces.github.io/learning/img/post/hashTable.png" width="400px"></p>
+<h2 id="linked-list-implementation">Linked List Implementation</h2>
 
-<p>如同前面所述，<span>$m \ll |U|$</span>，所以hash function 必是 many-to-one mapping ，<br/>也就是說，會有 collision 發生。而通常以下圖所示的 <strong>Chaining</strong> 來處理。</p>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/chaining.png" height="350px"></p>
-
-<p>Hash Table 中所存的 element 為指向一個個 linked list 的 pointer。</p>
-
-<p>在考慮 Chaining ，做複雜度的分析前，先假設我們有一 uniform hash function <span>$h$</span>，滿足以下性質</p>
+<p><img src="https://sunprinces.github.io/learning/img/post/djs-linked-list.jpg" width="800px"></p>
 
 <ul>
-<li><span>$\Pr[h(k) = x] = \frac{1}{m}, x \in \lbrace 0,1,\cdots, m-1 \rbrace$</span></li>
-<li><span>$h(K_1),h(K_2),\cdots,h(K_n) \text{~are independent if} ~K_1,K_2,\cdots,K_n \text{~are independent}$</span></li>
+<li><code>Make-Set(x)</code>: <span>$\mathcal{O}(1)$</span> (create <code>HEAD</code> and representative，也就是自己)</li>
+<li><code>Find(x)</code>: <span>$\mathcal{O}(1)$</span> (back to <code>HEAD</code>，go to representative)</li>
+<li><code>Union(x,y)</code>: <span>$\mathcal{O}(n)$</span> <br />
+可以發現 Union 非常慢，要依序將 <span>$S_2$</span> 中的元素依序指到 <span>$S_1$</span> 的 <code>HEAD</code> ，同時將 <span>$S_1$</span> 的最後一個元素之 <code>ptr</code> 指到原先 <span>$S_2$</span> 中的第一個。(當然可以在 <code>HEAD</code> 中多存一個指向最後一個元素的 <code>ptr</code> ，但複雜度還是 <span>$\mathcal{O}(m)$</span>, where <span>$m = |S_2|$</span>)</li>
 </ul>
 
-<h2 id="average-time-complexity">Average time complexity</h2>
+<p>雖說單看 <code>Union</code> 的複雜度似乎不太妙，但考慮一系列操作( <strong>Amortized Analysis</strong> ，也是一種常見的分析複雜度方式)，同時利用上方提到的 trick ，在做 <code>Union</code> 時，都是去合併<strong>較小</strong>的那個集合，再來做分析。</p>
 
-<p><strong>[Theorem 1]</strong> Assume Uniform Hashing, <span>$\mathbb{E}[op] = \mathcal{O}(\alpha)~~$</span> (Load Factor <span>$~\alpha = \frac{ |\text{elements}|}{ |\text{slots}|} = \frac{n}{m}$</span>)</p>
+<h3 id="lemma">Lemma</h3>
 
-<p>可以觀察到，若 m = <span>$\mathcal{O}(n)$</span>，則 <span>$\mathbb{E}[op] = \mathcal{O}(\alpha) = \mathcal{O}(1)$</span>，<br/>也就是說，只要 table size 跟元素個數是同個 order ，<strong>平均</strong> 來說，每個 operation 的 cost 還是 <span>$\mathcal{O}(1)$</span>。</p>
-
-<h2 id="worst-case-time-complexity">Worst-case time complexity</h2>
-
-<p>現在我們想考慮在<strong>最差</strong>情況下的複雜度，<br/>
-考慮一個類似的問題，將 <span>$n$</span> 顆球 uniformly at random 地分到 <span>$n$</span> 個 bin 中，<br/>“<strong>the expected # of balls in the most loaded bin</strong>” 為何 ？</p>
-
-<p><strong>[Theorem 2] The max # of balls in any bin <span>$\mathbf{\leq \frac{3\ln n}{\ln(\ln n)}}$</span> with probability <span>$\mathbf{\geq 1 - \frac{1}{n}}$</span></strong></p>
-
-<p><span>$\underline{~Proof.} ~~~Let~k = \frac{3 \ln n}{\ln(\ln n)}~ \text{and}~ [S]^k \triangleq \lbrace A \subseteq S~ | ~|A| = k \rbrace$</span>, <span>$S$</span> is the set of balls</p>
+<p>Starting from 0 sets</p>
 
 <div>
+
 \[
-
-\begin{aligned}
-\Pr[\text{Bin~} i \text{~has~} \geq k \text{~balls}] & \leq \sum_{A \in [S]^k} \Pr[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\
-& = \binom{n}{k} (\frac{1}{n})^k ~~(\because \textbf{uniform hashing}) \\\\
-& = \frac{n!}{k!(n-k)!} ~ \frac{1}{n^k} = \frac{1}{k!} ~ \frac{n!}{(n-k)!n^k} \\
-& \leq \frac{1}{k!} ~~(~\because~ \prod_{i=0}^{k-1}n-i \leq n^k) \\
-& \leq \frac{1}{n^2} ~~(~\because~ \textbf{ Stirling's approx. formula})
-\end{aligned}
-
-\]
-</div>
-
-<p><strong>[Theorem 3] Stirling&rsquo;s approx. formula</strong></p>
-
-<div>
-\[
-k! = \sqrt{2 \pi k}~ (\frac{k}{e})^k (1 + \mathcal{O}( \frac{1}{k} ))
-\]
-</div>
-
-<h2 id="uniform-hashing">Uniform Hashing?</h2>
-
-<p>看起來很合理，但當中我們做的一個假設其實是不合理的，也就是存在 uniform hashing function <span>$h$</span> 這件事情，想完成這個條件只有以下兩種可能</p>
-
-<ul>
-<li>input is random (<strong>impossible !!</strong>)</li>
-<li>input is arbitary, but hash function is random</li>
-</ul>
-
-<p>random hash function? 意思是說，我們希望有一組 hash function 的集合 <span>$\mathcal{H}$</span>，當每次要用到 hashing 時，便從中抽一個 <span>$h: U \rightarrow \lbrace 0,1,\cdots,m-1 \rbrace$</span> 出來，可能結果很不好 ( collision 很嚴重， 可以想成總是可以構造出某些 input sequence ，讓特定的 <span>$h$</span> 壞掉)，在這種情況可以再重新抽，<strong>平均而言</strong> collision 發生的機率很小即可 (i.e 不用太常重抽)。</p>
-
-<p>我們希望 <span>$\mathcal{H}$</span> 有以下性質:<br/>
-<span>$\forall x_1,x_2,\cdots,x_n \in S,~S \subset U,~ \text{and}~ a_1,a_2,\cdots,a_n \in \lbrace 0,1,\cdots,m-1 \rbrace$</span></p>
-
-<ul>
-<li><span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1] = \frac{1}{m}$</span></li>
-<li><span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ] = \frac{1}{m^2}$</span> <strong>[Pairwise independence]</strong></li>
-<li><span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ~\land~ \cdots ~\land~ h(x_n) = a_n ] = \frac{1}{m^k}$</span> <strong>[k-wise independence]</strong></li>
-</ul>
-
-<p>若想有 k-wise indep. 性質，則我們需要 <span>$m^k$</span> 個 hash function <span>$h$</span>，需要 <span>$\log |\mathcal{H}| = k \log m$</span> 個 bits 去記 <span>$\mathcal{H}$</span> ，也就是說，若想要更好的隨機性， compute hashing 的成本就越高。</p>
-
-<p><span>Let $L_x ~\text{be the length of linked list containing}~ x$</span></p>
-
-<div>
-\[
-I_y = \left\{ \begin{array}{ll}
-           1, ~\text{if}~ h(y) = h(x) \\
-           0, ~\text{otherwise}
+\text{operations} \left\{ \begin{array}{ll}
+           n \quad \text{make-set} (\, \therefore \, n \; \text{elements})\\
+           m \quad \text{find}\\
+           \leq n-1 \quad \text{union}
         \end{array} \right.
 \]
+
 </div>
 
-<div>
-\[
-\begin{aligned}
+<p><span>$\Rightarrow \, \text{total cost}: \mathcal{O}(m+n \log n)$</span><br />
+其中 <span>$n\log n$</span> 顯然是來自 <code>Union</code> 的 cost，而細看操作會發現，這亦為 <span>$\mathcal{\Theta}(\text{total number of times that element&rsquo;s top ptr changes})$</span>，<br />
+所以今天我們想證明，改動 <code>ptr</code> 的次數為 <span>$\mathcal{O}(n \log n)$</span></p>
 
-& \text{Then},~ L_x = 1 + \sum_{y \in S ;y \neq x} I_y \\
+<p><strong>Claim</strong>: If an element has changes <code>ptr</code> <span>$k$</span> times, then it belongs to a set of
+size <span>$\geq 2^{k}$</span></p>
 
-& \text{We know~} \mathbb{E}[L_x] = 1 + \sum_{y \in S ;y \neq x} \mathbb{E}[I_y] = 1 + \frac{n-1}{m} \leq 1 + \alpha
-\end{aligned}
-\]
-</div>
+<p>用數學歸納法可以簡單證明，假設 <span>$k=t$</span> 時成立，那在 <span>$k=t+1$</span> 時，如果該 set 還需改動 <code>ptr</code> ，表示其跟 size 比他大的 set 做 <code>Union</code> ，之後 size <span>$\geq 2^{t+1}$</span> ， Claim 依然成立 (<span>$k=0$</span> 時，只有 make-set， size 為 <span>$1$</span> 亦成立)</p>
 
-<p>上例不需要用到 k-wise independence 這麼強的性質， pairwise independence 即符合我們的需要，</br>也因此 <strong>2-Universal Hash Family</strong> 應運而生。</p>
+<p>而利用該 Claim ，又已知 size of any set <span>$\leq n$</span>，所以任何元素都只能改動 <code>ptr</code> <span>$\leq \log n$</span> 次，所以 total <code>ptr</code> 改動次數 <span>$\leq
+n \log n \quad \square$</span></p>
 
-<h2 id="2-universal-hash-family">2-Universal Hash Family</h2>
+<h2 id="forest-implementation">Forest Implementation</h2>
 
-<p><span>$\mathcal{H}$</span> is 2-Universal iff for and two elements <span>$x,y \in U ~\land~ x \neq y$</span></p>
+<p><img src="https://sunprinces.github.io/learning/img/post/djs-forest.jpg" width="300px"></p>
 
-<div>
-\[
-\Pr_{h \in \mathcal{H}}[h(x) = h(y)] \leq \frac{1}{m} \Leftrightarrow |\mathcal{H'}| \leq \frac{|\mathcal{H}|}{m}_ ~,~ \mathcal{H'} = \lbrace h ~|~ h(x) = h(y) \rbrace 
-\]
-</div>
+<ul>
+<li><code>Make-Set(x)</code>: <span>$\mathcal{O}(1)$</span> (建一顆只有一個節點的樹，root指向自己)</li>
+<li><code>Find(x)</code>: <span>$\mathcal{O}(\text{height})$</span> (trace back to root)</li>
+<li><code>Union(x,y)</code>: <span>$\mathcal{O}(\text{height})$</span> (單純改變被合併集 root 的指向為 <span>$\mathcal{O}(1)$</span> ，但要先用 <code>Find</code> 找到 root)</li>
+</ul>
 
-<p><em>Example</em>: </br>
-Given <span>$x=x_0 x_1 \cdots x_r~,y=y_0 y_1 \cdots y_r$</span>,
-<span>$a = &lt; a_1,a_2,\cdots,a_r&gt;,~a_i \in \lbrace 0,1,\cdots,m-1 \rbrace $</span></p>
+<p>稍微觀察一下發現，如果今天這個樹長的很傾斜(最爛的情況就是 skewed tree ，直接退化成 list)，那麼 height 為 <span>$\mathcal{O}(n)$</span> ，複雜度沒有任何改進。但若仿效前面 linked list 的想法，在做 <code>Union</code> 時，去合併比較小的 set ，則可以避免這個問題 (skewed tree會發生，就是每次都是拿一個 size 非 <span>$1$</span> 的 set 去接在 size 為 <span>$1$</span> 的 set 後面&hellip;)。</p>
 
-<div>
-\[
-h_a(x) = \sum_{i=0}^n a_i x_i \mod m
-\]
-</div>
+<h3 id="theorem-the-height-of-every-tree-span-leq-log-n-span">Theorem: The height of every tree <span>$\leq \log n$</span></h3>
+
+<p><strong>Claim:</strong> every tree with height <span>$k$</span> has at least <span>$2^{k-1}$</span> elements</p>
+
+<ul>
+<li><span>$k=1$</span>, trivial</li>
+<li>假設 <span>$k=t$</span> 成立，考慮兩個高度同為 $t$ 的樹(如果不一樣的話，那合併後的樹高度為原先兩者中較高的那個，但元素個數又增加了，Claim 必成立)，各自至少有 <span>$2^{t-1}$</span> 個元素，合併後高度變為 <span>$t+1$</span> ，元素個數 <span>$\geq 2^{t-1} \times 2 = 2^{t}$</span>， Claim 依然成立</li>
+</ul>
+
+<p>所以當已知每顆樹至多 <span>$n$</span> 個元素的情況下，我們可以證明其高度必
+<span>$\leq \log n \quad \square$</span></p>
+
+<h3 id="implementation">Implementation</h3>
+
+<script src="https://gist.github.com/sunprinceS/ba6415fdef340c1b97377d286a0ff402.js"></script>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.csie.ntu.edu.tw/~hsinmu/courses/_media/dsa_12spring/disjoint_set.pdf">台大資工 - DSA</a></li>
+</ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -418,13 +370,13 @@ h_a(x) = \sum_{i=0}^n a_i x_i \mod m
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/">Algorithmic Game Theory - Lecture2</a>
+      <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/">Advanced Algorithm - Linear Programming</a>
     </nav>
     
   </div>
@@ -433,14 +385,8 @@ h_a(x) = \sum_{i=0}^n a_i x_i \mod m
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/">Algorithmic Game Theory - Lecture3</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

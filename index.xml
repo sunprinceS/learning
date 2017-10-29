@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Mon, 14 Aug 2017 20:36:01 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 29 Oct 2017 23:01:50 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Algorithm - Disjoint Set</title>
+      <link>https://sunprinces.github.io/learning/2017/10/algorithm---disjoint-set/</link>
+      <pubDate>Sun, 29 Oct 2017 23:01:50 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/10/algorithm---disjoint-set/</guid>
+      <description>&lt;p&gt;Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets &lt;span&gt;$S_1,S_2,\cdots,S_k$&lt;/span&gt;，而每個 &lt;span&gt;$S_i$&lt;/span&gt; (每個 category) 以一個代表值 (&lt;em&gt;representative&lt;/em&gt;) 去紀錄。
+&lt;!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Advanced Algorithm - Linear Programming</title>
