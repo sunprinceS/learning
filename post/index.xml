@@ -7,10 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Fri, 25 Aug 2017 10:08:13 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 31 Aug 2017 17:02:52 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Algorithm - Graph Theory - Lec 2</title>
+      <link>https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/</link>
+      <pubDate>Thu, 31 Aug 2017 17:02:52 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/</guid>
+      <description>&lt;p&gt;圖的一個常見應用場合是想找出某兩點之間的最短(/長)路徑，此時的邊權重又視為兩節點之間的距離。
+&lt;!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。--&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Algorithm - Graph Theory - Lec 1</title>
