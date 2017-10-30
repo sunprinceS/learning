@@ -7,19 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sun, 29 Oct 2017 23:01:50 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 20 Aug 2017 08:01:34 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Algorithm - Disjoint Set</title>
-      <link>https://sunprinces.github.io/learning/2017/10/algorithm---disjoint-set/</link>
-      <pubDate>Sun, 29 Oct 2017 23:01:50 +0100</pubDate>
+      <title>利用Ignr自動生成.gitignore</title>
+      <link>https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/</link>
+      <pubDate>Sun, 20 Aug 2017 08:01:34 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/10/algorithm---disjoint-set/</guid>
-      <description>&lt;p&gt;Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets &lt;span&gt;$S_1,S_2,\cdots,S_k$&lt;/span&gt;，而每個 &lt;span&gt;$S_i$&lt;/span&gt; (每個 category) 以一個代表值 (&lt;em&gt;representative&lt;/em&gt;) 去紀錄。
-&lt;!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--&gt;&lt;/p&gt;
+      <guid>https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/</guid>
+      <description>&lt;p&gt;有在使用 git 的人，應該都知道我們很多時候我們不希望 git 去 track 某些檔案，也不在意他們的改動情況(但有時候手滑還是會不小心 checkin 進去&amp;hellip;😅)， 像是競賽的測資， c++ 編譯時的 .o 檔，binary executable 等等，這時候會加上 &lt;strong&gt;.gitignore&lt;/strong&gt; 於工作目錄下達成我們的目的。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
