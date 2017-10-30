@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Thu, 31 Aug 2017 17:02:52 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 03 Sep 2017 21:28:37 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Algorithm - Graph Theory - Lec 3</title>
+      <link>https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/</link>
+      <pubDate>Sun, 03 Sep 2017 21:28:37 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/</guid>
+      <description>&lt;p&gt;呈前一講的討論，我們有了個求單源最短路徑的演算法&lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/&#34;&gt;Bellman-Ford&lt;/a&gt; (複雜度為 &lt;span&gt;$\mathcal{O}(VE)$&lt;/span&gt; )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Algorithm - Graph Theory - Lec 2</title>

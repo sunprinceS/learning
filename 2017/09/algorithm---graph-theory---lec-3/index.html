@@ -5,10 +5,10 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
-  <meta name="description" content="">
+  <meta name="description" content="Shortest Path - Dijkstra Algorithm">
   <meta name="generator" content="Hugo 0.29" />
 
-  <title>Graph Theory &middot; Stay hungry. Stay foolish </title>
+  <title>Algorithm - Graph Theory - Lec 3 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -38,8 +38,6 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
-  
-  <link rel="alternate" type="application/rss+xml" title="Stay hungry. Stay foolish " href="https://sunprinces.github.io/learning/tags/graph-theory/index.xml" />
   
 
   
@@ -121,10 +119,6 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/graph-theory/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
-    </li>
     
 
     
@@ -238,16 +232,12 @@
 
 
 <div class="header">
-  <h1>Graph Theory</h1>
+  <h1>Algorithm - Graph Theory - Lec 3</h1>
+  <h2>Shortest Path - Dijkstra Algorithm</h2>
 </div>
-
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Algorithm - Graph Theory - Lec 3</a></h2>
 
-    <div class="post-meta">
+  <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
@@ -286,141 +276,147 @@
 </div>
 
 
-  </header>
-
-  <p>
   <p>呈前一講的討論，我們有了個求單源最短路徑的演算法<a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> (複雜度為 <span>$\mathcal{O}(VE)$</span> )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法</p>
 
 <p></p>
-  </p>
+
+<h2 id="三角不等式">三角不等式</h2>
+
+<div>
+\[
+\forall u,v,x \in V, \, \text{we have} \, \delta(u,v) \leq \delta(u,x) +
+\delta(x,v)
+\]
+</div>
+
+<p>其中 <span>$\delta(u,v)$</span> 表示 <span>$u, v$</span> 間的<strong>最短距離</strong>。<br />
+此為 Dijkstra 所根據的直觀原理，也是其為何不能處理負邊問題的原因(只有正邊時顯然成立)。</p>
+
+<p>之前討論在 <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> 中的一些觀察討論到 <code>relax</code> 邊的順序，決定了演算法運行的時間。而根據上方的論述，我們可以找到一個最優的訪問邊之順序。簡單來說，我們將節點分為兩個集合，一個集合表示最短路已被設好的節點，另一個表示還未確定者，而每一次都從<strong>還未確定者中，選出當前 d 值最小的節點</strong>來做 <code>relax</code>。</p>
+
+<p>根據三角不等式，這樣的 Greedy 策略是沒有問題的，因我們選出的節點 <span>$v$</span> ，所對應的 d[<span>$v$</span>] 已經不可能再更動了 (無法找到經由其他點的路徑使得距離成本 <span>$&lt;$</span> d[<span>$v$</span>])。</p>
+
+<h2 id="psuedo-code">Psuedo Code</h2>
+
+<p>其實跟 Bellman-Ford 非常相像。</p>
+
+<pre><code class="language-python"># Init
+for v in G(V):
+  d[v] = ∞ 
+  π[v] = NULL
+d[s] = 0
+
+Pick u which d[u] is MIN
+remove u
+for v in adj[u]:
+  relax(u,v)
+</code></pre>
+
+<h3 id="complexity-analysis">Complexity Analysis</h3>
+
+<p>通常以 heap 來實做，但效率如何則取決於我們使用何種 heap。需要</p>
+
+<ol>
+<li><span>$\mathcal{\Theta}(V)$</span> <code>INS</code></li>
+<li><span>$\mathcal{\Theta}(V)$</span> <code>Extract-Min</code></li>
+<li><span>$\mathcal{\Theta}(E)$</span> <code>Decrease(v,*)</code></li>
+</ol>
+
+<p>若用 binary heap 的話，複雜度為 <span>$\mathcal{\Theta}(E \log E + V\ log V) = \mathcal{O}((E+V) \log V)$</span> <br />
+若用 Fibonacci heap 的話，均攤複雜度為 <span>$\mathcal{\Theta}(E + V \log V)$</span></p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>在 C++ 中以 <code>priority_queue</code> 來實做 heap
+<script src="https://gist.github.com/sunprinceS/dea6b01e77cb3fe1f40c6779569d592e.js"></script></p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.cs.usfca.edu/~galles/visualization/Dijkstra.html">Visualization</a></li>
+</ul>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Algorithm - Graph Theory - Lec 2</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>31 Aug 2017</time>
-    </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
+    <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
+  <div class="pure-u-10-24">
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/graph-theory">Graph Theory</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Algorithm - Graph Theory - Lec 2</a>
+    </nav>
     
   </div>
-  
-  
-
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
 </div>
 
 
-  </header>
-
-  <p>
-  <p>圖的一個常見應用場合是想找出某兩點之間的最短(/長)路徑，此時的邊權重又視為兩節點之間的距離。
-<!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。--></p>
-
-<p></p>
-  </p>
 
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
 
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/">Algorithm - Graph Theory - Lec 1</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>25 Aug 2017</time>
-    </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
+(function() {
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
     
-  </div>
-  
-  
+    if (window.location.hostname == "localhost")
+        return;
 
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/graph-theory">Graph Theory</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
-    
-  </div>
-  
-  
-
-</div>
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-  </header>
-
-  <p>
-  <p>給定一張圖，要如何讀取當中的資訊呢？簡單來說就是從一給定點開始，依某種順序去拜訪相鄰(有關係)的點，最後走完所有點，收集完圖中的資訊。以下簡介兩種簡本的 traversal 方法以及應用。</p>
-
-<p></p>
-  </p>
-
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
 
-  
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
 </div>
 
 </div>
@@ -443,3 +439,4 @@
 
 </body>
 </html>
+
