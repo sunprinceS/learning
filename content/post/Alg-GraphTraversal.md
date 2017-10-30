@@ -139,5 +139,4 @@ def kosaraju(G,SCC_list):
 Run DFS on <span>$G^{rev}$</span> \\
 <span>$f(v)$</span> 由小到大的順序即為 Topological order，複雜度
 <span>$\mathcal{O}(V+E)$</span>\\
-**Note**: 若是 run 在 <span>$G$</span> 上，那麼 <span>$f(v)$</span> 由大到小的順
-序亦是 Topological order
+**Note**: 若是 run 在 <span>$G$</span> 上，那麼 <span>$f(v)$</span> 由大到小的順序亦是 Topological order
