@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Graph Theory on Stay hungry. Stay foolish </title>
+    <link>https://sunprinces.github.io/learning/tags/graph-theory/</link>
+    <description>Recent content in Graph Theory on Stay hungry. Stay foolish </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017. All rights reserved.</copyright>
+    <lastBuildDate>Fri, 25 Aug 2017 10:08:13 +0100</lastBuildDate>
+    
+	<atom:link href="https://sunprinces.github.io/learning/tags/graph-theory/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Algorithm - Graph Theory - Lec 1</title>
+      <link>https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/</link>
+      <pubDate>Fri, 25 Aug 2017 10:08:13 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/</guid>
+      <description>&lt;p&gt;給定一張圖，要如何讀取當中的資訊呢？簡單來說就是從一給定點開始，依某種順序去拜訪相鄰(有關係)的點，最後走完所有點，收集完圖中的資訊。以下簡介兩種簡本的 traversal 方法以及應用。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

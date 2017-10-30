@@ -5,10 +5,10 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
-  <meta name="description" content="Introduction">
+  <meta name="description" content="">
   <meta name="generator" content="Hugo 0.29" />
 
-  <title>利用Ignr自動生成.gitignore &middot; Stay hungry. Stay foolish </title>
+  <title>Graph Theory &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -38,6 +38,8 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  
+  <link rel="alternate" type="application/rss+xml" title="Stay hungry. Stay foolish " href="https://sunprinces.github.io/learning/tags/graph-theory/index.xml" />
   
 
   
@@ -119,6 +121,10 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/graph-theory/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+    </li>
     
 
     
@@ -232,16 +238,20 @@
 
 
 <div class="header">
-  <h1>利用Ignr自動生成.gitignore</h1>
-  <h2>Introduction</h2>
+  <h1>Graph Theory</h1>
 </div>
-<div class="content">
 
-  <div class="post-meta">
+<div class="content">
+  
+    <article>
+  <header>
+    <h2><a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/">Algorithm - Graph Theory - Lec 1</a></h2>
+
+    <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>20 Aug 2017</time>
+    <time>25 Aug 2017</time>
     </div>
   
 
@@ -251,7 +261,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/%E5%B7%A5%E5%85%B7">工具</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
     
   </div>
   
@@ -263,9 +273,11 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/git">git</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/%E5%B0%8F%E5%B7%A5%E5%85%B7">小工具</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/graph-theory">Graph Theory</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
     
   </div>
   
@@ -274,127 +286,22 @@
 </div>
 
 
-  <p>有在使用 git 的人，應該都知道我們很多時候我們不希望 git 去 track 某些檔案，也不在意他們的改動情況(但有時候手滑還是會不小心 checkin 進去&hellip;😅)， 像是競賽的測資， c++ 編譯時的 .o 檔，binary executable 等等，這時候會加上 <strong>.gitignore</strong> 於工作目錄下達成我們的目的。</p>
+  </header>
+
+  <p>
+  <p>給定一張圖，要如何讀取當中的資訊呢？簡單來說就是從一給定點開始，依某種順序去拜訪相鄰(有關係)的點，最後走完所有點，收集完圖中的資訊。以下簡介兩種簡本的 traversal 方法以及應用。</p>
 
 <p></p>
-
-<p>目前我自己用的有兩種作法:</p>
-
-<h3 id="global-gitignore">Global gitignore</h3>
-
-<p>在家目錄下的 .gitconfig 加入如下設定，之後創建的每個工作目錄都會去抓家目錄下的
-.gitignore 。</p>
-
-<pre><code class="language-Ini">[core]
-  excludesfile=~/.gitignore
-</code></pre>
-
-<p>通常是放一些 reference 的 <code>pdf</code>、<code>pptx</code> 等等。
-(之前還有 vim 的暫存檔，<code>swp</code> 、<code>swo</code>，但後來直接在 vimrc中 <code>set dir=~/vim_tmp</code> ，改變暫存檔的儲存路徑，所以也就不會在工作目錄看到惹。)</p>
-
-<h3 id="ignr-客製化每個-repo-的-gitignore">Ignr 客製化每個 repo 的 gitignore</h3>
-
-<p>根據所開發 project 語言及框架的不同， .gitignore 也理當不同，但全部放到 global 下看起來頗蠢，但每開一個 repo 就要去 google 相對應的 .gitignore 複製貼上也沒好到哪去😅。</p>
-
-<p>而這也是這篇要介紹的 <a href="https://github.com/Antrikshy/ignr.py">Ignr</a> ，在命令列直接從<a href="https://www.gitignore.io/">gitignore.io</a>抓取特定的 .gitignore 模板。</p>
-
-<p>安裝也很簡便 (但目前只有支援 python2 ，所以要裝在 py2 下)</p>
-
-<pre><code class="language-bash">pip2 install ignr
-</code></pre>
-
-<p>用的時候也很簡便，而其他指令可以去repo看更詳盡的敘述，這裡就不贅述了。</p>
-
-<pre><code class="language-bash">ignr -n c c++ cmake 
-</code></pre>
-  
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  </p>
 
   
-<div class="prev-next-post pure-g">
-  <div class="pure-u-1-24" style="text-align: left;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/"><i class="fa fa-chevron-left"></i></a>
-    
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/">Advanced Algorithm - Linear Programming</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-2-24">
-    &nbsp;
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/08/algorithm---disjoint-set/">Algorithm - Disjoint Set</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/08/algorithm---disjoint-set/"><i class="fa fa-chevron-right"></i></a>
-    
-  </div>
-</div>
-
-
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
 
   
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    if (window.location.hostname == "localhost")
-        return;
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'tonyhsu822';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-  
- <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
- <script>renderMathInElement(document.body, {
-   delimiters: [
-     {left: "\\[", right: "\\]", display: true},
-     {left: "$", right: "$", display: false},
-   ]
- });</script>
-
-
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-</script>
-
-
-
-
 </div>
 
 </div>
@@ -417,4 +324,3 @@ MathJax.Hub.Config({
 
 </body>
 </html>
-
