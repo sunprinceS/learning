@@ -1,7 +1,8 @@
 +++
-date =  "2017-10-29T23:01:50+01:00"
+date =  "2017-10-29T20:44:58+01:00"
 description = "Implementation & Analysis"
-tags = ["Algorithm","Data Structure","MTU"]
+draft = true
+tags = ["Algorithm","Data Structure","NTU"]
 title =  "Algorithm - Disjoint Set"
 topics = ["Algorithm"]
 +++
