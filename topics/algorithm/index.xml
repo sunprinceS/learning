@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sun, 03 Sep 2017 21:28:37 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 08 Sep 2017 22:29:20 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/topics/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Algorithm - Graph Theory - Lec 4</title>
+      <link>https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-4/</link>
+      <pubDate>Fri, 08 Sep 2017 22:29:20 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-4/</guid>
+      <description>&lt;p&gt;前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 &lt;span&gt;$V$&lt;/span&gt; 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Algorithm - Graph Theory - Lec 3</title>

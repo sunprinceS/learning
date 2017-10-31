@@ -5,10 +5,10 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
-  <meta name="description" content="Traversal &amp; Application">
+  <meta name="description" content="All Pairs Shortest Path - Floyd Warshall &amp; Johnson Algorithm">
   <meta name="generator" content="Hugo 0.30.2" />
 
-  <title>Algorithm - Graph Theory - Lec 1 &middot; Stay hungry. Stay foolish </title>
+  <title>Algorithm - Graph Theory - Lec 4 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -232,8 +232,8 @@
 
 
 <div class="header">
-  <h1>Algorithm - Graph Theory - Lec 1</h1>
-  <h2>Traversal &amp; Application</h2>
+  <h1>Algorithm - Graph Theory - Lec 4</h1>
+  <h2>All Pairs Shortest Path - Floyd Warshall &amp; Johnson Algorithm</h2>
 </div>
 <div class="content">
 
@@ -241,7 +241,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>25 Aug 2017</time>
+    <time>08 Sep 2017</time>
     </div>
   
 
@@ -276,159 +276,120 @@
 </div>
 
 
-  <p>給定一張圖，要如何讀取當中的資訊呢？簡單來說就是從一給定點開始，依某種順序去拜訪相鄰(有關係)的點，最後走完所有點，收集完圖中的資訊。以下簡介兩種簡本的 traversal 方法以及應用。</p>
+  <p>前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 <span>$V$</span> 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。</p>
 
 <p></p>
 
-<h2 id="breadth-first-search-bfs">Breadth-First Search (BFS)</h2>
+<p>一個簡單的想法是對每一個點都跑一遍單源最短路徑的 Algorithm，複雜度如下：</p>
 
-<p>從某一節點開始，依序走訪所有相鄰且未拜訪過的節點，由走訪的節點進行先廣後深的搜尋(搜尋會像同心圓般地擴散開來)，通常以 <strong>queue</strong> 來實做。</p>
+<ul>
+<li>Bellman-Ford: <span>$\mathcal{O}(V*EV) = \mathcal{O}(EV^2)$</span></li>
+<li>Dijkstra (W/ Fib. Heap): <span>$\mathcal{O}(V*(E+V \log V)) = \mathcal{O}(EV + V^2 \log V)$</span></li>
+</ul>
 
-<h3 id="psuedo-code">psuedo code</h3>
+<p><strong>Note: Dijkstra 不能處理負邊</strong></p>
 
-<pre><code class="language-python">def bfs(G,s):
-  Q = Queue(s); # put start into queue
+<h2 id="floyd-warshaall-algorithm">Floyd-Warshaall Algorithm</h2>
 
-  time = 0 # 紀錄節點離開queue的時刻
-  leave_time[s] = time
+<p>在此我們發展一個專用於找全點對最短路徑的演算法。核心想法是將 <span>$u \rightarrow v$</span> 的路徑依照經過的中繼點做分類(有/無經過)，一次增加一個可用的中繼點，並更新所有路徑。</p>
 
-  visited[s] = True
+<h3 id="優點-與-bellman-ford-https-sunprinces-github-io-learning-2017-08-algorithm-graph-theory-lec-2-一樣">優點 (與 <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> 一樣):</h3>
 
-  while Q is not empty:
-    time++
-    u = dequeue(Q)
-    leave_time[u] = time
+<ul>
+<li>可以處理有負邊的圖</li>
+<li>檢測是否存在負環</li>
+</ul>
 
-    for v in adj(u):
-      if visited[v] is False:
-        visited[v] = True
-        Q.push(v)
-</code></pre>
+<h3 id="dynamic-programming">Dynamic Programming</h3>
 
-<p>上圖迴圈中的 <code>if</code> 比較會執行 <span>$\mathcal{O}(\text{Total size of adj. list})$</span>，至多 <span>$2|E|$</span>，<br />
-所以total 複雜度為<span>$\mathcal{O}(V+E)$</span> (把圖讀進來)。<br />
-觀察 <code>leave_time</code> 可以發現 BFS 會<strong>優先走過離起點最近的點</strong>，而這個特性可以幫助我們解決一些圖論上的問題(e.g 找出每一點到根節點的最小距離)。</p>
+<div>
+\[
+d_{ij}^k \, : \, \text{the cost of shortest path from} \, v_i \rightarrow v_j \, \text{using only} \, \{v_1, v_2,\cdots,v_k\}
+\]
+</div>
 
-<h2 id="depth-first-search-dfs">Depth-First Search (DFS)</h2>
+<div>
+\[
+d_{ij}^k = \min\{\underbrace{d_{ij}^{k-1}}_{\text{\color{blue}{DOESN'T go through}} \, \color{blue}{v_k}}, \underbrace{{d_{ik}^{k-1} + d_{kj}^{k-1}}}_{\text{\color{blue}{go through}} \,\color{blue}{v_k} \,\text{\color{blue}{exactly once}}}\}
+\]
+</div>
 
-<p>從某一節點開始，探索相鄰的節點，並儘可能深地探索，直到該節點下的所有子孫節點全部遍歷過後，再 backtrace 回前一個節點，重複此步驟直到遍歷全部的節點。通常以 <strong>stack</strong> 來實做，亦即recursive call 某 function。其中，以 DFS 產生的搜索生成樹，我們稱之為 DFS tree 。</p>
+<p><span>$\displaystyle \Rightarrow$</span> Final answer: <span>$\displaystyle d_{ij}^n$</span></p>
 
-<h3 id="psuedo-code-1">psuedo code</h3>
+<p>複雜度為 <span>$\mathcal{O}(V^3)$</span></p>
 
-<pre><code class="language-python">def dfs(G,v):
-  mark v as visited
-  for u in adj(v):
-    if u is not visited:
-      dfs(u)
-</code></pre>
+<h3 id="implementation">Implementation</h3>
 
-<p>複雜度為 <span>$\mathcal{O}(V+E)$</span></p>
+<script src="https://gist.github.com/sunprinceS/03c1528da78d62a5eaf485be79a7d381.js"></script>
 
-<p>根據拜訪的先後順序，我們可以定義幾種 order ，且這些 order 實務上能用來解決問題，<br />
-比如 <code>pre-ordering</code> (拜訪的先後順序)、<code>post-ordering</code> (節點從 stack 離開的先後順序)。</p>
+<h2 id="johnson-s-algorithm">Johnson&rsquo;s Algorithm</h2>
 
-<h3 id="一些相關定義">一些相關定義</h3>
+<p>相比於 Bellman-Ford 跑 <span>$|V|$</span> 次的複雜度， Floyd-Warshall 可算是樂勝了；但對 Dijkstra 卻不盡然，如果說今天圖上的邊不多時(e.g <span>$|E| = \mathcal{O}(V \log V)$</span>)，跑 Dijkstra <span>$|V|$</span> 次的複雜度還比較好。<br />
+<strong>Note: 完全圖: <span>$|E| = \mathcal{O}(V^2)$</span></strong></p>
 
-<p>在 DFS 有向圖的過程中，我們將所遇到的邊進行分類</p>
+<p>但注意到，<a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Dijkstra</a> 只能處理沒有負邊的圖，所以直接使用是不行的。而 Johnson&rsquo;s Algorithm 的核心概念在於<strong>重新調整邊的權重使其為非負，再來對每個節點跑Dijkstra</strong> 。</p>
 
-<ol>
-<li>Tree Edge: DFS Tree 上的邊</li>
-<li>Back Edge: 連回 DFS tree 上祖先的邊</li>
-<li>Forward Edge: 連接 DFS Tree 上子孫的 non Tree Edge</li>
-<li>Cross Edge: otherwise ， 在 DFS Tree 上的一顆子樹連接另一棵子樹的邊</li>
-</ol>
+<h3 id="更改邊權重">更改邊權重</h3>
 
-<p><strong>Note</strong>: 後兩者在無向圖中不存在(<span>$\because$</span> Back Edge 和 Forward Edge 角色變為一樣；且 Cross Edge 若存在，那麼其必可直接連至另一子樹繼續 dfs ，變為 Tree Edge ，故不可能存在)</p>
+<p>Want: 不影響最短路徑及負環的位置</p>
 
-<h3 id="general-dfs">General DFS</h3>
+<p>方法: 對於圖上每個節點賦予一個權重 <span>$h(v)$</span> ，而每條邊的權重更新為</p>
 
-<p>考慮圖 <span>$G$</span> 不是 connected 的情況，定義 general DFS 來遍歷個節點，同時每個節點在 DFS 時，引進兩個全域變數 <span>$t,s$</span>。</p>
+<div>
+\[
+w^{\prime} (u,v) = w(u,v) + h(u) - h(v)
+\]
+</div>
 
-<pre><code class="language-python">t=0
-s=NULL
+<h4 id="correctness">Correctness</h4>
 
-def dfs(v):
-  mark v as visited
-  for u in adj[v]:
-    if u is not visited:
-      dfs(u)
-  leader(v) = s
-  leave_time(v) = t
-  t++
-  
-for v in G(V):
-  if v is not visited:
-    s=v
-    dfs(v)
-</code></pre>
+<ul>
+<li><span>$s \rightarrow v$</span> 的最短路徑不變</li>
+</ul>
 
-<h2 id="application-finding-strongly-connected-component">Application - Finding Strongly Connected Component</h2>
+<div>
+\[
+\begin{aligned}
+w^{\prime} (s,v) & = w^{\prime}(s,v_1) + w^{\prime}(v_1,v_2) + \cdots + w^{\prime}(v_{k-1},v)\\
+& = [w(s,v_1) + h(s) - h(v_1)] + [w(v_1,v_2) + h(v_1) - h(v_2)] + \cdots + [w(v_{k-1},v) + h(v_{k-1}) - h(v)] \\
+& = [w(s,v_1) + h(s) - \cancel{h(v_1)}] + [w(v_1,v_2) + \cancel{h(v_1)} - \cancel{h(v_2)}] + \cdots + [w(v_{k-1},v) + \cancel{h(v_{k-1})} - h(v)] \\
+& = [w(s,v_1) + w(v_1,v_2) + \cdots + w(v_{k-1},v)] + h(s) - h(v)\\
+& = w(s,v) + \underbrace{h(s) - h(v)}_{\text{定值}}\\
+\end{aligned}
+\]
+</div>
 
-<h3 id="關於連通的一些定義">關於連通的一些定義</h3>
+<ul>
+<li>負環還會是負環 (∵ <span>$h(s) - h(v) = 0 \, \Rightarrow \, w^{\prime}(s,v) = w(s,v)$</span>)</li>
+</ul>
 
-<ol>
-<li><span>$u$</span> is <span style="color:blue"> connected </span> to <span>$v$</span> <span>$\Leftrightarrow$</span> <span>$\exists$</span> a path from <span>$u$</span> to <span>$v$</span></li>
-<li>A <span style="color:blue"> connected component</span> of an undirected graph: <strong>maximal</strong> set of connected vertices<br />
-(已經無法再增添新的節點，並同時保持兩兩節點 connected 的關係)</li>
-<li>An <span style="color:blue"> undirected graph is connected </span> <span>$\Leftrightarrow$</span> there is <strong>exactly 1</strong> connected component</li>
-<li>A <span style="color:blue"> Tree </span> is an connected <strong>undirected</strong> graph with no simple cycles</li>
-<li><span style="color:blue"> Strongly Connected Component (SCC)</span> of a <strong>directed graph</strong>:<br />
-A maximal set <span>$S$</span> of vertices s.t <span>$\forall u,v \in S, u \,
-\text{is connected to}\, v$</span></li>
-</ol>
+<p>那麼接下來的問題是，該如何 assign <span>$h(v)$</span> ，使得邊的權重均為非負呢？</p>
 
-<h3 id="scc-的用途">SCC 的用途</h3>
+<h3 id="決定節點權重">決定節點權重</h3>
 
-<p>將任意有向圖收縮成 DAG，化簡問題。</p>
+<p>我們回到 Bellman-Ford 完成後(所有點均不能再被 relax )來看 ，滿足的不等式為</p>
 
-<p><strong>Example</strong>: [待補]</p>
+<div>
+\[
+\begin{aligned}
+d(u) + w(u,v) & \geq d(v) \; \forall \,u,v \in V \\
+\Rightarrow w^{\prime}(u,v) & \geq 0
+\end{aligned}
+\]
+</div>
 
-<h3 id="kosaraju-s-algorithm">Kosaraju&rsquo;s Algorithm</h3>
+<p>移項之後可以發現，用<strong>任一起點到其他節點的最短路徑值作為 <span>$h$</span></strong> ，可以滿足邊權重為非負的要求😄</p>
 
-<p>整體概念就是先對反圖 <span>$G^{rev}$</span> 做 general DFS，標註每個節點的finish_time (可以想成把 connected info 擷取出來)，接著再依該時間戳記，由高者對 <span>$G$</span> 做 general DFS，每次遍歷的一群即為一個 SCC。</p>
+<h3 id="combine-together">Combine Together</h3>
 
 <ol>
-<li>Let <span>$G^{rev} = (V,E^{rev}), \text{其中} \, (u,v) \in E \Leftrightarrow (v,u) \in E^{rev}$</span></li>
-<li>Run general DFS on <span>$G^{rev}$</span></li>
-<li>Run general DFS on <span>$G$</span>, <strong>Starting from nodes with highest f(v)</strong> <br />
-if leader(u) = leader(v) <span>$\Rightarrow$ </span> <span style="color:blue"> <span>$u,v$</span> in same SCC</span></li>
+<li>先用 Bellman-Ford 跑一遍去賦予節點值，並以此更新權重</li>
+<li>對每個點跑 Dijkstra ， 並減去 <span>$h(s) - h(t)$</span> 得到原先的最短路徑值</li>
 </ol>
 
-<h3 id="一些觀察">一些觀察</h3>
+<p><strong>實做細節: 考慮 <span>$G$</span> 並非 connected，我們額外加一個超級起點連接到所有節點(W/ 權重 0)，確保每個邊都可被更新到</strong>。</p>
 
-<p>不難發現到，反圖與原圖的 SCC 是一樣的 (可以從 SCC 的定義中得出)，在 run general DFS 第一遍 (於 <span>$G^{rev}$</span>)時，每個節點的 leader 其實已經設定好，但這並不能用作最終答案，因為此時 <span>$leader(v) = u$</span> 的意義為在 <span>$G^{rev}$</span> 上，可以由<span>$u$</span> 出發到達的點 (也就是在 <span>$G$</span> 上，由誰出發可以到達 <span>$u$</span>)，但不能確定在原圖上從 <span>$v$</span> 出發可以到達 <span>$u$</span> ，所以才需要再跑第二次 general DFS 來找出 SCC (而依據<span>$f(v)$</span> ，則確保了我們依循 topological reverse order，不會有<strong>跑到下一個 SCC</strong> 的情況發生)</p>
-
-<h3 id="psuedo-code-2">psuedo code</h3>
-
-<pre><code class="language-python">def kosaraju(G,SCC_list):
-  GT = G with reversing edges
-  general_dfs(GT)
-
-  for v in G(V) with decending finish_time stamp in GT:
-    if v is not visited:
-      DFS(v,G) with leader = v then make a set S (with every element whose leader is v)
-      SCC_list.append(S)
-
-</code></pre>
-
-<h2 id="application-topological-sort">Application - Topological Sort</h2>
-
-<h3 id="def-directed-acyclic-graph-dag-有向無環圖">Def. Directed Acyclic Graph (DAG，有向無環圖)</h3>
-
-<p>有向圖中的特例，所有的邊都朝著同一個方向延伸，所有節點可定義<strong>先後次序</strong>(也就是下方定義的拓樸排序)
-(e.g 玩遊戲時，將所有關卡視為一個個節點，要先破完 A 關卡或 B 關卡，才可以打後續E關卡，問可能的破關順序即是一種 Topological order)</p>
-
-<h3 id="topolocial-order-拓樸排序">Topolocial Order (拓樸排序)</h3>
-
-<p>在有向圖中，找到一個節點的排序 <span>$v_1,v_2,\cdots,v_n$</span>，使得任意兩點
- <span>$v_i,v_j$</span> ，若 <span>$i &lt; j$</span> ，則 <span>$e(v_i,v_j) \notin E$</span></p>
-
-<h3 id="dfs-algortihm">DFS Algortihm</h3>
-
-<p>Run DFS on <span>$G^{rev}$</span> <br />
-<span>$f(v)$</span> 由小到大的順序即為 Topological order，複雜度
-<span>$\mathcal{O}(V+E)$</span><br />
-<strong>Note</strong>: 若是 run 在 <span>$G$</span> 上，那麼 <span>$f(v)$</span> 由大到小的順序亦是 Topological order</p>
+<p>複雜度: <span>$\mathcal{O}(VE + V^2 \log V)$</span></p>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -436,13 +397,13 @@ if leader(u) = leader(v) <span>$\Rightarrow$ </span> <span style="color:blue"> <
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/08/algorithm---disjoint-set/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/08/algorithm---disjoint-set/">Algorithm - Disjoint Set</a>
+      <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Algorithm - Graph Theory - Lec 3</a>
     </nav>
     
   </div>
@@ -451,14 +412,8 @@ if leader(u) = leader(v) <span>$\Rightarrow$ </span> <span style="color:blue"> <
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Algorithm - Graph Theory - Lec 2</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

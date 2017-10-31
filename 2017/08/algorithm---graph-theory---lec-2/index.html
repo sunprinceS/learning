@@ -5,8 +5,8 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
-  <meta name="description" content="Shortest Path - Bellman-Ford Algorithm">
-  <meta name="generator" content="Hugo 0.29" />
+  <meta name="description" content="Single Source Shortest Path - Bellman-Ford Algorithm">
+  <meta name="generator" content="Hugo 0.30.2" />
 
   <title>Algorithm - Graph Theory - Lec 2 &middot; Stay hungry. Stay foolish </title>
 
@@ -46,7 +46,7 @@
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
   
   
   <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -233,7 +233,7 @@
 
 <div class="header">
   <h1>Algorithm - Graph Theory - Lec 2</h1>
-  <h2>Shortest Path - Bellman-Ford Algorithm</h2>
+  <h2>Single Source Shortest Path - Bellman-Ford Algorithm</h2>
 </div>
 <div class="content">
 
@@ -327,7 +327,7 @@ for i in range(|V| - 1):
 <h3 id="一些觀察">一些觀察</h3>
 
 <ul>
-<li><p>實際上也不用跑到 |V| - 1 次才停止，在某一回合如果沒有更新，那麼往後的回合也不可能更新了，此時便可以停止。</p></li>
+<li><p>實際上也不用跑到 <span>$|V| - 1$</span> 次才停止，在某一回合如果沒有更新，那麼往後的回合也不可能更新了，此時便可以停止。</p></li>
 
 <li><p>遍歷邊的順序，影響了需要幾回合才能找到最短路，那麼最佳的順序是什麼呢?
 (<span>$\rightarrow$ see <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Dijkstra</a></span>)</p></li>
@@ -446,8 +446,8 @@ s \stackrel{c_1}{\longrightarrow} v_1 \stackrel{c_2}{\longrightarrow} v_2 \stack
 
 
   
- <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
