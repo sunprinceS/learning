@@ -1,6 +1,6 @@
 +++
 date =  "2017-09-03T21:28:37+01:00"
-description = "Shortest Path - Dijkstra Algorithm"
+description = "Sigle Source Shortest Path - Dijkstra Algorithm"
 draft = false
 tags = ["Algorithm","Graph Theory","NTU"]
 title =  "Algorithm - Graph Theory - Lec 3"

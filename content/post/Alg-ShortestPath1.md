@@ -1,6 +1,6 @@
 +++
 date =  "2017-08-31T17:02:52+01:00"
-description = "Shortest Path - Bellman-Ford Algorithm"
+description = "Single Source Shortest Path - Bellman-Ford Algorithm"
 draft = false
 tags = ["Algorithm","Graph Theory","NTU"]
 title =  "Algorithm - Graph Theory - Lec 2"
@@ -56,7 +56,7 @@ for i in range(|V| - 1):
 
 ### 一些觀察
 
-* 實際上也不用跑到 |V| - 1 次才停止，在某一回合如果沒有更新，那麼往後的回合也不可能更新了，此時便可以停止。
+* 實際上也不用跑到 <span>$|V| - 1$</span> 次才停止，在某一回合如果沒有更新，那麼往後的回合也不可能更新了，此時便可以停止。
 
 * 遍歷邊的順序，影響了需要幾回合才能找到最短路，那麼最佳的順序是什麼呢?
   (<span>$\rightarrow$ see [Dijkstra](https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/)</span>)
