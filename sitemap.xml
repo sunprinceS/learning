@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/</loc>
+    <lastmod>2017-10-31T08:32:38+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/</loc>
     <lastmod>2017-09-12T08:32:38+01:00</lastmod>
   </url>
@@ -99,13 +104,13 @@
   </url>
   
   <url>
-    <loc>https://sunprinces.github.io/learning/topics/algorithm/</loc>
+    <loc>https://sunprinces.github.io/learning/tags/algorithm/</loc>
     <lastmod>2017-09-08T22:29:20+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://sunprinces.github.io/learning/tags/algorithm/</loc>
+    <loc>https://sunprinces.github.io/learning/topics/algorithm/</loc>
     <lastmod>2017-09-08T22:29:20+01:00</lastmod>
     <priority>0</priority>
   </url>
@@ -148,7 +153,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/graph-theory/</loc>
-    <lastmod>2017-09-08T22:29:20+01:00</lastmod>
+    <lastmod>2017-10-31T08:32:38+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -166,13 +171,13 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/kattis/</loc>
-    <lastmod>2017-09-12T08:32:38+01:00</lastmod>
+    <lastmod>2017-10-31T08:32:38+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/kth/</loc>
-    <lastmod>2017-09-12T08:32:38+01:00</lastmod>
+    <lastmod>2017-10-31T08:32:38+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -190,7 +195,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/online-judge/</loc>
-    <lastmod>2017-09-12T08:32:38+01:00</lastmod>
+    <lastmod>2017-10-31T08:32:38+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -202,13 +207,13 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/post/</loc>
-    <lastmod>2017-09-12T08:32:38+01:00</lastmod>
+    <lastmod>2017-10-31T08:32:38+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/programming/</loc>
-    <lastmod>2017-09-12T08:32:38+01:00</lastmod>
+    <lastmod>2017-10-31T08:32:38+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -232,7 +237,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/</loc>
-    <lastmod>2017-09-12T08:32:38+01:00</lastmod>
+    <lastmod>2017-10-31T08:32:38+01:00</lastmod>
     <priority>0</priority>
   </url>
   

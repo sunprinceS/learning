@@ -5,10 +5,10 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
-  <meta name="description" content="Warmup / Greedy Algorithms / Dynamic Programming">
+  <meta name="description" content="Graphs II">
   <meta name="generator" content="Hugo 0.31.1" />
 
-  <title>Problem Solving and Programming- hw1 &middot; Stay hungry. Stay foolish </title>
+  <title>Problem Solving and Programming- hw6 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -232,8 +232,8 @@
 
 
 <div class="header">
-  <h1>Problem Solving and Programming- hw1</h1>
-  <h2>Warmup / Greedy Algorithms / Dynamic Programming</h2>
+  <h1>Problem Solving and Programming- hw6</h1>
+  <h2>Graphs II</h2>
 </div>
 <div class="content">
 
@@ -241,7 +241,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>12 Sep 2017</time>
+    <time>31 Oct 2017</time>
     </div>
   
 
@@ -265,9 +265,7 @@
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/greedy">Greedy</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/dp">DP</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/graph-theory">Graph Theory</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kattis">Kattis</a>&nbsp;&#47;
     
@@ -280,121 +278,129 @@
 </div>
 
 
-  <p>在 KTH 交換時選到的神課！想說把題解稍微紀錄一下 ✌️<br />
-<a href="https://kth.kattis.com/problemgroups/617" target="_blank">題目連結</a></p>
+  <p><a href="https://kth.kattis.com/problemgroups/632" target="_blank">題目連結</a></p>
 
 <p></p>
 
-<h2 id="pa-spiderman-s-workout">pA - Spiderman&rsquo;s Workout</h2>
+<h2 id="pa-gopherii">pA - GopherII</h2>
 
-<p>蜘蛛人要爬上爬下！<strong>依序</strong>給一串要爬的距離數列 <span>$d_1,d_2,\cdots,d_n$</span>，每次可以選爬上或下，但有以下目標。</p>
+<p>今天有 <span>$n$</span> 隻老鼠和 <span>$m$</span> 個洞，當老鷹來的時候，老鼠們要躲到洞裡才不會被吃掉，但有以下限制。</p>
 
-<ol>
-<li><p>爬完 <span>$d_n$</span> 後要回到地面，否則就是非法解。</p></li>
+<ul>
+<li>一個洞只能容納一隻老鼠</li>
+<li>老鼠只能跑到一定範圍以內的洞，太遠跑不到</li>
+</ul>
 
-<li><p>不能爬得比地面低。</p></li>
+<p>想問說最後有幾隻老鼠會被吃掉。<br />
+這題頗水，根據題目給定的座標及限制，建一個二分圖去對老鼠和洞們做匹配，算幾隻老鼠沒被配到。</p>
 
-<li><p>在過程中，希望能 minimize 經歷的最高高度。</p></li>
-</ol>
+<p><span>$|E| = nm$</span> , <span>$|V| = n+m$</span>，用最大流求二分匹配的話，複雜度
+<span>$O(VE(V+E))$</span> <br />
+(不過題目沒給輸入範圍，應該就是怎樣都會過&hellip;lol)</p>
 
-<p>思考一下，可以用 <strong>DP</strong> 來解。</p>
+<h2 id="pb-xyzzy">pB - XYZZY</h2>
 
-<p><code>$$
-H[i][h] = \text{min. distance have experienced in order to achieve} \; h \; \text{at step} \;i
-$$</code></p>
+<p>今天有 <span>$n$</span> 個房間，每個房間蘊含著可正可負的能量(?)，一個冒險者想從房間 <span>$0$</span> 走到房間  <span>$n-1$</span> 。他一開始有能量 <span>$100$</span> 點，每經過一個房間便會獲得該房間的能量，而當他走到最終房間或是能量用完時，遊戲結束，想問說他有沒有可能走到最終房間。這題目包含了一些假設讓我們比較好解。</p>
 
-<p>轉移式如以下:</p>
+<ul>
+<li>在房間之間移動不耗費能量</li>
+<li>同一個房間可以走好幾次(可以一直拿能量)</li>
+<li>只在乎到不到的了，不在乎步數最少</li>
+<li>最後一個房間蘊含能量 <span>$0$</span> (所以你到它時，能量一定要
+<span>$\mathbf{&gt; 0}$</span>，等號不成立)</li>
+</ul>
 
-<p><code>$$
-H[i][h] = \max(h, \min (\underset{\color{blue}{爬上}}{H[i-1][h-d_i]}, \underset{\color{blue}{爬下}}{H[i-1][h+d_i]}))
-$$</code></p>
+<p>我們先把題目轉成有向圖，每個節點 <span>$v$</span> 代表一個房間，其出邊上的
+weight 為該房間蘊含的能量。今天我們想去 maxmize 到每一點還保有的能量，然後看
+<code>energy[n-1]</code> 是否大於 <span>$0$</span> ？</p>
 
-<p>初始 state 為 <span>$H[1][d_1]$</span> (一開始只能爬上)<br />
-最後輸出 <span>$H[n][0]$</span>，如果是 <code>INT_MAX</code> 的話，代表不存在任何方法走到
-這個 state，輸出 <code>IMPOSSIBLE</code>。</p>
+<p>是一個求單源最短路的變形，而因為有負邊，所以只能用 <a href="http://localhost:1313/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> 來做。
+而有些名詞要做些修正。</p>
 
-<h2 id="pb-help">pB - Help</h2>
+<ul>
+<li><code>NEG_CYCLE</code> <span>$\rightarrow$</span> <code>POS_CYCLE</code> (可以在正能量迴圈中繞，能量源源不絕)</li>
+<li><code>UNREACHABLE</code> <span>$\rightarrow$</span> energy <span>$= 0$</span></li>
+</ul>
 
-<p>給定兩個由 word 們組成的字串，當中有些 word 可以互相替代 (以 <code>&lt;[pattern]&gt;</code> 表示)，想問這兩個字串是否相等( 兩個字串對彼此的替代 word 是分開看的)。
-一開始直接迴圈吃了 WA，仔細想想以下例子</p>
+<p><code>Relax</code> 也要改一下，<span>$\forall e=(u,v)$</span></p>
 
-<p>&lt;d&gt; &lt;d&gt; &lt;b&gt; &lt;b&gt; b<br />
-&nbsp;&nbsp;e &nbsp;&nbsp;&lt;c&gt; &lt;c&gt; &lt;a&gt; &lt;a&gt;</p>
-
-<p>和</p>
-
-<p>&lt;d&gt; &lt;d&gt; &lt;b&gt; &lt;b&gt; b<br />
-&nbsp;&nbsp;b &nbsp;&nbsp;&lt;c&gt; &lt;c&gt; &lt;a&gt; &lt;a&gt;</p>
-
-<p><code>&lt;[pattern]&gt;</code> 不是簡單的幾層替代，要用<strong>遞迴</strong>的方法去把他們一一取代。</p>
-
-<pre><code class="language-python">def solve(s1,s2):
-    for i in range(len(s1)):
-        if is_placeholder(s1[i]) and not is_placeholder(s2[i]):
-            replace(s1,s1[i],s2[i])
-            return solve(s1,s2)
-        if not is_placeholder(s1[i]) and is_placeholder(s2[i]):
-            replace(s2,s2[i],s1[i])
-            return solve(s1,s2)
-    ## until now, no more placeholder mapping issue
-    for i in range(len(s1)):
-        if is_placeholder(s1[i]) and is_placeholder(s2[i]):
-            s1[i] = s2[i] = 'hao'
-    Finally, check whether 2 strings matches 
+<pre><code class="language-python">if(energy[u] != 0 &amp;&amp; energy[u] + e.w &gt; energy[v])
+  relax energy[v] = energy[u] + e.w
 </code></pre>
 
-<h2 id="pc-introspective-caching">pC - Introspective Caching</h2>
+<p>先用 <code>bfs</code> 從終點拓展，看哪些房間到的了它，在 Bellman-Ford 跑第二個迴圈偵測正環時，<span>$\forall e=(u,v)$</span></p>
 
-<p>Cache問題，假定有個 oracle 知道每個物件被 call 的順序，給定 cache size 及不同物件的個數，想問 cache miss 的次數有幾次。</p>
+<pre><code class="language-python">if exist POS_CYCLE at u:
+  if 終點 is reached by u:
+    return True
+</code></pre>
 
-<p>我們能夠決定的是，就是當 cache 滿了，我們要把某個物件移掉時，要移誰？<br />
-一個 <strong>Greedy</strong> 的 criteria 是，看誰下一次最慢被用到，就先把他移掉，然後
-maintain 一個 priority heap ，實際去模擬此問題的運作。</p>
+<p>如果上述判式在迴圈都沒成立，則 check <code>energy[n-1]</code> 是否 <span>$&gt; 0$</span></p>
 
-<p>簡單來說，</p>
+<h2 id="pc-risk">pC - Risk</h2>
 
-<pre><code class="language-cpp">struct Node{
-  int idx;//哪個物件
-  int next_tid;// 下次被 call 是在第幾個時刻
-  Node(int idx,int next_tid): idx(idx),next_tid(next_tid){}
-  bool operator &lt; (Node rhs) const{
-    return next_tid&lt; rhs.next_tid;
-  }
+<p>給定一張圖，裡頭的點有些是你的，有些是敵人的，而在每個點上有一些士兵。<br />
+給定圖中這些點與點相鄰與否的關係，及起始圖上每個點你的士兵有多少，在每個士兵至多移動一次的情況下(留在原地或移動到鄰近且屬於你的點)，想 maximize 與敵軍相鄰最弱點的士兵數，且每個點至少要留守一個士兵。<br />
+Note:同一點的士兵們，不用一起移動，可分別決定要到哪個鄰近點或留守(有點廢話，但一開始卡了一下)</p>
+
+<p>這題我是用最大流的想法來解，假設最弱點士兵數為 <span>$k$</span>，建一張屬於你的點的二分圖，如果相鄰的話，該邊的 capacity 就是原先在該點的士兵數(當然自己也要連到自己，因為可以留在原地)。最後將這些點連到 sink ，而當中邊的權重，如果該點不與敵軍相鄰，capacity 為 1，如果與敵軍相鄰則是 <span>$k$</span>，然後檢查是否滿流(滿流代表走一次的情況下，所有與敵軍相鄰點的士兵數均 <span>$\geq k$</span>)，然後用二分搜去找出最大的 <span>$k$</span>。複雜度為 <span>$\mathcal{O}(\log ( \text{army})n n^2(n + n^2)) = \mathcal{O}(\log ( \text{army}) n^5)$</span></p>
+
+<p>這題也很棒！如果推廣可以移動 <span>$m$</span> 步的話，就在加 <span>$m$</span> 個
+layer，如果有相鄰的話，第二層之後，最後一層連到 sink 之前，就設權重為 <span>$\sum_{army}$</span></p>
+
+<h2 id="pd-full-tank">pD - Full Tank</h2>
+
+<p>開車旅行，當中有 <span>$n$</span> 個城市，城市間有道路相連，每個城市有加油站，且單位油價各不相同，給定起點及終點，想找一條<strong>花費油錢最小的行程</strong>。</p>
+
+<p>感覺就是個求單源最短路徑的問題，但 criteria 略有不同 (但油錢多少跟距離也正相關)，因為邊權非負，不妨嘗試用 <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Dijkstra</a> 的想法解解看。但我們現在需要多考慮現存油量 <span>$f$</span> 這個變數。</p>
+
+<p><code>$$
+cost[i][f]: \quad \text{min. cost when arriving } \, i\text{-th city with fuel}
+\, f
+$$</code></p>
+
+<pre><code class="language-cpp">struct State{
+  int idx,fuel,cost;
+  State(int idx,int fuel,int cost):idx(idx),fuel(fuel),cost(cost){}
+  bool operator&lt;(const State&amp; rhs) const {return cost &gt; rhs.cost;}
 };
 </code></pre>
 
-<p>實際模擬一下</p>
+<p>而 state 的轉移(或說<code>Relax</code>)有兩個選擇：</p>
 
-<pre><code class="language-cpp">priority_queue&lt;Node&gt; cache;
-int num_miss = 0;
-int cache_size = 0;
-for(int i=0;i&lt;num_call;++i){
-  if(!b_cached[queries[i]]){ // miss
-    if(size == c){ //full
-        b_cached[cache.top().idx] = false;
-        cache.pop();
-      }
-    else{
-      ++cache_size;
-    }
-    b_cached[queries[i]] = true;
-    ++num_miss;
-  }
-  cache.push(Node(queries[i],next_tids[i]));
-}
+<ul>
+<li>在原地加 <span>$1$</span> 單位的油</li>
+<li>花費 <span>$d_e$</span> 單位的油，移動到別的城市</li>
+</ul>
+
+<p>跟 Dijkstra 一樣 maintain 一個 priority queue，每次 pop out 出一個 state 做
+<code>Relax</code> ，直到第一次 pop out 出的城市為終點，或queue 變為 empty (卻還沒成功，代表起點終點不連通)
+而 Relax 的 condition 就是上述兩個狀態轉移的方式。</p>
+
+<ul>
+<li>加一單位的油</li>
+</ul>
+
+<pre><code class="language-cpp">if(cost[i][f+1] &gt; cost[i][f] + prices[i]) 
+  relax(cost[i][f+1])
 </code></pre>
 
-<p><code>next_tids[i]</code> 表示 query[i]要 call的那個物件，下次是何時被 call。</p>
+<ul>
+<li>移動到鄰近城市
+<span>$\forall j \in N(i)$</span></li>
+</ul>
 
-<p>題目還沒寫很多，但我覺得這題蠻棒的XD，Greedy 的題目也頗神奇，不知道有沒有其他 criteria 就是😎</p>
+<pre><code class="language-cpp">if(cost[j][f-e.weight] &gt; cost[i][f])
+  relax(cost[j][f-w.weight])
+</code></pre>
 
-<h2 id="pd-troll-hunt">pD - Troll Hunt</h2>
+<p>關於複雜度，state 總數為 <span>$nC$</span> ( <span>$C$</span> 為油箱的 capacity)，如果用
+binary heap 的話，</p>
 
-<p>水題！</p>
-
-<h2 id="pe-aspen-avenue">pE - Aspen Avenue</h2>
-
-<p>還沒AC&hellip;</p>
+<ul>
+<li><code>Extract-Min</code>: <span>$\mathcal{O}(\log (nC))$</span> ，需要至多 <span>$nC$</span> 次</li>
+<li><code>INS</code>(state不會重複，cost 會嚴格遞增，不是用 <code>Decrease</code>): <span>$\mathcal{O}(\log (nC))$</span>，需要至多 <span>$2mC$</span> 次</li>
+</ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -402,13 +408,13 @@ for(int i=0;i&lt;num_call;++i){
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-4/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-4/">Algorithm - Graph Theory - Lec 4</a>
+      <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/">Problem Solving and Programming- hw1</a>
     </nav>
     
   </div>
@@ -417,14 +423,8 @@ for(int i=0;i&lt;num_call;++i){
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/">Problem Solving and Programming- hw6</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
