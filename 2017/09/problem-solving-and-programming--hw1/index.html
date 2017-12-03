@@ -5,10 +5,10 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
-  <meta name="description" content="Implementation &amp; Analysis">
+  <meta name="description" content="Warmup / Greedy Algorithms / Dynamic Programming">
   <meta name="generator" content="Hugo 0.31.1" />
 
-  <title>Algorithm - Disjoint Set &middot; Stay hungry. Stay foolish </title>
+  <title>Problem Solving and Programming- hw1 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -232,8 +232,8 @@
 
 
 <div class="header">
-  <h1>Algorithm - Disjoint Set</h1>
-  <h2>Implementation &amp; Analysis</h2>
+  <h1>Problem Solving and Programming- hw1</h1>
+  <h2>Warmup / Greedy Algorithms / Dynamic Programming</h2>
 </div>
 <div class="content">
 
@@ -241,7 +241,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>22 Aug 2017</time>
+    <time>12 Sep 2017</time>
     </div>
   
 
@@ -251,7 +251,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/online-judge">Online-Judge</a>
     
   </div>
   
@@ -263,11 +263,15 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/data-structure">Data Structure</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/greedy">Greedy</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/dp">DP</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kattis">Kattis</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
     
   </div>
   
@@ -276,93 +280,121 @@
 </div>
 
 
-  <p>Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets <span>$S_1,S_2,\cdots,S_k$</span>，而每個 <span>$S_i$</span> (每個 category) 以一個代表值 (<em>representative</em>) 去紀錄。
-<!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--></p>
+  <p>在 KTH 交換時選到的神課！想說把題解稍微紀錄一下 ✌️<br />
+<a href="https://kth.kattis.com/problemgroups/617" target="_blank">題目連結</a></p>
 
 <p></p>
 
-<h2 id="支援的-operations">支援的 Operations</h2>
+<h2 id="pa-spiderman-s-workout">pA - Spiderman&rsquo;s Workout</h2>
+
+<p>蜘蛛人要爬上爬下！<strong>依序</strong>給一串要爬的距離數列 <span>$d_1,d_2,\cdots,d_n$</span>，每次可以選爬上或下，但有以下目標。</p>
 
 <ol>
-<li><code>Make-Set(x)</code>: create a new set {<span>$x$</span>}</li>
-<li><code>Find(x)</code>: Find the leader of <span>$x$</span>&rsquo;s set</li>
-<li><code>Union(x,y)</code>: Union <span>$x$</span>&rsquo;s set and <span>$y$</span>&rsquo;s set</li>
+<li><p>爬完 <span>$d_n$</span> 後要回到地面，否則就是非法解。</p></li>
+
+<li><p>不能爬得比地面低。</p></li>
+
+<li><p>在過程中，希望能 minimize 經歷的最高高度。</p></li>
 </ol>
 
-<h2 id="linked-list-implementation">Linked List Implementation</h2>
+<p>思考一下，可以用 <strong>DP</strong> 來解。</p>
 
-<p><img src="https://sunprinces.github.io/learning/img/post/djs-linked-list.jpg" width="800px"></p>
+<p><code>$$
+H[i][h] = \text{min. distance have experienced in order to achieve} \; h \; \text{at step} \;i
+$$</code></p>
 
-<ul>
-<li><code>Make-Set(x)</code>: <span>$\mathcal{O}(1)$</span> (create <code>HEAD</code> and representative，也就是自己)</li>
-<li><code>Find(x)</code>: <span>$\mathcal{O}(1)$</span> (back to <code>HEAD</code>，go to representative)</li>
-<li><code>Union(x,y)</code>: <span>$\mathcal{O}(n)$</span> <br />
-可以發現 Union 非常慢，要依序將 <span>$S_2$</span> 中的元素依序指到 <span>$S_1$</span> 的 <code>HEAD</code> ，同時將 <span>$S_1$</span> 的最後一個元素之 <code>ptr</code> 指到原先 <span>$S_2$</span> 中的第一個。(當然可以在 <code>HEAD</code> 中多存一個指向最後一個元素的 <code>ptr</code> ，但複雜度還是 <span>$\mathcal{O}(m)$</span>, where <span>$m = |S_2|$</span>)</li>
-</ul>
+<p>轉移式如以下:</p>
 
-<p>雖說單看 <code>Union</code> 的複雜度似乎不太妙，但考慮一系列操作( <strong>Amortized Analysis</strong> ，也是一種常見的分析複雜度方式)，同時利用上方提到的 trick ，在做 <code>Union</code> 時，都是去合併<strong>較小</strong>的那個集合，再來做分析。</p>
+<p><code>$$
+H[i][h] = \max(h, \min (\underset{\color{blue}{爬上}}{H[i-1][h-d_i]}, \underset{\color{blue}{爬下}}{H[i-1][h+d_i]}))
+$$</code></p>
 
-<h3 id="lemma">Lemma</h3>
+<p>初始 state 為 <span>$H[1][d_1]$</span> (一開始只能爬上)<br />
+最後輸出 <span>$H[n][0]$</span>，如果是 <code>INT_MAX</code> 的話，代表不存在任何方法走到
+這個 state，輸出 <code>IMPOSSIBLE</code>。</p>
 
-<p>Starting from 0 sets</p>
+<h2 id="pb-help">pB - Help</h2>
 
-<div>
+<p>給定兩個由 word 們組成的字串，當中有些 word 可以互相替代 (以 <code>&lt;[pattern]&gt;</code> 表示)，想問這兩個字串是否相等( 兩個字串對彼此的替代 word 是分開看的)。
+一開始直接迴圈吃了 WA，仔細想想以下例子</p>
 
-\[
-\text{operations} \left\{ \begin{array}{ll}
-           n \quad \text{make-set} (\, \therefore \, n \; \text{elements})\\
-           m \quad \text{find}\\
-           \leq n-1 \quad \text{union}
-        \end{array} \right.
-\]
+<p>&lt;d&gt; &lt;d&gt; &lt;b&gt; &lt;b&gt; b<br />
+&nbsp;&nbsp;e &nbsp;&nbsp;&lt;c&gt; &lt;c&gt; &lt;a&gt; &lt;a&gt;</p>
 
-</div>
+<p>和</p>
 
-<p><span>$\Rightarrow \, \text{total cost}: \mathcal{O}(m+n \log n)$</span><br />
-其中 <span>$n\log n$</span> 顯然是來自 <code>Union</code> 的 cost，而細看操作會發現，這亦為 <span>$\mathcal{\Theta}(\text{total number of times that element&rsquo;s top ptr changes})$</span>，<br />
-所以今天我們想證明，改動 <code>ptr</code> 的次數為 <span>$\mathcal{O}(n \log n)$</span></p>
+<p>&lt;d&gt; &lt;d&gt; &lt;b&gt; &lt;b&gt; b<br />
+&nbsp;&nbsp;b &nbsp;&nbsp;&lt;c&gt; &lt;c&gt; &lt;a&gt; &lt;a&gt;</p>
 
-<p><strong>Claim</strong>: If an element has changes <code>ptr</code> <span>$k$</span> times, then it belongs to a set of
-size <span>$\geq 2^{k}$</span></p>
+<p><code>&lt;[pattern]&gt;</code> 不是簡單的幾層替代，要用<strong>遞迴</strong>的方法去把他們一一取代。</p>
 
-<p>用數學歸納法可以簡單證明，假設 <span>$k=t$</span> 時成立，那在 <span>$k=t+1$</span> 時，如果該 set 還需改動 <code>ptr</code> ，表示其跟 size 比他大的 set 做 <code>Union</code> ，之後 size <span>$\geq 2^{t+1}$</span> ， Claim 依然成立 (<span>$k=0$</span> 時，只有 make-set， size 為 <span>$1$</span> 亦成立)</p>
+<pre><code class="language-python">def solve(s1,s2):
+    for i in range(len(s1)):
+        if is_placeholder(s1[i]) and not is_placeholder(s2[i]):
+            replace(s1,s1[i],s2[i])
+            return solve(s1,s2)
+        if not is_placeholder(s1[i]) and is_placeholder(s2[i]):
+            replace(s2,s2[i],s1[i])
+            return solve(s1,s2)
+    ## until now, no more placeholder mapping issue
+    for i in range(len(s1)):
+        if is_placeholder(s1[i]) and is_placeholder(s2[i]):
+            s1[i] = s2[i] = 'hao'
+    Finally, check whether 2 strings matches 
+</code></pre>
 
-<p>而利用該 Claim ，又已知 size of any set <span>$\leq n$</span>，所以任何元素都只能改動 <code>ptr</code> <span>$\leq \log n$</span> 次，所以 total <code>ptr</code> 改動次數 <span>$\leq
-n \log n \quad \square$</span></p>
+<h2 id="pc-introspective-caching">pC - Introspective Caching</h2>
 
-<h2 id="forest-implementation">Forest Implementation</h2>
+<p>Cache問題，假定有個 oracle 知道每個物件被 call 的順序，給定 cache size 及不同物件的個數，想問 cache miss 的次數有幾次。</p>
 
-<p><img src="https://sunprinces.github.io/learning/img/post/djs-forest.jpg" width="300px"></p>
+<p>我們能夠決定的是，就是當 cache 滿了，我們要把某個物件移掉時，要移誰？<br />
+一個 <strong>Greedy</strong> 的 criteria 是，看誰下一次最慢被用到，就先把他移掉，然後
+maintain 一個 priority heap ，實際去模擬此問題的運作。</p>
 
-<ul>
-<li><code>Make-Set(x)</code>: <span>$\mathcal{O}(1)$</span> (建一顆只有一個節點的樹，root指向自己)</li>
-<li><code>Find(x)</code>: <span>$\mathcal{O}(\text{height})$</span> (trace back to root)</li>
-<li><code>Union(x,y)</code>: <span>$\mathcal{O}(\text{height})$</span> (單純改變被合併集 root 的指向為 <span>$\mathcal{O}(1)$</span> ，但要先用 <code>Find</code> 找到 root)</li>
-</ul>
+<p>簡單來說，</p>
 
-<p>稍微觀察一下發現，如果今天這個樹長的很傾斜(最爛的情況就是 skewed tree ，直接退化成 list)，那麼 height 為 <span>$\mathcal{O}(n)$</span> ，複雜度沒有任何改進。但若仿效前面 linked list 的想法，在做 <code>Union</code> 時，去合併比較小的 set ，則可以避免這個問題 (skewed tree會發生，就是每次都是拿一個 size 非 <span>$1$</span> 的 set 去接在 size 為 <span>$1$</span> 的 set 後面&hellip;)。</p>
+<pre><code class="language-cpp">struct Node{
+  int idx;//哪個物件
+  int next_tid;// 下次被 call 是在第幾個時刻
+  Node(int idx,int next_tid): idx(idx),next_tid(next_tid){}
+  bool operator &lt; (Node rhs) const{
+    return next_tid&lt; rhs.next_tid;
+  }
+};
+</code></pre>
 
-<h3 id="theorem-the-height-of-every-tree-span-leq-log-n-span">Theorem: The height of every tree <span>$\leq \log n$</span></h3>
+<p>實際模擬一下</p>
 
-<p><strong>Claim:</strong> every tree with height <span>$k$</span> has at least <span>$2^{k-1}$</span> elements</p>
+<pre><code class="language-cpp">priority_queue&lt;Node&gt; cache;
+int num_miss = 0;
+int cache_size = 0;
+for(int i=0;i&lt;num_call;++i){
+  if(!b_cached[queries[i]]){ // miss
+    if(size == c){ //full
+        b_cached[cache.top().idx] = false;
+        cache.pop();
+      }
+    else{
+      ++cache_size;
+    }
+    b_cached[queries[i]] = true;
+    ++num_miss;
+  }
+  cache.push(Node(queries[i],next_tids[i]));
+}
+</code></pre>
 
-<ul>
-<li><span>$k=1$</span>, trivial</li>
-<li>假設 <span>$k=t$</span> 成立，考慮兩個高度同為 $t$ 的樹(如果不一樣的話，那合併後的樹高度為原先兩者中較高的那個，但元素個數又增加了，Claim 必成立)，各自至少有 <span>$2^{t-1}$</span> 個元素，合併後高度變為 <span>$t+1$</span> ，元素個數 <span>$\geq 2^{t-1} \times 2 = 2^{t}$</span>， Claim 依然成立</li>
-</ul>
+<p><code>next_tids[i]</code> 表示 query[i]要 call的那個物件，下次是何時被 call。</p>
 
-<p>所以當已知每顆樹至多 <span>$n$</span> 個元素的情況下，我們可以證明其高度必
-<span>$\leq \log n \quad \square$</span></p>
+<p>題目還沒寫很多，但我覺得這題蠻棒的XD，Greedy 的題目也頗神奇，不知道有沒有其他 criteria 就是😎</p>
 
-<h3 id="implementation">Implementation</h3>
+<h2 id="pd-troll-hunt">pD - Troll Hunt</h2>
 
-<script src="https://gist.github.com/sunprinceS/ba6415fdef340c1b97377d286a0ff402.js"></script>
+<p>水題！</p>
 
-<h2 id="reference">Reference</h2>
+<h2 id="pe-aspen-avenue">pE - Aspen Avenue</h2>
 
-<ul>
-<li><a href="https://www.csie.ntu.edu.tw/~hsinmu/courses/_media/dsa_12spring/disjoint_set.pdf">台大資工 - DSA</a></li>
-</ul>
+<p>還沒AC&hellip;</p>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -370,13 +402,13 @@ n \log n \quad \square$</span></p>
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-4/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/">利用Ignr自動生成.gitignore</a>
+      <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-4/">Algorithm - Graph Theory - Lec 4</a>
     </nav>
     
   </div>
@@ -385,14 +417,8 @@ n \log n \quad \square$</span></p>
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/">Algorithm - Graph Theory - Lec 1</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
