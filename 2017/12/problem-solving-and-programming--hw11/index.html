@@ -5,10 +5,10 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:image" content="../../images/me.jpg"/>
-  <meta name="description" content="">
+  <meta name="description" content="Computational Geometry">
   <meta name="generator" content="Hugo 0.31.1" />
 
-  <title>Online Judge &middot; Stay hungry. Stay foolish </title>
+  <title>Problem Solving and Programming- hw11 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -38,8 +38,6 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
-  
-  <link rel="alternate" type="application/rss+xml" title="Stay hungry. Stay foolish " href="https://sunprinces.github.io/learning/topics/online-judge/index.xml" />
   
 
   
@@ -121,10 +119,6 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/online-judge/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
-    </li>
     
 
     
@@ -238,16 +232,12 @@
 
 
 <div class="header">
-  <h1>Online Judge</h1>
+  <h1>Problem Solving and Programming- hw11</h1>
+  <h2>Computational Geometry</h2>
 </div>
-
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming--hw11/">Problem Solving and Programming- hw11</a></h2>
 
-    <div class="post-meta">
+  <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
@@ -288,147 +278,152 @@
 </div>
 
 
-  </header>
-
-  <p>
   <p><a href="https://kth.kattis.com/problemgroups/641" target="_blank">題目連結</a></p>
 
 <p></p>
-  </p>
+
+<h2 id="pa-white-water-rafting">pA - White Water Rafting</h2>
+
+<p>給一個簡單內多邊形和外多邊形，求中間圍起來的部份，寬度最小為多少。<br />
+枚舉每個邊的組合，<strong>求兩線段之距離</strong>，取最小者，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
+
+<h2 id="pb-colliding-traffic">pB - Colliding Traffic</h2>
+
+<p>在平面上，有 <span>$n$</span> 個點，各自以定速朝定方向前進 (i.e 射線)，當兩個點間距
+<span>$&lt; r$</span> 時，定義他們 collide ，想問第一個 collide 發生在什麼時候。
+枚舉每條射線的組合，先看距離是否已小於 <span>$r$</span> ，如果是就輸出 <span>$0$</span>。
+不是的話，由兩條射線的參數方程相減得到其距離的參數方程，</p>
+
+<div>
+\[
+\vec{d}_{i,j} = (\vec{s}_j - \vec{s}_i) + (\vec{v}_j - \vec{v}_i) t \quad (\, \vec{s} \; \text{為起始位置}\,)
+\]
+</div>
+
+<p>找是否存在 <span>$t &gt; 0$</span> 滿足 <span>$|\vec{d}_{i,j}| \leq r$</span>，然後從所有射線組合中，找出最小的 <span>$t$</span>，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
+
+<pre><code class="language-cpp">double get_collision_t(Obj i,Obj j,double r_sq){
+  double a,b,c;
+  a = i.vel.distance_square(j.vel);
+  b = (j.pos - i.pos).dot(j.vel - i.vel);
+  c = i.pos.distance_square(j.pos) - r_sq;
+
+  double D = b*b - a*c;
+  if(isz(D)){
+    return (-b/a);
+  }
+  else if(D&lt;0){
+    return -100;
+  }
+  else{
+    if(b+sqrt(D) &gt; 0)
+      return ((-b+sqrt(D))/a);
+    else
+      return ((-b-sqrt(D))/a);
+  }
+}
+</code></pre>
+
+<h2 id="pc-pesky-mosquitoes">pC - Pesky Mosquitoes</h2>
+
+<p>圖上散落了一些點，給定一個定直徑 <span>$d$</span> 的圓，想找出最多可以蓋住幾個點。<br />
+觀察到若想蓋住最多點的話，至少有兩個點會在圓的邊上(否則總是可以再移動，
+看能否再蓋住更多點)。</p>
+
+<p>枚舉所有點的組合，找出過那兩點 <span>$A, B$</span> 且直徑為 <span>$d$</span> 的圓，再來看剩下的點是
+否在此圓裡面，複雜度為 <span>$\mathcal{O}(n^3)$</span>。<br />
+而找圓心的話，算是高中數學的範疇，應該很簡單。但注意到這樣定義的圓會有兩個，方便起見我們統一
+一個方向，法向量指向 <span>$\overrightarrow{AB}$</span> 的右邊 (如此算 <span>$\overrightarrow{BA}$</span> 時，就會得到另一個圓了)。</p>
+
+<h2 id="pd-unusual-darts">pD - Unusual Darts</h2>
+
+<p>吃了兩個 WA ，真難玩&hellip;</p>
+
+<h2 id="pe-meltdown">pE - Meltdown</h2>
+
+<p>我看我是沒理解題意&hellip;</p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming--hw11/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/">Problem Solving and Programming- hw6</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>31 Oct 2017</time>
-    </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/online-judge">Online-Judge</a>
+    <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
+  <div class="pure-u-10-24">
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/graph-theory">Graph Theory</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kattis">Kattis</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/">Problem Solving and Programming- hw6</a>
+    </nav>
     
   </div>
-  
-  
-
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
 </div>
 
 
-  </header>
-
-  <p>
-  <p><a href="https://kth.kattis.com/problemgroups/632" target="_blank">題目連結</a></p>
-
-<p></p>
-  </p>
 
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
 
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/">Problem Solving and Programming- hw1</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>12 Sep 2017</time>
-    </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
+(function() {
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/online-judge">Online-Judge</a>
     
-  </div>
-  
-  
+    if (window.location.hostname == "localhost")
+        return;
 
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/greedy">Greedy</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/dp">DP</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kattis">Kattis</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
-    
-  </div>
-  
-  
-
-</div>
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-  </header>
-
-  <p>
-  <p>在 KTH 交換時選到的神課！想說把題解稍微紀錄一下 ✌️<br />
-<a href="https://kth.kattis.com/problemgroups/617" target="_blank">題目連結</a></p>
-
-<p></p>
-  </p>
-
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
 
-  
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
 </div>
 
 </div>
@@ -451,3 +446,4 @@
 
 </body>
 </html>
+
