@@ -45,7 +45,7 @@ d_{ij}^k = \min\{\underbrace{d_{ij}^{k-1}}_{\text{\color{blue}{DOESN'T go throug
 複雜度為 <span>$\mathcal{O}(V^3)$</span>
 
 ### Implementation
-<script src="https://gist.github.com/sunprinceS/03c1528da78d62a5eaf485be79a7d381.js"></script>
+<script src="https://gist.github.com/sunprinceS/dea6b01e77cb3fe1f40c6779569d592e.js"></script>
 
 ## Johnson's Algorithm
 

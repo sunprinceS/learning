@@ -76,7 +76,7 @@ for(size_t i=0;i<r;++i){
 依序插入元素到 BST 中，想問每次插入的元素，其深度為多少。\\
 就跟 `delete` 元素一樣，插入分兩種情況，一個是原 bst 中比你大的 node <span>$i$</span> (但他的前一個 <span>$j$</span> 小於你)，下面已經
 有兩個 child ，或是不是。不是的話很簡單，直接接在 <span>$i$</span> 的左 child， 深度為
-<span>$\text{depth}[i]+1$</span> 。有兩個 child 的話，則是要接在 <span>$j$</span> 的左 child (<span>$j$</span> 一定是 leaf)，深度為<span>$\text{depth}[j]+1$</span> 。\\
+<span>$\text{depth}[i]+1$</span> 。有兩個 child 的話，則是要接在 <span>$j$</span> 的右 child (<span>$j$</span> 一定是 leaf)，深度為<span>$\text{depth}[j]+1$</span> 。\\
 直接用 c++ 的 map ，對 BST 夠熟的話，應該不困難！
 
 ```cpp
