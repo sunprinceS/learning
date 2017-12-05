@@ -8,7 +8,7 @@
   <meta name="description" content="Warmup / Greedy Algorithms / Dynamic Programming">
   <meta name="generator" content="Hugo 0.31.1" />
 
-  <title>Problem Solving and Programming- hw1 &middot; Stay hungry. Stay foolish </title>
+  <title>Problem Solving and Programming- hw2 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -232,7 +232,7 @@
 
 
 <div class="header">
-  <h1>Problem Solving and Programming- hw1</h1>
+  <h1>Problem Solving and Programming- hw2</h1>
   <h2>Warmup / Greedy Algorithms / Dynamic Programming</h2>
 </div>
 <div class="content">
@@ -241,7 +241,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>12 Sep 2017</time>
+    <time>19 Sep 2017</time>
     </div>
   
 
@@ -263,11 +263,7 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/greedy">Greedy</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/dp">DP</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/data-structure">Data Structure</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kattis">Kattis</a>&nbsp;&#47;
     
@@ -280,121 +276,106 @@
 </div>
 
 
-  <p>在 KTH 交換時選到的神課！想說把題解稍微紀錄一下 ✌️<br />
-<a href="https://kth.kattis.com/problemgroups/617" target="_blank">題目連結</a></p>
+  <p><a href="https://kth.kattis.com/problemgroups/624" target="_blank">題目連結</a></p>
 
 <p></p>
 
-<h2 id="pa-spiderman-s-workout">pA - Spiderman&rsquo;s Workout</h2>
+<h2 id="pa-turbo">pA - Turbo</h2>
 
-<p>蜘蛛人要爬上爬下！<strong>依序</strong>給一串要爬的距離數列 <span>$d_1,d_2,\cdots,d_n$</span>，每次可以選爬上或下，但有以下目標。</p>
+<p>有一種叫 <code>TurboSort</code> 的排序演算法，執行方式是在奇數次迴圈時，將目前尚未選過的最小 element 一路跟隔壁的 element swap 移到左邊(也是他應該在的位置)，在偶數次迴圈時，則是移大的 element 到右邊。<br />
+今天想問在每次 iteration 中，每次需要與幾個 element swap 才可以到達目的地 (Note: element <span>$i \in [1,N]$</span> 且不重複)。<br />
+Well&hellip; 一個 <span>$\mathcal{O}(n^2)$</span> 的演算法，所以基本上有個 <span>$\mathcal{O}(n \log n)$</span> 的方法差不多就符合題目要求惹。</p>
 
-<ol>
-<li><p>爬完 <span>$d_n$</span> 後要回到地面，否則就是非法解。</p></li>
+<p>簡單來說，以奇數次迴圈 (<span>$2i - 1$</span>)為例，想問的就是現在有幾個在<span>$[\,i,\,\text{position of } i \,]$</span> 中的元素 <span>$&gt; i$</span> ，而我們希望這件事可以在 <span>$\mathcal{O}(\log n)$</span>查到，剛好可以用上最近學過的 Binary Indexed Tree。</p>
 
-<li><p>不能爬得比地面低。</p></li>
+<p>bit[i] 所記的東西為 <strong>原先在 <span>$i$</span> 這個位置的 element</strong> 是否已經排到正確的地方了，<br />
+所以 <span>$\texttt{PrefixSum}(\,\text{position of }i\,)$</span> 就是在 i 元素左方還有幾個 element 還沒排到正確位置 (也就是那些還需要與他 swap 的 element)。因為我們是依序 pick 最小、最大、次小&hellip;的元素來 swap，所以只要還不在正確位置的那些元素，勢必都需要 swap，而交換好了之後，則 update bit[position of i] 為 0 (i.e <span>$\delta = -1$</span>)。</p>
 
-<li><p>在過程中，希望能 minimize 經歷的最高高度。</p></li>
-</ol>
-
-<p>思考一下，可以用 <strong>DP</strong> 來解。</p>
-
-<p><code>$$
-H[i][h] = \text{min. distance have experienced in order to achieve} \; h \; \text{at step} \;i
-$$</code></p>
-
-<p>轉移式如以下:</p>
-
-<p><code>$$
-H[i][h] = \max(h, \min (\underset{\color{blue}{爬上}}{H[i-1][h-d_i]}, \underset{\color{blue}{爬下}}{H[i-1][h+d_i]}))
-$$</code></p>
-
-<p>初始 state 為 <span>$H[1][d_1]$</span> (一開始只能爬上)<br />
-最後輸出 <span>$H[n][0]$</span>，如果是 <code>INT_MAX</code> 的話，代表不存在任何方法走到
-這個 state，輸出 <code>IMPOSSIBLE</code>。</p>
-
-<h2 id="pb-help">pB - Help</h2>
-
-<p>給定兩個由 word 們組成的字串，當中有些 word 可以互相替代 (以 <code>&lt;[pattern]&gt;</code> 表示)，想問這兩個字串是否相等( 兩個字串對彼此的替代 word 是分開看的)。
-一開始直接迴圈吃了 WA，仔細想想以下例子</p>
-
-<p>&lt;d&gt; &lt;d&gt; &lt;b&gt; &lt;b&gt; b<br />
-&nbsp;&nbsp;e &nbsp;&nbsp;&lt;c&gt; &lt;c&gt; &lt;a&gt; &lt;a&gt;</p>
-
-<p>和</p>
-
-<p>&lt;d&gt; &lt;d&gt; &lt;b&gt; &lt;b&gt; b<br />
-&nbsp;&nbsp;b &nbsp;&nbsp;&lt;c&gt; &lt;c&gt; &lt;a&gt; &lt;a&gt;</p>
-
-<p><code>&lt;[pattern]&gt;</code> 不是簡單的幾層替代，要用<strong>遞迴</strong>的方法去把他們一一取代。</p>
-
-<pre><code class="language-python">def solve(s1,s2):
-    for i in range(len(s1)):
-        if is_placeholder(s1[i]) and not is_placeholder(s2[i]):
-            replace(s1,s1[i],s2[i])
-            return solve(s1,s2)
-        if not is_placeholder(s1[i]) and is_placeholder(s2[i]):
-            replace(s2,s2[i],s1[i])
-            return solve(s1,s2)
-    ## until now, no more placeholder mapping issue
-    for i in range(len(s1)):
-        if is_placeholder(s1[i]) and is_placeholder(s2[i]):
-            s1[i] = s2[i] = 'hao'
-    Finally, check whether 2 strings matches 
-</code></pre>
-
-<h2 id="pc-introspective-caching">pC - Introspective Caching</h2>
-
-<p>Cache問題，假定有個 oracle 知道每個物件被 call 的順序，給定 cache size 及不同物件的個數，想問 cache miss 的次數有幾次。</p>
-
-<p>我們能夠決定的是，就是當 cache 滿了，我們要把某個物件移掉時，要移誰？<br />
-一個 <strong>Greedy</strong> 的 criteria 是，看誰下一次最慢被用到，就先把他移掉，然後
-maintain 一個 priority heap ，實際去模擬此問題的運作。</p>
-
-<p>簡單來說，</p>
-
-<pre><code class="language-cpp">struct Node{
-  int idx;//哪個物件
-  int next_tid;// 下次被 call 是在第幾個時刻
-  Node(int idx,int next_tid): idx(idx),next_tid(next_tid){}
-  bool operator &lt; (Node rhs) const{
-    return next_tid&lt; rhs.next_tid;
+<pre><code class="language-cpp">FenwickTree shift(N);
+//一開始都不在正確位置
+for(size_t i=0;i&lt;=n;++i){
+  shift.add(i,1);
+}
+int left = 1, right = N;
+for(size_t i=1;i&lt;=N;++i){
+  if( i &amp; 0x1){ //odd
+    shift.add(idx2loc[left],-1);
+    cout &lt;&lt; shift.prefix_sum(idx2loc[left]) &lt;&lt; endl;
+    left++;
   }
-};
-</code></pre>
-
-<p>實際模擬一下</p>
-
-<pre><code class="language-cpp">priority_queue&lt;Node&gt; cache;
-int num_miss = 0;
-int cache_size = 0;
-for(int i=0;i&lt;num_call;++i){
-  if(!b_cached[queries[i]]){ // miss
-    if(cache_size == c){ //full
-        b_cached[cache.top().idx] = false;
-        cache.pop();
-      }
-    else{
-      ++cache_size;
-    }
-    b_cached[queries[i]] = true;
-    ++num_miss;
+  else{
+    shift.add(idx2loc[right],-1);
+    cout &lt;&lt; shift.interval_sum(idx2loc[right]+1,N) &lt;&lt; endl;
+    right--;
   }
-  cache.push(Node(queries[i],next_tids[i]));
 }
 </code></pre>
 
-<p><code>next_tids[i]</code> 表示 query[i]要 call的那個物件，下次是何時被 call。</p>
+<h2 id="pb-movie-collection">pB - Movie Collection</h2>
 
-<p>題目還沒寫很多，但我覺得這題蠻棒的XD，Greedy 的題目也頗神奇，不知道有沒有其他 criteria 就是😎</p>
+<p>今天有一列光碟共 <span>$n$</span> 片，每次拿完一片看完後，會重新放到最上方，想去 maintain 對於編號<span>$i$</span> 的光碟，在他上面的光碟數有多少。</p>
 
-<h2 id="pd-troll-hunt">pD - Troll Hunt</h2>
+<p>如果實際去模擬這個運作，假設有 <span>$m$</span> 次拿光碟的動作，複雜度為
+<span>$\mathcal{O}(mn)$</span>，顯然大概是要我們找一個 <span>$\mathcal{O}(m \log n)$</span> 的方法，再一次想到 Binary Indexed Tree。</p>
+
+<p>讓我們先跳脫來想一想，假定今天有個 <span>$m+n$</span> 個 slot 的光碟架，同樣做一樣的操作，(但光碟不會 <strong>往下移動</strong> 了！)，bit[i] 所記的東西為現在在 <span>$i$</span> 位置( buttom 為 <span>$0$</span> ,top 為 <span>$n-1$</span>) 的 element，光碟是否還存在，所以 <span>$\texttt{PrefixSum}(i)$</span>。即是從 <span>$i$</span> 以降架上的光碟有幾片， <span>$n$</span> 減他即是題目所求。我覺得這題蠻好的XD</p>
+
+<pre><code class="language-cpp">FenwickTree cnt(m+r+1);
+top_loc = m;
+
+for(size_t i=1;i&lt;=m;++i){
+  pos[i] = m-i;
+  cnt.add(m-i,1);
+}
+
+for(size_t i=0;i&lt;r;++i){
+  cin &gt;&gt; q;
+  cout &lt;&lt; m - cnt.prefix_sum(pos[q]) -1  &lt;&lt; ' ';
+  cnt.add(pos[q],-1);
+  pos[q] = top_loc++;
+  cnt.add(pos[q],1);
+}
+</code></pre>
+
+<h2 id="pc-kitten-on-a-tree">pC - Kitten on a Tree</h2>
 
 <p>水題！</p>
 
-<h2 id="pe-aspen-avenue">pE - Aspen Avenue</h2>
+<h2 id="pd-binary-search-tree">pD - Binary Search Tree</h2>
 
-<p>還沒AC&hellip;</p>
+<p>依序插入元素到 BST 中，想問每次插入的元素，其深度為多少。<br />
+就跟 <code>delete</code> 元素一樣，插入分兩種情況，一個是原 bst 中比你大的 node <span>$i$</span> (但他的前一個 <span>$j$</span> 小於你)，下面已經
+有兩個 child ，或是不是。不是的話很簡單，直接接在 <span>$i$</span> 的左 child， 深度為
+<span>$\text{depth}[i]+1$</span> 。有兩個 child 的話，則是要接在 <span>$j$</span> 的左 child (<span>$j$</span> 一定是 leaf)，深度為<span>$\text{depth}[j]+1$</span> 。<br />
+直接用 c++ 的 map ，對 BST 夠熟的話，應該不困難！</p>
+
+<pre><code class="language-cpp">map&lt;int,int&gt; bst;
+bst[n] = 0;
+cout &lt;&lt; 0 &lt;&lt; endl;
+
+for(size_t i=1;i&lt;N;++i){
+  cin &gt;&gt; n;
+  it = bst.lower_bound(n);
+  if(it == bst.begin()){
+    depth = bst.begin() -&gt; second + 1;
+  }
+  else if(it == bst.end()){
+    it--;
+    depth = (*it).second + 1;
+  }
+  else{
+    it_backup = it;
+    it--;
+    depth = max(it-&gt;second,it_backup-&gt;second) + 1;
+  }
+  cnt += depth;
+  bst[n] = depth;
+}
+</code></pre>
+
+<h2 id="pe-all-just-a-dream">pE - All just a dream</h2>
+
+<p>寫起來很煩&hellip; 有空在寫解答 :p</p>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -402,13 +383,13 @@ for(int i=0;i&lt;num_call;++i){
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-4/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-4/">Algorithm - Graph Theory - Lec 4</a>
+      <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/">Problem Solving and Programming- hw1</a>
     </nav>
     
   </div>
@@ -418,13 +399,13 @@ for(int i=0;i&lt;num_call;++i){
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/">Problem Solving and Programming- hw2</a>
+      <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/">Problem Solving and Programming- hw6</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
