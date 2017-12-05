@@ -99,7 +99,7 @@ int num_miss = 0;
 int cache_size = 0;
 for(int i=0;i<num_call;++i){
   if(!b_cached[queries[i]]){ // miss
-    if(size == c){ //full
+    if(cache_size == c){ //full
         b_cached[cache.top().idx] = false;
         cache.pop();
       }
