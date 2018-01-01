@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The Learning Problem">
+  <meta name="description" content="Learning to Answer Yes/No">
   <meta name="generator" content="Hugo 0.31.1" />
 
-  <title>NTU Machine Learning - Lec1 &middot; Stay hungry. Stay foolish </title>
+  <title>NTU Machine Learning - Lec2 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>NTU Machine Learning - Lec1</h1>
-  <h2>The Learning Problem</h2>
+  <h1>NTU Machine Learning - Lec2</h1>
+  <h2>Learning to Answer Yes/No</h2>
 </div>
 <div class="content">
 
@@ -277,45 +277,136 @@
 </div>
 
 
-  <p>其實是大一升大二的暑假，閒來無事找的開放式課程，那時也做了一些筆記，沒想到兩三年過後，自己做專題也走向了這個領域XD，於是順手把它整理上來囉！</p>
+  <p></p>
 
-<p></p>
+<p>於前一講講述了 ML 的 framework ，於這一講中，我們會利用一個簡單的 learning model ， 去解決 binary classification 的問題。</p>
 
-<h2 id="what-is-machine-learning">What is Machine Learning</h2>
+<h2 id="hypothesis-set-linear-perceptron">Hypothesis Set: Linear Perceptron</h2>
 
-<p>ML 簡單來說，是希望於機器上實現如同人類的學習，目標是習得一些如何<strong>決策</strong>的技能(e.g Chatbot 根據之前的對話內容，下一個時間點應該要回什麼；下棋的過程中，下一步棋應該怎麼走；收到一串野外鳥叫的錄音，該如何辨別出當中有哪些品種&hellip;)。通常會適用的問題主要有以下特徵。</p>
+<div>
+\[
+\textcolor{red}{h}(x) = \texttt{sgn}(\sum_{i=1}^{d}\textcolor{red}{w_i}x_i - \textcolor{red}{\text{threshold}}) = \texttt{sgn}(\textcolor{red}{\mathbf{w}^T}\mathbf{x})
+\]
+</div>
+
+<p>其中，<span>$\mathbf{x} \in \mathcal{X}, \mathcal{X} = \lbrace 1 \rbrace \times \mathbb{R}^d $</span> (把 threshold 放進 <span>$\mathbf{w}$</span> 的第 0 維，以簡便表示)</p>
+
+<p>其實就是一個將空間一分為二的 hyperplane 。</p>
+
+<h2 id="learning-algorithm">Learning Algorithm</h2>
+
+<h3 id="objective">Objective</h3>
+
+<div>
+\[
+  \text{learned function} \, g \approx \text{ground truth function} \, f
+\]
+</div>
+
+<p>至少在看過的 training data 上做到一致，亦即</p>
+
+<div>
+\[
+g(x_n) = f(x_n) = y_n \quad \forall (x_n,y_n)\in \mathcal{D} 
+\]
+</div>
+
+<h3 id="how-to-select-span-g-span-from-span-mathcal-h-span">How to select <span>$g$</span> from <span>$\mathcal{H}$</span></h3>
+
+<p>隨便抽取一個起始權重，去看看在 training data 上是否會有與 label mismatch 的情況
+，若有的話，便去修正權重。</p>
+
+<div>
+\[
+ \text{If} \enspace \texttt{sgn}(\textcolor{red}{\mathbf{w}_t^T}\mathbf{x}_n) \not = y_n ,
+ \enspace \text{then} \enspace \textcolor{orange}{\mathbf{w}_{t+1}} \leftarrow
+ \textcolor{red}{\mathbf{w}_t} + y_n\mathbf{x}_n
+\]
+</div>
+
+<h3 id="correctness-of-updating">Correctness of Updating</h3>
+
+<p>若有錯誤發生，表示 <span>$y_n\underset{\text{predict}}{\mathbf{w}_t^T\mathbf{x}_n} &lt; 0$</span>，<br />
+目標是將其更正為 <span>$&gt; 0$</span> 。 我們想確定更新 <span>$\mathcal{w}$</span> 的過程中，<span>$y_n\mathbf{w}_t^T\mathbf{x}_n$</span> 會 <strong>遞增</strong>, which is trivial to prove</p>
+
+<h3 id="running-time">Running Time</h3>
+
+<p>承上，<span>$\mathbf{w}$</span> 的更新，會使得它更接近 ground truth，也就是其單位向量的內積越來越接近 <span>$1$</span>。</p>
+
+<h4 id="growth-of-span-mathbf-w-span-isn-t-too-fast">Growth of <span>$||\mathbf{w}||$</span> ISN&rsquo;t too fast</h4>
+
+<p><code>$$
+\begin{align}
+||\mathbf{w}_{t+1}||^2 &amp;= ||\mathbf{w}_t + y_n \mathbf{x}_n || ^2 \\
+&amp;= ||\mathbf{w}_{t}||^2 + 2\underset{\leq 0}{\color{blue}{y_n\mathbf{w}_t^T\mathbf{x}_n}} + ||y_n\mathbf{x}_n||^2\\
+&amp;\color{blue}{\leq}  ||\mathbf{w}_{t}||^2 + \color{blue}{0} + \color{red}{||y_n\mathbf{x}_n||^2} \\
+&amp;\color{red}{\leq} ||\mathbf{w}_{t}||^2 + \color{red}{\max_j ||x_j||^2}
+\end{align}
+$$</code></p>
+
+<div>
+\[
+\Rightarrow ||\mathbf{w}_T||^2 \leq \underset{=0}{||\mathbf{w}_0||^2} + T \times \max_j
+||x_j||^2
+\]
+</div>
+
+<div>
+\[
+\Rightarrow \boxed{||\mathbf{w}_T|| \leq \sqrt{T} \times \max_j||x_j||}
+\]
+</div>
+
+<h4 id="convergence-after-t-rounds">Convergence after T rounds</h4>
+
+<p>假設 <span>$\mathbf{w}_0 = \mathbf{0}$</span>，並觀察到 ground truth
+<span>$\mathbf{w}_f$</span> 滿足 <span>$\boxed{y_n\mathbf{w}_f^T\mathbf{x}_n \geq \min_n y_n\mathbf{w}_f^T\mathbf{x}_n \geq 0}$</span></p>
+
+<p><code>$$
+\require{cancel}
+\begin{align}
+\mathbf{w}_f^T\mathbf{w}_T &amp;= \cancel{\mathbf{w}_f^T\mathbf{w}_{T-1}} + y_{n_T}\mathbf{w}_f^T\mathbf{x}_{n_T} \\
+\cancel{\mathbf{w}_f^T\mathbf{w}_{T-1}} &amp;= \cancel{\mathbf{w}_f^T\mathbf{w}_{T-2}} + y_{n_{T-1}}\mathbf{w}_f^T\mathbf{x}_{n_{T-1}} \\
+.\\
+.\\
+\cancel{\mathbf{w}_f^T\mathbf{w}_1} &amp;= \underset{=0}{\mathbf{w}_f^T\mathbf{w}_{0}} + y_{n_1}\mathbf{w}_f^T\mathbf{x}_{n_{1}} 
+\end{align}
+$$</code></p>
+
+<div>
+\[
+\Rightarrow \boxed{\mathbf{w}_f^T\mathbf{w}_T  \geq T \times \min_n y_n\mathbf{w}_f^T\mathbf{x}_n}
+\]
+</div>
+
+<p>因此，</p>
+
+<p><code>$$
+1 \geq \frac{\mathbf{w}_f^T\mathbf{w}_T}{||\mathbf{w}_f|| \, ||\mathbf{w}_T||}
+\geq \frac{T\times \underset{n}{\min} y_n\mathbf{w}_f^T\mathbf{x}_n}{||\mathbf{w}_f|| \, ||\mathbf{w}_T||} \geq \sqrt{T} \times \frac{\stackrel{\color{blue}{\rho}}{\overbrace{\underset{n}{\min}y_n\frac{\mathbf{w}_f^T}{||\mathbf{w}_f||}\mathbf{x_n}}}}{\underset{\color{red}{R}}{\underbrace{\underset{j}{\max}||x_j||}}}
+$$</code></p>
+
+<div>
+\[
+\Rightarrow \boxed{T \leq \frac{R^2}{\rho^2} = \text{const.}}
+\]
+</div>
+
+<!--T &\leq \frac{\mathbf{w}_f^T\mathbf{w}_T}{\underset{n}{\min} y_n\mathbf{w}_f^T\mathbf{x}_n} \times \frac{||\mathbf{w}_f|| \, ||\mathbf{w}_T||}{||\mathbf{w}_f||\,||\mathbf{w}_T||}\\-->
+
+<!--& \leq 1 \times \frac{}{}-->
+
+<h3 id="limitation-modification">Limitation &amp; Modification</h3>
 
 <ol>
-<li>存在 pattern (問題也才有被 <strong>解決</strong> 的意義)</li>
-<li>不存在明確的定義 <span>$\rightarrow$</span> non-programmble</li>
-<li>有 data (不然從人類的角度看，就是不用學習就會的本能了 lol)</li>
+<li>資料必須是線性可分的(<em>Linear Separable</em>)，亦即對資料不能一無所知，如此方能做此假設。</li>
+<li>對 running time 僅知道會在有限時間內結束，但還是不知道要跑多久</li>
 </ol>
 
-<h2 id="components-of-learning">Components of Learning</h2>
-
-<ul>
-<li>input <span>$\vec{x} \in \mathcal{X}$</span></li>
-<li>output <span>$y \in \mathcal{Y}$</span></li>
-<li><strong>target function</strong> <span>$f: \mathcal{X} \rightarrow \mathcal{Y}$</span></li>
-<li>data <span>$\mathcal{D} = \lbrace(\vec{x_1},y_1),(\vec{x_2},y_2)\cdots,(\vec{x_N},y_N)\rbrace$</span></li>
-<li>hypothesis set <span>$\mathcal{H}$</span> (從中選出接近 <span>$f$</span> 的 function <span>$g$</span>)</li>
-</ul>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/ml-arch.png" width="800px"></p>
-
-<p>其中 <span>$\mathcal{A}$</span> 和 <span>$\mathcal{H}$</span> 合稱為 <em>learning model</em></p>
-
-<h3 id="補記">補記</h3>
-
-<p>這裡提到的 <span>$\vec{x}$</span> 經歷了<strong>將真實世界中的數據轉成數值向量</strong>的過程，考慮到計算複雜度，有些時候我們不能餵進原始數據，所以抽取適當的特徵 (<em>feature</em>) 便是一個重要的技巧 (好比推薦系統常見的一種作法是將消費者與產品的某些屬性化成數值向量再去算匹配度，但無法用此數值向量 rebuild 出消費者或產品，然而這種 ambiguity 也正是在這個任務中所需要的)；但這也不是一定，在影像辨識裡，深度學習是直接餵進 raw image 去做 classification ， 相當於是利用 NN 將 feature extraction 及 classification 這兩個任務 end-to-end 地串接在一起。</p>
-
-<h2 id="and-more">And more</h2>
-
-<p>在 2018 的今日，又經過了這麼多年的發展，幾乎每個領域都可以看到 ML 的身影，在只需用到<strong>一種</strong>技能的決策上，機器已經超越了人類 (日趨成熟的語音，影像辨識及其衍生出的各個分支(e.g <a href="https://research.googleblog.com/2017/03/assisting-pathologists-in-detecting.html">breast cancer prediction</a>)、甚至連搜索空間極大的圍棋也被攻破)、也改變了許多職業、領域的運作。Think with Google 就提到了許多其在推薦系統上的應用(推播最適廣告的決策，就像是在了解每個消費者呀！)，而股票買賣等需要高速決策的領域也因為 ML 的引進而改變 (Zero-sum game 必定有輸有贏，但當大家都用了同套 AI 的時候，誰又該輸該贏呢？)</p>
-
-<p>但在需要用到複數技能(真實世界中絕大部分問題)及在學習時學會舉一反三(人類學習的重要關鍵)，則還有相當長的一段路要走(但長不代表久，who knows the speed XD)，像是聊天型 Chatbot 回話的決策，除了要考慮先前的對話內容，還要判斷使用者的眼神、心情、語氣、甚至個性等等(所謂社交技巧)，但我們只會將問題簡化成僅從對話內容去推出一二 (所以常常覺得它們笨笨的XD)；又或著像前述的 breast cancer prediction，文末也提到了關於其他可能異常症狀的觀察，機器是無法回答的 (但當然也是可以跑好幾個分類器，一一去做 binary classification 啦&hellip;但對某些未被定義到的異常症狀就無法判斷了)；而像學習技能的推廣，如打電動的時候，人類通常精通某遊戲後，相似類型的遊戲也可能很快上手(甚至連不同類型遊戲也會比較快上手&hellip;但這就有點複雜了)，但就我所知，現在的 RL 只要 reward 或環境稍有不同，便需要重新訓練，而訓練完精通新的後，原本會的遊戲又變得不會玩了&hellip;</p>
-
-<p>身處在一個時代的浪頭，思考得真的要有新的維度，才能生存下來呢！ (筆記打一打變成心情抒發了XD)</p>
+<p>另外，有時候資料夾雜了一些雜訊，使得空間因少數數據點而無法線性可分，<br />
+此時我們利用 Pocket PLA 去找出一個 <strong>還不錯</strong> 的 <span>$g$</span> ，使得 label mismatch 的數據點為最少。<br />
+簡單來說，就是每更新一次 <span>$\mathbf{w}$</span>，便去跑過<strong>所有</strong>的數據點，來看是否比前一個更好，<br />
+再 run 過一定回合數後中止，running time 為<span>$\mathcal{O}(|\mathcal{D}|T)$</span>，不保證找到最佳解。</p>
 
 <h2 id="reference">Reference</h2>
 
@@ -329,13 +420,13 @@
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming--hw11/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec1/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming--hw11/">Problem Solving and Programming- hw11</a>
+      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec1/">NTU Machine Learning - Lec1</a>
     </nav>
     
   </div>
@@ -344,14 +435,8 @@
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec2/">NTU Machine Learning - Lec2</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec2/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
