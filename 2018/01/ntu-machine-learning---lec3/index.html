@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
+  <meta name="description" content="Types of Learning">
   <meta name="generator" content="Hugo 0.31.1" />
 
-  <title>Topics &middot; Stay hungry. Stay foolish </title>
+  <title>NTU Machine Learning - Lec3 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -36,8 +36,6 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
-  
-  <link rel="alternate" type="application/rss+xml" title="Stay hungry. Stay foolish " href="https://sunprinces.github.io/learning/topics/index.xml" />
   
 
   
@@ -121,10 +119,6 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
-    </li>
     
 
     
@@ -241,48 +235,172 @@
 
 
 <div class="header">
-  <h1>Topics</h1>
+  <h1>NTU Machine Learning - Lec3</h1>
+  <h2>Types of Learning</h2>
 </div>
 <div class="content">
-  <ul>
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>01 Jan 2018</time>
+  </div>
+  
+
   
   
-    <li>
-      <a href="advanced-algorithm">advanced-algorithm</a>
-      <span>&#40;5&#41;</span>
-    </li>
   
-    <li>
-      <a href="algorithm">algorithm</a>
-      <span>&#40;5&#41;</span>
-    </li>
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/machine-learning-foundation">Machine Learning Foundation</a>
+    
+  </div>
   
-    <li>
-      <a href="algorithmic-game-theory">algorithmic-game-theory</a>
-      <span>&#40;4&#41;</span>
-    </li>
   
-    <li>
-      <a href="online-judge">online-judge</a>
-      <span>&#40;4&#41;</span>
-    </li>
+
   
-    <li>
-      <a href="machine-learning-foundation">machine-learning-foundation</a>
-      <span>&#40;3&#41;</span>
-    </li>
   
-    <li>
-      <a href="web-development">web-development</a>
-      <span>&#40;1&#41;</span>
-    </li>
   
-    <li>
-      <a href="%E5%B7%A5%E5%85%B7">工具</a>
-      <span>&#40;1&#41;</span>
-    </li>
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/machine-learning">Machine Learning</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
   
-  </ul>
+  
+
+</div>
+
+
+  <p>這講建構了一個大略的 ML 世界觀。</p>
+
+<p></p>
+
+<h2 id="different-output-space">Different Output Space</h2>
+
+<ol>
+<li>Binary classification (<span>$|\mathcal{Y}| = 2$</span>)</li>
+<li>Multiclass classification (<span>$|\mathcal{Y}| = K$</span>)</li>
+<li>Regression (<span>$\mathcal{Y} \subset \mathbb{R}$</span>)</li>
+</ol>
+
+<h2 id="different-label">Different Label</h2>
+
+<ol>
+<li>Supervised (w/ explicit label)</li>
+<li>Unsupervised (e.g clustering)</li>
+<li>Semi-supervised (combine above 2, owing to label cost issue)</li>
+<li>Reinforcement (learn <strong>partial</strong> info. <strong>sequentially</strong>)</li>
+</ol>
+
+<h2 id="different-protocol">Different Protocol</h2>
+
+<ol>
+<li>Batch learning (Given all known data once)</li>
+<li>Online learning (can improve when seeing new data)</li>
+<li>Active learning (interactively query label <span>$y_n$</span> of chosen <span>$x_n$</span>)，也是很常見的蒐集 data 方式(欸！？)，跟 Online Learning 類似，但差別在會 <strong>主動</strong> query</li>
+</ol>
+
+<h2 id="different-input-space">Different Input Space</h2>
+
+<ol>
+<li>Concrete feature (利用human intelligence 抽取出有關連的特徵將 input 做簡化)</li>
+<li>Raw feature (通常需要再做 feature engineering，但現今 DL 的前半部通常會一起 end-to-end train 成一個還不錯的 feature extractor)</li>
+<li>Abstract feature (原先的 feature 沒有任何物理意義(e.g 可能只是 ID 而已)，需要做 feature conversion 轉成上述二者)</li>
+</ol>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/01_handout.pdf">林軒田老師的講義</a></li>
+</ul>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec2/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec2/">NTU Machine Learning - Lec2</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
 </div>
 
 </div>
@@ -307,3 +425,4 @@
 
 </body>
 </html>
+
