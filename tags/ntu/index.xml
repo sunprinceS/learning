@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Mon, 01 Jan 2018 19:02:37 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jan 2018 23:02:37 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/ntu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NTU Machine Learning - Lec4</title>
+      <link>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec4/</link>
+      <pubDate>Mon, 01 Jan 2018 23:02:37 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec4/</guid>
+      <description>&lt;p&gt;這一講要討論的是&lt;strong&gt;機器學習真的是可行的嗎&lt;/strong&gt;？能推廣到所有 scenerio 嗎？或是只有部份？是否需要某些假設才能證明可行呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>NTU Machine Learning - Lec3</title>
@@ -29,7 +40,9 @@
       <pubDate>Mon, 01 Jan 2018 14:02:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec2/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;於前一講講述了 ML 的 framework ，於這一講中，我們會利用一個簡單的 learning model ， 去解決 binary classification 的問題。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
