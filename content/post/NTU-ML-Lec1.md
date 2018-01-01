@@ -33,6 +33,9 @@ ML 簡單來說，是希望於機器上實現如同人類的學習，目標是�
 
 其中 <span>$\mathcal{A}$</span> 和 <span>$\mathcal{H}$</span> 合稱為 *learning model*
 
+### 補記
+這裡提到的 <span>$\vec{x}$</span> 經歷了**將真實世界中的數據轉成數值向量**的過程，考慮到計算複雜度，有些時候我們不能餵進原始數據，所以抽取適當的特徵 (*feature*) 便是一個重要的技巧 (好比推薦系統常見的一種作法是將消費者與產品的某些屬性化成數值向量再去算匹配度，但無法用此數值向量 rebuild 出消費者或產品，然而這種 ambiguity 也正是在這個任務中所需要的)；但這也不是一定，在影像辨識裡，深度學習是直接餵進 raw image 去做 classification ， 相當於是利用 NN 將 feature extraction 及 classification 這兩個任務 end-to-end 地串接在一起。
+
 ## And more
 
 在 2018 的今日，又經過了這麼多年的發展，幾乎每個領域都可以看到 ML 的身影，在只需用到**一種**技能的決策上，機器已經超越了人類 (日趨成熟的語音，影像辨識及其衍生出的各個分支(e.g [breast cancer prediction](https://research.googleblog.com/2017/03/assisting-pathologists-in-detecting.html))、甚至連搜索空間極大的圍棋也被攻破)、也改變了許多職業、領域的運作。Think with Google 就提到了許多其在推薦系統上的應用(推播最適廣告的決策，就像是在了解每個消費者呀！)，而股票買賣等需要高速決策的領域也因為 ML 的引進而改變 (Zero-sum game 必定有輸有贏，但當大家都用了同套 AI 的時候，誰又該輸該贏呢？)
