@@ -34,4 +34,4 @@ topics = ["Machine Learning Foundation"]
 
 ## Reference
 
-* [林軒田老師的講義](https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/01_handout.pdf)
+* [林軒田老師的講義](https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/03_handout.pdf)

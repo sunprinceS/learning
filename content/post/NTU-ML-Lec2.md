@@ -7,10 +7,10 @@ title =  "NTU Machine Learning - Lec2"
 topics = ["Machine Learning Foundation"]
 +++
 
+於前一講講述了 ML 的 framework ，於這一講中，我們會利用一個簡單的 learning model ， 去解決 binary classification 的問題。
 
 <!--more-->
 
-於前一講講述了 ML 的 framework ，於這一講中，我們會利用一個簡單的 learning model ， 去解決 binary classification 的問題。
 
 ## Hypothesis Set: Linear Perceptron
 
@@ -139,4 +139,4 @@ $$``
 
 ## Reference
 
-* [林軒田老師的講義](https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/01_handout.pdf)
+* [林軒田老師的講義](https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/02_handout.pdf)
