@@ -1,7 +1,7 @@
 +++
 date = "2018-01-01T14:02:37+01:00"
 description = "Learning to Answer Yes/No"
-draft = true
+draft = false
 tags = ["Machine Learning","NTU"]
 title =  "NTU Machine Learning - Lec2"
 topics = ["Machine Learning Foundation"]
