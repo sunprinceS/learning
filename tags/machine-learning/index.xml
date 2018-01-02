@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Mon, 01 Jan 2018 23:02:37 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jan 2018 19:02:37 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NTU Machine Learning - Lec5</title>
+      <link>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec5/</link>
+      <pubDate>Tue, 02 Jan 2018 19:02:37 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec5/</guid>
+      <description>&lt;p&gt;上一講提到了在 hypothesis set &lt;span&gt;$\mathcal{H}$&lt;/span&gt; 為有限，且sample size &lt;span&gt;$|\mathcal{D}|$&lt;/span&gt; 足夠大的情況下，是 PAC-learnable 的。但當 &lt;span&gt;$|\mathcal{H}| \, \rightarrow \, \infty$&lt;/span&gt;的時候呢？ (e.g 2D linear perceptron)&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>NTU Machine Learning - Lec4</title>

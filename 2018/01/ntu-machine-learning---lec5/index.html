@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Feasibility of Learning">
+  <meta name="description" content="Training vs Testing">
   <meta name="generator" content="Hugo 0.31.1" />
 
-  <title>NTU Machine Learning - Lec4 &middot; Stay hungry. Stay foolish </title>
+  <title>NTU Machine Learning - Lec5 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>NTU Machine Learning - Lec4</h1>
-  <h2>Feasibility of Learning</h2>
+  <h1>NTU Machine Learning - Lec5</h1>
+  <h2>Training vs Testing</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>01 Jan 2018</time>
+    <time>02 Jan 2018</time>
   </div>
   
 
@@ -277,78 +277,87 @@
 </div>
 
 
-  <p>這一講要討論的是<strong>機器學習真的是可行的嗎</strong>？能推廣到所有 scenerio 嗎？或是只有部份？是否需要某些假設才能證明可行呢？</p>
+  <p>上一講提到了在 hypothesis set <span>$\mathcal{H}$</span> 為有限，且sample size <span>$|\mathcal{D}|$</span> 足夠大的情況下，是 PAC-learnable 的。但當 <span>$|\mathcal{H}| \, \rightarrow \, \infty$</span>的時候呢？ (e.g 2D linear perceptron)</p>
 
 <p></p>
 
-<h2 id="前言">前言</h2>
+<h2 id="recap-of-feasibility-of-learning">Recap of Feasibility of Learning</h2>
 
-<p>課堂中給出了一個 learning puzzle 的例子，簡單來說，對於那些 training data 以外的資料，總是有個小惡魔設計與我們找到的 <span>$g$</span> 之 predction，恰恰相反的 label ，來反駁 ML 並沒有學到任何事情(儘管在 training data 上全部 align 了&hellip;)。對我們未知的部份，我們只能任人擺佈，但這些未知，也正是需要 ML 發揮價值的地方。</p>
+<ol>
+<li><span>$E_o(g) \approx E_i(g)$</span> ?</li>
+<li><span>$E_i(g) \rightarrow 0$</span> ?</li>
+</ol>
 
-<h2 id="infer-sth-unknown">Infer sth unknown</h2>
+<p>Hoeffding Ineq. 對於再複雜的 ground truth function <span>$f$</span> 及 hypothesis function <span>$h$</span> 均是成立的，1. 據此必是正確，但這僅能 verify 我們得到的結果，還是沒有告訴我們在複雜的 <span>$f$</span> (usually 不能只依靠一個 hypothesis candidate <span>$h$</span>，而是必須從 size 無限大的 hypothesis set <span>$\mathcal{H}$</span> 去挑選)下，學習是否可行？</p>
 
-<p>讓我們先跳出 learning 的框架，想一想從 training data 中，我們能否去推估關於未知部份的一些統計量？從已知連向未知的過程中，嘗試解決(partially)上方遇到的困難。
-這裡以簡單的 bin model 作為介紹。</p>
+<h2 id="some-observation-does-the-union-bound-too-loose">Some observation: Does the Union Bound too loose?</h2>
 
-<h3 id="bin-model">Bin Model</h3>
-
-<p>A bin consist many <span>$\textcolor{orange}{\text{orange}}$</span> and <span>$\textcolor{green}{\text{green}}$</span> balls <br />
-Want: estimate the portion of <span>$\textcolor{orange}{\text{orange}}$</span> balls <span>$\mu$</span></p>
-
-<p>先隨機抓取一把球，算出當中 <span>$\textcolor{orange}{\text{orange}}$</span> ball 的比例 <span>$\upsilon$</span>，是否能以<span>$\upsilon$</span> 去 estimate 未知的 <span>$\mu$</span>？</p>
-
-<h3 id="hoeffding-s-inequality">Hoeffding&rsquo;s Inequality</h3>
+<p>From 前一講最後，</p>
 
 <div>
 \[
-\Pr[|\upsilon - \mu| > \textcolor{red}{\epsilon}] \leq 2 \,
-\exp(-2\textcolor{red}{\epsilon}^2\textcolor{blue}{N})
+
+\Pr_D[\text{BAD} \, \text{for} \, \textcolor{orange}{\mathcal{H}}] \leq 2 \, M \, \exp(-2 \epsilon^2 N)
 \]
 </div>
 
-<h3 id="probably-approximately-correct-pac">Probably approximately correct (PAC)</h3>
+<p>其中，<span>$M$</span> 是來自 Union Bound 將各個 <span>$\underset{D}{\Pr}\,[\text{BAD} \, \text{for} \, \textcolor{orange}{h_n}]$</span> 做加總，等號成立於事件彼此互斥。</p>
 
-<p>When <span>$\Pr[|\upsilon - \mu| &gt; \textcolor{red}{\epsilon}]$</span> is small enough,<br />
-we say the statement <span>$\upsilon = \mu$</span> is <strong>PAC</strong> (which can
-be achieved by sampling large <span>$\textcolor{blue}{N}$</span>)</p>
+<p>事件彼此互斥？也就是說會讓 <span>$h_n$</span> 壞掉的 <span>$\mathcal{D}$</span> 各自不同，但想想這其實不合理。就拿 perceptron 來說好了，若 <span>$h_1 \approx h_2$</span> ，幾何上來說，這兩個 hyperplane 其實是非常<strong>靠近</strong>的，對大部分的數據點，均會給出一樣的 perdiction ，所以會讓 <span>$h_1$</span> 壞掉的 <span>$\mathcal{D}$</span> ，也 <strong>probably</strong> 會讓 <span>$h_2$</span> 壞掉。</p>
 
-<h3 id="connect-with-learning-framework">Connect with learning framework</h3>
+<h2 id="effective-number-of-hypotheses">Effective number of Hypotheses</h2>
 
-<p>Given fixed hypothesis function <span>$\textcolor{orange}{h}(x)$</span></p>
+<p>首先，我們先將 <span>$h$</span> 們做適當的分群，從數據點的角度來看，會 predict 出相同結果的 hypothesis set 視為<strong>相同</strong>的一群 (詳細範例可以看講義👀)，對 binary classification 來說，每一群又稱為一個二元分類器 (<em>dichotomy</em>)。<br />
+給定數據點 <span>$\mathbf{x}_1 \sim \mathbf{x}_N$</span>，我們可以定義不同的 dichotomy ， <span>$\mathcal{H}(\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N)$</span> 為這些 dichotomies 的集合(跟原先的 <span>$\mathcal{H}$</span> 有何不同呢？可以想成若 <span>$h_i, h_j$</span> 在 training data 上結果相同，則只會對應到當中的 <strong>一個</strong> dichotomy)。而我們想以這個集合的大小 (也就是分群數)，去取代原先的 <span>$M$</span> 。</p>
 
-<ul>
-<li><span>$h$</span> is <span>$\textcolor{orange}{\text{wrong}}$</span>，mark as
-<span>$\textcolor{orange}{\text{orange}}$</span></li>
-<li><span>$h$</span> is <span>$\textcolor{green}{\text{correct}}$</span>，mark as
-<span>$\textcolor{green}{\text{green}}$</span></li>
-</ul>
+<h3 id="growth-function-span-m-h-span">Growth Function <span>$m_H$</span></h3>
 
-<p>bin 可以想成是 input space <span>$\mathcal{X}$</span>，但我們僅從中 sample 出
-<span>$\mathcal{D}$</span> 作為 training data ，當<span>$|\mathcal{D}|$</span> (i.e <span>$\textcolor{blue}{N}$</span>) 夠大時，可以說 <span>$\textcolor{orange}{h}$</span> 在 training data 與未知的世界表現是 <strong>probably</strong> consistent 的 (<span>$\Pr[|E_i(h) - E_o(h)| &gt; \textcolor{red}{\epsilon}]$</span> is sufficiently small)。</p>
-
-<h2 id="how-to-find-sufficiently-good-span-h-span">How to find sufficiently good <span>$h$</span></h2>
-
-<p>我們的目標是要找一個 <span>$E_o(h)$</span> 夠小的 <span>$h$</span> ，而能推估<span>$E_o(h)$</span> 的唯一已知量便是 <span>$E_i(h)$</span> 了，而 Hoeffding Ineq. 告訴我們對於單一 <span>$h$</span>，這件事是 PAC。但 <span>$\mathcal{H}$</span> 不會只有一個 <span>$h$</span> ，學習的流程是對每一個 <span>$h$</span> 都去做 sample，並從中挑選出 sample error rate <span>$E_i(h)$</span> 最小者。然而，這件事情會放大 Hoeffding Ineq. 的 upper bound。舉例來說，對 150 個公平銅板，各作 5 次隨機試驗，其中有一個銅板連續 5 次都是正面的機率 &gt; 99% ，但我們能因此便說該銅板正面的機率為 1 嗎？我們把這類使得對給定銅板(<span>$\textcolor{orange}{h}$</span>) <span>$E_i$</span> 跟 <span>$E_o$</span> 差很多的試驗(<span>$\mathcal{D}$</span>)稱作 <span>$\textcolor{red}{\text{BAD}} \, \text{sample}$</span>(也就是說，雖然單看一個銅板，<span>$\Pr[\textcolor{red}{\text{BAD}}]$</span> 很小，但對 150 個銅板而言， <span>$\Pr[\textcolor{red}{\text{BAD}}]$</span> 便超高。</p>
-
-<p>從 learning 的角度來看，就是給定 <span>$\mathcal{D}$</span>， 它對各個 <span>$\textcolor{orange}{h}$</span> 為 <span>$\textcolor{red}{\text{BAD}}$</span> 的機率雖小，但對 <span>$\mathcal{H}$</span> 中至少一個 <span>$\textcolor{orange}{h}$</span> 是 <span>$\textcolor{red}{\text{BAD}}$</span> 的機率卻是不小的。</p>
+<p>可以發現，隨著 sample 的 <span>$\mathcal{D}$</span> 不同，分群的結果也會不同，
+in order to generalization ，我們定義 growth function <span>$m_H$</span> 為當中
+的 upper bound ，也是我們之後要拿來取代 <span>$M$</span> 的量。</p>
 
 <p><code>$$
-\begin{align}
-\Pr_D[\color{red}{\text{BAD}} \, \text{for} \, \mathcal{H}] &amp;= 
-\Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_1 \, \lor \color{red}{\text{BAD}} \, \text{for}\, h_2  \, \lor \, \cdots \, \color{red}{\text{BAD}} \, \text{for}\, h_M ] \\
-&amp; \leq \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_1] \, + \, \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_2]  \, + \, \cdots \, \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_M] \, (\because \, \text{Union Bound}) \\
-&amp; \leq 2 \, M \, \exp(-2 \color{red}{\epsilon}^2 \color{blue}{N}) (\because \, \text{Hoeffding Ineq.})
-\end{align}
+m_H(N) = \underset{\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N \in \mathcal{X}}{\max} |\mathcal{H}(\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N)|
 $$</code></p>
 
-<p><span>$\Rightarrow$</span> learning is possible when <span>$|\mathcal{H}|$</span> is finite and <span>$E_i(h)$</span> is small <br />
-所謂 <strong>possible</strong> 是指，在 data 足夠的情況下，是可以找到 <span>$E_o$</span>
-probably approximately and sufficiently small 的 <span>$\textcolor{orange}{h}$</span> 。</p>
+<p>其中 <span>$m_H(N) \leq 2^N$</span> (which is easy to see)</p>
+
+<h2 id="span-m-h-span-is-poly"><span>$m_H$</span> is POLY?</h2>
+
+<p>回到最上方的式子，隨著 sample size <span>$N$</span> 的增長，其壓低壞事發生機率的能力是 <strong>EXP</strong> ，所以我們只要能證明 <span>$m_H$</span> 為 <strong>POLY</strong> ，便可以 claim 說，在 <span>$N$</span> 足夠大的情況下， PAC-learnable (even <span>$\mathcal{H}$</span> is infinite)!</p>
+
+<p>可以在講義看到幾個簡單的例子(👀 1D perceptron, 1D interval, 2D contour)，並求出其 growth function 的 analytical form，但很多時候要寫下這個 form 並不那麼簡單，然而，其實我們關心的只是它的 order，或者說他是否為 <strong>POLY</strong> 罷了。為了方便討論，以下做幾個定義。</p>
+
+<h3 id="shatter">Shatter</h3>
+
+<div>
+\[
+\text{If} \: \mathcal{H} \: \text{can \textbf{shatter} N points} \Leftrightarrow m_H(N) = 2^N
+\]
+</div>
+
+<p>解釋是說，所擁有的 dichotomies ，可以應付training data中所有可能的分群情況。<br />
+(<span>$\exists \, h $</span>  s.t <span>$h(\mathbf{x}_i) = f(\mathbf{x}_i) \; \forall i=1 \sim N$</span>)，直覺來想，這代表了這個 Hypothesis set 很強，但同時也表示了需要搜索的數量很多，呈現在 growth function 為 <strong>EXP</strong> 。</p>
+
+<h3 id="break-point">Break Point</h3>
+
+<p>然而，很多時候我們對資料有些洞見，知道他滿足某種性質，不一定要找那種可以應付所有情況的 Hypothesis set，拿 Linear perceptron 所處理的對象為例，我們假設資料是線性可分，那麼便不需要用到 convex set 這麼強的 Hypothesis set 了 (所謂殺雞焉用牛刀)</p>
+
+<div>
+\[
+\text{If no data set of size } \, k \, \text{can be \textbf{shattered} by} \, \mathcal{H}, \;  k \, \text{is the \textbf{break point} for } \, \mathcal{H}
+\]
+</div>
+
+<p>簡單來說就是， <span>$\exists \; k \in \mathbb{N} \, s.t. \, m_H(k) &lt; 2^{k}$</span> ,which is <strong>POLY</strong><br />
+(當 <span>$N \geq k$</span> 時，開始出現 <span>$\mathcal{H}$</span> 不考慮的情況)</p>
+
+<p><img src="" width="800px" style="border-radius: 0%;"></p>
 
 <h2 id="reference">Reference</h2>
 
 <ul>
-<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/04_handout.pdf">林軒田老師的講義</a></li>
+<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/05_handout.pdf">林軒田老師的講義</a></li>
 </ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
@@ -357,13 +366,13 @@ probably approximately and sufficiently small 的 <span>$\textcolor{orange}{h}$<
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec3/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec4/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec3/">NTU Machine Learning - Lec3</a>
+      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec4/">NTU Machine Learning - Lec4</a>
     </nav>
     
   </div>
@@ -372,14 +381,8 @@ probably approximately and sufficiently small 的 <span>$\textcolor{orange}{h}$<
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec5/">NTU Machine Learning - Lec5</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec5/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
