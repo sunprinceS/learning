@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 30 Dec 2017 19:02:37 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jan 2018 19:02:37 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NTU Machine Learning - Lec6</title>
+      <link>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec6/</link>
+      <pubDate>Tue, 02 Jan 2018 19:02:37 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec6/</guid>
+      <description>&lt;p&gt;前一講中講述了 break point 的存在，壓制了 growth function &lt;span&gt;$m_H(N)$&lt;/span&gt; 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，&lt;span&gt;$m_H(N)$&lt;/span&gt; 便會是 &lt;strong&gt;POLY(N)&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>NTU Machine Learning - Lec5</title>
@@ -176,6 +187,17 @@
       
       <guid>https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/</guid>
       <description>&lt;p&gt;有在使用 git 的人，應該都知道我們很多時候我們不希望 git 去 track 某些檔案，也不在意他們的改動情況(但有時候手滑還是會不小心 checkin 進去&amp;hellip;😅)， 像是競賽的測資， c++ 編譯時的 .o 檔，binary executable 等等，這時候會加上 &lt;strong&gt;.gitignore&lt;/strong&gt; 於工作目錄下達成我們的目的。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Advanced Algorithm - Vertex Cover Problem</title>
+      <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/</link>
+      <pubDate>Mon, 14 Aug 2017 20:49:15 +0200</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/</guid>
+      <description>&lt;p&gt;這一講會展示將問題轉化為線性規劃的 form (但可能是 ILP)，利用 LP solver 得到解，做 &lt;strong&gt;LP relaxation&lt;/strong&gt; 並證明這個解不會太差 (approx. ratio 不太大)。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

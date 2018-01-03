@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec6/</loc>
+    <lastmod>2018-01-02T19:02:37+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec5/</loc>
     <lastmod>2017-12-30T19:02:37+01:00</lastmod>
   </url>
@@ -78,6 +83,11 @@
   </url>
   
   <url>
+    <loc>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/</loc>
+    <lastmod>2017-08-14T20:49:15+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/</loc>
     <lastmod>2017-08-14T20:36:01+02:00</lastmod>
   </url>
@@ -134,18 +144,18 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/advanced-algorithm/</loc>
-    <lastmod>2017-08-14T20:36:01+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://sunprinces.github.io/learning/tags/algorithm/</loc>
-    <lastmod>2017-09-08T22:29:20+01:00</lastmod>
+    <lastmod>2017-08-14T20:49:15+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/algorithm/</loc>
+    <lastmod>2017-09-08T22:29:20+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/tags/algorithm/</loc>
     <lastmod>2017-09-08T22:29:20+01:00</lastmod>
     <priority>0</priority>
   </url>
@@ -158,7 +168,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/approximation-algorithm/</loc>
-    <lastmod>2017-08-14T20:36:01+02:00</lastmod>
+    <lastmod>2017-08-14T20:49:15+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -224,25 +234,25 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/linear-programming/</loc>
-    <lastmod>2017-08-14T20:36:01+02:00</lastmod>
+    <lastmod>2017-08-14T20:49:15+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/machine-learning/</loc>
-    <lastmod>2017-12-30T19:02:37+01:00</lastmod>
+    <lastmod>2018-01-02T19:02:37+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/machine-learning-foundation/</loc>
-    <lastmod>2017-12-30T19:02:37+01:00</lastmod>
+    <lastmod>2018-01-02T19:02:37+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/ntu/</loc>
-    <lastmod>2017-12-30T19:02:37+01:00</lastmod>
+    <lastmod>2018-01-02T19:02:37+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -260,7 +270,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/post/</loc>
-    <lastmod>2017-12-30T19:02:37+01:00</lastmod>
+    <lastmod>2018-01-02T19:02:37+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -290,7 +300,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/</loc>
-    <lastmod>2017-12-30T19:02:37+01:00</lastmod>
+    <lastmod>2018-01-02T19:02:37+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -302,7 +312,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/</loc>
-    <lastmod>2017-08-14T20:36:01+02:00</lastmod>
+    <lastmod>2017-08-14T20:49:15+02:00</lastmod>
     <priority>0</priority>
   </url>
   

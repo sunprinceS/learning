@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Single Source Shortest Path - Bellman-Ford Algorithm">
+  <meta name="description" content="An example of deterministic rounding from LP">
   <meta name="generator" content="Hugo 0.32.1" />
 
-  <title>Algorithm - Graph Theory - Lec 2 &middot; Stay hungry. Stay foolish </title>
+  <title>Advanced Algorithm - Vertex Cover Problem &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Algorithm - Graph Theory - Lec 2</h1>
-  <h2>Single Source Shortest Path - Bellman-Ford Algorithm</h2>
+  <h1>Advanced Algorithm - Vertex Cover Problem</h1>
+  <h2>An example of deterministic rounding from LP</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>31 Aug 2017</time>
+    <time>14 Aug 2017</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
     
   </div>
   
@@ -268,7 +268,9 @@
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/graph-theory">Graph Theory</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/linear-programming">Linear Programming</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
     
@@ -279,119 +281,64 @@
 </div>
 
 
-  <p>圖的一個常見應用場合是想找出某兩點之間的最短(/長)路徑，此時的邊權重又視為兩節點之間的距離。
-<!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。--></p>
+  <p>這一講會展示將問題轉化為線性規劃的 form (但可能是 ILP)，利用 LP solver 得到解，做 <strong>LP relaxation</strong> 並證明這個解不會太差 (approx. ratio 不太大)。</p>
 
 <p></p>
 
-<h2 id="shortest-path-problem">Shortest Path Problem</h2>
+<h2 id="vertex-cover-problem">Vertex Cover Problem</h2>
 
-<p>Given a graph <span>$G$</span>, a starting vertex <span>$s$</span> and edge cost <span>$c_e$</span><br />
-Want: Find the path with min. total cost from <span>$s \rightarrow v$</span> for some <span>$v$</span></p>
+<p>Given a graph <span>$G$</span>, a vertex cover is a set of vertices <span>$S$</span><br />
+s.t. <span>$\forall (u,v) \in E, \; \text{either} \, u \in S \, \text{or} \, v \in S$</span></p>
 
-<h2 id="bellman-ford-algorithm">Bellman-Ford Algorithm</h2>
+<p>Want: Find the vertex cover <span>$S$</span> with <span>$\min$</span> # of nodes</p>
 
-<h3 id="優點">優點:</h3>
+<h2 id="formulation">Formulation</h2>
 
-<ul>
-<li>可以處理有負邊的圖</li>
-<li>能偵測負環 ( <em>Negative Cycle</em> )</li>
-</ul>
-
-<h3 id="relax-鬆弛">Relax (鬆弛)</h3>
-
-<p>最短路徑演算法中常看到的名詞，先看程式碼</p>
-
-<pre><code class="language-python">def relax(u,v):
-  if d[v] &gt; d[u] + w(u,v):
-    d[v] = d[u] + w(u,v) # 當前最短路的 cost
-    π[v] = u # back-tracking
-</code></pre>
-
-<p>簡單來說就是如果遇到 cost 更小的路徑，就更新。<br />
-這也建構於最短路徑問題的特性，若從 <span>$s$</span> 到 <span>$v$</span> 的最短路徑中經過 <span>$u$</span> ，那麼可以確定子路徑 <span>$s \rightarrow u$</span> 亦為其兩點間的最短路。</p>
-
-<h3 id="psuedo-code">Psuedo Code</h3>
-
-<pre><code class="language-python"># Init
-for v in G(V):
-  d[v] = ∞ 
-  π[v] = NULL
-d[s] = 0
-
-# Iterate |V| - 1 times
-for i in range(|V| - 1):
-  for e(u,v) in E:
-    relax(u,v)
-</code></pre>
-
-<p>複雜度為 <span>$\mathcal{O}(VE)$</span></p>
-
-<h3 id="一些觀察">一些觀察</h3>
-
-<ul>
-<li><p>實際上也不用跑到 <span>$|V| - 1$</span> 次才停止，在某一回合如果沒有更新，那麼往後的回合也不可能更新了，此時便可以停止。</p></li>
-
-<li><p>遍歷邊的順序，影響了需要幾回合才能找到最短路，那麼最佳的順序是什麼呢?
-(<span>$\rightarrow$ see <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Dijkstra</a></span>)</p></li>
-</ul>
-
-<h3 id="correctness">Correctness</h3>
-
-<ul>
-<li>假設圖上沒有負環，the shortest path from <span>$s \rightarrow v$</span> has <span>$\leq |V|-1$</span> edges</li>
-</ul>
-
-<p><em><strong>proof</strong></em> : By contradiction，若用了 <span>$\geq |V|$</span> 條邊，該路徑必存在 cycle (某些點被重複拜訪)，但負邊不存在，這麼做只是徒增 cost ( 故可把 cycle 拔掉 )，得證。</p>
-
-<ul>
-<li>跑 <span>$|V| - 1$</span> 個回合必可找到最短路，考慮 <span>$s \rightarrow v $</span> 的最短路徑，</li>
-</ul>
+<p>For each <span>$v_i \in V$</span>, assign a variable <span>$x_i = $</span>𝟙[<span>$v_i$</span> is chosen]</p>
 
 <div>
 \[
-s \stackrel{c_1}{\longrightarrow} v_1 \stackrel{c_2}{\longrightarrow} v_2 \stackrel{c_3}{\longrightarrow} \cdots v_{k-1} \stackrel{c_k}{\longrightarrow} v
+\min \sum_i x_i \quad s.t. \begin{cases}
+ x_i  + x_j \geq 1 \;& , \forall (v_i,v_j) \in E\\
+0  \leq x_i \leq 1 \; & , \textcolor{red}{x_i \in \mathbb{Z}}
+\end{cases}
 \]
 </div>
 
-<p>After <code>relax</code>( s , <span>$v_1$</span> )  in round 1，d[<span>$v_1$</span>] = <span>$c_1$</span></p>
+<p><span>$x_i \in \mathbb{Z}$</span> 這個條件，讓問題是困難的 ILP (which is NPC) ，在此我們把拿掉 (<strong>LP relaxation</strong>)，轉成 LP 。</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>relax</code>(<span>$v_1$</span>, <span>$v_2$</span> )  in round 2，d[<span>$v_2$</span>] = <span>$c_1 + c_2$</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>$\cdot$</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>$\cdot$</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>$\cdot$</span></p>
+<h2 id="2-approx-algorithm">2-Approx Algorithm</h2>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>relax</code>(<span>$v_{k-1}$</span>, <span>$v$</span>) in round <span>$k$</span>，d[<span>$v$</span>] = <span>$c_1 + c_2 + \cdots + c_k$</span></p>
+<p>Run 過 LP solver 後，可得到一組滿足限制式的解 <span>$\mathbf{x}^{\star}$</span>
+<br />
+但這並不是原問題的答案，我們需要利用它找出滿足條件的 <span>$\mathbf{x}^{\prime}$</span>，
+有個簡單的演算法</p>
 
-<p>可知在 <span>$k$</span> 回合內必可完成更新，又 <span>$k \leq |V| - 1$</span></p>
+<div>
+\[
+\text{choose all}\, v_i \, \text{subject to} \; x_i^{\star} \geq 0.5
+\]
+</div>
 
-<p>由上方這個 Claim ，如果 d[<span>$v$</span>] 在 <span>$|V|$</span> round 有所改動的話，代表了負環存在</p>
+<h3 id="correctness">Correctness</h3>
 
-<h3 id="implementation">Implementation</h3>
+<p><span>$\because x_i + x_j \geq 1$</span>，<span>$x_i, x_j$</span> 中至少有一個
+<span>$\geq \frac{1}{2}$</span>，所以每條邊至少會有一個端點被選</p>
 
-<script src="https://gist.github.com/sunprinceS/5c93f48db7d3b476f3829becbc2f2743.js"></script>
+<h3 id="approx-ratio">Approx. Ratio</h3>
 
-<p>做兩次 Bellman-Ford ，偵測出所有負環。<br />
-第二次 Bellman-Ford 中，邏輯判斷將d[<span>$v$</span>] 設成 <span>$- \infty$</span> 的情況共有兩個</p>
+<div>
+\[
+\text{cost}(x_i^{\prime})\leq \textcolor{red}{2} \sum x_i^{\star} \leq 2 \mathbf{OPT}
+\]
+</div>
 
-<ul>
-<li><span>$- \infty$</span> 的傳染性:</li>
-</ul>
+<p>Worst Case 就是所有 <span>$x_i = \frac{1}{2}$</span>，那麼便會每條邊的兩個端點都會被選起來。</p>
 
-<pre><code class="language-cpp">if(dist[e.edge.first] == INT_MIN)
-        dist[e.edge.second] = INT_MIN;
-</code></pre>
+<h2 id="推廣">推廣</h2>
 
-<ul>
-<li>negative cycle 存在於 <span>$s \rightarrow v$</span> 的最短路中，則將 d[<span>$v$</span>] 設成 <span>$- \infty$</span></li>
-</ul>
-
-<pre><code class="language-cpp">if(dist[e.edge.first] != INT_MAX &amp;&amp; dist[e.edge.first] + e.weight &lt; dist[e.edge.second])
-        dist[e.edge.second] = INT_MIN;
-</code></pre>
-
-<p>為什麼還需要再跑 <span>$|V| - 1$</span> 次？<br />
-是因為要將 <span>$- \infty$</span> 傳染遍整個環，需要負環長度個回合，而最大的負環長度 <span>$\leq |V| - 1$</span>。</p>
+<p>可以視為 Set Cover Problem with every element is covered by <span>$\leq l$</span> 個 subset 的特例 (<span>$l = 2$</span>)，<br />
+由此也可推知Set Cover Problem 的 <span>$l$</span>-approx algorithm。</p>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -399,13 +346,13 @@ s \stackrel{c_1}{\longrightarrow} v_1 \stackrel{c_2}{\longrightarrow} v_2 \stack
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/">Algorithm - Graph Theory - Lec 1</a>
+      <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/">Advanced Algorithm - Linear Programming</a>
     </nav>
     
   </div>
@@ -415,13 +362,13 @@ s \stackrel{c_1}{\longrightarrow} v_1 \stackrel{c_2}{\longrightarrow} v_2 \stack
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Algorithm - Graph Theory - Lec 3</a>
+      <a href="https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/">利用Ignr自動生成.gitignore</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

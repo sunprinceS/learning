@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 30 Dec 2017 19:02:37 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jan 2018 19:02:37 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/ntu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NTU Machine Learning - Lec6</title>
+      <link>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec6/</link>
+      <pubDate>Tue, 02 Jan 2018 19:02:37 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec6/</guid>
+      <description>&lt;p&gt;前一講中講述了 break point 的存在，壓制了 growth function &lt;span&gt;$m_H(N)$&lt;/span&gt; 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，&lt;span&gt;$m_H(N)$&lt;/span&gt; 便會是 &lt;strong&gt;POLY(N)&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>NTU Machine Learning - Lec5</title>
@@ -120,6 +131,17 @@
       <guid>https://sunprinces.github.io/learning/2017/08/algorithm---disjoint-set/</guid>
       <description>&lt;p&gt;Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets &lt;span&gt;$S_1,S_2,\cdots,S_k$&lt;/span&gt;，而每個 &lt;span&gt;$S_i$&lt;/span&gt; (每個 category) 以一個代表值 (&lt;em&gt;representative&lt;/em&gt;) 去紀錄。
 &lt;!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Advanced Algorithm - Vertex Cover Problem</title>
+      <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/</link>
+      <pubDate>Mon, 14 Aug 2017 20:49:15 +0200</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/</guid>
+      <description>&lt;p&gt;這一講會展示將問題轉化為線性規劃的 form (但可能是 ILP)，利用 LP solver 得到解，做 &lt;strong&gt;LP relaxation&lt;/strong&gt; 並證明這個解不會太差 (approx. ratio 不太大)。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
