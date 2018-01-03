@@ -1,7 +1,7 @@
 +++
 date =  "2017-08-16T21:19:19+02:00"
 description = "An example of randomized rounding from LP"
-draft = true
+draft = false
 tags = ["Algorithm","Linear Programming","Randomized Algorithm","Approximation Algorithm","NTU"]
 title =  "Advanced Algorithm - Weighted Set Cover"
 topics = ["Advanced Algorithm"]

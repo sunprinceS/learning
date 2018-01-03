@@ -54,7 +54,7 @@ B(N,k) \geq m_H(N) \quad \forall \, \mathcal{H} \, \text{with break point at} \,
 **Case2**: 看那些 <span>$\mathbf{x}_1 \sim \mathbf{x}_3$</span> 成對出現的
 dichotomies ，其 <span>$\mathbf{x}_4$</span> 必是一正一反，是故在 <span>$\mathbf{x}_1 \sim \mathbf{x}_3$</span> 中，不能有任意 <span>$k-1$</span> 個點可被 shatter (否則搭配 <span>$\mathbf{x}_4$</span> ， <span>$k$</span> 個點便可被 shatter 了)。所以有 <span>$\alpha < B(3,2)$</span> (亦即 <span>$\textcolor{purple}{B(N-1,k-1)}$</span>)
 
-綜合以上，得到 <span>$B(4,3) = \textcolor{orange}{2 \alpha} + \textcolor{purple}{\beta} \leq \textcolor{orange}{B(3,3)} + \textcolor{purple}{B(3,2)}$</span>
+綜合以上，得到 <span>$B(4,3) = \textcolor{orange}{ \alpha + \beta} + \textcolor{purple}{\alpha} \leq \textcolor{orange}{B(3,3)} + \textcolor{purple}{B(3,2)}$</span>
 
 <div>
 \[
