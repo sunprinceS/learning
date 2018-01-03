@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Computational Geometry">
+  <meta name="description" content="Feasibility of Learning">
   <meta name="generator" content="Hugo 0.31.1" />
 
-  <title>Problem Solving and Programming- hw11 &middot; Stay hungry. Stay foolish </title>
+  <title>NTU Machine Learning - Lec4 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Problem Solving and Programming- hw11</h1>
-  <h2>Computational Geometry</h2>
+  <h1>NTU Machine Learning - Lec4</h1>
+  <h2>Feasibility of Learning</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>05 Dec 2017</time>
+    <time>28 Dec 2017</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/online-judge">Online-Judge</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/machine-learning-foundation">Machine Learning Foundation</a>
     
   </div>
   
@@ -266,13 +266,9 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/machine-learning">Machine Learning</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/computational-geometry">Computational Geometry</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kattis">Kattis</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
     
   </div>
   
@@ -281,70 +277,79 @@
 </div>
 
 
-  <p><a href="https://kth.kattis.com/problemgroups/641" target="_blank">題目連結</a></p>
+  <p>這一講要討論的是<strong>機器學習真的是可行的嗎</strong>？能推廣到所有 scenerio 嗎？或是只有部份？是否需要某些假設才能證明可行呢？</p>
 
 <p></p>
 
-<h2 id="pa-white-water-rafting">pA - White Water Rafting</h2>
+<h2 id="前言">前言</h2>
 
-<p>給一個簡單內多邊形和外多邊形，求中間圍起來的部份，寬度最小為多少。<br />
-枚舉每個邊的組合，<strong>求兩線段之距離</strong>，取最小者，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
+<p>課堂中給出了一個 learning puzzle 的例子，簡單來說，對於那些 training data 以外的資料，總是有個小惡魔設計與我們找到的 <span>$g$</span> 之 predction，恰恰相反的 label ，來反駁 ML 並沒有學到任何事情(儘管在 training data 上全部 align 了&hellip;)。對我們未知的部份，我們只能任人擺佈，但這些未知，也正是需要 ML 發揮價值的地方。</p>
 
-<h2 id="pb-colliding-traffic">pB - Colliding Traffic</h2>
+<h2 id="infer-sth-unknown">Infer sth unknown</h2>
 
-<p>在平面上，有 <span>$n$</span> 個點，各自以定速朝定方向前進 (i.e 射線)，當兩個點間距
-<span>$&lt; r$</span> 時，定義他們 collide ，想問第一個 collide 發生在什麼時候。
-枚舉每條射線的組合，先看距離是否已小於 <span>$r$</span> ，如果是就輸出 <span>$0$</span>。
-不是的話，由兩條射線的參數方程相減得到其距離的參數方程，</p>
+<p>讓我們先跳出 learning 的框架，想一想從 training data 中，我們能否去推估關於未知部份的一些統計量？從已知連向未知的過程中，嘗試解決(partially)上方遇到的困難。
+這裡以簡單的 bin model 作為介紹。</p>
+
+<h3 id="bin-model">Bin Model</h3>
+
+<p>A bin consist many <span>$\textcolor{orange}{\text{orange}}$</span> and <span>$\textcolor{green}{\text{green}}$</span> balls <br />
+Want: estimate the portion of <span>$\textcolor{orange}{\text{orange}}$</span> balls <span>$\mu$</span></p>
+
+<p>先隨機抓取一把球，算出當中 <span>$\textcolor{orange}{\text{orange}}$</span> ball 的比例 <span>$\upsilon$</span>，是否能以<span>$\upsilon$</span> 去 estimate 未知的 <span>$\mu$</span>？</p>
+
+<h3 id="hoeffding-s-inequality">Hoeffding&rsquo;s Inequality</h3>
 
 <div>
 \[
-\vec{d}_{i,j} = (\vec{s}_j - \vec{s}_i) + (\vec{v}_j - \vec{v}_i) t \quad (\, \vec{s} \; \text{為起始位置}\,)
+\Pr[|\upsilon - \mu| > \textcolor{red}{\epsilon}] \leq 2 \,
+\exp(-2\textcolor{red}{\epsilon}^2\textcolor{blue}{N})
 \]
 </div>
 
-<p>找是否存在 <span>$t &gt; 0$</span> 滿足 <span>$|\vec{d}_{i,j}| \leq r$</span>，然後從所有射線組合中，找出最小的 <span>$t$</span>，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
+<h3 id="probably-approximately-correct-pac">Probably approximately correct (PAC)</h3>
 
-<pre><code class="language-cpp">double get_collision_t(Obj i,Obj j,double r_sq){
-  double a,b,c;
-  a = i.vel.distance_square(j.vel);
-  b = (j.pos - i.pos).dot(j.vel - i.vel);
-  c = i.pos.distance_square(j.pos) - r_sq;
+<p>When <span>$\Pr[|\upsilon - \mu| &gt; \textcolor{red}{\epsilon}]$</span> is small enough,<br />
+we say the statement <span>$\upsilon = \mu$</span> is <strong>PAC</strong> (which can
+be achieved by sampling large <span>$\textcolor{blue}{N}$</span>)</p>
 
-  double D = b*b - a*c;
-  if(isz(D)){
-    return (-b/a);
-  }
-  else if(D&lt;0){
-    return -100;
-  }
-  else{
-    if(b+sqrt(D) &gt; 0)
-      return ((-b+sqrt(D))/a);
-    else
-      return ((-b-sqrt(D))/a);
-  }
-}
-</code></pre>
+<h3 id="connect-with-learning-framework">Connect with learning framework</h3>
 
-<h2 id="pc-pesky-mosquitoes">pC - Pesky Mosquitoes</h2>
+<p>Given fixed hypothesis function <span>$\textcolor{orange}{h}(x)$</span></p>
 
-<p>圖上散落了一些點，給定一個定直徑 <span>$d$</span> 的圓，想找出最多可以蓋住幾個點。<br />
-觀察到若想蓋住最多點的話，至少有兩個點會在圓的邊上(否則總是可以再移動，
-看能否再蓋住更多點)。</p>
+<ul>
+<li><span>$h$</span> is <span>$\textcolor{orange}{\text{wrong}}$</span>，mark as
+<span>$\textcolor{orange}{\text{orange}}$</span></li>
+<li><span>$h$</span> is <span>$\textcolor{green}{\text{correct}}$</span>，mark as
+<span>$\textcolor{green}{\text{green}}$</span></li>
+</ul>
 
-<p>枚舉所有點的組合，找出過那兩點 <span>$A, B$</span> 且直徑為 <span>$d$</span> 的圓，再來看剩下的點是
-否在此圓裡面，複雜度為 <span>$\mathcal{O}(n^3)$</span>。<br />
-而找圓心的話，算是高中數學的範疇，應該很簡單。但注意到這樣定義的圓會有兩個，方便起見我們統一
-一個方向，法向量指向 <span>$\overrightarrow{AB}$</span> 的右邊 (如此算 <span>$\overrightarrow{BA}$</span> 時，就會得到另一個圓了)。</p>
+<p>bin 可以想成是 input space <span>$\mathcal{X}$</span>，但我們僅從中 sample 出
+<span>$\mathcal{D}$</span> 作為 training data ，當<span>$|\mathcal{D}|$</span> (i.e <span>$\textcolor{blue}{N}$</span>) 夠大時，可以說 <span>$\textcolor{orange}{h}$</span> 在 training data 與未知的世界表現是 <strong>probably</strong> consistent 的 (<span>$\Pr[|E_i(h) - E_o(h)| &gt; \textcolor{red}{\epsilon}]$</span> is sufficiently small)。</p>
 
-<h2 id="pd-unusual-darts">pD - Unusual Darts</h2>
+<h2 id="how-to-find-sufficiently-good-span-h-span">How to find sufficiently good <span>$h$</span></h2>
 
-<p>吃了兩個 WA ，真難玩&hellip;</p>
+<p>我們的目標是要找一個 <span>$E_o(h)$</span> 夠小的 <span>$h$</span> ，而能推估<span>$E_o(h)$</span> 的唯一已知量便是 <span>$E_i(h)$</span> 了，而 Hoeffding Ineq. 告訴我們對於單一 <span>$h$</span>，這件事是 PAC。但 <span>$\mathcal{H}$</span> 不會只有一個 <span>$h$</span> ，學習的流程是對每一個 <span>$h$</span> 都去做 sample，並從中挑選出 sample error rate <span>$E_i(h)$</span> 最小者。然而，這件事情會放大 Hoeffding Ineq. 的 upper bound。舉例來說，對 150 個公平銅板，各作 5 次隨機試驗，其中有一個銅板連續 5 次都是正面的機率 &gt; 99% ，但我們能因此便說該銅板正面的機率為 1 嗎？我們把這類使得對給定銅板(<span>$\textcolor{orange}{h}$</span>) <span>$E_i$</span> 跟 <span>$E_o$</span> 差很多的試驗(<span>$\mathcal{D}$</span>)稱作 <span>$\textcolor{red}{\text{BAD}} \, \text{sample}$</span>(也就是說，雖然單看一個銅板，<span>$\Pr[\textcolor{red}{\text{BAD}}]$</span> 很小，但對 150 個銅板而言， <span>$\Pr[\textcolor{red}{\text{BAD}}]$</span> 便超高。</p>
 
-<h2 id="pe-meltdown">pE - Meltdown</h2>
+<p>從 learning 的角度來看，就是給定 <span>$\mathcal{D}$</span>， 它對各個 <span>$\textcolor{orange}{h}$</span> 為 <span>$\textcolor{red}{\text{BAD}}$</span> 的機率雖小，但對 <span>$\mathcal{H}$</span> 中至少一個 <span>$\textcolor{orange}{h}$</span> 是 <span>$\textcolor{red}{\text{BAD}}$</span> 的機率卻是不小的。</p>
 
-<p>我看我是沒理解題意&hellip;</p>
+<p><code>$$
+\begin{align}
+\Pr_D[\color{red}{\text{BAD}} \, \text{for} \, \mathcal{H}] &amp;= 
+\Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_1 \, \lor \color{red}{\text{BAD}} \, \text{for}\, h_2  \, \lor \, \cdots \, \color{red}{\text{BAD}} \, \text{for}\, h_M ] \\
+&amp; \leq \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_1] \, + \, \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_2]  \, + \, \cdots \, \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_M] \, (\because \, \text{Union Bound}) \\
+&amp; \leq 2 \, M \, \exp(-2 \color{red}{\epsilon}^2 \color{blue}{N}) (\because \, \text{Hoeffding Ineq.})
+\end{align}
+$$</code></p>
+
+<p><span>$\Rightarrow$</span> learning is possible when <span>$|\mathcal{H}|$</span> is finite and <span>$E_i(h)$</span> is small <br />
+所謂 <strong>possible</strong> 是指，在 data 足夠的情況下，是可以找到 <span>$E_o$</span>
+probably approximately and sufficiently small 的 <span>$\textcolor{orange}{h}$</span> 。</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/04_handout.pdf">林軒田老師的講義</a></li>
+</ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -352,13 +357,13 @@
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec3/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/">Problem Solving and Programming- hw6</a>
+      <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec3/">NTU Machine Learning - Lec3</a>
     </nav>
     
   </div>
@@ -368,13 +373,13 @@
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec1/">NTU Machine Learning - Lec1</a>
+      <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec5/">NTU Machine Learning - Lec5</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec1/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec5/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Computational Geometry">
+  <meta name="description" content="The Learning Problem">
   <meta name="generator" content="Hugo 0.31.1" />
 
-  <title>Problem Solving and Programming- hw11 &middot; Stay hungry. Stay foolish </title>
+  <title>NTU Machine Learning - Lec1 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Problem Solving and Programming- hw11</h1>
-  <h2>Computational Geometry</h2>
+  <h1>NTU Machine Learning - Lec1</h1>
+  <h2>The Learning Problem</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>05 Dec 2017</time>
+    <time>20 Dec 2017</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/online-judge">Online-Judge</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/machine-learning-foundation">Machine Learning Foundation</a>
     
   </div>
   
@@ -266,13 +266,9 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/machine-learning">Machine Learning</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/computational-geometry">Computational Geometry</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kattis">Kattis</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
     
   </div>
   
@@ -281,70 +277,51 @@
 </div>
 
 
-  <p><a href="https://kth.kattis.com/problemgroups/641" target="_blank">題目連結</a></p>
+  <p>其實是大一升大二的暑假，閒來無事找的開放式課程，那時也做了一些筆記，沒想到兩三年過後，自己做專題也走向了這個領域XD，於是順手把它整理上來囉！</p>
 
 <p></p>
 
-<h2 id="pa-white-water-rafting">pA - White Water Rafting</h2>
+<h2 id="what-is-machine-learning">What is Machine Learning</h2>
 
-<p>給一個簡單內多邊形和外多邊形，求中間圍起來的部份，寬度最小為多少。<br />
-枚舉每個邊的組合，<strong>求兩線段之距離</strong>，取最小者，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
+<p>ML 簡單來說，是希望於機器上實現如同人類的學習，目標是習得一些如何<strong>決策</strong>的技能(e.g Chatbot 根據之前的對話內容，下一個時間點應該要回什麼；下棋的過程中，下一步棋應該怎麼走；收到一串野外鳥叫的錄音，該如何辨別出當中有哪些品種&hellip;)。通常會適用的問題主要有以下特徵。</p>
 
-<h2 id="pb-colliding-traffic">pB - Colliding Traffic</h2>
+<ol>
+<li>存在 pattern (問題也才有被 <strong>解決</strong> 的意義)</li>
+<li>不存在明確的定義 <span>$\rightarrow$</span> non-programmble</li>
+<li>有 data (不然從人類的角度看，就是不用學習就會的本能了 lol)</li>
+</ol>
 
-<p>在平面上，有 <span>$n$</span> 個點，各自以定速朝定方向前進 (i.e 射線)，當兩個點間距
-<span>$&lt; r$</span> 時，定義他們 collide ，想問第一個 collide 發生在什麼時候。
-枚舉每條射線的組合，先看距離是否已小於 <span>$r$</span> ，如果是就輸出 <span>$0$</span>。
-不是的話，由兩條射線的參數方程相減得到其距離的參數方程，</p>
+<h2 id="components-of-learning">Components of Learning</h2>
 
-<div>
-\[
-\vec{d}_{i,j} = (\vec{s}_j - \vec{s}_i) + (\vec{v}_j - \vec{v}_i) t \quad (\, \vec{s} \; \text{為起始位置}\,)
-\]
-</div>
+<ul>
+<li>input <span>$\vec{x} \in \mathcal{X}$</span></li>
+<li>output <span>$y \in \mathcal{Y}$</span></li>
+<li><strong>target function</strong> <span>$f: \mathcal{X} \rightarrow \mathcal{Y}$</span></li>
+<li>data <span>$\mathcal{D} = \lbrace(\vec{x_1},y_1),(\vec{x_2},y_2)\cdots,(\vec{x_N},y_N)\rbrace$</span></li>
+<li>hypothesis set <span>$\mathcal{H}$</span> (從中選出接近 <span>$f$</span> 的 function <span>$g$</span>)</li>
+</ul>
 
-<p>找是否存在 <span>$t &gt; 0$</span> 滿足 <span>$|\vec{d}_{i,j}| \leq r$</span>，然後從所有射線組合中，找出最小的 <span>$t$</span>，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
+<p><img src="https://sunprinces.github.io/learning/img/post/ml-arch.png" width="800px"></p>
 
-<pre><code class="language-cpp">double get_collision_t(Obj i,Obj j,double r_sq){
-  double a,b,c;
-  a = i.vel.distance_square(j.vel);
-  b = (j.pos - i.pos).dot(j.vel - i.vel);
-  c = i.pos.distance_square(j.pos) - r_sq;
+<p>其中 <span>$\mathcal{A}$</span> 和 <span>$\mathcal{H}$</span> 合稱為 <em>learning model</em></p>
 
-  double D = b*b - a*c;
-  if(isz(D)){
-    return (-b/a);
-  }
-  else if(D&lt;0){
-    return -100;
-  }
-  else{
-    if(b+sqrt(D) &gt; 0)
-      return ((-b+sqrt(D))/a);
-    else
-      return ((-b-sqrt(D))/a);
-  }
-}
-</code></pre>
+<h3 id="補記">補記</h3>
 
-<h2 id="pc-pesky-mosquitoes">pC - Pesky Mosquitoes</h2>
+<p>這裡提到的 <span>$\vec{x}$</span> 經歷了<strong>將真實世界中的數據轉成數值向量</strong>的過程，考慮到計算複雜度，有些時候我們不能餵進原始數據，所以抽取適當的特徵 (<em>feature</em>) 便是一個重要的技巧 (好比推薦系統常見的一種作法是將消費者與產品的某些屬性化成數值向量再去算匹配度，但無法用此數值向量 rebuild 出消費者或產品，然而這種 ambiguity 也正是在這個任務中所需要的)；但這也不是一定，在影像辨識裡，深度學習是直接餵進 raw image 去做 classification ， 相當於是利用 NN 將 feature extraction 及 classification 這兩個任務 end-to-end 地串接在一起。</p>
 
-<p>圖上散落了一些點，給定一個定直徑 <span>$d$</span> 的圓，想找出最多可以蓋住幾個點。<br />
-觀察到若想蓋住最多點的話，至少有兩個點會在圓的邊上(否則總是可以再移動，
-看能否再蓋住更多點)。</p>
+<h2 id="and-more">And more</h2>
 
-<p>枚舉所有點的組合，找出過那兩點 <span>$A, B$</span> 且直徑為 <span>$d$</span> 的圓，再來看剩下的點是
-否在此圓裡面，複雜度為 <span>$\mathcal{O}(n^3)$</span>。<br />
-而找圓心的話，算是高中數學的範疇，應該很簡單。但注意到這樣定義的圓會有兩個，方便起見我們統一
-一個方向，法向量指向 <span>$\overrightarrow{AB}$</span> 的右邊 (如此算 <span>$\overrightarrow{BA}$</span> 時，就會得到另一個圓了)。</p>
+<p>在 2017 的今日，又經過了這麼多年的發展，幾乎每個領域都可以看到 ML 的身影，在只需用到<strong>一種</strong>技能的決策上，機器已經超越了人類 (日趨成熟的語音，影像辨識及其衍生出的各個分支(e.g <a href="https://research.googleblog.com/2017/03/assisting-pathologists-in-detecting.html">breast cancer prediction</a>)、甚至連搜索空間極大的圍棋也被攻破)、也改變了許多職業、領域的運作。Think with Google 就提到了許多其在推薦系統上的應用(推播最適廣告的決策，就像是在了解每個消費者呀！)，而股票買賣等需要高速決策的領域也因為 ML 的引進而改變 (Zero-sum game 必定有輸有贏，但當大家都用了同套 AI 的時候，誰又該輸該贏呢？)</p>
 
-<h2 id="pd-unusual-darts">pD - Unusual Darts</h2>
+<p>但在需要用到複數技能(真實世界中絕大部分問題)及在學習時學會舉一反三(人類學習的重要關鍵)，則還有相當長的一段路要走(但長不代表久，who knows the speed XD)，像是聊天型 Chatbot 回話的決策，除了要考慮先前的對話內容，還要判斷使用者的眼神、心情、語氣、甚至個性等等(所謂社交技巧)，但我們只會將問題簡化成僅從對話內容去推出一二 (所以常常覺得它們笨笨的XD)；又或著像前述的 breast cancer prediction，文末也提到了關於其他可能異常症狀的觀察，機器是無法回答的 (但當然也是可以跑好幾個分類器，一一去做 binary classification 啦&hellip;但對某些未被定義到的異常症狀就無法判斷了)；而像學習技能的推廣，如打電動的時候，人類通常精通某遊戲後，相似類型的遊戲也可能很快上手(甚至連不同類型遊戲也會比較快上手&hellip;但這就有點複雜了)，但就我所知，現在的 RL 只要 reward 或環境稍有不同，便需要重新訓練，而訓練完精通新的後，原本會的遊戲又變得不會玩了&hellip;</p>
 
-<p>吃了兩個 WA ，真難玩&hellip;</p>
+<p>身處在一個時代的浪頭，思考得真的要有新的維度，才能生存下來呢！ (筆記打一打變成心情抒發了XD)</p>
 
-<h2 id="pe-meltdown">pE - Meltdown</h2>
+<h2 id="reference">Reference</h2>
 
-<p>我看我是沒理解題意&hellip;</p>
+<ul>
+<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/01_handout.pdf">林軒田老師的講義</a></li>
+</ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -352,13 +329,13 @@
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming--hw11/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/">Problem Solving and Programming- hw6</a>
+      <a href="https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming--hw11/">Problem Solving and Programming- hw11</a>
     </nav>
     
   </div>
@@ -368,13 +345,13 @@
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec1/">NTU Machine Learning - Lec1</a>
+      <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec2/">NTU Machine Learning - Lec2</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec1/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec2/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

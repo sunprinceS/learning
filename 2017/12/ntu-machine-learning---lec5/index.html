@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Computational Geometry">
+  <meta name="description" content="Training vs Testing">
   <meta name="generator" content="Hugo 0.31.1" />
 
-  <title>Problem Solving and Programming- hw11 &middot; Stay hungry. Stay foolish </title>
+  <title>NTU Machine Learning - Lec5 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Problem Solving and Programming- hw11</h1>
-  <h2>Computational Geometry</h2>
+  <h1>NTU Machine Learning - Lec5</h1>
+  <h2>Training vs Testing</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>05 Dec 2017</time>
+    <time>30 Dec 2017</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/online-judge">Online-Judge</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/machine-learning-foundation">Machine Learning Foundation</a>
     
   </div>
   
@@ -266,13 +266,9 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/machine-learning">Machine Learning</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/computational-geometry">Computational Geometry</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kattis">Kattis</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
     
   </div>
   
@@ -281,70 +277,88 @@
 </div>
 
 
-  <p><a href="https://kth.kattis.com/problemgroups/641" target="_blank">題目連結</a></p>
+  <p>上一講提到了在 hypothesis set <span>$\mathcal{H}$</span> 為有限，且sample size <span>$|\mathcal{D}|$</span> 足夠大的情況下，是 PAC-learnable 的。但當 <span>$|\mathcal{H}| \, \rightarrow \, \infty$</span>的時候呢？ (e.g 2D linear perceptron)</p>
 
 <p></p>
 
-<h2 id="pa-white-water-rafting">pA - White Water Rafting</h2>
+<h2 id="recap-of-feasibility-of-learning">Recap of Feasibility of Learning</h2>
 
-<p>給一個簡單內多邊形和外多邊形，求中間圍起來的部份，寬度最小為多少。<br />
-枚舉每個邊的組合，<strong>求兩線段之距離</strong>，取最小者，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
+<ol>
+<li><span>$E_o(g) \approx E_i(g)$</span> ?</li>
+<li><span>$E_i(g) \rightarrow 0$</span> ?</li>
+</ol>
 
-<h2 id="pb-colliding-traffic">pB - Colliding Traffic</h2>
+<p>Hoeffding Ineq. 對於再複雜的 ground truth function <span>$f$</span> 及 hypothesis function <span>$h$</span> 均是成立的，1. 據此必是正確，但這僅能 verify 我們得到的結果，還是沒有告訴我們在複雜的 <span>$f$</span> (usually 不能只依靠一個 hypothesis candidate <span>$h$</span>，而是必須從 size 無限大的 hypothesis set <span>$\mathcal{H}$</span> 去挑選)下，學習是否可行？</p>
 
-<p>在平面上，有 <span>$n$</span> 個點，各自以定速朝定方向前進 (i.e 射線)，當兩個點間距
-<span>$&lt; r$</span> 時，定義他們 collide ，想問第一個 collide 發生在什麼時候。
-枚舉每條射線的組合，先看距離是否已小於 <span>$r$</span> ，如果是就輸出 <span>$0$</span>。
-不是的話，由兩條射線的參數方程相減得到其距離的參數方程，</p>
+<h2 id="some-observation-does-the-union-bound-too-loose">Some observation: Does the Union Bound too loose?</h2>
+
+<p>From 前一講最後，</p>
 
 <div>
 \[
-\vec{d}_{i,j} = (\vec{s}_j - \vec{s}_i) + (\vec{v}_j - \vec{v}_i) t \quad (\, \vec{s} \; \text{為起始位置}\,)
+
+\Pr_D[\text{BAD} \, \text{for} \, \textcolor{orange}{\mathcal{H}}] \leq 2 \, M \, \exp(-2 \epsilon^2 N)
 \]
 </div>
 
-<p>找是否存在 <span>$t &gt; 0$</span> 滿足 <span>$|\vec{d}_{i,j}| \leq r$</span>，然後從所有射線組合中，找出最小的 <span>$t$</span>，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
+<p>其中，<span>$M$</span> 是來自 Union Bound 將各個 <span>$\underset{D}{\Pr}\,[\text{BAD} \, \text{for} \, \textcolor{orange}{h_n}]$</span> 做加總，等號成立於事件彼此互斥。</p>
 
-<pre><code class="language-cpp">double get_collision_t(Obj i,Obj j,double r_sq){
-  double a,b,c;
-  a = i.vel.distance_square(j.vel);
-  b = (j.pos - i.pos).dot(j.vel - i.vel);
-  c = i.pos.distance_square(j.pos) - r_sq;
+<p>事件彼此互斥？也就是說會讓 <span>$h_n$</span> 壞掉的 <span>$\mathcal{D}$</span> 各自不同，但想想這其實不合理。就拿 perceptron 來說好了，若 <span>$h_1 \approx h_2$</span> ，幾何上來說，這兩個 hyperplane 其實是非常<strong>靠近</strong>的，對大部分的數據點，均會給出一樣的 perdiction ，所以會讓 <span>$h_1$</span> 壞掉的 <span>$\mathcal{D}$</span> ，也 <strong>probably</strong> 會讓 <span>$h_2$</span> 壞掉。</p>
 
-  double D = b*b - a*c;
-  if(isz(D)){
-    return (-b/a);
-  }
-  else if(D&lt;0){
-    return -100;
-  }
-  else{
-    if(b+sqrt(D) &gt; 0)
-      return ((-b+sqrt(D))/a);
-    else
-      return ((-b-sqrt(D))/a);
-  }
-}
-</code></pre>
+<h2 id="effective-number-of-hypotheses">Effective number of Hypotheses</h2>
 
-<h2 id="pc-pesky-mosquitoes">pC - Pesky Mosquitoes</h2>
+<p>首先，我們先將 <span>$h$</span> 們做適當的分群，從數據點的角度來看，會 predict 出相同結果的 hypothesis set 視為<strong>相同</strong>的一群 (詳細範例可以看講義👀)，對 binary classification 來說，每一群又稱為一個二元分類器 (<em>dichotomy</em>)。<br />
+給定數據點 <span>$\mathbf{x}_1 \sim \mathbf{x}_N$</span>，我們可以定義不同的 dichotomy ， <span>$\mathcal{H}(\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N)$</span> 為這些 dichotomies 的集合(跟原先的 <span>$\mathcal{H}$</span> 有何不同呢？可以想成若 <span>$h_i, h_j$</span> 在 training data 上結果相同，則只會對應到當中的 <strong>一個</strong> dichotomy)。而我們想以這個集合的大小 (也就是分群數)，去取代原先的 <span>$M$</span> 。</p>
 
-<p>圖上散落了一些點，給定一個定直徑 <span>$d$</span> 的圓，想找出最多可以蓋住幾個點。<br />
-觀察到若想蓋住最多點的話，至少有兩個點會在圓的邊上(否則總是可以再移動，
-看能否再蓋住更多點)。</p>
+<h3 id="growth-function-span-m-h-span">Growth Function <span>$m_H$</span></h3>
 
-<p>枚舉所有點的組合，找出過那兩點 <span>$A, B$</span> 且直徑為 <span>$d$</span> 的圓，再來看剩下的點是
-否在此圓裡面，複雜度為 <span>$\mathcal{O}(n^3)$</span>。<br />
-而找圓心的話，算是高中數學的範疇，應該很簡單。但注意到這樣定義的圓會有兩個，方便起見我們統一
-一個方向，法向量指向 <span>$\overrightarrow{AB}$</span> 的右邊 (如此算 <span>$\overrightarrow{BA}$</span> 時，就會得到另一個圓了)。</p>
+<p>可以發現，隨著 sample 的 <span>$\mathcal{D}$</span> 不同，分群的結果也會不同，
+in order to generalization ，我們定義 growth function <span>$m_H$</span> 為當中
+的 upper bound ，也是我們之後要拿來取代 <span>$M$</span> 的量。</p>
 
-<h2 id="pd-unusual-darts">pD - Unusual Darts</h2>
+<p><code>$$
+m_H(N) = \underset{\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N \in \mathcal{X}}{\max} |\mathcal{H}(\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N)|
+$$</code></p>
 
-<p>吃了兩個 WA ，真難玩&hellip;</p>
+<p>其中 <span>$m_H(N) \leq 2^N$</span> (which is easy to see)</p>
 
-<h2 id="pe-meltdown">pE - Meltdown</h2>
+<h2 id="span-m-h-span-is-poly"><span>$m_H$</span> is POLY?</h2>
 
-<p>我看我是沒理解題意&hellip;</p>
+<p>回到最上方的式子，隨著 sample size <span>$N$</span> 的增長，其壓低壞事發生機率的能力是 <strong>EXP</strong> ，所以我們只要能證明 <span>$m_H$</span> 為 <strong>POLY</strong> ，便可以 claim 說，在 <span>$N$</span> 足夠大的情況下， PAC-learnable (even <span>$\mathcal{H}$</span> is infinite)!</p>
+
+<p>可以在講義看到幾個簡單的例子(👀 1D perceptron, 1D interval, 2D contour)，並求出其 growth function 的 analytical form，但很多時候要寫下這個 form 並不那麼簡單，然而，其實我們關心的只是它的 order，或者說他是否為 <strong>POLY</strong> 罷了。為了方便討論，以下做幾個定義。</p>
+
+<h3 id="shatter">Shatter</h3>
+
+<div>
+\[
+\text{If} \: \mathcal{H} \: \text{can \textbf{shatter} N points} \Leftrightarrow m_H(N) = 2^N
+\]
+</div>
+
+<p>解釋是說，所擁有的 dichotomies ，可以應付training data中所有可能的分群情況。<br />
+(<span>$\exists \, h $</span>  s.t <span>$h(\mathbf{x}_i) = f(\mathbf{x}_i) \; \forall i=1 \sim N$</span>)，直覺來想，這代表了這個 Hypothesis set 很強，但同時也表示了需要搜索的數量很多，呈現在 growth function 為 <strong>EXP</strong> 。</p>
+
+<h3 id="break-point">Break Point</h3>
+
+<p>然而，很多時候我們對資料有些洞見，知道他滿足某種性質，不一定要找那種可以應付所有情況的 Hypothesis set，拿 Linear perceptron 所處理的對象為例，我們假設資料是線性可分，那麼便不需要用到 convex set 這麼強的 Hypothesis set 了 (所謂殺雞焉用牛刀)</p>
+
+<div>
+\[
+\text{If no data set of size } \, k \, \text{can be \textbf{shattered} by} \, \mathcal{H}, \;  k \, \text{is the \textbf{break point} for } \, \mathcal{H}
+\]
+</div>
+
+<p>簡單來說就是， <span>$\exists \; k \in \mathbb{N} \, s.t. \, m_H(k) &lt; 2^{k}$</span> ,which is <strong>POLY</strong><br />
+(當 <span>$N \geq k$</span> 時，開始出現 <span>$\mathcal{H}$</span> 無法處理，或者說不考慮的情況)</p>
+
+<p><img src="" width="800px" style="border-radius: 0%;"></p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/05_handout.pdf">林軒田老師的講義</a></li>
+</ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -352,13 +366,13 @@
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec4/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/">Problem Solving and Programming- hw6</a>
+      <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec4/">NTU Machine Learning - Lec4</a>
     </nav>
     
   </div>
@@ -367,14 +381,8 @@
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec1/">NTU Machine Learning - Lec1</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec1/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
