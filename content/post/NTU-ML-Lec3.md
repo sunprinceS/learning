@@ -1,5 +1,5 @@
 +++
-date = "2018-01-01T19:02:37+01:00"
+date = "2017-12-24T19:02:37+01:00"
 description = "Types of Learning"
 draft = false
 tags = ["Machine Learning","NTU"]

@@ -1,5 +1,5 @@
 +++
-date = "2018-01-02T19:02:37+01:00"
+date = "2017-12-30T19:02:37+01:00"
 description = "Training vs Testing"
 draft = false
 tags = ["Machine Learning","NTU"]
@@ -80,12 +80,7 @@ $$``
 
 
 簡單來說就是， <span>$\exists \; k \in \mathbb{N} \, s.t. \, m_H(k) < 2^{k}$</span> ,which is **POLY**\\
-(當 <span>$N \geq k$</span> 時，開始出現 <span>$\mathcal{H}$</span> 不考慮的情況)
-
-
-<img src="" width="800px" style="border-radius: 0%;">
-
-
+(當 <span>$N \geq k$</span> 時，開始出現 <span>$\mathcal{H}$</span> 無法處理，或者說不考慮的情況)
 
 ## Reference
 

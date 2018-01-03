@@ -1,5 +1,5 @@
 +++
-date = "2018-01-01T14:02:37+01:00"
+date = "2017-12-22T14:02:37+01:00"
 description = "Learning to Answer Yes/No"
 draft = false
 tags = ["Machine Learning","NTU"]
@@ -63,7 +63,7 @@ g(x_n) = f(x_n) = y_n \quad \forall (x_n,y_n)\in \mathcal{D}
 ### Running Time
 承上，<span>$\mathbf{w}$</span> 的更新，會使得它更接近 ground truth，也就是其單位向量的內積越來越接近 <span>$1$</span>。
 
-#### Growth of <span>$||\mathbf{w}||$</span> ISN't too fast
+#### Growth of <span>$||\mathbf{w}||$</span> ISN'T too fast
 
 ``$$
 \begin{align}

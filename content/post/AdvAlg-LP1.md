@@ -51,9 +51,9 @@ The Integrality Gap (IG) is the upperbound of the ratio between <span>$OPT$</spa
 </div>
 
 
-<span>$\forall$</span> problem instance, follow LP relaxation and rounding 的步驟，\\
-我們可以得到一個 k-approx. algorithm ，且 <span>$k \geq IG$</span>\\
-(所以只要我們能找到一個 problem instance，使得 <span>$\frac{\mathcal{C}(OPT)}{\mathcal{C}(OPT^{frac})} = k$</span> ， 那就能說明 Integrality Gap 為 <span>$k$</span>
+<span>$\forall$</span> problem instance, 若我們能 follow LP relaxation and rounding 的步驟，\\
+得到一個 k-approx. algorithm ，使得 <span>$\frac{\mathcal{C}(\text{round})}{\mathcal{C}(OPT^{frac})} \leq k$</span>，便也可以推得 <span>$\frac{\mathcal{C}(OPT)}{\mathcal{C}(OPT^{frac})} \leq k$</span>
+所以說 <span>$k$</span> 便可以拿來當這個比例的上界，也就是 *IG* ，方能說明 Integrality Gap 為 <span>$k$</span>
 {{% fluid_img src="/img/post/ig_gap.png" alt="LP to ILP procedure" %}}
 
 ## Duality
