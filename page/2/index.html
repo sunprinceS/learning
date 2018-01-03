@@ -603,6 +603,72 @@
   
     <article>
   <header>
+    <h2><a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/">Advanced Algorithm - Weighted Set Cover</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>16 Aug 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/linear-programming">Linear Programming</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/randomized-algorithm">Randomized Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  </header>
+
+  <p>
+  呈前一講，我們對有限制的 WSC 問題有 $l$-approx. algorithm，但可能並不是太好(比方說 $l=|U|$ 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在大部分時候，都可以得到一個還不錯 (approx. ratio ISN&rsquo;T too bad)的結果。
+Weighted Set Cover Problem 讓我們明確定義這個問題
+Given $U = \lbrace e_1,e_2,\cdots,e_n \rbrace, \, S_1,S_2,\cdots S_k \subseteq U \, \text{with} \, \text{cost}\,(S_i)$
+Want: Find a min-cost collection of subsets $C$ such that $\underset{C}{\bigcup} S_i = U$
+Formulation Let $x_i = $𝟙[subset $S_i$ is chosen or not]
+ \[ \min \sum_i x_i \quad s.
+  </p>
+
+  
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
     <h2><a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/">Advanced Algorithm - Vertex Cover Problem</a></h2>
 
     <div class="post-meta">
@@ -782,66 +848,6 @@ multivariate function</strong> subject to some <strong>linear constraints</stron
   
   <footer>
     <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---bin-packing-problem/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---subset-sum-problem/">Advanced Algorithm - Subset Sum Problem</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>11 Jul 2017</time>
-  </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rounding-data--dp">Rounding Data &amp; DP</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
-    
-  </div>
-  
-  
-
-</div>
-
-
-  </header>
-
-  <p>
-  <p>Subset Sum Problem 與 Knapsack Problem 相同，也是一個 NPC 問題(可以想成 Knapsack Problem weight 均為 1 的特例)。而在 Knapsack Problem 中，我們發展出<strong>等差</strong> 的rounding 技巧，犧牲精確度去換取更低的時間複雜度，而這一講中，將利用<strong>等比</strong>的方式去做 rounding 。
-</p>
-  </p>
-
-  
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---subset-sum-problem/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>

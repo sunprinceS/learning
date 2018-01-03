@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="An example of deterministic rounding from LP">
+  <meta name="description" content="">
   <meta name="generator" content="Hugo 0.32.1" />
 
-  <title>Advanced Algorithm - Vertex Cover Problem &middot; Stay hungry. Stay foolish </title>
+  <title>Randomized Algorithm &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -36,6 +36,8 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  
+  <link rel="alternate" type="application/rss+xml" title="Stay hungry. Stay foolish " href="https://sunprinces.github.io/learning/tags/randomized-algorithm/index.xml" />
   
 
   
@@ -119,6 +121,10 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/randomized-algorithm/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+    </li>
     
 
     
@@ -235,16 +241,20 @@
 
 
 <div class="header">
-  <h1>Advanced Algorithm - Vertex Cover Problem</h1>
-  <h2>An example of deterministic rounding from LP</h2>
+  <h1>Randomized Algorithm</h1>
 </div>
-<div class="content">
 
-  <div class="post-meta">
+<div class="content">
+  
+    <article>
+  <header>
+    <h2><a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/">Advanced Algorithm - Weighted Set Cover</a></h2>
+
+    <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>14 Aug 2017</time>
+    <time>16 Aug 2017</time>
   </div>
   
 
@@ -270,6 +280,8 @@
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/linear-programming">Linear Programming</a>&nbsp;&#47;
     
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/randomized-algorithm">Randomized Algorithm</a>&nbsp;&#47;
+    
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
@@ -281,152 +293,25 @@
 </div>
 
 
-  <p>這一講會展示將問題轉化為線性規劃的 form (但可能是 ILP)，利用 LP solver 得到解，做 <strong>LP relaxation</strong> 並證明這個解不會太差 (approx. ratio 不太大)。</p>
+  </header>
 
-<p></p>
-
-<h2 id="vertex-cover-problem">Vertex Cover Problem</h2>
-
-<p>Given a graph <span>$G$</span>, a vertex cover is a set of vertices <span>$S$</span><br />
-s.t. <span>$\forall (u,v) \in E, \; \text{either} \, u \in S \, \text{or} \, v \in S$</span></p>
-
-<p>Want: Find the vertex cover <span>$S$</span> with <span>$\min$</span> # of nodes</p>
-
-<h2 id="formulation">Formulation</h2>
-
-<p>For each <span>$v_i \in V$</span>, assign a variable <span>$x_i = $</span>𝟙[<span>$v_i$</span> is chosen]</p>
-
-<div>
-\[
-\min \sum_i x_i \quad s.t. \begin{cases}
- x_i  + x_j \geq 1 \;& , \forall (v_i,v_j) \in E\\
-0  \leq x_i \leq 1 \; & , \textcolor{red}{x_i \in \mathbb{Z}}
-\end{cases}
-\]
-</div>
-
-<p><span>$x_i \in \mathbb{Z}$</span> 這個條件，讓問題是困難的 ILP (which is NPC) ，在此我們把拿掉 (<strong>LP relaxation</strong>)，轉成 LP 。</p>
-
-<h2 id="2-approx-algorithm">2-Approx Algorithm</h2>
-
-<p>Run 過 LP solver 後，可得到一組滿足限制式的解 <span>$\mathbf{x}^{\star}$</span>
-<br />
-但這並不是原問題的答案，我們需要利用它找出滿足條件的 <span>$\mathbf{x}^{\prime}$</span>，
-有個簡單的演算法</p>
-
-<div>
-\[
-\text{choose all}\, v_i \, \text{subject to} \; x_i^{\star} \geq 0.5
-\]
-</div>
-
-<h3 id="correctness">Correctness</h3>
-
-<p><span>$\because x_i + x_j \geq 1$</span>，<span>$x_i, x_j$</span> 中至少有一個
-<span>$\geq \frac{1}{2}$</span>，所以每條邊至少會有一個端點被選</p>
-
-<h3 id="approx-ratio">Approx. Ratio</h3>
-
-<div>
-\[
-\text{cost}(x_i^{\prime})\leq \textcolor{red}{2} \sum x_i^{\star} \leq 2 \mathbf{OPT}
-\]
-</div>
-
-<p>Worst Case 就是所有 <span>$x_i = \frac{1}{2}$</span>，那麼便會每條邊的兩個端點都會被選起來。</p>
-
-<h2 id="推廣">推廣</h2>
-
-<p>可以視為 Set Cover Problem with every element is covered by <span>$\leq l$</span> 個 subset 的特例 (<span>$l = 2$</span>)，<br />
-由此也可推知Set Cover Problem 的 <span>$l$</span>-approx algorithm。</p>
-  
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  <p>
+  呈前一講，我們對有限制的 WSC 問題有 $l$-approx. algorithm，但可能並不是太好(比方說 $l=|U|$ 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在大部分時候，都可以得到一個還不錯 (approx. ratio ISN&rsquo;T too bad)的結果。
+Weighted Set Cover Problem 讓我們明確定義這個問題
+Given $U = \lbrace e_1,e_2,\cdots,e_n \rbrace, \, S_1,S_2,\cdots S_k \subseteq U \, \text{with} \, \text{cost}\,(S_i)$
+Want: Find a min-cost collection of subsets $C$ such that $\underset{C}{\bigcup} S_i = U$
+Formulation Let $x_i = $𝟙[subset $S_i$ is chosen or not]
+ \[ \min \sum_i x_i \quad s.
+  </p>
 
   
-<div class="prev-next-post pure-g">
-  <div class="pure-u-1-24" style="text-align: left;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/"><i class="fa fa-chevron-left"></i></a>
-    
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/">Advanced Algorithm - Linear Programming</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-2-24">
-    &nbsp;
-  </div>
-  <div class="pure-u-10-24">
-    
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/">Advanced Algorithm - Weighted Set Cover</a>
-    </nav>
-    
-  </div>
-  <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/"><i class="fa fa-chevron-right"></i></a>
-    
-  </div>
-</div>
-
-
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
 
   
-<div id="disqus_thread"></div>
-<script type="text/javascript">
-
-(function() {
-    
-    
-    if (window.location.hostname == "localhost")
-        return;
-
-    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'tonyhsu822';
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
- <script>renderMathInElement(document.body, {
-   delimiters: [
-     {left: "\\[", right: "\\]", display: true},
-     {left: "$", right: "$", display: false},
-   ]
- });</script>
-
-
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [],
-    displayMath: [['$$','$$']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-</script>
-
-
-
-
 </div>
 
 </div>
@@ -451,4 +336,3 @@ MathJax.Hub.Config({
 
 </body>
 </html>
-
