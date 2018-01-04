@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 02 Jan 2018 19:02:37 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jan 2018 17:13:44 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NTU Machine Learning - Lec7</title>
+      <link>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec7/</link>
+      <pubDate>Thu, 04 Jan 2018 17:13:44 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec7/</guid>
+      <description>&lt;p&gt;於前一講中，我們證明了 growth function 為 &lt;strong&gt;POLY(N)&lt;/strong&gt; iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 &lt;span&gt;$E_i(h) \approx E_o(h)$&lt;/span&gt;  (if 數據點夠多 &lt;span&gt;$N$&lt;/span&gt; )。而這一講中，我們由 break point 引進 &lt;strong&gt;VC Dimension&lt;/strong&gt; &lt;span&gt;$d \scriptscriptstyle VC$&lt;/span&gt; ，來當作衡量 &lt;span&gt;$\mathcal{H}$&lt;/span&gt; 複雜度的一個指標。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>NTU Machine Learning - Lec6</title>
