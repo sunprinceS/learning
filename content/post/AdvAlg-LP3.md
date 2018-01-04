@@ -1,5 +1,5 @@
 +++
-date =  "2017-08-16T21:19:19+02:00"
+date =  "2017-08-18T21:19:19+02:00"
 description = "An example of randomized rounding from LP"
 draft = false
 tags = ["Algorithm","Linear Programming","Randomized Algorithm","Approximation Algorithm","NTU"]
@@ -61,7 +61,7 @@ $$``
 </div>
 
 ``$$
-\Rightarrow \boxed{\Pr[\, \text{cost of Alg. output} \, \geq \color{blue}{4} \, \mathbf{OPT} \cdot c \log n\,] \leq \frac{1}{4}}
+\Rightarrow \boxed{\Pr[\, \text{cost of Alg. output} \, \geq \color{blue}{4} \, \mathbf{OPT} \cdot c \log n\,] \leq \frac{1}{\color{blue}{4}}}
 $$``
 
 ### collection <span>$C$</span> 不是 set cover 的機率
@@ -82,8 +82,8 @@ For each elemetn <span>$e_j$</span>
 \]
 </div>
 
-所以在 <span>$c \log n$</span> 個 round 內， <span>$e_j$</span> 都不會被選到的機率 <span>$ \leq (\frac{1}{e})^{c \log n}$</span>，選擇適當的 <span>$c$</span> ，使得該機率 <span>$\leq \frac{1}{4n}$</span>
-利用 Union Bound，將單一 element 不被選到的機率加總
+所以在 <span>$c \log n$</span> 個 round 內， <span>$e_j$</span> 都不會被選到的機率 <span>$ \leq (\frac{1}{e})^{c \log n}$</span>，選擇適當的 <span>$c$</span> ，使得該機率 <span>$\leq \frac{1}{4n}$</span>，
+再利用 Union Bound，將單一 element 不被選到的機率加總
 
 <div>
 \[

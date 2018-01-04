@@ -67,10 +67,12 @@ $$``
 解釋是說，所擁有的 dichotomies ，可以應付training data中所有可能的分群情況。\\
 (<span>$\exists \, h $</span>  s.t <span>$h(\mathbf{x}_i) = f(\mathbf{x}_i) \; \forall i=1 \sim N$</span>)，直覺來想，這代表了這個 Hypothesis set 很強，但同時也表示了需要搜索的數量很多，呈現在 growth function 為 **EXP** 。
 
+※注意到 <span>$m_H(N)$</span> 是指**最大**的 dichotomies set size，所以 <span>$m_H(N)$</span>只能說明存在**至少一組** data 可被 shatter ，但不是**所有**的 data 都可以被 shatter。\\
+那些**退化**的情況反而是不能被 shatter 的特例，像是 2 維平面上，點為 colinear 的話， 3 個點 linear perceptron 便無法處理了，又或者像是 convex set 中，點如果沒有落在圓上，也是無法被 shatter 的
 
 ### Break Point
 
-然而，很多時候我們對資料有些洞見，知道他滿足某種性質，不一定要找那種可以應付所有情況的 Hypothesis set，拿 Linear perceptron 所處理的對象為例，我們假設資料是線性可分，那麼便不需要用到 convex set 這麼強的 Hypothesis set 了 (所謂殺雞焉用牛刀)
+然而，很多時候我們對資料有些洞見，知道他滿足某種性質，不一定要找那種可以應付所有情況的 Hypothesis set，拿 Linear perceptron 所處理的對象為例，我們假設資料是線性可分(i.e 對線性不可分的資料無法 shatter)，那麼便不需要用到 convex set 這麼強的 Hypothesis set 了 (所謂殺雞焉用牛刀)
 
 <div>
 \[
@@ -81,6 +83,13 @@ $$``
 
 簡單來說就是， <span>$\exists \; k \in \mathbb{N} \, s.t. \, m_H(k) < 2^{k}$</span> ,which is **POLY**\\
 (當 <span>$N \geq k$</span> 時，開始出現 <span>$\mathcal{H}$</span> 無法處理，或者說不考慮的情況)
+
+
+※承 shatter 的討論，這裡必須要確保 **對所有** size 為 <span>$k$</span> 的 data，
+都無法被 shatter (不存在只有特例才有的那些**特性** )，才能說 <span>$k$</span> 為
+hypothesis set 的 break point 。\\
+所以如果今天只知道某一組 data ，無法被
+<span>$\mathcal{H}$</span> 給 shatter ，**是無法判定 break point 為多少的** (有可能是 <span>$k \geq N$</span>中，被造出的特例；亦有可能如同我們直覺想的，因為 <span>$k < N$</span>，所以任一組當然找不到)。
 
 ## Reference
 

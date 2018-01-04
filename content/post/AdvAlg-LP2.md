@@ -1,5 +1,5 @@
 +++
-date =  "2017-08-14T20:49:15+02:00"
+date =  "2017-08-16T20:49:15+02:00"
 description = "An example of deterministic rounding from LP"
 draft = false
 tags = ["Algorithm","Linear Programming","Approximation Algorithm","NTU"]
