@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>16 Aug 2017</time>
+    <time>18 Aug 2017</time>
   </div>
   
 
@@ -339,7 +339,7 @@ $$</code></p>
 </div>
 
 <p><code>$$
-\Rightarrow \boxed{\Pr[\, \text{cost of Alg. output} \, \geq \color{blue}{4} \, \mathbf{OPT} \cdot c \log n\,] \leq \frac{1}{4}}
+\Rightarrow \boxed{\Pr[\, \text{cost of Alg. output} \, \geq \color{blue}{4} \, \mathbf{OPT} \cdot c \log n\,] \leq \frac{1}{\color{blue}{4}}}
 $$</code></p>
 
 <h3 id="collection-span-c-span-不是-set-cover-的機率">collection <span>$C$</span> 不是 set cover 的機率</h3>
@@ -360,8 +360,8 @@ $$</code></p>
 \]
 </div>
 
-<p>所以在 <span>$c \log n$</span> 個 round 內， <span>$e_j$</span> 都不會被選到的機率 <span>$ \leq (\frac{1}{e})^{c \log n}$</span>，選擇適當的 <span>$c$</span> ，使得該機率 <span>$\leq \frac{1}{4n}$</span>
-利用 Union Bound，將單一 element 不被選到的機率加總</p>
+<p>所以在 <span>$c \log n$</span> 個 round 內， <span>$e_j$</span> 都不會被選到的機率 <span>$ \leq (\frac{1}{e})^{c \log n}$</span>，選擇適當的 <span>$c$</span> ，使得該機率 <span>$\leq \frac{1}{4n}$</span>，
+再利用 Union Bound，將單一 element 不被選到的機率加總</p>
 
 <div>
 \[

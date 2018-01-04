@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 16 Aug 2017 21:19:19 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 18 Aug 2017 21:19:19 +0200</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/randomized-algorithm/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Advanced Algorithm - Weighted Set Cover</title>
       <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/</link>
-      <pubDate>Wed, 16 Aug 2017 21:19:19 +0200</pubDate>
+      <pubDate>Fri, 18 Aug 2017 21:19:19 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/</guid>
       <description>呈前一講，我們對有限制的 WSC 問題有 $l$-approx. algorithm，但可能並不是太好(比方說 $l=|U|$ 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在大部分時候，都可以得到一個還不錯 (approx. ratio ISN&amp;rsquo;T too bad)的結果。
