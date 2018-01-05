@@ -90,12 +90,12 @@
     </item>
     
     <item>
-      <title>Advanced Algorithm - Metric Facility Problem</title>
-      <link>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-problem/</link>
+      <title>Advanced Algorithm - Metric Facility Location Problem</title>
+      <link>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/</link>
       <pubDate>Sat, 16 Sep 2017 20:49:15 +0200</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-problem/</guid>
-      <description>&lt;p&gt;接續&lt;a href=&#34;https://sunprinces.github.io/learning/tags/linear-programming/&#34;&gt;前面幾講&lt;/a&gt;，一個常用的技巧是，利用 LP solver 得出來的解 &lt;span&gt;$\mathbf{x}^{\star}$&lt;/span&gt;， 拿去做 rounding 推出原先問題的解 &lt;span&gt;$\mathbf{x}^{\prime}$&lt;/span&gt; (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Problem 。&lt;/p&gt;
+      <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/</guid>
+      <description>&lt;p&gt;接續&lt;a href=&#34;https://sunprinces.github.io/learning/tags/linear-programming/&#34;&gt;前面幾講&lt;/a&gt;，一個常用的技巧是，利用 LP solver 得出來的解 &lt;span&gt;$\mathbf{x}^{\star}$&lt;/span&gt;， 拿去做 rounding 推出原先問題的解 &lt;span&gt;$\mathbf{x}^{\prime}$&lt;/span&gt; (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (&lt;strong&gt;MFL&lt;/strong&gt;)。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

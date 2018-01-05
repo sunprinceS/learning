@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="An example of randomized rounding from LP">
+  <meta name="description" content="6-Approx. Algorithm (Deterministic rounding from LP)">
   <meta name="generator" content="Hugo 0.32.1" />
 
-  <title>Advanced Algorithm - Weighted Set Cover &middot; Stay hungry. Stay foolish </title>
+  <title>Advanced Algorithm - Metric Facility Location Problem &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Advanced Algorithm - Weighted Set Cover</h1>
-  <h2>An example of randomized rounding from LP</h2>
+  <h1>Advanced Algorithm - Metric Facility Location Problem</h1>
+  <h2>6-Approx. Algorithm (Deterministic rounding from LP)</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>18 Aug 2017</time>
+    <time>16 Sep 2017</time>
   </div>
   
 
@@ -270,8 +270,6 @@
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/linear-programming">Linear Programming</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/randomized-algorithm">Randomized Algorithm</a>&nbsp;&#47;
-    
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
@@ -283,104 +281,138 @@
 </div>
 
 
-  <p>呈前一講，我們對<strong>有限制的</strong> WSC 問題有 <span>$l$</span>-approx. algorithm，但可能並不是太好(比方說 <span>$l=|U|$</span> 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在<strong>大部分</strong>時候，都可以得到一個<strong>還不錯</strong> (approx. ratio ISN&rsquo;T too bad)的結果。</p>
+  <p>接續<a href="https://sunprinces.github.io/learning/tags/linear-programming/">前面幾講</a>，一個常用的技巧是，利用 LP solver 得出來的解 <span>$\mathbf{x}^{\star}$</span>， 拿去做 rounding 推出原先問題的解 <span>$\mathbf{x}^{\prime}$</span> (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (<strong>MFL</strong>)。</p>
 
 <p></p>
 
-<h2 id="weighted-set-cover-problem">Weighted Set Cover Problem</h2>
+<h2 id="metric-facility-location-problem">Metric Facility Location Problem</h2>
 
-<p>讓我們明確定義這個問題</p>
+<p>問題大概是這樣的，想像你要規劃一個都市，你可以在某些地點建造一些設施 (<em>facility</em>)，當然，在不同的地點建造會有不同的成本，目地是要服務居民，或者說是客戶 (<em>client</em>) ， 同時需要建造道路使得居民能通到對應設施(隨著距離不同，也有不同成本)，目標是讓所有的居民都<strong>至少被一個</strong>設施給服務，並去 minimize 總成本。正式的 formulation 如以下：</p>
 
-<p>Given <span>$U = \lbrace e_1,e_2,\cdots,e_n \rbrace, \, S_1,S_2,\cdots S_k \subseteq U \, \text{with} \, \text{cost}\,(S_i)$</span></p>
+<p>Denote <span>$f_i$</span> be the cost of opening facility <span>$i$</span>, and <span>$c \scriptstyle ij$</span> be the cost of connecting facility <span>$i$</span> and client <span>$j$</span></p>
 
-<p>Want: Find a <strong>min</strong>-cost collection of subsets <span>$C$</span> such that <span>$\underset{C}{\bigcup} S_i = U$</span></p>
+<p>Let <span>$y_i = $</span>𝟙[facility <span>$i$</span> is open], <span>$x
+\scriptstyle ij$</span> <span>$ = $</span> 𝟙[client <span>$j$</span> is served by facility
+<span>$i$</span>]</p>
 
-<h2 id="formulation">Formulation</h2>
+<p>Objective is:</p>
 
-<p>Let <span>$x_i = $</span>𝟙[subset <span>$S_i$</span> is chosen or not]</p>
-
-<div>
-\[
-\min \sum_i x_i \quad s.t. \begin{cases}
- \sum_{e_j \in S_i} x_i \geq 1 \;& , \forall j=1 \sim n \;(\because \text{每個element 都至少要被蓋到一次})\\
-0  \leq x_i \leq 1 \; & , \cancel{x_i \in \mathbb{Z}} \;(\text{LP Relaxation})
+<p><code>$$
+\require{cancel}
+\min \sum_{i \in F}y_i f_i + \sum_{i \in F, \, j \in C} x_{ij} c_{ij} \; s.t. \, 
+\begin{cases}
+\sum_{i \in F}x_{ij} \geq 1, \; \forall j \in C \; (\because \text{client 都要被
+served})\\
+y_i \geq x_{ij}, \; \forall i \in F, \, j \in C \; (\because \text{facility 要開了才能 serve})\\
+x_{ij}, \, y_i \in \cancel{\lbrace 0,1 \rbrace} \mathbb{R}^{+} \bigcup \lbrace 0
+\rbrace
 \end{cases}
-\]
-</div>
-
-<p>利用 LP solver 得到的解 <span>$\mathbf{x}^{\star} = (x_1^{\star},x_2^{\star},\cdots,x_k^{\star})$</span> <strong>當作選擇</strong> <span>$\mathbf{S_i}$</span> <strong>進 collection 的機率</strong></p>
-
-<h2 id="lemma">Lemma</h2>
-
-<div>
-\[
-\Pr[C \, \text{is a set cover} \, \land \, \text{cost}(C) \leq \mathbf{OPT} \cdot c_1 \, \log n] \geq \frac{1}{2}
-\]
-</div>
-
-<h3 id="cost-很大的機率">cost 很大的機率</h3>
-
-<p>At each round, <span>$S_i$</span> will be chosen with prob. <span>$x_i^{\star}$</span> independently, and we repeat <span>$c \log n$</span> rounds</p>
-
-<p>因此，</p>
-
-<p><code>$$
-\mathbb{E}[\, \text{cost in 1 round} \,] = \, \sum_{i=1}^{k} \text{cost}(S_i) \cdot \Pr[ S_i \, \text{is chosen}] = \sum_{i=1}^{k} \, \text{cost}(S_i) \cdot x_i^{\star} \leq \mathbf{OPT}
 $$</code></p>
 
+<p>而 <strong>metric</strong> 表示 <span>$c \scriptstyle ij$</span> 間滿足三角不等式 (i.e <span>$c \scriptstyle ij$</span> <span>$\leq c\scriptstyle ik$</span> <span>$+ c\scriptstyle kj$</span>)</p>
+
+<p>Run 過一遍 LP solver ，我們現在有 <span>$\mathbf{x}^{\star}, \mathbf{y}^{\star}$</span>，將其拿來做 rounding 。</p>
+
+<h3 id="some-setting">Some setting</h3>
+
+<p><strong>1</strong>. For each client <span>$j$</span>， compute the average serving cost
+   <span>$c_j = \underset{i \in F}{\sum} x \scriptstyle ij$</span> <span>$c \scriptstyle ij$</span> <br />
+<strong>2</strong>. Pick up the set <span>$N_j = \lbrace i  \, | \, c \scriptstyle ij$</span> <span>$\leq 2 c_j \rbrace$</span> <br />
+<strong>3</strong>. <span>$\forall i \in F$</span></p>
+
+<div>
+\[
+\text{Let} \, y_i^{\prime} = 2y_i^{\star}\; \text{and} \; x_{ij} = \begin{cases} 2 x_{ij}^{\star}  \normalsize, \; \text{if} \, i \in N_j \\ 
+0, \; \text{otherwise} \end{cases}
+\]
+</div>
+
+<h3 id="correctness-of-the-above-setting">Correctness of the above setting</h3>
+
+<p><strong>Lemma:</strong></p>
+
 <p><code>$$
-\Rightarrow \mathbb{E}[\, \text{cost of Alg. output} \,] \leq c \log n \cdot \mathbf{OPT}
+\text{Fix} \, i , \mathbf{x}_i^{\star} =
+(x_{i1}^{\star},x_{i2}^{\star},\cdots,x_{in}^{\star}) \; \text{is a prob.
+distribution and } \, \sum_{i \in N_j} x^{\star}_{ij} \geq \frac{1}{2}
 $$</code></p>
 
-<p><a name="markov_ineq"></p>
+<p><strong>Proof:</strong></p>
 
-<div font color="#777">
-\[
-\text{According to \textbf{Markov Ineq.}} \quad \boxed{\Pr[X \geq a] \leq \frac{\mathbb{E}[X]}{a}}
-\]
-</div>
-
-<p></a></p>
+<p>如果 <span>$\underset{i \in F}{\sum} x \scriptstyle ij \normalsize &gt; 1$</span>，我們總是可以將其減到 <span>$1$</span> ，得到更小的 cost 。因此可以將 <span>$\mathbf{x}^{\star}$</span> 視為一機率分佈 (就把他當作 <span>$i$</span> serve <span>$j$</span> 的機率好了)。而直覺告訴我們，若 facility 距離太遠 (<span>$c \scriptstyle ij $</span>太大)，其機率應該要很小。根據 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/#markov_ineq">Markov Ineq</a>，<span>$\forall j \in C$</span></p>
 
 <p><code>$$
-\Rightarrow \boxed{\Pr[\, \text{cost of Alg. output} \, \geq \color{blue}{4} \, \mathbf{OPT} \cdot c \log n\,] \leq \frac{1}{\color{blue}{4}}}
+\sum_{i \not \in N_j}x_{ij}^{\star} = \Pr[X \geq c_j] = \Pr[X \geq 2 \mathbb{E}[X]] \leq \frac{1}{2}
 $$</code></p>
 
-<h3 id="collection-span-c-span-不是-set-cover-的機率">collection <span>$C$</span> 不是 set cover 的機率</h3>
+<p>所以 setting 的第 3 步還是有符合 constraint 。</p>
 
-<p>For each elemetn <span>$e_j$</span></p>
+<h3 id="algorithm">Algorithm</h3>
 
-<div>
-\[
-\Pr[e_j \, \text{is not covered in round 1}] \, = \underset{e_j \in S_i}{\prod}
-(1 - x_i^{\star}) \underset{\text{見以下}}{\leq} \underset{e_j \in S_i}{\prod} e^{-x_i^{\star}} =
-\exp(-\underset{e_j \in S_i}{\sum} x_i^{\star}) \underset{\text{constraint}}{\leq} e^{-1}
-\]
-</div>
+<ol>
+<li>Pick client <span>$j$</span> with minimum <span>$c_j$</span> (i.e 平均服務成
+本最小的顧客)</li>
+<li>Let facility <span>$k$</span> be the <strong>cheapest</strong> facility in <span>$N_j$</span> (單看 <span>$f_i$</span>)</li>
+<li>Open the facility <span>$k$</span><br /></li>
+<li>Close all other facilities in <span>$N_j$</span> (<span>$j$</span> 已
+經有 <span>$k$</span> serve 了)<br /></li>
+<li><span>$\forall j^{\prime} \, $</span> where <span>$N_j \bigcap N \scriptstyle j^{\prime}$</span> <span>$ \not = \varnothing$</span>，connect client <span>$j^{\prime}$</span> to facility <span>$k$</span></li>
+</ol>
 
-<div>
-\[
-\text{之後很常用到的不等式} \; \boxed{ 1-x \leq e^{-x}} \; \forall x \geq 0
-\]
-</div>
+<p>Find the minimum <span>$j^{\prime \prime}$</span> which hasn&rsquo;t been served.<br />
+Repeat the above procedure until every client has been served</p>
 
-<p>所以在 <span>$c \log n$</span> 個 round 內， <span>$e_j$</span> 都不會被選到的機率 <span>$ \leq (\frac{1}{e})^{c \log n}$</span>，選擇適當的 <span>$c$</span> ，使得該機率 <span>$\leq \frac{1}{4n}$</span>，
-再利用 Union Bound，將單一 element 不被選到的機率加總</p>
+<p><strong>6 - Approx. ratio</strong>:</p>
 
-<div>
-\[
-\Rightarrow \boxed{\Pr[\text{Alg. miss some element}] \leq \frac{1}{4}}
-\]
-</div>
+<blockquote>
+<p><strong>Connection cost</strong>:</p>
+</blockquote>
 
-<p>再一次利用 Union Bound，將這兩件<strong>壞事</strong>的機率相加，可以得到其 <span>$\leq
-\frac{1}{2}$</span>，得證！</p>
+<p><code>$$
+\begin{align}
+c_{kj^\prime} &amp;\leq c_{lj^\prime} + c_{lj} + c_{jk} \; (\because \, \text{三角不等式}) \\
+&amp; \leq 2 c_{j^\prime} + 2c_j + 2c_j \; (\because l \in N_{j^\prime}, \, l,k \in N_j)\\
+&amp; \leq 6 c_{j^\prime} \; (\because c_j \, \text{is current min.}) \\
+&amp; \Rightarrow \, \text{Total conn. cost} \, \leq \sum_{j}6 c_j \leq 6
+\sum_{j}\underset{\color{red}{\text{OPT}_{\text{LP}}}}{\underbrace{\sum_{i} x_{ij}^{\star} c_{ij}}}
+\end{align}
+$$</code></p>
 
-<p>※ 如果造得出 <span>$\frac{1}{2}$</span>，對於任意給定的常數 error tolerance
-<span>$\epsilon$</span> ，我們都可以藉由調控 <span>$c$</span> (也就是要 run 多少
- round) 得到 (但怪怪的地方是說，因 approx. ratio 並非 constant ，而是
- <span>$\mathcal{\Theta}(\log n)$</span>，所以 <span>$c$</span> 直接被忽略，才可以
- 在降低非法解的可能時，同時保證 approx. ratio)</p>
+<blockquote>
+<p><strong>Facility cost</strong>:</p>
+</blockquote>
+
+<p><code>$$
+\begin{align}
+f_k &amp;\leq \sum_{i \in F}x^{\prime}_{ij} \cdot f_k \; (\because \, \text{the 1st constraint})\\
+&amp; \leq \sum_{i \in F} y_j^{\prime} f_k \; (\because \, \text{the 2nd constraint})\\
+&amp; \leq \sum_{i \in N_j} (y^{\prime} \cdot f_i)
+\; (\because \, N_j \, \text{以外全部歸 0}, \, k \, \text{為} N_j \, \text{中最便宜者})\\
+&amp; \leq \sum_{i \in N_j} (2y^{\star}\cdot f_i)\\
+&amp; \leq 2 \underset{\color{red}{\text{OPT}_{\text{LP}}}}{\underbrace{\sum_{i \in
+N_j}y_i^{\star} \cdot f_i}}
+\end{align}
+$$</code></p>
+
+<blockquote>
+<p><strong>Remark:</strong></p>
+
+<p>如果沒有做 Algorithm 的 4 &amp; 5 步，在計算 total facility cost 的時候，對 <span>$\in N_j$</span>中的 facility ，便不能只看 <span>$k$</span> 而已(因為可能對其他 client 最便宜的 facility 會在之後被開起來)，如此要寫出其 bound 便不太簡單了&hellip; 直覺來想也是，既然 facility 都開了，儘量讓他去 serve 更多人，而不是單為每一個 client 去開對應的 facility (還要再加上 connection cost，可能都不是最優了&hellip;)，還不如將那些跟 facility <strong>不太遠</strong> 的 client 以 6 倍的 approx. ratio 連起來(Note: 不太遠這件事，由 <span>$N_j \bigcap N \scriptstyle j^{\prime}$</span> <span>$ \not = \varnothing$</span> 看出，而之所以可行，則是因為三角不等式 somehow 反應了概念上的 <strong>距離</strong> ，既然交集非空，代表離 <span>$j^\prime$</span> <strong>算近</strong> 的一些 facility 也落在 <span>$N_j$</span>，表示其跟 <span>$j$</span> 不遠，既然跟 <span>$j$</span> 不遠，也不會跟 <span>$k$</span> 太遠，所以再證 connection cost 的時候，其中一個不等式的推導也用到此條件)</p>
+</blockquote>
+
+<p><code>$$
+\Rightarrow \, \text{Total cost} \, \leq 6 \, \color{red}{\text{OPT}_{LP}} \leq \, 6 \, \mathbf{OPT}
+$$</code></p>
+
+<p><strong>Improvement</strong>:</p>
+
+<p>將原先 <span>$N_j$</span> 定義中的 2 倍圈改為 <span>$\beta$</span> 倍。</p>
+
+<p><code>$$
+\text{Total cost} \, \leq \, \underset{\text{改動 Markov Ineq. 的係數}}{\underbrace{\frac{\beta}{\beta - 1}\sum_{i \in F}y_i^{\star}f_i}}  + \underset{\beta \, \text{倍圈}}{\underbrace{3 \beta \sum c_{ij}x_{ij}^{\star}}}
+$$</code></p>
+
+<p>Let <span>$\frac{\beta}{\beta - 1} = 3 \beta$</span>，可得 <span>$\beta = \frac{4}{3}$</span>，代入得到 Approx. Ratio 為 <span>$\textcolor{red}{4}$</span> 。</p>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -388,13 +420,13 @@ $$</code></p>
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/">Advanced Algorithm - Vertex Cover Problem</a>
+      <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/">Problem Solving and Programming- hw1</a>
     </nav>
     
   </div>
@@ -404,13 +436,13 @@ $$</code></p>
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/">利用Ignr自動生成.gitignore</a>
+      <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/">Problem Solving and Programming- hw2</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
