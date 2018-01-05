@@ -1,5 +1,5 @@
 +++
-date = "2017-05-25T00:24:36+08:00"
+date = "2017-06-06T00:24:36+08:00"
 description = "Power of 2-choices"
 draft = true
 tags = ["Algorithm","Data Structure","NTU"]

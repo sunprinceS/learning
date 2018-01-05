@@ -1,7 +1,6 @@
 +++
-date = "2018-01-03T19:02:37+01:00"
+date = "2018-01-04T17:13:44+01:00"
 description = "The VC Dimension"
-draft = true
 tags = ["Machine Learning","NTU"]
 title =  "NTU Machine Learning - Lec7"
 topics = ["Machine Learning Foundation"]

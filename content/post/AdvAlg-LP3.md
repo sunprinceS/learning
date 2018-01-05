@@ -9,6 +9,8 @@ topics = ["Advanced Algorithm"]
 
 呈前一講，我們對**有限制的** WSC 問題有 <span>$l$</span>-approx. algorithm，但可能並不是太好(比方說 <span>$l=|U|$</span> 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在**大部分**時候，都可以得到一個**還不錯** (approx. ratio ISN'T too bad)的結果。
 
+<!--more-->
+
 ## Weighted Set Cover Problem
 
 讓我們明確定義這個問題

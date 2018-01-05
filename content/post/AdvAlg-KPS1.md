@@ -39,7 +39,7 @@ v$</span>
 
 **initial condition:** <span>$A[0,v] = (v \leq 0\,)?\,0:\infty $</span>
 
-**recursive relation**: <span>$A[i,v] = \min(\stackrel{\color{blue}{i\,\text{is not picked}}}{A[i-1,v]},\stackrel{\color{blue}{i\,\text{is picked}}}{A[i-1,v-v_i]+w_i})$</span>
+**recursive relation**: <span>$A[i,v] = \min(\stackrel{\textcolor{blue}{i\,\text{is not picked}}}{A[i-1,v]},\stackrel{\textcolor{blue}{i\,\text{is picked}}}{A[i-1,v-v_i]+w_i})$</span>
 
 Then search the n-th column (along the value axis), <br/>
 we can find <span>$v^{\star} \; \text{such that}\; A[n,v^{\star}] \leq W \land
@@ -71,7 +71,7 @@ The time complexity is <span>$\Theta(n \, v^{\star})$</span>
 ### Algorithm
 Let <span>$b = \frac{\epsilon}{2n}\max_i v_i$</span>
 
-Now, consider the rounded instance <span style="color: green"><span>$\text{0-1 Knapsack}^{\prime}$</span></span> , <span>$\hat{w_i} = w_i \, , \hat{W} = W \, , \color{blue}{\hat{v_i} = \lceil \frac{v_i}{b} \rceil \cdotp b}$</span>
+Now, consider the rounded instance <span style="color: green"><span>$\text{0-1 Knapsack}^{\prime}$</span></span> , <span>$\hat{w_i} = w_i \, , \hat{W} = W \, , \textcolor{blue}{\hat{v_i} = \lceil \frac{v_i}{b} \rceil \cdotp b}$</span>
 
 <span>$\Rightarrow$</span> Running time for solving <span style="color: green"><span>$\text{0-1 Knapsack}^{\prime}$</span></span> is <span>$\Theta(n \cdotp \frac{v^{\star}}{b}) = \Theta(\frac{n^3}{\epsilon})$</span>
 
@@ -90,10 +90,10 @@ value(OPT) in 0-1 Knapsack\\
 <span>$\leq \text{value}$</span> (<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) in 0-1 Knapsack + <span>$nb$</span> (直接就加一
 個刻度)\\
 = value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) +
-<span>$\frac{\epsilon}{2} \stackrel{\color{blue}{\leq \text{value(OPT)}}}{\max_i v_i}$</span>
+<span>$\frac{\epsilon}{2} \underset{\textcolor{blue}{\leq \text{value(OPT)}}}{\max_i v_i}$</span>
 
 <span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (1-\frac{\epsilon}{2})$</span> value(OPT)\\
-<span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (\frac{1}{1 + \epsilon})$</span> value(OPT) ( <span>$\because \color{red}{1-\frac{\epsilon}{2} \geq \frac{1}{1+\epsilon}}$</span> )
+<span>$\Rightarrow$</span> value(<span style="color: green"><span>$\text{OPT}^{\prime}$</span></span>) <span>$\geq \, (\frac{1}{1 + \epsilon})$</span> value(OPT) ( <span>$\because \textcolor{red}{1-\frac{\epsilon}{2} \geq \frac{1}{1+\epsilon}}$</span> )
 
 ### Improvement version
 
