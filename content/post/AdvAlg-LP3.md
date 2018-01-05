@@ -56,11 +56,15 @@ $$``
 \Rightarrow \mathbb{E}[\, \text{cost of Alg. output} \,] \leq c \log n \cdot \mathbf{OPT}
 $$``
 
-<div>
+<a name="markov_ineq">
+
+<div font color="#777">
 \[
-\text{According to Markov Ineq.} \quad \boxed{\Pr[X \geq a] \leq \frac{\mathbb{E}[X]}{a}}
+\text{According to \textbf{Markov Ineq.}} \quad \boxed{\Pr[X \geq a] \leq \frac{\mathbb{E}[X]}{a}}
 \]
 </div>
+
+</a>
 
 ``$$
 \Rightarrow \boxed{\Pr[\, \text{cost of Alg. output} \, \geq \color{blue}{4} \, \mathbf{OPT} \cdot c \log n\,] \leq \frac{1}{\color{blue}{4}}}

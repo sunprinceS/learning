@@ -52,19 +52,17 @@ Hash Table 中所存的 element 為指向一個個 linked list 的 pointer。
 
 <span>$\underline{~Proof.} ~~~Let~k = \frac{3 \ln n}{\ln(\ln n)}~ \text{and}~ [S]^k \triangleq \lbrace A \subseteq S~ | ~|A| = k \rbrace$</span>, <span>$S$</span> is the set of balls
 
-<div>
-\[
-
+``$$
 \begin{aligned}
-\Pr[\text{Bin~} i \text{~has~} \geq k \text{~balls}] & \leq \sum_{A \in [S]^k} \Pr[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\
+\Pr[\text{Bin} \; i \; \text{has}\, \geq k \; \text{balls}] & \leq \sum_{A \in [S]^k} \Pr[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\
 & = \binom{n}{k} (\frac{1}{n})^k ~~(\because \textbf{uniform hashing}) \\\\
 & = \frac{n!}{k!(n-k)!} ~ \frac{1}{n^k} = \frac{1}{k!} ~ \frac{n!}{(n-k)!n^k} \\
 & \leq \frac{1}{k!} ~~(~\because~ \prod_{i=0}^{k-1}n-i \leq n^k) \\
-& \leq \frac{1}{n^2} ~~(~\because~ \textbf{ Stirling's approx. formula})
+& \leq (\frac{e}{k})^k \, (\because \, \text{Stirling formula as follows})\\
+& \leq \color{red}{\frac{1}{n^2}} \, (\color{red}{\text{when} \; k = \frac{3 \ln n}{\ln(\ln n)}} \; \text{and according to the following lemma})
 \end{aligned}
+$$``
 
-\]
-</div>
 
 **[Theorem 3] Stirling's approx. formula**
 
@@ -73,6 +71,20 @@ Hash Table 中所存的 element 為指向一個個 linked list 的 pointer。
 k! = \sqrt{2 \pi k}~ (\frac{k}{e})^k (1 + \mathcal{O}( \frac{1}{k} ))
 \]
 </div>
+
+**[Lemma]** <span>$\forall \epsilon \in \mathbb{R}^{+} \; \exists \, n_0 \, s.t.  \, \forall n > n_0 \, \boxed{\ln (\ln n) \leq \epsilon \ln n}$</span>
+
+Let <span>$k = \textcolor{red}{\frac{3 \ln n}{\ln (\ln n)}}$</span>
+``$$
+\begin{align}
+\therefore \ln (\frac{e}{k})^k &= k(1 - \ln k)\\
+&= k[ \underset{\leq 0}{\underbrace{1 - \ln 3}} - \ln(\ln n) + \underset{\leq \frac{1}{3}\ln(\ln n)}{\underbrace{\ln(\ln(\ln n))}}] \\
+&\leq k \cdot -\frac{2}{3} \ln(\ln n) = -2 \ln n \, \square\\
+&\color{red}{\Rightarrow (\frac{e}{k})^k \leq \frac{1}{n^2}}
+\end{align}
+$$``
+
+
 
 ## Uniform Hashing? 
 看起來很合理，但當中我們做的一個假設其實是不合理的，也就是存在 uniform hashing function <span>$h$</span> 這件事情，想完成這個條件只有以下兩種可能
