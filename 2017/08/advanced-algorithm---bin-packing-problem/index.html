@@ -359,7 +359,7 @@ then exists poly-time algorithm can find the OPT</p>
 <ol>
 <li><p>number of ties in a bin <span>$\leq M = \lfloor \frac{1}{\epsilon} \rfloor$</span> ( <span>$\because \text{minimum size is} \, \epsilon$</span> )</p></li>
 
-<li><p>Only <span>$\leq {H}^{k}_{M}$</span> different possible contents in each bin (那 <span>$M$</span> 個位置選 <span>$k$</span> 個物品)</p></li>
+<li><p>Only <span>$\leq {H}^{k}_{M} = R$</span> different possible contents in each bin (那 <span>$M$</span> 個位置選 <span>$k$</span> 個物品)</p></li>
 
 <li><p>Total number of bin <span>$\leq \, n$</span> (最多也才 <span>$n$</span> 個物品)</p></li>
 </ol>
@@ -370,15 +370,15 @@ then exists poly-time algorithm can find the OPT</p>
 
 <h3 id="how-to-transform">How to transform ?</h3>
 
-<p>所以現在我們該如何將任意的 problem instance <span>$\color{green}{\tilde{I}}$</span> ，轉成符合此 lemma 的 instance <span>$J$</span> 呢？</p>
+<p>所以現在我們該如何將任意的 problem instance <span>$\textcolor{green}{\tilde{I}}$</span> ，轉成符合此 lemma 的 instance <span>$J$</span> 呢？</p>
 
 <p>首先我們將 size <span>$ &lt; \epsilon$</span> 者移掉得到 <span>$I$</span>，同時將剩下的物品依重量排序好，<strong>等個數</strong>地切分區間，每個區間有 <span>$\lfloor n\epsilon^2 \rfloor$</span> 個物品 (最後一個區間可能會少，但不管)，將區間的物品重量都放大到下一區間的 minimum (最後一個直接設成 <span>$1$</span>)。</p>
 
 <div>
 \[
 \begin{cases}
-J: \text{將區間的元素放大到下一個區間的 minimum} \, \small \color{red}{\text{(演算法所使用的)}}\\
-J^{\prime}: \text{將區間的元素縮小到同一群的 minimum (第一個區間直接縮到0)} \, \small \color{red}{(\text{用來證明bound})}
+J: \text{將區間的元素放大到下一個區間的 minimum} \, \small \textcolor{red}{\text{(演算法所使用的)}}\\
+J^{\prime}: \text{將區間的元素縮小到同一群的 minimum (第一個區間直接縮到0)} \, \small \textcolor{red}{(\text{用來證明bound})}
 \end{cases}
 \]
 </div>
@@ -405,14 +405,14 @@ J^{\prime}: \text{將區間的元素縮小到同一群的 minimum (第一個區�
 <strong>First-Fit</strong></p>
 
 <ol>
-<li><p>First-Fit do not require any new bins <span>$\Rightarrow OPT(J) \, \leq \, (1+\epsilon)\color{green}{OPT(\tilde{I})}$</span></p></li>
+<li><p>First-Fit do not require any new bins <span>$\Rightarrow OPT(J) \, \leq \, (1+\epsilon)\textcolor{green}{OPT(\tilde{I})}$</span></p></li>
 
 <li><p>First-Fit uses <span>$\geq \, 1$</span> extra bins，<br/>
 假設最後用了 <span>$L$</span> 個 bins ，那麼 <strong>all but the last bin must</strong>
 <span>$\mathbf{\geq \, 1 - \epsilon}$</span> (否則可放至前面的 bins 中)<br/>
-<span>$\Rightarrow \color{green}{OPT(\tilde{I})} \, \geq \,\sum_{\color{green}{\tilde{I}}}size &gt; (L-1)(1-\epsilon)$</span><br />
-<span>$\Rightarrow \frac{\color{green}{OPT(\tilde{I})}}{1 - \epsilon} &gt; L - 1$</span><br />
-<span>$\Rightarrow L \leq \frac{\color{green}{OPT(\tilde{I})}}{1-\epsilon} + 1 \leq (1+2\epsilon)\color{green}{OPT(\tilde{I})} + 1 \, \square$</span></p></li>
+<span>$\Rightarrow \textcolor{green}{OPT(\tilde{I})} \, \geq \,\sum_{\textcolor{green}{\tilde{I}}}size &gt; (L-1)(1-\epsilon)$</span><br />
+<span>$\Rightarrow \frac{\textcolor{green}{OPT(\tilde{I})}}{1 - \epsilon} &gt; L - 1$</span><br />
+<span>$\Rightarrow L \leq \frac{\textcolor{green}{OPT(\tilde{I})}}{1-\epsilon} + 1 \leq (1+2\epsilon)\textcolor{green}{OPT(\tilde{I})} + 1 \, \square$</span></p></li>
 </ol>
 
 <h2 id="延伸問題">延伸問題</h2>

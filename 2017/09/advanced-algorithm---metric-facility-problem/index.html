@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="An example of randomized rounding from LP">
+  <meta name="description" content="An example of deterministic rounding from LP">
   <meta name="generator" content="Hugo 0.32.1" />
 
-  <title>Advanced Algorithm - Weighted Set Cover &middot; Stay hungry. Stay foolish </title>
+  <title>Advanced Algorithm - Metric Facility Problem &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Advanced Algorithm - Weighted Set Cover</h1>
-  <h2>An example of randomized rounding from LP</h2>
+  <h1>Advanced Algorithm - Metric Facility Problem</h1>
+  <h2>An example of deterministic rounding from LP</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>18 Aug 2017</time>
+    <time>16 Sep 2017</time>
   </div>
   
 
@@ -270,8 +270,6 @@
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/linear-programming">Linear Programming</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/randomized-algorithm">Randomized Algorithm</a>&nbsp;&#47;
-    
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
@@ -283,100 +281,9 @@
 </div>
 
 
-  <p>呈前一講，我們對<strong>有限制的</strong> WSC 問題有 <span>$l$</span>-approx. algorithm，但可能並不是太好(比方說 <span>$l=|U|$</span> 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在<strong>大部分</strong>時候，都可以得到一個<strong>還不錯</strong> (approx. ratio ISN&rsquo;T too bad)的結果。</p>
+  <p>接續<a href="https://sunprinces.github.io/learning/tags/linear-programming/">前面幾講</a>，一個常用的技巧是，利用 LP solver 得出來的解 <span>$\mathbf{x}^{\star}$</span>， 拿去做 rounding 推出原先問題的解 <span>$\mathbf{x}^{\prime}$</span> (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Problem 。</p>
 
 <p></p>
-
-<h2 id="weighted-set-cover-problem">Weighted Set Cover Problem</h2>
-
-<p>讓我們明確定義這個問題</p>
-
-<p>Given <span>$U = \lbrace e_1,e_2,\cdots,e_n \rbrace, \, S_1,S_2,\cdots S_k \subseteq U \, \text{with} \, \text{cost}\,(S_i)$</span></p>
-
-<p>Want: Find a <strong>min</strong>-cost collection of subsets <span>$C$</span> such that <span>$\underset{C}{\bigcup} S_i = U$</span></p>
-
-<h2 id="formulation">Formulation</h2>
-
-<p>Let <span>$x_i = $</span>𝟙[subset <span>$S_i$</span> is chosen or not]</p>
-
-<div>
-\[
-\min \sum_i x_i \quad s.t. \begin{cases}
- \sum_{e_j \in S_i} x_i \geq 1 \;& , \forall j=1 \sim n \;(\because \text{每個element 都至少要被蓋到一次})\\
-0  \leq x_i \leq 1 \; & , \cancel{x_i \in \mathbb{Z}} \;(\text{LP Relaxation})
-\end{cases}
-\]
-</div>
-
-<p>利用 LP solver 得到的解 <span>$\mathbf{x}^{\star} = (x_1^{\star},x_2^{\star},\cdots,x_k^{\star})$</span> <strong>當作選擇</strong> <span>$\mathbf{S_i}$</span> <strong>進 collection 的機率</strong></p>
-
-<h2 id="lemma">Lemma</h2>
-
-<div>
-\[
-\Pr[C \, \text{is a set cover} \, \land \, \text{cost}(C) \leq \mathbf{OPT} \cdot c_1 \, \log n] \geq \frac{1}{2}
-\]
-</div>
-
-<h3 id="cost-很大的機率">cost 很大的機率</h3>
-
-<p>At each round, <span>$S_i$</span> will be chosen with prob. <span>$x_i^{\star}$</span> independently, and we repeat <span>$c \log n$</span> rounds</p>
-
-<p>因此，</p>
-
-<p><code>$$
-\mathbb{E}[\, \text{cost in 1 round} \,] = \, \sum_{i=1}^{k} \text{cost}(S_i) \cdot \Pr[ S_i \, \text{is chosen}] = \sum_{i=1}^{k} \, \text{cost}(S_i) \cdot x_i^{\star} \leq \mathbf{OPT}
-$$</code></p>
-
-<p><code>$$
-\Rightarrow \mathbb{E}[\, \text{cost of Alg. output} \,] \leq c \log n \cdot \mathbf{OPT}
-$$</code></p>
-
-<div>
-\[
-\text{According to Markov Ineq.} \quad \boxed{\Pr[X \geq a] \leq \frac{\mathbb{E}[X]}{a}}
-\]
-</div>
-
-<p><code>$$
-\Rightarrow \boxed{\Pr[\, \text{cost of Alg. output} \, \geq \color{blue}{4} \, \mathbf{OPT} \cdot c \log n\,] \leq \frac{1}{\color{blue}{4}}}
-$$</code></p>
-
-<h3 id="collection-span-c-span-不是-set-cover-的機率">collection <span>$C$</span> 不是 set cover 的機率</h3>
-
-<p>For each elemetn <span>$e_j$</span></p>
-
-<div>
-\[
-\Pr[e_j \, \text{is not covered in round 1}] \, = \underset{e_j \in S_i}{\prod}
-(1 - x_i^{\star}) \underset{\text{見以下}}{\leq} \underset{e_j \in S_i}{\prod} e^{-x_i^{\star}} =
-\exp(-\underset{e_j \in S_i}{\sum} x_i^{\star}) \underset{\text{constraint}}{\leq} e^{-1}
-\]
-</div>
-
-<div>
-\[
-\text{之後很常用到的不等式} \; \boxed{ 1-x \leq e^{-x}} \; \forall x \geq 0
-\]
-</div>
-
-<p>所以在 <span>$c \log n$</span> 個 round 內， <span>$e_j$</span> 都不會被選到的機率 <span>$ \leq (\frac{1}{e})^{c \log n}$</span>，選擇適當的 <span>$c$</span> ，使得該機率 <span>$\leq \frac{1}{4n}$</span>，
-再利用 Union Bound，將單一 element 不被選到的機率加總</p>
-
-<div>
-\[
-\Rightarrow \boxed{\Pr[\text{Alg. miss some element}] \leq \frac{1}{4}}
-\]
-</div>
-
-<p>再一次利用 Union Bound，將這兩件<strong>壞事</strong>的機率相加，可以得到其 <span>$\leq
-\frac{1}{2}$</span>，得證！</p>
-
-<p>※ 如果造得出 <span>$\frac{1}{2}$</span>，對於任意給定的常數 error tolerance
-<span>$\epsilon$</span> ，我們都可以藉由調控 <span>$c$</span> (也就是要 run 多少
- round) 得到 (但怪怪的地方是說，因 approx. ratio 並非 constant ，而是
- <span>$\mathcal{\Theta}(\log n)$</span>，所以 <span>$c$</span> 直接被忽略，才可以
- 在降低非法解的可能時，同時保證 approx. ratio)</p>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -384,13 +291,13 @@ $$</code></p>
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/">Advanced Algorithm - Vertex Cover Problem</a>
+      <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/">Problem Solving and Programming- hw1</a>
     </nav>
     
   </div>
@@ -400,13 +307,13 @@ $$</code></p>
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/">利用Ignr自動生成.gitignore</a>
+      <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/">Problem Solving and Programming- hw2</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

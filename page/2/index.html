@@ -249,6 +249,63 @@
   
     <article>
   <header>
+    <h2><a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-problem/">Advanced Algorithm - Metric Facility Problem</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>16 Sep 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/linear-programming">Linear Programming</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  </header>
+
+  <p>
+  <p>接續<a href="https://sunprinces.github.io/learning/tags/linear-programming/">前面幾講</a>，一個常用的技巧是，利用 LP solver 得出來的解 <span>$\mathbf{x}^{\star}$</span>， 拿去做 rounding 推出原先問題的解 <span>$\mathbf{x}^{\prime}$</span> (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Problem 。</p>
+
+<p></p>
+  </p>
+
+  
+</article>
+
+  
+    <article>
+  <header>
     <h2><a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/">Problem Solving and Programming- hw1</a></h2>
 
     <div class="post-meta">
@@ -715,12 +772,9 @@
   </header>
 
   <p>
-  呈前一講，我們對有限制的 WSC 問題有 $l$-approx. algorithm，但可能並不是太好(比方說 $l=|U|$ 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在大部分時候，都可以得到一個還不錯 (approx. ratio ISN&rsquo;T too bad)的結果。
-Weighted Set Cover Problem 讓我們明確定義這個問題
-Given $U = \lbrace e_1,e_2,\cdots,e_n \rbrace, \, S_1,S_2,\cdots S_k \subseteq U \, \text{with} \, \text{cost}\,(S_i)$
-Want: Find a min-cost collection of subsets $C$ such that $\underset{C}{\bigcup} S_i = U$
-Formulation Let $x_i = $𝟙[subset $S_i$ is chosen or not]
- \[ \min \sum_i x_i \quad s.
+  <p>呈前一講，我們對<strong>有限制的</strong> WSC 問題有 <span>$l$</span>-approx. algorithm，但可能並不是太好(比方說 <span>$l=|U|$</span> 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在<strong>大部分</strong>時候，都可以得到一個<strong>還不錯</strong> (approx. ratio ISN&rsquo;T too bad)的結果。</p>
+
+<p></p>
   </p>
 
   
@@ -787,68 +841,6 @@ Formulation Let $x_i = $𝟙[subset $S_i$ is chosen or not]
   
   <footer>
     <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/">Advanced Algorithm - Linear Programming</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>14 Aug 2017</time>
-  </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/linear-programming">Linear Programming</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
-    
-  </div>
-  
-  
-
-</div>
-
-
-  </header>
-
-  <p>
-  <p><strong>Definition:</strong><br/>
-A linear programming is a problem of <em>maximizing</em> or <em>minimizing</em> a <strong>linear
-multivariate function</strong> subject to some <strong>linear constraints</strong>
-</p>
-  </p>
-
-  
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>

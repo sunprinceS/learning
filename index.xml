@@ -123,6 +123,17 @@
     </item>
     
     <item>
+      <title>Advanced Algorithm - Metric Facility Problem</title>
+      <link>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-problem/</link>
+      <pubDate>Sat, 16 Sep 2017 20:49:15 +0200</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-problem/</guid>
+      <description>&lt;p&gt;接續&lt;a href=&#34;https://sunprinces.github.io/learning/tags/linear-programming/&#34;&gt;前面幾講&lt;/a&gt;，一個常用的技巧是，利用 LP solver 得出來的解 &lt;span&gt;$\mathbf{x}^{\star}$&lt;/span&gt;， 拿去做 rounding 推出原先問題的解 &lt;span&gt;$\mathbf{x}^{\prime}$&lt;/span&gt; (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Problem 。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Problem Solving and Programming- hw1</title>
       <link>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/</link>
       <pubDate>Tue, 12 Sep 2017 08:32:38 +0100</pubDate>
@@ -208,12 +219,9 @@
       <pubDate>Fri, 18 Aug 2017 21:19:19 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/</guid>
-      <description>呈前一講，我們對有限制的 WSC 問題有 $l$-approx. algorithm，但可能並不是太好(比方說 $l=|U|$ 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在大部分時候，都可以得到一個還不錯 (approx. ratio ISN&amp;rsquo;T too bad)的結果。
-Weighted Set Cover Problem 讓我們明確定義這個問題
-Given $U = \lbrace e_1,e_2,\cdots,e_n \rbrace, \, S_1,S_2,\cdots S_k \subseteq U \, \text{with} \, \text{cost}\,(S_i)$
-Want: Find a min-cost collection of subsets $C$ such that $\underset{C}{\bigcup} S_i = U$
-Formulation Let $x_i = $𝟙[subset $S_i$ is chosen or not]
- \[ \min \sum_i x_i \quad s.</description>
+      <description>&lt;p&gt;呈前一講，我們對&lt;strong&gt;有限制的&lt;/strong&gt; WSC 問題有 &lt;span&gt;$l$&lt;/span&gt;-approx. algorithm，但可能並不是太好(比方說 &lt;span&gt;$l=|U|$&lt;/span&gt; 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在&lt;strong&gt;大部分&lt;/strong&gt;時候，都可以得到一個&lt;strong&gt;還不錯&lt;/strong&gt; (approx. ratio ISN&amp;rsquo;T too bad)的結果。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
