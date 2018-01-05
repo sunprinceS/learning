@@ -327,19 +327,16 @@
 
 <p><span>$\underline{~Proof.} ~~~Let~k = \frac{3 \ln n}{\ln(\ln n)}~ \text{and}~ [S]^k \triangleq \lbrace A \subseteq S~ | ~|A| = k \rbrace$</span>, <span>$S$</span> is the set of balls</p>
 
-<div>
-\[
-
+<p><code>$$
 \begin{aligned}
-\Pr[\text{Bin~} i \text{~has~} \geq k \text{~balls}] & \leq \sum_{A \in [S]^k} \Pr[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\
-& = \binom{n}{k} (\frac{1}{n})^k ~~(\because \textbf{uniform hashing}) \\\\
-& = \frac{n!}{k!(n-k)!} ~ \frac{1}{n^k} = \frac{1}{k!} ~ \frac{n!}{(n-k)!n^k} \\
-& \leq \frac{1}{k!} ~~(~\because~ \prod_{i=0}^{k-1}n-i \leq n^k) \\
-& \leq \frac{1}{n^2} ~~(~\because~ \textbf{ Stirling's approx. formula})
+\Pr[\text{Bin} \; i \; \text{has}\, \geq k \; \text{balls}] &amp; \leq \sum_{A \in [S]^k} \Pr[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\
+&amp; = \binom{n}{k} (\frac{1}{n})^k ~~(\because \textbf{uniform hashing}) \\\\
+&amp; = \frac{n!}{k!(n-k)!} ~ \frac{1}{n^k} = \frac{1}{k!} ~ \frac{n!}{(n-k)!n^k} \\
+&amp; \leq \frac{1}{k!} ~~(~\because~ \prod_{i=0}^{k-1}n-i \leq n^k) \\
+&amp; \leq (\frac{e}{k})^k \, (\because \, \text{Stirling formula as follows})\\
+&amp; \leq \color{red}{\frac{1}{n^2}} \, (\color{red}{\text{when} \; k = \frac{3 \ln n}{\ln(\ln n)}} \; \text{and according to the following lemma})
 \end{aligned}
-
-\]
-</div>
+$$</code></p>
 
 <p><strong>[Theorem 3] Stirling&rsquo;s approx. formula</strong></p>
 
@@ -348,6 +345,18 @@
 k! = \sqrt{2 \pi k}~ (\frac{k}{e})^k (1 + \mathcal{O}( \frac{1}{k} ))
 \]
 </div>
+
+<p><strong>[Lemma]</strong> <span>$\forall \epsilon \in \mathbb{R}^{+} \; \exists \, n_0 \, s.t.  \, \forall n &gt; n_0 \, \boxed{\ln (\ln n) \leq \epsilon \ln n}$</span></p>
+
+<p>Let <span>$k = \textcolor{red}{\frac{3 \ln n}{\ln (\ln n)}}$</span>
+<code>$$
+\begin{align}
+\therefore \ln (\frac{e}{k})^k &amp;= k(1 - \ln k)\\
+&amp;= k[ \underset{\leq 0}{\underbrace{1 - \ln 3}} - \ln(\ln n) + \underset{\leq \frac{1}{3}\ln(\ln n)}{\underbrace{\ln(\ln(\ln n))}}] \\
+&amp;\leq k \cdot -\frac{2}{3} \ln(\ln n) = -2 \ln n \, \square\\
+&amp;\color{red}{\Rightarrow (\frac{e}{k})^k \leq \frac{1}{n^2}}
+\end{align}
+$$</code></p>
 
 <h2 id="uniform-hashing">Uniform Hashing?</h2>
 
