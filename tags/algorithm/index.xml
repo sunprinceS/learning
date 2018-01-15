@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 16 Sep 2017 20:49:15 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 23 Sep 2017 21:19:19 +0200</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Advanced Algorithm - Weighted Set Cover Revisited</title>
+      <link>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---weighted-set-cover-revisited/</link>
+      <pubDate>Sat, 23 Sep 2017 21:19:19 +0200</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---weighted-set-cover-revisited/</guid>
+      <description>&lt;p&gt;呈之前的討論，對於 WSC 問題，我們有了利用 LP solver 去對解做 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/&#34;&gt;deterministic rounding&lt;/a&gt; 及 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/&#34;&gt;randomized rounding&lt;/a&gt; 的演算法，解法的共通點是必須要先 run 過 LP solver (雖然理論上是 &lt;strong&gt;POLY&lt;/strong&gt; ，實務上現行的 solver 也很有效率)，但我們仍想問說，是否存在不須使用 LP solver 的演算法呢？ 而這也是這講所要提到的 &lt;strong&gt;Primal-Dual Method&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Advanced Algorithm - Metric Facility Location Problem</title>
