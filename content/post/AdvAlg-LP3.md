@@ -25,7 +25,7 @@ Let <span>$x_i = $</span>𝟙[subset <span>$S_i$</span> is chosen or not]
 
 <div>
 \[
-\min \sum_i x_i \quad s.t. \begin{cases}
+\min \sum_i x_i \cdot \text{cost}(S_i) \quad s.t. \begin{cases}
  \sum_{e_j \in S_i} x_i \geq 1 \;& , \forall j=1 \sim n \;(\because \text{每個element 都至少要被蓋到一次})\\
 0  \leq x_i \leq 1 \; & , \cancel{x_i \in \mathbb{Z}} \;(\text{LP Relaxation})
 \end{cases}

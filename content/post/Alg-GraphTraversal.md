@@ -129,11 +129,11 @@ def kosaraju(G,SCC_list):
 ## Application - Topological Sort
 ### Def. Directed Acyclic Graph (DAG，有向無環圖)
 有向圖中的特例，所有的邊都朝著同一個方向延伸，所有節點可定義**先後次序**(也就是下方定義的拓樸排序)
-(e.g 玩遊戲時，將所有關卡視為一個個節點，要先破完 A 關卡或 B 關卡，才可以打後續E關卡，問可能的破關順序即是一種 Topological order)
+(e.g 玩遊戲時，將所有關卡視為一個個節點，要先破完 A 關卡或 B 關卡，才可以打後續E關卡，每種可能的破關順序即是一種 Topological order)
 
 ### Topolocial Order (拓樸排序)
-在有向圖中，找到一個節點的排序 <span>$v_1,v_2,\cdots,v_n$</span>，使得任意兩點
- <span>$v_i,v_j$</span> ，若 <span>$i < j$</span> ，則 <span>$e(v_i,v_j) \notin E$</span>
+在有向圖中，找到一個節點的排序 <span>$v_1,v_2,\cdots,v_n$</span>，使得任意有向邊
+<span>$e(v_i,v_j) \in E$</span>， <span>$v_i$</span> comes before <span>$v_j$</span> in the ordering 。
 
 ### DFS Algortihm
 Run DFS on <span>$G^{rev}$</span> \\
