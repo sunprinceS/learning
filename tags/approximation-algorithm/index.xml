@@ -7,10 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 23 Sep 2017 21:19:19 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 29 Sep 2017 21:19:19 +0200</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/approximation-algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Advanced Algorithm - Metric Facility Location Revisited</title>
+      <link>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-revisited/</link>
+      <pubDate>Fri, 29 Sep 2017 21:19:19 +0200</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-revisited/</guid>
+      <description>&lt;p&gt;前面提到過一個較為複雜的優化問題， &lt;a href=&#34;https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/&#34;&gt;Metric Facility Location Problem&lt;/a&gt; ，並給出了一個 4-Approx. Algorithm ，於這講中，我們要來利用前面提到的 Primal-Dual method 來設計演算法。&lt;/p&gt;
+
+&lt;!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)--&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Advanced Algorithm - Weighted Set Cover Revisited</title>
