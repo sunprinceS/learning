@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 05 Dec 2017 09:56:56 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jan 2018 23:14:08 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/kth/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Information Retrieval - Lec1</title>
+      <link>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/</link>
+      <pubDate>Tue, 16 Jan 2018 23:14:08 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/</guid>
+      <description>&lt;p&gt;這個系列主要會紀錄自己在 KTH 修習 &lt;a href=&#34;https://www.kth.se/student/kurser/kurs/DD2476?l=en&#34;&gt;Information Retrieval System&lt;/a&gt; 的一些筆記，備忘用，不會像之前的 Post 那麼詳細，但還是會加點自己的 remark 這樣。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Problem Solving and Programming- hw11</title>

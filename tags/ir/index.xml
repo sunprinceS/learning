@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ir on Stay hungry. Stay foolish </title>
+    <link>https://sunprinces.github.io/learning/tags/ir/</link>
+    <description>Recent content in Ir on Stay hungry. Stay foolish </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017. All rights reserved.</copyright>
+    <lastBuildDate>Tue, 16 Jan 2018 23:14:08 +0100</lastBuildDate>
+    
+	<atom:link href="https://sunprinces.github.io/learning/tags/ir/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Information Retrieval - Lec1</title>
+      <link>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/</link>
+      <pubDate>Tue, 16 Jan 2018 23:14:08 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/</guid>
+      <description>&lt;p&gt;這個系列主要會紀錄自己在 KTH 修習 &lt;a href=&#34;https://www.kth.se/student/kurser/kurs/DD2476?l=en&#34;&gt;Information Retrieval System&lt;/a&gt; 的一些筆記，備忘用，不會像之前的 Post 那麼詳細，但還是會加點自己的 remark 這樣。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

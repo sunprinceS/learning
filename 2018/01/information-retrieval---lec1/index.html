@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The VC Dimension">
+  <meta name="description" content="Warmup / Greedy Algorithms / Dynamic Programming">
   <meta name="generator" content="Hugo 0.32.4" />
 
-  <title>NTU Machine Learning - Lec7 &middot; Stay hungry. Stay foolish </title>
+  <title>Information Retrieval - Lec1 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>NTU Machine Learning - Lec7</h1>
-  <h2>The VC Dimension</h2>
+  <h1>Information Retrieval - Lec1</h1>
+  <h2>Warmup / Greedy Algorithms / Dynamic Programming</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>04 Jan 2018</time>
+    <time>16 Jan 2018</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/machine-learning-foundation">Machine Learning Foundation</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/information-retrieval">Information Retrieval</a>
     
   </div>
   
@@ -266,9 +266,11 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/machine-learning">Machine Learning</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ir">IR</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/nlp">NLP</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
     
   </div>
   
@@ -277,111 +279,95 @@
 </div>
 
 
-  <p>於前一講中，我們證明了 growth function 為 <strong>POLY(N)</strong> iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 <span>$E_i(h) \approx E_o(h)$</span>  (if 數據點夠多 <span>$N$</span> )。而這一講中，我們由 break point 引進 <strong>VC Dimension</strong> <span>$d \scriptscriptstyle VC$</span> ，來當作衡量 <span>$\mathcal{H}$</span> 複雜度的一個指標。</p>
+  <p>這個系列主要會紀錄自己在 KTH 修習 <a href="https://www.kth.se/student/kurser/kurs/DD2476?l=en">Information Retrieval System</a> 的一些筆記，備忘用，不會像之前的 Post 那麼詳細，但還是會加點自己的 remark 這樣。</p>
 
 <p></p>
 
-<h2 id="vc-dimension">VC Dimension</h2>
+<h2 id="difference-between-database">Difference between Database</h2>
+
+<ol>
+<li>structured data v.s. unstructured data</li>
+<li>deterministic v.s. inexact</li>
+</ol>
+
+<p>DB 處理的對象是滿足選定資料結構的 structured data ，而 IR 則包含了將真實世界中的訊息 (which is unstructured) 轉換成我們容易處理的資料結構之步驟。<br />
+承上，該 parse 成何種資料結構隨著應用場景及需求而不同，又比方說在 query 時， DB 須滿足特定 rule ，而 IR 則是要處理在 <strong>Natural Language</strong> level 的 query，另外，像是計算 document 與 query 的相關程度也隨著需求不同而改變 (which is inexact)。</p>
+
+<p><strong>Remark:</strong> In brief, DB 是蘊含在 IR system 中的一個模塊。</p>
+
+<h2 id="key-idea">Key Idea</h2>
+
+<h3 id="inverted-index">Inverted Index</h3>
+
+<p>像是參考書背後的索引，會列出哪些名詞在哪些章節、第幾頁出現，在閱讀的時候，可以想成是看到一個 page <span>$\rightarrow$</span> word/phrase 的 mapping ， Inverted Index 則是建構一個<strong>反向</strong>的 mapping。</p>
+
+<h3 id="ranking">Ranking</h3>
+
+<p>決定當我們有大量的 return 結果時，該如何以怎樣的排序呈現給使用者。 (Ja&hellip;  Nowadays, the most successful ranking algorithm in the world is Google&hellip;lol)</p>
+
+<h3 id="evaluation">Evaluation</h3>
+
+<ul>
+<li>Precision</li>
+</ul>
 
 <div>
 \[
-\text{largest N for which }\, m_H(N) = 2^N
+p = \frac{|\text{ret} \, \bigcap \, \text{rel}|}{|\text{ret}|}
 \]
 </div>
 
-<p>其實就是 (minimum) break point <span>$k$</span> 的前一點罷了。</p>
-
-<h2 id="general-pla-w-higher-dimension-span-d-span">General PLA (w/ higher dimension <span>$d$</span>)</h2>
-
-<p><code>$$
-\boxed{d_{VC} = d + 1}
-$$</code></p>
-
-<p><strong>proof</strong>:</p>
+<p>回傳的結果中，真的有關係的比例</p>
 
 <ul>
-<li><span>$d \scriptscriptstyle VC$</span> <span>$\geq d + 1$</span>:<br />
-That is, for hypothesis <span>$\mathcal{H}$</span>， <span>$\exists$</span> some
-<span>$d+1$</span> 個數據點 can be shattered，所以我們就構造一組這樣的
-<span>$\mathcal{D}$</span> 就可以得證了！</li>
+<li>Recall</li>
 </ul>
 
-<blockquote>
-<p><img src="https://sunprinces.github.io/learning/img/post/dvc_1.png" width="70%" style="border-radius: 0%;"></p>
+<div>
+\[
+r = \frac{|\text{ret} \, \bigcap \, \text{rel}|}{|\text{rel}|}
+\]
+</div>
 
-<p>一個可以選擇的數據是在原點及單位正交基底向量 (簡單起見，選擇 <span>$\mathbf{e}_i$</span>)
-(會這樣想，可以回到<a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec5/">第五講</a>中提到，那些退化的 case 反而是不能被 shatter 的特例，所以我們應該是要找能展出整個 input space 的基底才是)</p>
+<p>關於有關連的那些文本，有被回傳結果的比例，實務上是無法計算的(我們不知道相關的文本到底有哪些)</p>
 
-<p>而 <strong>shatter</strong> 表示什麼呢？表示 given 一組任意的 label <span>$\mathbf{y}$</span>，我們都能找到一組係數與 <span>$X$</span> 乘一乘後得到它。</p>
+<p>Remark: 這兩個 criteria 其實有點互相矛盾，比方說得到 <span>$100 \%$</span> recall 的一個方法是回傳全部的文本，便可確保沒有漏網之魚 (但這太 87)。而得到僅可能高的precision 的方法則是只回傳那些 <span>$100 \%$</span> 確定關聯的文本 (但如此回傳的量太少，不夠使用者抉擇)</p>
 
-<p><img src="https://sunprinces.github.io/learning/img/post/dvc_2.png" width="80%" style="border-radius: 0%;"></p>
-
-<p>因為 <span>$\det(X) = 1$</span>，所以其 invertible !</p>
-</blockquote>
+<h2 id="why-ir-matter">Why IR matter</h2>
 
 <ul>
-<li><span>$d \scriptscriptstyle VC$</span> <span>$\leq d + 1$</span>: <br />
-That is, for hypothesis <span>$\mathcal{H}$</span>， <span>$\forall d+2$</span>
-個數據點都不能被 shatter 。</li>
+<li>How many times you use Google Search each day? 😉</li>
+<li>Get high ranking on the returened list is essential (gaming the ranking
+algorithm&hellip;lol)</li>
+<li>The returened consequence framed our mind to what they show&hellip; (which is not a
+good part, I think)</li>
 </ul>
 
-<blockquote>
-<p>而這裡的想法是利用反證法，一樣構造一組 <span>$d+2$</span> 個 row 的資料矩陣 <span>$X$</span> ，先假設存在一組 <span>$\mathbf{w}$</span> 滿足我們所給定的 label assignment。<br />
-但因為 <code>null</code>(<span>$X$</span>) <span>$\not = 0$</span>，所以最後一筆數據不能完全隨心所欲的 assign ，而是 depend on 前 <span>$d+1$</span> 個，而正是利用此矛盾點，在最後加入一個使得整筆資料不能被 shatter 的老鼠屎 (從 2D 的例子來看，就是找出會讓資料們變成線性不可分的點，在更高維也是)，便能得證！</p>
-</blockquote>
+<h2 id="a-first-example-boolean-search">A first example - Boolean Search</h2>
 
-<h3 id="exploiting-linear-dependence">Exploiting Linear dependence</h3>
+<p>構建一個 Term-document matrix <span>$M \in \mathbb{R}^{W \times D}$</span>，
+<span>$W$</span>
+為 query 的單詞數， <span>$D$</span> 為文本數。<br />
+<span>$M[w][d]= $</span> 𝟙[word <span>$w$</span> appears
+in document <span>$d$</span>]</p>
 
-<blockquote>
-<p>Assume the labels for previous <span>$d+1$</span> points are <span>$\lbrace \textcolor{blue}{\texttt{o}},\textcolor{red}{\texttt{x}},\cdots,\textcolor{red}{\texttt{x}} \rbrace$</span></p>
+<h3 id="advantage">Advantage</h3>
 
-<p><code>$$
-\mathbf{x}_{d+2} = \color{blue}{a_1}\mathbf{x}_1 + \color{red}{a_2}\mathbf{x_2}
-+ \cdots + \color{red}{a_{d+1}}\mathbf{x}_{d+1}
-$$</code></p>
+<p>Useful, simple, fast and intuitive in doing boolean operation <br />
+(often used in <strong>well-defined</strong> documents )</p>
 
-<p>Then, multiply by <span>$\mathbf{w}^T$</span>, we can find contradiction if the
-label for <span>$\mathbf{x} \scriptscriptstyle d+2$</span> is <span>$\textcolor{red}{\texttt{x}}$</span></p>
+<p>實做細節等 lab 1寫完再來補上XD</p>
 
-<p><img src="https://sunprinces.github.io/learning/img/post/dvc_3.png" width="70%" style="border-radius: 0%;"></p>
-</blockquote>
-
-<h2 id="interpretation-of-vc-dimension">Interpretation of VC Dimension</h2>
+<h3 id="disadvantage">Disadvantage</h3>
 
 <ul>
-<li><strong>Effective</strong> Degree of Freedom (<span>$\approx$</span> number of free params)</li>
-<li>Model Complexity</li>
+<li>How to formulate query (the result can be too many or too few, depending on
+the query)</li>
+<li>Lack of <strong>ranking</strong> of returned result</li>
+<li>Make a little unreasonable assumption: <strong>every terms are equally important</strong></li>
 </ul>
 
-<p>We can rewrite the VC Bound as follows</p>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/vc_1.png" width="70%" style="border-radius: 0%;"></p>
-
-<p><span>$\textcolor{purple}{\text{with prob.}  \, \geq 1 - \delta }$</span>， The
-error tolerance <span>$\epsilon$</span> will be</p>
-
-<p><code>$$
-\sqrt{\frac{8}{N}\ln(\frac{4 \, (2N)^{d_{VC}}}{\color{purple}{\delta}})}
-$$</code></p>
-
-<p>And we also call it <strong>penalty for model complexity</strong> <span>$\Omega(N,\mathcal{H},\delta)$</span></p>
-
-<p><code>$$
-\boxed{E_o(g) \leq E_i(g) + \underset{\color{red}{\Omega(N,\mathcal{H},\delta)}}{\underbrace{\sqrt{\frac{8}{N}\ln(\frac{4 \, (2N)^{d_{VC}}}{\delta})}}}}
-$$</code></p>
-
-<p><strong>Conclusion</strong>: powerful <span>$\mathcal{H}$</span> IS NOT always good! <br />
-不能只追求在 training data 上能完全 fit ，而引進過高的模型複雜度導致 <strong>overfitting</strong> 。</p>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/vc_2.png" width="90%" style="border-radius: 0%;"></p>
-
-<p><strong>Some Remark</strong>: VC bound 因為處理的情況很 general ，其是相當 <strong>LOOSE</strong> 的，實務上要達到夠小的 error rate ，不一定需要其所給出所需要的那麼多 data 量</p>
-
-<h2 id="reference">Reference</h2>
-
-<ul>
-<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/07_handout.pdf">林軒田老師的講義</a></li>
-</ul>
+<p><strong>Remark:</strong> 一個比較偏 DB 風格的 IR 方法 ，在將 documents 轉成方才定義的那種 term-document matrix 時，丟失了太多資訊。在 query 時處理的也非 user-friendly 的自然語言。</p>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -389,13 +375,13 @@ $$</code></p>
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec6/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec7/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec6/">NTU Machine Learning - Lec6</a>
+      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec7/">NTU Machine Learning - Lec7</a>
     </nav>
     
   </div>
@@ -404,14 +390,8 @@ $$</code></p>
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/">Information Retrieval - Lec1</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
