@@ -30,6 +30,9 @@ As [primal-dual LP](http://localhost:1313/learning/2017/08/advanced-algorithm---
 \end{cases}
 $$``
 
+**Remark:** \\
+**寫出 dual form 的直觀方法是，原先的 constraint 會變 objective ，而 objective 會變 constraint 。** \\
+像這個例子為 **我們想儘量 maximize 原先 constraint 中** <span>$\underset{i: e_j \in S_i}{\sum} x_i \geq 1$</span> 乘上的那個係數 <span>$\alpha_j$</span> ( 想讓原 objective 的下界越 tight 越好，而我們有 <span>$j$</span> 個這樣的式子)，但對每個 <span>$i$</span> 來說，係數合不能超過原先 objective 的 <span>$x_i$</span> 係數 (也就是上方的 constraint ，而我們有 <span>$i$</span> 個這樣的限制)。
 ## Correctness of Approx. Ratio
 
 利用 Weak Duality Theorem, <span>$\forall \, \text{feasible} \, \mathbf{x}, \mathbf{\alpha}$</span>我們有
