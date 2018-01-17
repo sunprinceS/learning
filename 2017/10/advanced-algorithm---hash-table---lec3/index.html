@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Perfect Hashing">
+  <meta name="description" content="Power of 2-choices">
   <meta name="generator" content="Hugo 0.32.4" />
 
-  <title>Advanced Algorithm - Hash Table - Lec2 &middot; Stay hungry. Stay foolish </title>
+  <title>Advanced Algorithm - Hash Table - Lec3 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Advanced Algorithm - Hash Table - Lec2</h1>
-  <h2>Perfect Hashing</h2>
+  <h1>Advanced Algorithm - Hash Table - Lec3</h1>
+  <h2>Power of 2-choices</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>05 Oct 2017</time>
+    <time>14 Oct 2017</time>
   </div>
   
 
@@ -281,78 +281,105 @@
 </div>
 
 
-  <p>Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 <span>$\mathcal{O}(1)$</span> lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？</p>
+  
 
-<p></p>
+<p>在 <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">第一講</a>中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 <span>$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$</span> ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same <span>$\mathcal{H}$</span>)可以選，每次我們就看哪一個 <span>$h$</span> 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 <span>$\mathbb{E}[\, \text{max num of elements in any slots} \, ]$</span> ?</p>
 
-<h3 id="def"><em>Def.</em></h3>
+<h2 id="chernoff-bound">Chernoff Bound</h2>
 
-<p><center>A <strong>Perfect Hash Function</strong> is a hash function w/o collision</center></p>
+<p><span>$n$</span> 個 identical R.V. 的相加，想 measure 其偏離平均值的機率</p>
 
-<p>想法的共通性是利用空間換取時間。</p>
+<p>Let <span>$X_1, X_2, \cdots, X_n$</span> be independent binary R.V with <span>$\mathbb{E}[X_i] = p_i$</span></p>
 
-<h2 id="naive-method-span-mathcal-o-n-2-space-method">Naive method - <span>$\mathcal{O}(N^2)$ space method</h2>
+<p><span>$X = \sum_i X_i$</span>, <span>$\; \mu = \mathbb{E}[X] = \sum_i p_i$</span>
+<!--<span>$\; p = \frac{\mu}{n} = \text{avg}(p_i)$</span>--></p>
 
-<p><strong>(w/ <span>$\mathcal{O}(1)$</span>time)</span></strong></p>
+<div>
+\[
+\boxed{\Pr[X \geq e \mu] \leq e^{- \mu}}
+\]
+</div>
 
-<p>Let the number of slots be <span>$N^2$</span>, then</p>
+<h2 id="power-of-2-choices">Power of 2 choices</h2>
 
-<p>任意從 2-Universal Hash Family <span>$\mathcal{H}$</span> 中抽一個 <span>$h$</span> 出來
-<code>$$
-\Pr_{h \in \mathcal{H}}[\,\text{collision happened}\,] = \binom{N}{2} \cdot \frac{1}{N^2} \leq
-\frac{1}{2}
-$$</code></p>
+<p>Throw <span>$n$</span> balls into <span>$n$</span> bins, <br />
+For every ball, we pick 2 bins uniformly at random, throw the ball into the bin with less load</p>
 
-<p>抽取次數的期望值為 <span>$2$</span> (成功率的倒數)</p>
-
-<h2 id="span-mathcal-o-n-space-method"><span>$\mathcal{O}(N)$ space method</h2>
-
-<p><strong>(w/ <span>$\mathcal{O}(N)$</span> time)</span></strong></p>
+<p>Let <span>$B_k = | \;\lbrace i \, | \,b_i \geq k \rbrace\;|$</span> (有 <span>$\geq k$</span> 顆球的 bin 數)<br />
+<!--<span>$\beta_k$</span> 為 <span>$B_k$</span> 的 upper bound (with <span>$\Pr[\underset{\text{event} \, \mathcal{E}_k}{\underbrace{B_k > \beta_k}}] \leq \frac{1}{n^2}$</span>)，\\-->
+<span>$\beta_k$</span> 為 <span>$B_k$</span> 的 upper bound ; <span>$ \quad \mathcal{E}_k$</span> 為 <span>$\beta_k &gt; B_k$</span> (上限符合要求) 的 event
+<br />
+假定我們已經有了 <span>$B_k \leq \beta_k$</span> 這個條件 (<span>$\mathcal{E}_k$</span> 成立)，該如何 inductively 去找 <span>$\beta \scriptstyle k+1$</span> ?</p>
 
 <ol>
-<li><p>從 <span>$\mathcal{H}$</span> 中抽出 <span>$h$</span> 將 <span>$N$</span> 個
-element hash 到 <span>$N$</span> 個 slot 當中 (Note: 這裡會發生 collision) <br />
-Denote <span>$m_i$</span> be the number of elements with hash value <span>$= i$</span></p></li>
+<li><p>For any balls <span>$j$</span>, we say <span>$j$</span> is <span>$\color{red}{red}$</span> if the number of balls below it <span>$\leq k$</span></p></li>
 
-<li><p>Redo Step1. until <span>$\sum m_i^2 \leq 4 N$</span></p></li>
+<li><p><span>$\Pr[ \, j \, \text{is red} \,] \leq (\frac{\beta_k}{n})^2$</span> (兩個 bin 球數都要 <span>$\geq k$</span>)</p></li>
 
-<li><p>For each slot <span>$i$</span> with number of elements <span>$m_i$</span><br />
-Pick a hash function from 2-Universal Hash family <span>$\mathcal{H}_i: \, \text{slot} \, i \rightarrow \lbrace 0, 1, \cdots, m_i^2 - 1\rbrace$</span><br />
-Repeat until no collision happened<br />
-Note: Need to do for every slots (from <span>$0 \sim N-1$</span>)</p></li>
+<li><p><span>$\mathbb{E}[B\scriptstyle k+1 \normalsize \, | \mathcal{E}_k] \leq \mathbb{E}[\text{num of red balls} \, | \mathcal{E}_k] \leq n \cdot (\frac{\beta_k}{n})^2$</span> <br />
+(第一個等號因為有紅色球的 bin 一定有 <span>$\geq$</span> <span>$k+1$</span> 個球，後面那個等號是因為 Union Bound)</p></li>
+
+<li><p>Using <span>$\color{blue}{\text{Chernoff Bound}}$</span>， <span>$\Pr[B \scriptstyle k+1 \normalsize \geq e \frac{\beta_k^2}{n} | \mathcal{E}_k] \leq \exp(-\frac{\beta_k^2}{n})$</span> <br />
+<br />
+(如果 <span>$\exp(-\frac{\beta_k^2}{n}) \leq \frac{1}{n^2}$</span>) ， 則我們可以選 <span>$\beta \scriptstyle k+1  \normalsize = e \, \frac{\beta_k^2}{n}$</span><br />
+整理一下此遞迴式，我們有了以下關係式</p></li>
 </ol>
 
-<p>所以最後每個元素 <span>$x$</span>的鍵值會是一個 pair (<span>$h(x),h_{h(x)} \normalsize(x)$</span>) ，所需總 slot 數 <span>$\leq 4 N$</span></p>
-
-<h3 id="running-time">Running Time</h3>
-
-<p>先來看 Step3.，跟上面 Naive method 的方法一樣，每個 slot 抽取 no collision hash function 的次數期望值 <span>$\leq 2$</span></p>
-
-<p>再來看 Step1. ， Number of total collision is</p>
+<p><code>$$
+\boxed{\frac{\beta_{k+m}}{n} = \frac{1}{e} \, (\frac{e \beta_k}{n})^{2^m}}
+$$</code>
+ 接下來要選定初始值 <span>$k$</span>，就可以確定 <span>$\beta$</span> 的值了，<br />
+ 注意到 <span>$\beta_6 \leq \lfloor \frac{n}{6} \rfloor \leq \frac{n}{2e}$</span> (顯然會超過 6 顆球
+ 的bin數 一定會小於均分的 case)<br />
+ 代回上式，可得</p>
 
 <p><code>$$
-\sum_{i=1}^N \frac{(m_i)(m_i - 1)}{2} = \frac{1}{2}\sum_{i=1}^N m_i^2 - \frac{N}{2}
+\frac{\beta_{6+m}}{n} \leq \frac{1}{e} \, \frac{1}{2^{2^m}}
 $$</code></p>
 
-<p>又已知</p>
+<p>當 <span>$m = \mathcal{O}(\ln \ln n)$</span>， we can find that <span>$\beta \scriptstyle 6+m \normalsize &lt; 1$</span> <br />
+(亦即超過 <span>$\mathcal{O}(1) + \ln \ln n $</span> 顆球的 bin 出現的機率極小)</p>
+
+<p>這裡只的機率很小是指 <span>$\Pr[\neg \, \mathcal{E}_m]$</span> 很小，根據上方的遞迴式，我們可以給出一個明確的上界</p>
+
+<h3 id="fact">Fact</h3>
 
 <p><code>$$
-\mathbb{E}[\,\text{# of collisions}\,] \leq \binom{N}{2} \cdot \frac{1}{N} = \frac{N-1}{2}
+\boxed{\Pr[ \neg \, \mathcal{E}_{k+1}] \leq \Pr[\neg \, \mathcal{E}_{k+1} \,| \, \mathcal{E}_k] \cdot \Pr[\mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k]}
 $$</code></p>
 
-<p>綜合兩式，可得</p>
+<p><strong>proof.</strong></p>
 
 <p><code>$$
-\mathbb{E}[\, \sum_{i=1}^N m_i^2 \,] \leq 2 N
+\begin{align}
+\text{RHS} \, &amp;= \, \Pr[\neg \, \mathcal{E}_{k+1} \,| \, \mathcal{E}_k] \cdot \Pr[\mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k] \\
+&amp; = \Pr[\neg \, \mathcal{E}_{k+1} \, \land \, \mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k]\\
+&amp; = \underbrace{\Pr[\neg \, \mathcal{E}_{k+1} \, \land \, \mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k \, \land \, \neg \, \mathcal{E}_{k+1}]}_{\Pr[\neg \, \mathcal{E}_{k+1}]} + \Pr[\neg \, \mathcal{E}_k \, \land \, \mathcal{E}_{k+1}] \\
+&amp; \geq \text{LHS}
+\end{align}
 $$</code></p>
 
-<p>根據 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/#markov_ineq">Markov Ineq.</a></p>
+<p><span>$\Rightarrow \Pr[\neg \, \mathcal{E} \scriptstyle k \normalsize] \leq \frac{1}{n} \quad$</span> (利用 <span>$\Pr[\neg \, \mathcal{E}_6 ] = 0$</span>，遞迴求出)</p>
+
+<h2 id="more-discussion">More Discussion</h2>
+
+<h3 id="span-l-span-choice"><span>$l$</span>-choice</h3>
+
+<p>第 2 步變為 <span>$\Pr[ \, j \, \text{is red} \,] \leq (\frac{\beta_k}{n})^l$</span> (<span>$l$</span> 個 bin 球數都要 <span>$\geq k$</span>)</p>
 
 <p><code>$$
-\Pr[\, \sum_{i=1}^N m_i^2 \, &gt; 4 N] \leq \frac{1}{2}
+\boxed{\frac{\beta_{k+m}}{n} = \frac{1}{e} \, (\frac{e \beta_k}{n})^{l^m}}
 $$</code></p>
 
-<p><span>$\Rightarrow$</span> 抽取次數的期望值 <span>$\leq 2$</span></p>
+<p>當 <span>$m = \mathcal{O}(\frac{\ln \ln n}{\ln l})$</span>， we can find that <span>$\beta \scriptstyle 6+m \normalsize &lt; 1$</span> ，但其實還是在同個 order</p>
+
+<h3 id="what-if-span-beta-k-span-is-so-small">What if <span>$\beta_k$</span> is so small</h3>
+
+<p>That is, 第 4 步的 bound 並不足夠小，也就是隨著 <span>$\beta_k$</span> 的 decay， <span>$\exp(-\frac{\beta_k^2}{n})$</span> 終會 <span>$ &gt; \frac{1}{n^2}$</span> <span>$\Rightarrow \beta_k &gt; \sqrt{2n \ln n}$</span> <br />
+Pick 使得此式成立的 min. <span>$k^\star$</span>， <span>$k^\star = \frac{\ln \ln n}{\ln 2} + \mathcal{O}(1)$</span></p>
+
+<p>可以證明有 bin 超過 <span>$k^\star + 2$</span> 的機率足夠小 (但證明我沒看懂QQ)</p>
+
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -360,13 +387,13 @@ $$</code></p>
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-revisited/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec2/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-revisited/">Advanced Algorithm - Metric Facility Location Revisited</a>
+      <a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec2/">Advanced Algorithm - Hash Table - Lec2</a>
     </nav>
     
   </div>
@@ -376,13 +403,13 @@ $$</code></p>
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec3/">Advanced Algorithm - Hash Table - Lec3</a>
+      <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/">Problem Solving and Programming- hw6</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec3/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

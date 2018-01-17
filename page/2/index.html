@@ -249,6 +249,68 @@
   
     <article>
   <header>
+    <h2><a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec3/">Advanced Algorithm - Hash Table - Lec3</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>14 Oct 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/data-structure">Data Structure</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/randomized-algorithm">Randomized Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  </header>
+
+  <p>
+  在 第一講中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 $\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$ ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same $\mathcal{H}$)可以選，每次我們就看哪一個 $h$ 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 $\mathbb{E}[\, \text{max num of elements in any slots} \, ]$ ?
+Chernoff Bound $n$ 個 identical R.V. 的相加，想 measure 其偏離平均值的機率
+Let $X_1, X_2, \cdots, X_n$ be independent binary R.V with $\mathbb{E}[X_i] = p_i$
+$X = \sum_i X_i$, $\; \mu = \mathbb{E}[X] = \sum_i p_i$ $\; p = \frac{\mu}{n} = \text{avg}(p_i)$--
+  </p>
+
+  
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec3/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
     <h2><a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec2/">Advanced Algorithm - Hash Table - Lec2</a></h2>
 
     <div class="post-meta">
@@ -282,8 +344,6 @@
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/data-structure">Data Structure</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/randomized-algorithm">Randomized Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
     
@@ -791,65 +851,6 @@
   
   <footer>
     <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/">Algorithm - Graph Theory - Lec 1</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>25 Aug 2017</time>
-  </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/graph-theory">Graph Theory</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
-    
-  </div>
-  
-  
-
-</div>
-
-
-  </header>
-
-  <p>
-  <p>給定一張圖，要如何讀取當中的資訊呢？簡單來說就是從一給定點開始，依某種順序去拜訪相鄰(有關係)的點，最後走完所有點，收集完圖中的資訊。以下簡介兩種簡本的 traversal 方法以及應用。</p>
-
-<p></p>
-  </p>
-
-  
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>

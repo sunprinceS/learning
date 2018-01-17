@@ -53,6 +53,11 @@
   </url>
   
   <url>
+    <loc>https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec3/</loc>
+    <lastmod>2017-10-14T00:24:36+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec2/</loc>
     <lastmod>2017-10-05T00:20:42+08:00</lastmod>
   </url>
@@ -179,19 +184,19 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/advanced-algorithm/</loc>
-    <lastmod>2017-10-05T00:20:42+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://sunprinces.github.io/learning/tags/algorithm/</loc>
-    <lastmod>2017-10-05T00:20:42+08:00</lastmod>
+    <lastmod>2017-10-14T00:24:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/algorithm/</loc>
     <lastmod>2017-09-08T22:29:20+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/tags/algorithm/</loc>
+    <lastmod>2017-10-14T00:24:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -203,7 +208,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/approximation-algorithm/</loc>
-    <lastmod>2017-10-05T00:20:42+08:00</lastmod>
+    <lastmod>2017-09-29T21:19:19+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -215,7 +220,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/data-structure/</loc>
-    <lastmod>2017-10-05T00:20:42+08:00</lastmod>
+    <lastmod>2017-10-14T00:24:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -335,7 +340,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/randomized-algorithm/</loc>
-    <lastmod>2017-10-05T00:20:42+08:00</lastmod>
+    <lastmod>2017-10-14T00:24:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -365,13 +370,13 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/</loc>
-    <lastmod>2017-10-05T00:20:42+08:00</lastmod>
+    <lastmod>2017-10-14T00:24:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/</loc>
-    <lastmod>2017-10-05T00:20:42+08:00</lastmod>
+    <lastmod>2017-10-14T00:24:36+08:00</lastmod>
     <priority>0</priority>
   </url>
   
