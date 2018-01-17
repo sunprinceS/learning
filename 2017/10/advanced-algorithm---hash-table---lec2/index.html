@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
+  <meta name="description" content="Perfect Hashing">
   <meta name="generator" content="Hugo 0.32.4" />
 
-  <title>Data Structure &middot; Stay hungry. Stay foolish </title>
+  <title>Advanced Algorithm - Hash Table - Lec2 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -36,8 +36,6 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
-  
-  <link rel="alternate" type="application/rss+xml" title="Stay hungry. Stay foolish " href="https://sunprinces.github.io/learning/tags/data-structure/index.xml" />
   
 
   
@@ -121,10 +119,6 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/data-structure/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
-    </li>
     
 
     
@@ -241,16 +235,12 @@
 
 
 <div class="header">
-  <h1>Data Structure</h1>
+  <h1>Advanced Algorithm - Hash Table - Lec2</h1>
+  <h2>Perfect Hashing</h2>
 </div>
-
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec2/">Advanced Algorithm - Hash Table - Lec2</a></h2>
 
-    <div class="post-meta">
+  <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
@@ -293,202 +283,166 @@
 </div>
 
 
-  </header>
-
-  <p>
   <p>Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 <span>$\mathcal{O}(1)$</span> lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？</p>
 
 <p></p>
-  </p>
+
+<h3 id="def"><em>Def.</em></h3>
+
+<p><center>A <strong>Perfect Hash Function</strong> is a hash function w/o collision</center></p>
+
+<p>想法的共通性是利用空間換取時間。</p>
+
+<h2 id="naive-method-span-mathcal-o-n-2-space-method">Naive method - <span>$\mathcal{O}(N^2)$ space method</h2>
+
+<p><strong>(w/ <span>$\mathcal{O}(1)$</span>time)</span></strong></p>
+
+<p>Let the number of slots be <span>$N^2$</span>, then</p>
+
+<p>任意從 2-Universal Hash Family <span>$\mathcal{H}$</span> 中抽一個 <span>$h$</span> 出來
+<code>$$
+\Pr_{h \in \mathcal{H}}[\,\text{collision happened}\,] = \binom{N}{2} \cdot \frac{1}{N^2} \leq
+\frac{1}{2}
+$$</code></p>
+
+<p>抽取次數的期望值為 <span>$2$</span> (成功率的倒數)</p>
+
+<h2 id="span-mathcal-o-n-space-method"><span>$\mathcal{O}(N)$ space method</h2>
+
+<p><strong>(w/ <span>$\mathcal{O}(N)$</span> time)</span></strong></p>
+
+<ol>
+<li><p>從 <span>$\mathcal{H}$</span> 中抽出 <span>$h$</span> 將 <span>$N$</span> 個
+element hash 到 <span>$N$</span> 個 slot 當中 (Note: 這裡會發生 collision) <br />
+Denote <span>$m_i$</span> be the number of elements with hash value <span>$= i$</span></p></li>
+
+<li><p>Redo Step1. until <span>$\sum m_i^2 \leq 4 N$</span></p></li>
+
+<li><p>For each slot <span>$i$</span> with number of elements <span>$m_i$</span><br />
+Pick a hash function from 2-Universal Hash family <span>$\mathcal{H}_i: \, \text{slot} \, i \rightarrow \lbrace 0, 1, \cdots, m_i^2 - 1\rbrace$</span><br />
+Repeat until no collision happened<br />
+Note: Need to do for every slots (from <span>$0 \sim N-1$</span>)</p></li>
+</ol>
+
+<p>所以最後每個元素 <span>$x$</span>的鍵值會是一個 pair (<span>$h(x),h_{h(x)} \normalsize(x)$</span>) ，所需總 slot 數 <span>$\leq 4 N$</span></p>
+
+<h3 id="running-time">Running Time</h3>
+
+<p>先來看 Step3.，跟上面 Naive method 的方法一樣，每個 slot 抽取 no collision hash function 的次數期望值 <span>$\leq 2$</span></p>
+
+<p>再來看 Step1. ， Number of total collision is</p>
+
+<p><code>$$
+\sum_{i=1}^N \frac{(m_i)(m_i - 1)}{2} = \frac{1}{2}\sum_{i=1}^N m_i^2 - \frac{N}{2}
+$$</code></p>
+
+<p>又已知</p>
+
+<p><code>$$
+\mathbb{E}[\,\text{# of collisions}\,] \leq \binom{N}{2} \cdot \frac{1}{N} = \frac{N-1}{2}
+$$</code></p>
+
+<p>綜合兩式，可得</p>
+
+<p><code>$$
+\mathbb{E}[\, \sum_{i=1}^N m_i^2 \,] \leq 2 N
+$$</code></p>
+
+<p>根據 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/#markov_ineq">Markov Ineq.</a></p>
+
+<p><code>$$
+\Pr[\, \sum_{i=1}^N m_i^2 \, &gt; 4 N] \leq \frac{1}{2}
+$$</code></p>
+
+<p><span>$\Rightarrow$</span> 抽取次數的期望值 <span>$\leq 2$</span></p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec2/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/">Problem Solving and Programming- hw2</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>19 Sep 2017</time>
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-revisited/"><i class="fa fa-chevron-left"></i></a>
+    
   </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
+  <div class="pure-u-10-24">
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/online-judge">Online-Judge</a>
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-revisited/">Advanced Algorithm - Metric Facility Location Revisited</a>
+    </nav>
     
   </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/data-structure">Data Structure</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kattis">Kattis</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/">Problem Solving and Programming- hw6</a>
+    </nav>
     
   </div>
-  
-  
-
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
 </div>
 
 
-  </header>
-
-  <p>
-  <p><a href="https://kth.kattis.com/problemgroups/624" target="_blank">題目連結</a></p>
-
-<p></p>
-  </p>
 
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
 
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/08/algorithm---disjoint-set/">Algorithm - Disjoint Set</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>22 Aug 2017</time>
-  </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
+(function() {
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
     
-  </div>
-  
-  
+    if (window.location.hostname == "localhost")
+        return;
 
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/data-structure">Data Structure</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
-    
-  </div>
-  
-  
-
-</div>
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-  </header>
-
-  <p>
-  <p>Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets <span>$S_1,S_2,\cdots,S_k$</span>，而每個 <span>$S_i$</span> (每個 category) 以一個代表值 (<em>representative</em>) 去紀錄。
-<!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--></p>
-
-<p></p>
-  </p>
-
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/08/algorithm---disjoint-set/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">Advanced Algorithm - Hash Table - Lec1</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>21 May 2017</time>
-  </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/data-structure">Data Structure</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
-    
-  </div>
-  
-  
-
-</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
 
 
-  </header>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
-  <p>
-  <!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。-->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
 
-<p>Hashing 可以想成是一種 <strong>renaming</strong> 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 <strong>Hashing</strong> 的方式，重新命名 key&rsquo; ，並依據 key&rsquo; 將資料放到 size 跟資料個數差不多的 Hash Table 中。</p>
 
-<p></p>
-  </p>
 
-  
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
 
-  
 </div>
 
 </div>
@@ -513,3 +467,4 @@
 
 </body>
 </html>
+
