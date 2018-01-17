@@ -281,9 +281,9 @@
 </div>
 
 
-  
+  <p>在 <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">第一講</a>中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 <span>$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$</span> ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same <span>$\mathcal{H}$</span>)可以選，每次我們就看哪一個 <span>$h$</span> 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 <span>$\mathbb{E}[\, \text{max num of elements in any slots} \, ]$</span> ?</p>
 
-<p>在 <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">第一講</a>中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 <span>$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$</span> ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same <span>$\mathcal{H}$</span>)可以選，每次我們就看哪一個 <span>$h$</span> 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 <span>$\mathbb{E}[\, \text{max num of elements in any slots} \, ]$</span> ?</p>
+<p></p>
 
 <h2 id="chernoff-bound">Chernoff Bound</h2>
 
@@ -375,11 +375,10 @@ $$</code></p>
 
 <h3 id="what-if-span-beta-k-span-is-so-small">What if <span>$\beta_k$</span> is so small</h3>
 
-<p>That is, 第 4 步的 bound 並不足夠小，也就是隨著 <span>$\beta_k$</span> 的 decay， <span>$\exp(-\frac{\beta_k^2}{n})$</span> 終會 <span>$ &gt; \frac{1}{n^2}$</span> <span>$\Rightarrow \beta_k &gt; \sqrt{2n \ln n}$</span> <br />
+<p>That is, 第 4 步的 bound 並不足夠小，也就是隨著 <span>$\beta_k$</span> 的 decay， <span>$\exp(-\frac{\beta_k^2}{n})$</span> 終會 <span>$ &gt; \frac{1}{n^2}$</span> <span>$\Rightarrow \beta_k &lt; \sqrt{2n \ln n}$</span> <br />
 Pick 使得此式成立的 min. <span>$k^\star$</span>， <span>$k^\star = \frac{\ln \ln n}{\ln 2} + \mathcal{O}(1)$</span></p>
 
 <p>可以證明有 bin 超過 <span>$k^\star + 2$</span> 的機率足夠小 (但證明我沒看懂QQ)</p>
-
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 

@@ -18,10 +18,9 @@
       <pubDate>Sat, 14 Oct 2017 00:24:36 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec3/</guid>
-      <description>在 第一講中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 $\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$ ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same $\mathcal{H}$)可以選，每次我們就看哪一個 $h$ 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 $\mathbb{E}[\, \text{max num of elements in any slots} \, ]$ ?
-Chernoff Bound $n$ 個 identical R.V. 的相加，想 measure 其偏離平均值的機率
-Let $X_1, X_2, \cdots, X_n$ be independent binary R.V with $\mathbb{E}[X_i] = p_i$
-$X = \sum_i X_i$, $\; \mu = \mathbb{E}[X] = \sum_i p_i$ $\; p = \frac{\mu}{n} = \text{avg}(p_i)$--</description>
+      <description>&lt;p&gt;在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/&#34;&gt;第一講&lt;/a&gt;中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 &lt;span&gt;$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$&lt;/span&gt; ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same &lt;span&gt;$\mathcal{H}$&lt;/span&gt;)可以選，每次我們就看哪一個 &lt;span&gt;$h$&lt;/span&gt; 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 &lt;span&gt;$\mathbb{E}[\, \text{max num of elements in any slots} \, ]$&lt;/span&gt; ?&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
