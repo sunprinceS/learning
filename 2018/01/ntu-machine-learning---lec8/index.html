@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="IR101">
+  <meta name="description" content="Noise and Probabilistic Target">
   <meta name="generator" content="Hugo 0.32.4" />
 
-  <title>Information Retrieval - Lec1 &middot; Stay hungry. Stay foolish </title>
+  <title>NTU Machine Learning - Lec8 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Information Retrieval - Lec1</h1>
-  <h2>IR101</h2>
+  <h1>NTU Machine Learning - Lec8</h1>
+  <h2>Noise and Probabilistic Target</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>16 Jan 2018</time>
+    <time>17 Jan 2018</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/information-retrieval">Information Retrieval</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/machine-learning-foundation">Machine Learning Foundation</a>
     
   </div>
   
@@ -266,11 +266,9 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ir">IR</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/machine-learning">Machine Learning</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/nlp">NLP</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
     
   </div>
   
@@ -279,95 +277,30 @@
 </div>
 
 
-  <p>這個系列主要會紀錄自己在 KTH 修習 <a href="https://www.kth.se/student/kurser/kurs/DD2476?l=en">Information Retrieval System</a> 的一些筆記，備忘用，不會像之前的 Post 那麼詳細，但還是會加點自己的 remark 這樣。</p>
+  <p>前面幾講的討論中，我們都假設有一個 ground truth function <span>$f$</span> 去 generate data，且我們所拿到的 <span>$\mathcal{D}$</span> 是乾淨的，然而在真實世界中，無可避免地會遇到 <strong>noise</strong> 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？</p>
 
 <p></p>
 
-<h2 id="difference-between-database">Difference between Database</h2>
+<h2 id="noise">Noise</h2>
 
-<ol>
-<li>structured data v.s. unstructured data</li>
-<li>deterministic v.s. inexact</li>
-</ol>
+<p>再度回到以前的 bin model， model noise 的方式是，今天抽取出一個 ball 時，他的顏色不再是是一個固定的顏色，而是一個機率分佈 <span>$\sim \Pr[y | \mathbf{x}]$</span> (i.e given input <span>$\mathbf{x}$</span>， label <span>$y$</span> is probabilistic rather than deterministic)。對應到 learning ，則是今天 learn 的 target 不再是一個deterministic 的 <span>$y = f(\mathbf{x})$</span>，而是一個機率分佈 <span>$\Pr[y | \mathbf{x} ]$</span> (deterministic 可以想成機率分佈為只在一個值為 <span>$1$</span>，其他全 <span>$0$</span> 的 special case)</p>
 
-<p>DB 處理的對象是滿足選定資料結構的 structured data ，而 IR 則包含了將真實世界中的訊息 (which is unstructured) 轉換成我們容易處理的資料結構之步驟。<br />
-承上，該 parse 成何種資料結構隨著應用場景及需求而不同，又比方說在 query 時， DB 須滿足特定 rule ，而 IR 則是要處理貼近 <strong>Natural Language</strong> level 的 query，另外，像是計算 document 與 query 的相關程度也隨著需求不同而改變 (which is inexact)。</p>
+<p>而因為 Hoeffeding Ineq. hold for arbitary, unknowm target function，所以 VC
+bound 還是成立(從相同的 joint distribution <span>$\sim \Pr(\mathbf{x},y)$</span> sample， <span>$\mathcal{D}$</span> 夠大的情況下，在 <span>$\mathcal{D}$</span> 衡量的量 (e.g error) 跟真實世界不會差太多)，但 learning 的同時， 在 noisy 的情況下，我們可能找不到夠好的 hypothesis <span>$h$</span> 使得 <span>$E_i$</span> 足夠小 (e.g 如果原先線性可分的資料中有 noise ，使其線性不可分，那麼便只能借助 Pocket Learning Algorithm，除了 running time 比較長之外，也不保證一定能找到跟沒有 noise 情況下， PLA 找到的最佳解一樣好的解)</p>
 
-<p><strong>Remark:</strong> In brief, DB 是蘊含在 IR system 中的一個模塊。</p>
+<h2 id="error-measure">Error Measure</h2>
 
-<h2 id="key-idea">Key Idea</h2>
+<p>隨著應用場景不同，想學的 target 不同， error metric 亦有所不同 (而如何選定合適的
+objective function 又是另一門學問了 &hellip;lol)，簡言之，對大多數的 hypothesis set
+<span>$\mathcal{H}$</span> 及 error metric ， VC theory 均會成立。</p>
 
-<h3 id="inverted-index">Inverted Index</h3>
+<p>講義中給出了一個 Weighted 0/1 error 的 metric ，可以利用 virtual copy 的概念去將新的演算法 reduce 回原先介紹的 PLA (類似的 reduce 想法可以推廣到其他 error metric)。</p>
 
-<p>像是參考書背後的索引，會列出哪些名詞在哪些章節、第幾頁出現，在閱讀的時候，可以想成是看到一個 page <span>$\rightarrow$</span> word/phrase 的 mapping ， Inverted Index 則是建構一個<strong>反向</strong>的 mapping。</p>
-
-<h3 id="ranking">Ranking</h3>
-
-<p>決定當我們有大量的 return 結果時，該如何以怎樣的排序呈現給使用者。 (Ja&hellip;  Nowadays, the most successful application of ranking algorithm in the world is Google&hellip;lol)</p>
-
-<h3 id="evaluation">Evaluation</h3>
+<h2 id="reference">Reference</h2>
 
 <ul>
-<li>Precision</li>
+<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/08_handout.pdf">林軒田老師的講義</a></li>
 </ul>
-
-<div>
-\[
-p = \frac{|\text{ret} \, \bigcap \, \text{rel}|}{|\text{ret}|}
-\]
-</div>
-
-<p>回傳的結果中，真的有關係的比例</p>
-
-<ul>
-<li>Recall</li>
-</ul>
-
-<div>
-\[
-r = \frac{|\text{ret} \, \bigcap \, \text{rel}|}{|\text{rel}|}
-\]
-</div>
-
-<p>關於有關連的那些文本，有被回傳結果的比例，實務上是無法計算的(我們不知道相關的文本到底有哪些)</p>
-
-<p>Remark: 這兩個 criteria 其實有點互相矛盾，比方說得到 <span>$100 \%$</span> recall 的一個方法是回傳全部的文本，便可確保沒有漏網之魚 (但這太 87)。而得到僅可能高的precision 的方法則是只回傳那些 <span>$100 \%$</span> 確定關聯的文本 (但如此回傳的量太少，不夠使用者抉擇)</p>
-
-<h2 id="why-ir-matter">Why IR matter</h2>
-
-<ul>
-<li>How many times you use Google Search every day? 😉</li>
-<li>Get high ranking on the returened list is essential (gaming the ranking
-algorithm&hellip;lol)</li>
-<li>The returened consequence framed our mind to what they show&hellip; (which is not a
-good part, I think)</li>
-</ul>
-
-<h2 id="a-first-example-boolean-search">A first example - Boolean Search</h2>
-
-<p>構建一個 Term-document matrix <span>$M \in \mathbb{R}^{W \times D}$</span>，
-<span>$W$</span>
-為 query 的單詞數， <span>$D$</span> 為文本數。<br />
-<span>$M[w][d]= $</span> 𝟙[word <span>$w$</span> appears
-in document <span>$d$</span>]</p>
-
-<h3 id="advantage">Advantage</h3>
-
-<p>Useful, simple, fast and intuitive in doing boolean operation <br />
-(often used in <strong>well-defined</strong> documents )</p>
-
-<p>實做細節等 lab 1寫完再來補上XD</p>
-
-<h3 id="disadvantage">Disadvantage</h3>
-
-<ul>
-<li>How to formulate query (the result can be too many or too few, depending on
-the query)</li>
-<li>Lack of <strong>ranking</strong> of returned result</li>
-<li>Make a little unreasonable assumption: <strong>every terms are equally important</strong></li>
-</ul>
-
-<p><strong>Remark:</strong> 一個比較偏 DB 風格的 IR 方法 ，在將 documents 轉成方才定義的那種 term-document matrix 時，丟失了太多資訊。在 query 時處理的也不是那麼貼近 user-friendly 的自然語言。</p>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -375,13 +308,13 @@ the query)</li>
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec7/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec7/">NTU Machine Learning - Lec7</a>
+      <a href="https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/">Information Retrieval - Lec1</a>
     </nav>
     
   </div>
@@ -390,14 +323,8 @@ the query)</li>
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec8/">NTU Machine Learning - Lec8</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec8/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

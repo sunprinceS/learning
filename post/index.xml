@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 16 Jan 2018 23:14:08 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jan 2018 22:59:24 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NTU Machine Learning - Lec8</title>
+      <link>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec8/</link>
+      <pubDate>Wed, 17 Jan 2018 22:59:24 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec8/</guid>
+      <description>&lt;p&gt;前面幾講的討論中，我們都假設有一個 ground truth function &lt;span&gt;$f$&lt;/span&gt; 去 generate data，且我們所拿到的 &lt;span&gt;$\mathcal{D}$&lt;/span&gt; 是乾淨的，然而在真實世界中，無可避免地會遇到 &lt;strong&gt;noise&lt;/strong&gt; 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Information Retrieval - Lec1</title>
