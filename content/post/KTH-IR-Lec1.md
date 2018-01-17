@@ -1,6 +1,6 @@
 +++
 date =  "2018-01-16T23:14:08+01:00"
-description = "Warmup / Greedy Algorithms / Dynamic Programming"
+description = "IR101"
 tags = ["IR","NLP","KTH"]
 title =  "Information Retrieval - Lec1"
 topics = ["Information Retrieval"]
