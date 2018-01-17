@@ -313,6 +313,10 @@ F, j \in C \, (x_{ij} \, \text{的 objective}) \\
 \end{cases}
 $$</code></p>
 
+<h3 id="對於-dual-var-的直觀理解">對於 Dual var 的直觀理解</h3>
+
+<p>把 <span>$\alpha_j$</span> 想成是 clinet <span>$j$</span> 所付的錢，而 <span>$\beta \scriptstyle ij$</span> 表示其貢獻給 facility <span>$i$</span> 的，先把原先條件中的不等式改為等式 (complementary slackness)，第一條式子，表示被開的 facility is fully paid for。而第二條式子，把 <span>$\alpha_j$</span> 拆成兩部份，一部分給 facility ，另一部份則用於支付 <span>$c \scriptstyle ij$</span> 的 coneection cost 。</p>
+
 <h2 id="algorithm">Algorithm</h2>
 
 <h3 id="phase-i-increase-span-alpha-span-and-span-beta-span">Phase I (Increase <span>$\alpha$</span> and <span>$\beta$</span>)</h3>
@@ -336,6 +340,85 @@ constraint)</p></li>
 
 <p>Then, facility <span>$i$</span> becomes <strong>temporarily opened</strong>，<br />
 <span>$\forall j$</span> such that <span>$(i,j)$</span> is tight and <span>$j$</span> is not <strong>covered</strong>, temporarily connect <span>$j$</span> to <span>$i$</span>, 之後的 Phase I 中， <span>$\alpha_j$</span> is fixed。 And we say <span>$\color{blue}{\text{facility} \, i \, \text{is client} \, j \text{&rsquo;s witness}}$</span></p>
+
+<p>Repeat above procedure until all clients are covered</p>
+
+<p><strong>Remark:</strong> 如果在 facility <span>$i$</span> 被開之後，有其他的 client <span>$j^\prime$</span> 使其 connection 為 tight，我們也稱 facility <span>$i$</span> 為 client <span>$j^\prime$</span> 的 witness (<strong>Note: 往後</strong> <span>$\alpha \scriptstyle j^\prime$</span> <strong>會 fixed ，且</strong> <span>$\beta \scriptstyle ij^\prime \normalsize = \alpha \scriptstyle j^\prime \normalsize - c \scriptstyle ij^\prime \normalsize = 0$</span><strong>，不會再更動</strong>)</p>
+
+<h3 id="phase-ii-first-remove-all-closed-facilities-and-edges-not-tight">Phase II (First remove all closed facilities and edges not tight)</h3>
+
+<p><strong>Def.</strong>: if <span>$\beta \scriptstyle ij \normalsize &gt; 0$</span> and <span>$\beta \scriptstyle ij^\prime \normalsize &gt; 0$</span>, we call <span>$i, i^\prime$</span> are <span>$\color{blue}{\text{conflict}}$</span></p>
+
+<p>(clinet <span>$j$</span> 同時有付錢給兩者，均有貢獻 <span>$\beta \scriptstyle \star j$</span>)</p>
+
+<p>Pick any <strong>maximal</strong> set of temporarily opened facilities <span>$\mathbf{I}$</span> that AREN&rsquo;T
+conflicting</p>
+
+<ol>
+<li>open <span>$\mathbf{I}$</span></li>
+<li>If client <span>$j$</span>&rsquo;s witness <span>$\in I$</span>, connect directly</li>
+<li>If not, connect indirectly to any conflicting <span>$i \in I$</span></li>
+</ol>
+
+<h2 id="correctness">Correctness</h2>
+
+<h3 id="complementary-slackness-revisited">Complementary Slackness Revisited</h3>
+
+<ol>
+<li><p><span>$\forall i \in F\, , \; y_i = 0 \lor \underset{j \in C}{\sum} \beta \scriptstyle ij \normalsize = f_i$</span> <br />
+(對有開的 facility, <span>$\sum \beta \scriptstyle ij \normalsize  = f_i$</span>) <span>$\Rightarrow$</span> 符合！</p></li>
+
+<li><p><span>$\color{red}{\forall i \in F \, j \in C, \; x \scriptstyle ij \normalsize  = 0 \lor \alpha_j - \beta \scriptstyle ij \normalsize = c \scriptstyle ij}$</span></p></li>
+
+<li><p><span>$\forall j \in C\, , \; \alpha_j  = 0 \lor \underset{i \in F}{\sum} x \scriptstyle ij \normalsize = 1$</span><br />
+(對所有的 client 而言，其只會被一個 facility serve) <span>$\Rightarrow$</span> 符合！</p></li>
+
+<li><p><span>$\forall i \in F, j \in C\, , \; \beta \scriptstyle ij \normalsize = 0
+\lor y_i = x \scriptstyle ij$</span><br />
+(對那些 directly connected 的 clinet，也就是 <span>$\beta \scriptstyle ij \normalsize \not = 0$</span> 者，<span>$j$</span> 是由 <span>$i$</span> serve<br />
+但注意到為 <span>$0$</span> 者也可能是被 directly connect 的) <span>$\Rightarrow$</span> 符合！</p></li>
+</ol>
+
+<p><strong>Remark:</strong> 1,2 分別為一組， 3,4 為另一組 complementary slackness，而現在我們要
+relax 第一組 3 倍 (因為對 indirectly connected 的那些 clinet ， <span>$\color{red}{2.}$</span> 不成立)</p>
+
+<p><strong>proof:</strong><br />
+<span>$\because \, \text{indirectly connected} \, \therefore \, \beta
+\scriptstyle ij \normalsize = 0$</span></p>
+
+<p>So what we want to prove now is <span>$\boxed{c \scriptstyle ij \normalsize \leq 3 \alpha_j}$</span></p>
+
+<p>Because the problem is <strong>metric</strong>,</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/facility_conflict.jpg" width="30%" style="border-radius: 0%;"></center></p>
+
+<p><code>$$
+\begin{align}
+c_{ij} &amp; \leq c_{ij^\prime} + c_{i^\prime j ^\prime} + c_{i^\prime j}\\
+&amp; \leq \alpha_{j^\prime} + \alpha_{j^\prime} + \alpha_j \; (\because \, \text{for directly connected} \, \alpha = \beta + c \geq c\\
+&amp; \leq 3 \alpha_j \; (\because \alpha_j \geq \alpha_{j^{\prime}})
+\end{align}
+$$</code></p>
+
+<p><strong>Note</strong></p>
+
+<p>如果 <span>$i, i^\prime$</span> conflict， <span>$(i,j)$</span> 又不 tight ，代表必定存在 <span>$j^\prime$</span> 使得 <span>$(i,j^\prime), \, (i^\prime,j^\prime)$</span> 均為 tight 。<br />
+如果說是 <span>$i^\prime$</span> 比較早開，那麼 <span>$\alpha_j, \alpha \scriptstyle j^\prime$</span> 會相等 (同時 fixed) ; <br />
+但若是 <span>$i$</span> 比較早開，<span>$\alpha \scriptstyle j^\prime$</span> 比 <span>$\alpha_j$</span> 提早被 fix ，一定比較小 <span>$\Rightarrow \alpha_j \geq \alpha \scriptstyle j^\prime$</span></p>
+
+<p>故我們可以將 <span>$\color{red}{2}$</span> 式 relax 成以下</p>
+
+<p><code>$$
+\frac{1}{3} c_{ij} \leq \alpha_j - \beta_{ij} \leq c_{ij}
+$$</code></p>
+
+<p><span>$\Rightarrow$</span> <span>$\color{red}{\text{3-Approx. Algorithm}}$</span> ✌️</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.cc.gatech.edu/~vazirani/k-median.pdf">原始論文</a></li>
+</ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
