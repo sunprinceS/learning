@@ -291,7 +291,7 @@
 </ol>
 
 <p>DB 處理的對象是滿足選定資料結構的 structured data ，而 IR 則包含了將真實世界中的訊息 (which is unstructured) 轉換成我們容易處理的資料結構之步驟。<br />
-承上，該 parse 成何種資料結構隨著應用場景及需求而不同，又比方說在 query 時， DB 須滿足特定 rule ，而 IR 則是要處理在 <strong>Natural Language</strong> level 的 query，另外，像是計算 document 與 query 的相關程度也隨著需求不同而改變 (which is inexact)。</p>
+承上，該 parse 成何種資料結構隨著應用場景及需求而不同，又比方說在 query 時， DB 須滿足特定 rule ，而 IR 則是要處理貼近 <strong>Natural Language</strong> level 的 query，另外，像是計算 document 與 query 的相關程度也隨著需求不同而改變 (which is inexact)。</p>
 
 <p><strong>Remark:</strong> In brief, DB 是蘊含在 IR system 中的一個模塊。</p>
 
@@ -303,7 +303,7 @@
 
 <h3 id="ranking">Ranking</h3>
 
-<p>決定當我們有大量的 return 結果時，該如何以怎樣的排序呈現給使用者。 (Ja&hellip;  Nowadays, the most successful ranking algorithm in the world is Google&hellip;lol)</p>
+<p>決定當我們有大量的 return 結果時，該如何以怎樣的排序呈現給使用者。 (Ja&hellip;  Nowadays, the most successful application of ranking algorithm in the world is Google&hellip;lol)</p>
 
 <h3 id="evaluation">Evaluation</h3>
 
@@ -336,7 +336,7 @@ r = \frac{|\text{ret} \, \bigcap \, \text{rel}|}{|\text{rel}|}
 <h2 id="why-ir-matter">Why IR matter</h2>
 
 <ul>
-<li>How many times you use Google Search each day? 😉</li>
+<li>How many times you use Google Search every day? 😉</li>
 <li>Get high ranking on the returened list is essential (gaming the ranking
 algorithm&hellip;lol)</li>
 <li>The returened consequence framed our mind to what they show&hellip; (which is not a
@@ -367,7 +367,7 @@ the query)</li>
 <li>Make a little unreasonable assumption: <strong>every terms are equally important</strong></li>
 </ul>
 
-<p><strong>Remark:</strong> 一個比較偏 DB 風格的 IR 方法 ，在將 documents 轉成方才定義的那種 term-document matrix 時，丟失了太多資訊。在 query 時處理的也非 user-friendly 的自然語言。</p>
+<p><strong>Remark:</strong> 一個比較偏 DB 風格的 IR 方法 ，在將 documents 轉成方才定義的那種 term-document matrix 時，丟失了太多資訊。在 query 時處理的也不是那麼貼近 user-friendly 的自然語言。</p>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
