@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Trimming">
+  <meta name="description" content="Function">
   <meta name="generator" content="Hugo 0.37.1" />
 
-  <title>Advanced Algorithm - Subset Sum Problem &middot; Stay hungry. Stay foolish </title>
+  <title>C&#43;&#43; STL Cheat Sheet - 2 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Advanced Algorithm - Subset Sum Problem</h1>
-  <h2>Trimming</h2>
+  <h1>C&#43;&#43; STL Cheat Sheet - 2</h1>
+  <h2>Function</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>11 Jul 2017</time>
+    <time>12 Mar 2018</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/cheatsheet">CheatSheet</a>
     
   </div>
   
@@ -266,13 +266,7 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rounding-data--dp">Rounding Data &amp; DP</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>
     
   </div>
   
@@ -281,68 +275,79 @@
 </div>
 
 
-  <p>Subset Sum Problem 與 Knapsack Problem 相同，也是一個 NPC 問題(可以想成 Knapsack Problem weight 均為 1 的特例)。而在 Knapsack Problem 中，我們發展出<strong>等差</strong> 的rounding 技巧，犧牲精確度去換取更低的時間複雜度，而這一講中，將利用<strong>等比</strong>的方式去做 rounding 。
-</p>
+  <p></p>
 
-<h2 id="algorithm">Algorithm</h2>
+<h2 id="general-initial-類">General Initial 類</h2>
 
-<p>Computer <span>$S_i$</span> : possible subset sum of {<span>$v_1, v_2, \cdots ,v_i$</span>}</p>
+<ul>
+<li><code>iota</code>: 等價於 <code>range(&lt;start&gt;,&lt;end&gt;,1)</code>，將 container element inplace 置換成等差數列</li>
+</ul>
 
-<p><span>$S_0 = $</span>{<span>$0$</span>}</p>
-
-<p><span>$S_1 = $</span>{<span>$\color{red}{S_0}, \color{blue}{S_0+v_1}$</span>} = {<span>$\color{red}{0}, \color{blue}{v_1}$</span>}</p>
-
-<p><span>$S_2 = $</span>{<span>$\color{red}{S_1}, \color{blue}{S_1+v_2}$</span>} = {<span>$\color{red}{0}, \color{red}{v_1}, \color{blue}{v_2}, \color{blue}{v_1+v_2}$</span>}</p>
-
-<p>.<br />
-.<br />
-.<br />
-<span>$S_{n} = $</span> <span>$\color{red}{S\scriptstyle{n-1}}$</span> <span>$\bigcup \, (\color{blue}{S\scriptstyle{n-1}}$</span> <span>$\color{blue}{+ \, v\scriptstyle{n-1}}$</span> <span>$)$</span></p>
-
-<p>由 <span>$S_{i}$</span> 計算 <span>$S\scriptstyle{i+1}$</span> 以 <span>$\mathsf{MergeSort}$</span> 來實做，並移除 <span>$&gt;W$</span>的元素和 (複雜度為 <span>$\mathcal{O}(|S_i|)$</span>)，又 <span>$|S_i| &lt; W \, (\forall i=1 \sim n)$</span>， 所以 Running time 為 <span>$\mathcal{O}(nW)$</span>。</p>
-
-<p>可以發現複雜度與 <span>$W$</span> 成正比，故充其量這個 Algorithm 也只是 psuedo-polynomial 而已，與前面的想法類似，造成複雜度的主因在每一個 Merge 的過程中，我們留下了太多元素(而 Merge 的複雜度又與元素個數呈線性)，如果<strong>只取幾個代表性的元素</strong>(e.g <span>$|S_i| = \mathcal{O}(\log W)$</span>)，便可將複雜度再往下壓。</p>
-
-
-<div class="pure-u-1">
-  <img class="pure-img" src="https://sunprinces.github.io/learning/img/post/trim.png" alt="Trimming Procedure">
-</div>
-
-
-<p>Pick <span>$x_1$</span>, remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list (say, <span>$x_2 \, \text{and} \, x_3$</span>). <br />
-Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list. Repeat this procedure until the last element.</p>
-
-<h3 id="psuedocode-for-trimming">PsuedoCode for Trimming</h3>
-
-<pre><code class="language-python">def trim(s_list,delta):
-  ret = [] # trimmed list
-  last = 0
-
-  for elm in s_list:
-    if elm &gt; last * delta:
-      ret.append(elm)
-      last = elm
-  return ret
+<pre><code class="language-cpp">//v is vector with size 10
+iota(v.begin(),v.end(),0); //v becomes [0,1,2,...,9]
 </code></pre>
 
-<p>Now, <span>$|S_i| \leq \log_M W = \mathcal{O}(\frac{n\ln W}{\epsilon})
-\Rightarrow \text{Total running time: } \mathcal{O}(\frac{n^2 \ln W}{\epsilon})$</span></p>
+<ul>
+<li><code>fill</code>,<code>fill_n</code>: 將 container element 置換成一定值</li>
+</ul>
 
-<h3 id="correctness-check">Correctness Check</h3>
+<pre><code class="language-cpp">fill(v.begin(),v.end(),0); // v becomes [0,0,...,0]
+fill_n(v.begin(),2,-1); // v becomes [-1,-1,0,...,0]
+</code></pre>
 
+<ul>
+<li><code>copy</code>: 將[first,last) 的 element copy 到另一個 container</li>
+</ul>
 
-<div class="pure-u-1">
-  <img class="pure-img" src="https://sunprinces.github.io/learning/img/post/trim_approx.png" alt="Trimming Approximation">
-</div>
+<pre><code class="language-cpp">copy(from_vec.begin(),from_vec.end(),std::back_inserter(to_vec)); 
 
+//equivalent，但to_vec size 需先 resize 好，否則會SIGSEV
+copy(ALL(from_vec),to_vec.begin()); 
 
-<p>可以將 Trimming 視為改小某一 range 中的元素們(將其改至該 range 內最小的元素)，OPT 在 trimming &amp; merge 的過程中不斷地被改小，最多最多會被等比縮小 <span>$n$</span> 次。</p>
+//Another easy way if want to copy **all** elements
+vector&lt;int&gt; to_vec = from_vec;
+vector&lt;int&gt; to_vec(from_vec)
+</code></pre>
 
-<div>
-\[
-  \text{Output} \, \geq \, \text{OPT} \cdotp (1-\frac{\epsilon}{n})^n \stackrel{\color{blue}{n=1}}{\geq} \, \text{OPT} \cdotp (1-\epsilon)
-\]
-</div>
+<p>Note: 不可用於 copy 者與被 copy 者範圍重疊。</p>
+
+<ul>
+<li><code>generate</code>:</li>
+</ul>
+
+<h2 id="計算類">計算類</h2>
+
+<ul>
+<li><code>partial_sum</code>: 計算 [first,last) 的 prefix sum</li>
+</ul>
+
+<pre><code class="language-cpp">partial_sum(fromvec.begin(),fromvec.end(),tovec.begin()) // [0,1,3,6,...,50]
+
+//product [0!,1!,2!,3!,...,9!]
+partial_sum(ALL(from_vec),tovec.begin(),std::multiplies&lt;int&gt;());
+
+//custom lambda op
+partial_sum(ALL(from_vec),tovec.begin(),[](int x,int y){return foo(x,y);});
+</code></pre>
+
+<p>Note: 如果 tovec 跟 fromvec 的 <code>begin()</code> 一樣的話，就是 inplace 置換。</p>
+
+<ul>
+<li>accumulate: 類似於找 <code>partial_sum()</code> 的最後一個元素</li>
+</ul>
+
+<pre><code class="language-cpp">//一樣可以與 lambda 做搭配
+int sum = accumulate(ALL(vec),0); // 0 為基準值
+</code></pre>
+
+<ul>
+<li><code>random_shuffle</code>: inplace shuffle elements</li>
+</ul>
+
+<pre><code class="language-cpp">srand(unsigned time(NULL)); //rng initialzation
+random_shuffle(vec.begin(),vec.end());// build-in rng
+random_shuffle(vec.begin(),vec.end(),[](int n){return my_rand(n)};);// custom
+</code></pre>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -350,13 +355,13 @@ Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\fra
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---1/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/">Advanced Algorithm - Knapsack Problem</a>
+      <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---1/">C&#43;&#43; STL Cheat Sheet - 1</a>
     </nav>
     
   </div>
@@ -366,13 +371,13 @@ Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\fra
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---bin-packing-problem/">Advanced Algorithm - Bin Packing Problem</a>
+      <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---3/">C&#43;&#43; STL Cheat Sheet - 3</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---bin-packing-problem/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---3/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

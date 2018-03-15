@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Trimming">
+  <meta name="description" content="資料結構 - Heap/ BST/ Hash Table">
   <meta name="generator" content="Hugo 0.37.1" />
 
-  <title>Advanced Algorithm - Subset Sum Problem &middot; Stay hungry. Stay foolish </title>
+  <title>C&#43;&#43; STL Cheat Sheet - 3 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Advanced Algorithm - Subset Sum Problem</h1>
-  <h2>Trimming</h2>
+  <h1>C&#43;&#43; STL Cheat Sheet - 3</h1>
+  <h2>資料結構 - Heap/ BST/ Hash Table</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>11 Jul 2017</time>
+    <time>13 Mar 2018</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/cheatsheet">CheatSheet</a>
     
   </div>
   
@@ -266,13 +266,7 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rounding-data--dp">Rounding Data &amp; DP</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>
     
   </div>
   
@@ -281,68 +275,104 @@
 </div>
 
 
-  <p>Subset Sum Problem 與 Knapsack Problem 相同，也是一個 NPC 問題(可以想成 Knapsack Problem weight 均為 1 的特例)。而在 Knapsack Problem 中，我們發展出<strong>等差</strong> 的rounding 技巧，犧牲精確度去換取更低的時間複雜度，而這一講中，將利用<strong>等比</strong>的方式去做 rounding 。
-</p>
+  <p>用途在為了保證 container <strong>存在某些性質</strong>時使用。</p>
 
-<h2 id="algorithm">Algorithm</h2>
+<p></p>
 
-<p>Computer <span>$S_i$</span> : possible subset sum of {<span>$v_1, v_2, \cdots ,v_i$</span>}</p>
+<h2 id="max-binary-heap-priority-queue">MAX Binary Heap - Priority Queue</h2>
 
-<p><span>$S_0 = $</span>{<span>$0$</span>}</p>
+<h3 id="性質">性質</h3>
 
-<p><span>$S_1 = $</span>{<span>$\color{red}{S_0}, \color{blue}{S_0+v_1}$</span>} = {<span>$\color{red}{0}, \color{blue}{v_1}$</span>}</p>
+<ul>
+<li><strong>top() 恆為當前資料中最大者， query 複雜度 <span>$O(1)$</span></strong></li>
+<li>push/pop 複雜度為 <span>$O(\log N)$</span></li>
+</ul>
 
-<p><span>$S_2 = $</span>{<span>$\color{red}{S_1}, \color{blue}{S_1+v_2}$</span>} = {<span>$\color{red}{0}, \color{red}{v_1}, \color{blue}{v_2}, \color{blue}{v_1+v_2}$</span>}</p>
+<h3 id="型態宣告">型態宣告</h3>
 
-<p>.<br />
-.<br />
-.<br />
-<span>$S_{n} = $</span> <span>$\color{red}{S\scriptstyle{n-1}}$</span> <span>$\bigcup \, (\color{blue}{S\scriptstyle{n-1}}$</span> <span>$\color{blue}{+ \, v\scriptstyle{n-1}}$</span> <span>$)$</span></p>
+<pre><code class="language-cpp">&lt;class T, class Container = vector&lt;T&gt;, less&lt;typename Container::value_type&gt; &gt; pq;
+//正常使用
+priority_queue&lt;int&gt; pq; // 
+priority_queue&lt;pair&lt;int,int&gt; &gt; pq;
 
-<p>由 <span>$S_{i}$</span> 計算 <span>$S\scriptstyle{i+1}$</span> 以 <span>$\mathsf{MergeSort}$</span> 來實做，並移除 <span>$&gt;W$</span>的元素和 (複雜度為 <span>$\mathcal{O}(|S_i|)$</span>)，又 <span>$|S_i| &lt; W \, (\forall i=1 \sim n)$</span>， 所以 Running time 為 <span>$\mathcal{O}(nW)$</span>。</p>
-
-<p>可以發現複雜度與 <span>$W$</span> 成正比，故充其量這個 Algorithm 也只是 psuedo-polynomial 而已，與前面的想法類似，造成複雜度的主因在每一個 Merge 的過程中，我們留下了太多元素(而 Merge 的複雜度又與元素個數呈線性)，如果<strong>只取幾個代表性的元素</strong>(e.g <span>$|S_i| = \mathcal{O}(\log W)$</span>)，便可將複雜度再往下壓。</p>
-
-
-<div class="pure-u-1">
-  <img class="pure-img" src="https://sunprinces.github.io/learning/img/post/trim.png" alt="Trimming Procedure">
-</div>
-
-
-<p>Pick <span>$x_1$</span>, remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list (say, <span>$x_2 \, \text{and} \, x_3$</span>). <br />
-Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list. Repeat this procedure until the last element.</p>
-
-<h3 id="psuedocode-for-trimming">PsuedoCode for Trimming</h3>
-
-<pre><code class="language-python">def trim(s_list,delta):
-  ret = [] # trimmed list
-  last = 0
-
-  for elm in s_list:
-    if elm &gt; last * delta:
-      ret.append(elm)
-      last = elm
-  return ret
+//e.g 若想改為 Min Binary Heap
+priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; pq;
+priority_queue&lt;pair&lt;int,int&gt;,vector&lt;pair&lt;int,int&gt; &gt;,greater&lt;pair&lt;int,int&gt; &gt; &gt; pq;
 </code></pre>
 
-<p>Now, <span>$|S_i| \leq \log_M W = \mathcal{O}(\frac{n\ln W}{\epsilon})
-\Rightarrow \text{Total running time: } \mathcal{O}(\frac{n^2 \ln W}{\epsilon})$</span></p>
+<h2 id="initialization">Initialization</h2>
 
-<h3 id="correctness-check">Correctness Check</h3>
+<pre><code class="language-cpp">priority_queue&lt;int&gt; pq;
+priority_queue&lt;int&gt; pq(vec.begin(),vec.end()); //copy [start,end)
+</code></pre>
 
+<p>Note: 直接在 constructor 做這件事，背後他會去 call <code>make_heap</code>，複雜度為 <span>$O(N)$</span>，<br />
+如果依序 push element 進來，複雜度為 <span>$)(N \log N)$</span>。</p>
 
-<div class="pure-u-1">
-  <img class="pure-img" src="https://sunprinces.github.io/learning/img/post/trim_approx.png" alt="Trimming Approximation">
-</div>
+<h2 id="binary-search-tree-set">Binary Search Tree - set</h2>
 
+<h2 id="性質-1">性質</h2>
 
-<p>可以將 Trimming 視為改小某一 range 中的元素們(將其改至該 range 內最小的元素)，OPT 在 trimming &amp; merge 的過程中不斷地被改小，最多最多會被等比縮小 <span>$n$</span> 次。</p>
+<ul>
+<li>container 中的 element 恆 follow 某個 order (default 是 ascending)</li>
+<li>element 為 unique ([cf] <code>multi_set</code> element 可 repeat)</li>
+</ul>
 
-<div>
-\[
-  \text{Output} \, \geq \, \text{OPT} \cdotp (1-\frac{\epsilon}{n})^n \stackrel{\color{blue}{n=1}}{\geq} \, \text{OPT} \cdotp (1-\epsilon)
-\]
-</div>
+<h3 id="宣告">宣告</h3>
+
+<pre><code>set&lt;int&gt; s;
+set&lt;int&gt; s(other_set);  //copy from other set
+set&lt;int&gt; s(ALL(other)); // can be other containers (like vector, set...) from [start, end)
+
+//Descending
+set&lt;int,greater&lt;int&gt; &gt;s;
+
+//Define custom order
+struct mycomp {
+  bool operator() (const int&amp; lhs, const int&amp; rhs) const
+  {return lhs&gt;rhs;} // descending
+};
+set&lt;int,mycomp&gt; s;
+</code></pre>
+
+<h3 id="計數-查找-span-o-log-n-span">計數/查找: <span>$O(\log N)$</span></h3>
+
+<pre><code class="language-cpp">set&lt;int&gt;::iterator it = s.find(123); // return iterator，找不到回傳 s.end()
+int b_exist = s.count(123); //either 0 or 1;
+
+//**lower_bound, upper_bound**
+// 注意：若今天查找的值，不在 set 裡頭，此兩者等價
+// Assume s = [1,2,3,5,6]
+set&lt;int&gt;:: iterator l_it = s.lower_bound(5); //*l_it = 5, 若all element &lt; val ，回傳 s.end()
+set&lt;int&gt;:: iterator u_it = s.upper_bound(5); //*u_it = 6,               &lt;=  
+</code></pre>
+
+<p>Note: <code>lower_bound()</code> 回傳的為 dereference 後 <span>$\geq$</span> val 者，<br />
+而 <code>upper_bound()</code> 回傳的為 dereference 後 <span>$&gt;$</span> val 者 ([cf] <code>multi_set</code> 的圖解)</p>
+
+<h3 id="插入-刪除-span-o-log-n-span">插入/刪除: <span>$O(\log N)$</span></h3>
+
+<pre><code class="language-cpp">s.insert(123);
+
+s.erase(123);
+s.erase(it); //*it = 123, O(1)
+s.erase(s.begin(),s.end()); //O(interval width)
+</code></pre>
+
+<p>Note:</p>
+
+<ul>
+<li>可以想見 <code>erase(val)</code> 實際上是去 call <code>find()</code> 拿到 iterator 後，再去 erase</li>
+<li>在 container 中的元素是不能被更改的 ([cf] map 可改 val，不能改 key)</li>
+<li>元素保證 unique ，若重複插入，<code>insert()</code> 不會插入 (關於其 return 值請查 cppreference)</li>
+</ul>
+
+<h3 id="misc">MISC</h3>
+
+<ul>
+<li>access <code>begin()</code>, <code>end()</code> 是 <span>$O(1)$</span> ，網路上某些參考資料有誤。</li>
+<li>基本上是下方 map 的一個 <strong>key = val</strong> 之特例。</li>
+</ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -350,13 +380,13 @@ Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\fra
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---2/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/">Advanced Algorithm - Knapsack Problem</a>
+      <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---2/">C&#43;&#43; STL Cheat Sheet - 2</a>
     </nav>
     
   </div>
@@ -365,14 +395,8 @@ Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\fra
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---bin-packing-problem/">Advanced Algorithm - Bin Packing Problem</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---bin-packing-problem/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
