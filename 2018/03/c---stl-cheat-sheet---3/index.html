@@ -275,7 +275,7 @@
 </div>
 
 
-  <p>用途在為了保證 container <strong>存在某些性質</strong>時使用。</p>
+  <p>這講所介紹的資料結構 (Heap, BST, Hash Table)，用途在為了保證 container <strong>存在某些性質</strong> 時使用。</p>
 
 <p></p>
 
@@ -300,7 +300,7 @@ priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; pq;
 priority_queue&lt;pair&lt;int,int&gt;,vector&lt;pair&lt;int,int&gt; &gt;,greater&lt;pair&lt;int,int&gt; &gt; &gt; pq;
 </code></pre>
 
-<h2 id="initialization">Initialization</h2>
+<h3 id="initialization">Initialization</h3>
 
 <pre><code class="language-cpp">priority_queue&lt;int&gt; pq;
 priority_queue&lt;int&gt; pq(vec.begin(),vec.end()); //copy [start,end)
@@ -311,14 +311,14 @@ priority_queue&lt;int&gt; pq(vec.begin(),vec.end()); //copy [start,end)
 
 <h2 id="binary-search-tree-set">Binary Search Tree - set</h2>
 
-<h2 id="性質-1">性質</h2>
+<h3 id="性質-1">性質</h3>
 
 <ul>
 <li>container 中的 element 恆 follow 某個 order (default 是 ascending)</li>
 <li>element 為 unique ([cf] <code>multi_set</code> element 可 repeat)</li>
 </ul>
 
-<h3 id="宣告">宣告</h3>
+<h3 id="宣告-initialization">宣告 &amp; Initialization</h3>
 
 <pre><code>set&lt;int&gt; s;
 set&lt;int&gt; s(other_set);  //copy from other set
@@ -372,6 +372,79 @@ s.erase(s.begin(),s.end()); //O(interval width)
 <ul>
 <li>access <code>begin()</code>, <code>end()</code> 是 <span>$O(1)$</span> ，網路上某些參考資料有誤。</li>
 <li>基本上是下方 map 的一個 <strong>key = val</strong> 之特例。</li>
+</ul>
+
+<h2 id="binary-search-tree-map">Binary Search Tree - Map</h2>
+
+<h3 id="性質-2">性質:</h3>
+
+<p>跟上述的 set 相同</p>
+
+<h3 id="宣告-initialization-1">宣告 &amp; Initialization</h3>
+
+<pre><code class="language-cpp">//同於 set
+map&lt;char,int&gt; mp;
+</code></pre>
+
+<h3 id="新增-修改-值-span-o-log-n-span">新增 / 修改 值: <span>$O(\log N)$</span></h3>
+
+<p>不同於 set 的不可更改， map 中我們可更改 val。</p>
+
+<pre><code class="language-cpp">//[],at()
+mp['h'] = 1; // if 'h ' exist, modify value to 1; if not, insert {'h',1}
+mp.at('h') = 1; //                              ; if not, 丟出例外
+</code></pre>
+
+<p>Note: 注意到若只想 query， e.g 使用<code>['o']</code>去查找不存在的 key 值 &lsquo;o&rsquo;，它會自動新增一個 key 值為 &lsquo;o&rsquo;，值為 default constructor 的 reference 。<br />
+在 init 表格紀錄時，使用 <code>[]</code>，便可以不用去 take care 例外，但 query 時，使用 <code>at()</code> 比較妥當。</p>
+
+<h3 id="插入-刪除-span-o-log-n-span-1">插入/刪除: <span>$O(\log N)$</span></h3>
+
+<p>注意到這時候要以 <strong>pair</strong> 來操作</p>
+
+<pre><code class="language-cpp">mp.insert({'h',1});
+mp.insert(pair&lt;char,int&gt;('h',1));
+
+mp.insert(other_mp.begin(),other_mp.find('o'));// 注意這裡的 container element 需為 pair 型態
+mp.erase('h'); // 以下類似
+</code></pre>
+
+<p>Note: <code>erase</code> 只能根據位置及 key 值來刪除，不能透由 value (想想也有道理，為了保持對數複雜度)</p>
+
+<h2 id="binary-search-tree-multiset-multimap">Binary Search Tree - Multiset, Multimap</h2>
+
+<h3 id="性質-3">性質：</h3>
+
+<ul>
+<li>允許重複值的 set</li>
+</ul>
+
+<h3 id="計數-查找">計數/查找</h3>
+
+<pre><code class="language-cpp">s.find(123); // 注意若 123 有多個，會回傳哪一個不一定 [故 multimap 使用它不太恰當]
+s.count(123); // O(lg N + equal range length)
+s.equal_range(123); 會回傳一個 {start,end} pair ，其中[start,end) 為 123
+
+// 圖解
+// 1 1 2 2 2 3
+//     ^       lower_bound(2)
+//           ^ upper_bound(2)
+</code></pre>
+
+<p>Note:</p>
+
+<ul>
+<li><code>equal_range()</code> 其實就是叫了 <code>lower_bound()</code> 及 <code>upper_bound()</code></li>
+<li><code>erase(val)</code> 會抹除所有值為 val 的元素，複雜度跟 <code>equal_range()</code> 相同</li>
+</ul>
+
+<h2 id="hash-table-unordered-set-unordered-map-及其-multi-類">Hash Table - Unordered_set, Unordered_map 及其 multi 類</h2>
+
+<h3 id="misc-1">Misc:</h3>
+
+<ul>
+<li>計數 / 查找 / 新增 / 刪除 : Average Case <span>$O(1)$</span>，Worst Case <span>$O(N)$</span></li>
+<li>儘量在插入元素前先 <code>reserve()</code> ，開好足夠大的表，避免 <code>rehash()</code> 發生。</li>
 </ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
