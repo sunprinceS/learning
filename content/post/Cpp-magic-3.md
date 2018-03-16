@@ -6,7 +6,7 @@ title =  "C++ STL Cheat Sheet - 3"
 topics = ["CheatSheet"]
 +++
 
-用途在為了保證 container **存在某些性質**時使用。
+這講所介紹的資料結構 (Heap, BST, Hash Table)，用途在為了保證 container **存在某些性質** 時使用。
 
 <!--more-->
 
@@ -31,7 +31,7 @@ priority_queue<int,vector<int>,greater<int> > pq;
 priority_queue<pair<int,int>,vector<pair<int,int> >,greater<pair<int,int> > > pq;
 ```
 
-## Initialization
+### Initialization
 
 ```cpp
 priority_queue<int> pq;
@@ -43,11 +43,11 @@ Note: 直接在 constructor 做這件事，背後他會去 call `make_heap`，�
 
 ## Binary Search Tree - set
 
-## 性質
+### 性質
 * container 中的 element 恆 follow 某個 order (default 是 ascending)
 * element 為 unique ([cf] `multi_set` element 可 repeat)
 
-### 宣告
+### 宣告 & Initialization
 
 ```
 set<int> s;
@@ -100,3 +100,75 @@ Note:
 
 * access `begin()`, `end()` 是 <span>$O(1)$</span> ，網路上某些參考資料有誤。
 * 基本上是下方 map 的一個 **key = val** 之特例。
+
+## Binary Search Tree - Map
+
+### 性質:
+
+跟上述的 set 相同
+
+### 宣告 & Initialization
+
+```cpp
+//同於 set
+map<char,int> mp;
+```
+
+### 新增 / 修改 值: <span>$O(\log N)$</span>
+
+不同於 set 的不可更改， map 中我們可更改 val。
+```cpp
+//[],at()
+mp['h'] = 1; // if 'h ' exist, modify value to 1; if not, insert {'h',1}
+mp.at('h') = 1; //                              ; if not, 丟出例外
+```
+
+Note: 注意到若只想 query， e.g 使用`['o']`去查找不存在的 key 值 'o'，它會自動新增一個 key 值為 'o'，值為 default constructor 的 reference 。\\
+在 init 表格紀錄時，使用 `[]`，便可以不用去 take care 例外，但 query 時，使用 `at()` 比較妥當。
+
+### 插入/刪除: <span>$O(\log N)$</span>
+
+注意到這時候要以 **pair** 來操作
+
+```cpp
+mp.insert({'h',1});
+mp.insert(pair<char,int>('h',1));
+
+mp.insert(other_mp.begin(),other_mp.find('o'));// 注意這裡的 container element 需為 pair 型態
+mp.erase('h'); // 以下類似
+```
+
+Note: `erase` 只能根據位置及 key 值來刪除，不能透由 value (想想也有道理，為了保持對數複雜度)
+
+## Binary Search Tree - Multiset, Multimap
+
+### 性質：
+
+* 允許重複值的 set
+
+### 計數/查找
+
+```cpp
+s.find(123); // 注意若 123 有多個，會回傳哪一個不一定 [故 multimap 使用它不太恰當]
+s.count(123); // O(lg N + equal range length)
+s.equal_range(123); 會回傳一個 {start,end} pair ，其中[start,end) 為 123
+
+// 圖解
+// 1 1 2 2 2 3
+//     ^       lower_bound(2)
+//           ^ upper_bound(2)
+```
+
+Note: 
+
+ * `equal_range()` 其實就是叫了 `lower_bound()` 及 `upper_bound()`
+ * `erase(val)` 會抹除所有值為 val 的元素，複雜度跟 `equal_range()` 相同
+
+
+## Hash Table - Unordered\_set, Unordered\_map 及其 multi 類
+
+### Misc:
+
+  * 計數 / 查找 / 新增 / 刪除 : Average Case <span>$O(1)$</span>，Worst Case <span>$O(N)$</span>
+  * 儘量在插入元素前先 `reserve()` ，開好足夠大的表，避免 `rehash()` 發生。
+
