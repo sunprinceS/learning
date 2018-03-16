@@ -3,22 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://sunprinces.github.io/learning/2018/03/test/</loc>
-    <lastmod>2018-03-16T09:37:07+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sunprinces.github.io/learning/2018/03/stl-cheat-sheet---3/</loc>
+    <loc>https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---3/</loc>
     <lastmod>2018-03-13T20:44:58+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sunprinces.github.io/learning/2018/03/stl-cheat-sheet---2/</loc>
+    <loc>https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---2/</loc>
     <lastmod>2018-03-12T22:44:58+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sunprinces.github.io/learning/2018/03/stl-cheat-sheet---1/</loc>
+    <loc>https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---1/</loc>
     <lastmod>2018-03-10T20:44:58+01:00</lastmod>
   </url>
   
@@ -238,6 +233,12 @@
   </url>
   
   <url>
+    <loc>https://sunprinces.github.io/learning/tags/c&#43;&#43;/</loc>
+    <lastmod>2018-03-13T20:44:58+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/topics/cheatsheet/</loc>
     <lastmod>2018-03-13T20:44:58+01:00</lastmod>
     <priority>0</priority>
@@ -359,7 +360,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/post/</loc>
-    <lastmod>2018-03-16T09:37:07+01:00</lastmod>
+    <lastmod>2018-03-13T20:44:58+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -395,7 +396,13 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/</loc>
-    <lastmod>2018-03-16T09:37:07+01:00</lastmod>
+    <lastmod>2018-03-13T20:44:58+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/tags/stl/</loc>
+    <lastmod>2018-03-13T20:44:58+01:00</lastmod>
     <priority>0</priority>
   </url>
   
