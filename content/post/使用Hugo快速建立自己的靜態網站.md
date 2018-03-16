@@ -44,7 +44,8 @@ topics = []
 ```bash
 # 在 local 端同步顯示，確定文章顯示與內容符合所想
 hugo server --buildDrafts
-hugo undraft content/post/[文章名稱].md # 不再是草稿囉
+# hugo undraft content/post/[文章名稱].md # deprecated after hugo ver>=0.37
+# 以後直接在 md 檔中修改即可！
 ```
 
 ## Git worktree
@@ -87,6 +88,10 @@ git push origin gh-pages # 大功告成！
 ```bash
 hugo --cleanDestinationDir
 ```
+
+## Post ChangeLog
+
+* 2018/03/16: 更新 `hugo clean`, `hugo undraft` 的指令 (Hugo ver <span>$\geq$</span> 0.36)
 
 ## Reference
 * [Quick Start](https://gohugo.io/overview/quickstart/)
