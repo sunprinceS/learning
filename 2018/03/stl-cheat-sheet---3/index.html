@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Noise and Probabilistic Target">
+  <meta name="description" content="資料結構 - Heap/ BST/ Hash Table">
   <meta name="generator" content="Hugo 0.37.1" />
 
-  <title>NTU Machine Learning - Lec8 &middot; Stay hungry. Stay foolish </title>
+  <title>STL Cheat Sheet - 3 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>NTU Machine Learning - Lec8</h1>
-  <h2>Noise and Probabilistic Target</h2>
+  <h1>STL Cheat Sheet - 3</h1>
+  <h2>資料結構 - Heap/ BST/ Hash Table</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>17 Jan 2018</time>
+    <time>13 Mar 2018</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/machine-learning-foundation">Machine Learning Foundation</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/cheatsheet">CheatSheet</a>
     
   </div>
   
@@ -266,9 +266,7 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/machine-learning">Machine Learning</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>
     
   </div>
   
@@ -277,29 +275,176 @@
 </div>
 
 
-  <p>前面幾講的討論中，我們都假設有一個 ground truth function <span>$f$</span> 去 generate data，且我們所拿到的 <span>$\mathcal{D}$</span> 是乾淨的，然而在真實世界中，無可避免地會遇到 <strong>noise</strong> 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？</p>
+  <p>這講所介紹的資料結構 (Heap, BST, Hash Table)，用途在為了保證 container <strong>存在某些性質</strong> 時使用。</p>
 
 <p></p>
 
-<h2 id="noise">Noise</h2>
+<h2 id="max-binary-heap-priority-queue">MAX Binary Heap - Priority Queue</h2>
 
-<p>再度回到以前的 bin model， model noise 的方式是，今天抽取出一個 ball 時，他的顏色不再是是一個固定的顏色，而是一個機率分佈 <span>$\sim \Pr[y | \mathbf{x}]$</span> (i.e given input <span>$\mathbf{x}$</span>， label <span>$y$</span> is probabilistic rather than deterministic)。對應到 learning ，則是今天 learn 的 target 不再是一個deterministic 的 <span>$y = f(\mathbf{x})$</span>，而是一個機率分佈 <span>$\Pr[y | \mathbf{x} ]$</span> (deterministic 可以想成機率分佈為只在一個值為 <span>$1$</span>，其他全 <span>$0$</span> 的 special case)</p>
-
-<p>而因為 Hoeffeding Ineq. hold for arbitary, unknowm target function，所以 VC
-bound 還是成立(從相同的 joint distribution <span>$\sim \Pr(\mathbf{x},y)$</span> sample， <span>$\mathcal{D}$</span> 夠大的情況下，在 <span>$\mathcal{D}$</span> 衡量的量 (e.g error) 跟真實世界不會差太多)，但 learning 的同時， 在 noisy 的情況下，我們可能找不到夠好的 hypothesis <span>$h$</span> 使得 <span>$E_i$</span> 足夠小 (e.g 如果原先線性可分的資料中有 noise ，使其線性不可分，那麼便只能借助 Pocket Learning Algorithm，除了 running time 比較長之外，也不保證一定能找到跟沒有 noise 情況下， PLA 找到的最佳解一樣好的解)</p>
-
-<h2 id="error-measure">Error Measure</h2>
-
-<p>隨著應用場景不同，想學的 target 不同， error metric 亦有所不同 (而如何選定合適的
-objective function 又是另一門學問了 &hellip;lol)，簡言之，對大多數的 hypothesis set
-<span>$\mathcal{H}$</span> 及 error metric ， VC theory 均會成立。</p>
-
-<p>講義中給出了一個 Weighted 0/1 error 的 metric ，可以利用 virtual copy 的概念去將新的演算法 reduce 回原先介紹的 PLA (類似的 reduce 想法可以推廣到其他 error metric)。</p>
-
-<h2 id="reference">Reference</h2>
+<h3 id="性質">性質</h3>
 
 <ul>
-<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/08_handout.pdf">林軒田老師的講義</a></li>
+<li><strong>top() 恆為當前資料中最大者， query 複雜度 <span>$O(1)$</span></strong></li>
+<li>push/pop 複雜度為 <span>$O(\log N)$</span></li>
+</ul>
+
+<h3 id="型態宣告">型態宣告</h3>
+
+<pre><code class="language-cpp">&lt;class T, class Container = vector&lt;T&gt;, less&lt;typename Container::value_type&gt; &gt; pq;
+//正常使用
+priority_queue&lt;int&gt; pq; // 
+priority_queue&lt;pair&lt;int,int&gt; &gt; pq;
+
+//e.g 若想改為 Min Binary Heap
+priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; pq;
+priority_queue&lt;pair&lt;int,int&gt;,vector&lt;pair&lt;int,int&gt; &gt;,greater&lt;pair&lt;int,int&gt; &gt; &gt; pq;
+</code></pre>
+
+<h3 id="initialization">Initialization</h3>
+
+<pre><code class="language-cpp">priority_queue&lt;int&gt; pq;
+priority_queue&lt;int&gt; pq(vec.begin(),vec.end()); //copy [start,end)
+</code></pre>
+
+<p>Note: 直接在 constructor 做這件事，背後他會去 call <code>make_heap</code>，複雜度為 <span>$O(N)$</span>，<br />
+如果依序 push element 進來，複雜度為 <span>$)(N \log N)$</span>。</p>
+
+<h2 id="binary-search-tree-set">Binary Search Tree - set</h2>
+
+<h3 id="性質-1">性質</h3>
+
+<ul>
+<li>container 中的 element 恆 follow 某個 order (default 是 ascending)</li>
+<li>element 為 unique ([cf] <code>multi_set</code> element 可 repeat)</li>
+</ul>
+
+<h3 id="宣告-initialization">宣告 &amp; Initialization</h3>
+
+<pre><code>set&lt;int&gt; s;
+set&lt;int&gt; s(other_set);  //copy from other set
+set&lt;int&gt; s(ALL(other)); // can be other containers (like vector, set...) from [start, end)
+
+//Descending
+set&lt;int,greater&lt;int&gt; &gt;s;
+
+//Define custom order
+struct mycomp {
+  bool operator() (const int&amp; lhs, const int&amp; rhs) const
+  {return lhs&gt;rhs;} // descending
+};
+set&lt;int,mycomp&gt; s;
+</code></pre>
+
+<h3 id="計數-查找-span-o-log-n-span">計數/查找: <span>$O(\log N)$</span></h3>
+
+<pre><code class="language-cpp">set&lt;int&gt;::iterator it = s.find(123); // return iterator，找不到回傳 s.end()
+int b_exist = s.count(123); //either 0 or 1;
+
+//**lower_bound, upper_bound**
+// 注意：若今天查找的值，不在 set 裡頭，此兩者等價
+// Assume s = [1,2,3,5,6]
+set&lt;int&gt;:: iterator l_it = s.lower_bound(5); //*l_it = 5, 若all element &lt; val ，回傳 s.end()
+set&lt;int&gt;:: iterator u_it = s.upper_bound(5); //*u_it = 6,               &lt;=  
+</code></pre>
+
+<p>Note: <code>lower_bound()</code> 回傳的為 dereference 後 <span>$\geq$</span> val 者，<br />
+而 <code>upper_bound()</code> 回傳的為 dereference 後 <span>$&gt;$</span> val 者 ([cf] <code>multi_set</code> 的圖解)</p>
+
+<h3 id="插入-刪除-span-o-log-n-span">插入/刪除: <span>$O(\log N)$</span></h3>
+
+<pre><code class="language-cpp">s.insert(123);
+
+s.erase(123);
+s.erase(it); //*it = 123, O(1)
+s.erase(s.begin(),s.end()); //O(interval width)
+</code></pre>
+
+<p>Note:</p>
+
+<ul>
+<li>可以想見 <code>erase(val)</code> 實際上是去 call <code>find()</code> 拿到 iterator 後，再去 erase</li>
+<li>在 container 中的元素是不能被更改的 ([cf] map 可改 val，不能改 key)</li>
+<li>元素保證 unique ，若重複插入，<code>insert()</code> 不會插入 (關於其 return 值請查 cppreference)</li>
+</ul>
+
+<h3 id="misc">MISC</h3>
+
+<ul>
+<li>access <code>begin()</code>, <code>end()</code> 是 <span>$O(1)$</span> ，網路上某些參考資料有誤。</li>
+<li>基本上是下方 map 的一個 <strong>key = val</strong> 之特例。</li>
+</ul>
+
+<h2 id="binary-search-tree-map">Binary Search Tree - Map</h2>
+
+<h3 id="性質-2">性質:</h3>
+
+<p>跟上述的 set 相同</p>
+
+<h3 id="宣告-initialization-1">宣告 &amp; Initialization</h3>
+
+<pre><code class="language-cpp">//同於 set
+map&lt;char,int&gt; mp;
+</code></pre>
+
+<h3 id="新增-修改-值-span-o-log-n-span">新增 / 修改 值: <span>$O(\log N)$</span></h3>
+
+<p>不同於 set 的不可更改， map 中我們可更改 val。</p>
+
+<pre><code class="language-cpp">//[],at()
+mp['h'] = 1; // if 'h ' exist, modify value to 1; if not, insert {'h',1}
+mp.at('h') = 1; //                              ; if not, 丟出例外
+</code></pre>
+
+<p>Note: 注意到若只想 query， e.g 使用<code>['o']</code>去查找不存在的 key 值 &lsquo;o&rsquo;，它會自動新增一個 key 值為 &lsquo;o&rsquo;，值為 default constructor 的 reference 。<br />
+在 init 表格紀錄時，使用 <code>[]</code>，便可以不用去 take care 例外，但 query 時，使用 <code>at()</code> 比較妥當。</p>
+
+<h3 id="插入-刪除-span-o-log-n-span-1">插入/刪除: <span>$O(\log N)$</span></h3>
+
+<p>注意到這時候要以 <strong>pair</strong> 來操作</p>
+
+<pre><code class="language-cpp">mp.insert({'h',1});
+mp.insert(pair&lt;char,int&gt;('h',1));
+
+mp.insert(other_mp.begin(),other_mp.find('o'));// 注意這裡的 container element 需為 pair 型態
+mp.erase('h'); // 以下類似
+</code></pre>
+
+<p>Note: <code>erase</code> 只能根據位置及 key 值來刪除，不能透由 value (想想也有道理，為了保持對數複雜度)</p>
+
+<h2 id="binary-search-tree-multiset-multimap">Binary Search Tree - Multiset, Multimap</h2>
+
+<h3 id="性質-3">性質：</h3>
+
+<ul>
+<li>允許重複值的 set</li>
+</ul>
+
+<h3 id="計數-查找">計數/查找</h3>
+
+<pre><code class="language-cpp">s.find(123); // 注意若 123 有多個，會回傳哪一個不一定 [故 multimap 使用它不太恰當]
+s.count(123); // O(lg N + equal range length)
+s.equal_range(123); 會回傳一個 {start,end} pair ，其中[start,end) 為 123
+
+// 圖解
+// 1 1 2 2 2 3
+//     ^       lower_bound(2)
+//           ^ upper_bound(2)
+</code></pre>
+
+<p>Note:</p>
+
+<ul>
+<li><code>equal_range()</code> 其實就是叫了 <code>lower_bound()</code> 及 <code>upper_bound()</code></li>
+<li><code>erase(val)</code> 會抹除所有值為 val 的元素，複雜度跟 <code>equal_range()</code> 相同</li>
+</ul>
+
+<h2 id="hash-table-unordered-set-unordered-map-及其-multi-類">Hash Table - Unordered_set, Unordered_map 及其 multi 類</h2>
+
+<h3 id="misc-1">Misc:</h3>
+
+<ul>
+<li>計數 / 查找 / 新增 / 刪除 : Average Case <span>$O(1)$</span>，Worst Case <span>$O(N)$</span></li>
+<li>儘量在插入元素前先 <code>reserve()</code> ，開好足夠大的表，避免 <code>rehash()</code> 發生。</li>
 </ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
@@ -308,13 +453,13 @@ objective function 又是另一門學問了 &hellip;lol)，簡言之，對大多
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/03/stl-cheat-sheet---2/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/">Information Retrieval - Lec1</a>
+      <a href="https://sunprinces.github.io/learning/2018/03/stl-cheat-sheet---2/">STL Cheat Sheet - 2</a>
     </nav>
     
   </div>
@@ -323,14 +468,8 @@ objective function 又是另一門學問了 &hellip;lol)，簡言之，對大多
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2018/03/stl-cheat-sheet---1/">STL Cheat Sheet - 1</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2018/03/stl-cheat-sheet---1/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
