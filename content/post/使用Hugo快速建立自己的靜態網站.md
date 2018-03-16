@@ -80,6 +80,14 @@ cd ..
 git push origin gh-pages # 大功告成！
 ```
 
+## Clean
+
+如果改動過標題，原先 publishdir 下已產生的檔案不會刪除，需利用以下指令刪除
+
+```bash
+hugo --cleanDestinationDir
+```
+
 ## Reference
 * [Quick Start](https://gohugo.io/overview/quickstart/)
 * [Hosting on GitHub Pages](https://gohugo.io/tutorials/github-pages-blog/)

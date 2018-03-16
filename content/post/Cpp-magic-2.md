@@ -1,7 +1,8 @@
 +++
 date =  "2018-03-12T22:44:58+01:00"
 description = "Function"
-tags = ["Programming"]
+draft = false
+tags = ["Programming","C++","STL"]
 title =  "C++ STL Cheat Sheet - 2"
 topics = ["CheatSheet"]
 +++
