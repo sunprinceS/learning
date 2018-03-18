@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="資料結構 - Heap/ BST/ Hash Table">
+  <meta name="description" content="">
   <meta name="generator" content="Hugo 0.37.1" />
 
-  <title>C&#43;&#43; STL Cheat Sheet - 3 &middot; Stay hungry. Stay foolish </title>
+  <title>LeetCode 287 - Find the Duplicate Number &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>C&#43;&#43; STL Cheat Sheet - 3</h1>
-  <h2>資料結構 - Heap/ BST/ Hash Table</h2>
+  <h1>LeetCode 287 - Find the Duplicate Number</h1>
+  <h2></h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>13 Mar 2018</time>
+    <time>18 Mar 2018</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/cheatsheet">CheatSheet</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/online-judge">Online-Judge</a>
     
   </div>
   
@@ -268,9 +268,7 @@
     
       <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/c&#43;&#43;">C&#43;&#43;</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/stl">STL</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/leetcode">LeetCode</a>
     
   </div>
   
@@ -279,177 +277,123 @@
 </div>
 
 
-  <p>這講所介紹的資料結構 (Heap, BST, Hash Table)，用途在為了保證 container <strong>存在某些性質</strong> 時使用。</p>
+  <p><a href="https://leetcode.com/problems/find-the-duplicate-number/description/">題目連結</a></p>
 
 <p></p>
 
-<h2 id="max-binary-heap-priority-queue">MAX Binary Heap - Priority Queue</h2>
+<p>最近開始刷 LeetCode 練習思考，這題討論串的某個解法蠻神的，因此來紀錄一下。</p>
 
-<h3 id="性質">性質</h3>
+<h2 id="題目敘述">題目敘述</h2>
 
-<ul>
-<li><strong>top() 恆為當前資料中最大者， query 複雜度 <span>$O(1)$</span></strong></li>
-<li>push/pop 複雜度為 <span>$O(\log N)$</span></li>
-</ul>
+<p>Given an array nums containing <strong>n + 1</strong> integers where each integer <span>$\in [1,n]$</span>，
+Assume that there is <strong>only one duplicate number</strong> (but can be repeated once), find the duplicate one.</p>
 
-<h3 id="型態宣告">型態宣告</h3>
-
-<pre><code class="language-cpp">&lt;class T, class Container = vector&lt;T&gt;, less&lt;typename Container::value_type&gt; &gt; pq;
-//正常使用
-priority_queue&lt;int&gt; pq; // 
-priority_queue&lt;pair&lt;int,int&gt; &gt; pq;
-
-//e.g 若想改為 Min Binary Heap
-priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; pq;
-priority_queue&lt;pair&lt;int,int&gt;,vector&lt;pair&lt;int,int&gt; &gt;,greater&lt;pair&lt;int,int&gt; &gt; &gt; pq;
-</code></pre>
-
-<h3 id="initialization">Initialization</h3>
-
-<pre><code class="language-cpp">priority_queue&lt;int&gt; pq;
-priority_queue&lt;int&gt; pq(vec.begin(),vec.end()); //copy [start,end)
-</code></pre>
-
-<p>Note: 直接在 constructor 做這件事，背後他會去 call <code>make_heap</code>，複雜度為 <span>$O(N)$</span>，<br />
-如果依序 push element 進來，複雜度為 <span>$)(N \log N)$</span>。</p>
-
-<h2 id="binary-search-tree-set">Binary Search Tree - set</h2>
-
-<h3 id="性質-1">性質</h3>
+<h2 id="限制">限制</h2>
 
 <ul>
-<li>container 中的 element 恆 follow 某個 order (default 是 ascending)</li>
-<li>element 為 unique ([cf] <code>multi_set</code> element 可 repeat)</li>
+<li>You must <strong>not modify the array</strong> (assume the array is read only).</li>
+<li>You must use only constant, <strong>O(1) extra space</strong>.</li>
+<li>Your runtime complexity should be less than <span>$O(n^2)$</span>.</li>
 </ul>
 
-<h3 id="宣告-initialization">宣告 &amp; Initialization</h3>
+<h2 id="o-n-簡單算法-w-modifying-array">O(n) 簡單算法 (W/ modifying array)</h2>
 
-<pre><code>set&lt;int&gt; s;
-set&lt;int&gt; s(other_set);  //copy from other set
-set&lt;int&gt; s(ALL(other)); // can be other containers (like vector, set...) from [start, end)
+<p>與 <a href="https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/">LeetCode448 - FindDisappearedNumber</a>一樣，在保有原先 array 資訊的情況下立 Flag。</p>
 
-//Descending
-set&lt;int,greater&lt;int&gt; &gt;s;
-
-//Define custom order
-struct mycomp {
-  bool operator() (const int&amp; lhs, const int&amp; rhs) const
-  {return lhs&gt;rhs;} // descending
-};
-set&lt;int,mycomp&gt; s;
+<pre><code class="language-cpp">int findDuplicate(vector&lt;int&gt;&amp; nums) {
+  for(size_t i=0;i&lt;nums.size();++i){
+    if(nums[abs(nums[i])-1] &lt; 0) return abs(nums[i]);
+    else nums[abs(nums[i])-1] *= -1; 
+  }
+}
 </code></pre>
 
-<h3 id="計數-查找-span-o-log-n-span">計數/查找: <span>$O(\log N)$</span></h3>
+<p>簡單！但是不合題目要求XD
+(如果沒加 read-only 這個條件，只說跑完該 function ，array 不能變其實可以用，反正
+就再跑個一輪加 <code>abs()</code> 😛)</p>
 
-<pre><code class="language-cpp">set&lt;int&gt;::iterator it = s.find(123); // return iterator，找不到回傳 s.end()
-int b_exist = s.count(123); //either 0 or 1;
+<h2 id="o-n-span-log-span-n-利用鴿籠原理的想法">O(n <span>$log$</span> n) - 利用鴿籠原理的想法</h2>
 
-//**lower_bound, upper_bound**
-// 注意：若今天查找的值，不在 set 裡頭，此兩者等價
-// Assume s = [1,2,3,5,6]
-set&lt;int&gt;:: iterator l_it = s.lower_bound(5); //*l_it = 5, 若all element &lt; val ，回傳 s.end()
-set&lt;int&gt;:: iterator u_it = s.upper_bound(5); //*u_it = 6,               &lt;=  
+<p>看到題目限 <span>$O(n^2)$</span> 複雜度，可以想到二分搜或排序，但不能開另外的
+container ，所以應該是二分搜。</p>
+
+<p>每次都砍半，去 check [1,mid] 中 element 的個數，如果比 mid 還大，代表裡頭有重
+複，反之就是另一個沒被檢查到的區間，每次都要 iterate 一輪，但 <span>$O(\log N)$</span> 輪便可找到答案。 (我想這題被放在 <code>medium</code> 應該是因為存在這個簡單的算法XD)</p>
+
+<pre><code class="language-cpp">int findDuplicate(vector&lt;int&gt;&amp; nums){
+int low = 1,high = nums.size()-1;
+int mid,cnt;
+while(low &lt;= high){
+  cnt = 0;
+  mid = (low + high) /2;
+  for(auto n: nums){
+    if(n &lt;= mid) ++cnt;
+  }
+  if(cnt &lt;= mid) low = mid +1;
+  else high = mid - 1;
+}
+return low;
+}
 </code></pre>
 
-<p>Note: <code>lower_bound()</code> 回傳的為 dereference 後 <span>$\geq$</span> val 者，<br />
-而 <code>upper_bound()</code> 回傳的為 dereference 後 <span>$&gt;$</span> val 者 ([cf] <code>multi_set</code> 的圖解)</p>
+<h2 id="o-n-tortoise-and-hare-algorithm">O(n) - Tortoise and Hare Algorithm</h2>
 
-<h3 id="插入-刪除-span-o-log-n-span">插入/刪除: <span>$O(\log N)$</span></h3>
+<p>沒寫過當場想的出來真的是大神&hellip;<br />
+In Brief，觀察到區間是 <span>$[1,n]$</span>，且沒有缺漏的元素，在不存在重複元
+素的情況下， index 與 value ，可以想成 <span>$[1,n] \mapsto [1,n]$</span> (Permutation!)，
+所以 <code>nums[0]</code>, <code>nums[nums[0]]</code>, <code>nums[nums[nums[0]]]</code>&hellip; 可以把元素都 iterate
+一遍，也就是一個 path。
+好！但今天我們確定有一個(也是唯一一個)元素重複了，對這個性質會造成什麼影響呢？
+WLOG，我們從眾多可能 permutation 挑出一個最好思考的(照順序的)，已知今天是有 <span>$n+1$</span> 個元素，假定我們今天在 <span>$[1,n]$</span> 的最後接上<span>$[1,n]$</span>中的任一個值，如以下紅色部份
+<center><img src="https://sunprinces.github.io/learning/img/post/leetcode287.png" width="70%" style="border-radius: 0%;"></center></p>
 
-<pre><code class="language-cpp">s.insert(123);
+<p>會將原先一條依序 iterate 過所有元素的 path ，變成一個 path 與 cycle 的 混合路徑(?)。因為 <span>$0$</span> 不存在元素裡頭，所以首位元素為一個 source。 由此可確定這個路徑中至少有一單位長度的 path 。</p>
 
-s.erase(123);
-s.erase(it); //*it = 123, O(1)
-s.erase(s.begin(),s.end()); //O(interval width)
-</code></pre>
+<p>過來是這個演算法精華的部份，如以下示意圖，<strong>重複的元素為 path 進入 cycle 的 entry point</strong> (注意到根本輪不到第三個重複元素，兩個就會形成cycle) ，那該如何偵測呢？</p>
 
-<p>Note:</p>
+<p><center><img src="https://sunprinces.github.io/learning/img/post/leetcode287-1.png" width="40%" style="border-radius: 0%;"></center></p>
+
+<p>maintain 兩個 pointer，其中一個(hare)一次走兩步 (i.e <code>nums[nums[i]]</code>)，另一個(turtle)一次走一
+步(e.g <code>nums[i]</code>)，因為迴圈存在，步數公因數又為 <span>$1$</span> 所以最後一定會
+相遇於 cycle 上一點 <span>$M$</span>，這點具有什麼特性？ 整理下我們有的式子。</p>
+
+<p><code>$$
+2\times (\underbrace{n_1 C + L_1 + \overline{SE}}_{turtle 走的長度})  = \underbrace{n_2 C+L_1 + \overline{SE}}_{hare 走的長度}
+$$</code></p>
+
+<p>移項可得</p>
+
+<p><code>$$
+L_1 + \overline{SE} = (n_2 - 2n_1)C = nC, \quad n \in \mathbb{N}
+$$</code></p>
 
 <ul>
-<li>可以想見 <code>erase(val)</code> 實際上是去 call <code>find()</code> 拿到 iterator 後，再去 erase</li>
-<li>在 container 中的元素是不能被更改的 ([cf] map 可改 val，不能改 key)</li>
-<li>元素保證 unique ，若重複插入，<code>insert()</code> 不會插入 (關於其 return 值請查 cppreference)</li>
+<li><p><span>$n = 1$</span>， <span>$\overline{SE} = L_2$</span>，令兩個 pointer 分別從
+M 和起始點出發(但這次步伐相同！)，交會點即是 <span>$E$</span> 。</p></li>
+
+<li><p><span>$n = k$</span>， <span>$\overline{SE} = (k-1)C + L_2$</span>，與上面一樣，會
+發現交會點亦是 <span>$E$</span> 。</p></li>
 </ul>
 
-<h3 id="misc">MISC</h3>
+<pre><code class="language-cpp">int findDuplicate(vector&lt;int&gt;&amp; nums)
+{
+  int t = nums[0];
+  int h = nums[nums[0]];
+  while (t != h){
+    t = nums[t];
+    h = nums[nums[h]];
+  }
 
-<ul>
-<li>access <code>begin()</code>, <code>end()</code> 是 <span>$O(1)$</span> ，網路上某些參考資料有誤。</li>
-<li>基本上是下方 map 的一個 <strong>key = val</strong> 之特例。</li>
-</ul>
-
-<h2 id="binary-search-tree-map">Binary Search Tree - Map</h2>
-
-<h3 id="性質-2">性質:</h3>
-
-<p>跟上述的 set 相同</p>
-
-<h3 id="宣告-initialization-1">宣告 &amp; Initialization</h3>
-
-<pre><code class="language-cpp">//同於 set
-map&lt;char,int&gt; mp;
+  h = 0;
+  while (t != h){
+    t = nums[t];
+    h = nums[h];
+  }
+  return t;
+}
 </code></pre>
 
-<h3 id="新增-修改-值-span-o-log-n-span">新增 / 修改 值: <span>$O(\log N)$</span></h3>
-
-<p>不同於 set 的不可更改， map 中我們可更改 val。</p>
-
-<pre><code class="language-cpp">//[],at()
-mp['h'] = 1; // if 'h ' exist, modify value to 1; if not, insert {'h',1}
-mp.at('h') = 1; //                              ; if not, 丟出例外
-</code></pre>
-
-<p>Note: 注意到若只想 query， e.g 使用<code>['o']</code>去查找不存在的 key 值 &lsquo;o&rsquo;，它會自動新增一個 key 值為 &lsquo;o&rsquo;，值為 default constructor 的 reference 。<br />
-在 init 表格紀錄時，使用 <code>[]</code>，便可以不用去 take care 例外，但 query 時，使用 <code>at()</code> 比較妥當。</p>
-
-<h3 id="插入-刪除-span-o-log-n-span-1">插入/刪除: <span>$O(\log N)$</span></h3>
-
-<p>注意到這時候要以 <strong>pair</strong> 來操作</p>
-
-<pre><code class="language-cpp">mp.insert({'h',1});
-mp.insert(pair&lt;char,int&gt;('h',1));
-
-mp.insert(other_mp.begin(),other_mp.find('o'));// 注意這裡的 container element 需為 pair 型態
-mp.erase('h'); // 以下類似
-</code></pre>
-
-<p>Note: <code>erase</code> 只能根據位置及 key 值來刪除，不能透由 value (想想也有道理，為了保持對數複雜度)</p>
-
-<h2 id="binary-search-tree-multiset-multimap">Binary Search Tree - Multiset, Multimap</h2>
-
-<h3 id="性質-3">性質：</h3>
-
-<ul>
-<li>允許重複值的 set</li>
-</ul>
-
-<h3 id="計數-查找">計數/查找</h3>
-
-<pre><code class="language-cpp">s.find(123); // 注意若 123 有多個，會回傳哪一個不一定 [故 multimap 使用它不太恰當]
-s.count(123); // O(lg N + equal range length)
-s.equal_range(123); 會回傳一個 {start,end} pair ，其中[start,end) 為 123
-
-// 圖解
-// 1 1 2 2 2 3
-//     ^       lower_bound(2)
-//           ^ upper_bound(2)
-</code></pre>
-
-<p>Note:</p>
-
-<ul>
-<li><code>equal_range()</code> 其實就是叫了 <code>lower_bound()</code> 及 <code>upper_bound()</code></li>
-<li><code>erase(val)</code> 會抹除所有值為 val 的元素，複雜度跟 <code>equal_range()</code> 相同</li>
-</ul>
-
-<h2 id="hash-table-unordered-set-unordered-map-及其-multi-類">Hash Table - Unordered_set, Unordered_map 及其 multi 類</h2>
-
-<h3 id="misc-1">Misc:</h3>
-
-<ul>
-<li>計數 / 查找 / 新增 / 刪除 : Average Case <span>$O(1)$</span>，Worst Case <span>$O(N)$</span></li>
-<li>儘量在插入元素前先 <code>reserve()</code> ，開好足夠大的表，避免 <code>rehash()</code> 發生。</li>
-</ul>
+<p>很精闢的演算法！</p>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -457,13 +401,13 @@ s.equal_range(123); 會回傳一個 {start,end} pair ，其中[start,end) 為 12
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---2/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---3/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---2/">C&#43;&#43; STL Cheat Sheet - 2</a>
+      <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---3/">C&#43;&#43; STL Cheat Sheet - 3</a>
     </nav>
     
   </div>
@@ -472,14 +416,8 @@ s.equal_range(123); 會回傳一個 {start,end} pair ，其中[start,end) 為 12
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2018/03/leetcode-287---find-the-duplicate-number/">LeetCode 287 - Find the Duplicate Number</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2018/03/leetcode-287---find-the-duplicate-number/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
