@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Tue, 16 Jan 2018 23:14:08 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jan 2018 23:14:08 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/kth/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Information Retrieval - Lec2</title>
+      <link>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec2/</link>
+      <pubDate>Mon, 22 Jan 2018 23:14:08 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec2/</guid>
+      <description>&lt;p&gt;在做 &lt;a href=&#34;https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/&#34;&gt;Indexing&lt;/a&gt; 之前，我們需要將文本從各方來源中抽取出來，這些來源的 &lt;strong&gt;格式&lt;/strong&gt; 相當多元(像是 html, md 等等 markup 或是與圖片相雜的 data ，可能還需要處理 encoding 的問題)，反正就是挺亂的，需要做一些 processing 後，才可以用強大的 NLP tool 來統一處理。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Information Retrieval - Lec1</title>
