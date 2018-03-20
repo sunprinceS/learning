@@ -1,7 +1,7 @@
 +++
 title = "LeetCode 287 - Find the Duplicate Number"
 date = "2018-03-18T15:44:33+01:00"
-draft = true
+draft = false
 tags = ["Programming","LeetCode"]
 topics = ["Online-Judge"]
 description = ""
@@ -16,7 +16,7 @@ description = ""
 ## 題目敘述
 
 Given an array nums containing **n + 1** integers where each integer <span>$\in \[1,n\]$</span>，
-Assume that there is **only one duplicate number** (but can be repeated once), find the duplicate one.
+Assume that there is **only one duplicate number** (but can be repeated many times), find the duplicate one.
 
 ## 限制
 * You must **not modify the array** (assume the array is read only).

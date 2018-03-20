@@ -76,8 +76,6 @@ in document <span>$d$</span>]
 Useful, simple, fast and intuitive in doing boolean operation \\
 (often used in **well-defined** documents )
 
-實做細節等 lab 1寫完再來補上XD
-
 ### Disadvantage
 
 * How to formulate query (the result can be too many or too few, depending on
@@ -86,3 +84,27 @@ Useful, simple, fast and intuitive in doing boolean operation \\
 * Make a little unreasonable assumption: **every terms are equally important**
 
 **Remark:** 一個比較偏 DB 風格的 IR 方法 ，在將 documents 轉成方才定義的那種 term-document matrix 時，丟失了太多資訊。在 query 時處理的也不是那麼貼近 user-friendly 的自然語言。
+
+### Implementation
+
+在 Lab 中，我們做了一些改動來實做 Inverted Index (因上述矩陣相當 sparse):
+
+* 對每個 term 建一個 PostingList (`HashMap`)
+* PostingList 中的每個 entry ，是一個文本 id 對應到字出現於該文本之位置
+   (**sorted** `Array`)
+
+> ``Dakin -> [{1: 1,2,3},{2: 1,8,9}]...``
+
+必須支援以下操作 `Intersection`, `weighted union`, `Intersection(Neighbor)`
+(下圖範例為 intersection)
+
+<center><img src="/img/post/ir-intersection.png" width="70%" style="border-radius: 0%;"></center>
+
+可以用 <span>$O(n+m)$</span> (<span>$n,m$</span> are the size of 2 posting lists) 解決！
+
+### Hardware Issue
+
+可以想見文本和 term 何其多，不太可能單純地全部 load 進 RAM 來處理，在 Lab 中用到的方法是將每個 term 先 hash 到一個 dictionary file，而當中的每個 entry 會指向另一個存 PostingList 的檔案。 (會需要另外存 dictinoary file 之因為 PostingList 大小不一，不知道該給每個 entry 多少空間，而這樣就無法確定 從 term 到記憶體位置的 hash mapping)。
+
+**Remark:** 這招真的蠻常用到的...
+
