@@ -100,11 +100,11 @@ Useful, simple, fast and intuitive in doing boolean operation \\
 
 <center><img src="/img/post/ir-intersection.png" width="70%" style="border-radius: 0%;"></center>
 
-可以用 <span>$O(n+m)$</span> (<span>$n,m$</span> are the size of 2 posting lists) 解決！
+可以在 <span>$O(n+m)$</span> (<span>$n,m$</span> are the size of 2 posting lists) 解決！
 
 ### Hardware Issue
 
-可以想見文本和 term 何其多，不太可能單純地全部 load 進 RAM 來處理，在 Lab 中用到的方法是將每個 term 先 hash 到一個 dictionary file，而當中的每個 entry 會指向另一個存 PostingList 的檔案。 (會需要另外存 dictinoary file 之因為 PostingList 大小不一，不知道該給每個 entry 多少空間，而這樣就無法確定 從 term 到記憶體位置的 hash mapping)。
+可以想見文本和 term 何其多，不太可能單純地全部 load 進 Memory 來處理，在 Lab 中用到的方法是將每個 term 先 hash 到一個 dictionary file，而當中的每個 entry 會指向另一個存 PostingList 的檔案。 (會需要另外存 dictinoary file 之因為 PostingList 大小不一，不知道該給每個 entry 多少空間，而這樣就無法確定 從 term 到記憶體位置的 hash mapping)。
 
-**Remark:** 這招真的蠻常用到的...
+**Remark:** 這招蠻常用到的...，不管在哪個領域
 

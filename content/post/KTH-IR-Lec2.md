@@ -4,7 +4,7 @@ description = "Preprocessing & Indexing"
 tags = ["IR","NLP","KTH"]
 title =  "Information Retrieval - Lec2"
 topics = ["Information Retrieval"]
-draft = true
+draft = false
 +++
 
 在做 [Indexing](https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/) 之前，我們需要將文本從各方來源中抽取出來，這些來源的 **格式** 相當多元(像是 html, md 等等 markup 或是與圖片相雜的 data ，可能還需要處理 encoding 的問題)，反正就是挺亂的，需要做一些 processing 後，才可以用強大的 NLP tool 來統一處理。
