@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Codeforce on Stay hungry. Stay foolish </title>
+    <link>https://sunprinces.github.io/learning/tags/codeforce/</link>
+    <description>Recent content in Codeforce on Stay hungry. Stay foolish </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017. All rights reserved.</copyright>
+    <lastBuildDate>Fri, 23 Mar 2018 15:44:33 +0100</lastBuildDate>
+    
+	<atom:link href="https://sunprinces.github.io/learning/tags/codeforce/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Algorithm - String Note 1</title>
+      <link>https://sunprinces.github.io/learning/2018/03/algorithm---string-note-1/</link>
+      <pubDate>Fri, 23 Mar 2018 15:44:33 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/03/algorithm---string-note-1/</guid>
+      <description>&lt;p&gt;寫 CodeForce 一題，遇到需要利用字典樹 (&lt;em&gt;Trie&lt;/em&gt;) 來處理的題目，以此紀錄一下。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

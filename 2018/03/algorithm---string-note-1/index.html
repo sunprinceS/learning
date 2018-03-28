@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Preprocessing &amp; Indexing">
+  <meta name="description" content="Trie">
   <meta name="generator" content="Hugo 0.37.1" />
 
-  <title>Information Retrieval - Lec2 &middot; Stay hungry. Stay foolish </title>
+  <title>Algorithm - String Note 1 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Information Retrieval - Lec2</h1>
-  <h2>Preprocessing &amp; Indexing</h2>
+  <h1>Algorithm - String Note 1</h1>
+  <h2>Trie</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>22 Jan 2018</time>
+    <time>23 Mar 2018</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/information-retrieval">Information Retrieval</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
     
   </div>
   
@@ -266,11 +266,13 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ir">IR</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/nlp">NLP</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/codeforce">CodeForce</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/data-structure">Data Structure</a>
     
   </div>
   
@@ -279,66 +281,28 @@
 </div>
 
 
-  <p>在做 <a href="https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/">Indexing</a> 之前，我們需要將文本從各方來源中抽取出來，這些來源的 <strong>格式</strong> 相當多元(像是 html, md 等等 markup 或是與圖片相雜的 data ，可能還需要處理 encoding 的問題)，反正就是挺亂的，需要做一些 processing 後，才可以用強大的 NLP tool 來統一處理。</p>
+  <p>寫 CodeForce 一題，遇到需要利用字典樹 (<em>Trie</em>) 來處理的題目，以此紀錄一下。</p>
 
 <p></p>
 
-<h2 id="tokenization">Tokenization</h2>
+<p>Trie 是一種專門用來處理字串的樹型資料結構，核心想法是將字串儲存於樹中節點的轉移。</p>
 
-<p>我們對 <strong>Token</strong> 的定義是，在 byte stream 中 <strong>能構成意義的最小單元</strong>。<br />
-(這樣講其實有點不精確，可以把這步想成是決定哪些 byte 要連在一起看，<br />
-白話來說，並以英文為例就是哪些 character 要連在一起看，哪些標點符號(e.g 。, <code>&lt;space&gt;</code>)、哪些 markup 要拿掉/或不拿掉。如果單看這個定義會覺得跟後方提到的方法在處理的對象及輸出有點小衝突😅，畢竟我們 pipeline 最終目標就是抽出一個所有文本中的 minimal meaning unit set ，但要直接從 byte stream level 做到這件事太難了，這步是 pipeline 的第一步而已)。</p>
+<p><img src="https://sunprinces.github.io/learning/img/post/trie-example.png" width="70%" style="border-radius: 0%;"></p>
 
-<p>以英文來說，一般會將標點符號或空白視為分隔符，但像是 hypen 連字(e.g. state-of-the-art)，網址(e.g. <a href="https://hao123.com">https://hao123.com</a> )，電話號碼&hellip;等，往往意義是不可拆的，所以需另外建構一些 rule (也 depend on 應用)去篩選，常用的表示方法則是 <strong>Regular Expression</strong> 。 e.g
-<code>https?:\/\/\S{2,300}</code>、<code>\d+[,.:-]\d+[,.:-]\d+</code>、<code>[a-zA-Z\d_.]+@[a-zA-Z\d.]+</code>。
-(你可以依此去 generate 幾個 sample ，來推測這些 regrex 的處理對象是哪些嗎？)</p>
+<h2 id="性質">性質</h2>
 
-<p><strong>Remark:</strong> 到這步你可以想見文本當中已經沒有那些困擾的符號 (有的話也是與 word 們 一起 bind 成一個概念看待)了。</p>
-
-<h2 id="normalization">Normalization</h2>
-
-<p>我們一般來說不希望字典過大增加太多 overhead， 希望將概念相同的字 mapping 到同一個表示 (過來的好幾步都是做這件事)，這裡做的是一個初步的嘗試 (e.g.大小寫, 變音)。</p>
-
-<h2 id="morpheme">Morpheme</h2>
-
-<div>
-\[
-\text{一個 word 當中能構成意義的最小單位}
-\]
-</div>
-
-<p>有以下幾中類別：</p>
+<p>每個節點下的所有子孫，有共同前綴。目前在以下場合用過</p>
 
 <ul>
-<li>stem: 詞幹 (<strong>通常 mapping 成它</strong>)</li>
-<li>affix: 可分為前綴(e.g un-, im-, &hellip;)、後綴(e.g -ly, -s, -ed) (不同語言還有其他不同的類別&hellip;lol)</li>
+<li>找LCA</li>
+<li>給定一字串， <span>$O(|s|)$</span> 找到於 trie 中最長前綴匹配的字串</li>
 </ul>
 
-<p>除此之外，還有各種由舊有詞複合(compound)起來表現的新詞 (e.g smartphone)，而像一些歐洲語言還有將一長串的字依一些 rule 構成一個超長詞的規則&hellip; (And such kind of language is called <strong>morphologically rich</strong>，但能夠表達的概念也不會比人家多&hellip;)<br />
-e.g 德文的 <code>Lebensversicherungsgesellschaftsangestellter</code> (life insurance company employee)</p>
+<p>在每個節點，maintain 一個 <code>cnt</code> 變數去記其子孫(i.e 擁有此前綴的字串)的數目
+(<code>insert</code>/<code>delete</code> -&gt; +1/-1)。</p>
 
-<p>有了 morpheme 的概念後，我們有更多的事可以做。</p>
-
-<h2 id="lemmatization">Lemmatization</h2>
-
-<p>將像是所有格、形容詞、副詞、第三人稱等通通 map 成 lemma (<strong>the base form</strong>)。以英文來說，會需要做 POS (part-of-speech) tagging 去抓詞性，才知道該怎麼 map ，而像剛剛提到的那些歐洲語言，還需要做些分析後，去把當中的 lemma 一個個抓出來(可以利用 FSM)。</p>
-
-<h3 id="alternative-method-stemming">Alternative method: Stemming</h3>
-
-<p>不管三七二十一，直接抓詞幹 (犧牲精確度但節省時間成本)。</p>
-
-<p>Example: Porter&rsquo;s Algorithm (a <strong>rule-based</strong> method)</p>
-
-<p><strong>Remark:</strong> 到這裡為止，我們已經大幅的減少了字典的 size 。</p>
-
-<h2 id="stop-words">Stop words</h2>
-
-<p>也是 rule-based ，有些字太常出現了(可能每個文本，甚至每個句子都有)，沒什麼語義上
-的價值，稱為 stopword ，可以從字典中移掉。</p>
-
-<p>(但有時候也不那麼絕對&hellip; e.g To be or not to be 😂) ，目前的潮流還是保留。</p>
-
-<p><strong>回顧:</strong> 如同前面所說，整個 preprocessing 要做的就是從文本中抽出一個 minimal meaning unit set （這裡我都叫他字典)，滿足利用這個字典中的每個 entry 能 rebuild 出全部文本 (or with 足夠小的語意 loss) 的條件，<strong>每一步要做多大的化簡除了是 precision 和 processing time,recall 的 trade-off 外，也是適當地 model NLP 的 ambiguousness</strong> 。</p>
+<p>比較為人詬病的是記憶體的用量，尤其在共同前綴沒那麼多時，每個節點都要開滿
+<span>$|\sigma|$</span></p>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -346,13 +310,13 @@ e.g 德文的 <code>Lebensversicherungsgesellschaftsangestellter</code> (life in
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec8/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/03/information-retrieval---lec4/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning---lec8/">NTU Machine Learning - Lec8</a>
+      <a href="https://sunprinces.github.io/learning/2018/03/information-retrieval---lec4/">Information Retrieval - Lec4</a>
     </nav>
     
   </div>
@@ -361,14 +325,8 @@ e.g 德文的 <code>Lebensversicherungsgesellschaftsangestellter</code> (life in
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2018/01/information-retrieval---lec3/">Information Retrieval - Lec3</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2018/01/information-retrieval---lec3/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

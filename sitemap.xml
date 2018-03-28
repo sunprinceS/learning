@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://sunprinces.github.io/learning/2018/03/information-retrieval---lec4/</loc>
+    <lastmod>2018-03-21T23:14:08+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/2018/03/leetcode-287---find-the-duplicate-number/</loc>
     <lastmod>2018-03-18T15:44:33+01:00</lastmod>
   </url>
@@ -20,6 +25,11 @@
   <url>
     <loc>https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---1/</loc>
     <lastmod>2018-03-10T20:44:58+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec3/</loc>
+    <lastmod>2018-01-31T23:14:08+01:00</lastmod>
   </url>
   
   <url>
@@ -304,13 +314,13 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/information-retrieval/</loc>
-    <lastmod>2018-01-22T23:14:08+01:00</lastmod>
+    <lastmod>2018-03-21T23:14:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/ir/</loc>
-    <lastmod>2018-01-22T23:14:08+01:00</lastmod>
+    <lastmod>2018-03-21T23:14:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -322,7 +332,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/kth/</loc>
-    <lastmod>2018-01-22T23:14:08+01:00</lastmod>
+    <lastmod>2018-03-21T23:14:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -352,7 +362,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/nlp/</loc>
-    <lastmod>2018-01-22T23:14:08+01:00</lastmod>
+    <lastmod>2018-03-21T23:14:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -376,7 +386,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/post/</loc>
-    <lastmod>2018-03-18T15:44:33+01:00</lastmod>
+    <lastmod>2018-03-21T23:14:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -412,7 +422,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/</loc>
-    <lastmod>2018-03-18T15:44:33+01:00</lastmod>
+    <lastmod>2018-03-21T23:14:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
