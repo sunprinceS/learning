@@ -7,10 +7,32 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 21 Mar 2018 23:14:08 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 09 Apr 2018 13:14:08 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Speech Recognition- Lec2</title>
+      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec2/</link>
+      <pubDate>Mon, 09 Apr 2018 13:14:08 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec2/</guid>
+      <description>&lt;p&gt;語音辨識的基本架構中，第一步便是要把聲音訊號轉成可被紀錄的數位形式以供 machine 處理。科學家們從人類究竟是如何發出特定聲音作為出發點，去找出訊號當中哪些是屬於那個聲音 unique 的 feature，並移除那些無關的資訊 (e.g noise) ，並利用這些 extract 出來的 feature 來作為辨識的基本元素。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Speech Recognition- Lec1</title>
+      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec1/</link>
+      <pubDate>Sun, 08 Apr 2018 16:14:08 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec1/</guid>
+      <description>&lt;p&gt;隨著變成菸酒生的日子逐漸逼近，最近開始重追尤達大師數位語音的連載，希望在進 Speech Lab 之前，將這些知識掌握地更加純熟，這個系列主要會雜揉以前在台大所修的 &lt;a href=&#34;http://speech.ee.ntu.edu.tw/DSP2017Autumn/&#34;&gt;數位語音處理概論&lt;/a&gt; 以及在 KTH 所修的 &lt;a href=&#34;https://www.kth.se/social/course/DT2119/&#34;&gt;Speech and Speaker Recognition&lt;/a&gt; 之相關內容。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Information Retrieval - Lec4</title>

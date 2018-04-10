@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Feature Extraction">
+  <meta name="generator" content="Hugo 0.38" />
+
+  <title>Speech Recognition- Lec2 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Speech Recognition- Lec2</h1>
+  <h2>Feature Extraction</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>09 Apr 2018</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/speech-processing">Speech Processing</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/asr">ASR</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>語音辨識的基本架構中，第一步便是要把聲音訊號轉成可被紀錄的數位形式以供 machine 處理。科學家們從人類究竟是如何發出特定聲音作為出發點，去找出訊號當中哪些是屬於那個聲音 unique 的 feature，並移除那些無關的資訊 (e.g noise) ，並利用這些 extract 出來的 feature 來作為辨識的基本元素。</p>
+
+<p></p>
+
+<h2 id="source-filter-model">Source-Filter Model</h2>
+
+<p>前面講的非常抽象，究竟聲音是如何產生的呢？</p>
+
+<p>透由聲帶的振動，有頻率地送出來自肺部的氣流，這些氣流經由聲道及唇齒舌不同的構造及位置 (vocal tract)，發出不同的聲音 (see <a href="https://dood.al/pinktrombone/">speech synthesis</a>)</p>
+
+<p>我們用以下的數學模型來描述，視聲帶振動所送出的氣流為聲源 <span>$e[n]$</span> ，而 vocal tract 則視為一個系統 <span>$H$</span> ，而兩者之後的 output 即為我們所聽到的聲音 <span>$s[n]$</span>。</p>
+
+<p>Remark: 其實應該要是連續的 <span>$e(t)$</span>，這裡已經做了 sample ，所以是離散的 <span>$e[n]$</span> 及 <span>$s[n]$</span></p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/speech-system.png" width="50%" style="border-radius: 0%;"></center></p>
+
+<h3 id="很粗淺的分類-濁音-vs-清音">很粗淺的分類: 濁音 vs 清音</h3>
+
+<ul>
+<li><p>濁音 (voiced speech): 發聲時會聲帶會振動的那些音 (母音及部份子音)，可以用手摸喉嚨感受看看！</p></li>
+
+<li><p>清音 (unvoiced speech): KK 音標中的 [s] ,[ts] ,[f], [p]</p></li>
+</ul>
+
+<p>Remark: 原本想舉注音符號當例子，但發現都會振動，因為我們的注音符號後面都會跟一個濁音 (像是ㄆ會念成ㄆㄜ,ㄈ會念成ㄈㄜ,ㄊ念成ㄊㄜ)，也算是意外的發現呢XD</p>
+
+<p>而聲帶會振動的濁音，是<strong>有週期性</strong>的送氣到 vocal tract ，而清音則是氣流直接灌進去(類似 white noise )，無週期可言，
+而從頻譜上來看，更可以發現當中的一些特性
+(以下是我利用 WaveSurfer 所錄製的 「阿斯」(??? )</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/ahs-general.png" width="60%" style="border-radius: 0%;"></center></p>
+
+<p>可以發現到濁音在低頻的部份比較強，而清音則是在高頻，解釋是畢竟聲帶的振動頻率有其生理限制，不能發到太高頻的音。</p>
+
+<p>取其中一小個 frame 來看</p>
+
+<ul>
+<li><p>阿
+<center><img src="https://sunprinces.github.io/learning/img/post/a-fig.png" width="70%" style="border-radius: 0%;"></center></p></li>
+
+<li><p>斯
+<center><img src="https://sunprinces.github.io/learning/img/post/s-fig.png" width="70%" style="border-radius: 0%;"></center></p></li>
+</ul>
+
+<p>可以發現在紅色線上，有幾個凸起的小 peak ，其中對應的頻率我們稱之為 <strong>formant frequency</strong> (對應到 <span>$H$</span> 的 pole )，用來當作描述 vocal tract 的特徵。除此之外，每個人聲帶振動頻率的不同，決定了其音高(<span>$F_0$</span>)(可以在 time domain 從濁音的波形看出來)。</p>
+
+<h3 id="發聲示意圖">發聲示意圖</h3>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/speech-synthesis.png" width="80%" style="border-radius: 0%;"></center></p>
+
+<p>看到這裡，或許你會想說，那麼利用 formant frequency ，可以幫我們確定所發的音。事實上也的確如此，聽說有些專家可以看頻譜就知道所對應的語音是在講些什麼，那有什麼方法可以幫我們擷取出這些 frequency 呢？</p>
+
+<h2 id="first-attampt-linear-prediction-coefficient-lpc">First attampt - Linear Prediction Coefficient (LPC)</h2>
+
+<p>當你打手機時，你有想過你的聲音是怎麼被對方聽到的嗎？
+一個最 naive 的作法是將每個時間點 sample 到的值記錄下來，然後 transmit 給對方，
+那麼這樣你一秒鐘需要傳多少資料呢？假定 sampling rate 是 8kHz 的話，你需要傳 8K 個資料點。
+這 8K 個資料點當中有沒有冗餘的資訊呢？(額&hellip;不是指廢話的那種沒有資訊)有沒有辦法傳更少，但卻同時保有一定的音質？</p>
+
+<p>因為人的<strong>生理構造限制</strong>，我們沒有辦法很快的改變我們的唇齒舌之位置，也就是說相鄰的音之變化是<strong>連續</strong>的，而剛剛提到唇齒舌位置可以視作是一個系統 <span>$H$</span> ，而這也表示這個系統當中的參數之變化，會持續一段時間，不會馬上變化 (相較於我們的音高在 80 ~ 1kHz之間，其相對變化得很慢，約在50 ~ 100 Hz 之間)，所以如果我們不是記 time domain 上快速變化的聲音訊號，而是變動相對緩慢的系統參數，便可以不用計那麼多的資料點。</p>
+
+<h3 id="basic-of-lpc">Basic of LPC</h3>
+
+<p>這裡所介紹的 LPC ，假定當前時間點的訊號值 <span>$s[n]$</span> 由聲帶送出的氣流 <span>$e[n]$</span> 及先前時間點的訊號 <span>$s[n-k]$</span> 所決定。</p>
+
+<p><code>$$
+s[n] = \sum_{k=1}^{p}a_ks[n-k] + e[n]
+$$</code></p>
+
+<p>所對應的系統就是</p>
+
+<p><code>$$
+H(z) = \frac{S(z)}{E(z)} = \frac{1}{1-\sum_{k=1}^{p}a_k z^{-k}} = \frac{1}{A(z)}
+$$</code></p>
+
+<p>這裡假定了該系統並沒有 zero 的存在，而是由 formant freq. 對應的 pole 所構成。</p>
+
+<p>Remark:</p>
+
+<ul>
+<li>這裡的 <span>$e[n]$</span> 又被稱為 excitation, prediction error, residual signal</li>
+<li>求 {<span>$a_k$</span>} 的方法是利用 minimize <span>$\sum_n e^2[n]$</span> 去求解對應的係數
+(雖然 <span>$e[n]$</span> 其實不能算是 error 啦&hellip;)</li>
+</ul>
+
+<h3 id="experiment-of-lpc">Experiment of LPC</h3>
+
+<p>一個有趣的問題是，我們可以只記 <span>$H$</span> 的參數 {<span>$a_k$</span>}嗎?</p>
+
+<p>正常來說，我們要將 <span>$s[n]$</span> 給反濾波出來(<span>$E(z) = A(z)S(z)$</span>)，得到 <span>$e[n]$</span>(會很像 white noise) ，並去 track 這個 <span>$e[n]$</span> 的音高 (simple pitch tracker)才能得到比較好的音質。</p>
+
+<p>在這個 [repo]()裡中的 ipynb 裡，有一些簡單的小實驗，當中 lpc 相關函數，是來自 <a href="https://www.ee.columbia.edu/~dpwe/e4896/">Columbia 的 ELEN E4896</a>，另外，我做了一些小修改，使它可以用 python3 跑。</p>
+
+<h3 id="所以跟語音辨識到底有什麼關係">所以跟語音辨識到底有什麼關係？</h3>
+
+<p>既然我們可以利用這組參數去 rebuild 出原先的聲音訊號，那麼就代表這組參數蘊含了語音當中對辨識來說重要的資訊，拿來當作 feature 比起直接拿整個頻譜餵給我們的 ASR 來的有效率多了！(類似的概念在訓練 autoencoder 也常常用到，或者像 word2vec 當中拿 bottleneck layer 作為 distributional embedding 也是一例)</p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec1/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec1/">Speech Recognition- Lec1</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

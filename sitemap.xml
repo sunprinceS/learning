@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec2/</loc>
+    <lastmod>2018-04-09T13:14:08+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec1/</loc>
+    <lastmod>2018-04-08T16:14:08+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/2018/03/information-retrieval---lec4/</loc>
     <lastmod>2018-03-21T23:14:08+01:00</lastmod>
   </url>
@@ -253,6 +263,12 @@
   </url>
   
   <url>
+    <loc>https://sunprinces.github.io/learning/tags/asr/</loc>
+    <lastmod>2018-04-09T13:14:08+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/tags/c&#43;&#43;/</loc>
     <lastmod>2018-03-13T20:44:58+01:00</lastmod>
     <priority>0</priority>
@@ -332,7 +348,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/kth/</loc>
-    <lastmod>2018-03-21T23:14:08+01:00</lastmod>
+    <lastmod>2018-04-09T13:14:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -368,7 +384,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/ntu/</loc>
-    <lastmod>2018-01-17T22:59:24+01:00</lastmod>
+    <lastmod>2018-04-09T13:14:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -386,7 +402,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/post/</loc>
-    <lastmod>2018-03-21T23:14:08+01:00</lastmod>
+    <lastmod>2018-04-09T13:14:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -409,6 +425,12 @@
   </url>
   
   <url>
+    <loc>https://sunprinces.github.io/learning/topics/speech-processing/</loc>
+    <lastmod>2018-04-09T13:14:08+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/tags/stanford/</loc>
     <lastmod>2017-05-27T17:06:53+08:00</lastmod>
     <priority>0</priority>
@@ -422,7 +444,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/</loc>
-    <lastmod>2018-03-21T23:14:08+01:00</lastmod>
+    <lastmod>2018-04-09T13:14:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
