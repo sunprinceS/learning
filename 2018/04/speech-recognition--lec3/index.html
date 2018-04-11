@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Feature Extraction#2 - MFCC">
+  <meta name="generator" content="Hugo 0.38" />
+
+  <title>Speech Recognition- Lec3 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Speech Recognition- Lec3</h1>
+  <h2>Feature Extraction#2 - MFCC</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>11 Apr 2018</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/speech-processing">Speech Processing</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/asr">ASR</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>上一回介紹了 LPC ，來做為我們抽取 feature 的一個方法，今天要來談談目前最常被使用的 feature - MFCC 。</p>
+
+<p></p>
+
+<h2 id="background">Background</h2>
+
+<p>LPC 所求得的係數用來 model 發聲時唇齒舌的構造所對應的 filter ，但這個 model 的假設是該 filter 為 all-pole (但我不知道為何不也 model zero ^^&ldquo;)，所以對某些音來說效果會沒這麼好 (e.g nasal (鼻音))。而今天所介紹的 MFCC 摒除了這個假設，並將人類聽覺的一些學理基礎 (filter bank) combine 進 model 當中。</p>
+
+<p><strong>Remark:</strong> 很簡單很簡單地來說， LPC 像是藉由觀察一個人的唇齒舌之位置，去猜測他說了什麼，而 MFCC 除了這點之外，還多模擬人類聽聲音的過程 (查閱文獻後，其似乎也只應用在 speech recognition 的 scenerio)。</p>
+
+<h2 id="流程">流程</h2>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/mfcc-schedule.png" width="80%" style="border-radius: 0%;"></center></p>
+
+<p>以下會針對每個 component 做說明，另外，我把 step-by-step 跑出 MFCC feature 的 ipynb 放在<a href="https://github.com/sunprinceS/Speech-Experiment/tree/master/MFCC">這裡</a>(資料來自 <a href="https://www.kth.se/student/kurser/kurs/DT2119?l=en">KTH DT2119</a> 所提供的 <a href="https://catalog.ldc.upenn.edu/ldc93s10">TIDIGIT</a>)</p>
+
+<h3 id="pre-emphasis">Pre-emphasis</h3>
+
+<p>在發聲的時候，高頻部份的聲音通常較弱 (尤其是 voiced speech)，因此為了 catch 到在高頻的 formant ，我們會讓訊號經過一個 High-Pass filter (下圖紅色線是有 pre-emphasis 過的)</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/pre-emph.png" width="80%" style="border-radius: 0%;"></center></p>
+
+<p>那這個 filter 怎麼描述呢？</p>
+
+<p><code>$$
+y[n] = x[n] - \alpha x[n-1]
+$$</code></p>
+
+<p><code>$$
+H(z) = \frac{Y(z)}{X(z)} = 1-\alpha z^{-1}
+$$</code></p>
+
+<p>Impulse Response 如以下</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/hp-filter.png" width="60%" style="border-radius: 0%;"></center></p>
+
+<p>你也可以在 ipynb 中觀察 pre-emphasis 前後聲音訊號的差別 (後者聽起來比較清晰)。</p>
+
+<h3 id="hamming-windowing">Hamming Windowing</h3>
+
+<p>在下一步中，我們要將 time-domain 的訊號經由 Fourier Transform 轉成 spectrum ，但今天訊號長度有限( 因為 sampling rate 有限的緣故)，轉出來的頻率值數目也要有限，所以是使用 DFT ，但做 DFT 時，數學上來說，我們是針對 infinite periodic time signal (將原先的 signal 往兩側 copy-paste 無限次)做 Fourier Transform，所以如果今天頭尾不連續的話，相當於是引進了 impulse response ，會讓頻譜多了無關的雜訊，因此常常 apply Hamming Window (如以下)，去讓頭尾都能接到 <span>$0$</span>。</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/hamming-window.png" width="60%" style="border-radius: 0%;"></center></p>
+
+<p><strong>Remark:</strong> 但也不是說 Rectangular window 就一定不行用啦&hellip;</p>
+
+<h3 id="dft-mel-scale-filter-bank">DFT &amp; Mel-scale Filter Bank</h3>
+
+<p>這部份就是整個 MFCC 最精華的地方了，DFT 之後，對每個 frame 我們都有其相對應的頻譜 (一把 freq. 值)，正常人耳聽到聲音時，會有不同的受器去感知不同的頻率，經由電訊號傳導進而在腦中形成聲音。</p>
+
+<p>我們可以把這些受器 model 成 bandpass filter (這裡是利用 triangular filter)。另外，它是 distribute logarithmically 於頻率軸上。 (也就是說，在低頻部份，所擁有的濾波器數量是比較多的，人類比較能夠辨別不同頻率的低音)</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/mfbank-linear.png" width="80%" style="border-radius: 0%;"></center></p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/mfbank-log.png" width="80%" style="border-radius: 0%;"></center></p>
+
+<p>再之後我們會對得到的結果取 magnitude 的平方再取 log ，取 log 之因也是因為人耳對 magnitude 的感知也是 logarithmic (所以分貝的定義才會是<span>$10 \log_{10}(\frac{P}{P_0})$</span>)</p>
+
+<h3 id="idft-dct">IDFT (DCT)</h3>
+
+<!--Discrete Cosine Transform (DCT) to decorrelate the filter bank coefficients and yield a compressed representation of the filter banks. Typically, for Automatic Speech Recognition (ASR), the resulting cepstral coefficients 2-13 are retained and the rest are discarded; num_ceps = 12. The reasons for discar-->
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec2/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec2/">Speech Recognition- Lec2</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

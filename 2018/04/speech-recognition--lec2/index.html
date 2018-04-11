@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Feature Extraction">
+  <meta name="description" content="Feature Extraction#1 - LPC">
   <meta name="generator" content="Hugo 0.38" />
 
   <title>Speech Recognition- Lec2 &middot; Stay hungry. Stay foolish </title>
@@ -236,7 +236,7 @@
 
 <div class="header">
   <h1>Speech Recognition- Lec2</h1>
-  <h2>Feature Extraction</h2>
+  <h2>Feature Extraction#1 - LPC</h2>
 </div>
 <div class="content">
 
@@ -329,7 +329,7 @@
 
 <p><center><img src="https://sunprinces.github.io/learning/img/post/speech-synthesis.png" width="80%" style="border-radius: 0%;"></center></p>
 
-<p>看到這裡，或許你會想說，那麼利用 formant frequency ，可以幫我們確定所發的音。事實上也的確如此，聽說有些專家可以看頻譜就知道所對應的語音是在講些什麼，那有什麼方法可以幫我們擷取出這些 frequency 呢？</p>
+<p>看到這裡，或許你會想說，那麼利用 formant frequency ，可能可以幫我們確定所發的音。事實上也的確如此，聽說有些專家可以看頻譜就知道所對應的語音是在講些什麼，那有什麼方法可以幫我們擷取出這些 frequency 呢？</p>
 
 <h2 id="first-attampt-linear-prediction-coefficient-lpc">First attampt - Linear Prediction Coefficient (LPC)</h2>
 
@@ -354,7 +354,7 @@ $$</code></p>
 H(z) = \frac{S(z)}{E(z)} = \frac{1}{1-\sum_{k=1}^{p}a_k z^{-k}} = \frac{1}{A(z)}
 $$</code></p>
 
-<p>這裡假定了該系統並沒有 zero 的存在，而是由 formant freq. 對應的 pole 所構成。</p>
+<p>這裡假定了該系統並沒有 zero 的存在，而是由 formant freq. 對應的 poles 所構成。</p>
 
 <p>Remark:</p>
 
@@ -370,7 +370,11 @@ $$</code></p>
 
 <p>正常來說，我們要將 <span>$s[n]$</span> 給反濾波出來(<span>$E(z) = A(z)S(z)$</span>)，得到 <span>$e[n]$</span>(會很像 white noise) ，並去 track 這個 <span>$e[n]$</span> 的音高 (simple pitch tracker)才能得到比較好的音質。</p>
 
-<p>在這個 [repo]()裡中的 ipynb 裡，有一些簡單的小實驗，當中 lpc 相關函數，是來自 <a href="https://www.ee.columbia.edu/~dpwe/e4896/">Columbia 的 ELEN E4896</a>，另外，我做了一些小修改，使它可以用 python3 跑。</p>
+<p>在這個 <a href="https://github.com/sunprinceS/Speech-Experiment/tree/master/LPC">repo</a> 裡中的 ipynb 裡，有一些小實驗，當中 lpc 相關函數，是來自 <a href="https://www.ee.columbia.edu/~dpwe/e4896/">Columbia 的 ELEN E4896</a>，另外，我做了一些小修改，使它可以用 python3 跑。</p>
+
+<p>另外，一個值得思考的問題是 <span>$p$</span> 該取多少比較好？對 <span>$8$</span> kHz sampling rate 的音訊來說，取個 8 - 12 差不多，取太大的 <span>$p$</span> 結果反而不好 (實驗結果 recover 回來會像在水底說話的咕嚕咕嚕音)，我的解釋是 LPC 想 model 的是 filter ，但如果 <span>$p$</span> 取的太大，會連 source 都 model 進去 (<strong>OVERFITTING!</strong> model is too powerful!)，但這個模型的假設就是 source 和 filter 彼此是 independent 的 (而且對 unvoiced speech ， source 基本上就是 white noise) ， model 到 white noise 會慘掉也是不意外。</p>
+
+<p><strong>Remark:</strong> 很多機器學習的 model 在 training 時都會有一樣的問題，雖然我們假設有一個 ground truth 的函數 <span>$f^\star(x)$</span> 去 generate 出 sample ，但實際上在觀測時，所看到的 <span>$f(x)$</span> 都會被雜訊覆蓋，但基本假設是 <span>$f^\star(x)$</span> 和雜訊是獨立的，而我們想從 training data 中萃取出 <span>$f^\star (x)$</span> ，但如果你用了太強的 model 的話，連雜訊都一併 model 進來的話，在 testing 時， performance 反而會壞掉&hellip;</p>
 
 <h3 id="所以跟語音辨識到底有什麼關係">所以跟語音辨識到底有什麼關係？</h3>
 
@@ -397,8 +401,14 @@ $$</code></p>
   </div>
   <div class="pure-u-10-24">
     
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec3/">Speech Recognition- Lec3</a>
+    </nav>
+    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec3/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
