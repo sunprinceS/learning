@@ -286,7 +286,7 @@
 <p>再度回到以前的 bin model， model noise 的方式是，今天抽取出一個 ball 時，他的顏色不再是是一個固定的顏色，而是一個機率分佈 <span>$\sim \Pr[y | \mathbf{x}]$</span> (i.e given input <span>$\mathbf{x}$</span>， label <span>$y$</span> is probabilistic rather than deterministic)。對應到 learning ，則是今天 learn 的 target 不再是一個deterministic 的 <span>$y = f(\mathbf{x})$</span>，而是一個機率分佈 <span>$\Pr[y | \mathbf{x} ]$</span> (deterministic 可以想成機率分佈為只在一個值為 <span>$1$</span>，其他全 <span>$0$</span> 的 special case)</p>
 
 <p>而因為 Hoeffeding Ineq. hold for arbitary, unknowm target function，所以 VC
-bound 還是成立(從相同的 joint distribution <span>$\sim \Pr(\mathbf{x},y)$</span> sample， <span>$\mathcal{D}$</span> 夠大的情況下，在 <span>$\mathcal{D}$</span> 衡量的量 (e.g error) 跟真實世界不會差太多)，但 learning 的同時， 在 noisy 的情況下，我們可能找不到夠好的 hypothesis <span>$h$</span> 使得 <span>$E_i$</span> 足夠小 (e.g 如果原先線性可分的資料中有 noise ，使其線性不可分，那麼便只能借助 Pocket Learning Algorithm，除了 running time 比較長之外，也不保證一定能找到跟沒有 noise 情況下， PLA 找到的最佳解一樣好的解)</p>
+bound 還是成立(從相同的 joint distribution <span>$\sim \Pr(\mathbf{x},y)$</span> sample， <span>$\mathcal{D}$</span> 夠大的情況下，在 <span>$\mathcal{D}$</span> 衡量的量 (e.g error) 跟真實世界不會差太多)，但 learning 的同時， 在 noisy 的情況下，我們可能找不到好的演算法去選出 hypothesis <span>$h$</span> 使得 <span>$E_i$</span> 足夠小 (e.g 如果原先線性可分的資料中有 noise ，使其線性不可分，那麼便只能借助 Pocket Learning Algorithm，除了 running time 比較長之外，也不保證一定能找到跟沒有 noise 情況下， PLA 找到的最佳解一樣好的解)</p>
 
 <h2 id="error-measure">Error Measure</h2>
 

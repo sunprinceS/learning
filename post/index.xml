@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Thu, 12 Apr 2018 22:59:24 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 13 Apr 2018 12:59:24 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NTU Machine Learning - Lec10</title>
+      <link>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec10/</link>
+      <pubDate>Fri, 13 Apr 2018 12:59:24 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec10/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>NTU Machine Learning - Lec9</title>
