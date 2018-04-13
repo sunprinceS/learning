@@ -336,7 +336,7 @@ $$</code></p>
 <p><strong>Lemma:</strong> trace(<span>$AB$</span>) = trace(<span>$BA$</span>)</p>
 
 <p><strong>Lemma:</strong>  trace(<span>$H$</span>) = <span>$d+1$</span>, Assume <span>$X^TX$</span> is invertible<br />
-(白話來講就是他的 col. vector 們是 linear dependent)，故其 dim. 為 <span>$d+1$</span></p>
+(白話來講就是他的 col. vector 們是 linear independent)，故其 dim. 為 <span>$d+1$</span></p>
 
 <p><strong>proof:</strong><br />
 trace(<span>$H$</span>) = trace(<span>$X(X^TX)^{-1}X^T$</span>) =
@@ -345,7 +345,7 @@ trace(<span>$(X^TX)^{-1}X^TX$</span>) = trace(<span>$I$</span>) = <span>$d+1$</s
 <h4 id="lemma">Lemma</h4>
 
 <p><code>$$
-\boxed{E_{in} = \frac{1}{N}||\text{trace}(I-H) \mathbf{\tilde{n}}||^2 =
+\boxed{E_{in} = \frac{1}{N}||(I-H) \mathbf{\tilde{n}}||^2 =
 \frac{1}{N}(N-(d+1))||\mathbf{\tilde{n}}||^2}
 $$</code></p>
 
