@@ -22,7 +22,7 @@ LPC 所求得的係數用來 model 發聲時唇齒舌的構造所對應的 filte
 
 <center><img src="/img/post/mfcc-schedule.png" width="80%" style="border-radius: 0%;"></center>
 
-以下會針對每個 component 做說明，另外，我把 step-by-step 跑出 MFCC feature 的 ipynb 放在[這裡](https://github.com/sunprinceS/Speech-Experiment/tree/master/MFCC)(語音資料來自 [KTH DT2119](https://www.kth.se/student/kurser/kurs/DT2119?l=en) 所提供的 [TIDIGIT](https://catalog.ldc.upenn.edu/ldc93s10))
+以下會針對每個 component 做說明，另外，我把 step-by-step 跑出 MFCC feature 的 ipynb 放在[這裡](https://github.com/sunprinceS/Speech-Experiment/blob/master/MFCC/MFCC-step-by-step.ipynb)(語音資料來自 [KTH DT2119](https://www.kth.se/student/kurser/kurs/DT2119?l=en) 所提供的 [TIDIGIT](https://catalog.ldc.upenn.edu/ldc93s10))
 
 ### Pre-emphasis
 
@@ -102,6 +102,8 @@ melspec = np.log(np.dot(input,mel_filter_bank.T)) # elementwise mul for each fil
 ```python
 fftpack.realtransforms.dct(input,norm='ortho')[:,:NUM_CEPS]
 ```
+
+**Remark:** 可能有讀者會以為白噪音僅僅是在描述那些高頻部份的噪音，但我們所說的白噪音在任何頻率上強度都是均勻分佈的。之所以會對高頻部份特別有感，得從耳朵的構造說起，因為耳朵由外到內的 filter 是高頻到低頻，所以低頻部份的白噪音被 activate 的時候，其強度遞減的比較多，所以我們對高頻白噪音才會特別敏感。
 
 <center><img src="/img/post/mfbank-cor.png" width="50%" style="border-radius: 0%;" title="before DCT"></center>
 <center><img src="/img/post/mfcc-cor.png" width="50%" style="border-radius: 0%;" title="after DCT"></center>
