@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 17 Jan 2018 22:59:24 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 12 Apr 2018 22:59:24 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/topics/machine-learning-foundation/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NTU Machine Learning - Lec9</title>
+      <link>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec9/</link>
+      <pubDate>Thu, 12 Apr 2018 22:59:24 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec9/</guid>
+      <description>&lt;p&gt;在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space &lt;span&gt;$\mathcal{Y}$&lt;/span&gt; 只是單純的 {&lt;span&gt;$1, -1$&lt;/span&gt;}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>NTU Machine Learning - Lec8</title>
