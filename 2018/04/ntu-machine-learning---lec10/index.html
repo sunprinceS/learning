@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Logistic Regression">
-  <meta name="generator" content="Hugo 0.38" />
+  <meta name="generator" content="Hugo 0.38.2" />
 
   <title>NTU Machine Learning - Lec10 &middot; Stay hungry. Stay foolish </title>
 
@@ -277,7 +277,74 @@
 </div>
 
 
-  <p></p>
+  <p>Linear Model 的核心在於 feature 分量的 weighted sum <span>$\mathbf{w}^T \mathbf{x}$</span>， 在 binary classification ，我們用 step function 將其二分 (<span>$\mathcal{Y} = \lbrace \, -1,1\,\rbrace$</span>)，而在 linear regression 中，我們將其直接作為輸出。而這一講要介紹的則是將 <span>$\mathbf{w}^T \mathbf{x}$</span> 通過一個 nonlinear function mapping 到[<span>$0,1$</span>]，賦予他機率的意義 (<span>$\Pr[y = +1 | \mathbf{x}]$</span>)。</p>
+
+<p></p>
+
+<h2 id="logistic-function">Logistic Function</h2>
+
+<p><code>$$
+h(\mathbf{x}) = \theta(\mathbf{w}^T \mathbf{x}), \quad \theta(s) = \frac{e^s}{1+e^s}
+$$</code></p>
+
+<p>一個 step function 的 soft 版本。</p>
+
+<h2 id="error-measure">Error Measure</h2>
+
+<p>而正常來說，我們所擁有的資料，並不是 feature 對 probability 的 pair ，而是跟binary classification 一樣的資料，也就是說 data 是由以下的 target 產生。</p>
+
+<p><code>$$
+\Pr[y|\mathbf{x}] = \begin{cases}
+f(x) \;&amp;, y = +1\\
+1-f(x) \; &amp;, y = -1
+\end{cases}
+$$</code></p>
+
+<p>所以接下來的問題是，我們想優化的 <span>$h(x)$</span> 跟 <span>$f(x)$</span> 有什麼關係。
+給定一組 data <span>$\mathcal D = \lbrace (\mathbf{x}_1,+1),\cdots,(\mathbf{x}_N,-1) \rbrace$</span>，我們可以算它被<strong>產生</strong>的機率有多少，而既然他會被我們 sample 到，代表機率一定不小，同樣地，如果 <span>$h(x)$</span> 學得好的話， behavior 要跟 <span>$f(\mathbf{x})$</span> 差不多，所以我們不妨考慮由 <span>$h(x)$</span> 去 generate <span>$\mathcal{D}$</span> 的<strong>可能性</strong>(likelihood)，並去 maximize 它，表示讓他跟 <span>$f(x)$</span> 越像。</p>
+
+<p>logistic 函數有一個性質是 <span>$\theta(-x) = 1 - \theta(x)$</span>，所以上方所講的 likelihood 可以表示成以下，</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/logis_likelihood.png" width="70%" style="border-radius: 0%;"></center></p>
+
+<p>等價於 minimize 以下，</p>
+
+<p><code>$$
+\frac{1}{N} \sum_n \ln(\frac{1}{\theta(y_n\mathbf{w}^T\mathbf{x}_n)})
+$$</code></p>
+
+<p>定義 <span>$E_{in}$</span> 為</p>
+
+<p><code>$$
+\boxed{E_{in} = \sum_n \underbrace{\ln(1 + \exp(-y_n \mathbf{w}^T \mathbf{x}_n))}_{\text{cross-entropy error}}}
+$$</code></p>
+
+<h2 id="feasibility-of-learning">Feasibility of Learning</h2>
+
+<h3 id="sufficient-small-span-e-in-span">Sufficient small <span>$E_{in}$</span></h3>
+
+<p>可以證明<span>$E_i(\mathbf{w})$</span> 是 convex，代表可以用 <span>$\nabla_w E_i(\mathbf{w}) = 0$</span>  來找到 weight <span>$\mathbf{w}^\star$</span>。</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/logis_ein.png" width="70%" style="border-radius: 0%;"></center></p>
+
+<p>但跟在 linear regression 不同的是，這裡 <span>$\mathbf{w}$</span> 被包在
+<span>$\theta(\cdot)$</span> 裡頭，而非單純的線性組合，不存在 closed form 的解可以一步到位。</p>
+
+<h3 id="gradient-descent">Gradient Descent</h3>
+
+<p>在這裡我們使用 Gradient Descent 去 iteratively 求解。</p>
+
+<p><code>$$
+\mathbf{w}_{t+1} \leftarrow \mathbf{w}_t - \eta \nabla E_{in}(\mathbf{w}_t)
+$$</code></p>
+
+<p><strong>Remark:</strong> <span>$||\nabla E_i||$</span> 包含了每次 step 大小的資訊，在陡峭的地方，我們一次順勢滑落比較多，而當趨於平緩時，則減小步伐。</p>
+
+<p><strong>Remark:</strong> 如果跑了 <span>$D$</span> 輪，時間複雜度為 <span>$\mathcal{O}(ND)$</span>，不保證找到最佳解(雖然知道谷底存在，但不知道怎麼走到)。</p>
+
+<h3 id="generalization-to-span-e-out-span">Generalization to <span>$E_{out}$</span></h3>
+
+<p>待補</p>
 
 <h2 id="reference">Reference</h2>
 
@@ -306,8 +373,14 @@
   </div>
   <div class="pure-u-10-24">
     
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec11/">NTU Machine Learning - Lec11</a>
+    </nav>
+    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec11/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
