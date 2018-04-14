@@ -39,7 +39,7 @@ topics = ["Machine Learning Foundation"]
 回顧 binary classification，Out-sample 的 error 會被以下 bound 住
 
 ``$$
-E_{out}(f) = E_{in}(f) + \mathcal{O}(\sqrt{\frac{d_{VC} \, \ln n}{N}})
+E_{out}(f) = E_{in}(f) + \mathcal{O}(\sqrt{\frac{d_{VC} \, \ln N}{N}})
 $$``
 
 對於 Regression 問題，我們還先要定義 <span>$d_{VC}$</span> 是什麼，以及所對應的 generalization bound。
@@ -65,7 +65,7 @@ $$``
 **Lemma:** trace(<span>$AB$</span>) = trace(<span>$BA$</span>)
 
 **Lemma:**  trace(<span>$H$</span>) = <span>$d+1$</span>, Assume <span>$X^TX$</span> is invertible\\
-(白話來講就是他的 col. vector 們是 linear dependent)，故其 dim. 為 <span>$d+1$</span>
+(白話來講就是他的 col. vector 們是 linear independent)，故其 dim. 為 <span>$d+1$</span>
 
 **proof:**\\
 trace(<span>$H$</span>) = trace(<span>$X(X^TX)^{-1}X^T$</span>) =
@@ -74,7 +74,7 @@ trace(<span>$(X^TX)^{-1}X^TX$</span>) = trace(<span>$I$</span>) = <span>$d+1$</s
 
 #### Lemma
 ``$$
-\boxed{E_{in} = \frac{1}{N}||\text{trace}(I-H) \mathbf{\tilde{n}}||^2 =
+\boxed{E_{in} = \frac{1}{N}||(I-H) \mathbf{\tilde{n}}||^2 =
 \frac{1}{N}(N-(d+1))||\mathbf{\tilde{n}}||^2}
 $$``
 
