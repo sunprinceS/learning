@@ -133,8 +133,12 @@ $$``
 
 另外，有時候資料夾雜了一些雜訊，使得空間因少數數據點而無法線性可分，\\
 此時我們利用 Pocket PLA 去找出一個 **還不錯** 的 <span>$g$</span> ，使得 label mismatch 的數據點為最少。\\
-簡單來說，就是每更新一次 <span>$\mathbf{w}$</span>，便去跑過**所有**的數據點，來看是否比前一個更好，\\
+簡單來說，就是每更新一次 <span>$\mathbf{w}$</span>，便去跑過**所有**的數據點，來看是否比前一個更好，並把對應的 <span>$w$</span> 記起來\\
 再 run 過一定回合數後中止，running time 為<span>$\mathcal{O}(|\mathcal{D}|T)$</span>，不保證找到最佳解。
+
+**Remark:** <span>$w$</span> 的更新方式跟 PLA 是一樣的，不是表現進步才更新！
+
+[**Implementation**](https://github.com/sunprinceS/NTU-Machine-Learning/blob/master/hw1/PLA.py)
 
 
 ## Reference
