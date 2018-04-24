@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 14 Apr 2018 06:59:24 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 15 Apr 2018 08:23:22 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/ntu/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NTU Machine Learning - Lec12</title>
+      <link>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec12/</link>
+      <pubDate>Sun, 15 Apr 2018 08:23:22 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec12/</guid>
+      <description>&lt;p&gt;在此之前，針對 linear separable 的 data ，我們利用找可以切分這些數據點的 hyper-plane 來做 classification (或 regression )。但這個強大的假設並不適用於每筆真實世界中的 data ，所以我們勢必得處理 non-linear 的問題。換句話說，我們希望 hypothesis set 中可以包含更多的候選人（可以 match nonlinear 特性的那些 function ），同時去驗證在這樣的情況下，學習依然是可行的。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>NTU Machine Learning - Lec11</title>

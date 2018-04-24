@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ranked Retrieval">
+  <meta name="description" content="Nonlinear Transform">
   <meta name="generator" content="Hugo 0.39" />
 
-  <title>Information Retrieval - Lec3 &middot; Stay hungry. Stay foolish </title>
+  <title>NTU Machine Learning - Lec12 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>Information Retrieval - Lec3</h1>
-  <h2>Ranked Retrieval</h2>
+  <h1>NTU Machine Learning - Lec12</h1>
+  <h2>Nonlinear Transform</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>31 Jan 2018</time>
+    <time>15 Apr 2018</time>
   </div>
   
 
@@ -254,7 +254,7 @@
   <div>
     <i class="fa fa-folder fa-fw"></i>
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/information-retrieval">Information Retrieval</a>
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/machine-learning-foundation">Machine Learning Foundation</a>
     
   </div>
   
@@ -266,11 +266,9 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ir">IR</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/machine-learning">Machine Learning</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/nlp">NLP</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
     
   </div>
   
@@ -279,95 +277,53 @@
 </div>
 
 
-  <p>前面提過 Boolearn Search 的其中一個問題在於， machine 是<strong>無腦</strong>地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 <span>$10^6$</span> 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 <strong>ranked retrieval</strong> 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。</p>
+  <p>在此之前，針對 linear separable 的 data ，我們利用找可以切分這些數據點的 hyper-plane 來做 classification (或 regression )。但這個強大的假設並不適用於每筆真實世界中的 data ，所以我們勢必得處理 non-linear 的問題。換句話說，我們希望 hypothesis set 中可以包含更多的候選人（可以 match nonlinear 特性的那些 function ），同時去驗證在這樣的情況下，學習依然是可行的。</p>
 
 <p></p>
 
-<h2 id="vector-space-model">Vector Space Model</h2>
+<h2 id="feature-transform">Feature Transform</h2>
 
-<p>這裡引進了在 NLP 各類應用中，相當常見的一個將離散的 symbol (word, sentence, document&hellip;) map 到數值空間的模型 - Vector Space Model (VSM)。對於 word ，目前最耳熟能詳的 Word Embedding 有 Word2Vec, GloVe &hellip;.等等，而 sentence vector ( word的集合) 除了簡單的 Bag-of-Word (BOW) ，亦有用各類型的 recurrent/recursive NN 去 compose vector 的方法，而這裡我們要處理的對象是 document (sentence 的集合)，考量到一般的 IR scenerio ，通常不太要用到 syntactic 或 detailed 的 semantic 的資訊，僅採用最簡單的 BOW 搭配 tf-idf 做 weighting 的方法。</p>
+<p>既然 linear function 不夠用，一個很直觀的想法是引進更高 order 的函數。</p>
 
-<p><strong>Remark</strong>: 我的理解是，每個使用者心中想查詢 query 的 semantics 各有不同， in
-general 而言，只要某個 term 與 query 有 match ，說他相關其實相當合理，反而是
-NN-based 的方法做的一些 smoothing 性質 (比方說歌手/影星的名字在向量空間中會相當接近，因其
-上下文都差不多的緣故) 反而不太適用於這個應用場合。</p>
+<p><a href="https://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=&amp;seed=0.19036&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">Tensorflow playground</a></p>
 
-<h3 id="tf-idf">tf-idf</h3>
+<p>上面那個例子中，展示了 circular data 的分類問題，如果只取 <span>$x_1, x_2$</span> 無法 separate ，但如果多考慮 <span>$x_1^2, x_2^2$</span> 便能成功 (而且依然能處理原先 linear separable 的 data , i.e 退化的情形同時可以考慮，亦即 <span>$\mathcal{H}\scriptsize old \normalsize \subset \mathcal{H} \scriptsize new$</span>)。</p>
 
-<ul>
-<li>tf: term 在文本中出現的次數</li>
-<li>df: corpus 中有多少 document 含有此 term (可以想見該值越大，代表此 term 大概是
-一些 function word，但帶多少 infomation，像是 be Verb，轉折詞等等)</li>
-</ul>
-
-<p>有許多不同的 weighting scheme</p>
-
-<h3 id="cosing-similarity">Cosing Similarity</h3>
-
-<p>計算關聯性</p>
-
-<h2 id="pagerank">PageRank</h2>
-
-<p>除了文本當中具有的<strong>interior 的性質</strong> (e.g term freq.)， modern IR 中有鑑於 web 的蓬勃發展，各個文本 (網站) 之間的 link (<strong>exterior 的性質</strong>) 也是相當有價值的排序參考來源。</p>
+<p>從另一個角度看，相當於是我們將 data 做了 feature transform (<span>$\phi(\mathbf{x})$</span>) 到新的空間，而在這個空間中，其是 linear separable 的。<br />
+e.g General Quadratic Hypothesis Set</p>
 
 <p><code>$$
-\text{PR}(d) = c(\sum_{s \in in(d)} \frac{\text{PR}(d)}{\text{out_deg}(d)}) + \frac{1-c}{\text{# of document}}
+\mathbf{x} \in \mathbb{R}^2 \stackrel{\phi}{\longmapsto} \mathbf{z} \in
+\mathbb{R}^6
 $$</code></p>
 
-<p>上述的式子描述的是一個 <strong>random surfer model</strong>，使用者從某一網站 (node) 開始，會 uniform 選擇其 out edge 連向的任一網站，而若該 node 為 sink (#out edge = 0)，則隨機訪問任意一個網站。要從這個遞迴式中解出 PR ，我們需要利用 Markov Chain 計算其 stationary prob. dist. ，同時為了保證該機率存在的唯一性，我們加入 <span>$c$</span> 這個 term ， 數學上是為了保證最後得到的 prob. dist. 所有 term 都是非零，以使唯一性存在。 直觀解釋上叫做 <strong>boring probability</strong> ，就是使用者有一定的機率不管當前所在的 node， random 從任一個網站開始，</p>
+<p><code>$$
+\text{其中}\quad \phi(\mathbf{x}) = (1,x_1,x_2,x_1^2,x_2^2,x_1x_2)
+$$</code></p>
 
-<p><strong>Remark</strong>: Lab 中，我們會將兩個 score 作加權平均</p>
+<p>而在新的 space 中，因資料滿足了 linear separable 的特性，前幾講討論的方法都可以適用。而在這個 space 中找到一個好的 hyper-plane ，相當於在原資料中找到好的 quadratic plane。</p>
 
-<h3 id="implementation-sparse-matirx-version">Implementation (Sparse Matirx Version)</h3>
+<p><center><img src="https://sunprinces.github.io/learning/img/post/nonlineartransform.png" width="90%" style="border-radius: 0%;"></center></p>
 
-<pre><code class="language-java">void iterate(int numberOfDocs, int maxIterations) {
+<h2 id="feasibility-of-learning">Feasibility of Learning</h2>
 
-   int numIter = 0;
-   double[] a = new double[numberOfDocs];
-   Arrays.fill(a, 1.0 / numberOfDocs); // uniform start
-   double[] old_a = new double[numberOfDocs];
-   int[] cnt = new int[numberOfDocs];
+<p>前方曾經提過，model complexity 雖然能 minimize 在 training data 上的 error ，使
+得 hypothesis function fit data 的程度越好，但相對應的代價是不太能做
+generalization (後面會提到，這就是 overfitting 原因的其中一種)。</p>
 
-   double p;
-   double eps; // measure the difference of previous iteration
+<p>而衡量這些代價，可以從在新空間中 hyper-plane 的 VC dimension 去想。<br />
+對一般 <span>$Q \scriptsize th$</span> order 的 POLY transform ，<span>$d \scriptsize \text{vc}$</span> 為 <span>$H_Q^{d+1}$</span> (<span>$\mathbf{x} \in \mathbb{R}^d$</span>)，複雜度依 <span>$\mathcal{O}(Q^d)$</span> 上升。</p>
 
-   while (numIter++ &lt; maxIterations) {
-     old_a = Arrays.copyOf(a, a.length);
-     Arrays.fill(cnt, 0);
+<p><img src="https://sunprinces.github.io/learning/img/post/vc_2.png" width="90%" style="border-radius: 0%;"></p>
 
-     p = 0.0;
-     for (int i = 0; i &lt; numberOfDocs; ++i) {
-       if (out[i] == 0) {
-         p += old_a[i];
-       }
-     }
-     Arrays.fill(a, p / numberOfDocs);
+<p><strong>Remark:</strong> 實務上都先從最簡單的 linear model 開始，再去逐步增加 model
+complexity ，並利用 validation set 找出最適合的維度</p>
 
+<h2 id="reference">Reference</h2>
 
-     for (int col = 0; col &lt; numberOfDocs; ++col) {
-       if (out[col] != 0) {
-         for (int i = 0; i &lt; numberOfDocs; ++i) {
-           if (cnt[col] &lt; out[col] &amp;&amp; link.get(col).get(i) != null) {
-             ++cnt[col];
-             a[i] += (old_a[col] * (((1 - BORED) / out[col]) + (BORED / numberOfDocs)));
-           } else { // non link
-             a[i] += (old_a[col] * BORED / numberOfDocs);
-           }
-         }
-       }
-     }
-
-
-     eps = 0;
-     for (int i = 0; i &lt; numberOfDocs; ++i) {
-       eps += Math.abs(old_a[i] - a[i]);
-     }
-     if (eps &lt; EPSILON) {
-       break;
-     }
-  }
-}
-</code></pre>
+<ul>
+<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/12_handout.pdf">林軒田老師的講義</a></li>
+</ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
@@ -375,13 +331,13 @@ $$</code></p>
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2018/01/information-retrieval---lec2/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec11/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2018/01/information-retrieval---lec2/">Information Retrieval - Lec2</a>
+      <a href="https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec11/">NTU Machine Learning - Lec11</a>
     </nav>
     
   </div>
@@ -390,14 +346,8 @@ $$</code></p>
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---1/">C&#43;&#43; STL Cheat Sheet - 1</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2018/03/c---stl-cheat-sheet---1/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
