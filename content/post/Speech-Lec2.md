@@ -96,7 +96,7 @@ Remark:
 
 另外，一個值得思考的問題是 <span>$p$</span> 該取多少比較好？對 <span>$8$</span> kHz sampling rate 的音訊來說，取個 8 - 12 差不多，取太大的 <span>$p$</span> 結果反而不好 (實驗結果 recover 回來會像在水底說話的咕嚕咕嚕音)，我的解釋是 LPC 想 model 的是 filter ，但如果 <span>$p$</span> 取的太大，會連 source 都 model 進去 (**OVERFITTING!** model is too powerful!)，但這個模型的假設就是 source 和 filter 彼此是 independent 的 (而且對 unvoiced speech ， source 基本上就是 white noise) ， model 到 white noise 會慘掉也是不意外。
 
-**Remark:** 很多機器學習的 model 在 training 時都會有一樣的問題，雖然我們假設有一個 ground truth 的函數 <span>$f^\star(x)$</span> 去 generate 出 sample ，但實際上在觀測時，所看到的 <span>$f(x)$</span> 都會被雜訊覆蓋，但基本假設是 <span>$f^\star(x)$</span> 和雜訊是獨立的，而我們想從 training data 中萃取出 <span>$f^\star (x)$</span> ，但如果你用了太強的 model 的話，連雜訊都一併 model 進來的話，在 testing 時， performance 反而會壞掉...
+**Remark:** 很多機器學習的 model 在 training 時都會有一樣的問題，雖然我們假設有一個 ground truth 的函數 <span>$f^\star(x)$</span> 去 generate 出 sample ，但實際上在觀測時，所看到的 <span>$f(x)$</span> 都會被雜訊覆蓋，但基本假設是 <span>$f^\star(x)$</span> 和雜訊是獨立的，而我們想從 training data 中萃取出 <span>$f^\star (x)$</span> ，但如果你用了太強的 model ，連雜訊都一併 model 進來的話，在 testing 時， performance 反而會壞掉...
 
 ### 所以跟語音辨識到底有什麼關係？
-既然我們可以利用這組參數去 rebuild 出原先的聲音訊號，那麼就代表這組參數蘊含了語音當中對辨識來說重要的資訊，拿來當作 feature 比起直接拿整個頻譜餵給我們的 ASR 來的有效率多了！(類似的概念在訓練 autoencoder 也常常用到，或者像 word2vec 當中拿 bottleneck layer 作為 distributional embedding 也是一例)
+既然我們可以利用這組參數去 rebuild 出原先的聲音訊號，那麼就代表這組參數蘊含了語音當中對辨識來說重要的資訊，拿來當作 feature 比起直接拿整個頻譜餵給我們的 ASR 來的有效率多了！(類似的概念在訓練 autoencoder 也常常用到，或者像 word2vec 當中拿 bottleneck layer 作為 distributed embedding 也是一例)

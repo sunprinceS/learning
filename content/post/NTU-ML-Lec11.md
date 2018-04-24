@@ -23,7 +23,7 @@ function 來作為 binary classifier 也是一種做 classification 的方法。
 ## Acceleration on Gradient Descent - Stochastic GD
 之前在找 <span>$E_i$</span> 下山的方向時， <span>$\nabla_w E_i$</span> 要iterate 過所有資料點才能得到，但我們不妨只 sample 幾個資料點即可(期望值一樣)，但實務上比較不穩定。
 
-**Remark:** PLA 可以想成 SGD 的 一個特例 (只 sample 一個資料點， <span>$\eta = 1$</span>)
+**Remark:** PLA 可以想成 SGD 的 一個特例 (只 sample 一個資料點，且 <span>$\eta = 1$</span>)
 
 ## Binary Classification to Multiclass
 
