@@ -7,10 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Thu, 19 Apr 2018 16:45:08 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 21 Apr 2018 16:45:08 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/tags/asr/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Speech Recognition- Lec6</title>
+      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec6/</link>
+      <pubDate>Sat, 21 Apr 2018 16:45:08 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec6/</guid>
+      <description>&lt;p&gt;ASR 做的其實就是以下這件事，&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$$
+\Pr(\text{words|sounds}) = \frac{\Pr(\text{sounds|words})}{\Pr(\text{sounds})}
+$$&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;當中我們視 &lt;span&gt;$\Pr(\text{sounds})$&lt;/span&gt; 為 uniform distribution ，不管它。
+&lt;br /&gt;
+&lt;span&gt;$\Pr(\text{words})$&lt;/span&gt; 由 &lt;strong&gt;Language Model&lt;/strong&gt; 負責，評估產生的
+transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)&lt;br /&gt;
+&lt;span&gt;$\Pr(\text{sounds|words})$&lt;/span&gt; 則是 &lt;strong&gt;Acoustic Model&lt;/strong&gt;， 也就是前一講中用 Viterbi 所算的 Likelihood 。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Speech Recognition- Lec5</title>
