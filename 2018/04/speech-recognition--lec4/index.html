@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
+  <meta name="description" content="Basic of Probabilistic Modelling of Sequences">
   <meta name="generator" content="Hugo 0.39" />
 
-  <title>Speech Processing &middot; Stay hungry. Stay foolish </title>
+  <title>Speech Recognition- Lec4 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -36,8 +36,6 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
-  
-  <link rel="alternate" type="application/rss+xml" title="Stay hungry. Stay foolish " href="https://sunprinces.github.io/learning/topics/speech-processing/index.xml" />
   
 
   
@@ -121,10 +119,6 @@
   <div class="pure-menu social">
   <ul class="pure-menu-list">
 
-    
-    <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/speech-processing/index.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
-    </li>
     
 
     
@@ -241,75 +235,12 @@
 
 
 <div class="header">
-  <h1>Speech Processing</h1>
+  <h1>Speech Recognition- Lec4</h1>
+  <h2>Basic of Probabilistic Modelling of Sequences</h2>
 </div>
-
 <div class="content">
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec5/">Speech Recognition- Lec5</a></h2>
 
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>19 Apr 2018</time>
-  </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/speech-processing">Speech Processing</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/asr">ASR</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
-    
-  </div>
-  
-  
-
-</div>
-
-
-  </header>
-
-  <p>
-  <p>我覺得自己之前做的<a href="https://drive.google.com/file/d/152rJZPdCl1k4IqLgr7frwWXeE6lCHjO0/view?usp=sharing">投影片</a>真的蠻好的XD (自己講)，因此這一講中，只會偏重在原本寫的比較簡略的 Learning Problem ， Evaluation 及 Decoding Problem 僅會附上程式碼及做定義。</p>
-
-<p></p>
-  </p>
-
-  
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec5/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec4/">Speech Recognition- Lec4</a></h2>
-
-    <div class="post-meta">
+  <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
@@ -348,201 +279,148 @@
 </div>
 
 
-  </header>
-
-  <p>
   <p>在能夠將聲音訊號轉為數值向量給 machine 處理後，我們要怎麼判斷這串 vector 是 mapping 到哪一段文字呢？ <br />
 在進入 continuous ASR 前，讓我們先來想一想怎麼辨識一個 word ？想法是針對這個 word 建一個 model ，給定一段聲音訊號， output 該訊號 map 到此
 word 的機率為多少。</p>
 
 <p></p>
-  </p>
+
+<h2 id="characteristic-of-speech">Characteristic of Speech</h2>
+
+<p>聲音訊號的特性在於，每個時間點的數值，會與 context 相關，也就是說</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/speechnotiid.png" width="70%" style="border-radius: 0%;"></center></p>
+
+<p>所以我們的 model 除了要包含每個時間點的 distribution ，<strong>也要考慮之間的 transition</strong>。</p>
+
+<h2 id="probabilistic-model">Probabilistic Model</h2>
+
+<p>同時考慮的話，就是對每個時間點的訊號 <span>$x_t$</span> ，我們要去計算其 given 之前時間點的訊號(<span>$\mathbf{x} \scriptsize -t$</span>) 的條件機率 <span>$\Pr(x_t|\mathbf{x}\scriptsize -t)$</span>，
+可以利用 Bayesian Network 去描述。</p>
+
+<p>但今天隨著訊號長度變長(frame 數變多)，我們需要去估計的機率也越來越多，<br />
+考慮 <span>$\mathbf{x} = \lbrace x_1,x_2,x_3 \rbrace$</span>，想計算 <span>$\Pr(\mathbf{x})$</span>，要有 <span>$\Pr(x_1) \times \Pr(x_2|x_1) \times \Pr(x_3|x_1,x_2)$</span> ，當中的每一項都是需要估計的。但這樣複雜度實在太高，故我們引進以下的假設:</p>
+
+<ul>
+<li>First order Markov Assumption (<span>$x_t$</span> 只與其前一個聲音訊號有關)<br />
+<span>$\Pr(x_t|\mathbf{x} \scriptsize -t \normalsize) = \Pr(x_t|x_{t-1})$</span></li>
+<li>假定每個 frame sample 都是從一個 distribution 抽取出來，而這個 distribution 會
+隨著時間變化，但不同的 distribution 數目是有限的。<br />
+引進 latent variable <span>$z_t$</span> (或者說 state variable)，每個不同的 state 對應到不同的 distribution (但不同時間點，若 state 相同的話，則 distribution 是一樣的， i.e <strong>stationary</strong>)</li>
+</ul>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/insightHMM.png" width="80%" style="border-radius: 0%;"></center></p>
+
+<ul>
+<li><span>$x_t$</span> (也是上圖的 <span>$o_t$</span>) 只跟 <span>$z_t$</span>有關，而 <span>$z_t$</span> 根據 Markov assumption 只跟 <span>$z_{t-1}$</span> 有關。</li>
+</ul>
+
+<h3 id="hidden-markov-model">Hidden Markov Model</h3>
+
+<p>HMM 就是做了以上假設的產物，也是我們拿來 predict 聲音訊號跟該 word 所對應的 HMM
+match 機率的 model。 我們需要計算以下機率值</p>
+
+<ul>
+<li>Emission Probability: <span>$\Pr(x_t|z_t) \, \forall t$</span></li>
+<li>Transition Probability: <span>$\Pr(z_t|z_{t-1}) \, \forall t$</span></li>
+<li>Initial Probability: <span>$\Pr(z_1)$</span></li>
+</ul>
+
+<!--而每個 state 所對應的 distribution ，我們用 Gaussian Mixture Model (**GMM**) 去描述。-->
+
+<p><strong>Remark:</strong> HMM 所 model 的，可以想成是 ASR 的基本 unit ，選 word 是一種選擇，但在 continuous speech 中，我們通常會選用更短的單位 - phoneme (並以 3 個 state 去描述)，然後再利用 lexicon model (這個 word 是怎麼發音的 i.e 怎麼被 phoneme 組成的) 將其串成一個大 HMM 以辨識 words (算是對那些不同 word 中，發音相同的部份做 weight sharing，這個概念之後也會很常用到)。</p>
+
+<h2 id="延伸閱讀">延伸閱讀</h2>
+
+<p>在此提供一份之前報告所作的<a href="https://drive.google.com/file/d/152rJZPdCl1k4IqLgr7frwWXeE6lCHjO0/view?usp=sharing">投影片</a></p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec4/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec3/">Speech Recognition- Lec3</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>11 Apr 2018</time>
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec12/"><i class="fa fa-chevron-left"></i></a>
+    
   </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
+  <div class="pure-u-10-24">
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/speech-processing">Speech Processing</a>
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2018/04/ntu-machine-learning---lec12/">NTU Machine Learning - Lec12</a>
+    </nav>
     
   </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
     
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/asr">ASR</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec5/">Speech Recognition- Lec5</a>
+    </nav>
     
   </div>
-  
-  
-
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec5/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
 </div>
 
 
-  </header>
-
-  <p>
-  <p>上一回介紹了 LPC ，來做為我們抽取 feature 的一個方法，今天要來談談目前最常被使用的 feature - MFCC 。</p>
-
-<p></p>
-  </p>
 
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec3/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
 
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec2/">Speech Recognition- Lec2</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>09 Apr 2018</time>
-  </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
+(function() {
     
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/speech-processing">Speech Processing</a>
     
-  </div>
-  
-  
+    if (window.location.hostname == "localhost")
+        return;
 
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/asr">ASR</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
-    
-  </div>
-  
-  
-
-</div>
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
-  </header>
-
-  <p>
-  <p>語音辨識的基本架構中，第一步便是要把聲音訊號轉成可被紀錄的數位形式以供 machine 處理。科學家們從人類究竟是如何發出特定聲音作為出發點，去找出訊號當中哪些是屬於那個聲音 unique 的 feature，並移除那些無關的資訊 (e.g noise) ，並利用這些 extract 出來的 feature 來作為辨識的基本元素。</p>
-
-<p></p>
-  </p>
-
   
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec2/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
-
-  
-    <article>
-  <header>
-    <h2><a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec1/">Speech Recognition- Lec1</a></h2>
-
-    <div class="post-meta">
-
-  <div>
-    <i class="fa fa-calendar fa-fw"></i>
-    <time>08 Apr 2018</time>
-  </div>
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-folder fa-fw"></i>
-    
-      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/speech-processing">Speech Processing</a>
-    
-  </div>
-  
-  
-
-  
-  
-  
-  <div>
-    <i class="fa fa-tags fa-fw"></i>
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/asr">ASR</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
-    
-  </div>
-  
-  
-
-</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
 
 
-  </header>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
-  <p>
-  <p>隨著變成菸酒生的日子逐漸逼近，最近開始重追尤達大師數位語音的連載，希望在進 Speech Lab 之前，將這些知識掌握地更加純熟，這個系列主要會雜揉以前在台大所修的 <a href="http://speech.ee.ntu.edu.tw/DSP2017Autumn/">數位語音處理概論</a> 以及在 KTH 所修的 <a href="https://www.kth.se/social/course/DT2119/">Speech and Speaker Recognition</a> 之相關內容。</p>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
 
-<p></p>
-  </p>
 
-  
-  <footer>
-    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition--lec1/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
-  </footer>
-  
-</article>
 
-  
+
 </div>
 
 </div>
@@ -567,3 +445,4 @@ word 的機率為多少。</p>
 
 </body>
 </html>
+

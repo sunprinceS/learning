@@ -7,10 +7,34 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sun, 15 Apr 2018 08:23:22 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 19 Apr 2018 16:45:08 +0100</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Speech Recognition- Lec5</title>
+      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec5/</link>
+      <pubDate>Thu, 19 Apr 2018 16:45:08 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec5/</guid>
+      <description>&lt;p&gt;我覺得自己之前做的&lt;a href=&#34;https://drive.google.com/file/d/152rJZPdCl1k4IqLgr7frwWXeE6lCHjO0/view?usp=sharing&#34;&gt;投影片&lt;/a&gt;真的蠻好的XD (自己講)，因此這一講中，只會偏重在原本寫的比較簡略的 Learning Problem ， Evaluation 及 Decoding Problem 僅會附上程式碼及做定義。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Speech Recognition- Lec4</title>
+      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec4/</link>
+      <pubDate>Tue, 17 Apr 2018 19:32:08 +0100</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec4/</guid>
+      <description>&lt;p&gt;在能夠將聲音訊號轉為數值向量給 machine 處理後，我們要怎麼判斷這串 vector 是 mapping 到哪一段文字呢？ &lt;br /&gt;
+在進入 continuous ASR 前，讓我們先來想一想怎麼辨識一個 word ？想法是針對這個 word 建一個 model ，給定一段聲音訊號， output 該訊號 map 到此
+word 的機率為多少。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>NTU Machine Learning - Lec12</title>
