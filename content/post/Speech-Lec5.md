@@ -20,7 +20,7 @@ probability), <span>$A$</span> (transition matrix), <span>$\phi$</span>
 (emission probability)
 
 * Evaluation Problem: <span>$\Pr(X|\Theta)$</span>，即是一開始我們想求的，該
-  sequence 與特定 HMM match 的機率，可用於 isolated word recognition 。
+  sequence 與特定 HMM match 的 likelihood，可用於 isolated word recognition 。
 
 * Decoding Problem: Find the optimal state sequence <span>$\Pr(Z|X,\Theta)$</span> (在之後的 continuous ASR ，我們需要知道一路走來的 state sequence，才能據此還原出對應的 word sequence)
 
@@ -60,7 +60,7 @@ return logalpha
 Solution: Viterbi Algorithm
 
 ``$$
-\delta_t(i) \triangleq \max_{Z_{-t}} \Pr(Z_{-t},X \land z_t = i | \Theta)
+\delta_t(i) \triangleq \max_{Z_{-t}} \Pr(Z_{-t},X \land z_t = s_i | \Theta)
 $$``
 
 ```python
@@ -189,6 +189,8 @@ $$``
 要重估的參數有每個 gaussian 的 mean 和 covariance 以及 在某個 mixture 的比例
 <span>$w_{jk}$</span>
 
+**Note:** 上面的 <span>$x_t, \mu, \sigma^2$</span> 都可以是向量形式
+
 **Remark:** 我們假設 <span>$d \times d$</span> 的 covariance matrix 是 diagonal
 (based on 前面抽 feature 時，用 DCT uncoorelate feature 的各個 dimension)
 
@@ -197,7 +199,7 @@ $$``
 ``$$
 \begin{aligned}
 \gamma_t(j,k) &= \Pr(z_t = s_j \land \text{choose k-th mixture in state j} |z_t = s_j, X, \Theta)\\
-&= \underbrace{\quad \gamma_t(j) \quad}_{\text{gamma probability}} \cdot \frac{w_{jk}\mathcal{N}(x_t;\mu_{jk},\sigma_{jk}^2)}{\sum_m w_{jm}\mathcal{N}(x_t;\mu_{jm},\sigma_{jm}^2)}
+&= \underbrace{\quad \gamma_t(j) \quad}_{\text{gamma probability}} \cdot \underbrace{\frac{w_{jk}\mathcal{N}(x_t;\mu_{jk},\sigma_{jk}^2)}{\sum_m w_{jm}\mathcal{N}(x_t;\mu_{jm},\sigma_{jm}^2)}}_{\text{k-th mixture 佔的比例}}
 \end{aligned}
 $$``
 
@@ -211,8 +213,10 @@ w_{jk} &= \frac{\mathbb{E}[\text{# of choosing k-th mixture in state j}]}{\mathb
 \end{aligned}
 $$``
 
-**Remark:** 跟一般沒有跟 HMM bind 在一起的 Gaussian Mixture 更新基本上一樣，但原先的 sample 數 <span>$N$</span> 改為 <span>$\mathbb{E}[\text{number of visit}\, s_j]$</span> (因為這個 mixture 不是每次都會被抽到，要拜訪 <span>$s_j$</span> 才是它負責的)
+**Remark:** 跟一般沒有跟 HMM bind 在一起的 Gaussian Mixture 更新基本上一樣，但
+
+* sample 數 <span>$N$</span> 改為 <span>$\mathbb{E}[\text{number of visit}\, s_j]$</span> (因為這個 mixture 不是每次都會被抽到，要拜訪 <span>$s_j$</span> 才是它負責的); 
+* <span>$\gamma(j,k)$</span> 多了一個下標 <span>$t$</span> (時間 <span>$t$</span> 在 state <span>$j$</span> 且抽中該 Gaussian 的期望值)，表示其會隨 time evolve
 
 **Remark:** 而 GMM 的更新，就是根據想 maximize 的 criteria 定義 loss function ，去微分求極值發生點。
 
-**Note:** 上面的 <span>$x_t, \mu, \sigma^2$</span> 都可以是向量形式
