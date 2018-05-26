@@ -2,7 +2,7 @@
 date =  "2018-04-23T13:45:08+01:00"
 description = "Deep Learning & ASR"
 tags = ["ASR","KTH","NTU"]
-title =  "Speech Recognition- Lec6"
+title =  "Speech Recognition- Lec7"
 topics = ["Speech Processing"]
 draft = true
 +++
