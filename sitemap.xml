@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://sunprinces.github.io/learning/2018/05/beyond-rnn---lec1/</loc>
+    <lastmod>2018-05-20T16:45:08+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec6/</loc>
     <lastmod>2018-04-21T16:45:08+01:00</lastmod>
   </url>
@@ -309,6 +314,12 @@
   </url>
   
   <url>
+    <loc>https://sunprinces.github.io/learning/topics/beyond-rnn/</loc>
+    <lastmod>2018-05-20T16:45:08+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/tags/c&#43;&#43;/</loc>
     <lastmod>2018-03-13T20:44:58+01:00</lastmod>
     <priority>0</priority>
@@ -406,7 +417,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/machine-learning/</loc>
-    <lastmod>2018-04-15T08:23:22+01:00</lastmod>
+    <lastmod>2018-05-20T16:45:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -442,7 +453,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/post/</loc>
-    <lastmod>2018-04-21T16:45:08+01:00</lastmod>
+    <lastmod>2018-05-20T16:45:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -455,6 +466,12 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/randomized-algorithm/</loc>
     <lastmod>2017-10-14T00:24:36+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/tags/rnn/</loc>
+    <lastmod>2018-05-20T16:45:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -484,7 +501,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/</loc>
-    <lastmod>2018-04-21T16:45:08+01:00</lastmod>
+    <lastmod>2018-05-20T16:45:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
