@@ -9,6 +9,8 @@ draft = true
 
 這個系列會 focus 在近年來各式各樣我覺得有趣的 RNN 變形，以及相關的實做。
 
+這篇文章的相關程式碼，放在[這裡](https://github.com/sunprinceS/Neural-Turing-Machine)。
+
 <!--more-->
 
 最近剛好在學習 PyTorch，便想找個適合的題目來練手，但一昧地 implement 和寫扣有些乏味，希望自己能同時鞏固 programming 又學習新的學理知識，也因此有了這個系列 - Beyond RNN。
@@ -33,7 +35,7 @@ maintain？ 很直覺的應該是 dimension 要更大，可以想成我們要用
 
 而 NTM 的 idea 在於引進 extra 的 memory ，也可以理解成把原先那個上千維的 1D
 hidden vector，折成 2D Tensor 作為 memory，並仿效現在電腦的架構，構造其與 input
-interact 的 mechanism。
+interact 的 mechanism，把 sequence 先後的資訊給考慮進來。
 
 ## Basic Structure
 <center><img src="/img/post/ntm-structure.png" width="50%" style="border-radius: 0%;"></center>
@@ -172,8 +174,76 @@ def address(self, k, beta, g, s, gamma, w_prev):
        return w
 ```
 
-## Discussion & Conclusion
-我參考了別人的 implementation， reorganize 了自己的 [NTM](https://github.com/sunprinceS/Neural-Turing-Machine)，而在 Tensorboard，加進了某些 task 的 visualization。
+## Experiment & Discussion
+
+相關實驗可以在 [ipython notebook](https://github.com/sunprinceS/Neural-Turing-Machine/blob/master/NTM-Copy-Analysis.ipynb) 找到
+
+### Copy Task
+
+這是我隨機用長度為 3 ~ 20 的 sequence 訓練的結果，並拿長度為 30 的 sequence 當作
+validation data。
+<center><img src="/img/post/ntm-copy-cost-0320.png" width="80%" style="border-radius: 0%;"></center>
+其實到 20k 以後，就可以 fit training data 了，但對於更長的 sequence 之 generalization ，偶爾會有爛掉的可能。
+
+從 output 的 posterior 來看，也可以看出 model 其實蠻肯定的
+
+<center><img src="/img/post/ntm-copy-pred-0320.png" width="80%" style="border-radius: 0%;"></center>
+
+一個有趣的問題是，如果用更短的 sequence 做 training 呢？比方說 3 ~ 10 的 sequence
+，其還能夠類推到長度為 30 的 sequence 嗎？
+
+<center><img src="/img/post/ntm-copy-cost-0310.png" width="80%" style="border-radius: 0%;"></center>
+<center><img src="/img/post/ntm-copy-pred-0310-L20.png" width="80%" style="border-radius: 0%;"></center>
+<center><img src="/img/post/ntm-copy-pred-0310-L30.png" width="80%" style="border-radius: 0%;"></center>
+
+實驗結果看起來是不行😅。
+而且長度 20 的 sequence 也學不起來，這樣是否代表 NTM 沒有 generalization 的能力呢？
+
+讓我們把 train 在 長度為 3 ~ 20 的 sequence 之 model，拿來 predict 在長度 <span>$\geq 20$</span>的 sequence 上。
+
+<center><img src="/img/post/ntm-copy-error-curve.png" width="60%" style="border-radius: 0%;"></center>
+
+看起來它是有學到 generalization 的，而且對於 memory 已經不夠放的部份，也不是一口
+氣爛掉，還是有盡量記到一些值。
+
+**Remark:** model generalization 的能力與其看過的 training data 有關，但應該不是一個
+簡單的線性關係而已。
+
+
+### Some Training Detail
+
+* Memory 的使用及 R/W weight 變化
+
+<center><img src="/img/post/ntm-memory-use.png" width="100%" style="border-radius: 0%;"></center>
+
+<center><img src="/img/post/ntm-head-weight.png" width="100%" style="border-radius: 0%;"></center>
+
+* 這裡的 NTM ，contoller 在輸出 final output 時，是同時考慮了 read head 的值，以
+  及 current input。在 prediction 階段， current input 都是 dummy 的 <span>$\mathbf{0}$</span> vector，但如果不考慮它的話，NTM 無法 train 起來，推測可能是在某個 range 都為 0 的 vector ，對 model 而言就是僅有讀而沒有寫的指令(如同上方所提到的 R/W mode 切換)。
+
+```python
+def forward(self,x):
+       """NTM forward"""
+       prev_reads,prev_ctrl_state,prev_heads_state = self.prev_state
+       inp = torch.cat([x] + prev_reads,dim=1)
+       ctrl_outp,ctrl_state = self.controller(inp,prev_ctrl_state)
+       reads = []
+       heads_state = []
+       for head,prev_head_state in zip(self.heads,prev_heads_state):
+           if head.is_read_head():
+               r,head_state = head(ctrl_outp,prev_head_state)
+               reads += [r]
+           else:
+               head_state = head(ctrl_outp,prev_head_state)
+           heads_state += [head_state]
+
+       # Retrieve output according to current reads
+       inp2 = torch.cat([x] + reads, dim=1)
+       o = F.sigmoid(self.fc(inp2)) # range: [0,1]
+       self.prev_state = (reads,ctrl_state,heads_state)
+
+       return o, self.prev_state
+```
 
 ## Reference
 
