@@ -18,7 +18,7 @@
       <pubDate>Sun, 20 May 2018 16:45:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/05/beyond-rnn---lec1/</guid>
-      <description>&lt;p&gt;這個系列會 focus 在近年來各式各樣我覺得有趣的 RNN 變形，以及相關的實做。&lt;/p&gt;
+      <description>&lt;p&gt;Beyond RNN 這個系列會 focus 在近年來各式各樣我覺得有趣的 RNN 變形，及其相關的實做。&lt;/p&gt;
 
 &lt;p&gt;這篇文章的相關程式碼，放在&lt;a href=&#34;https://github.com/sunprinceS/Neural-Turing-Machine&#34;&gt;這裡&lt;/a&gt;。&lt;/p&gt;
 

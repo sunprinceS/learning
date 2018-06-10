@@ -277,44 +277,42 @@
 </div>
 
 
-  <p>這個系列會 focus 在近年來各式各樣我覺得有趣的 RNN 變形，以及相關的實做。</p>
+  <p>Beyond RNN 這個系列會 focus 在近年來各式各樣我覺得有趣的 RNN 變形，及其相關的實做。</p>
 
 <p>這篇文章的相關程式碼，放在<a href="https://github.com/sunprinceS/Neural-Turing-Machine">這裡</a>。</p>
 
 <p></p>
 
-<p>最近剛好在學習 PyTorch，便想找個適合的題目來練手，但一昧地 implement 和寫扣有些乏味，希望自己能同時鞏固 programming 又學習新的學理知識，也因此有了這個系列 - Beyond RNN。</p>
+<p>最近剛好在學習 PyTorch，便想找個適合的題目來練手，但一昧地 implement 或看論文都有些乏味，希望自己能同時鞏固實做能力又學習新的知識，也因此有了這個系列 - Beyond RNN。</p>
 
-<p>有接觸過 DL 的讀者，想必對 RNN (Recurrent Neural Network) 並不陌生，它主要應用在資料有順序性的 scenerio (e.g 語音,文字,股票走勢(?😛) &hellip;)，除了 single cell 的變形如 LSTM (Long Short Term Memory) 和 GRU (Gated Recurrent Unit)之外，另外有許多將其 equip 在不同的架構上，強化其功能的許多延伸。</p>
+<p>有接觸過 DL 的讀者，想必對 RNN (<em>Recurrent Neural Network</em>) 並不陌生，它主要應用在<strong>資料有順序性</strong>的 scenerio (e.g 語音,文字,股票走勢(?😛)等等 &hellip;)，除了 single cell 的變形如 LSTM (Long Short Term Memory) 和 GRU (Gated Recurrent Unit)之外，另外有許多將其 equip 在不同的架構上，強化其功能的延伸。</p>
 
 <h2 id="introduction">Introduction</h2>
 
-<p>今天所要帶來的是 <a href="https://arxiv.org/abs/1410.5401">Neural Turing Machine</a> ，是 DeepMind 在 2014 年
+<p>這一篇 Post 會介紹的是 <a href="https://arxiv.org/abs/1410.5401">Neural Turing Machine</a> ，是 DeepMind 在 2014 年
 所發表的研究。</p>
 
 <p>RNN-type 的 network ，之所以能處理 sequence 的問題，關鍵在它 keep 了 hidden
-state (對應到 LSTM 的 <span>$h,c$</span>&hellip; )，可以理解成當作到目前為止，<strong>所有 input 的
+state (對應到 LSTM 的 <span>$h,c$</span>&hellip; )，可以理解成當作到目前為止，綜合了<strong>所有 input 的
 representation</strong> ，而其又會隨著新的 input 進來而有所改變。</p>
 
 <h2 id="motivation">Motivation</h2>
 
-<p>一個很自然的問題是，對於很長的那些 sequence ，我們需要開多大的 hidden state 去
-maintain？ 很直覺的應該是 dimension 要更大，可以想成我們要用一條幾千維的 vector 來當成我們的 hidden state。</p>
+<p>一個很自然的問題是，對於那些很長的 sequence ，我們需要開多大的 hidden state 去
+maintain？ 直覺應該是 dimension 要更大，可以想成我們要用一條幾千維的 vector 來當 hidden state。</p>
 
-<p>就像 <strong>CNN</strong> 的 motivation 一樣，我們希望我們的 model 能引進多一點先備的資訊，對於影像，直接把每個 pixel 展平成 1D vector，其 performance 比不上將其 treat 成 2D Tensor ，考慮鄰近 pixel 的 額外 information。(工商時間: 這裡有我之前當 TA 時出給同學的<a href="https://sunprinces.github.io/ML-Assignment3/">練習</a>，在 FER 這個 dataset 上比較 CNN 跟 DNN 的 performance 優劣)</p>
+<p>而就像 <strong>CNN</strong> 的 motivation 一樣，我們希望我們的 model 能引進多一點先備的資訊。在 CNN 中，對於 structured 的影像，直接把每個 pixel 展平成 1D vector 作為 model 的 input，其 performance 比不上將其 treat 成 2D Tensor ，考慮鄰近 pixel 的 額外 information。(工商時間: 這裡有我之前當 TA 時出給同學的<a href="https://sunprinces.github.io/ML-Assignment3/">練習</a>，在 FER 這個 dataset 上比較 CNN 跟 DNN 的 performance 優劣)</p>
 
-<p>而 NTM 的 idea 在於引進 extra 的 memory ，也可以理解成把原先那個上千維的 1D
-hidden vector，折成 2D Tensor 作為 memory，並仿效現在電腦的架構，構造其與 input
-interact 的 mechanism，把 sequence 先後的資訊給考慮進來。</p>
+<p>而 NTM 的 idea 也是類似，藉由引進 extra memory ，把原先那個上千維的 1D hidden vector，折成 2D Tensor 作為 memory 。並仿效現在電腦的架構，構造其與 input interact 的 mechanism，把 sequence 先後的資訊給考慮進來。</p>
 
 <h2 id="basic-structure">Basic Structure</h2>
 
-<p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-structure.png" width="50%" style="border-radius: 0%;"></center></p>
+<p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-structure.png" width="60%" style="border-radius: 0%;"></center></p>
 
-<p>讀寫 memory 這件事分成兩個步驟，內容及位置。仔細想想，「位置」在 memory 中，應該
-是離散的存在，該如何把從哪裡讀/寫這件事變成可以用 NN 可以 train 呢？想法就是讓其
-<strong>可微</strong>，在這裡的作法是每次在讀寫時，不是對 specific 位置的 memory cell 做操作，而
-是對一個 specific distribution <span>$w$</span> 的 memory cell 做操作 (簡單來說，就是同時考慮所有
+<p>讀寫 memory 這件事分成兩個步驟，<strong>內容</strong>及<strong>位置</strong>。<br />
+仔細想想，「位置」在 memory 中，是<strong>離散</strong>的存在，該如何把從哪裡讀/寫這件事變成可以用 NN 可以 train 呢？<br />
+想法就是讓其<strong>可微</strong>，這裡的作法是每次在讀寫時，不是對 specific 位置的 memory cell 做操作，而
+是對一個 specific distribution <span>$w$</span> 的 memory cell 們做操作 (簡單來說，就是同時考慮所有
 的 memory cell，但根據裡頭內容的不同，決定其所佔的 weight)。</p>
 
 <h2 id="read-write">Read &amp; Write</h2>
@@ -364,7 +362,7 @@ interact 的 mechanism，把 sequence 先後的資訊給考慮進來。</p>
 
 <h3 id="content-based-attention">Content-based Attention</h3>
 
-<p>根據 memory cell 現在所紀錄的內容與 controller 的 output key vector <span>$\mathbf{k}$</span> (亦即 <span>$f$</span>(input))做比較，決定該 memory cell 所要佔的比重。</p>
+<p>根據 memory cell 現在所紀錄的內容與 controller 的 output key vector <span>$\mathbf{k}$</span> (亦即 <span>$f$</span>(input))做比較，決定該 memory cell 所要佔的比重 (越類似者，權重越高)。</p>
 
 <div>
 \[
@@ -377,8 +375,7 @@ similarity</p>
 
 <h3 id="location-based-attention">Location-based Attention</h3>
 
-<p>As title，我們從上一步中，得到了 <span>$w_c$</span>，但根據不同的 input ，又再多
-考慮這些 moemory cell 與其鄰近者的 distribution 。</p>
+<p>As title，我們從上一步中，得到了 <span>$w_c$</span>，但根據不同的 input ，又再多考慮這些 moemory cell 與其鄰近者的 distribution 。</p>
 
 <h4 id="interpolation">Interpolation</h4>
 
@@ -459,25 +456,24 @@ validation data。
 
 <p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-pred-0320.png" width="80%" style="border-radius: 0%;"></center></p>
 
-<p>一個有趣的問題是，如果用更短的 sequence 做 training 呢？比方說 3 ~ 10 的 sequence
-，其還能夠類推到長度為 30 的 sequence 嗎？</p>
+<p>一個有趣的問題是，如果用更短的 sequence 做 training 呢？<br />
+比方說 3 ~ 10 的 sequence ，其還能夠類推到長度為 30 的 sequence 嗎？</p>
 
 <p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-cost-0310.png" width="80%" style="border-radius: 0%;"></center>
 <center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-pred-0310-L20.png" width="80%" style="border-radius: 0%;"></center>
 <center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-pred-0310-L30.png" width="80%" style="border-radius: 0%;"></center></p>
 
-<p>實驗結果看起來是不行😅。
+<p>實驗結果看起來是不行😅。<br />
 而且長度 20 的 sequence 也學不起來，這樣是否代表 NTM 沒有 generalization 的能力呢？</p>
 
 <p>讓我們把 train 在 長度為 3 ~ 20 的 sequence 之 model，拿來 predict 在長度 <span>$\geq 20$</span>的 sequence 上。</p>
 
 <p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-error-curve.png" width="60%" style="border-radius: 0%;"></center></p>
 
-<p>看起來它是有學到 generalization 的，而且對於 memory 已經不夠放的部份，也不是一口
-氣爛掉，還是有盡量記到一些值。</p>
+<p>看起來它是有學到 generalization 的，<br />
+而且對於 memory 已經不夠放的部份，也不是一口氣爛掉，還是有盡量記到一些值。</p>
 
-<p><strong>Remark:</strong> model generalization 的能力與其看過的 training data 有關，但應該不是一個
-簡單的線性關係而已。</p>
+<p><strong>Remark:</strong> model generalization 的能力與其看過的 training data 有關，但不是簡單的線性關係而已。</p>
 
 <h3 id="some-training-detail">Some Training Detail</h3>
 
@@ -490,8 +486,8 @@ validation data。
 <p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-head-weight.png" width="100%" style="border-radius: 0%;"></center></p>
 
 <ul>
-<li>這裡的 NTM ，contoller 在輸出 final output 時，是同時考慮了 read head 的值，以
-及 current input。在 prediction 階段， current input 都是 dummy 的 <span>$\mathbf{0}$</span> vector，但如果不考慮它的話，NTM 無法 train 起來，推測可能是在某個 range 都為 0 的 vector ，對 model 而言就是僅有讀而沒有寫的指令(如同上方所提到的 R/W mode 切換)。</li>
+<li>這裡實做的 NTM ，contoller 在輸出 final output 時，同時考慮了 read head 以及 input 的值。<br />
+在 prediction 階段， current input 都是 dummy 的 <span>$\mathbf{0}$</span> vector，但如果不考慮它的話，NTM 就無法 train 起來，推測可能是在那個 dummy vector ，對 model 而言就是僅有讀而沒有寫的指令(如同上方所提到的 R/W mode 切換)。</li>
 </ul>
 
 <pre><code class="language-python">def forward(self,x):
