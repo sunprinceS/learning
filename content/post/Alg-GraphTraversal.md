@@ -140,3 +140,8 @@ Run DFS on <span>$G^{rev}$</span> \\
 <span>$f(v)$</span> 由小到大的順序即為 Topological order，複雜度
 <span>$\mathcal{O}(V+E)$</span>\\
 **Note**: 若是 run 在 <span>$G$</span> 上，那麼 <span>$f(v)$</span> 由大到小的順序亦是 Topological order
+
+#### Example
+
+範例: [LeetCode 210: Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/)
+<script src="https://gist.github.com/sunprinceS/5544098dae33b4e0358a6fb317a27011.js"></script>
