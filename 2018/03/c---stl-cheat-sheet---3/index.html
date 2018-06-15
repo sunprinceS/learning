@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="資料結構 - Heap/ BST/ Hash Table">
-  <meta name="generator" content="Hugo 0.40.3" />
+  <meta name="generator" content="Hugo 0.42.1" />
 
   <title>C&#43;&#43; STL Cheat Sheet - 3 &middot; Stay hungry. Stay foolish </title>
 
@@ -425,7 +425,8 @@ mp.erase('h'); // 以下類似
 
 <h3 id="計數-查找">計數/查找</h3>
 
-<pre><code class="language-cpp">s.find(123); // 注意若 123 有多個，會回傳哪一個不一定 [故 multimap 使用它不太恰當]
+<pre><code class="language-cpp">mp.insert({'h',1}); // 注意不能使用 mp['h'] = 1 的 insert 方式
+s.find(123); // 注意若 123 有多個，會回傳哪一個不一定 [故 multimap 使用它不太恰當]
 s.count(123); // O(lg N + equal range length)
 s.equal_range(123); 會回傳一個 {start,end} pair ，其中[start,end) 為 123
 
