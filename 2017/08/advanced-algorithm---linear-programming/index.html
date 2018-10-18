@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Basic Introduction">
-  <meta name="generator" content="Hugo 0.42.1" />
+  <meta name="generator" content="Hugo 0.49.2" />
 
   <title>Advanced Algorithm - Linear Programming &middot; Stay hungry. Stay foolish </title>
 
@@ -308,11 +308,7 @@ multivariate function</strong> subject to some <strong>linear constraints</stron
 
 <p>在解最佳化問題時，我們會將問題轉化成線性規劃的 form ，但某些 NPC 問題，要求演算法輸出的解需為整數，也就是 Integer Linear Programming Problem (Note that ILP <span>$\in$</span> NPC)。我們會先將原先的 ILP 問題 <strong>relax</strong> 成 LP 問題，用現行的 LP solver 得到解後，根據這個結果去做 <strong>rounding</strong>，(either deterministic or randomized and more on this later)，流程如下</p>
 
-
-<div class="pure-u-1">
-  <img class="pure-img" src="https://sunprinces.github.io/learning/img/post/ilp_procedure.png" alt="LP to ILP procedure">
-</div>
-
+<p><img src="https://sunprinces.github.io/learning/img/post/ilp_procedure.png" width="80%" style="border-radius: 0%;"></p>
 
 <p>在證明 approx ratio 時，關係如下<br/></p>
 
@@ -336,11 +332,7 @@ The Integrality Gap (IG) is the upperbound of the ratio between <span>$OPT$</spa
 <p><span>$\forall$</span> problem instance, 若我們能 follow LP relaxation and rounding 的步驟，<br />
 得到一個 k-approx. algorithm ，使得 <span>$\frac{\mathcal{C}(\text{round})}{\mathcal{C}(OPT^{frac})} \leq k$</span>，便也可以推得 <span>$\frac{\mathcal{C}(OPT)}{\mathcal{C}(OPT^{frac})} \leq k$</span>
 所以說 <span>$k$</span> 便可以拿來當這個比例的上界，也就是 <em>IG</em> ，方能說明 Integrality Gap 為 <span>$k$</span>
-
-<div class="pure-u-1">
-  <img class="pure-img" src="https://sunprinces.github.io/learning/img/post/ig_gap.png" alt="LP to ILP procedure">
-</div>
-</p>
+<img src="https://sunprinces.github.io/learning/img/post/ig_gap.png" width="80%" style="border-radius: 0%;"></p>
 
 <h2 id="duality">Duality</h2>
 

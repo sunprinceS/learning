@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Trimming">
-  <meta name="generator" content="Hugo 0.42.1" />
+  <meta name="generator" content="Hugo 0.49.2" />
 
   <title>Advanced Algorithm - Subset Sum Problem &middot; Stay hungry. Stay foolish </title>
 
@@ -303,11 +303,7 @@
 
 <p>可以發現複雜度與 <span>$W$</span> 成正比，故充其量這個 Algorithm 也只是 psuedo-polynomial 而已，與前面的想法類似，造成複雜度的主因在每一個 Merge 的過程中，我們留下了太多元素(而 Merge 的複雜度又與元素個數呈線性)，如果<strong>只取幾個代表性的元素</strong>(e.g <span>$|S_i| = \mathcal{O}(\log W)$</span>)，便可將複雜度再往下壓。</p>
 
-
-<div class="pure-u-1">
-  <img class="pure-img" src="https://sunprinces.github.io/learning/img/post/trim.png" alt="Trimming Procedure">
-</div>
-
+<p><img src="https://sunprinces.github.io/learning/img/post/trim.png" width="80%" style="border-radius: 0%;"></p>
 
 <p>Pick <span>$x_1$</span>, remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list (say, <span>$x_2 \, \text{and} \, x_3$</span>). <br />
 Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list. Repeat this procedure until the last element.</p>
@@ -330,11 +326,7 @@ Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\fra
 
 <h3 id="correctness-check">Correctness Check</h3>
 
-
-<div class="pure-u-1">
-  <img class="pure-img" src="https://sunprinces.github.io/learning/img/post/trim_approx.png" alt="Trimming Approximation">
-</div>
-
+<p><img src="https://sunprinces.github.io/learning/img/post/trim_approx.png" width="80%" style="border-radius: 0%;"></p>
 
 <p>可以將 Trimming 視為改小某一 range 中的元素們(將其改至該 range 內最小的元素)，OPT 在 trimming &amp; merge 的過程中不斷地被改小，最多最多會被等比縮小 <span>$n$</span> 次。</p>
 
