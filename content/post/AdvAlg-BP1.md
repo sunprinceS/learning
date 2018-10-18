@@ -105,7 +105,7 @@ J^{\prime}: \text{將區間的元素縮小到同一群的 minimum (第一個區�
 \]
 </div>
 
-{{% fluid_img src="/img/post/bp.png" alt="Bin Packing Rounding" %}}
+<img src="/img/post/bp.png" width="80%" style="border-radius: 0%;">
 
 從這裡可以觀察到 <span>$J$</span> 跟 <span>$J^{\prime}$</span> 的差別只在 <span>$J$</span> 多了 <span>$\lfloor n\epsilon^2 \rfloor$</span>  個 size 為 <span>$1$</span> 的元素。
 

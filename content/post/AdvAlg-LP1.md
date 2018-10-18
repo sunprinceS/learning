@@ -29,7 +29,7 @@ multivariate function** subject to some **linear constraints**
 ## Integrality Gap
 在解最佳化問題時，我們會將問題轉化成線性規劃的 form ，但某些 NPC 問題，要求演算法輸出的解需為整數，也就是 Integer Linear Programming Problem (Note that ILP <span>$\in$</span> NPC)。我們會先將原先的 ILP 問題 **relax** 成 LP 問題，用現行的 LP solver 得到解後，根據這個結果去做 **rounding**，(either deterministic or randomized and more on this later)，流程如下
 
-{{% fluid_img src="/img/post/ilp_procedure.png" alt="LP to ILP procedure" %}}
+<img src="/img/post/ilp_procedure.png" width="80%" style="border-radius: 0%;">
 
 在證明 approx ratio 時，關係如下<br/>
 
@@ -54,7 +54,7 @@ The Integrality Gap (IG) is the upperbound of the ratio between <span>$OPT$</spa
 <span>$\forall$</span> problem instance, 若我們能 follow LP relaxation and rounding 的步驟，\\
 得到一個 k-approx. algorithm ，使得 <span>$\frac{\mathcal{C}(\text{round})}{\mathcal{C}(OPT^{frac})} \leq k$</span>，便也可以推得 <span>$\frac{\mathcal{C}(OPT)}{\mathcal{C}(OPT^{frac})} \leq k$</span>
 所以說 <span>$k$</span> 便可以拿來當這個比例的上界，也就是 *IG* ，方能說明 Integrality Gap 為 <span>$k$</span>
-{{% fluid_img src="/img/post/ig_gap.png" alt="LP to ILP procedure" %}}
+<img src="/img/post/ig_gap.png" width="80%" style="border-radius: 0%;">
 
 ## Duality
 

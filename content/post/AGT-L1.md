@@ -39,7 +39,7 @@ We want to design a system for **strategic** participants with **good** performa
 ### Example : Braess's paradox
 考慮一群人要從 <span>$ s \rightarrow t$</span>，有兩種 type 的道路可選，其中一條 cost 為 constant 1，另一條的 cost 則是根據在其上的 agent 之比例 (如果全部的agent都通過此，則 cost = 1)決定。
 
-{{% fluid_img src="/img/post/baraessParadox.png" alt="Braess's Paradox" %}}
+<img src="/img/post/baraessParadox.png" width="80%" style="border-radius: 0%;">
 
 
 (The figure is from [here](http://theory.stanford.edu/~tim/f13/l/l1.pdf))

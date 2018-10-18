@@ -28,7 +28,7 @@ Computer <span>$S_i$</span> : possible subset sum of \{<span>$v_1, v_2, \cdots ,
 
 可以發現複雜度與 <span>$W$</span> 成正比，故充其量這個 Algorithm 也只是 psuedo-polynomial 而已，與前面的想法類似，造成複雜度的主因在每一個 Merge 的過程中，我們留下了太多元素(而 Merge 的複雜度又與元素個數呈線性)，如果**只取幾個代表性的元素**(e.g <span>$|S_i| = \mathcal{O}(\log W)$</span>)，便可將複雜度再往下壓。
 
-{{% fluid_img src="/img/post/trim.png" alt="Trimming Procedure" %}}
+<img src="/img/post/trim.png" width="80%" style="border-radius: 0%;">
 
 Pick <span>$x_1$</span>, remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list (say, <span>$x_2 \, \text{and} \, x_3$</span>). \\
 Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list. Repeat this procedure until the last element.
@@ -52,7 +52,7 @@ Now, <span>$|S_i| \leq \log_M W = \mathcal{O}(\frac{n\ln W}{\epsilon})
 
 ### Correctness Check
 
-{{% fluid_img src="/img/post/trim_approx.png" alt="Trimming Approximation" %}}
+<img src="/img/post/trim_approx.png" width="80%" style="border-radius: 0%;">
 
 可以將 Trimming 視為改小某一 range 中的元素們(將其改至該 range 內最小的元素)，OPT 在 trimming & merge 的過程中不斷地被改小，最多最多會被等比縮小 <span>$n$</span> 次。
 
