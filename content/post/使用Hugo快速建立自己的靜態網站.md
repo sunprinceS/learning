@@ -89,9 +89,23 @@ git push origin gh-pages # 大功告成！
 hugo --cleanDestinationDir
 ```
 
+## Clone to new workspace
+
+如果想在不同的電腦間寫 blog 的話，請仿以下步驟
+
+```bash
+git clone --recurse-submodules -j8 [repo] # clone from remote
+git co master # 因為我 default branch 是 gh-pages
+git worktree add -B gh-pages public origin/gh-pages # 重新 set worktree
+git submodule update --init # track submodule (因 [theme] 是另一個 repo 在維護的)
+# 上述那步沒做的話， hugo server 後會發現什麼都沒 render ^^" (因為 [theme] 是空的)
+# 而 hugo 並不會再次 render，所以 publish 到 github page 並不會有任何更新
+```
+
 ## Post ChangeLog
 
 * 2018/03/16: 更新 `hugo clean`, `hugo undraft` 的指令 (Hugo ver <span>$\geq$</span> 0.36)
+* 2018/10/18: 新增如何 clone 到新的 workspace
 
 ## Reference
 * [Quick Start](https://gohugo.io/overview/quickstart/)
