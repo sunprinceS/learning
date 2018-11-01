@@ -14,10 +14,10 @@
     
     <item>
       <title>Advanced Algorithm - Hash Table - Lec3</title>
-      <link>https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec3/</link>
+      <link>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec3/</link>
       <pubDate>Sat, 14 Oct 2017 00:24:36 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec3/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec3/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/&#34;&gt;第一講&lt;/a&gt;中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 &lt;span&gt;$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$&lt;/span&gt; ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same &lt;span&gt;$\mathcal{H}$&lt;/span&gt;)可以選，每次我們就看哪一個 &lt;span&gt;$h$&lt;/span&gt; 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 &lt;span&gt;$\mathbb{E}[\, \text{max num of elements in any slots} \, ]$&lt;/span&gt; ?&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -25,10 +25,10 @@
     
     <item>
       <title>Advanced Algorithm - Hash Table - Lec2</title>
-      <link>https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec2/</link>
+      <link>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec2/</link>
       <pubDate>Thu, 05 Oct 2017 00:20:42 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec2/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec2/</guid>
       <description>&lt;p&gt;Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 &lt;span&gt;$\mathcal{O}(1)$&lt;/span&gt; lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -36,10 +36,10 @@
     
     <item>
       <title>Problem Solving and Programming- hw2</title>
-      <link>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/</link>
+      <link>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw2/</link>
       <pubDate>Tue, 19 Sep 2017 08:32:38 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw2/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/624&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -47,10 +47,10 @@
     
     <item>
       <title>Algorithm - Disjoint Set</title>
-      <link>https://sunprinces.github.io/learning/2017/08/algorithm---disjoint-set/</link>
+      <link>https://sunprinces.github.io/learning/2017/08/algorithm-disjoint-set/</link>
       <pubDate>Tue, 22 Aug 2017 20:44:58 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/08/algorithm---disjoint-set/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/08/algorithm-disjoint-set/</guid>
       <description>&lt;p&gt;Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets &lt;span&gt;$S_1,S_2,\cdots,S_k$&lt;/span&gt;，而每個 &lt;span&gt;$S_i$&lt;/span&gt; (每個 category) 以一個代表值 (&lt;em&gt;representative&lt;/em&gt;) 去紀錄。
 &lt;!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--&gt;&lt;/p&gt;
 
@@ -59,10 +59,10 @@
     
     <item>
       <title>Advanced Algorithm - Hash Table - Lec1</title>
-      <link>https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/</link>
+      <link>https://sunprinces.github.io/learning/2017/05/advanced-algorithm-hash-table-lec1/</link>
       <pubDate>Sun, 21 May 2017 08:52:55 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/05/advanced-algorithm-hash-table-lec1/</guid>
       <description>&lt;!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。--&gt;
 
 &lt;p&gt;Hashing 可以想成是一種 &lt;strong&gt;renaming&lt;/strong&gt; 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 &lt;strong&gt;Hashing&lt;/strong&gt; 的方式，重新命名 key&amp;rsquo; ，並依據 key&amp;rsquo; 將資料放到 size 跟資料個數差不多的 Hash Table 中。&lt;/p&gt;

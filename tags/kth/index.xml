@@ -14,10 +14,10 @@
     
     <item>
       <title>Speech Recognition- Lec6</title>
-      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec6/</link>
+      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec6/</link>
       <pubDate>Sat, 21 Apr 2018 16:45:08 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec6/</guid>
+      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec6/</guid>
       <description>&lt;p&gt;ASR 做的其實就是以下這件事，&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;$$
@@ -35,10 +35,10 @@ transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)&lt;br /&gt;
     
     <item>
       <title>Speech Recognition- Lec5</title>
-      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec5/</link>
+      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec5/</link>
       <pubDate>Thu, 19 Apr 2018 16:45:08 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec5/</guid>
+      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec5/</guid>
       <description>&lt;p&gt;我覺得自己之前做的&lt;a href=&#34;https://drive.google.com/file/d/152rJZPdCl1k4IqLgr7frwWXeE6lCHjO0/view?usp=sharing&#34;&gt;投影片&lt;/a&gt;真的蠻好的XD (自己講)，因此這一講中，只會偏重在原本寫的比較簡略的 Learning Problem ， Evaluation 及 Decoding Problem 僅會附上程式碼及做定義。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -46,10 +46,10 @@ transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)&lt;br /&gt;
     
     <item>
       <title>Speech Recognition- Lec4</title>
-      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec4/</link>
+      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec4/</link>
       <pubDate>Tue, 17 Apr 2018 19:32:08 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec4/</guid>
+      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec4/</guid>
       <description>&lt;p&gt;在能夠將聲音訊號轉為數值向量給 machine 處理後，我們要怎麼判斷這串 vector 是 mapping 到哪一段文字呢？ &lt;br /&gt;
 在進入 continuous ASR 前，讓我們先來想一想怎麼辨識一個 word ？想法是針對這個 word 建一個 model ，給定一段聲音訊號， output 該訊號 map 到此
 word 的機率為多少。&lt;/p&gt;
@@ -59,10 +59,10 @@ word 的機率為多少。&lt;/p&gt;
     
     <item>
       <title>Speech Recognition- Lec3</title>
-      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec3/</link>
+      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec3/</link>
       <pubDate>Wed, 11 Apr 2018 17:14:08 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec3/</guid>
+      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec3/</guid>
       <description>&lt;p&gt;上一回介紹了 LPC ，來做為我們抽取 feature 的一個方法，今天要來談談目前最常被使用的 feature - MFCC 。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -70,10 +70,10 @@ word 的機率為多少。&lt;/p&gt;
     
     <item>
       <title>Speech Recognition- Lec2</title>
-      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec2/</link>
+      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec2/</link>
       <pubDate>Mon, 09 Apr 2018 13:14:08 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec2/</guid>
+      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec2/</guid>
       <description>&lt;p&gt;語音辨識的基本架構中，第一步便是要把聲音訊號轉成可被紀錄的數位形式以供 machine 處理。科學家們從人類究竟是如何發出特定聲音作為出發點，去找出訊號當中哪些是屬於那個聲音 unique 的 feature，並移除那些無關的資訊 (e.g noise) ，並利用這些 extract 出來的 feature 來作為辨識的基本元素。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -81,30 +81,21 @@ word 的機率為多少。&lt;/p&gt;
     
     <item>
       <title>Speech Recognition- Lec1</title>
-      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec1/</link>
+      <link>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec1/</link>
       <pubDate>Sun, 08 Apr 2018 16:14:08 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition--lec1/</guid>
+      <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec1/</guid>
       <description>&lt;p&gt;隨著變成菸酒生的日子逐漸逼近，最近開始重追尤達大師數位語音的連載，希望在進 Speech Lab 之前，將這些知識掌握地更加純熟，這個系列主要會雜揉以前在台大所修的 &lt;a href=&#34;http://speech.ee.ntu.edu.tw/DSP2017Autumn/&#34;&gt;數位語音處理概論&lt;/a&gt; 以及在 KTH 所修的 &lt;a href=&#34;https://www.kth.se/social/course/DT2119/&#34;&gt;Speech and Speaker Recognition&lt;/a&gt; 之相關內容。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Information Retrieval - Lec4</title>
-      <link>https://sunprinces.github.io/learning/2018/03/information-retrieval---lec4/</link>
-      <pubDate>Wed, 21 Mar 2018 23:14:08 +0100</pubDate>
-      
-      <guid>https://sunprinces.github.io/learning/2018/03/information-retrieval---lec4/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Information Retrieval - Lec3</title>
-      <link>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec3/</link>
+      <link>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec3/</link>
       <pubDate>Wed, 31 Jan 2018 23:14:08 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec3/</guid>
+      <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec3/</guid>
       <description>&lt;p&gt;前面提過 Boolearn Search 的其中一個問題在於， machine 是&lt;strong&gt;無腦&lt;/strong&gt;地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 &lt;span&gt;$10^6$&lt;/span&gt; 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 &lt;strong&gt;ranked retrieval&lt;/strong&gt; 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -112,10 +103,10 @@ word 的機率為多少。&lt;/p&gt;
     
     <item>
       <title>Information Retrieval - Lec2</title>
-      <link>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec2/</link>
+      <link>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec2/</link>
       <pubDate>Mon, 22 Jan 2018 23:14:08 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec2/</guid>
+      <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec2/</guid>
       <description>&lt;p&gt;在做 &lt;a href=&#34;https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/&#34;&gt;Indexing&lt;/a&gt; 之前，我們需要將文本從各方來源中抽取出來，這些來源的 &lt;strong&gt;格式&lt;/strong&gt; 相當多元(像是 html, md 等等 markup 或是與圖片相雜的 data ，可能還需要處理 encoding 的問題)，反正就是挺亂的，需要做一些 processing 後，才可以用強大的 NLP tool 來統一處理。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -123,10 +114,10 @@ word 的機率為多少。&lt;/p&gt;
     
     <item>
       <title>Information Retrieval - Lec1</title>
-      <link>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/</link>
+      <link>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec1/</link>
       <pubDate>Tue, 16 Jan 2018 23:14:08 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/</guid>
+      <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec1/</guid>
       <description>&lt;p&gt;這個系列主要會紀錄自己在 KTH 修習 &lt;a href=&#34;https://www.kth.se/student/kurser/kurs/DD2476?l=en&#34;&gt;Information Retrieval System&lt;/a&gt; 的一些筆記，備忘用，不會像之前的 Post 那麼詳細，但還是會加點自己的 remark 這樣。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -134,10 +125,10 @@ word 的機率為多少。&lt;/p&gt;
     
     <item>
       <title>Problem Solving and Programming- hw11</title>
-      <link>https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming--hw11/</link>
+      <link>https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming-hw11/</link>
       <pubDate>Tue, 05 Dec 2017 09:56:56 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming--hw11/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming-hw11/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/641&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -145,10 +136,10 @@ word 的機率為多少。&lt;/p&gt;
     
     <item>
       <title>Problem Solving and Programming- hw6</title>
-      <link>https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/</link>
+      <link>https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming-hw6/</link>
       <pubDate>Tue, 31 Oct 2017 08:32:38 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming--hw6/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming-hw6/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/632&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -156,10 +147,10 @@ word 的機率為多少。&lt;/p&gt;
     
     <item>
       <title>Problem Solving and Programming- hw2</title>
-      <link>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/</link>
+      <link>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw2/</link>
       <pubDate>Tue, 19 Sep 2017 08:32:38 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw2/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw2/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/624&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -167,10 +158,10 @@ word 的機率為多少。&lt;/p&gt;
     
     <item>
       <title>Problem Solving and Programming- hw1</title>
-      <link>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/</link>
+      <link>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw1/</link>
       <pubDate>Tue, 12 Sep 2017 08:32:38 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming--hw1/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw1/</guid>
       <description>&lt;p&gt;在 KTH 交換時選到的神課！想說把題解稍微紀錄一下 ✌️&lt;br /&gt;
 &lt;a href=&#34;https://kth.kattis.com/problemgroups/617&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
 

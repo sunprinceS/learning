@@ -14,10 +14,10 @@
     
     <item>
       <title>Advanced Algorithm - Hash Table - Lec3</title>
-      <link>https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec3/</link>
+      <link>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec3/</link>
       <pubDate>Sat, 14 Oct 2017 00:24:36 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec3/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec3/</guid>
       <description>&lt;p&gt;在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/&#34;&gt;第一講&lt;/a&gt;中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 &lt;span&gt;$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$&lt;/span&gt; ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same &lt;span&gt;$\mathcal{H}$&lt;/span&gt;)可以選，每次我們就看哪一個 &lt;span&gt;$h$&lt;/span&gt; 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 &lt;span&gt;$\mathbb{E}[\, \text{max num of elements in any slots} \, ]$&lt;/span&gt; ?&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -25,10 +25,10 @@
     
     <item>
       <title>Advanced Algorithm - Hash Table - Lec2</title>
-      <link>https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec2/</link>
+      <link>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec2/</link>
       <pubDate>Thu, 05 Oct 2017 00:20:42 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm---hash-table---lec2/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec2/</guid>
       <description>&lt;p&gt;Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 &lt;span&gt;$\mathcal{O}(1)$&lt;/span&gt; lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -36,10 +36,10 @@
     
     <item>
       <title>Advanced Algorithm - Metric Facility Location Revisited</title>
-      <link>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-revisited/</link>
+      <link>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-revisited/</link>
       <pubDate>Fri, 29 Sep 2017 21:19:19 +0200</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-revisited/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-revisited/</guid>
       <description>&lt;p&gt;前面提到過一個較為複雜的優化問題， &lt;a href=&#34;https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/&#34;&gt;Metric Facility Location Problem&lt;/a&gt; ，並給出了一個 4-Approx. Algorithm ，於這講中，我們要來利用前面提到的 Primal-Dual method 來設計演算法。&lt;/p&gt;
 
 &lt;!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)--&gt;
@@ -49,10 +49,10 @@
     
     <item>
       <title>Advanced Algorithm - Weighted Set Cover Revisited</title>
-      <link>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---weighted-set-cover-revisited/</link>
+      <link>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-weighted-set-cover-revisited/</link>
       <pubDate>Sat, 23 Sep 2017 21:19:19 +0200</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---weighted-set-cover-revisited/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-weighted-set-cover-revisited/</guid>
       <description>&lt;p&gt;呈之前的討論，對於 WSC 問題，我們有了利用 LP solver 去對解做 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/&#34;&gt;deterministic rounding&lt;/a&gt; 及 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/&#34;&gt;randomized rounding&lt;/a&gt; 的演算法，解法的共通點是必須要先 run 過 LP solver (雖然理論上是 &lt;strong&gt;POLY&lt;/strong&gt; ，實務上現行的 solver 也很有效率)，但我們仍想問說，是否存在不須使用 LP solver 的演算法呢？ 而這也是這講所要提到的 &lt;strong&gt;Primal-Dual Method&lt;/strong&gt; 。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -60,10 +60,10 @@
     
     <item>
       <title>Advanced Algorithm - Metric Facility Location Problem</title>
-      <link>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/</link>
+      <link>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-problem/</link>
       <pubDate>Sat, 16 Sep 2017 20:49:15 +0200</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-problem/</guid>
       <description>&lt;p&gt;接續&lt;a href=&#34;https://sunprinces.github.io/learning/tags/linear-programming/&#34;&gt;前面幾講&lt;/a&gt;，一個常用的技巧是，利用 LP solver 得出來的解 &lt;span&gt;$\mathbf{x}^{\star}$&lt;/span&gt;， 拿去做 rounding 推出原先問題的解 &lt;span&gt;$\mathbf{x}^{\prime}$&lt;/span&gt; (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (&lt;strong&gt;MFL&lt;/strong&gt;)。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -71,10 +71,10 @@
     
     <item>
       <title>Algorithm - Graph Theory - Lec 4</title>
-      <link>https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-4/</link>
+      <link>https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-4/</link>
       <pubDate>Fri, 08 Sep 2017 22:29:20 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-4/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-4/</guid>
       <description>&lt;p&gt;前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 &lt;span&gt;$V$&lt;/span&gt; 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -82,10 +82,10 @@
     
     <item>
       <title>Algorithm - Graph Theory - Lec 3</title>
-      <link>https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/</link>
+      <link>https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-3/</link>
       <pubDate>Sun, 03 Sep 2017 21:28:37 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-3/</guid>
       <description>&lt;p&gt;呈前一講的討論，我們有了個求單源最短路徑的演算法&lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/&#34;&gt;Bellman-Ford&lt;/a&gt; (複雜度為 &lt;span&gt;$\mathcal{O}(VE)$&lt;/span&gt; )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -93,10 +93,10 @@
     
     <item>
       <title>Algorithm - Graph Theory - Lec 2</title>
-      <link>https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/</link>
+      <link>https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-2/</link>
       <pubDate>Thu, 31 Aug 2017 17:02:52 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-2/</guid>
       <description>&lt;p&gt;圖的一個常見應用場合是想找出某兩點之間的最短(/長)路徑，此時的邊權重又視為兩節點之間的距離。
 &lt;!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。--&gt;&lt;/p&gt;
 
@@ -105,10 +105,10 @@
     
     <item>
       <title>Algorithm - Graph Theory - Lec 1</title>
-      <link>https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/</link>
+      <link>https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-1/</link>
       <pubDate>Fri, 25 Aug 2017 10:08:13 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-1/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-1/</guid>
       <description>&lt;p&gt;給定一張圖，要如何讀取當中的資訊呢？簡單來說就是從一給定點開始，依某種順序去拜訪相鄰(有關係)的點，最後走完所有點，收集完圖中的資訊。以下簡介兩種簡本的 traversal 方法以及應用。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -116,10 +116,10 @@
     
     <item>
       <title>Algorithm - Disjoint Set</title>
-      <link>https://sunprinces.github.io/learning/2017/08/algorithm---disjoint-set/</link>
+      <link>https://sunprinces.github.io/learning/2017/08/algorithm-disjoint-set/</link>
       <pubDate>Tue, 22 Aug 2017 20:44:58 +0100</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/08/algorithm---disjoint-set/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/08/algorithm-disjoint-set/</guid>
       <description>&lt;p&gt;Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets &lt;span&gt;$S_1,S_2,\cdots,S_k$&lt;/span&gt;，而每個 &lt;span&gt;$S_i$&lt;/span&gt; (每個 category) 以一個代表值 (&lt;em&gt;representative&lt;/em&gt;) 去紀錄。
 &lt;!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--&gt;&lt;/p&gt;
 
@@ -128,10 +128,10 @@
     
     <item>
       <title>Advanced Algorithm - Weighted Set Cover</title>
-      <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/</link>
+      <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-weighted-set-cover/</link>
       <pubDate>Fri, 18 Aug 2017 21:19:19 +0200</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-weighted-set-cover/</guid>
       <description>&lt;p&gt;呈前一講，我們對&lt;strong&gt;有限制的&lt;/strong&gt; WSC 問題有 &lt;span&gt;$l$&lt;/span&gt;-approx. algorithm，但可能並不是太好(比方說 &lt;span&gt;$l=|U|$&lt;/span&gt; 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在&lt;strong&gt;大部分&lt;/strong&gt;時候，都可以得到一個&lt;strong&gt;還不錯&lt;/strong&gt; (approx. ratio ISN&amp;rsquo;T too bad)的結果。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -139,10 +139,10 @@
     
     <item>
       <title>Advanced Algorithm - Vertex Cover Problem</title>
-      <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/</link>
+      <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-vertex-cover-problem/</link>
       <pubDate>Wed, 16 Aug 2017 20:49:15 +0200</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-vertex-cover-problem/</guid>
       <description>&lt;p&gt;這一講會展示將問題轉化為線性規劃的 form (但可能是 ILP)，利用 LP solver 得到解，做 &lt;strong&gt;LP relaxation&lt;/strong&gt; 並證明這個解不會太差 (approx. ratio 不太大)。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -150,10 +150,10 @@
     
     <item>
       <title>Advanced Algorithm - Linear Programming</title>
-      <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/</link>
+      <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-linear-programming/</link>
       <pubDate>Mon, 14 Aug 2017 20:36:01 +0200</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---linear-programming/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-linear-programming/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Definition:&lt;/strong&gt;&lt;br/&gt;
 A linear programming is a problem of &lt;em&gt;maximizing&lt;/em&gt; or &lt;em&gt;minimizing&lt;/em&gt; a &lt;strong&gt;linear
 multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constraints&lt;/strong&gt;
@@ -162,10 +162,10 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
     
     <item>
       <title>Advanced Algorithm - Bin Packing Problem</title>
-      <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---bin-packing-problem/</link>
+      <link>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-bin-packing-problem/</link>
       <pubDate>Sat, 12 Aug 2017 20:39:07 +0200</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm---bin-packing-problem/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-bin-packing-problem/</guid>
       <description>&lt;p&gt;從前兩講關於&lt;strong&gt;分配&lt;/strong&gt; (在一堆物品中，決定哪些是要拿的一群，哪些不拿) 的最佳化問題中，我們延伸出新的問題，&lt;strong&gt;Bin Packing Problem&lt;/strong&gt;。不同於在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/&#34;&gt;Knapsack Problem&lt;/a&gt; 中，我們只有一個箱子(可以想成你聘了一個工人搬一個箱子)；在Bin Packing 問題中，要取走&lt;strong&gt;所有&lt;/strong&gt;寶物(所有寶物的重量都小於 1 單位)，而你需要聘請一些工人來搬，但今天每個工人都只帶了一個負重為 1 單位的箱子，該如何分配這些寶物(雖說是寶物，但其實我們不care價值惹)，使得需帶的箱子(聘請的工人)為最少？&lt;/p&gt;
 
 &lt;p&gt;簡單的 formulation 如下：&lt;/p&gt;
@@ -175,20 +175,20 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
     
     <item>
       <title>Advanced Algorithm - Subset Sum Problem</title>
-      <link>https://sunprinces.github.io/learning/2017/07/advanced-algorithm---subset-sum-problem/</link>
+      <link>https://sunprinces.github.io/learning/2017/07/advanced-algorithm-subset-sum-problem/</link>
       <pubDate>Tue, 11 Jul 2017 23:36:01 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/07/advanced-algorithm---subset-sum-problem/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/07/advanced-algorithm-subset-sum-problem/</guid>
       <description>&lt;p&gt;Subset Sum Problem 與 Knapsack Problem 相同，也是一個 NPC 問題(可以想成 Knapsack Problem weight 均為 1 的特例)。而在 Knapsack Problem 中，我們發展出&lt;strong&gt;等差&lt;/strong&gt; 的rounding 技巧，犧牲精確度去換取更低的時間複雜度，而這一講中，將利用&lt;strong&gt;等比&lt;/strong&gt;的方式去做 rounding 。
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Advanced Algorithm - Knapsack Problem</title>
-      <link>https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/</link>
+      <link>https://sunprinces.github.io/learning/2017/07/advanced-algorithm-knapsack-problem/</link>
       <pubDate>Sat, 01 Jul 2017 22:56:26 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/07/advanced-algorithm-knapsack-problem/</guid>
       <description>&lt;p&gt;背包問題為一個典型的最佳化問題，想像你來到了一個寶庫，裡頭有一些寶物，都有各自的價值和重量，但你只帶了一個背包(而且負重還有限制)，要怎麼取寶物才能在背得走的前提下，帶走價值總和儘可能高的寶物們呢？&lt;/p&gt;
 
 &lt;p&gt;這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:&lt;/p&gt;
@@ -198,19 +198,19 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
     
     <item>
       <title>Algorithmic Game Theory - Lecture4</title>
-      <link>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture4/</link>
+      <link>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture4/</link>
       <pubDate>Sat, 27 May 2017 17:06:53 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture4/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture4/</guid>
       <description>&lt;p&gt;上一講利用 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/&#34;&gt;Myerson&amp;rsquo;s Lemma&lt;/a&gt; 闡述了給定在「好」的 allocation rule 下，該如何定價，使得 auction 具有 DSIC property; 而這講則要說明該如何 derive 出「好」的 allocation rule。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Algorithmic Game Theory - Lecture3</title>
-      <link>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/</link>
+      <link>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture3/</link>
       <pubDate>Wed, 24 May 2017 00:27:07 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture3/</guid>
       <description>&lt;p&gt;上一講提到了怎樣的 auction 是設計者所希望看到的，有足夠的誘因使參與者做出我們希望看到的決策 (&lt;strong&gt;DSIC&lt;/strong&gt; property)，且此決策所造成的結果為設計者認定的 optimal ，同時又能簡單到能在多項式時間完成。接下來會提供一個更 general 的方式去設計機制，而不單單只是限定於 single-item auction 而已。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -218,10 +218,10 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
     
     <item>
       <title>Advanced Algorithm - Hash Table - Lec1</title>
-      <link>https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/</link>
+      <link>https://sunprinces.github.io/learning/2017/05/advanced-algorithm-hash-table-lec1/</link>
       <pubDate>Sun, 21 May 2017 08:52:55 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/05/advanced-algorithm-hash-table-lec1/</guid>
       <description>&lt;!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。--&gt;
 
 &lt;p&gt;Hashing 可以想成是一種 &lt;strong&gt;renaming&lt;/strong&gt; 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 &lt;strong&gt;Hashing&lt;/strong&gt; 的方式，重新命名 key&amp;rsquo; ，並依據 key&amp;rsquo; 將資料放到 size 跟資料個數差不多的 Hash Table 中。&lt;/p&gt;
@@ -231,10 +231,10 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
     
     <item>
       <title>Algorithmic Game Theory - Lecture2</title>
-      <link>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/</link>
+      <link>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture2/</link>
       <pubDate>Fri, 19 May 2017 09:51:12 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture2/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture2/</guid>
       <description>&lt;p&gt;Lecture1 提到了我們需要透由好的 mechanism，使得 agent 與 designer 的 incentive 彼此 aligned。這講從最簡單的 &lt;strong&gt;Single-item Auction&lt;/strong&gt; 開始，探討該如何設計合理的 mechanism。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -242,10 +242,10 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
     
     <item>
       <title>Algorithmic Game Theory - Lecture1</title>
-      <link>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/</link>
+      <link>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture1/</link>
       <pubDate>Mon, 15 May 2017 19:49:52 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/</guid>
+      <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture1/</guid>
       <description>&lt;p&gt;這學期因緣際會之下，選了商研所的賽局，上起課來的感覺跟 EECS 著實差異頗大，直白的文字敘述及直覺居多（課後作業還是電影欣賞），考試也多以申論為主(但即使這樣，期中考還是考了全班最高分XD)，碰巧在網路上找到了這門課程，覺得相當有趣，以資訊科學的角度出發， formulate 各種所謂「直覺」的經濟學想法，去解決現實世界的問題，聽了前兩堂課，感覺之後也會用到不少這學期修的高等演算法的概念，算是相輔相成，希望自己有毅力聽完，並整理筆記囉 :D&lt;/p&gt;</description>
     </item>
     
