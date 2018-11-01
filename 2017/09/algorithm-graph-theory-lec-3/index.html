@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sigle Source Shortest Path - Dijkstra Algorithm">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Algorithm - Graph Theory - Lec 3 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Algorithm - Graph Theory - Lec 3</h1>
+  <h2>Sigle Source Shortest Path - Dijkstra Algorithm</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>03 Sep 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/graph-theory">Graph Theory</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>呈前一講的討論，我們有了個求單源最短路徑的演算法<a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> (複雜度為 <span>$\mathcal{O}(VE)$</span> )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法</p>
+
+<p></p>
+
+<h2 id="三角不等式">三角不等式</h2>
+
+<div>
+\[
+\forall u,v,x \in V, \, \text{we have} \, \delta(u,v) \leq \delta(u,x) +
+\delta(x,v)
+\]
+</div>
+
+<p>其中 <span>$\delta(u,v)$</span> 表示 <span>$u, v$</span> 間的<strong>最短距離</strong>。<br />
+此為 Dijkstra 所根據的直觀原理，也是其為何不能處理負邊問題的原因(只有正邊時顯然成立)。</p>
+
+<p>之前討論在 <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> 中的一些觀察討論到 <code>relax</code> 邊的順序，決定了演算法運行的時間。而根據上方的論述，我們可以找到一個最優的訪問邊之順序。簡單來說，我們將節點分為兩個集合，一個集合表示最短路已被設好的節點，另一個表示還未確定者，而每一次都從<strong>還未確定者中，選出當前 d 值最小的節點</strong>來做 <code>relax</code>。</p>
+
+<p>根據三角不等式，這樣的 Greedy 策略是沒有問題的，因我們選出的節點 <span>$v$</span> ，所對應的 d[<span>$v$</span>] 已經不可能再更動了 (無法找到經由其他點的路徑使得距離成本 <span>$&lt;$</span> d[<span>$v$</span>])。</p>
+
+<h2 id="psuedo-code">Psuedo Code</h2>
+
+<p>其實跟 Bellman-Ford 非常相像。</p>
+
+<pre><code class="language-python"># Init
+for v in G(V):
+  d[v] = ∞ 
+  π[v] = NULL
+d[s] = 0
+
+Pick u which d[u] is MIN
+remove u
+for v in adj[u]:
+  relax(u,v)
+</code></pre>
+
+<h3 id="complexity-analysis">Complexity Analysis</h3>
+
+<p>通常以 heap 來實做，但效率如何則取決於我們使用何種 heap。需要</p>
+
+<ol>
+<li><span>$\mathcal{\Theta}(V)$</span> <code>INS</code></li>
+<li><span>$\mathcal{\Theta}(V)$</span> <code>Extract-Min</code></li>
+<li><span>$\mathcal{\Theta}(E)$</span> <code>Decrease(v,*)</code></li>
+</ol>
+
+<p>若用 binary heap 的話，複雜度為 <span>$\mathcal{\Theta}(E \log E + V\ log V) = \mathcal{\Theta}((E+V) \log V)$</span> <br />
+若用 Fibonacci heap 的話，均攤複雜度為 <span>$\mathcal{\Theta}(E + V \log V)$</span></p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>在 C++ 中以 <code>priority_queue</code> 來實做 heap。
+在 Relax 時，會希望用 <code>Decrease</code>，而非 insert 一個新的 vertex 進去之因，是為了不希望 <code>priority_queue</code> 中有太多元素(別忘了 <code>ExtractMin</code>，也就是 <code>pop()</code> 需要成本)，但實做上因為不能透由 iterator 去 traverse 看 queue 中 是否已經存在該 vertex ，還是得把可能已經在 <code>queue</code> 中的 vertex 給放進去&hellip;</p>
+
+<p>但如果不管該 vertex 是否已 <code>pop</code> 出來，還繼續去檢查它的每個邊，看是否可以 <code>Relax</code> (透由上方的討論，我們知道這不可能)的話，就是浪費了。如此 <code>queue</code> 中至多 <span>$\mathcal{\Theta}(E)$</span> 個元素，每 <code>pop</code> 出一個 vertex ，至多要做 <span>$\mathcal{\Theta}(V)$</span> 次檢查是否可以 <code>Relax</code> 的判斷 (最差就完全圖的情況)，所以複雜度 total 為 <span>$\mathcal{\Theta}(E \log E + EV )$</span>。但如果我們注意到這件事，不再去對已經 <code>pop</code> 過的邊做 <code>Relax</code> 與否的檢查，那麼複雜度則會降為 <span>$\mathcal{\Theta}(E \log E + V^2)$</span> ，而這也是下方 code 中， <code>b_set</code> 的功能。 ( <span>$\mathcal{\rightarrow}$</span> <a href="https://kth.kattis.com/problems/shortestpath1">練習</a>，如果你 running time 超過 0.3 秒的話，大概就是寫成 <span>$\mathcal{O}(EV)$</span> 了😅)。</p>
+
+<script src="https://gist.github.com/sunprinceS/dea6b01e77cb3fe1f40c6779569d592e.js"></script>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.cs.usfca.edu/~galles/visualization/Dijkstra.html">Visualization</a></li>
+</ul>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-2/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-2/">Algorithm - Graph Theory - Lec 2</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-4/">Algorithm - Graph Theory - Lec 4</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-4/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Computational Geometry">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Problem Solving and Programming- hw11 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Problem Solving and Programming- hw11</h1>
+  <h2>Computational Geometry</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>05 Dec 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/online-judge">Online-Judge</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/computational-geometry">Computational Geometry</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kattis">Kattis</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p><a href="https://kth.kattis.com/problemgroups/641" target="_blank">題目連結</a></p>
+
+<p></p>
+
+<h2 id="pa-white-water-rafting">pA - White Water Rafting</h2>
+
+<p>給一個簡單內多邊形和外多邊形，求中間圍起來的部份，寬度最小為多少。<br />
+枚舉每個邊的組合，<strong>求兩線段之距離</strong>，取最小者，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
+
+<h2 id="pb-colliding-traffic">pB - Colliding Traffic</h2>
+
+<p>在平面上，有 <span>$n$</span> 個點，各自以定速朝定方向前進 (i.e 射線)，當兩個點間距
+<span>$&lt; r$</span> 時，定義他們 collide ，想問第一個 collide 發生在什麼時候。
+枚舉每條射線的組合，先看距離是否已小於 <span>$r$</span> ，如果是就輸出 <span>$0$</span>。
+不是的話，由兩條射線的參數方程相減得到其距離的參數方程，</p>
+
+<div>
+\[
+\vec{d}_{i,j} = (\vec{s}_j - \vec{s}_i) + (\vec{v}_j - \vec{v}_i) t \quad (\, \vec{s} \; \text{為起始位置}\,)
+\]
+</div>
+
+<p>找是否存在 <span>$t &gt; 0$</span> 滿足 <span>$|\vec{d}_{i,j}| \leq r$</span>，然後從所有射線組合中，找出最小的 <span>$t$</span>，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
+
+<pre><code class="language-cpp">double get_collision_t(Obj i,Obj j,double r_sq){
+  double a,b,c;
+  a = i.vel.distance_square(j.vel);
+  b = (j.pos - i.pos).dot(j.vel - i.vel);
+  c = i.pos.distance_square(j.pos) - r_sq;
+
+  double D = b*b - a*c;
+  if(isz(D)){
+    return (-b/a);
+  }
+  else if(D&lt;0){
+    return -100;
+  }
+  else{
+    if(b+sqrt(D) &gt; 0)
+      return ((-b+sqrt(D))/a);
+    else
+      return ((-b-sqrt(D))/a);
+  }
+}
+</code></pre>
+
+<h2 id="pc-pesky-mosquitoes">pC - Pesky Mosquitoes</h2>
+
+<p>圖上散落了一些點，給定一個定直徑 <span>$d$</span> 的圓，想找出最多可以蓋住幾個點。<br />
+觀察到若想蓋住最多點的話，至少有兩個點會在圓的邊上(否則總是可以再移動，
+看能否再蓋住更多點)。</p>
+
+<p>枚舉所有點的組合，找出過那兩點 <span>$A, B$</span> 且直徑為 <span>$d$</span> 的圓，再來看剩下的點是
+否在此圓裡面，複雜度為 <span>$\mathcal{O}(n^3)$</span>。<br />
+而找圓心的話，算是高中數學的範疇，應該很簡單。但注意到這樣定義的圓會有兩個，方便起見我們統一
+一個方向，法向量指向 <span>$\overrightarrow{AB}$</span> 的右邊 (如此算 <span>$\overrightarrow{BA}$</span> 時，就會得到另一個圓了)。</p>
+
+<h2 id="pd-unusual-darts">pD - Unusual Darts</h2>
+
+<p>吃了兩個 WA ，真難玩&hellip;</p>
+
+<h2 id="pe-meltdown">pE - Meltdown</h2>
+
+<p>我看我是沒理解題意&hellip;</p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming-hw6/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming-hw6/">Problem Solving and Programming- hw6</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec1/">NTU Machine Learning - Lec1</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec1/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

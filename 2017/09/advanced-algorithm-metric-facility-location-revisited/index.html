@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="3-Approx. Algorithm (Primal-Dual method)">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Advanced Algorithm - Metric Facility Location Revisited &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Advanced Algorithm - Metric Facility Location Revisited</h1>
+  <h2>3-Approx. Algorithm (Primal-Dual method)</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>29 Sep 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/linear-programming">Linear Programming</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>前面提到過一個較為複雜的優化問題， <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/">Metric Facility Location Problem</a> ，並給出了一個 4-Approx. Algorithm ，於這講中，我們要來利用前面提到的 Primal-Dual method 來設計演算法。</p>
+
+<!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)-->
+
+<p></p>
+
+<h2 id="rewrite-dual-form">Rewrite Dual form</h2>
+
+<h3 id="primal-lp">Primal LP</h3>
+
+<p><code>$$
+\min \sum_{i \in F}y_i f_i + \sum_{i \in F, \, j \in C} x_{ij} c_{ij} \; s.t. \, 
+\begin{cases} 
+\sum_{i \in F}x_{ij} \geq 1, \; \forall j \in C \; (\text{乘上} \, \color{red}{\alpha_j})\\
+y_i \geq x_{ij}, \; \forall i \in F, \, j \in C \; (\text{乘上} \, \color{green}{\beta_{ij}})\\
+x_{ij}, \, y_i \geq 0 
+\end{cases}
+$$</code></p>
+
+<h3 id="dual-lp">Dual LP</h3>
+
+<p><code>$$
+\min \sum_{j \in C} \color{red}{\alpha_j} \; s.t. \, 
+\begin{cases}
+\sum_{j \in C} \color{green}{\beta_{ij}} \leq f_i \; \forall i \in F \,
+(y_i \, \text{的 objective}) \\
+\color{red}{\alpha_j} - \color{green}{\beta_{ij}} \leq c_{ij} \; \forall i \in
+F, j \in C \, (x_{ij} \, \text{的 objective}) \\
+\alpha_j ,\beta_{ij} \geq 0
+\end{cases}
+$$</code></p>
+
+<h3 id="對於-dual-var-的直觀理解">對於 Dual var 的直觀理解</h3>
+
+<p>把 <span>$\alpha_j$</span> 想成是 clinet <span>$j$</span> 所付的錢，而 <span>$\beta \scriptstyle ij$</span> 表示其貢獻給 facility <span>$i$</span> 的，先把原先條件中的不等式改為等式 (complementary slackness)，第一條式子，表示被開的 facility is fully paid for。而第二條式子，把 <span>$\alpha_j$</span> 拆成兩部份，一部分給 facility ，另一部份則用於支付 <span>$c \scriptstyle ij$</span> 的 coneection cost 。</p>
+
+<h2 id="algorithm">Algorithm</h2>
+
+<h3 id="phase-i-increase-span-alpha-span-and-span-beta-span">Phase I (Increase <span>$\alpha$</span> and <span>$\beta$</span>)</h3>
+
+<p>Initially, set <span>$\alpha_i$</span> and <span>$\beta \scriptstyle ij$</span>
+to <span>$0 \; \forall i,j$</span></p>
+
+<ol>
+<li><p>Increase all <strong>uncovered</strong> <span>$\alpha_j$</span> with same rate until
+<span>$\alpha_i = c\scriptstyle ij$</span> for some <span>$i,j$</span>， call <span>$\color{blue}{(i,j) \, \text{is tight}}$</span></p></li>
+
+<li><p>When <span>$(i,j)$</span> is tight, set <span>$\beta \scriptstyle ij
+\normalsize = \alpha_j - c \scriptstyle ij$</span> (僅可能緩慢地讓
+<span>$\beta$</span> 隨 <span>$\alpha$</span> increase ，在滿足第一條
+constraint 的情況下，不要讓 <span>$\alpha$</span> 的增長太快碰到第二條
+constraint)</p></li>
+</ol>
+
+<p>Repeat above procedure, until <span>$\color{blue}{\underset{j \in C}{\sum}\beta
+\scriptstyle ij \normalsize = f_i \, \text{for some} \, i}$</span></p>
+
+<p>Then, facility <span>$i$</span> becomes <strong>temporarily opened</strong>，<br />
+<span>$\forall j$</span> such that <span>$(i,j)$</span> is tight and <span>$j$</span> is not <strong>covered</strong>, temporarily connect <span>$j$</span> to <span>$i$</span>, 之後的 Phase I 中， <span>$\alpha_j$</span> is fixed。 And we say <span>$\color{blue}{\text{facility} \, i \, \text{is client} \, j \text{&rsquo;s witness}}$</span></p>
+
+<p>Repeat above procedure until all clients are covered</p>
+
+<p><strong>Remark:</strong> 如果在 facility <span>$i$</span> 被開之後，有其他的 client <span>$j^\prime$</span> 使其 connection 為 tight，我們也稱 facility <span>$i$</span> 為 client <span>$j^\prime$</span> 的 witness (<strong>Note: 往後</strong> <span>$\alpha \scriptstyle j^\prime$</span> <strong>會 fixed ，且</strong> <span>$\beta \scriptstyle ij^\prime \normalsize = \alpha \scriptstyle j^\prime \normalsize - c \scriptstyle ij^\prime \normalsize = 0$</span><strong>，不會再更動</strong>)</p>
+
+<h3 id="phase-ii-first-remove-all-closed-facilities-and-edges-not-tight">Phase II (First remove all closed facilities and edges not tight)</h3>
+
+<p><strong>Def.</strong>: if <span>$\beta \scriptstyle ij \normalsize &gt; 0$</span> and <span>$\beta \scriptstyle ij^\prime \normalsize &gt; 0$</span>, we call <span>$i, i^\prime$</span> are <span>$\color{blue}{\text{conflict}}$</span></p>
+
+<p>(clinet <span>$j$</span> 同時有付錢給兩者，均有貢獻 <span>$\beta \scriptstyle \star j$</span>)</p>
+
+<p>Pick any <strong>maximal</strong> set of temporarily opened facilities <span>$\mathbf{I}$</span> that AREN&rsquo;T
+conflicting</p>
+
+<ol>
+<li>open <span>$\mathbf{I}$</span></li>
+<li>If client <span>$j$</span>&rsquo;s witness <span>$\in I$</span>, connect directly</li>
+<li>If not, connect indirectly to any conflicting <span>$i \in I$</span></li>
+</ol>
+
+<h2 id="correctness">Correctness</h2>
+
+<h3 id="complementary-slackness-revisited">Complementary Slackness Revisited</h3>
+
+<ol>
+<li><p><span>$\forall i \in F\, , \; y_i = 0 \lor \underset{j \in C}{\sum} \beta \scriptstyle ij \normalsize = f_i$</span> <br />
+(對有開的 facility, <span>$\sum \beta \scriptstyle ij \normalsize  = f_i$</span>) <span>$\Rightarrow$</span> 符合！</p></li>
+
+<li><p><span>$\color{red}{\forall i \in F \, j \in C, \; x \scriptstyle ij \normalsize  = 0 \lor \alpha_j - \beta \scriptstyle ij \normalsize = c \scriptstyle ij}$</span></p></li>
+
+<li><p><span>$\forall j \in C\, , \; \alpha_j  = 0 \lor \underset{i \in F}{\sum} x \scriptstyle ij \normalsize = 1$</span><br />
+(對所有的 client 而言，其只會被一個 facility serve) <span>$\Rightarrow$</span> 符合！</p></li>
+
+<li><p><span>$\forall i \in F, j \in C\, , \; \beta \scriptstyle ij \normalsize = 0
+\lor y_i = x \scriptstyle ij$</span><br />
+(對那些 directly connected 的 clinet，也就是 <span>$\beta \scriptstyle ij \normalsize \not = 0$</span> 者，<span>$j$</span> 是由 <span>$i$</span> serve<br />
+但注意到為 <span>$0$</span> 者也可能是被 directly connect 的) <span>$\Rightarrow$</span> 符合！</p></li>
+</ol>
+
+<p><strong>Remark:</strong> 1,2 分別為一組， 3,4 為另一組 complementary slackness，而現在我們要
+relax 第一組 3 倍 (因為對 indirectly connected 的那些 clinet ， <span>$\color{red}{2.}$</span> 不成立)</p>
+
+<p><strong>proof:</strong><br />
+<span>$\because \, \text{indirectly connected} \, \therefore \, \beta
+\scriptstyle ij \normalsize = 0$</span></p>
+
+<p>So what we want to prove now is <span>$\boxed{c \scriptstyle ij \normalsize \leq 3 \alpha_j}$</span></p>
+
+<p>Because the problem is <strong>metric</strong>,</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/facility_conflict.jpg" width="30%" style="border-radius: 0%;"></center></p>
+
+<p><code>$$
+\begin{align}
+c_{ij} &amp; \leq c_{ij^\prime} + c_{i^\prime j ^\prime} + c_{i^\prime j}\\
+&amp; \leq \alpha_{j^\prime} + \alpha_{j^\prime} + \alpha_j \; (\because \, \text{for directly connected} \, \alpha = \beta + c \geq c\\
+&amp; \leq 3 \alpha_j \; (\because \alpha_j \geq \alpha_{j^{\prime}})
+\end{align}
+$$</code></p>
+
+<p><strong>Note</strong></p>
+
+<p>如果 <span>$i, i^\prime$</span> conflict， <span>$(i,j)$</span> 又不 tight ，代表必定存在 <span>$j^\prime$</span> 使得 <span>$(i,j^\prime), \, (i^\prime,j^\prime)$</span> 均為 tight 。<br />
+如果說是 <span>$i^\prime$</span> 比較早開，那麼 <span>$\alpha_j, \alpha \scriptstyle j^\prime$</span> 會相等 (同時 fixed) ; <br />
+但若是 <span>$i$</span> 比較早開，<span>$\alpha \scriptstyle j^\prime$</span> 比 <span>$\alpha_j$</span> 提早被 fix ，一定比較小 <span>$\Rightarrow \alpha_j \geq \alpha \scriptstyle j^\prime$</span></p>
+
+<p>故我們可以將 <span>$\color{red}{2}$</span> 式 relax 成以下</p>
+
+<p><code>$$
+\frac{1}{3} c_{ij} \leq \alpha_j - \beta_{ij} \leq c_{ij}
+$$</code></p>
+
+<p><span>$\Rightarrow$</span> <span>$\color{red}{\text{3-Approx. Algorithm}}$</span> ✌️</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.cc.gatech.edu/~vazirani/k-median.pdf">原始論文</a></li>
+</ul>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm-weighted-set-cover-revisited/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm-weighted-set-cover-revisited/">Advanced Algorithm - Weighted Set Cover Revisited</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec2/">Advanced Algorithm - Hash Table - Lec2</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec2/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

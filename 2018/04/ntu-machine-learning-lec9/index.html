@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Linear Regression">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>NTU Machine Learning - Lec9 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>NTU Machine Learning - Lec9</h1>
+  <h2>Linear Regression</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>12 Apr 2018</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/machine-learning-foundation">Machine Learning Foundation</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/machine-learning">Machine Learning</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space <span>$\mathcal{Y}$</span> 只是單純的 {<span>$1, -1$</span>}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。</p>
+
+<p></p>
+
+<h2 id="basic">Basic</h2>
+
+<p>想像我們今天有一把 data <span>$\mathcal{D}$</span>，其中的每一筆為 (<span>$\mathbf{x},y$</span>)的 pair，其中 <span>$x \in \mathbb{R}^d, y \in \mathbb{R}$</span>。之前的 binary classification 做的事情就是在 <span>$\mathcal{R}^d$</span>中找 hyper-plane 去將空間一分為二，而 regression 所做的事也是嘗試去找到這樣的一個 hyper-plane，同時去 minimize <span>$\mathcal{D}$</span> 上的每個點到其的距離 (e.g Euclidean distance)。</p>
+
+<h2 id="feasibility-of-learning">Feasibility of Learning</h2>
+
+<h3 id="sufficient-small-span-e-in-span">Sufficient small <span>$E_{in}$</span></h3>
+
+<p>上面提到的<strong>距離</strong>就是所謂 error。</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/lr-ein.png" width="70%" style="border-radius: 0%;"></center></p>
+
+<p>可以看出 <span>$E_i$</span> 是 convex function，可以透由找 <span>$\nabla_w E_i = 0$</span>所對應的點找到我們要的 weight。</p>
+
+<p>在 linear regression 中，這樣的 weight <span>$\mathbf{w}_{\text{LIN}}$</span> 是有 closed form 的。</p>
+
+<div>
+\[
+\mathbf{w} = (X^TX)^{-1}X^T \mathbf{y} = X^\dag \mathbf{y}
+\]
+</div>
+
+<p>從幾何的觀點來看，就是  <span>$\mathbf{y} \notin $</span> col <span>$(X)$</span> ，亦即
+找不到一個 <span>$\mathbf{w}$</span> 滿足 <span>$X \mathbf{w} = \mathbf{y}$</span>，所以退而求其次，將 <span>$\mathbf{y}$</span> 投影到 col(<span>$X$</span>) 上 (which is <span>$\underset{\text{projection}\,  P}{\underbrace{X(X^TX)^{-1}X^T}} \mathbf{y}$</span>)，再去找出對應的 <span>$\mathbf{w}$</span> ，也就是上方的 <span>$\mathbf{w}_{\text{LIN}}$</span>。</p>
+
+<h3 id="generalization-to-span-e-out-span">Generalization to <span>$E_{out}$</span></h3>
+
+<p>回顧 binary classification，Out-sample 的 error 會被以下 bound 住</p>
+
+<p><code>$$
+E_{out}(f) = E_{in}(f) + \mathcal{O}(\sqrt{\frac{d_{VC} \, \ln N}{N}})
+$$</code></p>
+
+<p>對於 Regression 問題，我們還先要定義 <span>$d_{VC}$</span> 是什麼，以及所對應的 generalization bound。</p>
+
+<p>關於 <span>$d_{VC}$</span> ， 原先的定義似乎不太適用，我們沒辦法定義在 <span>$\mathbb{R}$</span> 上的 <strong>shatter</strong> 究竟是怎麼一回事，但從自由度的觀點來看，有跟 linear preceptron 一樣的 dim 是很直覺的(就只是經過了 step 變換而已) (似乎有個叫 psuedo dimension 的主題就是將其推廣至 regression ，這裡就不繼續探討了)</p>
+
+<p>先來回想一下，當初 classification 的 generalization bound 是怎麼 derive 的，假設資料是線性可分，我們在空間中 sample <span>$N$</span> 點，以此去找出可以將空間一分為二的最佳平面 (dichotomy) ，但因為我們只能 sample 有限的點，對沒 sample 到的那些，可以總是有個小惡魔做出跟我們相反的決策 claim 我們是錯的，而我們利用 Hoeffeding Equality 以及 hypothesis set 的幾何特性去說 <span>$E_i$</span> 跟 <span>$E_o$</span> 相去甚遠的機率很小。而如果有 flipping noise 的話，找 <span>$f(\mathbf{x})$</span> 則變成找 <span>$f(\mathbf{x}, y)$</span> 的 joint dist.</p>
+
+<p>而今天在 Linear Regression，我們對資料的假設又更強了，假設今天有個 oracle 說，已知所有在 <span>$\mathbb{R}^3$</span> 中的 data 都落於一個二維平面上 (對應到 classification 線性可分的條件)，那麼我們跑 LR 所得到的結果，無論在 training 還是testing ， error 都是完美的 <span>$0$</span> (其實在這種情況下，跑個反矩陣運算就解決了&hellip;)。</p>
+
+<p>所以這裡引進 noise 的討論就重要了(在後面會提到，除了隨機的雜訊外 (white noise 的概念)，今天 ground truth model 過於複雜使得 hypothesis set 無法完整 catch 所造成的誤差，也是 noise 的一種，所以我們必須 model ，畢竟我們其實沒有 oracle XD)。<br />
+我們假定 <span>$y = \mathbf{w^\star}^{T} \mathbf{x} + \epsilon$</span>，而這個 <span>$\epsilon$</span> 會讓資料開始從平面上跳走，幾何上來看就是加入了垂直於 col(<span>${X})$</span> 的分量。 (Note: 這裡把投影到 col(<span>$X$</span>) 的 矩陣特稱為 Hat matrix <span>$H$</span>)。
+則 <span>$E_i$</span> 可以看成是 Noise <span>$\tilde{\mathbf{n}}$</span> 投影到 Null(<span>$X$</span>) 的分量，which is <span>$(I-H) \mathbf{y}$</span> <br />
+以下是圖解</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/lr-proj.png" width="60%" style="border-radius: 0%;"></center></p>
+
+<p><code>$$
+E_{in} = \frac{1}{N}||\mathbf{y} - \mathbf{\hat{y}}||^2 = \frac{1}{N}||(I-H) \tilde{\mathbf{n}}||^2
+$$</code></p>
+
+<p><strong>Lemma:</strong> trace(<span>$AB$</span>) = trace(<span>$BA$</span>)</p>
+
+<p><strong>Lemma:</strong>  trace(<span>$H$</span>) = <span>$d+1$</span>, Assume <span>$X^TX$</span> is invertible<br />
+(白話來講就是他的 col. vector 們是 linear independent)，故其 dim. 為 <span>$d+1$</span></p>
+
+<p><strong>proof:</strong><br />
+trace(<span>$H$</span>) = trace(<span>$X(X^TX)^{-1}X^T$</span>) =
+trace(<span>$(X^TX)^{-1}X^TX$</span>) = trace(<span>$I$</span>) = <span>$d+1$</span></p>
+
+<h4 id="lemma">Lemma</h4>
+
+<p><code>$$
+\boxed{E_{in} = \frac{1}{N}||(I-H) \mathbf{\tilde{n}}||^2 =
+\frac{1}{N}(N-(d+1))||\mathbf{\tilde{n}}||^2}
+$$</code></p>
+
+<p><strong>proof:</strong></p>
+
+<p><span>$||(I-H)\mathbf{\tilde{n}}||^2 = \mathbf{\tilde{n}^T}(I-H)^T(I-H)\mathbf{\tilde{n}}$</span> <br />
+因為 <span>$(I-H)$</span> 也是個投影矩陣，所以我們有其 symmetric 及冪等性兩個性質，<br />
+所以 <span>$= \mathbf{\tilde{n}^T}(I-H)\mathbf{\tilde{n}}$</span>，
+結果為一個<strong>值</strong>，故亦等於其 trace，用跡數相乘的可交換性，我們可以得到
+<span>$E_i$</span></p>
+
+<p>再稍微推導一下， <span>$E_o$</span> 可以得到類似的式子 (但證明我看不懂了QQ)</p>
+
+<p><code>$$
+\boxed{E_o = \text{noise level} \cdot (1 + \frac{d+1}{N})}
+$$</code></p>
+
+<!--``$$-->
+
+<!--E_{in}(\mathbf{w}_{\text{LIN}}) = \frac{1}{N} || \mathbf{y} - \mathbf{\hat{y}} ||^2 = \frac{1}{N} || (I-H) \, \mathbf{\tilde{n}} || ^2-->
+
+<!--$$``-->
+
+<p>所以 Generalization bound 可以寫成以下 (Assume Noise level is constant)</p>
+
+<p><code>$$
+E_{out}(f) = E_{in}(f) + \mathcal{O}(\frac{d_{VC}}{N})
+$$</code></p>
+
+<!--## Apply to Binary Classification-->
+
+<!--既然有 closed form 這麼好的性質，那麼用 linear regression　求得一組係數後，再加個 ‵sgn‵ ，也就可以當成 binary classification 的 hypothesis 了。那麼數學上如何表示呢？-->
+
+<!--其實兩者還是有些微的不同 - **error measure**-->
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/09_handout.pdf">林軒田老師的講義</a></li>
+</ul>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition-lec3/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition-lec3/">Speech Recognition- Lec3</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2018/04/ntu-machine-learning-lec10/">NTU Machine Learning - Lec10</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/04/ntu-machine-learning-lec10/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

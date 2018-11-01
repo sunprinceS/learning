@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Power of 2-choices">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Advanced Algorithm - Hash Table - Lec3 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Advanced Algorithm - Hash Table - Lec3</h1>
+  <h2>Power of 2-choices</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>14 Oct 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/data-structure">Data Structure</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/randomized-algorithm">Randomized Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>在 <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">第一講</a>中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 <span>$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$</span> ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same <span>$\mathcal{H}$</span>)可以選，每次我們就看哪一個 <span>$h$</span> 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 <span>$\mathbb{E}[\, \text{max num of elements in any slots} \, ]$</span> ?</p>
+
+<p></p>
+
+<h2 id="chernoff-bound">Chernoff Bound</h2>
+
+<p><span>$n$</span> 個 identical R.V. 的相加，想 measure 其偏離平均值的機率</p>
+
+<p>Let <span>$X_1, X_2, \cdots, X_n$</span> be independent binary R.V with <span>$\mathbb{E}[X_i] = p_i$</span></p>
+
+<p><span>$X = \sum_i X_i$</span>, <span>$\; \mu = \mathbb{E}[X] = \sum_i p_i$</span>
+<!--<span>$\; p = \frac{\mu}{n} = \text{avg}(p_i)$</span>--></p>
+
+<div>
+\[
+\boxed{\Pr[X \geq e \mu] \leq e^{- \mu}}
+\]
+</div>
+
+<h2 id="power-of-2-choices">Power of 2 choices</h2>
+
+<p>Throw <span>$n$</span> balls into <span>$n$</span> bins, <br />
+For every ball, we pick 2 bins uniformly at random, throw the ball into the bin with less load</p>
+
+<p>Let <span>$B_k = | \;\lbrace i \, | \,b_i \geq k \rbrace\;|$</span> (有 <span>$\geq k$</span> 顆球的 bin 數)<br />
+<!--<span>$\beta_k$</span> 為 <span>$B_k$</span> 的 upper bound (with <span>$\Pr[\underset{\text{event} \, \mathcal{E}_k}{\underbrace{B_k > \beta_k}}] \leq \frac{1}{n^2}$</span>)，\\-->
+<span>$\beta_k$</span> 為 <span>$B_k$</span> 的 upper bound ; <span>$ \quad \mathcal{E}_k$</span> 為 <span>$\beta_k &gt; B_k$</span> (上限符合要求) 的 event
+<br />
+假定我們已經有了 <span>$B_k \leq \beta_k$</span> 這個條件 (<span>$\mathcal{E}_k$</span> 成立)，該如何 inductively 去找 <span>$\beta \scriptstyle k+1$</span> ?</p>
+
+<ol>
+<li><p>For any balls <span>$j$</span>, we say <span>$j$</span> is <span>$\color{red}{red}$</span> if the number of balls below it <span>$\leq k$</span></p></li>
+
+<li><p><span>$\Pr[ \, j \, \text{is red} \,] \leq (\frac{\beta_k}{n})^2$</span> (兩個 bin 球數都要 <span>$\geq k$</span>)</p></li>
+
+<li><p><span>$\mathbb{E}[B\scriptstyle k+1 \normalsize \, | \mathcal{E}_k] \leq \mathbb{E}[\text{num of red balls} \, | \mathcal{E}_k] \leq n \cdot (\frac{\beta_k}{n})^2$</span> <br />
+(第一個等號因為有紅色球的 bin 一定有 <span>$\geq$</span> <span>$k+1$</span> 個球，後面那個等號是因為 Union Bound)</p></li>
+
+<li><p>Using <span>$\color{blue}{\text{Chernoff Bound}}$</span>， <span>$\Pr[B \scriptstyle k+1 \normalsize \geq e \frac{\beta_k^2}{n} | \mathcal{E}_k] \leq \exp(-\frac{\beta_k^2}{n})$</span> <br />
+<br />
+(如果 <span>$\exp(-\frac{\beta_k^2}{n}) \leq \frac{1}{n^2}$</span>) ， 則我們可以選 <span>$\beta \scriptstyle k+1  \normalsize = e \, \frac{\beta_k^2}{n}$</span><br />
+整理一下此遞迴式，我們有了以下關係式</p></li>
+</ol>
+
+<p><code>$$
+\boxed{\frac{\beta_{k+m}}{n} = \frac{1}{e} \, (\frac{e \beta_k}{n})^{2^m}}
+$$</code>
+ 接下來要選定初始值 <span>$k$</span>，就可以確定 <span>$\beta$</span> 的值了，<br />
+ 注意到 <span>$\beta_6 \leq \lfloor \frac{n}{6} \rfloor \leq \frac{n}{2e}$</span> (顯然會超過 6 顆球
+ 的bin數 一定會小於均分的 case)<br />
+ 代回上式，可得</p>
+
+<p><code>$$
+\frac{\beta_{6+m}}{n} \leq \frac{1}{e} \, \frac{1}{2^{2^m}}
+$$</code></p>
+
+<p>當 <span>$m = \mathcal{O}(\ln \ln n)$</span>， we can find that <span>$\beta \scriptstyle 6+m \normalsize &lt; 1$</span> <br />
+(亦即超過 <span>$\mathcal{O}(1) + \ln \ln n $</span> 顆球的 bin 出現的機率極小)</p>
+
+<p>這裡只的機率很小是指 <span>$\Pr[\neg \, \mathcal{E}_m]$</span> 很小，根據上方的遞迴式，我們可以給出一個明確的上界</p>
+
+<h3 id="fact">Fact</h3>
+
+<p><code>$$
+\boxed{\Pr[ \neg \, \mathcal{E}_{k+1}] \leq \Pr[\neg \, \mathcal{E}_{k+1} \,| \, \mathcal{E}_k] \cdot \Pr[\mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k]}
+$$</code></p>
+
+<p><strong>proof.</strong></p>
+
+<p><code>$$
+\begin{align}
+\text{RHS} \, &amp;= \, \Pr[\neg \, \mathcal{E}_{k+1} \,| \, \mathcal{E}_k] \cdot \Pr[\mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k] \\
+&amp; = \Pr[\neg \, \mathcal{E}_{k+1} \, \land \, \mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k]\\
+&amp; = \underbrace{\Pr[\neg \, \mathcal{E}_{k+1} \, \land \, \mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k \, \land \, \neg \, \mathcal{E}_{k+1}]}_{\Pr[\neg \, \mathcal{E}_{k+1}]} + \Pr[\neg \, \mathcal{E}_k \, \land \, \mathcal{E}_{k+1}] \\
+&amp; \geq \text{LHS}
+\end{align}
+$$</code></p>
+
+<p><span>$\Rightarrow \Pr[\neg \, \mathcal{E} \scriptstyle k \normalsize] \leq \frac{1}{n} \quad$</span> (利用 <span>$\Pr[\neg \, \mathcal{E}_6 ] = 0$</span>，遞迴求出)</p>
+
+<h2 id="more-discussion">More Discussion</h2>
+
+<h3 id="span-l-span-choice"><span>$l$</span>-choice</h3>
+
+<p>第 2 步變為 <span>$\Pr[ \, j \, \text{is red} \,] \leq (\frac{\beta_k}{n})^l$</span> (<span>$l$</span> 個 bin 球數都要 <span>$\geq k$</span>)</p>
+
+<p><code>$$
+\boxed{\frac{\beta_{k+m}}{n} = \frac{1}{e} \, (\frac{e \beta_k}{n})^{l^m}}
+$$</code></p>
+
+<p>當 <span>$m = \mathcal{O}(\frac{\ln \ln n}{\ln l})$</span>， we can find that <span>$\beta \scriptstyle 6+m \normalsize &lt; 1$</span> ，但其實還是在同個 order</p>
+
+<h3 id="what-if-span-beta-k-span-is-so-small">What if <span>$\beta_k$</span> is so small</h3>
+
+<p>That is, 第 4 步的 bound 並不足夠小，也就是隨著 <span>$\beta_k$</span> 的 decay， <span>$\exp(-\frac{\beta_k^2}{n})$</span> 終會 <span>$ &gt; \frac{1}{n^2}$</span> <span>$\Rightarrow \beta_k &lt; \sqrt{2n \ln n}$</span> <br />
+Pick 使得此式成立的 min. <span>$k^\star$</span>， <span>$k^\star = \frac{\ln \ln n}{\ln 2} + \mathcal{O}(1)$</span></p>
+
+<p>可以證明有 bin 超過 <span>$k^\star + 2$</span> 的機率足夠小 (但證明我沒看懂QQ)</p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec2/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec2/">Advanced Algorithm - Hash Table - Lec2</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming-hw6/">Problem Solving and Programming- hw6</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming-hw6/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

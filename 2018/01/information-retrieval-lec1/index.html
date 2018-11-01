@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="IR101">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Information Retrieval - Lec1 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Information Retrieval - Lec1</h1>
+  <h2>IR101</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>16 Jan 2018</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/information-retrieval">Information Retrieval</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ir">IR</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/nlp">NLP</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>這個系列主要會紀錄自己在 KTH 修習 <a href="https://www.kth.se/student/kurser/kurs/DD2476?l=en">Information Retrieval System</a> 的一些筆記，備忘用，不會像之前的 Post 那麼詳細，但還是會加點自己的 remark 這樣。</p>
+
+<p></p>
+
+<h2 id="difference-between-database">Difference between Database</h2>
+
+<ol>
+<li>structured data v.s. unstructured data</li>
+<li>deterministic v.s. inexact</li>
+</ol>
+
+<p>DB 處理的對象是滿足選定資料結構的 structured data ，而 IR 則包含了將真實世界中的訊息 (which is unstructured) 轉換成我們容易處理的資料結構之步驟。<br />
+承上，該 parse 成何種資料結構隨著應用場景及需求而不同，又比方說在 query 時， DB 須滿足特定 rule ，而 IR 則是要處理貼近 <strong>Natural Language</strong> level 的 query，另外，像是計算 document 與 query 的相關程度也隨著需求不同而改變 (which is inexact)。</p>
+
+<p><strong>Remark:</strong> In brief, DB 是蘊含在 IR system 中的一個模塊。</p>
+
+<h2 id="key-idea">Key Idea</h2>
+
+<h3 id="inverted-index">Inverted Index</h3>
+
+<p>像是參考書背後的索引，會列出哪些名詞在哪些章節、第幾頁出現，在閱讀的時候，可以想成是看到一個 page <span>$\rightarrow$</span> word/phrase 的 mapping ， Inverted Index 則是建構一個<strong>反向</strong>的 mapping。</p>
+
+<h3 id="ranking">Ranking</h3>
+
+<p>決定當我們有大量的 return 結果時，該如何以怎樣的排序呈現給使用者。 (Ja&hellip;  Nowadays, the most successful application of ranking algorithm in the world is Google&hellip;lol)</p>
+
+<h3 id="evaluation">Evaluation</h3>
+
+<ul>
+<li>Precision</li>
+</ul>
+
+<div>
+\[
+p = \frac{|\text{ret} \, \bigcap \, \text{rel}|}{|\text{ret}|}
+\]
+</div>
+
+<p>回傳的結果中，真的有關係的比例</p>
+
+<ul>
+<li>Recall</li>
+</ul>
+
+<div>
+\[
+r = \frac{|\text{ret} \, \bigcap \, \text{rel}|}{|\text{rel}|}
+\]
+</div>
+
+<p>關於有關連的那些文本，有被回傳結果的比例，實務上是無法計算的(我們不知道相關的文本到底有哪些)</p>
+
+<p>Remark: 這兩個 criteria 其實有點互相矛盾，比方說得到 <span>$100 \%$</span> recall 的一個方法是回傳全部的文本，便可確保沒有漏網之魚 (但這太 87)。而得到僅可能高的precision 的方法則是只回傳那些 <span>$100 \%$</span> 確定關聯的文本 (但如此回傳的量太少，不夠使用者抉擇)</p>
+
+<h2 id="why-ir-matter">Why IR matter</h2>
+
+<ul>
+<li>How many times you use Google Search every day? 😉</li>
+<li>Get high ranking on the returened list is essential (gaming the ranking
+algorithm&hellip;lol)</li>
+<li>The returened consequence framed our mind to what they show&hellip; (which is not a
+good part, I think)</li>
+</ul>
+
+<h2 id="a-first-example-boolean-search">A first example - Boolean Search</h2>
+
+<p>構建一個 Term-document matrix <span>$M \in \mathbb{R}^{W \times D}$</span>，
+<span>$W$</span>
+為 query 的單詞數， <span>$D$</span> 為文本數。<br />
+<span>$M[w][d]= $</span> 𝟙[word <span>$w$</span> appears
+in document <span>$d$</span>]</p>
+
+<h3 id="advantage">Advantage</h3>
+
+<p>Useful, simple, fast and intuitive in doing boolean operation <br />
+(often used in <strong>well-defined</strong> documents )</p>
+
+<h3 id="disadvantage">Disadvantage</h3>
+
+<ul>
+<li>How to formulate query (the result can be too many or too few, depending on
+the query)</li>
+<li>Lack of <strong>ranking</strong> of returned result</li>
+<li>Make a little unreasonable assumption: <strong>every terms are equally important</strong></li>
+</ul>
+
+<p><strong>Remark:</strong> 一個比較偏 DB 風格的 IR 方法 ，在將 documents 轉成方才定義的那種 term-document matrix 時，丟失了太多資訊。在 query 時處理的也不是那麼貼近 user-friendly 的自然語言。</p>
+
+<h3 id="implementation">Implementation</h3>
+
+<p>在 Lab 中，我們做了一些改動來實做 Inverted Index (因上述矩陣相當 sparse):</p>
+
+<ul>
+<li>對每個 term 建一個 PostingList (<code>HashMap</code>)</li>
+<li>PostingList 中的每個 entry ，是一個文本 id 對應到字出現於該文本之位置
+(<strong>sorted</strong> <code>Array</code>)</li>
+</ul>
+
+<blockquote>
+<p><code>Dakin -&gt; [{1: 1,2,3},{2: 1,8,9}]...</code></p>
+</blockquote>
+
+<p>必須支援以下操作 <code>Intersection</code>, <code>weighted union</code>, <code>Intersection(Neighbor)</code>
+(下圖範例為 intersection)</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/ir-intersection.png" width="70%" style="border-radius: 0%;"></center></p>
+
+<p>可以在 <span>$O(n+m)$</span> (<span>$n,m$</span> are the size of 2 posting lists) 解決！</p>
+
+<h3 id="hardware-issue">Hardware Issue</h3>
+
+<p>可以想見文本和 term 何其多，不太可能單純地全部 load 進 Memory 來處理，在 Lab 中用到的方法是將每個 term 先 hash 到一個 dictionary file，而當中的每個 entry 會指向另一個存 PostingList 的檔案。 (會需要另外存 dictinoary file 之因為 PostingList 大小不一，不知道該給每個 entry 多少空間，而這樣就無法確定 從 term 到記憶體位置的 hash mapping)。</p>
+
+<p><strong>Remark:</strong> 這招蠻常用到的&hellip;，不管在哪個領域</p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec7/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec7/">NTU Machine Learning - Lec7</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec8/">NTU Machine Learning - Lec8</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec8/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

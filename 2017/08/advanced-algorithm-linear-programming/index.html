@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Basic Introduction">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Advanced Algorithm - Linear Programming &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Advanced Algorithm - Linear Programming</h1>
+  <h2>Basic Introduction</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>14 Aug 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/linear-programming">Linear Programming</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p><strong>Definition:</strong><br/>
+A linear programming is a problem of <em>maximizing</em> or <em>minimizing</em> a <strong>linear
+multivariate function</strong> subject to some <strong>linear constraints</strong>
+</p>
+
+<h2 id="some-theorem">Some Theorem</h2>
+
+<p><strong>Thm. Feasible solution region is convex polytope</strong> <br/></p>
+
+<blockquote>
+<p>In N-simensional space, a polytope is called convex iff for any two points in the polytope, the line segment between these two points lies entirely in the polytope.</p>
+
+<p><em>e.g</em> &nbsp;<span>$x_1, x_2$</span> is feasible, then <span>$\lambda x_1 + (1-\lambda) x_2$</span> is also feasible (<span>$ 0 \leq \lambda \leq 1$</span>)</p>
+</blockquote>
+
+<p><strong>Thm. OPT happens at a extreme point</strong></p>
+
+<p><strong>Thm. Linear Programming <span>$\in$</span> P</strong></p>
+
+<blockquote>
+<p><em>e.g</em> &nbsp; simplex method</p>
+</blockquote>
+
+<h2 id="integrality-gap">Integrality Gap</h2>
+
+<p>在解最佳化問題時，我們會將問題轉化成線性規劃的 form ，但某些 NPC 問題，要求演算法輸出的解需為整數，也就是 Integer Linear Programming Problem (Note that ILP <span>$\in$</span> NPC)。我們會先將原先的 ILP 問題 <strong>relax</strong> 成 LP 問題，用現行的 LP solver 得到解後，根據這個結果去做 <strong>rounding</strong>，(either deterministic or randomized and more on this later)，流程如下</p>
+
+<p><img src="https://sunprinces.github.io/learning/img/post/ilp_procedure.png" width="80%" style="border-radius: 0%;"></p>
+
+<p>在證明 approx ratio 時，關係如下<br/></p>
+
+<div>
+\[
+  \mathcal{C}(x^{frac}) \, \leq \, OPT \, \leq \, \color{blue}{\mathcal{C}(x^{round})} \, \leq \, k \cdotp \mathcal{C}(x^{frac}) \, \leq \, \color{blue}{k \cdotp OPT}
+\]
+</div>
+
+<p>但近似的好度根據問題本身也有其上限，在此我們引進 <em>Integrality Gap</em></p>
+
+<p><strong>Definition</strong><br/>
+The Integrality Gap (IG) is the upperbound of the ratio between <span>$OPT$</span> and <span>$OPT^{frac}$</span> over all problem instances. That is,</p>
+
+<div>
+\[
+ IG = \sup_I \frac{OPT(I)}{OPT^{frac}(I)}
+\]
+</div>
+
+<p><span>$\forall$</span> problem instance, 若我們能 follow LP relaxation and rounding 的步驟，<br />
+得到一個 k-approx. algorithm ，使得 <span>$\frac{\mathcal{C}(\text{round})}{\mathcal{C}(OPT^{frac})} \leq k$</span>，便也可以推得 <span>$\frac{\mathcal{C}(OPT)}{\mathcal{C}(OPT^{frac})} \leq k$</span>
+所以說 <span>$k$</span> 便可以拿來當這個比例的上界，也就是 <em>IG</em> ，方能說明 Integrality Gap 為 <span>$k$</span>
+<img src="https://sunprinces.github.io/learning/img/post/ig_gap.png" width="80%" style="border-radius: 0%;"></p>
+
+<h2 id="duality">Duality</h2>
+
+<p>對 minimizing problem 而言，考慮其 dual LP 問題，可以得到原先問題 (primal) 解的 lower bound (<strong>最好</strong>情況的 cost )。簡單來說，考慮以下的 LP 的標準型:</p>
+
+<p><code>$$
+\color{blue}{\min} 7x_1+x_2+5x_3 \enspace \text{subject to}
+\begin{cases}
+x_1 - x_2 + 3x_3 \geq 10\\
+5x_1 + 2x_2 - x_3 \geq 6\\
+x_1,x_2,x_3 \geq 0
+\end{cases}
+$$</code></p>
+
+<p>要找 upper bound 很簡單，隨便找一組符合 constraint 的解代進 objective function 即可
+。那麼若想找 lower bound 呢？我們不妨考慮將 constraint 做線性組合，去<strong>湊出</strong>
+objective function 的係數，如以下</p>
+
+<div>
+\[
+7x_1 + x_2 + 5x_3 \geq (x_1 - x_2 + 3x_3) \times 1 + (5x_1 + 2x_2 - x_3) \times
+1 \geq 16
+\]
+</div>
+
+<p>但這個下界鬆鬆的，若想讓它 tight 來找到 optimal 的 lower bound，我們<strong>需要設計 constraint 所乘上的係數</strong> (<span>$y_1, y_2$</span>) 使得下界 tight ，而找到 optimal 係數的問題 (maximize <span>$10y_1+6y_2$</span>)，可以表示成另一個 LP 問題，也就是所謂的 dual LP 。</p>
+
+<div>
+\[
+ \text{Need} \; \color{green}{y_1}, \color{green}{y_2} \quad \text{s.t} \enspace 7x_1 +
+ x_2 + 5x_3 \geq (x_1 - x_2 + 3x_3) \times \color{green}{y_1} + (5x_1 + 2x_2 -
+ x_3) \times \color{green}{y_2} \geq 10 \, \color{green}{y_1} + 6 \, \color{green}{y_2}
+\]
+</div>
+
+<h4 id="dual-lp">Dual LP</h4>
+
+<p><code>$$
+\color{green}{\max} 10y_1+6y_2 \enspace \text{subject to}
+\begin{cases}
+y_1+5y_2 \leq 7\\
+-y_1+2y_2 \leq 1\\
+3y_1-y_2 \leq 5 \\
+y_1, y_2 \geq 0 \enspace (\because \, \text{為滿足不等式相加依然滿足不等式的關係})
+\end{cases}
+$$</code></p>
+
+<h3 id="general-form">General form</h3>
+
+<h4 id="primal-lp">Primal LP</h4>
+
+<p><code>$$
+\color{blue}{\min} \sum_{j=1}^{n}\color{orange}{c_j}\color{blue}{x_j} \enspace \text{subject to }
+\begin{cases}
+\sum_{j=1}^{n}a_{ij}\color{blue}{x_j} \color{blue}{\geq} \color{red}{b_i} \enspace \forall i = 1 \sim m \quad (m \, \text{個
+constraints})\\
+\color{blue}{x_j} \geq 0 \enspace \forall j
+\end{cases}
+$$</code></p>
+
+<h4 id="dual-lp-1">Dual LP</h4>
+
+<p><code>$$
+\color{green}{\max} \sum_{i=1}^{m}\color{red}{b_i}\color{green}{y_i} \enspace \text{subject to }
+\begin{cases}
+\sum_{i=1}^{m}a_{ij}\color{green}{y_i} \color{green}{\leq} \color{orange}{c_j} \enspace \forall j = 1 \sim n \quad (n \, \text{個 primal obj. 的係數})\\
+\color{green}{y_i} \geq 0 \enspace \forall i
+\end{cases}
+$$</code></p>
+
+<h2 id="some-theorem-about-duality">Some theorem about duality</h2>
+
+<h4 id="thm-weak-duality-theorem">Thm. Weak Duality Theorem</h4>
+
+<p><code>$$
+\text{If} \enspace \vec{x} \enspace \text{and} \enspace \vec{y} \enspace \text{are feasible}, \text{then} \sum_{j=1}^{n} c_jx_j \geq \sum_{i=1}^{m}b_iy_i
+$$</code></p>
+
+<p><em>proof</em></p>
+
+<p><code>$$
+\sum_{j=1}^{n}\color{blue}{c_j}x_j \color{blue}{\geq} \sum_{j=1}^{n}\color{blue}{\sum_{i=1}^{m}(a_{ij}y_i)}x_j = \sum_{i=1}^{m}\color{green}{\sum_{j=1}^{n}(a_{ij}x_j)}y_i \color{green}{\geq} \sum_{i=1}^{m}\color{green}{b_i}y_i
+$$</code></p>
+
+<h4 id="thm-duality-theorem">Thm. Duality Theorem</h4>
+
+<p><code>$$
+\text{If} \enspace \vec{x^\star}, \vec{y^\star} \enspace \text{are}\enspace OPT
+\enspace \text{for primal and dual}, \enspace \text{then} \enspace \sum_{j}c_jx_j^{\star} =\sum_{i}b_iy_i^{\star}
+$$</code></p>
+
+<p>(Note that Duality Theorem DOESN&rsquo;T hold for ILP)</p>
+
+<h4 id="complementary-slackness">Complementary Slackness</h4>
+
+<p><code>$$
+\vec{x^\star}, \vec{y^\star} \enspace \text{are}\enspace OPT \enspace \text{for primal and dual}\\
+\Updownarrow\\
+\begin{cases}
+\forall j: \enspace \text{either} \enspace x_j^{\star} = 0 \enspace \text{or} \enspace \sum_{i=1}^{m}a_{ij}y_i^{\star} = c_j\\
+\forall i: \enspace \text{either} \enspace y_i^{\star} = 0 \enspace \text{or} \enspace \sum_{j=1}^{n}a_{ij}x_j^{\star} = b_i
+\end{cases}
+$$</code></p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm-bin-packing-problem/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm-bin-packing-problem/">Advanced Algorithm - Bin Packing Problem</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm-vertex-cover-problem/">Advanced Algorithm - Vertex Cover Problem</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm-vertex-cover-problem/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

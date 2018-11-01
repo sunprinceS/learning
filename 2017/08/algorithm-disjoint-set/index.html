@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Implementation &amp; Analysis">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Algorithm - Disjoint Set &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Algorithm - Disjoint Set</h1>
+  <h2>Implementation &amp; Analysis</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>22 Aug 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/data-structure">Data Structure</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets <span>$S_1,S_2,\cdots,S_k$</span>，而每個 <span>$S_i$</span> (每個 category) 以一個代表值 (<em>representative</em>) 去紀錄。
+<!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--></p>
+
+<p></p>
+
+<h2 id="支援的-operations">支援的 Operations</h2>
+
+<ol>
+<li><code>Make-Set(x)</code>: create a new set {<span>$x$</span>}</li>
+<li><code>Find(x)</code>: Find the leader of <span>$x$</span>&rsquo;s set</li>
+<li><code>Union(x,y)</code>: Union <span>$x$</span>&rsquo;s set and <span>$y$</span>&rsquo;s set</li>
+</ol>
+
+<h2 id="linked-list-implementation">Linked List Implementation</h2>
+
+<p><img src="https://sunprinces.github.io/learning/img/post/djs-linked-list.jpg" width="800px"></p>
+
+<ul>
+<li><code>Make-Set(x)</code>: <span>$\mathcal{O}(1)$</span> (create <code>HEAD</code> and representative，也就是自己)</li>
+<li><code>Find(x)</code>: <span>$\mathcal{O}(1)$</span> (back to <code>HEAD</code>，go to representative)</li>
+<li><code>Union(x,y)</code>: <span>$\mathcal{O}(n)$</span> <br />
+可以發現 Union 非常慢，要依序將 <span>$S_2$</span> 中的元素依序指到 <span>$S_1$</span> 的 <code>HEAD</code> ，同時將 <span>$S_1$</span> 的最後一個元素之 <code>ptr</code> 指到原先 <span>$S_2$</span> 中的第一個。(當然可以在 <code>HEAD</code> 中多存一個指向最後一個元素的 <code>ptr</code> ，但複雜度還是 <span>$\mathcal{O}(m)$</span>, where <span>$m = |S_2|$</span>)</li>
+</ul>
+
+<p>雖說單看 <code>Union</code> 的複雜度似乎不太妙，但考慮一系列操作( <strong>Amortized Analysis</strong> ，也是一種常見的分析複雜度方式)，同時利用上方提到的 trick ，在做 <code>Union</code> 時，都是去合併<strong>較小</strong>的那個集合，再來做分析。</p>
+
+<h3 id="lemma">Lemma</h3>
+
+<p>Starting from 0 sets</p>
+
+<div>
+
+\[
+\text{operations} \left\{ \begin{array}{ll}
+           n \quad \text{make-set} (\, \therefore \, n \; \text{elements})\\
+           m \quad \text{find}\\
+           \leq n-1 \quad \text{union}
+        \end{array} \right.
+\]
+
+</div>
+
+<p><span>$\Rightarrow \, \text{total cost}: \mathcal{O}(m+n \log n)$</span><br />
+其中 <span>$n\log n$</span> 顯然是來自 <code>Union</code> 的 cost，而細看操作會發現，這亦為 <span>$\mathcal{\Theta}(\text{total number of times that element&rsquo;s top ptr changes})$</span>，<br />
+所以今天我們想證明，改動 <code>ptr</code> 的次數為 <span>$\mathcal{O}(n \log n)$</span></p>
+
+<p><strong>Claim</strong>: If an element has changes <code>ptr</code> <span>$k$</span> times, then it belongs to a set of
+size <span>$\geq 2^{k}$</span></p>
+
+<p>用數學歸納法可以簡單證明，假設 <span>$k=t$</span> 時成立，那在 <span>$k=t+1$</span> 時，如果該 set 還需改動 <code>ptr</code> ，表示其跟 size 比他大的 set 做 <code>Union</code> ，之後 size <span>$\geq 2^{t+1}$</span> ， Claim 依然成立 (<span>$k=0$</span> 時，只有 make-set， size 為 <span>$1$</span> 亦成立)</p>
+
+<p>而利用該 Claim ，又已知 size of any set <span>$\leq n$</span>，所以任何元素都只能改動 <code>ptr</code> <span>$\leq \log n$</span> 次，所以 total <code>ptr</code> 改動次數 <span>$\leq
+n \log n \quad \square$</span></p>
+
+<h2 id="forest-implementation">Forest Implementation</h2>
+
+<p><img src="https://sunprinces.github.io/learning/img/post/djs-forest.jpg" width="300px"></p>
+
+<ul>
+<li><code>Make-Set(x)</code>: <span>$\mathcal{O}(1)$</span> (建一顆只有一個節點的樹，root指向自己)</li>
+<li><code>Find(x)</code>: <span>$\mathcal{O}(\text{height})$</span> (trace back to root)</li>
+<li><code>Union(x,y)</code>: <span>$\mathcal{O}(\text{height})$</span> (單純改變被合併集 root 的指向為 <span>$\mathcal{O}(1)$</span> ，但要先用 <code>Find</code> 找到 root)</li>
+</ul>
+
+<p>稍微觀察一下發現，如果今天這個樹長的很傾斜(最爛的情況就是 skewed tree ，直接退化成 list)，那麼 height 為 <span>$\mathcal{O}(n)$</span> ，複雜度沒有任何改進。但若仿效前面 linked list 的想法，在做 <code>Union</code> 時，去合併比較小的 set ，則可以避免這個問題 (skewed tree會發生，就是每次都是拿一個 size 非 <span>$1$</span> 的 set 去接在 size 為 <span>$1$</span> 的 set 後面&hellip;)。</p>
+
+<h3 id="theorem-the-height-of-every-tree-span-leq-log-n-span">Theorem: The height of every tree <span>$\leq \log n$</span></h3>
+
+<p><strong>Claim:</strong> every tree with height <span>$k$</span> has at least <span>$2^{k-1}$</span> elements</p>
+
+<ul>
+<li><span>$k=1$</span>, trivial</li>
+<li>假設 <span>$k=t$</span> 成立，考慮兩個高度同為 $t$ 的樹(如果不一樣的話，那合併後的樹高度為原先兩者中較高的那個，但元素個數又增加了，Claim 必成立)，各自至少有 <span>$2^{t-1}$</span> 個元素，合併後高度變為 <span>$t+1$</span> ，元素個數 <span>$\geq 2^{t-1} \times 2 = 2^{t}$</span>， Claim 依然成立</li>
+</ul>
+
+<p>所以當已知每顆樹至多 <span>$n$</span> 個元素的情況下，我們可以證明其高度必
+<span>$\leq \log n \quad \square$</span></p>
+
+<h3 id="implementation">Implementation</h3>
+
+<script src="https://gist.github.com/sunprinceS/ba6415fdef340c1b97377d286a0ff402.js"></script>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.csie.ntu.edu.tw/~hsinmu/courses/_media/dsa_12spring/disjoint_set.pdf">台大資工 - DSA</a></li>
+</ul>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/">利用Ignr自動生成.gitignore</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-1/">Algorithm - Graph Theory - Lec 1</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-1/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

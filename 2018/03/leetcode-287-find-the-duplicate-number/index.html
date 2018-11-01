@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>LeetCode 287 - Find the Duplicate Number &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>LeetCode 287 - Find the Duplicate Number</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>18 Mar 2018</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/online-judge">Online-Judge</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/leetcode">LeetCode</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p><a href="https://leetcode.com/problems/find-the-duplicate-number/description/">題目連結</a></p>
+
+<p></p>
+
+<p>最近開始刷 LeetCode 練習思考，這題討論串的某個解法蠻神的，因此來紀錄一下。</p>
+
+<h2 id="題目敘述">題目敘述</h2>
+
+<p>Given an array nums containing <strong>n + 1</strong> integers where each integer <span>$\in [1,n]$</span>，
+Assume that there is <strong>only one duplicate number</strong> (but can be repeated many times), find the duplicate one.</p>
+
+<h2 id="限制">限制</h2>
+
+<ul>
+<li>You must <strong>not modify the array</strong> (assume the array is read only).</li>
+<li>You must use only constant, <strong>O(1) extra space</strong>.</li>
+<li>Your runtime complexity should be less than <span>$O(n^2)$</span>.</li>
+</ul>
+
+<h2 id="o-n-簡單算法-w-modifying-array">O(n) 簡單算法 (W/ modifying array)</h2>
+
+<p>與 <a href="https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/">LeetCode448 - FindDisappearedNumber</a>一樣，在保有原先 array 資訊的情況下立 Flag。</p>
+
+<pre><code class="language-cpp">int findDuplicate(vector&lt;int&gt;&amp; nums) {
+  for(size_t i=0;i&lt;nums.size();++i){
+    if(nums[abs(nums[i])-1] &lt; 0) return abs(nums[i]);
+    else nums[abs(nums[i])-1] *= -1; 
+  }
+}
+</code></pre>
+
+<p>簡單！但是不合題目要求XD
+(如果沒加 read-only 這個條件，只說跑完該 function ，array 不能變其實可以用，反正
+就再跑個一輪加 <code>abs()</code> 😛)</p>
+
+<h2 id="o-n-span-log-span-n-利用鴿籠原理的想法">O(n <span>$log$</span> n) - 利用鴿籠原理的想法</h2>
+
+<p>看到題目限 <span>$O(n^2)$</span> 複雜度，可以想到二分搜或排序，但不能開另外的
+container ，所以應該是二分搜。</p>
+
+<p>每次都砍半，去 check [1,mid] 中 element 的個數，如果比 mid 還大，代表裡頭有重
+複，反之就是另一個沒被檢查到的區間，每次都要 iterate 一輪，但 <span>$O(\log N)$</span> 輪便可找到答案。 (我想這題被放在 <code>medium</code> 應該是因為存在這個簡單的算法XD)</p>
+
+<pre><code class="language-cpp">int findDuplicate(vector&lt;int&gt;&amp; nums){
+int low = 1,high = nums.size()-1;
+int mid,cnt;
+while(low &lt;= high){
+  cnt = 0;
+  mid = (low + high) /2;
+  for(auto n: nums){
+    if(n &lt;= mid) ++cnt;
+  }
+  if(cnt &lt;= mid) low = mid +1;
+  else high = mid - 1;
+}
+return low;
+}
+</code></pre>
+
+<h2 id="o-n-tortoise-and-hare-algorithm">O(n) - Tortoise and Hare Algorithm</h2>
+
+<p>沒寫過當場想的出來真的是大神&hellip;<br />
+In Brief，觀察到區間是 <span>$[1,n]$</span>，且沒有缺漏的元素，在不存在重複元
+素的情況下， index 與 value ，可以想成 <span>$[1,n] \mapsto [1,n]$</span> (Permutation!)，
+所以 <code>nums[0]</code>, <code>nums[nums[0]]</code>, <code>nums[nums[nums[0]]]</code>&hellip; 可以把元素都 iterate
+一遍，也就是一個 path。
+好！但今天我們確定有一個(也是唯一一個)元素重複了，對這個性質會造成什麼影響呢？
+WLOG，我們從眾多可能 permutation 挑出一個最好思考的(照順序的)，已知今天是有 <span>$n+1$</span> 個元素，假定我們今天在 <span>$[1,n]$</span> 的最後接上<span>$[1,n]$</span>中的任一個值，如以下紅色部份
+<center><img src="https://sunprinces.github.io/learning/img/post/leetcode287.png" width="70%" style="border-radius: 0%;"></center></p>
+
+<p>會將原先一條依序 iterate 過所有元素的 path ，變成一個 path 與 cycle 的 混合路徑(?)。因為 <span>$0$</span> 不存在元素裡頭，所以首位元素為一個 source。 由此可確定這個路徑中至少有一單位長度的 path 。</p>
+
+<p>過來是這個演算法精華的部份，如以下示意圖，<strong>重複的元素為 path 進入 cycle 的 entry point</strong> (注意到根本輪不到第三個重複元素，兩個就會形成cycle) ，那該如何偵測呢？</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/leetcode287-1.png" width="40%" style="border-radius: 0%;"></center></p>
+
+<p>maintain 兩個 pointer，其中一個(hare)一次走兩步 (i.e <code>nums[nums[i]]</code>)，另一個(turtle)一次走一
+步(e.g <code>nums[i]</code>)，因為迴圈存在，步數公因數又為 <span>$1$</span> 所以最後一定會
+相遇於 cycle 上一點 <span>$M$</span>，這點具有什麼特性？ 整理下我們有的式子。</p>
+
+<p><code>$$
+2\times (\underbrace{n_1 C + L_1 + \overline{SE}}_{turtle 走的長度})  = \underbrace{n_2 C+L_1 + \overline{SE}}_{hare 走的長度}
+$$</code></p>
+
+<p>移項可得</p>
+
+<p><code>$$
+L_1 + \overline{SE} = (n_2 - 2n_1)C = nC, \quad n \in \mathbb{N}
+$$</code></p>
+
+<ul>
+<li><p><span>$n = 1$</span>， <span>$\overline{SE} = L_2$</span>，令兩個 pointer 分別從
+M 和起始點出發(但這次步伐相同！)，交會點即是 <span>$E$</span> 。</p></li>
+
+<li><p><span>$n = k$</span>， <span>$\overline{SE} = (k-1)C + L_2$</span>，與上面一樣，會
+發現交會點亦是 <span>$E$</span> 。</p></li>
+</ul>
+
+<pre><code class="language-cpp">int findDuplicate(vector&lt;int&gt;&amp; nums)
+{
+  int t = nums[0];
+  int h = nums[nums[0]];
+  while (t != h){
+    t = nums[t];
+    h = nums[nums[h]];
+  }
+
+  h = 0;
+  while (t != h){
+    t = nums[t];
+    h = nums[h];
+  }
+  return t;
+}
+</code></pre>
+
+<p>很精闢的演算法！</p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/03/c-stl-cheat-sheet-3/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2018/03/c-stl-cheat-sheet-3/">C&#43;&#43; STL Cheat Sheet - 3</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition-lec1/">Speech Recognition- Lec1</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition-lec1/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

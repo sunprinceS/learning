@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hidden Markov Model">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Speech Recognition- Lec5 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Speech Recognition- Lec5</h1>
+  <h2>Hidden Markov Model</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>19 Apr 2018</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/speech-processing">Speech Processing</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/asr">ASR</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>我覺得自己之前做的<a href="https://drive.google.com/file/d/152rJZPdCl1k4IqLgr7frwWXeE6lCHjO0/view?usp=sharing">投影片</a>真的蠻好的XD (自己講)，因此這一講中，只會偏重在原本寫的比較簡略的 Learning Problem ， Evaluation 及 Decoding Problem 僅會附上程式碼及做定義。</p>
+
+<p></p>
+
+<h2 id="3-problems-of-hmm">3 Problems of HMM</h2>
+
+<p>Given observation sequence <span>$X$</span> and model parameter <span>$\Theta$</span></p>
+
+<p><span>$\Theta$</span> 包含了以下幾個 component: <span>$\pi$</span> (initial
+probability), <span>$A$</span> (transition matrix), <span>$\phi$</span>
+(emission probability)</p>
+
+<ul>
+<li><p>Evaluation Problem: <span>$\Pr(X|\Theta)$</span>，即是一開始我們想求的，該
+sequence 與特定 HMM match 的 likelihood，可用於 isolated word recognition 。</p></li>
+
+<li><p>Decoding Problem: Find the optimal state sequence <span>$\Pr(Z|X,\Theta)$</span> (在之後的 continuous ASR ，我們需要知道一路走來的 state sequence，才能據此還原出對應的 word sequence)</p></li>
+
+<li><p>Learning Problem: Find the optimal parameter <span>$\Theta^\star$</span>,
+which satisfies some criteria</p></li>
+</ul>
+
+<h2 id="evaluation-problem">Evaluation Problem</h2>
+
+<p>Solution: Forward Algorithm</p>
+
+<p><code>$$
+\alpha_t(i) \triangleq \Pr(x_1,x_2,\cdots,x_t \land z_t = s_i | \Theta)
+$$</code></p>
+
+<p>因為在最後一個 frame 中， <span>$\alpha_T(i)$</span> 跟 <span>$\alpha_T(j) \, (i \not = j)$</span> 中的事件互斥，所以我們可以對 <span>$\Pr(X|\Theta)$</span> marginalize over states</p>
+
+<p><code>$$
+\Pr(X|\Theta) = \sum_{i=1}^M \alpha_T(i)
+$$</code></p>
+
+<pre><code class="language-python">logalpha = np.zeros((num_frame,num_state))
+
+for j in range(num_state):
+    logalpha[0][j] = log_startprob[j] + log_emlik[0][j]
+
+for i in range(1,num_frame):
+    for j in range(num_state):
+        logalpha[i][j] = logsumexp(logalpha[i-1,:]+log_transmat[:,j]) +log_emlik[i][j]
+
+return logalpha
+</code></pre>
+
+<h2 id="decoding-problem">Decoding Problem</h2>
+
+<p>Solution: Viterbi Algorithm</p>
+
+<p><code>$$
+\delta_t(i) \triangleq \max_{Z_{-t}} \Pr(Z_{-t},X \land z_t = s_i | \Theta)
+$$</code></p>
+
+<pre><code class="language-python">logdelta = np.zeros((num_frame,num_state))
+ptr = np.zeros((num_frame,num_state),dtype=np.int8) # the first row is dummy
+best_path = np.zeros(num_frame,dtype=np.int8)
+
+for j in range(num_state):
+    logdelta[0][j] = log_startprob[j] + log_emlik[0][j]
+
+for i in range(1,num_frame):
+    for j in range(num_state):
+        tmp = logdelta[i-1,:] + log_transmat[:,j]
+        logdelta[i][j] = np.max(tmp) + log_emlik[i][j]
+        ptr[i][j] = np.argmax(tmp)
+
+best_path[-1] = np.argmax(logdelta[-1,:])
+for i in range(2,num_frame+1):
+    best_path[-i] = ptr[-i+1][best_path[-i+1]]
+
+return np.max(logdelta[-1,:]), best_path
+</code></pre>
+
+<p><strong>Remark:</strong> 亦可利用 Viterbi 算出來的機率，去近似  forward algorithm 所計算的結果 (從下圖 Viterbi 的best path 之走勢與 logalpha 的變化可略知一二)</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/viterbialpha.png" width="90%" style="border-radius: 0%;"></center></p>
+
+<h2 id="learning-problem">Learning Problem</h2>
+
+<p>Solution: Baum-Welch Algorithm (a special case of EM algorithm)</p>
+
+<p>一個 HMM model <span>$\Theta = \lbrace \pi, A, \phi \rbrace$</span>
+我們想根據 data 去調整 <span>$\Theta$</span> ，使得其能 exploit 去選出較好的參數
+<span>$\Theta^\prime$</span>，而所謂的<strong>好</strong>，可能是</p>
+
+<ul>
+<li>fit data (e.g likelihood, posterior) -&gt; ML, MAP criteria</li>
+<li>classification performance (discriminitive training)</li>
+</ul>
+
+<p>在此我們考慮 ML (<em>Maximum Likelihood</em>) criteria ，也就是想找到
+<span>$\Theta^\star = \underset{\Theta}{\arg \max} \Pr(X|\Theta)$</span></p>
+
+<p>對 HMM 來說，直接從 <span>$\Theta$</span> 是不能直接去估 <span>$X$</span> 的分佈的，必須要先確定所對應的 state sequence <span>$Z$</span> 才行，但今天難點就在 state 是 <strong>hidden</strong> 的。<br />
+EM Algorithm (Expectation-Maximization) 常用來解決這類問題，大概的思想就是:</p>
+
+<ul>
+<li>E-step: 利用現在的 parameter <span>$\Theta$</span> 去算背後 state 分佈的<strong>期望值</strong> (白話來說就是假設知道了 state)</li>
+<li>M-step: 知道了 state 的分佈，去估計 HMM 的參數 (to <strong>maximize</strong> some criteria)。</li>
+</ul>
+
+<p>E, M iteratively 交錯去更新參數。</p>
+
+<h3 id="e-step">E-step</h3>
+
+<p>先定義一些值</p>
+
+<h4 id="backward-probability">Backward Probability</h4>
+
+<p>跟 forward probability <span>$\alpha_t(i)$</span> 很類似，不過是考慮後半</p>
+
+<p><code>$$
+\beta_t(i) \triangleq \Pr(x_{t+1},x_{t+2},\cdots,x_{T}|z_t = s_i, \Theta)
+$$</code></p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/forwardbackward.png" width="70%" style="border-radius: 0%;"></center></p>
+
+<pre><code class="language-python">logbeta = np.zeros((num_frame,num_state))
+
+for j in range(num_state-1,-1,-1):
+    logbeta[num_frame-1][j] = 0
+
+for i in range(num_frame-2,-1,-1):
+    for j in range(num_state):
+        logbeta[i][j] = logsumexp(logbeta[i+1,:]+log_emlik[i+1,:]+log_transmat[j,:])
+
+return logbeta
+</code></pre>
+
+<h4 id="posterior-probability">Posterior Probability</h4>
+
+<h5 id="gamma-probability">Gamma Probability</h5>
+
+<p><code>$$
+\gamma_t(i) \triangleq \Pr(z_t = s_i | X,\Theta) = \frac{\Pr(z_t = s_i ,X | \Theta)}{\Pr(X|\Theta)} = \frac{\alpha_t(i) \beta_t(i)}{\underbrace{\sum_j \alpha_T(j)}_{\text{Evaluation Problem 算過}}}
+$$</code></p>
+
+<p><strong>Remark:</strong> <span>$\sum_{t=1}^{T-1} \gamma_t(i)$</span>: <span>$\mathbb{E}[X$</span>中有拜訪過 <span>$s_i$</span><span>$]$</span>，同時也是在 <span>$s_i$</span> 中<strong>有發生 transition</strong> 的期望值。</p>
+
+<h5 id="epsilon-probability">Epsilon Probability</h5>
+
+<p><code>$$
+\epsilon_t(i,j) \triangleq \Pr(z_t = i \land z_{t+1} = j | X,\Theta)
+$$</code></p>
+
+<p><code>$$
+\epsilon_t(i,j) = \frac{\alpha_t(i) A_{ij} \phi_j(x_{t+1}) \beta_{t+1}(j)}{\Pr(X|\Theta)}
+$$</code></p>
+
+<p><strong>Remark:</strong> <span>$\sum_{t=1}^{T-1} \epsilon_t(i,j)$</span>: <span>$\mathbb{E}[s_i \rightarrow s_j]$</span></p>
+
+<p><strong>Note:</strong> 上述這兩個機率都是 conditioned on 整個 observation sequence <span>$X$</span> ，而非只有那個時間點的 <span>$x_t$</span></p>
+
+<h3 id="m-step">M-step</h3>
+
+<h4 id="initial-probability">Initial Probability</h4>
+
+<p><code>$$
+\pi_i = \gamma_1(i)
+$$</code></p>
+
+<h4 id="transition-probability">Transition Probability</h4>
+
+<p><code>$$
+A_{ij} = \frac{\mathbb{E}[s_i \rightarrow s_j]}{\mathbb{E}[\text{# of visit}\, s_i]}
+$$</code></p>
+
+<h4 id="emission-probability">Emission Probability</h4>
+
+<p>前面提到，我們利用 GMM 來 model emission probability (mixture 數夠多可以近似任何的連續函數，我想也是有 optimization feasibility 的考量)</p>
+
+<p>在選定該時間點對應到哪個 state 後，還要在從一把 gaussian 中抽出一個去 sample
+observation <span>$x_t$</span>。(pretty hierachical XD)<br />
+<!--簡單討論起見，先將 mixture 數目設為兩個，--></p>
+
+<p><code>$$
+\phi_j(x) = \sum_i w_{jk} \mathcal{N}(x;\mu_k,\sigma_k^2) \quad(w_{jk} \, \text{為 k-th Gaussian 在 state j 的 GMM 中所佔的比例})
+$$</code></p>
+
+<p>要重估的參數有每個 gaussian 的 mean 和 covariance 以及 在某個 mixture 的比例
+<span>$w_{jk}$</span></p>
+
+<p><strong>Note:</strong> 上面的 <span>$x_t, \mu, \sigma^2$</span> 都可以是向量形式</p>
+
+<p><strong>Remark:</strong> 我們假設 <span>$d \times d$</span> 的 covariance matrix 是 diagonal
+(based on 前面抽 feature 時，用 DCT uncoorelate feature 的各個 dimension)</p>
+
+<h5 id="posterior-probability-of-choosing-k-th-mixture">Posterior Probability of choosing k-th mixture</h5>
+
+<p><code>$$
+\begin{aligned}
+\gamma_t(j,k) &amp;= \Pr(z_t = s_j \land \text{choose k-th mixture in state j} |z_t = s_j, X, \Theta)\\
+&amp;= \underbrace{\quad \gamma_t(j) \quad}_{\text{gamma probability}} \cdot \underbrace{\frac{w_{jk}\mathcal{N}(x_t;\mu_{jk},\sigma_{jk}^2)}{\sum_m w_{jm}\mathcal{N}(x_t;\mu_{jm},\sigma_{jm}^2)}}_{\text{k-th mixture 佔的比例}}
+\end{aligned}
+$$</code></p>
+
+<h4 id="update-rule">Update Rule</h4>
+
+<p><code>$$
+\begin{aligned}
+w_{jk} &amp;= \frac{\mathbb{E}[\text{# of choosing k-th mixture in state j}]}{\mathbb{E}[\text{# of visit}\, s_j]} = \frac{\sum_t \gamma_t(j,k)}{\sum_t \gamma_t(j)}\\
+\mu_{jk} &amp;= \frac{\sum_t \gamma_t(j,k) x_t}{\sum_t \gamma_t(j,k)}\\
+\sigma_{jk}^2 &amp;= \frac{\sum_t \gamma_t(j,k)(x_t - \mu_{jk})^T (x_t - \mu_{jk})}{\sum_t \gamma_t(j,k)}
+\end{aligned}
+$$</code></p>
+
+<p><strong>Remark:</strong> 跟一般沒有跟 HMM bind 在一起的 Gaussian Mixture 更新基本上一樣，但</p>
+
+<ul>
+<li>sample 數 <span>$N$</span> 改為 <span>$\mathbb{E}[\text{number of visit}\, s_j]$</span> (因為這個 mixture 不是每次都會被抽到，要拜訪 <span>$s_j$</span> 才是它負責的);</li>
+<li><span>$\gamma(j,k)$</span> 多了一個下標 <span>$t$</span> (時間 <span>$t$</span> 在 state <span>$j$</span> 且抽中該 Gaussian 的期望值)，表示其會隨 time evolve</li>
+</ul>
+
+<p><strong>Remark:</strong> 而 GMM 的更新，就是根據想 maximize 的 criteria 定義 loss function ，去微分求極值發生點。</p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition-lec4/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition-lec4/">Speech Recognition- Lec4</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition-lec6/">Speech Recognition- Lec6</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/04/speech-recognition-lec6/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

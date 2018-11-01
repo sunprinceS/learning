@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learning to Answer Yes/No">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>NTU Machine Learning - Lec2 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>NTU Machine Learning - Lec2</h1>
+  <h2>Learning to Answer Yes/No</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>22 Dec 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/machine-learning-foundation">Machine Learning Foundation</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/machine-learning">Machine Learning</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>於前一講講述了 ML 的 framework ，於這一講中，我們會利用一個簡單的 learning model ， 去解決 binary classification 的問題。</p>
+
+<p></p>
+
+<h2 id="hypothesis-set-linear-perceptron">Hypothesis Set: Linear Perceptron</h2>
+
+<div>
+\[
+\textcolor{red}{h}(x) = \texttt{sgn}(\sum_{i=1}^{d}\textcolor{red}{w_i}x_i - \textcolor{red}{\text{threshold}}) = \texttt{sgn}(\textcolor{red}{\mathbf{w}^T}\mathbf{x})
+\]
+</div>
+
+<p>其中，<span>$\mathbf{x} \in \mathcal{X}, \mathcal{X} = \lbrace 1 \rbrace \times \mathbb{R}^d $</span> (把 threshold 放進 <span>$\mathbf{w}$</span> 的第 0 維，以簡便表示)</p>
+
+<p>其實就是一個將空間一分為二的 hyperplane 。</p>
+
+<h2 id="learning-algorithm">Learning Algorithm</h2>
+
+<h3 id="objective">Objective</h3>
+
+<div>
+\[
+  \text{learned function} \, g \approx \text{ground truth function} \, f
+\]
+</div>
+
+<p>至少在看過的 training data 上做到一致，亦即</p>
+
+<div>
+\[
+g(x_n) = f(x_n) = y_n \quad \forall (x_n,y_n)\in \mathcal{D} 
+\]
+</div>
+
+<h3 id="how-to-select-span-g-span-from-span-mathcal-h-span">How to select <span>$g$</span> from <span>$\mathcal{H}$</span></h3>
+
+<p>隨便抽取一個起始權重，去看看在 training data 上是否會有與 label mismatch 的情況
+，若有的話，便去修正權重。</p>
+
+<div>
+\[
+ \text{If} \enspace \texttt{sgn}(\textcolor{red}{\mathbf{w}_t^T}\mathbf{x}_n) \not = y_n ,
+ \enspace \text{then} \enspace \textcolor{orange}{\mathbf{w}_{t+1}} \leftarrow
+ \textcolor{red}{\mathbf{w}_t} + y_n\mathbf{x}_n
+\]
+</div>
+
+<h3 id="correctness-of-updating">Correctness of Updating</h3>
+
+<p>若有錯誤發生，表示 <span>$y_n\underset{\text{predict}}{\mathbf{w}_t^T\mathbf{x}_n} &lt; 0$</span>，<br />
+目標是將其更正為 <span>$&gt; 0$</span> 。 我們想確定更新 <span>$\mathcal{w}$</span> 的過程中，<span>$y_n\mathbf{w}_t^T\mathbf{x}_n$</span> 會 <strong>遞增</strong>, which is trivial to prove</p>
+
+<h3 id="running-time">Running Time</h3>
+
+<p>承上，<span>$\mathbf{w}$</span> 的更新，會使得它更接近 ground truth，也就是其單位向量的內積越來越接近 <span>$1$</span>。</p>
+
+<h4 id="growth-of-span-mathbf-w-span-isn-t-too-fast">Growth of <span>$||\mathbf{w}||$</span> ISN&rsquo;T too fast</h4>
+
+<p><code>$$
+\begin{align}
+||\mathbf{w}_{t+1}||^2 &amp;= ||\mathbf{w}_t + y_n \mathbf{x}_n || ^2 \\
+&amp;= ||\mathbf{w}_{t}||^2 + 2\underset{\leq 0}{\color{blue}{y_n\mathbf{w}_t^T\mathbf{x}_n}} + ||y_n\mathbf{x}_n||^2\\
+&amp;\color{blue}{\leq}  ||\mathbf{w}_{t}||^2 + \color{blue}{0} + \color{red}{||y_n\mathbf{x}_n||^2} \\
+&amp;\color{red}{\leq} ||\mathbf{w}_{t}||^2 + \color{red}{\max_j ||x_j||^2}
+\end{align}
+$$</code></p>
+
+<div>
+\[
+\Rightarrow ||\mathbf{w}_T||^2 \leq \underset{=0}{||\mathbf{w}_0||^2} + T \times \max_j
+||x_j||^2
+\]
+</div>
+
+<div>
+\[
+\Rightarrow \boxed{||\mathbf{w}_T|| \leq \sqrt{T} \times \max_j||x_j||}
+\]
+</div>
+
+<h4 id="convergence-after-t-rounds">Convergence after T rounds</h4>
+
+<p>假設 <span>$\mathbf{w}_0 = \mathbf{0}$</span>，並觀察到 ground truth
+<span>$\mathbf{w}_f$</span> 滿足 <span>$\boxed{y_n\mathbf{w}_f^T\mathbf{x}_n \geq \min_n y_n\mathbf{w}_f^T\mathbf{x}_n \geq 0}$</span></p>
+
+<p><code>$$
+\require{cancel}
+\begin{align}
+\mathbf{w}_f^T\mathbf{w}_T &amp;= \cancel{\mathbf{w}_f^T\mathbf{w}_{T-1}} + y_{n_T}\mathbf{w}_f^T\mathbf{x}_{n_T} \\
+\cancel{\mathbf{w}_f^T\mathbf{w}_{T-1}} &amp;= \cancel{\mathbf{w}_f^T\mathbf{w}_{T-2}} + y_{n_{T-1}}\mathbf{w}_f^T\mathbf{x}_{n_{T-1}} \\
+.\\
+.\\
+\cancel{\mathbf{w}_f^T\mathbf{w}_1} &amp;= \underset{=0}{\mathbf{w}_f^T\mathbf{w}_{0}} + y_{n_1}\mathbf{w}_f^T\mathbf{x}_{n_{1}} 
+\end{align}
+$$</code></p>
+
+<div>
+\[
+\Rightarrow \boxed{\mathbf{w}_f^T\mathbf{w}_T  \geq T \times \min_n y_n\mathbf{w}_f^T\mathbf{x}_n}
+\]
+</div>
+
+<p>因此，</p>
+
+<p><code>$$
+1 \geq \frac{\mathbf{w}_f^T\mathbf{w}_T}{||\mathbf{w}_f|| \, ||\mathbf{w}_T||}
+\geq \frac{T\times \underset{n}{\min} y_n\mathbf{w}_f^T\mathbf{x}_n}{||\mathbf{w}_f|| \, ||\mathbf{w}_T||} \geq \sqrt{T} \times \frac{\stackrel{\color{blue}{\rho}}{\overbrace{\underset{n}{\min}y_n\frac{\mathbf{w}_f^T}{||\mathbf{w}_f||}\mathbf{x_n}}}}{\underset{\color{red}{R}}{\underbrace{\underset{j}{\max}||x_j||}}}
+$$</code></p>
+
+<div>
+\[
+\Rightarrow \boxed{T \leq \frac{R^2}{\rho^2} = \text{const.}}
+\]
+</div>
+
+<!--T &\leq \frac{\mathbf{w}_f^T\mathbf{w}_T}{\underset{n}{\min} y_n\mathbf{w}_f^T\mathbf{x}_n} \times \frac{||\mathbf{w}_f|| \, ||\mathbf{w}_T||}{||\mathbf{w}_f||\,||\mathbf{w}_T||}\\-->
+
+<!--& \leq 1 \times \frac{}{}-->
+
+<h3 id="limitation-modification">Limitation &amp; Modification</h3>
+
+<ol>
+<li>資料必須是線性可分的(<em>Linear Separable</em>)，亦即對資料不能一無所知，如此方能做此假設。</li>
+<li>對 running time 僅知道會在有限時間內結束，但還是不知道要跑多久</li>
+</ol>
+
+<p>另外，有時候資料夾雜了一些雜訊，使得空間因少數數據點而無法線性可分，<br />
+此時我們利用 Pocket PLA 去找出一個 <strong>還不錯</strong> 的 <span>$g$</span> ，使得 label mismatch 的數據點為最少。<br />
+簡單來說，就是每更新一次 <span>$\mathbf{w}$</span>，便去跑過<strong>所有</strong>的數據點，來看是否比前一個更好，並把對應的 <span>$w$</span> 記起來<br />
+再 run 過一定回合數後中止，running time 為<span>$\mathcal{O}(|\mathcal{D}|T)$</span>，不保證找到最佳解。</p>
+
+<p><strong>Remark:</strong> <span>$w$</span> 的更新方式跟 PLA 是一樣的，不是表現進步才更新！</p>
+
+<p><a href="https://github.com/sunprinceS/NTU-Machine-Learning/blob/master/hw1/PLA.py"><strong>Implementation</strong></a></p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/02_handout.pdf">林軒田老師的講義</a></li>
+</ul>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec1/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec1/">NTU Machine Learning - Lec1</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec3/">NTU Machine Learning - Lec3</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec3/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Introduction">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Algorithmic Game Theory - Lecture1 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Algorithmic Game Theory - Lecture1</h1>
+  <h2>Introduction</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>15 May 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithmic-game-theory">Algorithmic Game Theory</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/game-theory">Game Theory</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/open-course">Open Course</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/stanford">Stanford</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>這學期因緣際會之下，選了商研所的賽局，上起課來的感覺跟 EECS 著實差異頗大，直白的文字敘述及直覺居多（課後作業還是電影欣賞），考試也多以申論為主(但即使這樣，期中考還是考了全班最高分XD)，碰巧在網路上找到了這門課程，覺得相當有趣，以資訊科學的角度出發， formulate 各種所謂「直覺」的經濟學想法，去解決現實世界的問題，聽了前兩堂課，感覺之後也會用到不少這學期修的高等演算法的概念，算是相輔相成，希望自己有毅力聽完，並整理筆記囉 :D</p>
+
+<p>
+課程有以下三個部份</p>
+
+<h2 id="mechanism-design">Mechanism Design</h2>
+
+<p>We want to design a system for <strong>strategic</strong> participants with <strong>good</strong> performance.</p>
+
+<p><strong>strategic</strong> 表示 agent/participant 會以自己的利益為第一優先 (i.e the objective is to maximize their own benefit)，但是 <strong>good</strong> 與否則是由 designer 所定義的，而好的 mechanism 需要使 agent 與 designer 的 incentive 彼此間是互相 aligned 的，也就是說不好的 mechanism，會因 agent 追求自己的最大利益，而使結果不如 designer 預期。 (example: 2012 倫敦奧運的羽球女雙放水事件)</p>
+
+<p>以下這段話相當有意思，也點明了 mechanism design 的重要性。</p>
+
+<blockquote>
+<p>“ The burden lies on the system designer to anticipate strategic behavior, not on the participants to behave against their own interest. ”</p>
+</blockquote>
+
+<p>像是說，如果沒有定義好股市的遊戲規則，那就不能怪罪有能力的商人去 exploit ，攫取自身的最大利益；又或是，若政府及企業沒有提供給人才適合的 pay 及發展環境，就不該冀望在人才外流時，他們還能能懷著愛國的情操留下來為國家奉獻一樣&hellip;</p>
+
+<h2 id="can-selfish-behavior-be-near-optimal">Can selfish behavior be near optimal</h2>
+
+<p>我們定義 <strong>Price of Anarchy (POA)</strong> 來描述自利行為與最優解 (everything is under control) 之間的比例 (一個 approx. ratio 的概念)</p>
+
+<div>
+\[
+ POA = \frac{cost(REAL)}{cost(OPT)}
+\]
+</div>
+
+<p>當 POA 越趨近於 1，表示自利行為越接近 optimal。</p>
+
+<h3 id="example-braess-s-paradox">Example : Braess&rsquo;s paradox</h3>
+
+<p>考慮一群人要從 <span>$ s \rightarrow t$</span>，有兩種 type 的道路可選，其中一條 cost 為 constant 1，另一條的 cost 則是根據在其上的 agent 之比例 (如果全部的agent都通過此，則 cost = 1)決定。</p>
+
+<p><img src="https://sunprinces.github.io/learning/img/post/baraessParadox.png" width="80%" style="border-radius: 0%;"></p>
+
+<p>(The figure is from <a href="http://theory.stanford.edu/~tim/f13/l/l1.pdf">here</a>)</p>
+
+<p>未加中間的通道之前為 <strong>everything is under control</strong> (i.e 禁止 agent 走此 teleport )，其中 <span>$c(x) = x$</span> 跟 <span>$c(x) = 1$</span> 相比，至少都是前者較好，所以每個 agent 在<strong>可以選擇</strong>的時候，都會湧向 <span>$c(x) = x$</span> 的道路。</p>
+
+<p>(此例的 <span>$POA = \frac{1 + 1}{1 + 0.5} = \frac{4}{3}$<span>)</p>
+
+<p>原因: Nash Eq. <span>$\neq$</span> 社會最優</p>
+
+<p>Corollary: Selfish routing <strong>DOESN&rsquo;T</strong> minimize commute time</p>
+
+<h2 id="how-do-strategic-players-reach-an-equilbrium">How do strategic players reach an equilbrium</h2>
+
+<p>在說明<strong>如何</strong>達到 eq. 之前，得先考慮該 eq. 是否存在</p>
+
+<h3 id="nash-existence-theorem">Nash Existence Theorem</h3>
+
+<blockquote>
+<p>If we allow <strong>mixed strategy</strong>, then every game with finite number of players who can choose finite number of actions has <strong>at least</strong> one Nash Eq.</p>
+</blockquote>
+
+<!--據此 Theorem，考慮 2-player game，我們有-->
+
+<!--Every bimatrix game has **at least** one Nash Eq.-->
+
+<p>確定了存在性，那 agent 該如何達到此 Eq. ?</p>
+
+<p>課堂上概略提到了幾個 facts:</p>
+
+<ul>
+<li>若是零和賽局，存在 <span>$\mathbf{POLY}$</span> 時間的演算法求出 Nash Eq.</li>
+
+<li><p>對非零和賽局而言，找 Nash Eq. 非 <span>$\mathbf{NP-hard}$</span> 除非 <span>$NP = coNP$</span></p>
+
+<p><span>$\rightarrow \mathbf{PPAD-hard}$</span></p></li>
+</ul>
+
+<p>我們利用 Nash Eq. 來作為預測 agent 行為的 predictor (同理，完全理性的 agent 在做出 action 時，也會考慮其他 agent based on 此而做出的的 action)。但第二個 fact 說明了一件事情，若我們承許 <span>$P \neq NP$</span> ，則 Turing Machine 不存在有效率的解法找到均衡點，那算力不如它的 agent 更不可能找到均衡點，所以把 Nash Eq. 當作 agent behavior 的 predictor 就顯得沒有意義了&hellip; ☹</p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/">使用Hugo快速建立自己的靜態網站</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture2/">Algorithmic Game Theory - Lecture2</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture2/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

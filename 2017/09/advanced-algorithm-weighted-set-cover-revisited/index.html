@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An example of primal-dual method">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Advanced Algorithm - Weighted Set Cover Revisited &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Advanced Algorithm - Weighted Set Cover Revisited</h1>
+  <h2>An example of primal-dual method</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>23 Sep 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/advanced-algorithm">Advanced Algorithm</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/linear-programming">Linear Programming</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/approximation-algorithm">Approximation Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>呈之前的討論，對於 WSC 問題，我們有了利用 LP solver 去對解做 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/">deterministic rounding</a> 及 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/">randomized rounding</a> 的演算法，解法的共通點是必須要先 run 過 LP solver (雖然理論上是 <strong>POLY</strong> ，實務上現行的 solver 也很有效率)，但我們仍想問說，是否存在不須使用 LP solver 的演算法呢？ 而這也是這講所要提到的 <strong>Primal-Dual Method</strong> 。</p>
+
+<p></p>
+
+<p>至於實務上的好處嘛&hellip;，節錄官方(?)說法如以下:</p>
+
+<blockquote>
+<p>While linear programs are efficiently solvable, and algorithms for them are quick in practice, <strong>special purpose algorithms</strong> are often much <strong>faster</strong></p>
+</blockquote>
+
+<!--而我自己的一點點感覺是，如此證明 ratio 可以用更簡便的方式，去用上題目所給的已知條件 ( 利用-->
+
+<!--**relaxed** complentary slackness 直接 include 進來 ) 。-->
+
+<h2 id="rewrite-to-dual-form">Rewrite to Dual Form</h2>
+
+<p>As <a href="http://localhost:1313/learning/2017/08/advanced-algorithm---linear-programming/">primal-dual LP</a> mentioned, the dual LP is</p>
+
+<p><code>$$
+\max \sum_{j=1}^{n} \alpha_j \quad s.t. \begin{cases}
+\sum_{e_j \in S_i} \alpha_j \leq \text{cost}(S_i) \; \forall i \\
+\alpha_j \geq 0
+\end{cases}
+$$</code></p>
+
+<p><strong>Remark:</strong> <br />
+<strong>寫出 dual form 的直觀方法是，原先的 constraint 會變 objective ，而 objective 會變 constraint 。</strong> <br />
+像這個例子為 <strong>我們想儘量 maximize 原先 constraint 中</strong> <span>$\underset{i: e_j \in S_i}{\sum} x_i \geq 1$</span> 乘上的那個係數 <span>$\alpha_j$</span> ( 想讓原 objective 的下界越 tight 越好，而我們有 <span>$j$</span> 個這樣的式子)，但對每個 <span>$i$</span> 來說，係數合不能超過原先 objective 的 <span>$x_i$</span> 係數 (也就是上方的 constraint ，而我們有 <span>$i$</span> 個這樣的限制)。</p>
+
+<h2 id="correctness-of-approx-ratio">Correctness of Approx. Ratio</h2>
+
+<p>利用 Weak Duality Theorem, <span>$\forall \, \text{feasible} \, \mathbf{x}, \mathbf{\alpha}$</span>我們有</p>
+
+<p><code>$$
+\sum_{i=1}^m \, \text{cost}(S_i) \cdot x_i \color{red}{\geq} \sum_{(i,j): e_j
+\in S_i} \, \alpha_j \cdot x_i \color{green}{\geq} \, \sum_{j=1}^{n} \, \alpha_j
+$$</code></p>
+
+<p>雖然 form 看起來簡單一些了，但要找出符合 complentary slackness 的 dual OPT 還是很難，所以我們做些 relaxation。</p>
+
+<h3 id="relaxed-complementary-slackness">Relaxed Complementary Slackness</h3>
+
+<p><code>$$
+\begin{cases}
+\color{red}{\geq}: \forall i, \, \text{either} \, x_i = 0 \, \text{or} \,
+\boxed{\color{red}{\frac{1}{A} \, \text{cost}(S_i)} \leq \sum_{j: e_j \in S_i} \alpha_j \, \leq
+\text{cost}(S_i)}\\
+\color{green}{\geq}: \forall j, \, \text{either} \, \alpha_j = 0 \, \text{or} \,
+\boxed{\color{green}{B} \, \geq \, \sum_{i: e_j \in S_i} x_i \, \geq \, 1}
+\end{cases}
+$$</code></p>
+
+<p>Then, we have</p>
+
+<p><code>$$
+\boxed{\sum_j \alpha_j \, \leq \, \sum_{i}\text{cost}(S_i) \cdot x_i \leq \color{red}{A}\color{green}{B}
+\sum_{j}\alpha_j}
+$$</code></p>
+
+<p>如我們之前對題目做的假設，如果每個 element 都被 <span>$\leq l$</span> 個 subset
+蓋住的話，相當於是設 <span>$A = 1, B = l$</span>，可以 derive 出一個 <span>$l$</span>-approx. algorithm。</p>
+
+<h2 id="algorithm-primal-dual-method">Algorithm - Primal-Dual Method</h2>
+
+<h3 id="core-concept">Core Concept</h3>
+
+<blockquote>
+<p>慢慢更動 dual solution 的 variable <span>$\alpha_j$</span> 並搭配 complentary slackness (儘量去 satisfy，不行就 relax 得更鬆) ，利用此去轉換出 primal solution 。</p>
+</blockquote>
+
+<h3 id="一個可行的-algorithm">一個可行的 Algorithm</h3>
+
+<p>Initially, <span>$\alpha_j = 0 \; \forall j$</span></p>
+
+<ol>
+<li>Pick any uncovered element <span>$e_j$</span></li>
+<li>Increase <span>$\alpha_j$</span> until <span>$\exists \, i \; s.t \; \underset{e_j \in S_i}{\sum} \alpha_j \, = \, \text{cost}(S_i)$</span> <span>$\Rightarrow \, \color{green}{ S_i \, \text{is tight}}$</span> (<span>$\color{red}{\text{更動 dual sol. } \, \land \, \text{搭配 C.S.}}$</span>)</li>
+<li>Add all <span>$\color{green}{\text{tight}} \, S_i$</span> to set cover
+(<span>$\color{red}{\text{轉換出 primal sol.}}$</span>)</li>
+</ol>
+
+<p>Repeat above procedure until all elements are covered</p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw2/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw2/">Problem Solving and Programming- hw2</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-revisited/">Advanced Algorithm - Metric Facility Location Revisited</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-revisited/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

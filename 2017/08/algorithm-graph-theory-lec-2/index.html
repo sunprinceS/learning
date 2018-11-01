@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Single Source Shortest Path - Bellman-Ford Algorithm">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Algorithm - Graph Theory - Lec 2 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Algorithm - Graph Theory - Lec 2</h1>
+  <h2>Single Source Shortest Path - Bellman-Ford Algorithm</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>31 Aug 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/algorithm">Algorithm</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/algorithm">Algorithm</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/graph-theory">Graph Theory</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>圖的一個常見應用場合是想找出某兩點之間的最短(/長)路徑，此時的邊權重又視為兩節點之間的距離。
+<!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。--></p>
+
+<p></p>
+
+<h2 id="shortest-path-problem">Shortest Path Problem</h2>
+
+<p>Given a graph <span>$G$</span>, a starting vertex <span>$s$</span> and edge cost <span>$c_e$</span><br />
+Want: Find the path with min. total cost from <span>$s \rightarrow v$</span> for some <span>$v$</span></p>
+
+<h2 id="bellman-ford-algorithm">Bellman-Ford Algorithm</h2>
+
+<h3 id="優點">優點:</h3>
+
+<ul>
+<li>可以處理有負邊的圖</li>
+<li>能偵測負環 ( <em>Negative Cycle</em> )</li>
+</ul>
+
+<h3 id="relax-鬆弛">Relax (鬆弛)</h3>
+
+<p>最短路徑演算法中常看到的名詞，先看程式碼</p>
+
+<pre><code class="language-python">def relax(u,v):
+  if d[v] &gt; d[u] + w(u,v):
+    d[v] = d[u] + w(u,v) # 當前最短路的 cost
+    π[v] = u # back-tracking
+</code></pre>
+
+<p>簡單來說就是如果遇到 cost 更小的路徑，就更新。<br />
+這也建構於最短路徑問題的特性，若從 <span>$s$</span> 到 <span>$v$</span> 的最短路徑中經過 <span>$u$</span> ，那麼可以確定子路徑 <span>$s \rightarrow u$</span> 亦為其兩點間的最短路。</p>
+
+<h3 id="psuedo-code">Psuedo Code</h3>
+
+<pre><code class="language-python"># Init
+for v in G(V):
+  d[v] = ∞ 
+  π[v] = NULL
+d[s] = 0
+
+# Iterate |V| - 1 times
+for i in range(|V| - 1):
+  for e(u,v) in E:
+    relax(u,v)
+</code></pre>
+
+<p>複雜度為 <span>$\mathcal{O}(VE)$</span></p>
+
+<h3 id="一些觀察">一些觀察</h3>
+
+<ul>
+<li><p>實際上也不用跑到 <span>$|V| - 1$</span> 次才停止，在某一回合如果沒有更新，那麼往後的回合也不可能更新了，此時便可以停止。</p></li>
+
+<li><p>遍歷邊的順序，影響了需要幾回合才能找到最短路，那麼最佳的順序是什麼呢?
+(<span>$\rightarrow$ see <a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Dijkstra</a></span>)</p></li>
+</ul>
+
+<h3 id="correctness">Correctness</h3>
+
+<ul>
+<li>假設圖上沒有負環，the shortest path from <span>$s \rightarrow v$</span> has <span>$\leq |V|-1$</span> edges</li>
+</ul>
+
+<p><em><strong>proof</strong></em> : By contradiction，若用了 <span>$\geq |V|$</span> 條邊，該路徑必存在 cycle (某些點被重複拜訪)，但負邊不存在，這麼做只是徒增 cost ( 故可把 cycle 拔掉 )，得證。</p>
+
+<ul>
+<li>跑 <span>$|V| - 1$</span> 個回合必可找到最短路，考慮 <span>$s \rightarrow v $</span> 的最短路徑，</li>
+</ul>
+
+<div>
+\[
+s \stackrel{c_1}{\longrightarrow} v_1 \stackrel{c_2}{\longrightarrow} v_2 \stackrel{c_3}{\longrightarrow} \cdots v_{k-1} \stackrel{c_k}{\longrightarrow} v
+\]
+</div>
+
+<p>After <code>relax</code>( s , <span>$v_1$</span> )  in round 1，d[<span>$v_1$</span>] = <span>$c_1$</span></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>relax</code>(<span>$v_1$</span>, <span>$v_2$</span> )  in round 2，d[<span>$v_2$</span>] = <span>$c_1 + c_2$</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>$\cdot$</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>$\cdot$</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>$\cdot$</span></p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>relax</code>(<span>$v_{k-1}$</span>, <span>$v$</span>) in round <span>$k$</span>，d[<span>$v$</span>] = <span>$c_1 + c_2 + \cdots + c_k$</span></p>
+
+<p>可知在 <span>$k$</span> 回合內必可完成更新，又 <span>$k \leq |V| - 1$</span></p>
+
+<p>由上方這個 Claim ，如果 d[<span>$v$</span>] 在 <span>$|V|$</span> round 有所改動的話，代表了負環存在</p>
+
+<h3 id="implementation">Implementation</h3>
+
+<script src="https://gist.github.com/sunprinceS/5c93f48db7d3b476f3829becbc2f2743.js"></script>
+
+<p>做兩次 Bellman-Ford ，偵測出所有負環。<br />
+第二次 Bellman-Ford 中，邏輯判斷將d[<span>$v$</span>] 設成 <span>$- \infty$</span> 的情況共有兩個</p>
+
+<ul>
+<li><span>$- \infty$</span> 的傳染性:</li>
+</ul>
+
+<pre><code class="language-cpp">if(dist[e.edge.first] == INT_MIN)
+        dist[e.edge.second] = INT_MIN;
+</code></pre>
+
+<ul>
+<li>negative cycle 存在於 <span>$s \rightarrow v$</span> 的最短路中，則將 d[<span>$v$</span>] 設成 <span>$- \infty$</span></li>
+</ul>
+
+<pre><code class="language-cpp">if(dist[e.edge.first] != INT_MAX &amp;&amp; dist[e.edge.first] + e.weight &lt; dist[e.edge.second])
+        dist[e.edge.second] = INT_MIN;
+</code></pre>
+
+<p>為什麼還需要再跑 <span>$|V| - 1$</span> 次？<br />
+是因為要將 <span>$- \infty$</span> 傳染遍整個環，需要負環長度個回合，而最大的負環長度 <span>$\leq |V| - 1$</span>。</p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-1/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-1/">Algorithm - Graph Theory - Lec 1</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-3/">Algorithm - Graph Theory - Lec 3</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-3/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

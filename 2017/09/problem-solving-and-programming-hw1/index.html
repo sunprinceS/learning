@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Warmup / Greedy Algorithms / Dynamic Programming">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>Problem Solving and Programming- hw1 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Problem Solving and Programming- hw1</h1>
+  <h2>Warmup / Greedy Algorithms / Dynamic Programming</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>12 Sep 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/online-judge">Online-Judge</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/programming">Programming</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/greedy">Greedy</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/dp">DP</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kattis">Kattis</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/kth">KTH</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>在 KTH 交換時選到的神課！想說把題解稍微紀錄一下 ✌️<br />
+<a href="https://kth.kattis.com/problemgroups/617" target="_blank">題目連結</a></p>
+
+<p></p>
+
+<h2 id="pa-spiderman-s-workout">pA - Spiderman&rsquo;s Workout</h2>
+
+<p>蜘蛛人要爬上爬下！<strong>依序</strong>給一串要爬的距離數列 <span>$d_1,d_2,\cdots,d_n$</span>，每次可以選爬上或下，但有以下目標。</p>
+
+<ol>
+<li><p>爬完 <span>$d_n$</span> 後要回到地面，否則就是非法解。</p></li>
+
+<li><p>不能爬得比地面低。</p></li>
+
+<li><p>在過程中，希望能 minimize 經歷的最高高度。</p></li>
+</ol>
+
+<p>思考一下，可以用 <strong>DP</strong> 來解。</p>
+
+<p><code>$$
+H[i][h] = \text{min. distance have experienced in order to achieve} \; h \; \text{at step} \;i
+$$</code></p>
+
+<p>轉移式如以下:</p>
+
+<p><code>$$
+H[i][h] = \max(h, \min (\underset{\color{blue}{爬上}}{H[i-1][h-d_i]}, \underset{\color{blue}{爬下}}{H[i-1][h+d_i]}))
+$$</code></p>
+
+<p>初始 state 為 <span>$H[1][d_1]$</span> (一開始只能爬上)<br />
+最後輸出 <span>$H[n][0]$</span>，如果是 <code>INT_MAX</code> 的話，代表不存在任何方法走到
+這個 state，輸出 <code>IMPOSSIBLE</code>。</p>
+
+<h2 id="pb-help">pB - Help</h2>
+
+<p>給定兩個由 word 們組成的字串，當中有些 word 可以互相替代 (以 <code>&lt;[pattern]&gt;</code> 表示)，想問這兩個字串是否相等( 兩個字串對彼此的替代 word 是分開看的)。
+一開始直接迴圈吃了 WA，仔細想想以下例子</p>
+
+<p>&lt;d&gt; &lt;d&gt; &lt;b&gt; &lt;b&gt; b<br />
+&nbsp;&nbsp;e &nbsp;&nbsp;&lt;c&gt; &lt;c&gt; &lt;a&gt; &lt;a&gt;</p>
+
+<p>和</p>
+
+<p>&lt;d&gt; &lt;d&gt; &lt;b&gt; &lt;b&gt; b<br />
+&nbsp;&nbsp;b &nbsp;&nbsp;&lt;c&gt; &lt;c&gt; &lt;a&gt; &lt;a&gt;</p>
+
+<p><code>&lt;[pattern]&gt;</code> 不是簡單的幾層替代，要用<strong>遞迴</strong>的方法去把他們一一取代。</p>
+
+<pre><code class="language-python">def solve(s1,s2):
+    for i in range(len(s1)):
+        if is_placeholder(s1[i]) and not is_placeholder(s2[i]):
+            replace(s1,s1[i],s2[i])
+            return solve(s1,s2)
+        if not is_placeholder(s1[i]) and is_placeholder(s2[i]):
+            replace(s2,s2[i],s1[i])
+            return solve(s1,s2)
+    ## until now, no more placeholder mapping issue
+    for i in range(len(s1)):
+        if is_placeholder(s1[i]) and is_placeholder(s2[i]):
+            s1[i] = s2[i] = 'hao'
+    Finally, check whether 2 strings matches 
+</code></pre>
+
+<h2 id="pc-introspective-caching">pC - Introspective Caching</h2>
+
+<p>Cache問題，假定有個 oracle 知道每個物件被 call 的順序，給定 cache size 及不同物件的個數，想問 cache miss 的次數有幾次。</p>
+
+<p>我們能夠決定的是，就是當 cache 滿了，我們要把某個物件移掉時，要移誰？<br />
+一個 <strong>Greedy</strong> 的 criteria 是，看誰下一次最慢被用到，就先把他移掉，然後
+maintain 一個 priority heap ，實際去模擬此問題的運作。</p>
+
+<p>簡單來說，</p>
+
+<pre><code class="language-cpp">struct Node{
+  int idx;//哪個物件
+  int next_tid;// 下次被 call 是在第幾個時刻
+  Node(int idx,int next_tid): idx(idx),next_tid(next_tid){}
+  bool operator &lt; (Node rhs) const{
+    return next_tid&lt; rhs.next_tid;
+  }
+};
+</code></pre>
+
+<p>實際模擬一下</p>
+
+<pre><code class="language-cpp">priority_queue&lt;Node&gt; cache;
+int num_miss = 0;
+int cache_size = 0;
+for(int i=0;i&lt;num_call;++i){
+  if(!b_cached[queries[i]]){ // miss
+    if(cache_size == c){ //full
+        b_cached[cache.top().idx] = false;
+        cache.pop();
+      }
+    else{
+      ++cache_size;
+    }
+    b_cached[queries[i]] = true;
+    ++num_miss;
+  }
+  cache.push(Node(queries[i],next_tids[i]));
+}
+</code></pre>
+
+<p><code>next_tids[i]</code> 表示 query[i]要 call的那個物件，下次是何時被 call。</p>
+
+<p>題目還沒寫很多，但我覺得這題蠻棒的XD，Greedy 的題目也頗神奇，不知道有沒有其他 criteria 就是😎</p>
+
+<h2 id="pd-troll-hunt">pD - Troll Hunt</h2>
+
+<p>水題！</p>
+
+<h2 id="pe-aspen-avenue">pE - Aspen Avenue</h2>
+
+<p>還沒AC&hellip;</p>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-4/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-4/">Algorithm - Graph Theory - Lec 4</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-problem/">Advanced Algorithm - Metric Facility Location Problem</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-problem/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

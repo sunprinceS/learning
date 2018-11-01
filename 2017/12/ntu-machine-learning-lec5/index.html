@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Training vs Testing">
+  <meta name="generator" content="Hugo 0.50" />
+
+  <title>NTU Machine Learning - Lec5 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>NTU Machine Learning - Lec5</h1>
+  <h2>Training vs Testing</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>30 Dec 2017</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/machine-learning-foundation">Machine Learning Foundation</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/machine-learning">Machine Learning</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>上一講提到了在 hypothesis set <span>$\mathcal{H}$</span> 為有限，且sample size <span>$|\mathcal{D}|$</span> 足夠大的情況下，是 PAC-learnable 的。但當 <span>$|\mathcal{H}| \, \rightarrow \, \infty$</span>的時候呢？ (e.g 2D linear perceptron)</p>
+
+<p></p>
+
+<h2 id="recap-of-feasibility-of-learning">Recap of Feasibility of Learning</h2>
+
+<ol>
+<li><span>$E_o(g) \approx E_i(g)$</span> ?</li>
+<li><span>$E_i(g) \rightarrow 0$</span> ?</li>
+</ol>
+
+<p>Hoeffding Ineq. 對於再複雜的 ground truth function <span>$f$</span> 及 hypothesis function <span>$h$</span> 均是成立的，1. 據此必是正確，但這僅能 verify 我們得到的結果，還是沒有告訴我們在複雜的 <span>$f$</span> (usually 不能只依靠一個 hypothesis candidate <span>$h$</span>，而是必須從 size 無限大的 hypothesis set <span>$\mathcal{H}$</span> 去挑選)下，學習是否可行？</p>
+
+<h2 id="some-observation-does-the-union-bound-too-loose">Some observation: Does the Union Bound too loose?</h2>
+
+<p>From 前一講最後，</p>
+
+<div>
+\[
+
+\Pr_D[\text{BAD} \, \text{for} \, \textcolor{orange}{\mathcal{H}}] \leq 2 \, M \, \exp(-2 \epsilon^2 N)
+\]
+</div>
+
+<p>其中，<span>$M$</span> 是來自 Union Bound 將各個 <span>$\underset{D}{\Pr}\,[\text{BAD} \, \text{for} \, \textcolor{orange}{h_n}]$</span> 做加總，等號成立於事件彼此互斥。</p>
+
+<p>事件彼此互斥？也就是說會讓 <span>$h_n$</span> 壞掉的 <span>$\mathcal{D}$</span> 各自不同，但想想這其實不合理。就拿 perceptron 來說好了，若 <span>$h_1 \approx h_2$</span> ，幾何上來說，這兩個 hyperplane 其實是非常<strong>靠近</strong>的，對大部分的數據點，均會給出一樣的 perdiction ，所以會讓 <span>$h_1$</span> 壞掉的 <span>$\mathcal{D}$</span> ，也 <strong>probably</strong> 會讓 <span>$h_2$</span> 壞掉。</p>
+
+<h2 id="effective-number-of-hypotheses">Effective number of Hypotheses</h2>
+
+<p>首先，我們先將 <span>$h$</span> 們做適當的分群，從數據點的角度來看，會 predict 出相同結果的 hypothesis set 視為<strong>相同</strong>的一群 (詳細範例可以看講義👀)，對 binary classification 來說，每一群又稱為一個二元分類器 (<em>dichotomy</em>)。<br />
+給定數據點 <span>$\mathbf{x}_1 \sim \mathbf{x}_N$</span>，我們可以定義不同的 dichotomy ， <span>$\mathcal{H}(\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N)$</span> 為這些 dichotomies 的集合(跟原先的 <span>$\mathcal{H}$</span> 有何不同呢？可以想成若 <span>$h_i, h_j$</span> 在 training data 上結果相同，則只會對應到當中的 <strong>一個</strong> dichotomy)。而我們想以這個集合的大小 (也就是分群數)，去取代原先的 <span>$M$</span> 。</p>
+
+<h3 id="growth-function-span-m-h-span">Growth Function <span>$m_H$</span></h3>
+
+<p>可以發現，隨著 sample 的 <span>$\mathcal{D}$</span> 不同，分群的結果也會不同，
+in order to generalization ，我們定義 growth function <span>$m_H$</span> 為當中
+的 upper bound ，也是我們之後要拿來取代 <span>$M$</span> 的量。</p>
+
+<p><code>$$
+m_H(N) = \underset{\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N \in \mathcal{X}}{\max} |\mathcal{H}(\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N)|
+$$</code></p>
+
+<p>其中 <span>$m_H(N) \leq 2^N$</span> (which is easy to see)</p>
+
+<h2 id="span-m-h-span-is-poly"><span>$m_H$</span> is POLY?</h2>
+
+<p>回到最上方的式子，隨著 sample size <span>$N$</span> 的增長，其壓低壞事發生機率的能力是 <strong>EXP</strong> ，所以我們只要能證明 <span>$m_H$</span> 為 <strong>POLY</strong> ，便可以 claim 說，在 <span>$N$</span> 足夠大的情況下， PAC-learnable (even <span>$\mathcal{H}$</span> is infinite)!</p>
+
+<p>可以在講義看到幾個簡單的例子(👀 1D perceptron, 1D interval, 2D contour)，並求出其 growth function 的 analytical form，但很多時候要寫下這個 form 並不那麼簡單，然而，其實我們關心的只是它的 order，或者說他是否為 <strong>POLY</strong> 罷了。為了方便討論，以下做幾個定義。</p>
+
+<h3 id="shatter">Shatter</h3>
+
+<div>
+\[
+\text{If} \: \mathcal{H} \: \text{can \textbf{shatter} N points} \Leftrightarrow m_H(N) = 2^N
+\]
+</div>
+
+<p>解釋是說，所擁有的 dichotomies ，可以應付training data中所有可能的分群情況。<br />
+(<span>$\exists \, h $</span>  s.t <span>$h(\mathbf{x}_i) = f(\mathbf{x}_i) \; \forall i=1 \sim N$</span>)，直覺來想，這代表了這個 Hypothesis set 很強，但同時也表示了需要搜索的數量很多，呈現在 growth function 為 <strong>EXP</strong> 。</p>
+
+<p>※注意到 <span>$m_H(N)$</span> 是指<strong>最大</strong>的 dichotomies set size，所以 <span>$m_H(N)$</span>只能說明存在<strong>至少一組</strong> data 可被 shatter ，但不是<strong>所有</strong>的 data 都可以被 shatter。<br />
+那些<strong>退化</strong>的情況反而是不能被 shatter 的特例，像是 2 維平面上，點為 colinear 的話， 3 個點 linear perceptron 便無法處理了，又或者像是 convex set 中，點如果沒有落在圓上，也是無法被 shatter 的</p>
+
+<h3 id="break-point">Break Point</h3>
+
+<p>然而，很多時候我們對資料有些洞見，知道他滿足某種性質，不一定要找那種可以應付所有情況的 Hypothesis set，拿 Linear perceptron 所處理的對象為例，我們假設資料是線性可分(i.e 對線性不可分的資料無法 shatter)，那麼便不需要用到 convex set 這麼強的 Hypothesis set 了 (所謂殺雞焉用牛刀)</p>
+
+<div>
+\[
+\text{If no data set of size } \, k \, \text{can be \textbf{shattered} by} \, \mathcal{H}, \;  k \, \text{is the \textbf{break point} for } \, \mathcal{H}
+\]
+</div>
+
+<p>簡單來說就是， <span>$\exists \; k \in \mathbb{N} \, s.t. \, m_H(k) &lt; 2^{k}$</span> ,which is <strong>POLY</strong><br />
+(當 <span>$N \geq k$</span> 時，開始出現 <span>$\mathcal{H}$</span> 無法處理，或者說不考慮的情況)</p>
+
+<p>※承 shatter 的討論，這裡必須要確保 <strong>對所有</strong> size 為 <span>$k$</span> 的 data，
+都無法被 shatter (不存在只有特例才有的那些<strong>特性</strong> )，才能說 <span>$k$</span> 為
+hypothesis set 的 break point 。<br />
+所以如果今天只知道某一組 data ，無法被
+<span>$\mathcal{H}$</span> 給 shatter ，<strong>是無法判定 break point 為多少的</strong> (有可能是 <span>$k \geq N$</span>中，被造出的特例；亦有可能如同我們直覺想的，因為 <span>$k &lt; N$</span>，所以任一組當然找不到)。</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/05_handout.pdf">林軒田老師的講義</a></li>
+</ul>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec4/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec4/">NTU Machine Learning - Lec4</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec6/">NTU Machine Learning - Lec6</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec6/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+
