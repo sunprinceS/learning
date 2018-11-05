@@ -6,23 +6,24 @@ title =  "NTU Machine Learning - Lec13"
 topics = ["Machine Learning Foundation"]
 +++
 
-上一講提到了 **Nonlinear transform** 來處理 data 並不 linear separable 的情形，相當於讓 ML model 具備了更強的能力，但在這麼做的同時，也提高了 hypothesis set 的 VC dimension，使得 model 的 complexity 增加，變得不容易 generalizaion ，而這也是這一講要探討的 overfitting 。
+上一講提到了利用 **nonlinear transform** 來處理 data 並不 linear separable 的情形，讓 ML model 具備了更強的 fitting 能力，但在這麼做的同時，也提高了 hypothesis set 的 VC dimension，使得 model 的 complexity 增加，變得不容易 generalizaion ，而這也是這一講要探討的 overfitting 。
 
 <!--more-->
 
 ## 比喻
 
-如果將 overfitting 比喻成車禍的話，用過於複雜的 model 就像過快一樣，而 noisy 的
-data 則如同不平的路面，有限的 data 則是我們所觀察到的 partial 視野，那麼 **noise** 及 **limited dataset size** 是怎麼造成 overfitting 的呢？
+如果將 overfitting 比喻成車禍的話，用過於複雜的 model 就像車速過快一樣，而 noisy 的
+data 則如同不平的路面，有限的 data 則是我們所觀察到的 partial 視野。
+那更細部來看， **noise** 及 **limited dataset size** 是怎麼造成 overfitting 的呢？
 
 ## 實驗
 <center><img src="/img/post/L13-overfitting.png" width="70%" style="border-radius: 0%;"></center>
 
 上面的圖呈現了兩個實驗，並介紹了一個較不直覺的發現。
 
-我們拿 2 次及 10 次的 polynomial model 去 fit 有 noise 的 10 次 polynomial 及
+我們分別拿 2 次及 10 次的 polynomial model 去 fit 有 noise 的 10 次 polynomial 及
 noiseless 的 50 次 polynomial，發現 10 次的 function 都表現的比較差。對於第一個
-實驗還好理解，過於複雜的 model 雜訊也 fit 進去，結果理所當然比較差；然而第二個實
+實驗還好理解，過於複雜的 model 把雜訊也 fit 進去，結果理所當然比較差；然而第二個實
 驗結果就比較反直覺一點，對於 noiseless 的複雜 model ，用高次的 model 結果反而會
 比較差？
 
