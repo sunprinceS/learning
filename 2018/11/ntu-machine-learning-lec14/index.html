@@ -4,10 +4,10 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Harzard of Overfitting">
+  <meta name="description" content="Regularization">
   <meta name="generator" content="Hugo 0.50" />
 
-  <title>NTU Machine Learning - Lec13 &middot; Stay hungry. Stay foolish </title>
+  <title>NTU Machine Learning - Lec14 &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -235,8 +235,8 @@
 
 
 <div class="header">
-  <h1>NTU Machine Learning - Lec13</h1>
-  <h2>Harzard of Overfitting</h2>
+  <h1>NTU Machine Learning - Lec14</h1>
+  <h2>Regularization</h2>
 </div>
 <div class="content">
 
@@ -244,7 +244,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>31 Oct 2018</time>
+    <time>02 Nov 2018</time>
   </div>
   
 
@@ -277,64 +277,121 @@
 </div>
 
 
-  <p>上一講提到了利用 <strong>nonlinear transform</strong> 來處理 data 並不 linear separable 的情形，讓 ML model 具備了更強的 fitting 能力，但在這麼做的同時，也提高了 hypothesis set 的 VC dimension，使得 model 的 complexity 增加，變得不容易 generalizaion ，而這也是這一講要探討的 overfitting 。</p>
+  <p>前一講提到了無論是 stochastic noise 或是 ground truth 過複雜而引進的 deterministic noise ，對本身就複雜 (VC dimension 高) 的 model 而言，overfitting 是很容易發生的，而解決之道其一就是這一講所要介紹的 Regularization。</p>
 
 <p></p>
 
-<h2 id="比喻">比喻</h2>
+<p>除了藉由 cleaning 或 augumentation 等改變原始 data distribution <span>$\mathcal{D}$</span> 的方法之外， regularization 派的方法主要藉由降低 hypothesis set 的複雜度來減少 <span>$\Omega$</span> 的 penalty term 以縮小 <span>$E_o$</span> 及 <span>$E_i$</span> 的差距。如以下：</p>
 
-<p>如果將 overfitting 比喻成車禍的話，用過於複雜的 model 就像車速過快一樣，而 noisy 的
-data 則如同不平的路面，有限的 data 則是我們所觀察到的 partial 視野。
-那更細部來看， <strong>noise</strong> 及 <strong>limited dataset size</strong> 是怎麼造成 overfitting 的呢？</p>
+<div>
+\[
+E_o(h) \leq E_i(h) + \Omega(\mathcal{H}) \quad \forall h \in \mathcal{H}
+\]
+</div>
 
-<h2 id="實驗">實驗</h2>
+<p>Regularization 有很多種實現的方式，而這裡會介紹最常見的一種 - Weight Decay ，藉
+由 prefer 在 <span>$\mathbf{0}$</span> 附近的 <span>$h$</span> (i.e <span>$||h||$</span> is small)來減少 overfitting 。</p>
 
-<p><center><img src="https://sunprinces.github.io/learning/img/post/L13-overfitting.png" width="70%" style="border-radius: 0%;"></center></p>
+<h2 id="general-idea">General Idea</h2>
 
-<p>上面的圖呈現了兩個實驗，並介紹了一個較不直覺的發現。</p>
+<div>
+\[
+Loss = TaskLoss(D;\mathbf{w}) + ||\mathbf{w}||^2
+\]
+</div>
 
-<p>我們分別拿 2 次及 10 次的 polynomial model 去 fit 有 noise 的 10 次 polynomial 及
-noiseless 的 50 次 polynomial，發現 10 次的 function 都表現的比較差。對於第一個
-實驗還好理解，過於複雜的 model 把雜訊也 fit 進去，結果理所當然比較差；然而第二個實
-驗結果就比較反直覺一點，對於 noiseless 的複雜 model ，用高次的 model 結果反而會
-比較差？</p>
+<p>到這裡可能多數人會有一個疑問，為什麼選擇 norm 小的 model 就會是好的選擇呢？</p>
 
-<h2 id="explanation">Explanation</h2>
+<p>Heuristically 來說， Regularization 想解決的是 noise 的影響(non-smooth and high-freq)，而我們想 model 的那
+些 ground truth <strong>empirically</strong> 來說參數都不太大 (strong hypothesis &hellip; lol)，所對應的 surface 也是較為平滑的，這也是為什麼 weight decay 會有用的原因。</p>
 
-<p>事實上，對 complexity 小的 model 而言，要 fit 的 target 如果過於複雜，使得其不
-論怎麼 optimize 都無法 fit 時，這中間的 gap (i.e target complexity) 之作用就如
-同 noise 一樣 (but it&rsquo;s <strong>deterministic</strong>)。</p>
+<p>相信這大概沒有回答到問題，不如來算點數學吧☺</p>
 
-<h2 id="complete-analysis">Complete Analysis</h2>
+<h2 id="step-back-to-simple-low-order-model">Step back to simple (low-order) model</h2>
 
-<p>以下兩張圖分別以 Noise 的大小及 Target function 作為變因，觀察 model complexity
-與 overfitting 之間的關係。
-<center><img src="https://sunprinces.github.io/learning/img/post/overfit-test.png" width="70%" style="border-radius: 0%;"></center></p>
+<p>回顧前一講的兩個實驗，low-order 的 hypothesis <span>$\mathcal{H}_2$</span>受到 overfitting 的影響較
+high-order 的 <span>$\mathcal{H}\scriptstyle 10$</span>來說較不嚴重，所以不妨限制
+<span>$\mathcal{H} \scriptstyle 10$</span> 的某些係數為 <span>$0$</span> 來降 order 。</p>
 
-<ul>
-<li><p>Noise 為變因的實驗：隨著 noise 的增強，複雜的 model 需要更多 data 才能避免
-overfiting ， they are more <strong>sensitive to noise</strong> 。</p></li>
+<p><center><img src="https://sunprinces.github.io/learning/img/post/stepback1.png" width="70%" style="border-radius: 0%;"></center></p>
 
-<li><p>Target Complexity 為變因的實驗：大部分走勢與上個實驗相同，在左下角那裡有塊變化
-劇烈的區域 (大概落在高次 model 的 VC dimension )，若 target complexity 在那個
-值以下，多給幾個 data point 的影響很大 (which is also inuitive) 。</p></li>
-</ul>
+<p>不過這樣還蠻愚蠢的，那打從一開始用 <span>$\mathcal{H}_2$</span> 就好了😅</p>
 
-<h2 id="howt-to-overcome-overfitting">Howt to overcome overfitting</h2>
+<h2 id="looser-but-hard-constraint">Looser but Hard Constraint</h2>
 
-<ul>
-<li>Start from simple model: 一開始不要用過複雜的 model (一開始先慢慢開)</li>
-<li>Data cleaning/pruning: 消弭 noise (讓路變平)</li>
-<li>Data hinting: 做 Data Augumentation，利用現有的道路資訊，去推出更多相關的 info
-， Need more domain knowledge</li>
-<li>Regularization: 煞車 (more on next lecture)</li>
-<li>Validation: 選出 generalize 最好的 model (carefully monitor)</li>
-</ul>
+<p>所以我們稍稍放寬限制，限定只要係數不為 <span>$0$</span> 的 <span>$w_n$</span> 不要太多就好，如以下</p>
+
+<div>
+\[
+\sum_n^{10} 1\!\!1[w_n \neq 0] \leq 3
+\]
+</div>
+
+<p>這樣的好處是我們比原先 low order 的 <span>$\mathcal{H}_2$</span> 更具彈性，但同
+時又比 <span>$\mathcal{H} \scriptstyle 10$</span> 還安全，然而， boolean
+的 constraint 是很難 optimize 的 (which is NP-hard)，所以我們不妨將其轉成較好 optimize 的形式 (但同時又 align 我們原先的 motivation)</p>
+
+<h2 id="soft-constraint">Soft Constraint</h2>
+
+<p>Given <span>$C \geq 0$</span>, we have regularized <span>$\mathcal{H}( C )$</span>
+with the following constraint</p>
+
+<div>
+\[
+\sum_n^{10} w_n^2 \leq C
+\]
+</div>
+
+<p><strong>Remark:</strong> 當 <span>$C$</span> 足夠大的時候，其實對解完全不影響 (i.e 就 linear
+regression 這種可以找 closed-form 的問題來說，只要 <span>$\sqrt{C}$</span> 的
+高維球有把原先的 optimal sol <span>$\mathbf{w}_{lin}$</span> 包進去，
+regularized term 就不會發揮作用)</p>
+
+<h2 id="geometric-view">Geometric View</h2>
+
+<p>那麼在 regularization 下，找到的 <span>$\mathbf{w}_{reg}$</span> 有什麼特性呢
+？從幾何上來看</p>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/geo-regularization.png" width="40%" style="border-radius: 0%;"></center></p>
+
+<p>所有的合法解會在 <span>$\mathbf{w}^T \mathbf{w} = C$</span> 上的球移動，而停止的 criteria 是 <span>$\nabla E_{in}$</span> 已經再沒有在球上移動的切分量，亦即</p>
+
+<div>
+\[
+\mathbf{w}_{reg} \parallel - \nabla E_{in} 
+\]
+</div>
+
+<p>而我們想找到一個 <span>$\lambda &gt; 0$</span> and <span>$\mathbf{w}_{reg}$</span>
+滿足</p>
+
+<div>
+\[
+\nabla E_{in}(\mathbf{w}_{reg}) + \frac{2 \lambda}{N} = 0
+\]
+</div>
+
+<p><strong>Remark:</strong> <span>$\lambda$</span> 稱為 <strong>Lagrange Multiplier</strong> ，是一個在
+constraint 下 解 optimization 問題的 方法 <del>trick</del>。</p>
+
+<h2 id="equivalent-augumented-error">Equivalent Augumented Error</h2>
+
+<p>要解上方那個 Equation 等價於 minimize 以下這個 objective</p>
+
+<div>
+\[
+E_{aug}(\mathbf{w}) = E_i(\mathbf{w}) + \frac{\lambda}{N} \mathbf{w}^T\mathbf{w}
+\]
+</div>
+
+<p><strong>Remark</strong>: 對不同的 <span>$C$</span> ，均有對應的 <span>$\lambda$</span> ，而 <span>$E_{aug}$</span> 將 <span>$\sqrt{C}$</span>-hypersphere 這個 constraint 轉成藉由調控 <span>$\lambda$</span> 大小的 unconstrained optimization 問題，實務上也比較好做。</p>
+
+<p><strong>Remark:</strong> 技術上來說，在 unconstrained optimization 中，我們還是享有整個 <span>$\mathcal{H}$</span> 的 flexibility 。</p>
 
 <h2 id="reference">Reference</h2>
 
 <ul>
-<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/13_handout.pdf">林軒田老師的講義</a></li>
+<li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/14_handout.pdf">林軒田老師的講義</a></li>
 </ul>
   
   <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
@@ -343,13 +400,13 @@ overfiting ， they are more <strong>sensitive to noise</strong> 。</p></li>
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="https://sunprinces.github.io/learning/2018/05/beyond-rnn-lec1/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://sunprinces.github.io/learning/2018/10/ntu-machine-learning-lec13/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="https://sunprinces.github.io/learning/2018/05/beyond-rnn-lec1/">Beyond RNN - Lec1</a>
+      <a href="https://sunprinces.github.io/learning/2018/10/ntu-machine-learning-lec13/">NTU Machine Learning - Lec13</a>
     </nav>
     
   </div>
@@ -358,14 +415,8 @@ overfiting ， they are more <strong>sensitive to noise</strong> 。</p></li>
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="https://sunprinces.github.io/learning/2018/11/ntu-machine-learning-lec14/">NTU Machine Learning - Lec14</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="https://sunprinces.github.io/learning/2018/11/ntu-machine-learning-lec14/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://sunprinces.github.io/learning/2018/11/ntu-machine-learning-lec14/</loc>
+    <lastmod>2018-11-02T10:23:24+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/2018/10/ntu-machine-learning-lec13/</loc>
     <lastmod>2018-10-31T11:59:24+08:00</lastmod>
   </url>
@@ -417,13 +422,13 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/machine-learning/</loc>
-    <lastmod>2018-10-31T11:59:24+08:00</lastmod>
+    <lastmod>2018-11-02T10:23:24+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/machine-learning-foundation/</loc>
-    <lastmod>2018-10-31T11:59:24+08:00</lastmod>
+    <lastmod>2018-11-02T10:23:24+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -435,7 +440,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/ntu/</loc>
-    <lastmod>2018-10-31T11:59:24+08:00</lastmod>
+    <lastmod>2018-11-02T10:23:24+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -453,7 +458,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/post/</loc>
-    <lastmod>2018-10-31T11:59:24+08:00</lastmod>
+    <lastmod>2018-11-02T10:23:24+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -501,7 +506,7 @@
   
   <url>
     <loc>https://sunprinces.github.io/learning/</loc>
-    <lastmod>2018-10-31T11:59:24+08:00</lastmod>
+    <lastmod>2018-11-02T10:23:24+08:00</lastmod>
     <priority>0</priority>
   </url>
   

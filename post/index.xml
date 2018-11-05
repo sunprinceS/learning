@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Wed, 31 Oct 2018 11:59:24 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 02 Nov 2018 10:23:24 +0800</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>NTU Machine Learning - Lec14</title>
+      <link>https://sunprinces.github.io/learning/2018/11/ntu-machine-learning-lec14/</link>
+      <pubDate>Fri, 02 Nov 2018 10:23:24 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2018/11/ntu-machine-learning-lec14/</guid>
+      <description>&lt;p&gt;前一講提到了無論是 stochastic noise 或是 ground truth 過複雜而引進的 deterministic noise ，對本身就複雜 (VC dimension 高) 的 model 而言，overfitting 是很容易發生的，而解決之道其一就是這一講所要介紹的 Regularization。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>NTU Machine Learning - Lec13</title>
@@ -18,7 +29,7 @@
       <pubDate>Wed, 31 Oct 2018 11:59:24 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/10/ntu-machine-learning-lec13/</guid>
-      <description>&lt;p&gt;上一講提到了 &lt;strong&gt;Nonlinear transform&lt;/strong&gt; 來處理 data 並不 linear separable 的情形，相當於讓 ML model 具備了更強的能力，但在這麼做的同時，也提高了 hypothesis set 的 VC dimension，使得 model 的 complexity 增加，變得不容易 generalizaion ，而這也是這一講要探討的 overfitting 。&lt;/p&gt;
+      <description>&lt;p&gt;上一講提到了利用 &lt;strong&gt;nonlinear transform&lt;/strong&gt; 來處理 data 並不 linear separable 的情形，讓 ML model 具備了更強的 fitting 能力，但在這麼做的同時，也提高了 hypothesis set 的 VC dimension，使得 model 的 complexity 增加，變得不容易 generalizaion ，而這也是這一講要探討的 overfitting 。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
