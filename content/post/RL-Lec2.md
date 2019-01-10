@@ -2,7 +2,7 @@
 date = "2019-01-08T10:59:24+08:00"
 description = "Improvements of naive REINFORCE algorithm"
 tags = ["RL","NTU","CS294"]
-title =  "Reinforcemtn Learning - Lec2"
+title =  "Reinforcement Learning - Lec2"
 topics = ["Reinforcement Learning"]
 +++
 

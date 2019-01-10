@@ -2,7 +2,7 @@
 date = "2019-01-07T11:59:24+08:00"
 description = "Policy-based Algorithm"
 tags = ["RL","NTU","CS294"]
-title =  "Reinforcemtn Learning - Lec1"
+title =  "Reinforcement Learning - Lec1"
 topics = ["Reinforcement Learning"]
 +++
 
@@ -52,7 +52,7 @@ $$``
 \end{align}
 $$``
 
-直覺來說，相同於傳統 suervised learning 的 setting ，但更新的步伐大小，跟 reward 成線性關係 (i.e try & error，哪個方向好就走多一點，weighted by reward)
+直覺來說，相同於傳統 supervised learning 的 setting ，但更新的步伐大小，跟 reward 成線性關係 (i.e try & error，哪個方向好就走多一點，weighted by reward)
 
 而實務上更新的時候，我們是對每一個 <span>$(a,s)$</span> 做更新 (因 <span>$\pi$</span> 能管的也只有 Given <span>$s$</span>，選擇採取 <span>$a$</span> 的機率)
 
@@ -62,6 +62,8 @@ $$``
 $$``
 
 **Remark:** Conveninet identity <span>$\nabla f(x) = f(x) \nabla \log f(x)$</span>
+
+**Remark:** 在最後的 sampling approximation 中，我們是以 <span>$r(\tau)$</span> (final reward) 來當作 <span>$Q^{\pi_\theta}(s,a)$</span>的估計值。之後的Actor-Critic Algorithm 會介紹其他估計值 (在 variance 跟 accuracy 與否間做 trade-off)。
 
 ## Policy Gradient 101 - REINFORCE algorithm
 1. Fix policy, sample {<span>$\tau_i$</span>} from <span>$\pi(a|s)$</span>
