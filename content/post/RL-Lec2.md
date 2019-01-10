@@ -30,7 +30,7 @@ Action taken at <span>$t^{\prime} (> t)$</span> cannot affect reward at <span>$t
 
 **Remark:** 把 gradient 的 weight 稱為 **Advantage function** <span>$A^\pi(s_t,a_t)$</span>\\
 意義上為 "How good it is if we take <span>$a_t$</span> than other action at
-<span>$s_t$</span>" (之後會提到的 <span>$Q(s,a)$</span>)
+<span>$s_t$</span>" 。
 
 ## Off-policy
 
