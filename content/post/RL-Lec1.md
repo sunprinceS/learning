@@ -1,5 +1,5 @@
 +++
-date = "2019-01-07T11:59:24+08:00"
+date = "2019-01-01T11:59:24+08:00"
 description = "Policy-based Algorithm"
 tags = ["RL","NTU","CS294"]
 title =  "Reinforcement Learning - Lec1"

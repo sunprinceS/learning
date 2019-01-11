@@ -1,5 +1,5 @@
 +++
-date = "2019-01-11T10:59:24+08:00"
+date = "2019-01-10T10:59:24+08:00"
 description = "Actor-Critic Algorithm"
 tags = ["RL","NTU","CS294"]
 title =  "Reinforcement Learning - Lec7"

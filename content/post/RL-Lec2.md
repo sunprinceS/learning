@@ -1,5 +1,5 @@
 +++
-date = "2019-01-08T10:59:24+08:00"
+date = "2019-01-03T10:59:24+08:00"
 description = "Improvements of naive REINFORCE algorithm"
 tags = ["RL","NTU","CS294"]
 title =  "Reinforcement Learning - Lec2"
@@ -19,6 +19,15 @@ sample 的 variance 及 off-policy (使得 data 更有效地被利用)。
 想法是可能每個 <span>$\tau$</span>所收到的 reward 都是正的，在下一次更新後，
 policy 更會 prefer 去選擇這些 <span>$(s,a)$</span> ，但因為畢竟我們是用 sample 的方式，尚有許多 <span>$(s,a)$</span> 沒有遇到，reward 相當於是 <span>$0$</span> ，但其**可能**是個比平均好的選擇，在原先的 policy update 卻不會被 explore 。\\
 簡單來說就是要 normlize reward。
+
+**Remark:** 減去這個項所得的新 weight ，相較原先的 final reward 是 unbiased sample。
+
+<div>
+\[
+\int_\tau \pi_\theta(\tau)\nabla_\theta \log_\theta(\tau) \textcolor{red}{b} \; d\tau \, = \, \int_\tau \nabla_\theta \pi_\theta (\tau) \textcolor{red}{b} \; d\tau \, = \, \textcolor{red}{b}\nabla_\theta \textcolor{blue}{\int_\tau \pi_\theta(\tau)} \, = \, \textcolor{red}{b} \nabla_\theta \textcolor{blue}{1} = 0
+\]
+</div>
+
 
 ### Causality
 
