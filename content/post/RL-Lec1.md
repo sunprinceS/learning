@@ -51,7 +51,8 @@ Q^\pi(s,a) = \mathbb{E}_\pi[r(\tau)|s_t = s, a_t = a]
 ## Goal
 我們想找到一個最好的 policy 去 maximize 最後得到 reward 的期望值 ( optimize 的目標)
 
-### Evaluation Problem (Optimal value function)
+<!--### Evaluation Problem (Optimal value function)-->
+### Optimal value function
 <div>
 \[
 \begin{aligned}
