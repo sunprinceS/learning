@@ -1,79 +1,83 @@
 +++
-date = "2019-01-08T11:59:24+08:00"
-description = "Imitation Learning"
+date = "2019-01-08T10:59:24+08:00"
+description = "Actor Critic"
 tags = ["RL","NTU","CS294"]
 title =  "Reinforcement Learning - Lec5"
 topics = ["Reinforcement Learning"]
 +++
 
-在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, "ground-truth" agent) 與 environment 互動的<span>$(s,a)$</span> pairs 去 train 我們的 agent/actor。那麼該如何利用這些 <span>$(s,a)$</span> pair 呢？
+Lec1 - Lec4  分別介紹了 Policy-based 及 Value-based 的 RL algorithm ，而這一講要
+介紹的 Actor Critic 則是同時用到了兩個演算法的部份，並在 biased 與否 (準不準) 及 variance
+高低 (好不好 train) 提供一個可以調控的 hyperparameter 讓我們選擇。
 
 <!--more-->
 
-## Behavior cloning
+## Motivation
 
-Make training set <span>$D = \lbrace \mathcal{X}, \mathcal{Y} \rbrace$</span> be <span>$\lbrace (s_1,\hat{a_1}),\cdots,(s_N,\hat{a_N}) \rbrace$</span>
+目前為止介紹的 RL 演算法，想法都是在利用**有限的 sample** 去估測於 state <span>$s$</span> 做出 <span>$a$</span> 這個 action 相對於其他 action 的好度，也就是 <span>$A^\pi(s,a)$</span> ( <span>$Q^\pi(s,a)$</span> with normalization)。
 
-### Issue#1 - Distribution Drift
-Unlike conventional supervised learning setting，在 RL 中每個 training data 並非是 i.i.d (白話來說，在某個時間點所作的決策，會影響到後續所收到的 sample)，也因此，儘管在每個 step 都只犯了小小錯誤，這些**錯誤卻會 accumulate** 。
+Policy-based 的方法，並不 explicit 算出這個值，但在 update <span>$\theta$</span> (which parametrize that policy) 時，利用了 final reward <span>$r(\tau)$</span> (with some modification like baseline and causality to reduce variance) implicit 地當作 <span>$Q(s,a)$</span> 的 sample，雖然是個 unbiased 的估計，但未來的變數太多， variance 太大的問題是 Policy Gradient 難 train 的原因。
 
-<center><img src="/img/post/behavior-cloning-error.jpg" width="90%" style="border-radius: 0%;"></center>
+而 Value-based 的方法，則是 explicitly 算出這個值，同時也提供了 biased 與 variance 的調控讓我選擇，而所對應的 policy 即是<span>$\epsilon$</span>-greedy 地選擇 action (with some modification to make it
+easier to train and **more unbiased**)，但缺點在於很難 generalize 到 continuous action 的問題上。
 
-``$$
-p_D(s_t) \not = p_\pi(s_t)
-$$``
+而 Actor-Critic 則是想結合兩者，一樣利用 <span>$\theta$</span> 去 parametrize policy，但利用 Value-based 的方法如 MC 或 TD 來近似 <span>$Q^\pi(s,a)$</span>
 
+## Advantage Actor-Critic
 
-#### Error Analysis
-
-Assume <span>$\pi(a\not = \hat{a}|s) \leq \epsilon$</span>, then <span>$\forall
-s \, \text{in one episode (length T)}$</span>
+原先 Policy Gradient 的  <span>$\nabla_\theta J(\theta)$</span>
 
 ``$$
-\mathbb{E}\lbrack \sum_t 1\!\!1[a_t \not = \hat{a_t}]\rbrack \leq \epsilon T +
-(1-\epsilon)[\epsilon(T-1)+(1-\epsilon)\cdots] 
-\color{red}{\Rightarrow \mathcal{O}(\epsilon T^2)}
+J(\theta) = \sum_n \sum_t \nabla_\theta [\log \pi_\theta(a_t,s_t)]
+\color{red}{[\sum_{t^\prime = t}^{T_n} \gamma^{t^\prime - t} r_{t^\prime}^n - b ]}
 $$``
 
+紅色部份的第一項為 期望值為 <span>$Q^\pi(s,a)$</span>，我們不妨就直接拿 Q value 來代表，而 normalize 用的第二項很直覺地用 <span>$V^\pi(s)$</span> 來代替
+
+**Remark:** 在估 <span>$Q,V$</span> 時，我們可以在 MD (#step <span>$\rightarrow \inf$</span>) 與 TD (#step=<span>$1$</span>)間，做 accurate 與 bias 的 tradeoff。
+
+### Fact
+
+<div>
+\[
+Q^\pi(s_t,a_t) = \mathbb{E}_\pi[r_t + V^\pi(s_{t+1})]
+\]
+</div>
+
+類似的概念，也可以用 Value Function 去 approx Q function。比如以下
+
+<div>
+\[
+Q^\pi(s_t,a_t) = r_t + V^\pi(s_{t+1})
+\]
+</div>
+
+以上是 1-step 的 case，很容易可以推廣到 multi-step (同樣是 bias 與 variance
+的取捨)。
+
+**Remark:** 也可以都用 <span>$Q$</span> function 來表示 ( 對應的 <span>$V$</span> 即是 Q value summation over action)
+
+**Remark:** 實務上在 <span>$V^\pi(s_{t+1})$</span> 會加上一個係數 <span>$\gamma$</span> 作為 discount factor
+
+綜合以上，以 1-step 的估計為例
+
+``$$
+J(\theta) = \sum_n \sum_t \nabla_\theta [\log \pi_\theta(a_t|s_t)]
+\color{red}{[r(s_t,a_t) + \gamma V^\pi(s_{t+1}) - V^\pi(s_t))]}
+$$``
+
+**Remark:** <span>$\gamma$</span> 也可以看成是一個 reduce variance 的技巧，畢竟越未來的事變數越多，variance 越大，所以當前決定中，越久之後才得到的 reward 不該影響這時候的決定太多。
+
+## Some tips
 
 
 
-### Solution#1 DAgger - Dataset Aggregation
+### Shared Feature of policy and value approximator
+<center><img src="/img/post/aac.png" width="70%" style="border-radius: 0%;"></center>
 
-In brief, colect training data from <span>$p_\pi(s_t)$</span> instead of <span>$p_D(s_t)$</span>，就是 run 現在的 policy 去收集 data ，再由 human expert 去 label，最後再將其與原先的 training set 聯集起來，再重複此步驟。
+### Async. Advantage Actor Critic (A3C)
 
-**Remark:** 就像是讓學生回去寫作業，遇到不會的再拿來學校問老師。\\
-**Remark:** 中間牽涉到 human labelling 的 interaction，沒效率
-
-### Solution#2 Make model equipped with some property
-
-* Non-Markovian: 考慮到 data 間 sequential 的關係，以 recurrent-type 的 model 作為 agent。
-* Multimdal: Given same state, 人類可能會做出不同決定
-  * Mixture Model: 最後 output 的並非一個 action <span>$a$</span>，而是一個 distribution。簡單來說，以 GMM 來 model 該 distribution，讓 model output GMM 所需的參數。
-  * Latent Variable Models: 待補
-
-### Issue#2 - Limited Capacity
-許多 expert 無意義的習慣(?) 也會被 model 學進去， 若 learning capacity 是 limited 的話，重要的 behavior 反而沒學到 (因 label 並沒有 split 哪些不同的 sub-behavior 是沒關係，哪些又有關係)
-
-## Inverse Reinforcement Learning
-
-In brief, 藉由 <span>$(s,a)$</span> pairs 去 model 可能的 reward function <span>$R$</span>，而有了 <span>$R$</span> 後，便可套用前面 4 講提到的 RL algorithm 去 update <span>$\pi$</span>。
-
-**Remark:** Simple reward function can cause **complex policy**，算是有點找出源頭的味道。
-
-<center><img src="/img/post/irl.png" width="70%" style="border-radius: 0%;"></center>
-
-With constraint <span>$\sum R(\hat{\tau}) \geq \sum R(\tau)$</span>
-
-**Remark:** 這裡的 insight 在於跟 GAN 的類比。
-
-## Some Thoughts
-
-* 很多時候不知道該如何訂做了哪個 action ，該給多少 reward (usually in complex
-  task)，下一講則會介紹如何處理 Sparse reward 的問題。
-* Provide 較為明顯的 training signal，讓機器在學習的過程中，更善加利用人類發現的結果，站在巨人的肩膀上。
-* Ditribution drift 的問題，跟之前 Off-policy 想處理的問題類似，可否利用 Importance Sampling 去改進？
+平行化多個 agent 的學習，也是藉由增加 sample 量去減低 variance ，但參數的更新也會因 offline 的關係出現 bias。
 
 ## Reference
-* [CS294-Lec2] (http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-2.pdf)
-* [NTU-MLDS] (http://speech.ee.ntu.edu.tw/~tlkagk/courses/MLDS_2018/Lecture/IRL%20(v2).pdf)
+* [李宏毅老師的投影片] (http://speech.ee.ntu.edu.tw/~tlkagk/courses/MLDS_2018/Lecture/AC.pdf.pdf)
