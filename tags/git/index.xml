@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Git on Stay hungry. Stay foolish </title>
+    <title>git on Stay hungry. Stay foolish </title>
     <link>https://sunprinces.github.io/learning/tags/git/</link>
-    <description>Recent content in Git on Stay hungry. Stay foolish </description>
+    <description>Recent content in git on Stay hungry. Stay foolish </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
@@ -18,9 +18,7 @@
       <pubDate>Sun, 20 Aug 2017 08:01:34 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/</guid>
-      <description>&lt;p&gt;有在使用 git 的人，應該都知道我們很多時候我們不希望 git 去 track 某些檔案，也不在意他們的改動情況(但有時候手滑還是會不小心 checkin 進去&amp;hellip;😅)， 像是競賽的測資， c++ 編譯時的 .o 檔，binary executable 等等，這時候會加上 &lt;strong&gt;.gitignore&lt;/strong&gt; 於工作目錄下達成我們的目的。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;有在使用 git 的人，應該都知道我們很多時候我們不希望 git 去 track 某些檔案，也不在意他們的改動情況(但有時候手滑還是會不小心 checkin 進去&amp;hellip;😅)， 像是競賽的測資， c++ 編譯時的 .o 檔，binary executable 等等，這時候會加上 &lt;strong&gt;.gitignore&lt;/strong&gt; 於工作目錄下達成我們的目的。&lt;/p&gt;</description>
     </item>
     
   </channel>

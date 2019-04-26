@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Policy-based Algorithm">
+  <meta name="generator" content="Hugo 0.55.3" />
+
+  <title>Reinforcement Learning - Lec1 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Reinforcement Learning - Lec1</h1>
+  <h2>Policy-based Algorithm</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>01 Jan 2019</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/reinforcement-learning">Reinforcement Learning</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rl">RL</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/cs294">CS294</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>今年1 月的目標想複習三下時學的 RL，主要的參考教材為李宏毅老師的 DRL 8 講及 Sergey 在
+Berkeley 開的 CS294。</p>
+
+<p>先讓我們從 Policy Gradient 開始吧！</p>
+
+<h2 id="terminology">Terminology</h2>
+
+<p>這裡假設讀者熟悉 RL 的基本概念 (env/action/state 的交互作用及相關名詞)。<br />
+所謂的 policy <span>$\pi$</span> 是 Given state <span>$s$</span>，採取 action
+<span>$a$</span> 的機率。而我們以一組參數 <span>$\theta$</span> 去描述。</p>
+
+<div>
+\[
+\pi_\theta(a,s) = \mathbb{P}[a|s]
+\]
+</div>
+
+<p>Given 一個固定的 policy 的 agent (或者又叫做 actor)，我們讓其去與環境互動，每玩一次(一個 episode) 會收集到一個序列 {<span>$s_1,a_1,\cdots,s_T,a_T$</span>}，稱為 trajectory <span>$\tau$</span></p>
+
+<h2 id="evaluation-problem-goodness-of-span-pi-span">Evaluation Problem: Goodness of <span>$\pi$</span></h2>
+
+<p>那現在我們的目標是要找出一組最好的 <span>$\theta^{\ast}$</span>。<br />
+而所謂最好，則是要去 maximize final reward，也就是以下</p>
+
+<p><code>$$
+\mathbb{E}_{\tau \; \sim \; \pi_\theta(\tau)} [r(\tau)] = \int_\tau
+\pi_\theta(\tau) r(\tau) d\tau
+$$</code></p>
+
+<p><strong>Note:</strong> <span>$\pi_\theta(\tau)$</span> 是指 Given policy，特定 trajectory 被 sample 出來的機率</p>
+
+<h2 id="learning-prolem-how-to-update-span-theta-span">Learning Prolem: How to update <span>$\theta$</span></h2>
+
+<p>利用 <strong>Graient Descent</strong>。</p>
+
+<p><code>$$
+\begin{align}
+\nabla_\theta J(\theta) &amp;= \int \color{blue}{\nabla_\theta[\pi_\theta(\tau)]} r(\tau) d\tau\\
+&amp;= \int \color{blue}{\pi_\theta \nabla_\theta[\log \pi_\theta(\tau)]}r(\tau) d\tau \\
+&amp;= \mathbb{E}_{\tau \; \sim \; \pi_\theta(\tau)} \nabla_\theta[\log\pi_\theta(\tau)]r(\tau) \\
+&amp;\approx \sum_n \nabla_\theta[\log\pi_\theta(\tau)]r(\tau) \quad (\text{sampling})
+\end{align}
+$$</code></p>
+
+<p>直覺來說，相同於傳統 supervised learning 的 setting ，但更新的步伐大小，跟 reward 成線性關係 (i.e try &amp; error，哪個方向好就走多一點，weighted by reward)</p>
+
+<p>而實務上更新的時候，我們是對每一個 <span>$(a,s)$</span> 做更新 (因 <span>$\pi$</span> 能管的也只有 Given <span>$s$</span>，選擇採取 <span>$a$</span> 的機率)</p>
+
+<p><code>$$
+\nabla_\theta [\log \pi_\theta (\tau)] = \sum_t \nabla_\theta [\log \pi_\theta
+(a_t | s_t)]
+$$</code></p>
+
+<p><strong>Remark:</strong> Conveninet identity <span>$\nabla f(x) = f(x) \nabla \log f(x)$</span></p>
+
+<p><strong>Remark:</strong> 在最後的 sampling approximation 中，我們是以 <span>$r(\tau)$</span> (final reward) 來當作 <span>$Q^{\pi_\theta}(s,a)$</span>的估計值。之後的Actor-Critic Algorithm 會介紹其他估計值 (在 variance 跟 accuracy 與否間做 trade-off)。</p>
+
+<h2 id="policy-gradient-101-reinforce-algorithm">Policy Gradient 101 - REINFORCE algorithm</h2>
+
+<ol>
+<li>Fix policy, sample {<span>$\tau_i$</span>} from <span>$\pi(a|s)$</span></li>
+<li>calculate <span>$\nabla_\theta J(\theta)$</span></li>
+<li><span>$\theta \leftarrow \theta + \alpha \nabla_\theta J(\theta)$</span></li>
+</ol>
+
+<h3 id="drawback">Drawback</h3>
+
+<ul>
+<li>Online policy，need to resample when <span>$\theta$</span> is updated
+<span>$\Rightarrow$</span> Data collection 費時</li>
+<li>Sample is finite <span>$\Rightarrow$</span> variance 大，難 train</li>
+</ul>
+
+<h2 id="appendix">Appendix</h2>
+
+<h3 id="policy-gradient-theorem">Policy Gradient Theorem</h3>
+
+<p>For any differentialble policy <span>$\pi_{\theta}(a,s)$</span>, for any of the policy objective functions <span>$J = J_1,J \scriptstyle avR$</span>&hellip;,<br />
+the policy gradient is</p>
+
+<div>
+\[
+\nabla_\theta J(\theta) = \mathbb{E}_{\pi_\theta}[\nabla_\theta \log \pi_\theta(s,a)Q^{\pi_\theta}(s,a)]
+\]
+</div>
+
+<p>基本款我們利用 expected reward 來作為 <span>$Q^{\pi_\theta}$</span> 的 unbiased sample</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="https://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf">Policy Gradient Theorem 的證明</a></li>
+</ul>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2018/11/ntu-machine-learning-lec14/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2018/11/ntu-machine-learning-lec14/">NTU Machine Learning - Lec14</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec2/">Reinforcement Learning - Lec2</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec2/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

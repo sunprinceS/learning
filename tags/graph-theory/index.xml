@@ -18,9 +18,7 @@
       <pubDate>Tue, 31 Oct 2017 08:32:38 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming-hw6/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/632&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/632&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -29,9 +27,7 @@
       <pubDate>Fri, 08 Sep 2017 22:29:20 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-4/</guid>
-      <description>&lt;p&gt;前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 &lt;span&gt;$V$&lt;/span&gt; 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 &lt;span&gt;$V$&lt;/span&gt; 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -40,9 +36,7 @@
       <pubDate>Sun, 03 Sep 2017 21:28:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-3/</guid>
-      <description>&lt;p&gt;呈前一講的討論，我們有了個求單源最短路徑的演算法&lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/&#34;&gt;Bellman-Ford&lt;/a&gt; (複雜度為 &lt;span&gt;$\mathcal{O}(VE)$&lt;/span&gt; )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;呈前一講的討論，我們有了個求單源最短路徑的演算法&lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/&#34;&gt;Bellman-Ford&lt;/a&gt; (複雜度為 &lt;span&gt;$\mathcal{O}(VE)$&lt;/span&gt; )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -52,9 +46,7 @@
       
       <guid>https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-2/</guid>
       <description>&lt;p&gt;圖的一個常見應用場合是想找出某兩點之間的最短(/長)路徑，此時的邊權重又視為兩節點之間的距離。
-&lt;!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。--&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。--&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -63,9 +55,7 @@
       <pubDate>Fri, 25 Aug 2017 10:08:13 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-1/</guid>
-      <description>&lt;p&gt;給定一張圖，要如何讀取當中的資訊呢？簡單來說就是從一給定點開始，依某種順序去拜訪相鄰(有關係)的點，最後走完所有點，收集完圖中的資訊。以下簡介兩種簡本的 traversal 方法以及應用。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;給定一張圖，要如何讀取當中的資訊呢？簡單來說就是從一給定點開始，依某種順序去拜訪相鄰(有關係)的點，最後走完所有點，收集完圖中的資訊。以下簡介兩種簡本的 traversal 方法以及應用。&lt;/p&gt;</description>
     </item>
     
   </channel>

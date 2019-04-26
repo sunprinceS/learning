@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Acoustic Modeling">
-  <meta name="generator" content="Hugo 0.50" />
+  <meta name="generator" content="Hugo 0.55.3" />
 
   <title>Speech Recognition- Lec6 &middot; Stay hungry. Stay foolish </title>
 
@@ -291,8 +291,6 @@ $$</code></p>
 transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)<br />
 <span>$\Pr(\text{sounds|words})$</span> 則是 <strong>Acoustic Model</strong>， 也就是前一講中用 Viterbi 所算的 Likelihood 。</p>
 
-<p></p>
-
 <h2 id="basic-unit-choice">Basic Unit Choice</h2>
 
 <p>前面提到，我們利用發音規則所建的 lexical model 去串接 phoneme 的 HMM model 形成
@@ -304,7 +302,7 @@ $$</code></p>
 
 <p>上圖中的 &lsquo;a&rsquo; 對應到不同的 tri-phone ，但 tri-phone 不是去串接這三個 phone 的 model ，而是對有不同 context 的相同 phone 去訓練不同的 model 。</p>
 
-<p>但這麼一來，會遇到把 word 當 basic unit 的問題 (雖然沒那麼嚴重)，因此，我們想對
+<p>但這麼一來，會遇到把 word 當 basic unit 使得每個 unit 的 sample 都不夠多的問題 (雖然沒那麼嚴重)，因此，我們想對
 發音類似的那些 tri-phone 中的某些 state 做 weight sharing (e.g 上例中，prefix 相同，第一個和第二個 state 或許就可以 share)</p>
 
 <p>可以用 data-driven 的方法 automatically 決定如何 share (e.g Hierarchical

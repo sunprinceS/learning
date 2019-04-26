@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.50" />
+  <meta name="generator" content="Hugo 0.55.3" />
 
   <title>Machine Learning &middot; Stay hungry. Stay foolish </title>
 
@@ -291,8 +291,6 @@
 
   <p>
   <p>前一講提到了無論是 stochastic noise 或是 ground truth 過複雜而引進的 deterministic noise ，對本身就複雜 (VC dimension 高) 的 model 而言，overfitting 是很容易發生的，而解決之道其一就是這一講所要介紹的 Regularization。</p>
-
-<p></p>
   </p>
 
   
@@ -348,8 +346,6 @@
 
   <p>
   <p>上一講提到了利用 <strong>nonlinear transform</strong> 來處理 data 並不 linear separable 的情形，讓 ML model 具備了更強的 fitting 能力，但在這麼做的同時，也提高了 hypothesis set 的 VC dimension，使得 model 的 complexity 增加，變得不容易 generalizaion ，而這也是這一講要探討的 overfitting 。</p>
-
-<p></p>
   </p>
 
   
@@ -407,8 +403,6 @@
   <p>Beyond RNN 這個系列會 focus 在近年來各式各樣我覺得有趣的 RNN 變形，及其相關的實做。</p>
 
 <p>這篇文章的相關程式碼，放在<a href="https://github.com/sunprinceS/Neural-Turing-Machine">這裡</a>。</p>
-
-<p></p>
   </p>
 
   
@@ -464,8 +458,6 @@
 
   <p>
   <p>在此之前，針對 linear separable 的 data ，我們利用找可以切分這些數據點的 hyper-plane 來做 classification (或 regression )。但這個強大的假設並不適用於每筆真實世界中的 data ，所以我們勢必得處理 non-linear 的問題。換句話說，我們希望 hypothesis set 中可以包含更多的候選人（可以 match nonlinear 特性的那些 function ），同時去驗證在這樣的情況下，學習依然是可行的。</p>
-
-<p></p>
   </p>
 
   
@@ -521,8 +513,6 @@
 
   <p>
   <p>總結目前學到的 3 個 linear model。</p>
-
-<p></p>
   </p>
 
   
@@ -578,8 +568,6 @@
 
   <p>
   <p>Linear Model 的核心在於 feature 分量的 weighted sum <span>$\mathbf{w}^T \mathbf{x}$</span>， 在 binary classification ，我們用 step function 將其二分 (<span>$\mathcal{Y} = \lbrace \, -1,1\,\rbrace$</span>)，而在 linear regression 中，我們將其直接作為輸出。而這一講要介紹的則是將 <span>$\mathbf{w}^T \mathbf{x}$</span> 通過一個 nonlinear function mapping 到[<span>$0,1$</span>]，賦予他機率的意義 (<span>$\Pr[y = +1 | \mathbf{x}]$</span>)。</p>
-
-<p></p>
   </p>
 
   
@@ -635,8 +623,6 @@
 
   <p>
   <p>在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space <span>$\mathcal{Y}$</span> 只是單純的 {<span>$1, -1$</span>}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。</p>
-
-<p></p>
   </p>
 
   
@@ -692,8 +678,6 @@
 
   <p>
   <p>前面幾講的討論中，我們都假設有一個 ground truth function <span>$f$</span> 去 generate data，且我們所拿到的 <span>$\mathcal{D}$</span> 是乾淨的，然而在真實世界中，無可避免地會遇到 <strong>noise</strong> 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？</p>
-
-<p></p>
   </p>
 
   
@@ -749,8 +733,6 @@
 
   <p>
   <p>於前一講中，我們證明了 growth function 為 <strong>POLY(N)</strong> iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 <span>$E_i(h) \approx E_o(h)$</span>  (if 數據點夠多 <span>$N$</span> )。而這一講中，我們由 break point 引進 <strong>VC Dimension</strong> <span>$d \scriptscriptstyle VC$</span> ，來當作衡量 <span>$\mathcal{H}$</span> 複雜度的一個指標。</p>
-
-<p></p>
   </p>
 
   
@@ -806,8 +788,6 @@
 
   <p>
   <p>前一講中講述了 break point 的存在，壓制了 growth function <span>$m_H(N)$</span> 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，<span>$m_H(N)$</span> 便會是 <strong>POLY(N)</strong> 。</p>
-
-<p></p>
   </p>
 
   
@@ -863,8 +843,6 @@
 
   <p>
   <p>上一講提到了在 hypothesis set <span>$\mathcal{H}$</span> 為有限，且sample size <span>$|\mathcal{D}|$</span> 足夠大的情況下，是 PAC-learnable 的。但當 <span>$|\mathcal{H}| \, \rightarrow \, \infty$</span>的時候呢？ (e.g 2D linear perceptron)</p>
-
-<p></p>
   </p>
 
   
@@ -920,8 +898,6 @@
 
   <p>
   <p>這一講要討論的是<strong>機器學習真的是可行的嗎</strong>？能推廣到所有 scenerio 嗎？或是只有部份？是否需要某些假設才能證明可行呢？</p>
-
-<p></p>
   </p>
 
   
@@ -977,8 +953,6 @@
 
   <p>
   <p>這講建構了一個大略的 ML 世界觀。</p>
-
-<p></p>
   </p>
 
   
@@ -1034,8 +1008,6 @@
 
   <p>
   <p>於前一講講述了 ML 的 framework ，於這一講中，我們會利用一個簡單的 learning model ， 去解決 binary classification 的問題。</p>
-
-<p></p>
   </p>
 
   
@@ -1091,8 +1063,6 @@
 
   <p>
   <p>其實是大一升大二的暑假，閒來無事找的開放式課程，那時也做了一些筆記，沒想到兩三年過後，自己做專題也走向了這個領域XD，於是順手把它整理上來囉！</p>
-
-<p></p>
   </p>
 
   

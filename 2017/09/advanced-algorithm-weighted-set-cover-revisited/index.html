@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="An example of primal-dual method">
-  <meta name="generator" content="Hugo 0.50" />
+  <meta name="generator" content="Hugo 0.55.3" />
 
   <title>Advanced Algorithm - Weighted Set Cover Revisited &middot; Stay hungry. Stay foolish </title>
 
@@ -282,8 +282,6 @@
 
 
   <p>呈之前的討論，對於 WSC 問題，我們有了利用 LP solver 去對解做 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/">deterministic rounding</a> 及 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/">randomized rounding</a> 的演算法，解法的共通點是必須要先 run 過 LP solver (雖然理論上是 <strong>POLY</strong> ，實務上現行的 solver 也很有效率)，但我們仍想問說，是否存在不須使用 LP solver 的演算法呢？ 而這也是這講所要提到的 <strong>Primal-Dual Method</strong> 。</p>
-
-<p></p>
 
 <p>至於實務上的好處嘛&hellip;，節錄官方(?)說法如以下:</p>
 

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actor-Critic Algorithm">
+  <meta name="generator" content="Hugo 0.55.3" />
+
+  <title>Reinforcement Learning - Lec7 &middot; Stay hungry. Stay foolish </title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  
+  
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
+
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  <style>
+  img{
+    padding-left: 15px;
+    border-radius: 100%
+  }
+</style>
+<a class="pure-menu-heading brand img-circle" target='_blank' href="https://sunprinces.github.io/">
+  <img src="https://sunprinces.github.io/learning/img/logo.png" width="145px" >
+</a>
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/topics/"><i class='fa fa-folder fa-fw'></i>Topics</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="https://sunprinces.github.io/learning/tags/"><i class='fa fa-tags fa-fw'></i>Tags</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
+
+    </li>
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+  </div>
+  <div class="small-print">
+    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
+  </div>
+  <div class="small-print">
+    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
+  </div>
+
+  <div class="small-print">
+  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Reinforcement Learning - Lec7</h1>
+  <h2>Actor-Critic Algorithm</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>10 Jan 2019</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/reinforcement-learning">Reinforcement Learning</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rl">RL</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/cs294">CS294</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  <p>Lec1 - Lec4 分別介紹了 Policy-based 以及 Value-based 的 RL algorithm ，而這一講要介紹的 Actor Critic 則是同時用到了兩個演算法的部份，並在 biased 與否 (準不準) 及 variance 高低 (好不好 train) 提供一個可以調控的 hyperparameter 讓我們選擇。</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>目前為止介紹的 RL 演算法，想法都是在利用<strong>有限的 sample</strong> 去估測於 state <span>$s$</span> 做出 <span>$a$</span> 這個 action 相對於其他 action 的好度，也就是 <span>$A^\pi(s,a)$</span> (想成 <span>$Q^\pi(s,a)$</span> with normalization)。</p>
+
+<p>Policy-based 的方法，並不 explicit 算出這個值，但在 update <span>$\theta$</span> (which parametrize that policy) 時，利用了 final reward <span>$r(\tau)$</span> (with some modification like baseline and causality to reduce variance) implicit 地當作 <span>$Q(s,a)$</span> 的 sample，雖然是個 unbiased 的估計，但未來的變數太多， variance 太大的問題是 Policy Gradient 難 train 的原因。</p>
+
+<p>而 Value-based 的方法，則是 explicitly 算出這個值，而所對應的 policy 即是<span>$\epsilon$</span>-greedy 地選擇 action (with some modification to make it
+easier to train and <strong>more unbiased</strong>)，但缺點在於&hellip;(待補)，以及很難 generalize 到 continuous action/state 的問題上。</p>
+
+<p>而 Actor-Critic 則是想結合兩者，一樣利用 <span>$\theta$</span> 去 parametrize policy，但利用 Value-based 的方法如 MC 或 TD 來近似 <span>$Q^\pi(s,a)$</span></p>
+
+<h2 id="advantage-actor-critic">Advantage Actor-Critic</h2>
+
+<p>原先 Policy Gradient 的  <span>$\nabla_\theta J(\theta)$</span></p>
+
+<p><code>$$
+J(\theta) = \sum_n \sum_t \nabla_\theta [\log \pi_\theta(a_t|s_t)]
+\color{red}{[\sum_{t^\prime = t}^{T_n} \gamma^{t^\prime - t} r_{t^\prime}^n - b ]}
+$$</code></p>
+
+<p>紅色部份的第一項為 期望值為 <span>$Q^\pi(s,a)$</span>，我們不妨就直接拿 Q value 來代表，而 normalize 用的第二項很直覺地用 <span>$V^\pi(s)$</span> 來代替 (在這個 state 做所有 action 的期望值)</p>
+
+<p><strong>Remark:</strong> 在估 <span>$Q,V$</span> 時，我們可以在 MD (#step <span>$\rightarrow \inf$</span>) 與 TD (#step=<span>$1$</span>)間，做 accurate 與 bias 的 tradeoff。</p>
+
+<p>at that state)，待 survey！</p>
+
+<h3 id="fact">Fact</h3>
+
+<p><code>$$
+Q^\pi(s_t,a_t) = \mathbb{E}_\pi[r_t + V^\pi(s_{t+1})]
+$$</code></p>
+
+<p>類似的概念，也可以用 Value Function 去 approx Q function。比如以下</p>
+
+<p><code>$$
+Q^\pi(s_t,a_t) = r_t + V^\pi(s_{t+1})
+$$</code></p>
+
+<p>以上是 1-step 的 case，很容易可以推廣到 multi-step (同樣是 bias 與 variance
+的取捨)。</p>
+
+<p><strong>Remark:</strong> 也可以都用 <span>$Q$</span> function 來表示 ( 對應的 <span>$V$</span> 即是 Q value summation over action)</p>
+
+<p><strong>Remark:</strong> 實務上在 <span>$V^\pi(s_{t+1})$</span> 會加上一個係數 <span>$\gamma$</span> 作為 discount factor</p>
+
+<p>綜合以上，以 1-step 的估計為例</p>
+
+<p><code>$$
+J(\theta) = \sum_n \sum_t \nabla_\theta [\log \pi_\theta(a_t|s_t)]
+\color{red}{[r(s_t,a_t) + \gamma V^\pi(s_{t+1}) - V^\pi(s_t))]}
+$$</code></p>
+
+<p><strong>Remark:</strong> <span>$\gamma$</span> 也可以看成是一個 reduce variance 的技巧，畢竟越未來的事變數越多，variance 越大，所以當前決定中，越久之後才得到的 reward 不該影響這時候的決定太多。</p>
+
+<h2 id="some-tips">Some tips</h2>
+
+<h3 id="shared-feature-of-policy-and-value-approximator">Shared Feature of policy and value approximator</h3>
+
+<p><center><img src="https://sunprinces.github.io/learning/img/post/aac.png" width="70%" style="border-radius: 0%;"></center></p>
+
+<h3 id="async-advantage-actor-critic-a3c">Async. Advantage Actor Critic (A3C)</h3>
+
+<p>平行化多個 agent 的學習，也是藉由增加 sample 量去減低 variance ，但參數的更新也會因 offline 的關係，出現 bias。</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+<li><a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses/MLDS_2018/Lecture/AC.pdf.pdf">李宏毅老師的投影片</a></li>
+</ul>
+  
+  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec5/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec5/">Reinforcement Learning - Lec5</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'tonyhsu822';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+ <script>renderMathInElement(document.body, {
+   delimiters: [
+     {left: "\\[", right: "\\]", display: true},
+     {left: "$", right: "$", display: false},
+   ]
+ });</script>
+
+
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+</div>
+
+</div>
+</div>
+<script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59748795-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

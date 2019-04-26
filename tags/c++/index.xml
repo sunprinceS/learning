@@ -18,9 +18,7 @@
       <pubDate>Tue, 13 Mar 2018 20:44:58 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/03/c-stl-cheat-sheet-3/</guid>
-      <description>&lt;p&gt;這講所介紹的資料結構 (Heap, BST, Hash Table)，用途在為了保證 container &lt;strong&gt;存在某些性質&lt;/strong&gt; 時使用。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;這講所介紹的資料結構 (Heap, BST, Hash Table)，用途在為了保證 container &lt;strong&gt;存在某些性質&lt;/strong&gt; 時使用。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -29,7 +27,7 @@
       <pubDate>Mon, 12 Mar 2018 22:44:58 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/03/c-stl-cheat-sheet-2/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -38,9 +36,7 @@
       <pubDate>Sat, 10 Mar 2018 20:44:58 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/03/c-stl-cheat-sheet-1/</guid>
-      <description>&lt;p&gt;這個系列主要會整理一些自己刷 judge 常使用到的 STL 用法，cppreference 好是好，但就是有點太詳細了XD，首篇介紹的 vetor 和 pair，絕對是我最常用到的 STL 資料結構 XD !&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;這個系列主要會整理一些自己刷 judge 常使用到的 STL 用法，cppreference 好是好，但就是有點太詳細了XD，首篇介紹的 vetor 和 pair，絕對是我最常用到的 STL 資料結構 XD !&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.50" />
+  <meta name="generator" content="Hugo 0.55.3" />
 
   <title>Linear Programming &middot; Stay hungry. Stay foolish </title>
 
@@ -297,8 +297,6 @@
   <p>前面提到過一個較為複雜的優化問題， <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/">Metric Facility Location Problem</a> ，並給出了一個 4-Approx. Algorithm ，於這講中，我們要來利用前面提到的 Primal-Dual method 來設計演算法。</p>
 
 <!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)-->
-
-<p></p>
   </p>
 
   
@@ -358,8 +356,6 @@
 
   <p>
   <p>呈之前的討論，對於 WSC 問題，我們有了利用 LP solver 去對解做 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/">deterministic rounding</a> 及 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/">randomized rounding</a> 的演算法，解法的共通點是必須要先 run 過 LP solver (雖然理論上是 <strong>POLY</strong> ，實務上現行的 solver 也很有效率)，但我們仍想問說，是否存在不須使用 LP solver 的演算法呢？ 而這也是這講所要提到的 <strong>Primal-Dual Method</strong> 。</p>
-
-<p></p>
   </p>
 
   
@@ -419,8 +415,6 @@
 
   <p>
   <p>接續<a href="https://sunprinces.github.io/learning/tags/linear-programming/">前面幾講</a>，一個常用的技巧是，利用 LP solver 得出來的解 <span>$\mathbf{x}^{\star}$</span>， 拿去做 rounding 推出原先問題的解 <span>$\mathbf{x}^{\prime}$</span> (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (<strong>MFL</strong>)。</p>
-
-<p></p>
   </p>
 
   
@@ -482,8 +476,6 @@
 
   <p>
   <p>呈前一講，我們對<strong>有限制的</strong> WSC 問題有 <span>$l$</span>-approx. algorithm，但可能並不是太好(比方說 <span>$l=|U|$</span> 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在<strong>大部分</strong>時候，都可以得到一個<strong>還不錯</strong> (approx. ratio ISN&rsquo;T too bad)的結果。</p>
-
-<p></p>
   </p>
 
   
@@ -543,8 +535,6 @@
 
   <p>
   <p>這一講會展示將問題轉化為線性規劃的 form (但可能是 ILP)，利用 LP solver 得到解，做 <strong>LP relaxation</strong> 並證明這個解不會太差 (approx. ratio 不太大)。</p>
-
-<p></p>
   </p>
 
   
@@ -605,8 +595,7 @@
   <p>
   <p><strong>Definition:</strong><br/>
 A linear programming is a problem of <em>maximizing</em> or <em>minimizing</em> a <strong>linear
-multivariate function</strong> subject to some <strong>linear constraints</strong>
-</p>
+multivariate function</strong> subject to some <strong>linear constraints</strong></p>
   </p>
 
   

@@ -18,9 +18,7 @@
       <pubDate>Wed, 31 Jan 2018 23:14:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec3/</guid>
-      <description>&lt;p&gt;前面提過 Boolearn Search 的其中一個問題在於， machine 是&lt;strong&gt;無腦&lt;/strong&gt;地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 &lt;span&gt;$10^6$&lt;/span&gt; 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 &lt;strong&gt;ranked retrieval&lt;/strong&gt; 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;前面提過 Boolearn Search 的其中一個問題在於， machine 是&lt;strong&gt;無腦&lt;/strong&gt;地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 &lt;span&gt;$10^6$&lt;/span&gt; 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 &lt;strong&gt;ranked retrieval&lt;/strong&gt; 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -29,9 +27,7 @@
       <pubDate>Mon, 22 Jan 2018 23:14:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec2/</guid>
-      <description>&lt;p&gt;在做 &lt;a href=&#34;https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/&#34;&gt;Indexing&lt;/a&gt; 之前，我們需要將文本從各方來源中抽取出來，這些來源的 &lt;strong&gt;格式&lt;/strong&gt; 相當多元(像是 html, md 等等 markup 或是與圖片相雜的 data ，可能還需要處理 encoding 的問題)，反正就是挺亂的，需要做一些 processing 後，才可以用強大的 NLP tool 來統一處理。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;在做 &lt;a href=&#34;https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/&#34;&gt;Indexing&lt;/a&gt; 之前，我們需要將文本從各方來源中抽取出來，這些來源的 &lt;strong&gt;格式&lt;/strong&gt; 相當多元(像是 html, md 等等 markup 或是與圖片相雜的 data ，可能還需要處理 encoding 的問題)，反正就是挺亂的，需要做一些 processing 後，才可以用強大的 NLP tool 來統一處理。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -40,9 +36,7 @@
       <pubDate>Tue, 16 Jan 2018 23:14:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec1/</guid>
-      <description>&lt;p&gt;這個系列主要會紀錄自己在 KTH 修習 &lt;a href=&#34;https://www.kth.se/student/kurser/kurs/DD2476?l=en&#34;&gt;Information Retrieval System&lt;/a&gt; 的一些筆記，備忘用，不會像之前的 Post 那麼詳細，但還是會加點自己的 remark 這樣。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;這個系列主要會紀錄自己在 KTH 修習 &lt;a href=&#34;https://www.kth.se/student/kurser/kurs/DD2476?l=en&#34;&gt;Information Retrieval System&lt;/a&gt; 的一些筆記，備忘用，不會像之前的 Post 那麼詳細，但還是會加點自己的 remark 這樣。&lt;/p&gt;</description>
     </item>
     
   </channel>

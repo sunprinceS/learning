@@ -18,9 +18,7 @@
       <pubDate>Thu, 11 May 2017 17:54:03 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/</guid>
-      <description>&lt;p&gt;像 Hugo 這類 static site generator 的好處是可以用簡單的語法(如 Markdown)來寫網站，其會根據寫好的模板，自己幫你渲染成 html ，而前人也已經寫好許多功能，如 topic , tag 管理等，算是集一般部落格的方便上手，與自幹 html 的 flexibility 於一身，而且整個網頁都是靜態的緣故，可以直接免費託管在 github page 等免費的網頁空間上，維護上可說是十分方便。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;像 Hugo 這類 static site generator 的好處是可以用簡單的語法(如 Markdown)來寫網站，其會根據寫好的模板，自己幫你渲染成 html ，而前人也已經寫好許多功能，如 topic , tag 管理等，算是集一般部落格的方便上手，與自幹 html 的 flexibility 於一身，而且整個網頁都是靜態的緣故，可以直接免費託管在 github page 等免費的網頁空間上，維護上可說是十分方便。&lt;/p&gt;</description>
     </item>
     
   </channel>

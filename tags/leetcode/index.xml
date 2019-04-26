@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Leetcode on Stay hungry. Stay foolish </title>
+    <title>LeetCode on Stay hungry. Stay foolish </title>
     <link>https://sunprinces.github.io/learning/tags/leetcode/</link>
-    <description>Recent content in Leetcode on Stay hungry. Stay foolish </description>
+    <description>Recent content in LeetCode on Stay hungry. Stay foolish </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
@@ -18,9 +18,7 @@
       <pubDate>Sun, 18 Mar 2018 15:44:33 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/03/leetcode-287-find-the-duplicate-number/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/find-the-duplicate-number/description/&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/find-the-duplicate-number/description/&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

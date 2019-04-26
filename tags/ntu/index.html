@@ -5,9 +5,9 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.50" />
+  <meta name="generator" content="Hugo 0.55.3" />
 
-  <title>Ntu &middot; Stay hungry. Stay foolish </title>
+  <title>NTU &middot; Stay hungry. Stay foolish </title>
 
   
   
@@ -241,10 +241,357 @@
 
 
 <div class="header">
-  <h1>Ntu</h1>
+  <h1>NTU</h1>
 </div>
 
 <div class="content">
+  
+    <article>
+  <header>
+    <h2><a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec7/">Reinforcement Learning - Lec7</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>10 Jan 2019</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/reinforcement-learning">Reinforcement Learning</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rl">RL</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/cs294">CS294</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  </header>
+
+  <p>
+  <p>Lec1 - Lec4 分別介紹了 Policy-based 以及 Value-based 的 RL algorithm ，而這一講要介紹的 Actor Critic 則是同時用到了兩個演算法的部份，並在 biased 與否 (準不準) 及 variance 高低 (好不好 train) 提供一個可以調控的 hyperparameter 讓我們選擇。</p>
+  </p>
+
+  
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec7/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec5/">Reinforcement Learning - Lec5</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>08 Jan 2019</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/reinforcement-learning">Reinforcement Learning</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rl">RL</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/cs294">CS294</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  </header>
+
+  <p>
+  <p>在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &ldquo;ground-truth&rdquo; agent) 與 environment 互動的<span>$(s,a)$</span> pairs 去 train 我們的 agent/actor。那麼該如何利用這些 <span>$(s,a)$</span> pair 呢？</p>
+  </p>
+
+  
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec5/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec4/">Reinforcement Learning - Lec4</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>06 Jan 2019</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/reinforcement-learning">Reinforcement Learning</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rl">RL</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/cs294">CS294</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  </header>
+
+  <p>
+  <p>在這講中，要討論的是 non-tabular case 的問題 (就是上一講中無法保證收斂的那些QQ)，我們選定 Neural Network 作為拿來 approximate <span>$Q(s,a)$</span> 的 function family，且不是用一般 regression 的方法找 <span>$\phi$</span> (畢竟它的 target <span>$y$</span> 也只是中間產物，並非 optimal Q)，而是 N-step 的 gradient descent。</p>
+  </p>
+
+  
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec4/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec3/">Reinforcement Learning - Lec3</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>05 Jan 2019</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/reinforcement-learning">Reinforcement Learning</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rl">RL</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/cs294">CS294</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  </header>
+
+  <p>
+  <p>前兩講 focus 在 policy-based 的 RL 演算法，直接 learn 一組參數去 parametrize
+policy。而後續兩講則會 focus 在 value-based 的方法，想法是算出 <span>$V^\pi(s), Q^\pi(s,a)$</span> (同樣可以 approximately parametrized by <span>$\theta$</span>)，而所對應的 policy 則是去選擇 Given <span>$s$</span>，好度最高的 action <span>$a$</span> (w/ appropriate exploration)。</p>
+  </p>
+
+  
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec3/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec2/">Reinforcement Learning - Lec2</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>03 Jan 2019</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/reinforcement-learning">Reinforcement Learning</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rl">RL</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/cs294">CS294</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  </header>
+
+  <p>
+  <p>上回提到了 policy gradint 的方法，及其缺點，這一講會介紹各種改進的方法。包括降低
+sample 的 variance 及 off-policy (使得 data 更有效地被利用)。</p>
+  </p>
+
+  
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec2/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec1/">Reinforcement Learning - Lec1</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>01 Jan 2019</time>
+  </div>
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    
+      <a class="post-taxonomy-topic" href="https://sunprinces.github.io/learning/topics/reinforcement-learning">Reinforcement Learning</a>
+    
+  </div>
+  
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/rl">RL</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/ntu">NTU</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="https://sunprinces.github.io/learning/tags/cs294">CS294</a>
+    
+  </div>
+  
+  
+
+</div>
+
+
+  </header>
+
+  <p>
+  <p>今年1 月的目標想複習三下時學的 RL，主要的參考教材為李宏毅老師的 DRL 8 講及 Sergey 在
+Berkeley 開的 CS294。</p>
+
+<p>先讓我們從 Policy Gradient 開始吧！</p>
+  </p>
+
+  
+  <footer>
+    <a href="https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec1/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
   
     <article>
   <header>
@@ -291,8 +638,6 @@
 
   <p>
   <p>前一講提到了無論是 stochastic noise 或是 ground truth 過複雜而引進的 deterministic noise ，對本身就複雜 (VC dimension 高) 的 model 而言，overfitting 是很容易發生的，而解決之道其一就是這一講所要介紹的 Regularization。</p>
-
-<p></p>
   </p>
 
   
@@ -348,8 +693,6 @@
 
   <p>
   <p>上一講提到了利用 <strong>nonlinear transform</strong> 來處理 data 並不 linear separable 的情形，讓 ML model 具備了更強的 fitting 能力，但在這麼做的同時，也提高了 hypothesis set 的 VC dimension，使得 model 的 complexity 增加，變得不容易 generalizaion ，而這也是這一講要探討的 overfitting 。</p>
-
-<p></p>
   </p>
 
   
@@ -417,8 +760,6 @@ $$</code></p>
 <span>$\Pr(\text{words})$</span> 由 <strong>Language Model</strong> 負責，評估產生的
 transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)<br />
 <span>$\Pr(\text{sounds|words})$</span> 則是 <strong>Acoustic Model</strong>， 也就是前一講中用 Viterbi 所算的 Likelihood 。</p>
-
-<p></p>
   </p>
 
   
@@ -476,8 +817,6 @@ transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)<br />
 
   <p>
   <p>我覺得自己之前做的<a href="https://drive.google.com/file/d/152rJZPdCl1k4IqLgr7frwWXeE6lCHjO0/view?usp=sharing">投影片</a>真的蠻好的XD (自己講)，因此這一講中，只會偏重在原本寫的比較簡略的 Learning Problem ， Evaluation 及 Decoding Problem 僅會附上程式碼及做定義。</p>
-
-<p></p>
   </p>
 
   
@@ -537,8 +876,6 @@ transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)<br />
   <p>在能夠將聲音訊號轉為數值向量給 machine 處理後，我們要怎麼判斷這串 vector 是 mapping 到哪一段文字呢？ <br />
 在進入 continuous ASR 前，讓我們先來想一想怎麼辨識一個 word ？想法是針對這個 word 建一個 model ，給定一段聲音訊號， output 該訊號 map 到此
 word 的機率為多少。</p>
-
-<p></p>
   </p>
 
   
@@ -594,8 +931,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>在此之前，針對 linear separable 的 data ，我們利用找可以切分這些數據點的 hyper-plane 來做 classification (或 regression )。但這個強大的假設並不適用於每筆真實世界中的 data ，所以我們勢必得處理 non-linear 的問題。換句話說，我們希望 hypothesis set 中可以包含更多的候選人（可以 match nonlinear 特性的那些 function ），同時去驗證在這樣的情況下，學習依然是可行的。</p>
-
-<p></p>
   </p>
 
   
@@ -651,8 +986,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>總結目前學到的 3 個 linear model。</p>
-
-<p></p>
   </p>
 
   
@@ -708,8 +1041,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>Linear Model 的核心在於 feature 分量的 weighted sum <span>$\mathbf{w}^T \mathbf{x}$</span>， 在 binary classification ，我們用 step function 將其二分 (<span>$\mathcal{Y} = \lbrace \, -1,1\,\rbrace$</span>)，而在 linear regression 中，我們將其直接作為輸出。而這一講要介紹的則是將 <span>$\mathbf{w}^T \mathbf{x}$</span> 通過一個 nonlinear function mapping 到[<span>$0,1$</span>]，賦予他機率的意義 (<span>$\Pr[y = +1 | \mathbf{x}]$</span>)。</p>
-
-<p></p>
   </p>
 
   
@@ -765,8 +1096,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space <span>$\mathcal{Y}$</span> 只是單純的 {<span>$1, -1$</span>}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。</p>
-
-<p></p>
   </p>
 
   
@@ -824,8 +1153,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>上一回介紹了 LPC ，來做為我們抽取 feature 的一個方法，今天要來談談目前最常被使用的 feature - MFCC 。</p>
-
-<p></p>
   </p>
 
   
@@ -883,8 +1210,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>語音辨識的基本架構中，第一步便是要把聲音訊號轉成可被紀錄的數位形式以供 machine 處理。科學家們從人類究竟是如何發出特定聲音作為出發點，去找出訊號當中哪些是屬於那個聲音 unique 的 feature，並移除那些無關的資訊 (e.g noise) ，並利用這些 extract 出來的 feature 來作為辨識的基本元素。</p>
-
-<p></p>
   </p>
 
   
@@ -942,8 +1267,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>隨著變成菸酒生的日子逐漸逼近，最近開始重追尤達大師數位語音的連載，希望在進 Speech Lab 之前，將這些知識掌握地更加純熟，這個系列主要會雜揉以前在台大所修的 <a href="http://speech.ee.ntu.edu.tw/DSP2017Autumn/">數位語音處理概論</a> 以及在 KTH 所修的 <a href="https://www.kth.se/social/course/DT2119/">Speech and Speaker Recognition</a> 之相關內容。</p>
-
-<p></p>
   </p>
 
   
@@ -999,8 +1322,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>前面幾講的討論中，我們都假設有一個 ground truth function <span>$f$</span> 去 generate data，且我們所拿到的 <span>$\mathcal{D}$</span> 是乾淨的，然而在真實世界中，無可避免地會遇到 <strong>noise</strong> 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？</p>
-
-<p></p>
   </p>
 
   
@@ -1056,8 +1377,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>於前一講中，我們證明了 growth function 為 <strong>POLY(N)</strong> iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 <span>$E_i(h) \approx E_o(h)$</span>  (if 數據點夠多 <span>$N$</span> )。而這一講中，我們由 break point 引進 <strong>VC Dimension</strong> <span>$d \scriptscriptstyle VC$</span> ，來當作衡量 <span>$\mathcal{H}$</span> 複雜度的一個指標。</p>
-
-<p></p>
   </p>
 
   
@@ -1113,8 +1432,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>前一講中講述了 break point 的存在，壓制了 growth function <span>$m_H(N)$</span> 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，<span>$m_H(N)$</span> 便會是 <strong>POLY(N)</strong> 。</p>
-
-<p></p>
   </p>
 
   
@@ -1170,8 +1487,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>上一講提到了在 hypothesis set <span>$\mathcal{H}$</span> 為有限，且sample size <span>$|\mathcal{D}|$</span> 足夠大的情況下，是 PAC-learnable 的。但當 <span>$|\mathcal{H}| \, \rightarrow \, \infty$</span>的時候呢？ (e.g 2D linear perceptron)</p>
-
-<p></p>
   </p>
 
   
@@ -1227,8 +1542,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>這一講要討論的是<strong>機器學習真的是可行的嗎</strong>？能推廣到所有 scenerio 嗎？或是只有部份？是否需要某些假設才能證明可行呢？</p>
-
-<p></p>
   </p>
 
   
@@ -1284,8 +1597,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>這講建構了一個大略的 ML 世界觀。</p>
-
-<p></p>
   </p>
 
   
@@ -1341,8 +1652,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>於前一講講述了 ML 的 framework ，於這一講中，我們會利用一個簡單的 learning model ， 去解決 binary classification 的問題。</p>
-
-<p></p>
   </p>
 
   
@@ -1398,8 +1707,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>其實是大一升大二的暑假，閒來無事找的開放式課程，那時也做了一些筆記，沒想到兩三年過後，自己做專題也走向了這個領域XD，於是順手把它整理上來囉！</p>
-
-<p></p>
   </p>
 
   
@@ -1459,8 +1766,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>在 <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">第一講</a>中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 <span>$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$</span> ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same <span>$\mathcal{H}$</span>)可以選，每次我們就看哪一個 <span>$h$</span> 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 <span>$\mathbb{E}[\, \text{max num of elements in any slots} \, ]$</span> ?</p>
-
-<p></p>
   </p>
 
   
@@ -1520,8 +1825,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 <span>$\mathcal{O}(1)$</span> lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？</p>
-
-<p></p>
   </p>
 
   
@@ -1583,8 +1886,6 @@ word 的機率為多少。</p>
   <p>前面提到過一個較為複雜的優化問題， <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/">Metric Facility Location Problem</a> ，並給出了一個 4-Approx. Algorithm ，於這講中，我們要來利用前面提到的 Primal-Dual method 來設計演算法。</p>
 
 <!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)-->
-
-<p></p>
   </p>
 
   
@@ -1644,8 +1945,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>呈之前的討論，對於 WSC 問題，我們有了利用 LP solver 去對解做 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/">deterministic rounding</a> 及 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/">randomized rounding</a> 的演算法，解法的共通點是必須要先 run 過 LP solver (雖然理論上是 <strong>POLY</strong> ，實務上現行的 solver 也很有效率)，但我們仍想問說，是否存在不須使用 LP solver 的演算法呢？ 而這也是這講所要提到的 <strong>Primal-Dual Method</strong> 。</p>
-
-<p></p>
   </p>
 
   
@@ -1705,8 +2004,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>接續<a href="https://sunprinces.github.io/learning/tags/linear-programming/">前面幾講</a>，一個常用的技巧是，利用 LP solver 得出來的解 <span>$\mathbf{x}^{\star}$</span>， 拿去做 rounding 推出原先問題的解 <span>$\mathbf{x}^{\prime}$</span> (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (<strong>MFL</strong>)。</p>
-
-<p></p>
   </p>
 
   
@@ -1764,8 +2061,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 <span>$V$</span> 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。</p>
-
-<p></p>
   </p>
 
   
@@ -1823,8 +2118,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>呈前一講的討論，我們有了個求單源最短路徑的演算法<a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> (複雜度為 <span>$\mathcal{O}(VE)$</span> )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法</p>
-
-<p></p>
   </p>
 
   
@@ -1883,8 +2176,6 @@ word 的機率為多少。</p>
   <p>
   <p>圖的一個常見應用場合是想找出某兩點之間的最短(/長)路徑，此時的邊權重又視為兩節點之間的距離。
 <!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。--></p>
-
-<p></p>
   </p>
 
   
@@ -1942,8 +2233,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>給定一張圖，要如何讀取當中的資訊呢？簡單來說就是從一給定點開始，依某種順序去拜訪相鄰(有關係)的點，最後走完所有點，收集完圖中的資訊。以下簡介兩種簡本的 traversal 方法以及應用。</p>
-
-<p></p>
   </p>
 
   
@@ -2002,8 +2291,6 @@ word 的機率為多少。</p>
   <p>
   <p>Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets <span>$S_1,S_2,\cdots,S_k$</span>，而每個 <span>$S_i$</span> (每個 category) 以一個代表值 (<em>representative</em>) 去紀錄。
 <!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--></p>
-
-<p></p>
   </p>
 
   
@@ -2065,8 +2352,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>呈前一講，我們對<strong>有限制的</strong> WSC 問題有 <span>$l$</span>-approx. algorithm，但可能並不是太好(比方說 <span>$l=|U|$</span> 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在<strong>大部分</strong>時候，都可以得到一個<strong>還不錯</strong> (approx. ratio ISN&rsquo;T too bad)的結果。</p>
-
-<p></p>
   </p>
 
   
@@ -2126,8 +2411,6 @@ word 的機率為多少。</p>
 
   <p>
   <p>這一講會展示將問題轉化為線性規劃的 form (但可能是 ILP)，利用 LP solver 得到解，做 <strong>LP relaxation</strong> 並證明這個解不會太差 (approx. ratio 不太大)。</p>
-
-<p></p>
   </p>
 
   
@@ -2188,8 +2471,7 @@ word 的機率為多少。</p>
   <p>
   <p><strong>Definition:</strong><br/>
 A linear programming is a problem of <em>maximizing</em> or <em>minimizing</em> a <strong>linear
-multivariate function</strong> subject to some <strong>linear constraints</strong>
-</p>
+multivariate function</strong> subject to some <strong>linear constraints</strong></p>
   </p>
 
   
@@ -2251,8 +2533,6 @@ multivariate function</strong> subject to some <strong>linear constraints</stron
   <p>從前兩講關於<strong>分配</strong> (在一堆物品中，決定哪些是要拿的一群，哪些不拿) 的最佳化問題中，我們延伸出新的問題，<strong>Bin Packing Problem</strong>。不同於在 <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/">Knapsack Problem</a> 中，我們只有一個箱子(可以想成你聘了一個工人搬一個箱子)；在Bin Packing 問題中，要取走<strong>所有</strong>寶物(所有寶物的重量都小於 1 單位)，而你需要聘請一些工人來搬，但今天每個工人都只帶了一個負重為 1 單位的箱子，該如何分配這些寶物(雖說是寶物，但其實我們不care價值惹)，使得需帶的箱子(聘請的工人)為最少？</p>
 
 <p>簡單的 formulation 如下：</p>
-
-<p></p>
   </p>
 
   
@@ -2311,8 +2591,7 @@ multivariate function</strong> subject to some <strong>linear constraints</stron
   </header>
 
   <p>
-  <p>Subset Sum Problem 與 Knapsack Problem 相同，也是一個 NPC 問題(可以想成 Knapsack Problem weight 均為 1 的特例)。而在 Knapsack Problem 中，我們發展出<strong>等差</strong> 的rounding 技巧，犧牲精確度去換取更低的時間複雜度，而這一講中，將利用<strong>等比</strong>的方式去做 rounding 。
-</p>
+  <p>Subset Sum Problem 與 Knapsack Problem 相同，也是一個 NPC 問題(可以想成 Knapsack Problem weight 均為 1 的特例)。而在 Knapsack Problem 中，我們發展出<strong>等差</strong> 的rounding 技巧，犧牲精確度去換取更低的時間複雜度，而這一講中，將利用<strong>等比</strong>的方式去做 rounding 。</p>
   </p>
 
   
@@ -2374,8 +2653,6 @@ multivariate function</strong> subject to some <strong>linear constraints</stron
   <p>背包問題為一個典型的最佳化問題，想像你來到了一個寶庫，裡頭有一些寶物，都有各自的價值和重量，但你只帶了一個背包(而且負重還有限制)，要怎麼取寶物才能在背得走的前提下，帶走價值總和儘可能高的寶物們呢？</p>
 
 <p>這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:</p>
-
-<p></p>
   </p>
 
   
@@ -2435,8 +2712,6 @@ multivariate function</strong> subject to some <strong>linear constraints</stron
   <!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。-->
 
 <p>Hashing 可以想成是一種 <strong>renaming</strong> 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 <strong>Hashing</strong> 的方式，重新命名 key&rsquo; ，並依據 key&rsquo; 將資料放到 size 跟資料個數差不多的 Hash Table 中。</p>
-
-<p></p>
   </p>
 
   

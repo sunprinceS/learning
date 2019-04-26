@@ -7,10 +7,69 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Fri, 02 Nov 2018 10:23:24 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 10 Jan 2019 10:59:24 +0800</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reinforcement Learning - Lec7</title>
+      <link>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec7/</link>
+      <pubDate>Thu, 10 Jan 2019 10:59:24 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec7/</guid>
+      <description>&lt;p&gt;Lec1 - Lec4 分別介紹了 Policy-based 以及 Value-based 的 RL algorithm ，而這一講要介紹的 Actor Critic 則是同時用到了兩個演算法的部份，並在 biased 與否 (準不準) 及 variance 高低 (好不好 train) 提供一個可以調控的 hyperparameter 讓我們選擇。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Reinforcement Learning - Lec5</title>
+      <link>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec5/</link>
+      <pubDate>Tue, 08 Jan 2019 11:59:24 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec5/</guid>
+      <description>&lt;p&gt;在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &amp;ldquo;ground-truth&amp;rdquo; agent) 與 environment 互動的&lt;span&gt;$(s,a)$&lt;/span&gt; pairs 去 train 我們的 agent/actor。那麼該如何利用這些 &lt;span&gt;$(s,a)$&lt;/span&gt; pair 呢？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Reinforcement Learning - Lec4</title>
+      <link>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec4/</link>
+      <pubDate>Sun, 06 Jan 2019 15:59:24 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec4/</guid>
+      <description>&lt;p&gt;在這講中，要討論的是 non-tabular case 的問題 (就是上一講中無法保證收斂的那些QQ)，我們選定 Neural Network 作為拿來 approximate &lt;span&gt;$Q(s,a)$&lt;/span&gt; 的 function family，且不是用一般 regression 的方法找 &lt;span&gt;$\phi$&lt;/span&gt; (畢竟它的 target &lt;span&gt;$y$&lt;/span&gt; 也只是中間產物，並非 optimal Q)，而是 N-step 的 gradient descent。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Reinforcement Learning - Lec3</title>
+      <link>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec3/</link>
+      <pubDate>Sat, 05 Jan 2019 08:59:24 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec3/</guid>
+      <description>&lt;p&gt;前兩講 focus 在 policy-based 的 RL 演算法，直接 learn 一組參數去 parametrize
+policy。而後續兩講則會 focus 在 value-based 的方法，想法是算出 &lt;span&gt;$V^\pi(s), Q^\pi(s,a)$&lt;/span&gt; (同樣可以 approximately parametrized by &lt;span&gt;$\theta$&lt;/span&gt;)，而所對應的 policy 則是去選擇 Given &lt;span&gt;$s$&lt;/span&gt;，好度最高的 action &lt;span&gt;$a$&lt;/span&gt; (w/ appropriate exploration)。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Reinforcement Learning - Lec2</title>
+      <link>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec2/</link>
+      <pubDate>Thu, 03 Jan 2019 10:59:24 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec2/</guid>
+      <description>&lt;p&gt;上回提到了 policy gradint 的方法，及其缺點，這一講會介紹各種改進的方法。包括降低
+sample 的 variance 及 off-policy (使得 data 更有效地被利用)。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Reinforcement Learning - Lec1</title>
+      <link>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec1/</link>
+      <pubDate>Tue, 01 Jan 2019 11:59:24 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec1/</guid>
+      <description>&lt;p&gt;今年1 月的目標想複習三下時學的 RL，主要的參考教材為李宏毅老師的 DRL 8 講及 Sergey 在
+Berkeley 開的 CS294。&lt;/p&gt;
+
+&lt;p&gt;先讓我們從 Policy Gradient 開始吧！&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>NTU Machine Learning - Lec14</title>
@@ -18,9 +77,7 @@
       <pubDate>Fri, 02 Nov 2018 10:23:24 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/11/ntu-machine-learning-lec14/</guid>
-      <description>&lt;p&gt;前一講提到了無論是 stochastic noise 或是 ground truth 過複雜而引進的 deterministic noise ，對本身就複雜 (VC dimension 高) 的 model 而言，overfitting 是很容易發生的，而解決之道其一就是這一講所要介紹的 Regularization。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;前一講提到了無論是 stochastic noise 或是 ground truth 過複雜而引進的 deterministic noise ，對本身就複雜 (VC dimension 高) 的 model 而言，overfitting 是很容易發生的，而解決之道其一就是這一講所要介紹的 Regularization。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -29,9 +86,7 @@
       <pubDate>Wed, 31 Oct 2018 11:59:24 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/10/ntu-machine-learning-lec13/</guid>
-      <description>&lt;p&gt;上一講提到了利用 &lt;strong&gt;nonlinear transform&lt;/strong&gt; 來處理 data 並不 linear separable 的情形，讓 ML model 具備了更強的 fitting 能力，但在這麼做的同時，也提高了 hypothesis set 的 VC dimension，使得 model 的 complexity 增加，變得不容易 generalizaion ，而這也是這一講要探討的 overfitting 。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;上一講提到了利用 &lt;strong&gt;nonlinear transform&lt;/strong&gt; 來處理 data 並不 linear separable 的情形，讓 ML model 具備了更強的 fitting 能力，但在這麼做的同時，也提高了 hypothesis set 的 VC dimension，使得 model 的 complexity 增加，變得不容易 generalizaion ，而這也是這一講要探討的 overfitting 。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -42,9 +97,7 @@
       <guid>https://sunprinces.github.io/learning/2018/05/beyond-rnn-lec1/</guid>
       <description>&lt;p&gt;Beyond RNN 這個系列會 focus 在近年來各式各樣我覺得有趣的 RNN 變形，及其相關的實做。&lt;/p&gt;
 
-&lt;p&gt;這篇文章的相關程式碼，放在&lt;a href=&#34;https://github.com/sunprinceS/Neural-Turing-Machine&#34;&gt;這裡&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;這篇文章的相關程式碼，放在&lt;a href=&#34;https://github.com/sunprinceS/Neural-Turing-Machine&#34;&gt;這裡&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -63,9 +116,7 @@ $$&lt;/code&gt;&lt;/p&gt;
 &lt;br /&gt;
 &lt;span&gt;$\Pr(\text{words})$&lt;/span&gt; 由 &lt;strong&gt;Language Model&lt;/strong&gt; 負責，評估產生的
 transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)&lt;br /&gt;
-&lt;span&gt;$\Pr(\text{sounds|words})$&lt;/span&gt; 則是 &lt;strong&gt;Acoustic Model&lt;/strong&gt;， 也就是前一講中用 Viterbi 所算的 Likelihood 。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;span&gt;$\Pr(\text{sounds|words})$&lt;/span&gt; 則是 &lt;strong&gt;Acoustic Model&lt;/strong&gt;， 也就是前一講中用 Viterbi 所算的 Likelihood 。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -74,9 +125,7 @@ transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)&lt;br /&gt;
       <pubDate>Thu, 19 Apr 2018 16:45:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec5/</guid>
-      <description>&lt;p&gt;我覺得自己之前做的&lt;a href=&#34;https://drive.google.com/file/d/152rJZPdCl1k4IqLgr7frwWXeE6lCHjO0/view?usp=sharing&#34;&gt;投影片&lt;/a&gt;真的蠻好的XD (自己講)，因此這一講中，只會偏重在原本寫的比較簡略的 Learning Problem ， Evaluation 及 Decoding Problem 僅會附上程式碼及做定義。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;我覺得自己之前做的&lt;a href=&#34;https://drive.google.com/file/d/152rJZPdCl1k4IqLgr7frwWXeE6lCHjO0/view?usp=sharing&#34;&gt;投影片&lt;/a&gt;真的蠻好的XD (自己講)，因此這一講中，只會偏重在原本寫的比較簡略的 Learning Problem ， Evaluation 及 Decoding Problem 僅會附上程式碼及做定義。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -87,9 +136,7 @@ transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)&lt;br /&gt;
       <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec4/</guid>
       <description>&lt;p&gt;在能夠將聲音訊號轉為數值向量給 machine 處理後，我們要怎麼判斷這串 vector 是 mapping 到哪一段文字呢？ &lt;br /&gt;
 在進入 continuous ASR 前，讓我們先來想一想怎麼辨識一個 word ？想法是針對這個 word 建一個 model ，給定一段聲音訊號， output 該訊號 map 到此
-word 的機率為多少。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+word 的機率為多少。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -98,9 +145,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sun, 15 Apr 2018 08:23:22 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning-lec12/</guid>
-      <description>&lt;p&gt;在此之前，針對 linear separable 的 data ，我們利用找可以切分這些數據點的 hyper-plane 來做 classification (或 regression )。但這個強大的假設並不適用於每筆真實世界中的 data ，所以我們勢必得處理 non-linear 的問題。換句話說，我們希望 hypothesis set 中可以包含更多的候選人（可以 match nonlinear 特性的那些 function ），同時去驗證在這樣的情況下，學習依然是可行的。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;在此之前，針對 linear separable 的 data ，我們利用找可以切分這些數據點的 hyper-plane 來做 classification (或 regression )。但這個強大的假設並不適用於每筆真實世界中的 data ，所以我們勢必得處理 non-linear 的問題。換句話說，我們希望 hypothesis set 中可以包含更多的候選人（可以 match nonlinear 特性的那些 function ），同時去驗證在這樣的情況下，學習依然是可行的。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -109,9 +154,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sat, 14 Apr 2018 06:59:24 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning-lec11/</guid>
-      <description>&lt;p&gt;總結目前學到的 3 個 linear model。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;總結目前學到的 3 個 linear model。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -120,9 +163,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Fri, 13 Apr 2018 12:59:24 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning-lec10/</guid>
-      <description>&lt;p&gt;Linear Model 的核心在於 feature 分量的 weighted sum &lt;span&gt;$\mathbf{w}^T \mathbf{x}$&lt;/span&gt;， 在 binary classification ，我們用 step function 將其二分 (&lt;span&gt;$\mathcal{Y} = \lbrace \, -1,1\,\rbrace$&lt;/span&gt;)，而在 linear regression 中，我們將其直接作為輸出。而這一講要介紹的則是將 &lt;span&gt;$\mathbf{w}^T \mathbf{x}$&lt;/span&gt; 通過一個 nonlinear function mapping 到[&lt;span&gt;$0,1$&lt;/span&gt;]，賦予他機率的意義 (&lt;span&gt;$\Pr[y = +1 | \mathbf{x}]$&lt;/span&gt;)。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Linear Model 的核心在於 feature 分量的 weighted sum &lt;span&gt;$\mathbf{w}^T \mathbf{x}$&lt;/span&gt;， 在 binary classification ，我們用 step function 將其二分 (&lt;span&gt;$\mathcal{Y} = \lbrace \, -1,1\,\rbrace$&lt;/span&gt;)，而在 linear regression 中，我們將其直接作為輸出。而這一講要介紹的則是將 &lt;span&gt;$\mathbf{w}^T \mathbf{x}$&lt;/span&gt; 通過一個 nonlinear function mapping 到[&lt;span&gt;$0,1$&lt;/span&gt;]，賦予他機率的意義 (&lt;span&gt;$\Pr[y = +1 | \mathbf{x}]$&lt;/span&gt;)。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -131,9 +172,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Thu, 12 Apr 2018 22:59:24 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning-lec9/</guid>
-      <description>&lt;p&gt;在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space &lt;span&gt;$\mathcal{Y}$&lt;/span&gt; 只是單純的 {&lt;span&gt;$1, -1$&lt;/span&gt;}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space &lt;span&gt;$\mathcal{Y}$&lt;/span&gt; 只是單純的 {&lt;span&gt;$1, -1$&lt;/span&gt;}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -142,9 +181,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Wed, 11 Apr 2018 17:14:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec3/</guid>
-      <description>&lt;p&gt;上一回介紹了 LPC ，來做為我們抽取 feature 的一個方法，今天要來談談目前最常被使用的 feature - MFCC 。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;上一回介紹了 LPC ，來做為我們抽取 feature 的一個方法，今天要來談談目前最常被使用的 feature - MFCC 。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -153,9 +190,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Mon, 09 Apr 2018 13:14:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec2/</guid>
-      <description>&lt;p&gt;語音辨識的基本架構中，第一步便是要把聲音訊號轉成可被紀錄的數位形式以供 machine 處理。科學家們從人類究竟是如何發出特定聲音作為出發點，去找出訊號當中哪些是屬於那個聲音 unique 的 feature，並移除那些無關的資訊 (e.g noise) ，並利用這些 extract 出來的 feature 來作為辨識的基本元素。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;語音辨識的基本架構中，第一步便是要把聲音訊號轉成可被紀錄的數位形式以供 machine 處理。科學家們從人類究竟是如何發出特定聲音作為出發點，去找出訊號當中哪些是屬於那個聲音 unique 的 feature，並移除那些無關的資訊 (e.g noise) ，並利用這些 extract 出來的 feature 來作為辨識的基本元素。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -164,9 +199,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sun, 08 Apr 2018 16:14:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec1/</guid>
-      <description>&lt;p&gt;隨著變成菸酒生的日子逐漸逼近，最近開始重追尤達大師數位語音的連載，希望在進 Speech Lab 之前，將這些知識掌握地更加純熟，這個系列主要會雜揉以前在台大所修的 &lt;a href=&#34;http://speech.ee.ntu.edu.tw/DSP2017Autumn/&#34;&gt;數位語音處理概論&lt;/a&gt; 以及在 KTH 所修的 &lt;a href=&#34;https://www.kth.se/social/course/DT2119/&#34;&gt;Speech and Speaker Recognition&lt;/a&gt; 之相關內容。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;隨著變成菸酒生的日子逐漸逼近，最近開始重追尤達大師數位語音的連載，希望在進 Speech Lab 之前，將這些知識掌握地更加純熟，這個系列主要會雜揉以前在台大所修的 &lt;a href=&#34;http://speech.ee.ntu.edu.tw/DSP2017Autumn/&#34;&gt;數位語音處理概論&lt;/a&gt; 以及在 KTH 所修的 &lt;a href=&#34;https://www.kth.se/social/course/DT2119/&#34;&gt;Speech and Speaker Recognition&lt;/a&gt; 之相關內容。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -175,9 +208,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sun, 18 Mar 2018 15:44:33 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/03/leetcode-287-find-the-duplicate-number/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/find-the-duplicate-number/description/&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/find-the-duplicate-number/description/&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -186,9 +217,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Tue, 13 Mar 2018 20:44:58 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/03/c-stl-cheat-sheet-3/</guid>
-      <description>&lt;p&gt;這講所介紹的資料結構 (Heap, BST, Hash Table)，用途在為了保證 container &lt;strong&gt;存在某些性質&lt;/strong&gt; 時使用。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;這講所介紹的資料結構 (Heap, BST, Hash Table)，用途在為了保證 container &lt;strong&gt;存在某些性質&lt;/strong&gt; 時使用。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -197,7 +226,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Mon, 12 Mar 2018 22:44:58 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/03/c-stl-cheat-sheet-2/</guid>
-      <description>&lt;p&gt;&lt;/p&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -206,9 +235,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sat, 10 Mar 2018 20:44:58 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/03/c-stl-cheat-sheet-1/</guid>
-      <description>&lt;p&gt;這個系列主要會整理一些自己刷 judge 常使用到的 STL 用法，cppreference 好是好，但就是有點太詳細了XD，首篇介紹的 vetor 和 pair，絕對是我最常用到的 STL 資料結構 XD !&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;這個系列主要會整理一些自己刷 judge 常使用到的 STL 用法，cppreference 好是好，但就是有點太詳細了XD，首篇介紹的 vetor 和 pair，絕對是我最常用到的 STL 資料結構 XD !&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -217,9 +244,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Wed, 31 Jan 2018 23:14:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec3/</guid>
-      <description>&lt;p&gt;前面提過 Boolearn Search 的其中一個問題在於， machine 是&lt;strong&gt;無腦&lt;/strong&gt;地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 &lt;span&gt;$10^6$&lt;/span&gt; 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 &lt;strong&gt;ranked retrieval&lt;/strong&gt; 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;前面提過 Boolearn Search 的其中一個問題在於， machine 是&lt;strong&gt;無腦&lt;/strong&gt;地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 &lt;span&gt;$10^6$&lt;/span&gt; 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 &lt;strong&gt;ranked retrieval&lt;/strong&gt; 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -228,9 +253,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Mon, 22 Jan 2018 23:14:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec2/</guid>
-      <description>&lt;p&gt;在做 &lt;a href=&#34;https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/&#34;&gt;Indexing&lt;/a&gt; 之前，我們需要將文本從各方來源中抽取出來，這些來源的 &lt;strong&gt;格式&lt;/strong&gt; 相當多元(像是 html, md 等等 markup 或是與圖片相雜的 data ，可能還需要處理 encoding 的問題)，反正就是挺亂的，需要做一些 processing 後，才可以用強大的 NLP tool 來統一處理。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;在做 &lt;a href=&#34;https://sunprinces.github.io/learning/2018/01/information-retrieval---lec1/&#34;&gt;Indexing&lt;/a&gt; 之前，我們需要將文本從各方來源中抽取出來，這些來源的 &lt;strong&gt;格式&lt;/strong&gt; 相當多元(像是 html, md 等等 markup 或是與圖片相雜的 data ，可能還需要處理 encoding 的問題)，反正就是挺亂的，需要做一些 processing 後，才可以用強大的 NLP tool 來統一處理。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -239,9 +262,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Wed, 17 Jan 2018 22:59:24 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec8/</guid>
-      <description>&lt;p&gt;前面幾講的討論中，我們都假設有一個 ground truth function &lt;span&gt;$f$&lt;/span&gt; 去 generate data，且我們所拿到的 &lt;span&gt;$\mathcal{D}$&lt;/span&gt; 是乾淨的，然而在真實世界中，無可避免地會遇到 &lt;strong&gt;noise&lt;/strong&gt; 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;前面幾講的討論中，我們都假設有一個 ground truth function &lt;span&gt;$f$&lt;/span&gt; 去 generate data，且我們所拿到的 &lt;span&gt;$\mathcal{D}$&lt;/span&gt; 是乾淨的，然而在真實世界中，無可避免地會遇到 &lt;strong&gt;noise&lt;/strong&gt; 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -250,9 +271,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Tue, 16 Jan 2018 23:14:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec1/</guid>
-      <description>&lt;p&gt;這個系列主要會紀錄自己在 KTH 修習 &lt;a href=&#34;https://www.kth.se/student/kurser/kurs/DD2476?l=en&#34;&gt;Information Retrieval System&lt;/a&gt; 的一些筆記，備忘用，不會像之前的 Post 那麼詳細，但還是會加點自己的 remark 這樣。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;這個系列主要會紀錄自己在 KTH 修習 &lt;a href=&#34;https://www.kth.se/student/kurser/kurs/DD2476?l=en&#34;&gt;Information Retrieval System&lt;/a&gt; 的一些筆記，備忘用，不會像之前的 Post 那麼詳細，但還是會加點自己的 remark 這樣。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -261,9 +280,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Thu, 04 Jan 2018 17:13:44 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec7/</guid>
-      <description>&lt;p&gt;於前一講中，我們證明了 growth function 為 &lt;strong&gt;POLY(N)&lt;/strong&gt; iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 &lt;span&gt;$E_i(h) \approx E_o(h)$&lt;/span&gt;  (if 數據點夠多 &lt;span&gt;$N$&lt;/span&gt; )。而這一講中，我們由 break point 引進 &lt;strong&gt;VC Dimension&lt;/strong&gt; &lt;span&gt;$d \scriptscriptstyle VC$&lt;/span&gt; ，來當作衡量 &lt;span&gt;$\mathcal{H}$&lt;/span&gt; 複雜度的一個指標。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;於前一講中，我們證明了 growth function 為 &lt;strong&gt;POLY(N)&lt;/strong&gt; iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 &lt;span&gt;$E_i(h) \approx E_o(h)$&lt;/span&gt;  (if 數據點夠多 &lt;span&gt;$N$&lt;/span&gt; )。而這一講中，我們由 break point 引進 &lt;strong&gt;VC Dimension&lt;/strong&gt; &lt;span&gt;$d \scriptscriptstyle VC$&lt;/span&gt; ，來當作衡量 &lt;span&gt;$\mathcal{H}$&lt;/span&gt; 複雜度的一個指標。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -272,9 +289,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Tue, 02 Jan 2018 19:02:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec6/</guid>
-      <description>&lt;p&gt;前一講中講述了 break point 的存在，壓制了 growth function &lt;span&gt;$m_H(N)$&lt;/span&gt; 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，&lt;span&gt;$m_H(N)$&lt;/span&gt; 便會是 &lt;strong&gt;POLY(N)&lt;/strong&gt; 。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;前一講中講述了 break point 的存在，壓制了 growth function &lt;span&gt;$m_H(N)$&lt;/span&gt; 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，&lt;span&gt;$m_H(N)$&lt;/span&gt; 便會是 &lt;strong&gt;POLY(N)&lt;/strong&gt; 。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -283,9 +298,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sat, 30 Dec 2017 19:02:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec5/</guid>
-      <description>&lt;p&gt;上一講提到了在 hypothesis set &lt;span&gt;$\mathcal{H}$&lt;/span&gt; 為有限，且sample size &lt;span&gt;$|\mathcal{D}|$&lt;/span&gt; 足夠大的情況下，是 PAC-learnable 的。但當 &lt;span&gt;$|\mathcal{H}| \, \rightarrow \, \infty$&lt;/span&gt;的時候呢？ (e.g 2D linear perceptron)&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;上一講提到了在 hypothesis set &lt;span&gt;$\mathcal{H}$&lt;/span&gt; 為有限，且sample size &lt;span&gt;$|\mathcal{D}|$&lt;/span&gt; 足夠大的情況下，是 PAC-learnable 的。但當 &lt;span&gt;$|\mathcal{H}| \, \rightarrow \, \infty$&lt;/span&gt;的時候呢？ (e.g 2D linear perceptron)&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -294,9 +307,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Thu, 28 Dec 2017 23:02:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec4/</guid>
-      <description>&lt;p&gt;這一講要討論的是&lt;strong&gt;機器學習真的是可行的嗎&lt;/strong&gt;？能推廣到所有 scenerio 嗎？或是只有部份？是否需要某些假設才能證明可行呢？&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;這一講要討論的是&lt;strong&gt;機器學習真的是可行的嗎&lt;/strong&gt;？能推廣到所有 scenerio 嗎？或是只有部份？是否需要某些假設才能證明可行呢？&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -305,9 +316,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sun, 24 Dec 2017 19:02:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec3/</guid>
-      <description>&lt;p&gt;這講建構了一個大略的 ML 世界觀。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;這講建構了一個大略的 ML 世界觀。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -316,9 +325,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Fri, 22 Dec 2017 14:02:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec2/</guid>
-      <description>&lt;p&gt;於前一講講述了 ML 的 framework ，於這一講中，我們會利用一個簡單的 learning model ， 去解決 binary classification 的問題。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;於前一講講述了 ML 的 framework ，於這一講中，我們會利用一個簡單的 learning model ， 去解決 binary classification 的問題。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -327,9 +334,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Wed, 20 Dec 2017 09:02:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec1/</guid>
-      <description>&lt;p&gt;其實是大一升大二的暑假，閒來無事找的開放式課程，那時也做了一些筆記，沒想到兩三年過後，自己做專題也走向了這個領域XD，於是順手把它整理上來囉！&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;其實是大一升大二的暑假，閒來無事找的開放式課程，那時也做了一些筆記，沒想到兩三年過後，自己做專題也走向了這個領域XD，於是順手把它整理上來囉！&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -338,9 +343,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Tue, 05 Dec 2017 09:56:56 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming-hw11/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/641&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/641&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -349,9 +352,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Tue, 31 Oct 2017 08:32:38 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming-hw6/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/632&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/632&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -360,9 +361,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sat, 14 Oct 2017 00:24:36 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec3/</guid>
-      <description>&lt;p&gt;在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/&#34;&gt;第一講&lt;/a&gt;中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 &lt;span&gt;$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$&lt;/span&gt; ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same &lt;span&gt;$\mathcal{H}$&lt;/span&gt;)可以選，每次我們就看哪一個 &lt;span&gt;$h$&lt;/span&gt; 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 &lt;span&gt;$\mathbb{E}[\, \text{max num of elements in any slots} \, ]$&lt;/span&gt; ?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/&#34;&gt;第一講&lt;/a&gt;中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 &lt;span&gt;$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$&lt;/span&gt; ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same &lt;span&gt;$\mathcal{H}$&lt;/span&gt;)可以選，每次我們就看哪一個 &lt;span&gt;$h$&lt;/span&gt; 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 &lt;span&gt;$\mathbb{E}[\, \text{max num of elements in any slots} \, ]$&lt;/span&gt; ?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -371,9 +370,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Thu, 05 Oct 2017 00:20:42 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec2/</guid>
-      <description>&lt;p&gt;Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 &lt;span&gt;$\mathcal{O}(1)$&lt;/span&gt; lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 &lt;span&gt;$\mathcal{O}(1)$&lt;/span&gt; lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -384,9 +381,7 @@ word 的機率為多少。&lt;/p&gt;
       <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-revisited/</guid>
       <description>&lt;p&gt;前面提到過一個較為複雜的優化問題， &lt;a href=&#34;https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/&#34;&gt;Metric Facility Location Problem&lt;/a&gt; ，並給出了一個 4-Approx. Algorithm ，於這講中，我們要來利用前面提到的 Primal-Dual method 來設計演算法。&lt;/p&gt;
 
-&lt;!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)--&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)--&gt;</description>
     </item>
     
     <item>
@@ -395,9 +390,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sat, 23 Sep 2017 21:19:19 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-weighted-set-cover-revisited/</guid>
-      <description>&lt;p&gt;呈之前的討論，對於 WSC 問題，我們有了利用 LP solver 去對解做 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/&#34;&gt;deterministic rounding&lt;/a&gt; 及 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/&#34;&gt;randomized rounding&lt;/a&gt; 的演算法，解法的共通點是必須要先 run 過 LP solver (雖然理論上是 &lt;strong&gt;POLY&lt;/strong&gt; ，實務上現行的 solver 也很有效率)，但我們仍想問說，是否存在不須使用 LP solver 的演算法呢？ 而這也是這講所要提到的 &lt;strong&gt;Primal-Dual Method&lt;/strong&gt; 。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;呈之前的討論，對於 WSC 問題，我們有了利用 LP solver 去對解做 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/advanced-algorithm---vertex-cover-problem/&#34;&gt;deterministic rounding&lt;/a&gt; 及 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/&#34;&gt;randomized rounding&lt;/a&gt; 的演算法，解法的共通點是必須要先 run 過 LP solver (雖然理論上是 &lt;strong&gt;POLY&lt;/strong&gt; ，實務上現行的 solver 也很有效率)，但我們仍想問說，是否存在不須使用 LP solver 的演算法呢？ 而這也是這講所要提到的 &lt;strong&gt;Primal-Dual Method&lt;/strong&gt; 。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -406,9 +399,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Tue, 19 Sep 2017 08:32:38 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw2/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/624&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/624&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -417,9 +408,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sat, 16 Sep 2017 20:49:15 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-problem/</guid>
-      <description>&lt;p&gt;接續&lt;a href=&#34;https://sunprinces.github.io/learning/tags/linear-programming/&#34;&gt;前面幾講&lt;/a&gt;，一個常用的技巧是，利用 LP solver 得出來的解 &lt;span&gt;$\mathbf{x}^{\star}$&lt;/span&gt;， 拿去做 rounding 推出原先問題的解 &lt;span&gt;$\mathbf{x}^{\prime}$&lt;/span&gt; (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (&lt;strong&gt;MFL&lt;/strong&gt;)。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;接續&lt;a href=&#34;https://sunprinces.github.io/learning/tags/linear-programming/&#34;&gt;前面幾講&lt;/a&gt;，一個常用的技巧是，利用 LP solver 得出來的解 &lt;span&gt;$\mathbf{x}^{\star}$&lt;/span&gt;， 拿去做 rounding 推出原先問題的解 &lt;span&gt;$\mathbf{x}^{\prime}$&lt;/span&gt; (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (&lt;strong&gt;MFL&lt;/strong&gt;)。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -429,9 +418,7 @@ word 的機率為多少。&lt;/p&gt;
       
       <guid>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw1/</guid>
       <description>&lt;p&gt;在 KTH 交換時選到的神課！想說把題解稍微紀錄一下 ✌️&lt;br /&gt;
-&lt;a href=&#34;https://kth.kattis.com/problemgroups/617&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;a href=&#34;https://kth.kattis.com/problemgroups/617&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -440,9 +427,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Fri, 08 Sep 2017 22:29:20 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-4/</guid>
-      <description>&lt;p&gt;前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 &lt;span&gt;$V$&lt;/span&gt; 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 &lt;span&gt;$V$&lt;/span&gt; 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -451,9 +436,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sun, 03 Sep 2017 21:28:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-3/</guid>
-      <description>&lt;p&gt;呈前一講的討論，我們有了個求單源最短路徑的演算法&lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/&#34;&gt;Bellman-Ford&lt;/a&gt; (複雜度為 &lt;span&gt;$\mathcal{O}(VE)$&lt;/span&gt; )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;呈前一講的討論，我們有了個求單源最短路徑的演算法&lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/&#34;&gt;Bellman-Ford&lt;/a&gt; (複雜度為 &lt;span&gt;$\mathcal{O}(VE)$&lt;/span&gt; )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -463,9 +446,7 @@ word 的機率為多少。&lt;/p&gt;
       
       <guid>https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-2/</guid>
       <description>&lt;p&gt;圖的一個常見應用場合是想找出某兩點之間的最短(/長)路徑，此時的邊權重又視為兩節點之間的距離。
-&lt;!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。--&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。--&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -474,9 +455,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Fri, 25 Aug 2017 10:08:13 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-1/</guid>
-      <description>&lt;p&gt;給定一張圖，要如何讀取當中的資訊呢？簡單來說就是從一給定點開始，依某種順序去拜訪相鄰(有關係)的點，最後走完所有點，收集完圖中的資訊。以下簡介兩種簡本的 traversal 方法以及應用。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;給定一張圖，要如何讀取當中的資訊呢？簡單來說就是從一給定點開始，依某種順序去拜訪相鄰(有關係)的點，最後走完所有點，收集完圖中的資訊。以下簡介兩種簡本的 traversal 方法以及應用。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -486,9 +465,7 @@ word 的機率為多少。&lt;/p&gt;
       
       <guid>https://sunprinces.github.io/learning/2017/08/algorithm-disjoint-set/</guid>
       <description>&lt;p&gt;Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets &lt;span&gt;$S_1,S_2,\cdots,S_k$&lt;/span&gt;，而每個 &lt;span&gt;$S_i$&lt;/span&gt; (每個 category) 以一個代表值 (&lt;em&gt;representative&lt;/em&gt;) 去紀錄。
-&lt;!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -497,9 +474,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Sun, 20 Aug 2017 08:01:34 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/%E5%88%A9%E7%94%A8ignr%E8%87%AA%E5%8B%95%E7%94%9F%E6%88%90.gitignore/</guid>
-      <description>&lt;p&gt;有在使用 git 的人，應該都知道我們很多時候我們不希望 git 去 track 某些檔案，也不在意他們的改動情況(但有時候手滑還是會不小心 checkin 進去&amp;hellip;😅)， 像是競賽的測資， c++ 編譯時的 .o 檔，binary executable 等等，這時候會加上 &lt;strong&gt;.gitignore&lt;/strong&gt; 於工作目錄下達成我們的目的。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;有在使用 git 的人，應該都知道我們很多時候我們不希望 git 去 track 某些檔案，也不在意他們的改動情況(但有時候手滑還是會不小心 checkin 進去&amp;hellip;😅)， 像是競賽的測資， c++ 編譯時的 .o 檔，binary executable 等等，這時候會加上 &lt;strong&gt;.gitignore&lt;/strong&gt; 於工作目錄下達成我們的目的。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -508,9 +483,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Fri, 18 Aug 2017 21:19:19 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-weighted-set-cover/</guid>
-      <description>&lt;p&gt;呈前一講，我們對&lt;strong&gt;有限制的&lt;/strong&gt; WSC 問題有 &lt;span&gt;$l$&lt;/span&gt;-approx. algorithm，但可能並不是太好(比方說 &lt;span&gt;$l=|U|$&lt;/span&gt; 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在&lt;strong&gt;大部分&lt;/strong&gt;時候，都可以得到一個&lt;strong&gt;還不錯&lt;/strong&gt; (approx. ratio ISN&amp;rsquo;T too bad)的結果。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;呈前一講，我們對&lt;strong&gt;有限制的&lt;/strong&gt; WSC 問題有 &lt;span&gt;$l$&lt;/span&gt;-approx. algorithm，但可能並不是太好(比方說 &lt;span&gt;$l=|U|$&lt;/span&gt; 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在&lt;strong&gt;大部分&lt;/strong&gt;時候，都可以得到一個&lt;strong&gt;還不錯&lt;/strong&gt; (approx. ratio ISN&amp;rsquo;T too bad)的結果。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -519,9 +492,7 @@ word 的機率為多少。&lt;/p&gt;
       <pubDate>Wed, 16 Aug 2017 20:49:15 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-vertex-cover-problem/</guid>
-      <description>&lt;p&gt;這一講會展示將問題轉化為線性規劃的 form (但可能是 ILP)，利用 LP solver 得到解，做 &lt;strong&gt;LP relaxation&lt;/strong&gt; 並證明這個解不會太差 (approx. ratio 不太大)。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;這一講會展示將問題轉化為線性規劃的 form (但可能是 ILP)，利用 LP solver 得到解，做 &lt;strong&gt;LP relaxation&lt;/strong&gt; 並證明這個解不會太差 (approx. ratio 不太大)。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -532,8 +503,7 @@ word 的機率為多少。&lt;/p&gt;
       <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-linear-programming/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Definition:&lt;/strong&gt;&lt;br/&gt;
 A linear programming is a problem of &lt;em&gt;maximizing&lt;/em&gt; or &lt;em&gt;minimizing&lt;/em&gt; a &lt;strong&gt;linear
-multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constraints&lt;/strong&gt;
-&lt;/p&gt;</description>
+multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constraints&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -544,9 +514,7 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
       <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-bin-packing-problem/</guid>
       <description>&lt;p&gt;從前兩講關於&lt;strong&gt;分配&lt;/strong&gt; (在一堆物品中，決定哪些是要拿的一群，哪些不拿) 的最佳化問題中，我們延伸出新的問題，&lt;strong&gt;Bin Packing Problem&lt;/strong&gt;。不同於在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/&#34;&gt;Knapsack Problem&lt;/a&gt; 中，我們只有一個箱子(可以想成你聘了一個工人搬一個箱子)；在Bin Packing 問題中，要取走&lt;strong&gt;所有&lt;/strong&gt;寶物(所有寶物的重量都小於 1 單位)，而你需要聘請一些工人來搬，但今天每個工人都只帶了一個負重為 1 單位的箱子，該如何分配這些寶物(雖說是寶物，但其實我們不care價值惹)，使得需帶的箱子(聘請的工人)為最少？&lt;/p&gt;
 
-&lt;p&gt;簡單的 formulation 如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;簡單的 formulation 如下：&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -555,8 +523,7 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
       <pubDate>Tue, 11 Jul 2017 23:36:01 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/07/advanced-algorithm-subset-sum-problem/</guid>
-      <description>&lt;p&gt;Subset Sum Problem 與 Knapsack Problem 相同，也是一個 NPC 問題(可以想成 Knapsack Problem weight 均為 1 的特例)。而在 Knapsack Problem 中，我們發展出&lt;strong&gt;等差&lt;/strong&gt; 的rounding 技巧，犧牲精確度去換取更低的時間複雜度，而這一講中，將利用&lt;strong&gt;等比&lt;/strong&gt;的方式去做 rounding 。
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;Subset Sum Problem 與 Knapsack Problem 相同，也是一個 NPC 問題(可以想成 Knapsack Problem weight 均為 1 的特例)。而在 Knapsack Problem 中，我們發展出&lt;strong&gt;等差&lt;/strong&gt; 的rounding 技巧，犧牲精確度去換取更低的時間複雜度，而這一講中，將利用&lt;strong&gt;等比&lt;/strong&gt;的方式去做 rounding 。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -567,9 +534,7 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
       <guid>https://sunprinces.github.io/learning/2017/07/advanced-algorithm-knapsack-problem/</guid>
       <description>&lt;p&gt;背包問題為一個典型的最佳化問題，想像你來到了一個寶庫，裡頭有一些寶物，都有各自的價值和重量，但你只帶了一個背包(而且負重還有限制)，要怎麼取寶物才能在背得走的前提下，帶走價值總和儘可能高的寶物們呢？&lt;/p&gt;
 
-&lt;p&gt;這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;這裡我們考慮最基本的 0/1 - Knapsack Problem 。簡單的 formulation 如下:&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -587,9 +552,7 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
       <pubDate>Wed, 24 May 2017 00:27:07 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture3/</guid>
-      <description>&lt;p&gt;上一講提到了怎樣的 auction 是設計者所希望看到的，有足夠的誘因使參與者做出我們希望看到的決策 (&lt;strong&gt;DSIC&lt;/strong&gt; property)，且此決策所造成的結果為設計者認定的 optimal ，同時又能簡單到能在多項式時間完成。接下來會提供一個更 general 的方式去設計機制，而不單單只是限定於 single-item auction 而已。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;上一講提到了怎樣的 auction 是設計者所希望看到的，有足夠的誘因使參與者做出我們希望看到的決策 (&lt;strong&gt;DSIC&lt;/strong&gt; property)，且此決策所造成的結果為設計者認定的 optimal ，同時又能簡單到能在多項式時間完成。接下來會提供一個更 general 的方式去設計機制，而不單單只是限定於 single-item auction 而已。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -600,9 +563,7 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
       <guid>https://sunprinces.github.io/learning/2017/05/advanced-algorithm-hash-table-lec1/</guid>
       <description>&lt;!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。--&gt;
 
-&lt;p&gt;Hashing 可以想成是一種 &lt;strong&gt;renaming&lt;/strong&gt; 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 &lt;strong&gt;Hashing&lt;/strong&gt; 的方式，重新命名 key&amp;rsquo; ，並依據 key&amp;rsquo; 將資料放到 size 跟資料個數差不多的 Hash Table 中。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Hashing 可以想成是一種 &lt;strong&gt;renaming&lt;/strong&gt; 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 &lt;strong&gt;Hashing&lt;/strong&gt; 的方式，重新命名 key&amp;rsquo; ，並依據 key&amp;rsquo; 將資料放到 size 跟資料個數差不多的 Hash Table 中。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -611,9 +572,7 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
       <pubDate>Fri, 19 May 2017 09:51:12 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture2/</guid>
-      <description>&lt;p&gt;Lecture1 提到了我們需要透由好的 mechanism，使得 agent 與 designer 的 incentive 彼此 aligned。這講從最簡單的 &lt;strong&gt;Single-item Auction&lt;/strong&gt; 開始，探討該如何設計合理的 mechanism。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Lecture1 提到了我們需要透由好的 mechanism，使得 agent 與 designer 的 incentive 彼此 aligned。這講從最簡單的 &lt;strong&gt;Single-item Auction&lt;/strong&gt; 開始，探討該如何設計合理的 mechanism。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -631,9 +590,7 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
       <pubDate>Thu, 11 May 2017 17:54:03 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/05/%E4%BD%BF%E7%94%A8hugo%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99/</guid>
-      <description>&lt;p&gt;像 Hugo 這類 static site generator 的好處是可以用簡單的語法(如 Markdown)來寫網站，其會根據寫好的模板，自己幫你渲染成 html ，而前人也已經寫好許多功能，如 topic , tag 管理等，算是集一般部落格的方便上手，與自幹 html 的 flexibility 於一身，而且整個網頁都是靜態的緣故，可以直接免費託管在 github page 等免費的網頁空間上，維護上可說是十分方便。&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;像 Hugo 這類 static site generator 的好處是可以用簡單的語法(如 Markdown)來寫網站，其會根據寫好的模板，自己幫你渲染成 html ，而前人也已經寫好許多功能，如 topic , tag 管理等，算是集一般部落格的方便上手，與自幹 html 的 flexibility 於一身，而且整個網頁都是靜態的緣故，可以直接免費託管在 github page 等免費的網頁空間上，維護上可說是十分方便。&lt;/p&gt;</description>
     </item>
     
     <item>
