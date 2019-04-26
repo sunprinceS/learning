@@ -7,27 +7,29 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Thu, 10 Jan 2019 10:59:24 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 10 Jan 2019 11:59:24 +0800</lastBuildDate>
     
 	<atom:link href="https://sunprinces.github.io/learning/topics/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Reinforcement Learning - Lec7</title>
-      <link>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec7/</link>
-      <pubDate>Thu, 10 Jan 2019 10:59:24 +0800</pubDate>
+      <title>Reinforcement Learning - Lec6</title>
+      <link>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec6/</link>
+      <pubDate>Thu, 10 Jan 2019 11:59:24 +0800</pubDate>
       
-      <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec7/</guid>
-      <description>&lt;p&gt;Lec1 - Lec4 分別介紹了 Policy-based 以及 Value-based 的 RL algorithm ，而這一講要介紹的 Actor Critic 則是同時用到了兩個演算法的部份，並在 biased 與否 (準不準) 及 variance 高低 (好不好 train) 提供一個可以調控的 hyperparameter 讓我們選擇。&lt;/p&gt;</description>
+      <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec6/</guid>
+      <description>&lt;p&gt;在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &amp;ldquo;ground-truth&amp;rdquo; agent) 與 environment 互動的&lt;span&gt;$(s,a)$&lt;/span&gt; pairs 去 train 我們的 agent/actor。那麼該如何利用這些 &lt;span&gt;$(s,a)$&lt;/span&gt; pair 呢？&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Reinforcement Learning - Lec5</title>
       <link>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec5/</link>
-      <pubDate>Tue, 08 Jan 2019 11:59:24 +0800</pubDate>
+      <pubDate>Tue, 08 Jan 2019 10:59:24 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec5/</guid>
-      <description>&lt;p&gt;在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &amp;ldquo;ground-truth&amp;rdquo; agent) 與 environment 互動的&lt;span&gt;$(s,a)$&lt;/span&gt; pairs 去 train 我們的 agent/actor。那麼該如何利用這些 &lt;span&gt;$(s,a)$&lt;/span&gt; pair 呢？&lt;/p&gt;</description>
+      <description>&lt;p&gt;Lec1 - Lec4  分別介紹了 Policy-based 及 Value-based 的 RL algorithm ，而這一講要
+介紹的 Actor Critic 則是同時用到了兩個演算法的部份，並在 biased 與否 (準不準) 及 variance
+高低 (好不好 train) 提供一個可以調控的 hyperparameter 讓我們選擇。&lt;/p&gt;</description>
     </item>
     
     <item>
