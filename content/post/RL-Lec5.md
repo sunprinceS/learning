@@ -18,7 +18,7 @@ Lec1 - Lec4  分別介紹了 Policy-based 及 Value-based 的 RL algorithm ，�
 
 Policy-based 的方法，並不 explicit 算出這個值，但在 update <span>$\theta$</span> (which parametrize that policy) 時，利用了 final reward <span>$r(\tau)$</span> (with some modification like baseline and causality to reduce variance) implicit 地當作 <span>$Q(s,a)$</span> 的 sample，雖然是個 unbiased 的估計，但未來的變數太多， variance 太大的問題是 Policy Gradient 難 train 的原因。
 
-而 Value-based 的方法，則是 explicitly 算出這個值，同時也提供了 biased 與 variance 的調控讓我選擇，而所對應的 policy 即是<span>$\epsilon$</span>-greedy 地選擇 action (with some modification to make it
+而 Value-based 的方法，則是 explicitly 算出這個值，同時也提供了 biased 與 variance 的調控供選擇，而所對應的 policy 即是<span>$\epsilon$</span>-greedy 地選擇 action (with some modification to make it
 easier to train and **more unbiased**)，但缺點在於很難 generalize 到 continuous action 的問題上。
 
 而 Actor-Critic 則是想結合兩者，一樣利用 <span>$\theta$</span> 去 parametrize policy，但利用 Value-based 的方法如 MC 或 TD 來近似 <span>$Q^\pi(s,a)$</span>
@@ -69,8 +69,6 @@ $$``
 **Remark:** <span>$\gamma$</span> 也可以看成是一個 reduce variance 的技巧，畢竟越未來的事變數越多，variance 越大，所以當前決定中，越久之後才得到的 reward 不該影響這時候的決定太多。
 
 ## Some tips
-
-
 
 ### Shared Feature of policy and value approximator
 <center><img src="/img/post/aac.png" width="70%" style="border-radius: 0%;"></center>

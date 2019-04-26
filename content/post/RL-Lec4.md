@@ -59,7 +59,7 @@ balance between TD (step = 1) and MC (step <span>$\rightarrow \infty$</span>)
 
 Instead of <span>$\epsilon$</span>-greedy when choosing action, add noise to <span>$Q_\phi$</span> (will explore in consistent way)
 
-## Distributional Q-function
+<!--## Distributional Q-function-->
 
 ## Reference
 

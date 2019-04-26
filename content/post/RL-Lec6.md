@@ -45,17 +45,19 @@ In brief, colect training data from <span>$p_\pi(s_t)$</span> instead of <span>$
 **Remark:** 
 
 * 就像是讓學生回去寫作業，遇到不會的再拿來學校問老師。\\
-* 中間牽涉到 human labelling 的 interaction，沒效率
+* 中間牽涉到 human labelling 的 interaction，為效率的 bottleneck
 
 ### Solution#2 Make model equipped with some property
 
-* Non-Markovian: 考慮到 data 間 sequential 的關係，以 recurrent-type 的 model 作為 agent model。
+* Non-Markovian: 考慮到 data 間 sequential 的關係，以 recurrent-type 的 model 作為 agent model (e.g RNN)。
 * Multimodal: Given same state, 人類可能會做出不同決定
   * Mixture Model: 最後 output 的並非一個 action <span>$a$</span>，而是一個 distribution。簡單來說，以 GMM 來 model 該 distribution，讓 model output GMM 所需的參數。
   * Latent Variable Models: 待補
 
 ### Issue#2 - Limited Capacity
 許多 expert 無意義的習慣(?) 也會被 model 學進去， 若 learning capacity 是 limited 的話，重要的 behavior 反而沒學到 (因 label 並沒有 split 哪些不同的 sub-behavior 是沒關係，哪些又有關係)
+
+**Remark**: 如果對 domain 有些了解，可以利用人工 augment noise 進去，再用 adversarial 去 alleviate 這個 issue。不過更根本的問題在於 factorize 這件事現在的方法都還不是做的 generally 非常好
 
 ## Inverse Reinforcement Learning
 

@@ -32,7 +32,7 @@ $$``
 
 上圖中的 'a' 對應到不同的 tri-phone ，但 tri-phone 不是去串接這三個 phone 的 model ，而是對有不同 context 的相同 phone 去訓練不同的 model 。
 
-但這麼一來，會遇到把 word 當 basic unit 的問題 (雖然沒那麼嚴重)，因此，我們想對
+但這麼一來，會遇到把 word 當 basic unit 使得每個 unit sample 都不夠多的問題 (雖然沒那麼嚴重)，因此，我們想對
 發音類似的那些 tri-phone 中的某些 state 做 weight sharing (e.g 上例中，prefix 相同，第一個和第二個 state 或許就可以 share)
 
 可以用 data-driven 的方法 automatically 決定如何 share (e.g Hierarchical
