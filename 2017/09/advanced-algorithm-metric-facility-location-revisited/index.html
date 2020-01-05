@@ -284,84 +284,84 @@
 </div>
 
   <p>前面提到過一個較為複雜的優化問題， <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/">Metric Facility Location Problem</a> ，並給出了一個 4-Approx. Algorithm ，於這講中，我們要來利用前面提到的 Primal-Dual method 來設計演算法。</p>
-<!-- raw HTML omitted -->
+<!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)-->
 <h2 id="rewrite-dual-form">Rewrite Dual form</h2>
 <h3 id="primal-lp">Primal LP</h3>
 <p><code>$$ \min \sum_{i \in F}y_i f_i + \sum_{i \in F, \, j \in C} x_{ij} c_{ij} \; s.t. \,  \begin{cases}  \sum_{i \in F}x_{ij} \geq 1, \; \forall j \in C \; (\text{乘上} \, \color{red}{\alpha_j})\\ y_i \geq x_{ij}, \; \forall i \in F, \, j \in C \; (\text{乘上} \, \color{green}{\beta_{ij}})\\ x_{ij}, \, y_i \geq 0  \end{cases} $$</code></p>
 <h3 id="dual-lp">Dual LP</h3>
 <p><code>$$ \min \sum_{j \in C} \color{red}{\alpha_j} \; s.t. \,  \begin{cases} \sum_{j \in C} \color{green}{\beta_{ij}} \leq f_i \; \forall i \in F \, (y_i \, \text{的 objective}) \\ \color{red}{\alpha_j} - \color{green}{\beta_{ij}} \leq c_{ij} \; \forall i \in F, j \in C \, (x_{ij} \, \text{的 objective}) \\ \alpha_j ,\beta_{ij} \geq 0 \end{cases} $$</code></p>
 <h3 id="-dual-var-">對於 Dual var 的直觀理解</h3>
-<p>把 <!-- raw HTML omitted -->$\alpha_j$<!-- raw HTML omitted --> 想成是 clinet <!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> 所付的錢，而 <!-- raw HTML omitted -->$\beta \scriptstyle ij$<!-- raw HTML omitted --> 表示其貢獻給 facility <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 的，先把原先條件中的不等式改為等式 (complementary slackness)，第一條式子，表示被開的 facility is fully paid for。而第二條式子，把 <!-- raw HTML omitted -->$\alpha_j$<!-- raw HTML omitted --> 拆成兩部份，一部分給 facility ，另一部份則用於支付 <!-- raw HTML omitted -->$c \scriptstyle ij$<!-- raw HTML omitted --> 的 coneection cost 。</p>
+<p>把 <span>$\alpha_j$</span> 想成是 clinet <span>$j$</span> 所付的錢，而 <span>$\beta \scriptstyle ij$</span> 表示其貢獻給 facility <span>$i$</span> 的，先把原先條件中的不等式改為等式 (complementary slackness)，第一條式子，表示被開的 facility is fully paid for。而第二條式子，把 <span>$\alpha_j$</span> 拆成兩部份，一部分給 facility ，另一部份則用於支付 <span>$c \scriptstyle ij$</span> 的 coneection cost 。</p>
 <h2 id="algorithm">Algorithm</h2>
-<h3 id="phase-i-increase-spanalphaspan-and-spanbetaspan">Phase I (Increase <!-- raw HTML omitted -->$\alpha$<!-- raw HTML omitted --> and <!-- raw HTML omitted -->$\beta$<!-- raw HTML omitted -->)</h3>
-<p>Initially, set <!-- raw HTML omitted -->$\alpha_i$<!-- raw HTML omitted --> and <!-- raw HTML omitted -->$\beta \scriptstyle ij$<!-- raw HTML omitted -->
-to <!-- raw HTML omitted -->$0 ; \forall i,j$<!-- raw HTML omitted --></p>
+<h3 id="phase-i-increase-spanalphaspan-and-spanbetaspan">Phase I (Increase <span>$\alpha$</span> and <span>$\beta$</span>)</h3>
+<p>Initially, set <span>$\alpha_i$</span> and <span>$\beta \scriptstyle ij$</span>
+to <span>$0 ; \forall i,j$</span></p>
 <ol>
 <li>
-<p>Increase all <strong>uncovered</strong> <!-- raw HTML omitted -->$\alpha_j$<!-- raw HTML omitted --> with same rate until
-<!-- raw HTML omitted -->$\alpha_i = c\scriptstyle ij$<!-- raw HTML omitted --> for some <!-- raw HTML omitted -->$i,j$<!-- raw HTML omitted -->， call <!-- raw HTML omitted -->$\color{blue}{(i,j) , \text{is tight}}$<!-- raw HTML omitted --></p>
+<p>Increase all <strong>uncovered</strong> <span>$\alpha_j$</span> with same rate until
+<span>$\alpha_i = c\scriptstyle ij$</span> for some <span>$i,j$</span>， call <span>$\color{blue}{(i,j) , \text{is tight}}$</span></p>
 </li>
 <li>
-<p>When <!-- raw HTML omitted -->$(i,j)$<!-- raw HTML omitted --> is tight, set <!-- raw HTML omitted -->$\beta \scriptstyle ij
-\normalsize = \alpha_j - c \scriptstyle ij$<!-- raw HTML omitted --> (僅可能緩慢地讓
-<!-- raw HTML omitted -->$\beta$<!-- raw HTML omitted --> 隨 <!-- raw HTML omitted -->$\alpha$<!-- raw HTML omitted --> increase ，在滿足第一條
-constraint 的情況下，不要讓 <!-- raw HTML omitted -->$\alpha$<!-- raw HTML omitted --> 的增長太快碰到第二條
+<p>When <span>$(i,j)$</span> is tight, set <span>$\beta \scriptstyle ij
+\normalsize = \alpha_j - c \scriptstyle ij$</span> (僅可能緩慢地讓
+<span>$\beta$</span> 隨 <span>$\alpha$</span> increase ，在滿足第一條
+constraint 的情況下，不要讓 <span>$\alpha$</span> 的增長太快碰到第二條
 constraint)</p>
 </li>
 </ol>
-<p>Repeat above procedure, until <!-- raw HTML omitted -->$\color{blue}{\underset{j \in C}{\sum}\beta
-\scriptstyle ij \normalsize = f_i , \text{for some} , i}$<!-- raw HTML omitted --></p>
-<p>Then, facility <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> becomes <strong>temporarily opened</strong>，\<br>
-<!-- raw HTML omitted -->$\forall j$<!-- raw HTML omitted --> such that <!-- raw HTML omitted -->$(i,j)$<!-- raw HTML omitted --> is tight and <!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> is not <strong>covered</strong>, temporarily connect <!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> to <!-- raw HTML omitted -->$i$<!-- raw HTML omitted -->, 之後的 Phase I 中， <!-- raw HTML omitted -->$\alpha_j$<!-- raw HTML omitted --> is fixed。 And we say <!-- raw HTML omitted -->$\color{blue}{\text{facility} , i , \text{is client} , j \text{&lsquo;s witness}}$<!-- raw HTML omitted --></p>
+<p>Repeat above procedure, until <span>$\color{blue}{\underset{j \in C}{\sum}\beta
+\scriptstyle ij \normalsize = f_i , \text{for some} , i}$</span></p>
+<p>Then, facility <span>$i$</span> becomes <strong>temporarily opened</strong>，\<br>
+<span>$\forall j$</span> such that <span>$(i,j)$</span> is tight and <span>$j$</span> is not <strong>covered</strong>, temporarily connect <span>$j$</span> to <span>$i$</span>, 之後的 Phase I 中， <span>$\alpha_j$</span> is fixed。 And we say <span>$\color{blue}{\text{facility} , i , \text{is client} , j \text{&lsquo;s witness}}$</span></p>
 <p>Repeat above procedure until all clients are covered</p>
-<p><strong>Remark:</strong> 如果在 facility <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 被開之後，有其他的 client <!-- raw HTML omitted -->$j^\prime$<!-- raw HTML omitted --> 使其 connection 為 tight，我們也稱 facility <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 為 client <!-- raw HTML omitted -->$j^\prime$<!-- raw HTML omitted --> 的 witness (<strong>Note: 往後</strong> <!-- raw HTML omitted -->$\alpha \scriptstyle j^\prime$<!-- raw HTML omitted --> <strong>會 fixed ，且</strong> <!-- raw HTML omitted -->$\beta \scriptstyle ij^\prime \normalsize = \alpha \scriptstyle j^\prime \normalsize - c \scriptstyle ij^\prime \normalsize = 0$<!-- raw HTML omitted -->**，不會再更動**)</p>
+<p><strong>Remark:</strong> 如果在 facility <span>$i$</span> 被開之後，有其他的 client <span>$j^\prime$</span> 使其 connection 為 tight，我們也稱 facility <span>$i$</span> 為 client <span>$j^\prime$</span> 的 witness (<strong>Note: 往後</strong> <span>$\alpha \scriptstyle j^\prime$</span> <strong>會 fixed ，且</strong> <span>$\beta \scriptstyle ij^\prime \normalsize = \alpha \scriptstyle j^\prime \normalsize - c \scriptstyle ij^\prime \normalsize = 0$</span>**，不會再更動**)</p>
 <h3 id="phase-ii-first-remove-all-closed-facilities-and-edges-not-tight">Phase II (First remove all closed facilities and edges not tight)</h3>
-<p><strong>Def.</strong>: if <!-- raw HTML omitted -->$\beta \scriptstyle ij \normalsize &gt; 0$<!-- raw HTML omitted --> and <!-- raw HTML omitted -->$\beta \scriptstyle ij^\prime \normalsize &gt; 0$<!-- raw HTML omitted -->, we call <!-- raw HTML omitted -->$i, i^\prime$<!-- raw HTML omitted --> are <!-- raw HTML omitted -->$\color{blue}{\text{conflict}}$<!-- raw HTML omitted --></p>
-<p>(clinet <!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> 同時有付錢給兩者，均有貢獻 <!-- raw HTML omitted -->$\beta \scriptstyle \star j$<!-- raw HTML omitted -->)</p>
-<p>Pick any <strong>maximal</strong> set of temporarily opened facilities <!-- raw HTML omitted -->$\mathbf{I}$<!-- raw HTML omitted --> that AREN'T
+<p><strong>Def.</strong>: if <span>$\beta \scriptstyle ij \normalsize &gt; 0$</span> and <span>$\beta \scriptstyle ij^\prime \normalsize &gt; 0$</span>, we call <span>$i, i^\prime$</span> are <span>$\color{blue}{\text{conflict}}$</span></p>
+<p>(clinet <span>$j$</span> 同時有付錢給兩者，均有貢獻 <span>$\beta \scriptstyle \star j$</span>)</p>
+<p>Pick any <strong>maximal</strong> set of temporarily opened facilities <span>$\mathbf{I}$</span> that AREN'T
 conflicting</p>
 <ol>
-<li>open <!-- raw HTML omitted -->$\mathbf{I}$<!-- raw HTML omitted --></li>
-<li>If client <!-- raw HTML omitted -->$j$<!-- raw HTML omitted -->'s witness <!-- raw HTML omitted -->$\in I$<!-- raw HTML omitted -->, connect directly</li>
-<li>If not, connect indirectly to any conflicting <!-- raw HTML omitted -->$i \in I$<!-- raw HTML omitted --></li>
+<li>open <span>$\mathbf{I}$</span></li>
+<li>If client <span>$j$</span>'s witness <span>$\in I$</span>, connect directly</li>
+<li>If not, connect indirectly to any conflicting <span>$i \in I$</span></li>
 </ol>
 <h2 id="correctness">Correctness</h2>
 <h3 id="complementary-slackness-revisited">Complementary Slackness Revisited</h3>
 <ol>
 <li>
-<p><!-- raw HTML omitted -->$\forall i \in F, , ; y_i = 0 \lor \underset{j \in C}{\sum} \beta \scriptstyle ij \normalsize = f_i$<!-- raw HTML omitted --> \<br>
-(對有開的 facility, <!-- raw HTML omitted -->$\sum \beta \scriptstyle ij \normalsize  = f_i$<!-- raw HTML omitted -->) <!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> 符合！</p>
+<p><span>$\forall i \in F, , ; y_i = 0 \lor \underset{j \in C}{\sum} \beta \scriptstyle ij \normalsize = f_i$</span> \<br>
+(對有開的 facility, <span>$\sum \beta \scriptstyle ij \normalsize  = f_i$</span>) <span>$\Rightarrow$</span> 符合！</p>
 </li>
 <li>
-<p><!-- raw HTML omitted -->$\color{red}{\forall i \in F , j \in C, ; x \scriptstyle ij \normalsize  = 0 \lor \alpha_j - \beta \scriptstyle ij \normalsize = c \scriptstyle ij}$<!-- raw HTML omitted --></p>
+<p><span>$\color{red}{\forall i \in F , j \in C, ; x \scriptstyle ij \normalsize  = 0 \lor \alpha_j - \beta \scriptstyle ij \normalsize = c \scriptstyle ij}$</span></p>
 </li>
 <li>
-<p><!-- raw HTML omitted -->$\forall j \in C, , ; \alpha_j  = 0 \lor \underset{i \in F}{\sum} x \scriptstyle ij \normalsize = 1$<!-- raw HTML omitted -->\<br>
-(對所有的 client 而言，其只會被一個 facility serve) <!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> 符合！</p>
+<p><span>$\forall j \in C, , ; \alpha_j  = 0 \lor \underset{i \in F}{\sum} x \scriptstyle ij \normalsize = 1$</span>\<br>
+(對所有的 client 而言，其只會被一個 facility serve) <span>$\Rightarrow$</span> 符合！</p>
 </li>
 <li>
-<p><!-- raw HTML omitted -->$\forall i \in F, j \in C, , ; \beta \scriptstyle ij \normalsize = 0
-\lor y_i = x \scriptstyle ij$<!-- raw HTML omitted -->\<br>
-(對那些 directly connected 的 clinet，也就是 <!-- raw HTML omitted -->$\beta \scriptstyle ij \normalsize \not = 0$<!-- raw HTML omitted --> 者，<!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> 是由 <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> serve\<br>
-但注意到為 <!-- raw HTML omitted -->$0$<!-- raw HTML omitted --> 者也可能是被 directly connect 的) <!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> 符合！</p>
+<p><span>$\forall i \in F, j \in C, , ; \beta \scriptstyle ij \normalsize = 0
+\lor y_i = x \scriptstyle ij$</span>\<br>
+(對那些 directly connected 的 clinet，也就是 <span>$\beta \scriptstyle ij \normalsize \not = 0$</span> 者，<span>$j$</span> 是由 <span>$i$</span> serve\<br>
+但注意到為 <span>$0$</span> 者也可能是被 directly connect 的) <span>$\Rightarrow$</span> 符合！</p>
 </li>
 </ol>
 <p><strong>Remark:</strong> 1,2 分別為一組， 3,4 為另一組 complementary slackness，而現在我們要
-relax 第一組 3 倍 (因為對 indirectly connected 的那些 clinet ， <!-- raw HTML omitted -->$\color{red}{2.}$<!-- raw HTML omitted --> 不成立)</p>
+relax 第一組 3 倍 (因為對 indirectly connected 的那些 clinet ， <span>$\color{red}{2.}$</span> 不成立)</p>
 <p><strong>proof:</strong>\<br>
-<!-- raw HTML omitted -->$\because , \text{indirectly connected} , \therefore , \beta
-\scriptstyle ij \normalsize = 0$<!-- raw HTML omitted --></p>
-<p>So what we want to prove now is <!-- raw HTML omitted -->$\boxed{c \scriptstyle ij \normalsize \leq 3 \alpha_j}$<!-- raw HTML omitted --></p>
+<span>$\because , \text{indirectly connected} , \therefore , \beta
+\scriptstyle ij \normalsize = 0$</span></p>
+<p>So what we want to prove now is <span>$\boxed{c \scriptstyle ij \normalsize \leq 3 \alpha_j}$</span></p>
 <p>Because the problem is <strong>metric</strong>,</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/facility_conflict.jpg" width="30%" style="border-radius: 0%;"></center>
 <p><code>$$ \begin{align} c_{ij} &amp; \leq c_{ij^\prime} + c_{i^\prime j ^\prime} + c_{i^\prime j}\\ &amp; \leq \alpha_{j^\prime} + \alpha_{j^\prime} + \alpha_j \; (\because \, \text{for directly connected} \, \alpha = \beta + c \geq c\\ &amp; \leq 3 \alpha_j \; (\because \alpha_j \geq \alpha_{j^{\prime}}) \end{align} $$</code></p>
 <p><strong>Note</strong></p>
-<p>如果 <!-- raw HTML omitted -->$i, i^\prime$<!-- raw HTML omitted --> conflict， <!-- raw HTML omitted -->$(i,j)$<!-- raw HTML omitted --> 又不 tight ，代表必定存在 <!-- raw HTML omitted -->$j^\prime$<!-- raw HTML omitted --> 使得 <!-- raw HTML omitted -->$(i,j^\prime), , (i^\prime,j^\prime)$<!-- raw HTML omitted --> 均為 tight 。\<br>
-如果說是 <!-- raw HTML omitted -->$i^\prime$<!-- raw HTML omitted --> 比較早開，那麼 <!-- raw HTML omitted -->$\alpha_j, \alpha \scriptstyle j^\prime$<!-- raw HTML omitted --> 會相等 (同時 fixed) ; \<br>
-但若是 <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 比較早開，<!-- raw HTML omitted -->$\alpha \scriptstyle j^\prime$<!-- raw HTML omitted --> 比 <!-- raw HTML omitted -->$\alpha_j$<!-- raw HTML omitted --> 提早被 fix ，一定比較小 <!-- raw HTML omitted -->$\Rightarrow \alpha_j \geq \alpha \scriptstyle j^\prime$<!-- raw HTML omitted --></p>
-<p>故我們可以將 <!-- raw HTML omitted -->$\color{red}{2}$<!-- raw HTML omitted --> 式 relax 成以下</p>
+<p>如果 <span>$i, i^\prime$</span> conflict， <span>$(i,j)$</span> 又不 tight ，代表必定存在 <span>$j^\prime$</span> 使得 <span>$(i,j^\prime), , (i^\prime,j^\prime)$</span> 均為 tight 。\<br>
+如果說是 <span>$i^\prime$</span> 比較早開，那麼 <span>$\alpha_j, \alpha \scriptstyle j^\prime$</span> 會相等 (同時 fixed) ; \<br>
+但若是 <span>$i$</span> 比較早開，<span>$\alpha \scriptstyle j^\prime$</span> 比 <span>$\alpha_j$</span> 提早被 fix ，一定比較小 <span>$\Rightarrow \alpha_j \geq \alpha \scriptstyle j^\prime$</span></p>
+<p>故我們可以將 <span>$\color{red}{2}$</span> 式 relax 成以下</p>
 <p><code>$$ \frac{1}{3} c_{ij} \leq \alpha_j - \beta_{ij} \leq c_{ij} $$</code></p>
-<p><!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\color{red}{\text{3-Approx. Algorithm}}$<!-- raw HTML omitted --> ✌️</p>
+<p><span>$\Rightarrow$</span> <span>$\color{red}{\text{3-Approx. Algorithm}}$</span> ✌️</p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li><a href="https://www.cc.gatech.edu/~vazirani/k-median.pdf">原始論文</a></li>

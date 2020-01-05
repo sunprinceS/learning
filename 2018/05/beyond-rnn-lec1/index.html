@@ -287,7 +287,7 @@
 <p>這一篇 Post 會介紹的是 <a href="https://arxiv.org/abs/1410.5401">Neural Turing Machine</a> ，是 DeepMind 在 2014 年
 所發表的研究。</p>
 <p>RNN-type 的 network ，之所以能處理 sequence 的問題，關鍵在它 keep 了 hidden
-state (對應到 LSTM 的 <!-- raw HTML omitted -->$h,c$<!-- raw HTML omitted -->&hellip; )，可以理解成當作到目前為止，綜合了<strong>所有 input 的
+state (對應到 LSTM 的 <span>$h,c$</span>&hellip; )，可以理解成當作到目前為止，綜合了<strong>所有 input 的
 representation</strong> ，而其又會隨著新的 input 進來而有所改變。</p>
 <h2 id="motivation">Motivation</h2>
 <p>一個很自然的問題是，對於那些很長的 sequence ，我們需要開多大的 hidden state 去
@@ -295,15 +295,19 @@ maintain？ 直覺應該是 dimension 要更大，可以想成我們要用一條
 <p>而就像 <strong>CNN</strong> 的 motivation 一樣，我們希望我們的 model 能引進多一點先備的資訊。在 CNN 中，對於 structured 的影像，直接把每個 pixel 展平成 1D vector 作為 model 的 input，其 performance 比不上將其 treat 成 2D Tensor ，考慮鄰近 pixel 的 額外 information。(工商時間: 這裡有我之前當 TA 時出給同學的<a href="https://sunprinces.github.io/ML-Assignment3/">練習</a>，在 FER 這個 dataset 上比較 CNN 跟 DNN 的 performance 優劣)</p>
 <p>而 NTM 的 idea 也是類似，藉由引進 extra memory ，把原先那個上千維的 1D hidden vector，折成 2D Tensor 作為 memory 。並仿效現在電腦的架構，構造其與 input interact 的 mechanism，把 sequence 先後的資訊給考慮進來。</p>
 <h2 id="basic-structure">Basic Structure</h2>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/ntm-structure.png" width="60%" style="border-radius: 0%;"></center>
 <p>讀寫 memory 這件事分成兩個步驟，<strong>內容</strong>及<strong>位置</strong>。\<br>
 仔細想想，「位置」在 memory 中，是<strong>離散</strong>的存在，該如何把從哪裡讀/寫這件事變成可以用 NN 可以 train 呢？\<br>
 想法就是讓其<strong>可微</strong>，這裡的作法是每次在讀寫時，不是對 specific 位置的 memory cell 做操作，而
-是對一個 specific distribution <!-- raw HTML omitted -->$w$<!-- raw HTML omitted --> 的 memory cell 們做操作 (簡單來說，就是同時考慮所有
+是對一個 specific distribution <span>$w$</span> 的 memory cell 們做操作 (簡單來說，就是同時考慮所有
 的 memory cell，但根據裡頭內容的不同，決定其所佔的 weight)。</p>
 <h2 id="read--write">Read &amp; Write</h2>
-<p>假設時間點 <!-- raw HTML omitted -->$t$<!-- raw HTML omitted --> ，我們有了一個 address distribution <!-- raw HTML omitted -->$w_t$<!-- raw HTML omitted -->，讀出來的內容很簡單就是</p>
-<!-- raw HTML omitted -->
+<p>假設時間點 <span>$t$</span> ，我們有了一個 address distribution <span>$w_t$</span>，讀出來的內容很簡單就是</p>
+<div>
+\[
+\mathbf{r}_t \leftarrow \sum_i w_t(i)\mathbf{M}(i)
+\]
+</div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">read</span>(self, w):
         <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> Read memory corresponding to the address weighting</span><span style="color:#e6db74">
 </span><span style="color:#e6db74"></span><span style="color:#e6db74">        Arguments:</span><span style="color:#e6db74">
@@ -313,7 +317,11 @@ maintain？ 直覺應該是 dimension 要更大，可以想成我們要用一條
 </span><span style="color:#e6db74"></span><span style="color:#e6db74">        </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
         <span style="color:#66d9ef">return</span> torch<span style="color:#f92672">.</span>matmul(w<span style="color:#f92672">.</span>unsqueeze(<span style="color:#ae81ff">1</span>), self<span style="color:#f92672">.</span>memory)<span style="color:#f92672">.</span>squeeze(<span style="color:#ae81ff">1</span>)
 </code></pre></div><p>寫入 memory 就是</p>
-<!-- raw HTML omitted -->
+<div>
+\[
+\mathbf{M}_t(i) \leftarrow \tilde \mathbf{M}_t(i)[\mathbf{1} - w_t(i) \mathbf{e}_t] + w_t(i)\mathbf{a}_t
+\]
+</div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">write</span>(self, w, e, a):
         <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> Erase/Add memory corresponding to the address weighting</span><span style="color:#e6db74">
 </span><span style="color:#e6db74"></span><span style="color:#e6db74">        Arguments:</span><span style="color:#e6db74">
@@ -326,26 +334,42 @@ maintain？ 直覺應該是 dimension 要更大，可以想成我們要用一條
         self<span style="color:#f92672">.</span>memory <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>prev_mem <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> erase) <span style="color:#f92672">+</span> add
 </code></pre></div><h2 id="address-mechanism">Address Mechanism</h2>
 <p>我覺得這部份就是 NTM 中最精華的一段了，討論了如何得到 address distribution
-<!-- raw HTML omitted -->$w_t$<!-- raw HTML omitted -->，所用到的概念，也是之後 attention-based model 的 motivation。</p>
+<span>$w_t$</span>，所用到的概念，也是之後 attention-based model 的 motivation。</p>
 <h3 id="content-based-attention">Content-based Attention</h3>
-<p>根據 memory cell 現在所紀錄的內容與 controller 的 output key vector <!-- raw HTML omitted -->$\mathbf{k}$<!-- raw HTML omitted --> (亦即 <!-- raw HTML omitted -->$f$<!-- raw HTML omitted -->(input))做比較，決定該 memory cell 所要佔的比重 (越類似者，權重越高)。</p>
-<!-- raw HTML omitted -->
-<p><strong>Note:</strong> <!-- raw HTML omitted -->$K[u,v]$<!-- raw HTML omitted -->是 similarity 的 measure，一般用 cosine
+<p>根據 memory cell 現在所紀錄的內容與 controller 的 output key vector <span>$\mathbf{k}$</span> (亦即 <span>$f$</span>(input))做比較，決定該 memory cell 所要佔的比重 (越類似者，權重越高)。</p>
+<div>
+\[
+w_c(i) \leftarrow \frac{e^{\beta K[\textbf{k},\textbf{M}(i)] } }{ \sum_{j} e^{ \beta K[\textbf{k},\textbf{M}(j)] } }
+\]
+</div>
+<p><strong>Note:</strong> <span>$K[u,v]$</span>是 similarity 的 measure，一般用 cosine
 similarity</p>
 <h3 id="location-based-attention">Location-based Attention</h3>
-<p>As title，我們從上一步中，得到了 <!-- raw HTML omitted -->$w_c$<!-- raw HTML omitted -->，但根據不同的 input ，又再多考慮這些 moemory cell 與其鄰近者的 distribution 。</p>
+<p>As title，我們從上一步中，得到了 <span>$w_c$</span>，但根據不同的 input ，又再多考慮這些 moemory cell 與其鄰近者的 distribution 。</p>
 <h4 id="interpolation">Interpolation</h4>
 <p>考慮上一個時間點 address weighting 的影響</p>
-<!-- raw HTML omitted -->
+<div>
+\[
+\textbf{w}_{t} \leftarrow g \textbf{w}_{t} + (1-g) \textbf{w}_{t-1}
+\]
+</div>
 <h4 id="convolution-shift">Convolution Shift</h4>
 <p>將某一位置的 memory cell 之 weighting 上，再考慮其與鄰近 memory cell 的
-distribution (在此我們考慮左右各一個 memory，如果 weight 是 <!-- raw HTML omitted -->$(0,0,1)$<!-- raw HTML omitted --> 的話，意思
+distribution (在此我們考慮左右各一個 memory，如果 weight 是 <span>$(0,0,1)$</span> 的話，意思
 就是原先該 cell 得到的所有 weight 都 apply 給其右邊的 cell)</p>
-<!-- raw HTML omitted -->
+<div>
+\[
+w(i) \leftarrow w(i+1) s(-1) + w(i)s(0) + w(i-1)s(1)
+\]
+</div>
 <h4 id="reweighting---sharpening">Reweighting - Sharpening</h4>
-<!-- raw HTML omitted -->
+<div>
+\[
+w(i) \leftarrow \frac{w(i)^{\gamma}}{\sum_{j}w(j)^{\gamma}}
+\]
+</div>
 <p>綜合起來，整個 mechanism 是這樣運作的。</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/ntm-address-mechanism.png" width="80%" style="border-radius: 0%;"></center>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">address</span>(self, k, beta, g, s, gamma, w_prev):
        <span style="color:#75715e"># Content focus</span>
        wc <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_similarity(k, beta)
@@ -380,16 +404,19 @@ distribution (在此我們考慮左右各一個 memory，如果 weight 是 <!-- 
 <h3 id="copy-task">Copy Task</h3>
 <p>這是我隨機用長度為 3 ~ 20 的 sequence 訓練的結果，並拿長度為 30 的 sequence 當作
 validation data。</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-cost-0320.png" width="80%" style="border-radius: 0%;"></center>
+其實到 20k 以後，就可以 fit training data 了，但對於更長的 sequence 之 generalization ，偶爾會有爛掉的可能。
 <p>從 output 的 posterior 來看，也可以看出 model 其實蠻肯定的</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-pred-0320.png" width="80%" style="border-radius: 0%;"></center>
 <p>一個有趣的問題是，如果用更短的 sequence 做 training 呢？\<br>
 比方說 3 ~ 10 的 sequence ，其還能夠類推到長度為 30 的 sequence 嗎？</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-cost-0310.png" width="80%" style="border-radius: 0%;"></center>
+<center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-pred-0310-L20.png" width="80%" style="border-radius: 0%;"></center>
+<center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-pred-0310-L30.png" width="80%" style="border-radius: 0%;"></center>
 <p>實驗結果看起來是不行😅。\<br>
 而且長度 20 的 sequence 也學不起來，這樣是否代表 NTM 沒有 generalization 的能力呢？</p>
-<p>讓我們把 train 在 長度為 3 ~ 20 的 sequence 之 model，拿來 predict 在長度 <!-- raw HTML omitted -->$\geq 20$<!-- raw HTML omitted -->的 sequence 上。</p>
-<!-- raw HTML omitted -->
+<p>讓我們把 train 在 長度為 3 ~ 20 的 sequence 之 model，拿來 predict 在長度 <span>$\geq 20$</span>的 sequence 上。</p>
+<center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-error-curve.png" width="60%" style="border-radius: 0%;"></center>
 <p>看起來它是有學到 generalization 的，\<br>
 而且對於 memory 已經不夠放的部份，也不是一口氣爛掉，還是有盡量記到一些值。</p>
 <p><strong>Remark:</strong> model generalization 的能力與其看過的 training data 有關，但不是簡單的線性關係而已。</p>
@@ -397,11 +424,11 @@ validation data。</p>
 <ul>
 <li>Memory 的使用及 R/W weight 變化</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/ntm-memory-use.png" width="100%" style="border-radius: 0%;"></center>
+<center><img src="https://sunprinces.github.io/learning/img/post/ntm-head-weight.png" width="100%" style="border-radius: 0%;"></center>
 <ul>
 <li>這裡實做的 NTM ，contoller 在輸出 final output 時，同時考慮了 read head 以及 input 的值。\<br>
-在 prediction 階段， current input 都是 dummy 的 <!-- raw HTML omitted -->$\mathbf{0}$<!-- raw HTML omitted --> vector，但如果不考慮它的話，NTM 就無法 train 起來，推測可能是在那個 dummy vector ，對 model 而言就是僅有讀而沒有寫的指令(如同上方所提到的 R/W mode 切換)。</li>
+在 prediction 階段， current input 都是 dummy 的 <span>$\mathbf{0}$</span> vector，但如果不考慮它的話，NTM 就無法 train 起來，推測可能是在那個 dummy vector ，對 model 而言就是僅有讀而沒有寫的指令(如同上方所提到的 R/W mode 切換)。</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forward</span>(self,x):
        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">NTM forward</span><span style="color:#e6db74">&#34;&#34;&#34;</span>

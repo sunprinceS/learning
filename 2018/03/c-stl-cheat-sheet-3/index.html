@@ -285,8 +285,8 @@
 <h2 id="max-binary-heap---priority-queue">MAX Binary Heap - Priority Queue</h2>
 <h3 id="heading">性質</h3>
 <ul>
-<li><strong>top() 恆為當前資料中最大者， query 複雜度 <!-- raw HTML omitted -->$O(1)$<!-- raw HTML omitted --></strong></li>
-<li>push/pop 複雜度為 <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --></li>
+<li><strong>top() 恆為當前資料中最大者， query 複雜度 <span>$O(1)$</span></strong></li>
+<li>push/pop 複雜度為 <span>$O(\log N)$</span></li>
 </ul>
 <h3 id="heading-1">型態宣告</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span> <span style="color:#f92672">=</span> vector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>, less<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> Container<span style="color:#f92672">:</span><span style="color:#f92672">:</span>value_type<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> pq;
@@ -300,8 +300,8 @@ priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92
 </code></pre></div><h3 id="initialization">Initialization</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pq;
 priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pq(vec.begin(),vec.end()); <span style="color:#75715e">//copy [start,end)
-</span></code></pre></div><p>Note: 直接在 constructor 做這件事，背後他會去 call <code>make_heap</code>，複雜度為 <!-- raw HTML omitted -->$O(N)$<!-- raw HTML omitted -->，\<br>
-如果依序 push element 進來，複雜度為 <!-- raw HTML omitted -->$)(N \log N)$<!-- raw HTML omitted -->。</p>
+</span></code></pre></div><p>Note: 直接在 constructor 做這件事，背後他會去 call <code>make_heap</code>，複雜度為 <span>$O(N)$</span>，\<br>
+如果依序 push element 進來，複雜度為 <span>$)(N \log N)$</span>。</p>
 <h2 id="binary-search-tree---set">Binary Search Tree - set</h2>
 <h3 id="heading-2">性質</h3>
 <ul>
@@ -322,7 +322,7 @@ struct mycomp {
   {return lhs&gt;rhs;} // descending
 };
 set&lt;int,mycomp&gt; s;
-</code></pre><h3 id="-spanolog-nspan">計數/查找: <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --></h3>
+</code></pre><h3 id="-spanolog-nspan">計數/查找: <span>$O(\log N)$</span></h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span>iterator it <span style="color:#f92672">=</span> s.find(<span style="color:#ae81ff">123</span>); <span style="color:#75715e">// return iterator，找不到回傳 s.end()
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> b_exist <span style="color:#f92672">=</span> s.count(<span style="color:#ae81ff">123</span>); <span style="color:#75715e">//either 0 or 1;
 </span><span style="color:#75715e"></span>
@@ -331,9 +331,9 @@ set&lt;int,mycomp&gt; s;
 </span><span style="color:#75715e"></span><span style="color:#75715e">// Assume s = [1,2,3,5,6]
 </span><span style="color:#75715e"></span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span> iterator l_it <span style="color:#f92672">=</span> s.lower_bound(<span style="color:#ae81ff">5</span>); <span style="color:#75715e">//*l_it = 5, 若all element &lt; val ，回傳 s.end()
 </span><span style="color:#75715e"></span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span> iterator u_it <span style="color:#f92672">=</span> s.upper_bound(<span style="color:#ae81ff">5</span>); <span style="color:#75715e">//*u_it = 6,               &lt;=  
-</span></code></pre></div><p>Note: <code>lower_bound()</code> 回傳的為 dereference 後 <!-- raw HTML omitted -->$\geq$<!-- raw HTML omitted --> val 者，\<br>
-而 <code>upper_bound()</code> 回傳的為 dereference 後 <!-- raw HTML omitted -->$&gt;$<!-- raw HTML omitted --> val 者 ([cf] <code>multi_set</code> 的圖解)</p>
-<h3 id="-spanolog-nspan-1">插入/刪除: <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --></h3>
+</span></code></pre></div><p>Note: <code>lower_bound()</code> 回傳的為 dereference 後 <span>$\geq$</span> val 者，\<br>
+而 <code>upper_bound()</code> 回傳的為 dereference 後 <span>$&gt;$</span> val 者 ([cf] <code>multi_set</code> 的圖解)</p>
+<h3 id="-spanolog-nspan-1">插入/刪除: <span>$O(\log N)$</span></h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">s.insert(<span style="color:#ae81ff">123</span>);
 
 s.erase(<span style="color:#ae81ff">123</span>);
@@ -347,7 +347,7 @@ s.erase(it); <span style="color:#75715e">//*it = 123, O(1)
 </ul>
 <h3 id="misc">MISC</h3>
 <ul>
-<li>access <code>begin()</code>, <code>end()</code> 是 <!-- raw HTML omitted -->$O(1)$<!-- raw HTML omitted --> ，網路上某些參考資料有誤。</li>
+<li>access <code>begin()</code>, <code>end()</code> 是 <span>$O(1)$</span> ，網路上某些參考資料有誤。</li>
 <li>基本上是下方 map 的一個 <strong>key = val</strong> 之特例。</li>
 </ul>
 <h2 id="binary-search-tree---map">Binary Search Tree - Map</h2>
@@ -356,14 +356,14 @@ s.erase(it); <span style="color:#75715e">//*it = 123, O(1)
 <h3 id="--initialization-1">宣告 &amp; Initialization</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//同於 set
 </span><span style="color:#75715e"></span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
-</code></pre></div><h3 id="----spanolog-nspan">新增 / 修改 值: <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --></h3>
+</code></pre></div><h3 id="----spanolog-nspan">新增 / 修改 值: <span>$O(\log N)$</span></h3>
 <p>不同於 set 的不可更改， map 中我們可更改 val。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//[],at()
 </span><span style="color:#75715e"></span>mp[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">h</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// if &#39;h &#39; exist, modify value to 1; if not, insert {&#39;h&#39;,1}
 </span><span style="color:#75715e"></span>mp.at(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">h</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">//                              ; if not, 丟出例外
 </span></code></pre></div><p>Note: 注意到若只想 query， e.g 使用<code>['o']</code>去查找不存在的 key 值 &lsquo;o&rsquo;，它會自動新增一個 key 值為 &lsquo;o&rsquo;，值為 default constructor 的 reference 。\<br>
 在 init 表格紀錄時，使用 <code>[]</code>，便可以不用去 take care 例外，但 query 時，使用 <code>at()</code> 比較妥當。</p>
-<h3 id="-spanolog-nspan-2">插入/刪除: <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --></h3>
+<h3 id="-spanolog-nspan-2">插入/刪除: <span>$O(\log N)$</span></h3>
 <p>注意到這時候要以 <strong>pair</strong> 來操作</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">mp.insert({<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">h</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">1</span>});
 mp.insert(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">h</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">1</span>));
@@ -394,7 +394,7 @@ mp.insert(other_mp.begin(),other_mp.find(<span style="color:#e6db74"></span><spa
 <h2 id="hash-table---unordered-set-unordered-map--multi-">Hash Table - Unordered_set, Unordered_map 及其 multi 類</h2>
 <h3 id="misc-1">Misc:</h3>
 <ul>
-<li>計數 / 查找 / 新增 / 刪除 : Average Case <!-- raw HTML omitted -->$O(1)$<!-- raw HTML omitted -->，Worst Case <!-- raw HTML omitted -->$O(N)$<!-- raw HTML omitted --></li>
+<li>計數 / 查找 / 新增 / 刪除 : Average Case <span>$O(1)$</span>，Worst Case <span>$O(N)$</span></li>
 <li>儘量在插入元素前先 <code>reserve()</code> ，開好足夠大的表，避免 <code>rehash()</code> 發生。</li>
 </ul>
   

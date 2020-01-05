@@ -281,47 +281,82 @@
 
   <p>於前一講講述了 ML 的 framework ，於這一講中，我們會利用一個簡單的 learning model ， 去解決 binary classification 的問題。</p>
 <h2 id="hypothesis-set-linear-perceptron">Hypothesis Set: Linear Perceptron</h2>
-<!-- raw HTML omitted -->
-<p>其中，<!-- raw HTML omitted -->$\mathbf{x} \in \mathcal{X}, \mathcal{X} = \lbrace 1 \rbrace \times \mathbb{R}^d $<!-- raw HTML omitted --> (把 threshold 放進 <!-- raw HTML omitted -->$\mathbf{w}$<!-- raw HTML omitted --> 的第 0 維，以簡便表示)</p>
+<div>
+\[
+\textcolor{red}{h}(x) = \texttt{sgn}(\sum_{i=1}^{d}\textcolor{red}{w_i}x_i - \textcolor{red}{\text{threshold}}) = \texttt{sgn}(\textcolor{red}{\mathbf{w}^T}\mathbf{x})
+\]
+</div>
+<p>其中，<span>$\mathbf{x} \in \mathcal{X}, \mathcal{X} = \lbrace 1 \rbrace \times \mathbb{R}^d $</span> (把 threshold 放進 <span>$\mathbf{w}$</span> 的第 0 維，以簡便表示)</p>
 <p>其實就是一個將空間一分為二的 hyperplane 。</p>
 <h2 id="learning-algorithm">Learning Algorithm</h2>
 <h3 id="objective">Objective</h3>
-<!-- raw HTML omitted -->
+<div>
+\[
+  \text{learned function} \, g \approx \text{ground truth function} \, f
+\]
+</div>
 <p>至少在看過的 training data 上做到一致，亦即</p>
-<!-- raw HTML omitted -->
-<h3 id="how-to-select-spangspan-from-spanmathcalhspan">How to select <!-- raw HTML omitted -->$g$<!-- raw HTML omitted --> from <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --></h3>
+<div>
+\[
+g(x_n) = f(x_n) = y_n \quad \forall (x_n,y_n)\in \mathcal{D} 
+\]
+</div>
+<h3 id="how-to-select-spangspan-from-spanmathcalhspan">How to select <span>$g$</span> from <span>$\mathcal{H}$</span></h3>
 <p>隨便抽取一個起始權重，去看看在 training data 上是否會有與 label mismatch 的情況
 ，若有的話，便去修正權重。</p>
-<!-- raw HTML omitted -->
+<div>
+\[
+ \text{If} \enspace \texttt{sgn}(\textcolor{red}{\mathbf{w}_t^T}\mathbf{x}_n) \not = y_n ,
+ \enspace \text{then} \enspace \textcolor{orange}{\mathbf{w}_{t+1}} \leftarrow
+ \textcolor{red}{\mathbf{w}_t} + y_n\mathbf{x}_n
+\]
+</div>
 <h3 id="correctness-of-updating">Correctness of Updating</h3>
-<p>若有錯誤發生，表示 <!-- raw HTML omitted -->$y_n\underset{\text{predict}}{\mathbf{w}_t^T\mathbf{x}_n} &lt; 0$<!-- raw HTML omitted -->，\<br>
-目標是將其更正為 <!-- raw HTML omitted -->$&gt; 0$<!-- raw HTML omitted --> 。 我們想確定更新 <!-- raw HTML omitted -->$\mathcal{w}$<!-- raw HTML omitted --> 的過程中，<!-- raw HTML omitted -->$y_n\mathbf{w}_t^T\mathbf{x}_n$<!-- raw HTML omitted --> 會 <strong>遞增</strong>, which is trivial to prove</p>
+<p>若有錯誤發生，表示 <span>$y_n\underset{\text{predict}}{\mathbf{w}_t^T\mathbf{x}_n} &lt; 0$</span>，\<br>
+目標是將其更正為 <span>$&gt; 0$</span> 。 我們想確定更新 <span>$\mathcal{w}$</span> 的過程中，<span>$y_n\mathbf{w}_t^T\mathbf{x}_n$</span> 會 <strong>遞增</strong>, which is trivial to prove</p>
 <h3 id="running-time">Running Time</h3>
-<p>承上，<!-- raw HTML omitted -->$\mathbf{w}$<!-- raw HTML omitted --> 的更新，會使得它更接近 ground truth，也就是其單位向量的內積越來越接近 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted -->。</p>
-<h4 id="growth-of-spanmathbfwspan-isnt-too-fast">Growth of <!-- raw HTML omitted -->$||\mathbf{w}||$<!-- raw HTML omitted --> ISN'T too fast</h4>
+<p>承上，<span>$\mathbf{w}$</span> 的更新，會使得它更接近 ground truth，也就是其單位向量的內積越來越接近 <span>$1$</span>。</p>
+<h4 id="growth-of-spanmathbfwspan-isnt-too-fast">Growth of <span>$||\mathbf{w}||$</span> ISN'T too fast</h4>
 <p><code>$$ \begin{align} ||\mathbf{w}_{t+1}||^2 &amp;= ||\mathbf{w}_t + y_n \mathbf{x}_n || ^2 \\ &amp;= ||\mathbf{w}_{t}||^2 + 2\underset{\leq 0}{\color{blue}{y_n\mathbf{w}_t^T\mathbf{x}_n}} + ||y_n\mathbf{x}_n||^2\\ &amp;\color{blue}{\leq}  ||\mathbf{w}_{t}||^2 + \color{blue}{0} + \color{red}{||y_n\mathbf{x}_n||^2} \\ &amp;\color{red}{\leq} ||\mathbf{w}_{t}||^2 + \color{red}{\max_j ||x_j||^2} \end{align} $$</code></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div>
+\[
+\Rightarrow ||\mathbf{w}_T||^2 \leq \underset{=0}{||\mathbf{w}_0||^2} + T \times \max_j
+||x_j||^2
+\]
+</div>
+<div>
+\[
+\Rightarrow \boxed{||\mathbf{w}_T|| \leq \sqrt{T} \times \max_j||x_j||}
+\]
+</div>
 <h4 id="convergence-after-t-rounds">Convergence after T rounds</h4>
-<p>假設 <!-- raw HTML omitted -->$\mathbf{w}_0 = \mathbf{0}$<!-- raw HTML omitted -->，並觀察到 ground truth
-<!-- raw HTML omitted -->$\mathbf{w}_f$<!-- raw HTML omitted --> 滿足 <!-- raw HTML omitted -->$\boxed{y_n\mathbf{w}_f^T\mathbf{x}_n \geq \min_n y_n\mathbf{w}_f^T\mathbf{x}_n \geq 0}$<!-- raw HTML omitted --></p>
+<p>假設 <span>$\mathbf{w}_0 = \mathbf{0}$</span>，並觀察到 ground truth
+<span>$\mathbf{w}_f$</span> 滿足 <span>$\boxed{y_n\mathbf{w}_f^T\mathbf{x}_n \geq \min_n y_n\mathbf{w}_f^T\mathbf{x}_n \geq 0}$</span></p>
 <p><code>$$ \require{cancel} \begin{align} \mathbf{w}_f^T\mathbf{w}_T &amp;= \cancel{\mathbf{w}_f^T\mathbf{w}_{T-1}} + y_{n_T}\mathbf{w}_f^T\mathbf{x}_{n_T} \\ \cancel{\mathbf{w}_f^T\mathbf{w}_{T-1}} &amp;= \cancel{\mathbf{w}_f^T\mathbf{w}_{T-2}} + y_{n_{T-1}}\mathbf{w}_f^T\mathbf{x}_{n_{T-1}} \\ .\\ .\\ \cancel{\mathbf{w}_f^T\mathbf{w}_1} &amp;= \underset{=0}{\mathbf{w}_f^T\mathbf{w}_{0}} + y_{n_1}\mathbf{w}_f^T\mathbf{x}_{n_{1}}  \end{align} $$</code></p>
-<!-- raw HTML omitted -->
+<div>
+\[
+\Rightarrow \boxed{\mathbf{w}_f^T\mathbf{w}_T  \geq T \times \min_n y_n\mathbf{w}_f^T\mathbf{x}_n}
+\]
+</div>
 <p>因此，</p>
 <p><code>$$ 1 \geq \frac{\mathbf{w}_f^T\mathbf{w}_T}{||\mathbf{w}_f|| \, ||\mathbf{w}_T||} \geq \frac{T\times \underset{n}{\min} y_n\mathbf{w}_f^T\mathbf{x}_n}{||\mathbf{w}_f|| \, ||\mathbf{w}_T||} \geq \sqrt{T} \times \frac{\stackrel{\color{blue}{\rho}}{\overbrace{\underset{n}{\min}y_n\frac{\mathbf{w}_f^T}{||\mathbf{w}_f||}\mathbf{x_n}}}}{\underset{\color{red}{R}}{\underbrace{\underset{j}{\max}||x_j||}}} $$</code></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<div>
+\[
+\Rightarrow \boxed{T \leq \frac{R^2}{\rho^2} = \text{const.}}
+\]
+</div>
+<!--T &\leq \frac{\mathbf{w}_f^T\mathbf{w}_T}{\underset{n}{\min} y_n\mathbf{w}_f^T\mathbf{x}_n} \times \frac{||\mathbf{w}_f|| \, ||\mathbf{w}_T||}{||\mathbf{w}_f||\,||\mathbf{w}_T||}\\-->
+<!--& \leq 1 \times \frac{}{}-->
 <h3 id="limitation--modification">Limitation &amp; Modification</h3>
 <ol>
 <li>資料必須是線性可分的(<em>Linear Separable</em>)，亦即對資料不能一無所知，如此方能做此假設。</li>
 <li>對 running time 僅知道會在有限時間內結束，但還是不知道要跑多久</li>
 </ol>
 <p>另外，有時候資料夾雜了一些雜訊，使得空間因少數數據點而無法線性可分，\<br>
-此時我們利用 Pocket PLA 去找出一個 <strong>還不錯</strong> 的 <!-- raw HTML omitted -->$g$<!-- raw HTML omitted --> ，使得 label mismatch 的數據點為最少。\<br>
-簡單來說，就是每更新一次 <!-- raw HTML omitted -->$\mathbf{w}$<!-- raw HTML omitted -->，便去跑過<strong>所有</strong>的數據點，來看是否比前一個更好，並把對應的 <!-- raw HTML omitted -->$w$<!-- raw HTML omitted --> 記起來\<br>
-再 run 過一定回合數後中止，running time 為<!-- raw HTML omitted -->$\mathcal{O}(|\mathcal{D}|T)$<!-- raw HTML omitted -->，不保證找到最佳解。</p>
-<p><strong>Remark:</strong> <!-- raw HTML omitted -->$w$<!-- raw HTML omitted --> 的更新方式跟 PLA 是一樣的，不是表現進步才更新！</p>
+此時我們利用 Pocket PLA 去找出一個 <strong>還不錯</strong> 的 <span>$g$</span> ，使得 label mismatch 的數據點為最少。\<br>
+簡單來說，就是每更新一次 <span>$\mathbf{w}$</span>，便去跑過<strong>所有</strong>的數據點，來看是否比前一個更好，並把對應的 <span>$w$</span> 記起來\<br>
+再 run 過一定回合數後中止，running time 為<span>$\mathcal{O}(|\mathcal{D}|T)$</span>，不保證找到最佳解。</p>
+<p><strong>Remark:</strong> <span>$w$</span> 的更新方式跟 PLA 是一樣的，不是表現進步才更新！</p>
 <p><a href="https://github.com/sunprinceS/NTU-Machine-Learning/blob/master/hw1/PLA.py"><strong>Implementation</strong></a></p>
 <h2 id="reference">Reference</h2>
 <ul>

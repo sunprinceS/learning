@@ -286,12 +286,12 @@
 </div>
 
   <p>在 KTH 交換時選到的神課！想說把題解稍微紀錄一下 ✌️\<br>
-<!-- raw HTML omitted -->題目連結<!-- raw HTML omitted --></p>
+<a href="https://kth.kattis.com/problemgroups/617" target="_blank">題目連結</a></p>
 <h2 id="pa---spidermans-workout">pA - Spiderman's Workout</h2>
-<p>蜘蛛人要爬上爬下！<strong>依序</strong>給一串要爬的距離數列 <!-- raw HTML omitted -->$d_1,d_2,\cdots,d_n$<!-- raw HTML omitted -->，每次可以選爬上或下，但有以下目標。</p>
+<p>蜘蛛人要爬上爬下！<strong>依序</strong>給一串要爬的距離數列 <span>$d_1,d_2,\cdots,d_n$</span>，每次可以選爬上或下，但有以下目標。</p>
 <ol>
 <li>
-<p>爬完 <!-- raw HTML omitted -->$d_n$<!-- raw HTML omitted --> 後要回到地面，否則就是非法解。</p>
+<p>爬完 <span>$d_n$</span> 後要回到地面，否則就是非法解。</p>
 </li>
 <li>
 <p>不能爬得比地面低。</p>
@@ -304,8 +304,8 @@
 <p><code>$$ H[i][h] = \text{min. distance have experienced in order to achieve} \; h \; \text{at step} \;i $$</code></p>
 <p>轉移式如以下:</p>
 <p><code>$$ H[i][h] = \max(h, \min (\underset{\color{blue}{爬上}}{H[i-1][h-d_i]}, \underset{\color{blue}{爬下}}{H[i-1][h+d_i]})) $$</code></p>
-<p>初始 state 為 <!-- raw HTML omitted -->$H[1][d_1]$<!-- raw HTML omitted --> (一開始只能爬上)\<br>
-最後輸出 <!-- raw HTML omitted -->$H[n][0]$<!-- raw HTML omitted -->，如果是 <code>INT_MAX</code> 的話，代表不存在任何方法走到
+<p>初始 state 為 <span>$H[1][d_1]$</span> (一開始只能爬上)\<br>
+最後輸出 <span>$H[n][0]$</span>，如果是 <code>INT_MAX</code> 的話，代表不存在任何方法走到
 這個 state，輸出 <code>IMPOSSIBLE</code>。</p>
 <h2 id="pb---help">pB - Help</h2>
 <p>給定兩個由 word 們組成的字串，當中有些 word 可以互相替代 (以 <code>&lt;[pattern]&gt;</code> 表示)，想問這兩個字串是否相等( 兩個字串對彼此的替代 word 是分開看的)。

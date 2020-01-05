@@ -281,55 +281,84 @@
 
 </div>
 
-  <p>前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 <!-- raw HTML omitted -->$V$<!-- raw HTML omitted --> 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。</p>
+  <p>前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 <span>$V$</span> 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。</p>
 <p>一個簡單的想法是對每一個點都跑一遍單源最短路徑的 Algorithm，複雜度如下：</p>
 <ul>
-<li>Bellman-Ford: <!-- raw HTML omitted -->$\mathcal{O}(V*EV) = \mathcal{O}(EV^2)$<!-- raw HTML omitted --></li>
-<li>Dijkstra (W/ Fib. Heap): <!-- raw HTML omitted -->$\mathcal{O}(V*(E+V \log V)) = \mathcal{O}(EV + V^2 \log V)$<!-- raw HTML omitted --></li>
+<li>Bellman-Ford: <span>$\mathcal{O}(V*EV) = \mathcal{O}(EV^2)$</span></li>
+<li>Dijkstra (W/ Fib. Heap): <span>$\mathcal{O}(V*(E+V \log V)) = \mathcal{O}(EV + V^2 \log V)$</span></li>
 </ul>
 <p><strong>Note: Dijkstra 不能處理負邊</strong></p>
 <h2 id="floyd-warshaall-algorithm">Floyd-Warshaall Algorithm</h2>
-<p>在此我們發展一個專用於找全點對最短路徑的演算法。核心想法是將 <!-- raw HTML omitted -->$u \rightarrow v$<!-- raw HTML omitted --> 的路徑依照經過的中繼點做分類(有/無經過)，一次增加一個可用的中繼點，並更新所有路徑。</p>
+<p>在此我們發展一個專用於找全點對最短路徑的演算法。核心想法是將 <span>$u \rightarrow v$</span> 的路徑依照經過的中繼點做分類(有/無經過)，一次增加一個可用的中繼點，並更新所有路徑。</p>
 <h3 id="--bellman-fordhttpssunprincesgithubiolearning201708algorithm---graph-theory---lec-2-">優點 (與 <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> 一樣):</h3>
 <ul>
 <li>可以處理有負邊的圖</li>
 <li>檢測是否存在負環</li>
 </ul>
 <h3 id="dynamic-programming">Dynamic Programming</h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted -->$\displaystyle \Rightarrow$<!-- raw HTML omitted --> Final answer: <!-- raw HTML omitted -->$\displaystyle d_{ij}^n$<!-- raw HTML omitted --></p>
-<p>複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(V^3)$<!-- raw HTML omitted --></p>
+<div>
+\[
+d_{ij}^k \, : \, \text{the cost of shortest path from} \, v_i \rightarrow v_j \, \text{using only} \, \{v_1, v_2,\cdots,v_k\}
+\]
+</div>
+<div>
+\[
+d_{ij}^k = \min\{\underbrace{d_{ij}^{k-1}}_{\text{\color{blue}{DOESN'T go through}} \, \color{blue}{v_k}}, \underbrace{{d_{ik}^{k-1} + d_{kj}^{k-1}}}_{\text{\color{blue}{go through}} \,\color{blue}{v_k} \,\text{\color{blue}{exactly once}}}\}
+\]
+</div>
+<p><span>$\displaystyle \Rightarrow$</span> Final answer: <span>$\displaystyle d_{ij}^n$</span></p>
+<p>複雜度為 <span>$\mathcal{O}(V^3)$</span></p>
 <h3 id="implementation">Implementation</h3>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/sunprinceS/dea6b01e77cb3fe1f40c6779569d592e.js"></script>
 <h2 id="johnsons-algorithm">Johnson's Algorithm</h2>
-<p>相比於 Bellman-Ford 跑 <!-- raw HTML omitted -->$|V|$<!-- raw HTML omitted --> 次的複雜度， Floyd-Warshall 可算是樂勝了；但對 Dijkstra 卻不盡然，如果說今天圖上的邊不多時(e.g <!-- raw HTML omitted -->$|E| = \mathcal{O}(V \log V)$<!-- raw HTML omitted -->)，跑 Dijkstra <!-- raw HTML omitted -->$|V|$<!-- raw HTML omitted --> 次的複雜度還比較好。\<br>
-<strong>Note: 完全圖: <!-- raw HTML omitted -->$|E| = \mathcal{O}(V^2)$<!-- raw HTML omitted --></strong></p>
+<p>相比於 Bellman-Ford 跑 <span>$|V|$</span> 次的複雜度， Floyd-Warshall 可算是樂勝了；但對 Dijkstra 卻不盡然，如果說今天圖上的邊不多時(e.g <span>$|E| = \mathcal{O}(V \log V)$</span>)，跑 Dijkstra <span>$|V|$</span> 次的複雜度還比較好。\<br>
+<strong>Note: 完全圖: <span>$|E| = \mathcal{O}(V^2)$</span></strong></p>
 <p>但注意到，<a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Dijkstra</a> 只能處理沒有負邊的圖，所以直接使用是不行的。而 Johnson's Algorithm 的核心概念在於<strong>重新調整邊的權重使其為非負，再來對每個節點跑Dijkstra</strong> 。</p>
 <h3 id="heading">更改邊權重</h3>
 <p>Want: 不影響最短路徑及負環的位置</p>
-<p>方法: 對於圖上每個節點賦予一個權重 <!-- raw HTML omitted -->$h(v)$<!-- raw HTML omitted --> ，而每條邊的權重更新為</p>
-<!-- raw HTML omitted -->
+<p>方法: 對於圖上每個節點賦予一個權重 <span>$h(v)$</span> ，而每條邊的權重更新為</p>
+<div>
+\[
+w^{\prime} (u,v) = w(u,v) + h(u) - h(v)
+\]
+</div>
 <h4 id="correctness">Correctness</h4>
 <ul>
-<li><!-- raw HTML omitted -->$s \rightarrow v$<!-- raw HTML omitted --> 的最短路徑不變</li>
+<li><span>$s \rightarrow v$</span> 的最短路徑不變</li>
 </ul>
-<!-- raw HTML omitted -->
+<div>
+\[
+\begin{aligned}
+w^{\prime} (s,v) & = w^{\prime}(s,v_1) + w^{\prime}(v_1,v_2) + \cdots + w^{\prime}(v_{k-1},v)\\
+& = [w(s,v_1) + h(s) - h(v_1)] + [w(v_1,v_2) + h(v_1) - h(v_2)] + \cdots + [w(v_{k-1},v) + h(v_{k-1}) - h(v)] \\
+& = [w(s,v_1) + h(s) - \cancel{h(v_1)}] + [w(v_1,v_2) + \cancel{h(v_1)} - \cancel{h(v_2)}] + \cdots + [w(v_{k-1},v) + \cancel{h(v_{k-1})} - h(v)] \\
+& = [w(s,v_1) + w(v_1,v_2) + \cdots + w(v_{k-1},v)] + h(s) - h(v)\\
+& = w(s,v) + \underbrace{h(s) - h(v)}_{\text{定值}}\\
+\end{aligned}
+\]
+</div>
 <ul>
-<li>負環還會是負環 (∵ <!-- raw HTML omitted -->$h(s) - h(v) = 0 , \Rightarrow , w^{\prime}(s,v) = w(s,v)$<!-- raw HTML omitted -->)</li>
+<li>負環還會是負環 (∵ <span>$h(s) - h(v) = 0 , \Rightarrow , w^{\prime}(s,v) = w(s,v)$</span>)</li>
 </ul>
-<p>那麼接下來的問題是，該如何 assign <!-- raw HTML omitted -->$h(v)$<!-- raw HTML omitted --> ，使得邊的權重均為非負呢？</p>
+<p>那麼接下來的問題是，該如何 assign <span>$h(v)$</span> ，使得邊的權重均為非負呢？</p>
 <h3 id="heading-1">決定節點權重</h3>
 <p>我們回到 Bellman-Ford 完成後(所有點均不能再被 relax )來看 ，滿足的不等式為</p>
-<!-- raw HTML omitted -->
-<p>移項之後可以發現，用<strong>任一起點到其他節點的最短路徑值作為 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --></strong> ，可以滿足邊權重為非負的要求😄</p>
+<div>
+\[
+\begin{aligned}
+d(u) + w(u,v) & \geq d(v) \; \forall \,u,v \in V \\
+\Rightarrow w^{\prime}(u,v) & \geq 0
+\end{aligned}
+\]
+</div>
+<p>移項之後可以發現，用<strong>任一起點到其他節點的最短路徑值作為 <span>$h$</span></strong> ，可以滿足邊權重為非負的要求😄</p>
 <h3 id="combine-together">Combine Together</h3>
 <ol>
 <li>先用 Bellman-Ford 跑一遍去賦予節點值，並以此更新權重</li>
-<li>對每個點跑 Dijkstra ， 並減去 <!-- raw HTML omitted -->$h(s) - h(t)$<!-- raw HTML omitted --> 得到原先的最短路徑值</li>
+<li>對每個點跑 Dijkstra ， 並減去 <span>$h(s) - h(t)$</span> 得到原先的最短路徑值</li>
 </ol>
-<p><strong>實做細節: 考慮 <!-- raw HTML omitted -->$G$<!-- raw HTML omitted --> 並非 connected，我們額外加一個超級起點連接到所有節點(W/ 權重 0)，確保每個邊都可被更新到</strong>。</p>
-<p>複雜度: <!-- raw HTML omitted -->$\mathcal{O}(VE + V^2 \log V)$<!-- raw HTML omitted --></p>
+<p><strong>實做細節: 考慮 <span>$G$</span> 並非 connected，我們額外加一個超級起點連接到所有節點(W/ 權重 0)，確保每個邊都可被更新到</strong>。</p>
+<p>複雜度: <span>$\mathcal{O}(VE + V^2 \log V)$</span></p>
   
   
 <ul class="share-buttons">

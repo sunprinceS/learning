@@ -281,23 +281,23 @@
 
   <p>總結目前學到的 3 個 linear model。</p>
 <h2 id="linear-models-for-binary-classification">Linear Models for Binary Classification</h2>
-<p>前面學到的 regression ，其 error (經過 const. scale) 後都會 <!-- raw HTML omitted -->$\geq$<!-- raw HTML omitted -->
+<p>前面學到的 regression ，其 error (經過 const. scale) 後都會 <span>$\geq$</span>
 0-1 error，因此利用有效率的演算法，求出 regression 的 model 後， apply step
 function 來作為 binary classifier 也是一種做 classification 的方法。</p>
 <p><strong>Remark:</strong> error bound 相對比較鬆，可以想成為了提高效率所作的 accuracy trade-off。</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/l-comp.png" width="70%" style="border-radius: 0%;"></center>
 <h2 id="acceleration-on-gradient-descent---stochastic-gd">Acceleration on Gradient Descent - Stochastic GD</h2>
-<p>之前在找 <!-- raw HTML omitted -->$E_i$<!-- raw HTML omitted --> 下山的方向時， <!-- raw HTML omitted -->$\nabla_w E_i$<!-- raw HTML omitted --> 要iterate 過所有資料點才能得到，但我們不妨只 sample 幾個資料點即可(期望值一樣)，但實務上比較不穩定。</p>
-<p><strong>Remark:</strong> PLA 可以想成 SGD 的 一個特例 (只 sample 一個資料點，且 <!-- raw HTML omitted -->$\eta = 1$<!-- raw HTML omitted -->)</p>
+<p>之前在找 <span>$E_i$</span> 下山的方向時， <span>$\nabla_w E_i$</span> 要iterate 過所有資料點才能得到，但我們不妨只 sample 幾個資料點即可(期望值一樣)，但實務上比較不穩定。</p>
+<p><strong>Remark:</strong> PLA 可以想成 SGD 的 一個特例 (只 sample 一個資料點，且 <span>$\eta = 1$</span>)</p>
 <h2 id="binary-classification-to-multiclass">Binary Classification to Multiclass</h2>
 <p>可以使用 1-vs-all (OVA) 或 1-vs-1 (OVO) 的方法</p>
 <ul>
 <li>
-<p>OVA: 有 <!-- raw HTML omitted -->$M$<!-- raw HTML omitted --> 個 class 的話，要 train <!-- raw HTML omitted -->$M$<!-- raw HTML omitted --> 個 binary
-OVA 的 classifier (each with <!-- raw HTML omitted -->$|\mathcal{D}| = N$<!-- raw HTML omitted --> )，但資料 unblanced，結果可能 unstable。</p>
+<p>OVA: 有 <span>$M$</span> 個 class 的話，要 train <span>$M$</span> 個 binary
+OVA 的 classifier (each with <span>$|\mathcal{D}| = N$</span> )，但資料 unblanced，結果可能 unstable。</p>
 </li>
 <li>
-<p>OVO: 要 train <!-- raw HTML omitted -->$\binom{M}{2}$<!-- raw HTML omitted --> 個分類器 (assume equally distributed, each size is <!-- raw HTML omitted -->$\frac{2N}{M}$<!-- raw HTML omitted -->)，結果比較 stable ， 但 prediction 時要 run 過 <!-- raw HTML omitted -->$\mathcal{O}(M^2)$<!-- raw HTML omitted --> 使其比較沒效率。</p>
+<p>OVO: 要 train <span>$\binom{M}{2}$</span> 個分類器 (assume equally distributed, each size is <span>$\frac{2N}{M}$</span>)，結果比較 stable ， 但 prediction 時要 run 過 <span>$\mathcal{O}(M^2)$</span> 使其比較沒效率。</p>
 </li>
 </ul>
 <p><strong>Remark:</strong> OVO 在 training 時，反而是比較有效率的 ！</p>

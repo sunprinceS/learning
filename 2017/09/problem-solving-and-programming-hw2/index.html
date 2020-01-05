@@ -281,14 +281,14 @@
 
 </div>
 
-  <p><!-- raw HTML omitted -->題目連結<!-- raw HTML omitted --></p>
+  <p><a href="https://kth.kattis.com/problemgroups/624" target="_blank">題目連結</a></p>
 <h2 id="pa---turbo">pA - Turbo</h2>
 <p>有一種叫 <code>TurboSort</code> 的排序演算法，執行方式是在奇數次迴圈時，將目前尚未選過的最小 element 一路跟隔壁的 element swap 移到左邊(也是他應該在的位置)，在偶數次迴圈時，則是移大的 element 到右邊。\<br>
-今天想問在每次 iteration 中，每次需要與幾個 element swap 才可以到達目的地 (Note: element <!-- raw HTML omitted -->$i \in [1,N]$<!-- raw HTML omitted --> 且不重複)。\<br>
-Well&hellip; 一個 <!-- raw HTML omitted -->$\mathcal{O}(n^2)$<!-- raw HTML omitted --> 的演算法，所以基本上有個 <!-- raw HTML omitted -->$\mathcal{O}(n \log n)$<!-- raw HTML omitted --> 的方法差不多就符合題目要求惹。</p>
-<p>簡單來說，以奇數次迴圈 (<!-- raw HTML omitted -->$2i - 1$<!-- raw HTML omitted -->)為例，想問的就是現在有幾個在<!-- raw HTML omitted -->$[,i,,\text{position of } i ,]$<!-- raw HTML omitted --> 中的元素 <!-- raw HTML omitted -->$&gt; i$<!-- raw HTML omitted --> ，而我們希望這件事可以在 <!-- raw HTML omitted -->$\mathcal{O}(\log n)$<!-- raw HTML omitted -->查到，剛好可以用上最近學過的 Binary Indexed Tree。</p>
-<p>bit[i] 所記的東西為 <strong>原先在 <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 這個位置的 element</strong> 是否已經排到正確的地方了，\<br>
-所以 <!-- raw HTML omitted -->$\texttt{PrefixSum}(,\text{position of }i,)$<!-- raw HTML omitted --> 就是在 i 元素左方還有幾個 element 還沒排到正確位置 (也就是那些還需要與他 swap 的 element)。因為我們是依序 pick 最小、最大、次小&hellip;的元素來 swap，所以只要還不在正確位置的那些元素，勢必都需要 swap，而交換好了之後，則 update bit[position of i] 為 0 (i.e <!-- raw HTML omitted -->$\delta = -1$<!-- raw HTML omitted -->)。</p>
+今天想問在每次 iteration 中，每次需要與幾個 element swap 才可以到達目的地 (Note: element <span>$i \in [1,N]$</span> 且不重複)。\<br>
+Well&hellip; 一個 <span>$\mathcal{O}(n^2)$</span> 的演算法，所以基本上有個 <span>$\mathcal{O}(n \log n)$</span> 的方法差不多就符合題目要求惹。</p>
+<p>簡單來說，以奇數次迴圈 (<span>$2i - 1$</span>)為例，想問的就是現在有幾個在<span>$[,i,,\text{position of } i ,]$</span> 中的元素 <span>$&gt; i$</span> ，而我們希望這件事可以在 <span>$\mathcal{O}(\log n)$</span>查到，剛好可以用上最近學過的 Binary Indexed Tree。</p>
+<p>bit[i] 所記的東西為 <strong>原先在 <span>$i$</span> 這個位置的 element</strong> 是否已經排到正確的地方了，\<br>
+所以 <span>$\texttt{PrefixSum}(,\text{position of }i,)$</span> 就是在 i 元素左方還有幾個 element 還沒排到正確位置 (也就是那些還需要與他 swap 的 element)。因為我們是依序 pick 最小、最大、次小&hellip;的元素來 swap，所以只要還不在正確位置的那些元素，勢必都需要 swap，而交換好了之後，則 update bit[position of i] 為 0 (i.e <span>$\delta = -1$</span>)。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">FenwickTree <span style="color:#a6e22e">shift</span>(N);
 <span style="color:#75715e">//一開始都不在正確位置
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span>(size_t i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>n;<span style="color:#f92672">+</span><span style="color:#f92672">+</span>i){
@@ -308,10 +308,10 @@ Well&hellip; 一個 <!-- raw HTML omitted -->$\mathcal{O}(n^2)$<!-- raw HTML omi
   }
 }
 </code></pre></div><h2 id="pb---movie-collection">pB - Movie Collection</h2>
-<p>今天有一列光碟共 <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 片，每次拿完一片看完後，會重新放到最上方，想去 maintain 對於編號<!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 的光碟，在他上面的光碟數有多少。</p>
-<p>如果實際去模擬這個運作，假設有 <!-- raw HTML omitted -->$m$<!-- raw HTML omitted --> 次拿光碟的動作，複雜度為
-<!-- raw HTML omitted -->$\mathcal{O}(mn)$<!-- raw HTML omitted -->，顯然大概是要我們找一個 <!-- raw HTML omitted -->$\mathcal{O}(m \log n)$<!-- raw HTML omitted --> 的方法，再一次想到 Binary Indexed Tree。</p>
-<p>讓我們先跳脫來想一想，假定今天有個 <!-- raw HTML omitted -->$m+n$<!-- raw HTML omitted --> 個 slot 的光碟架，同樣做一樣的操作，(但光碟不會 <strong>往下移動</strong> 了！)，bit[i] 所記的東西為現在在 <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 位置( buttom 為 <!-- raw HTML omitted -->$0$<!-- raw HTML omitted --> ,top 為 <!-- raw HTML omitted -->$n-1$<!-- raw HTML omitted -->) 的 element，光碟是否還存在，所以 <!-- raw HTML omitted -->$\texttt{PrefixSum}(i)$<!-- raw HTML omitted -->。即是從 <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 以降架上的光碟有幾片， <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 減他即是題目所求。我覺得這題蠻好的XD</p>
+<p>今天有一列光碟共 <span>$n$</span> 片，每次拿完一片看完後，會重新放到最上方，想去 maintain 對於編號<span>$i$</span> 的光碟，在他上面的光碟數有多少。</p>
+<p>如果實際去模擬這個運作，假設有 <span>$m$</span> 次拿光碟的動作，複雜度為
+<span>$\mathcal{O}(mn)$</span>，顯然大概是要我們找一個 <span>$\mathcal{O}(m \log n)$</span> 的方法，再一次想到 Binary Indexed Tree。</p>
+<p>讓我們先跳脫來想一想，假定今天有個 <span>$m+n$</span> 個 slot 的光碟架，同樣做一樣的操作，(但光碟不會 <strong>往下移動</strong> 了！)，bit[i] 所記的東西為現在在 <span>$i$</span> 位置( buttom 為 <span>$0$</span> ,top 為 <span>$n-1$</span>) 的 element，光碟是否還存在，所以 <span>$\texttt{PrefixSum}(i)$</span>。即是從 <span>$i$</span> 以降架上的光碟有幾片， <span>$n$</span> 減他即是題目所求。我覺得這題蠻好的XD</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">FenwickTree <span style="color:#a6e22e">cnt</span>(m<span style="color:#f92672">+</span>r<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
 top_loc <span style="color:#f92672">=</span> m;
 
@@ -331,9 +331,9 @@ top_loc <span style="color:#f92672">=</span> m;
 <p>水題！</p>
 <h2 id="pd---binary-search-tree">pD - Binary Search Tree</h2>
 <p>依序插入元素到 BST 中，想問每次插入的元素，其深度為多少。\<br>
-就跟 <code>delete</code> 元素一樣，插入分兩種情況，一個是原 bst 中比你大的 node <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> (但他的前一個 <!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> 小於你)，下面已經
-有兩個 child ，或是不是。不是的話很簡單，直接接在 <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 的左 child， 深度為
-<!-- raw HTML omitted -->$\text{depth}[i]+1$<!-- raw HTML omitted --> 。有兩個 child 的話，則是要接在 <!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> 的右 child (<!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> 一定是 leaf)，深度為<!-- raw HTML omitted -->$\text{depth}[j]+1$<!-- raw HTML omitted --> 。\<br>
+就跟 <code>delete</code> 元素一樣，插入分兩種情況，一個是原 bst 中比你大的 node <span>$i$</span> (但他的前一個 <span>$j$</span> 小於你)，下面已經
+有兩個 child ，或是不是。不是的話很簡單，直接接在 <span>$i$</span> 的左 child， 深度為
+<span>$\text{depth}[i]+1$</span> 。有兩個 child 的話，則是要接在 <span>$j$</span> 的右 child (<span>$j$</span> 一定是 leaf)，深度為<span>$\text{depth}[j]+1$</span> 。\<br>
 直接用 c++ 的 map ，對 BST 夠熟的話，應該不困難！</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> bst;
 bst[n] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;

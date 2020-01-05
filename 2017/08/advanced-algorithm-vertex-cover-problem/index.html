@@ -285,28 +285,43 @@
 
   <p>這一講會展示將問題轉化為線性規劃的 form (但可能是 ILP)，利用 LP solver 得到解，做 <strong>LP relaxation</strong> 並證明這個解不會太差 (approx. ratio 不太大)。</p>
 <h2 id="vertex-cover-problem">Vertex Cover Problem</h2>
-<p>Given a graph <!-- raw HTML omitted -->$G$<!-- raw HTML omitted -->, a vertex cover is a set of vertices <!-- raw HTML omitted -->$S$<!-- raw HTML omitted -->\<br>
-s.t. <!-- raw HTML omitted -->$\forall (u,v) \in E, ; \text{either} , u \in S , \text{or} , v \in S$<!-- raw HTML omitted --></p>
-<p>Want: Find the vertex cover <!-- raw HTML omitted -->$S$<!-- raw HTML omitted --> with <!-- raw HTML omitted -->$\min$<!-- raw HTML omitted --> # of nodes</p>
+<p>Given a graph <span>$G$</span>, a vertex cover is a set of vertices <span>$S$</span>\<br>
+s.t. <span>$\forall (u,v) \in E, ; \text{either} , u \in S , \text{or} , v \in S$</span></p>
+<p>Want: Find the vertex cover <span>$S$</span> with <span>$\min$</span> # of nodes</p>
 <h2 id="formulation">Formulation</h2>
-<p>For each <!-- raw HTML omitted -->$v_i \in V$<!-- raw HTML omitted -->, assign a variable <!-- raw HTML omitted -->$x_i = $<!-- raw HTML omitted -->𝟙[<!-- raw HTML omitted -->$v_i$<!-- raw HTML omitted --> is chosen]</p>
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted -->$x_i \in \mathbb{Z}$<!-- raw HTML omitted --> 這個條件，讓問題是困難的 ILP (which is NPC) ，在此我們把拿掉 (<strong>LP relaxation</strong>)，轉成 LP 。</p>
+<p>For each <span>$v_i \in V$</span>, assign a variable <span>$x_i = $</span>𝟙[<span>$v_i$</span> is chosen]</p>
+<div>
+\[
+\min \sum_i x_i \quad s.t. \begin{cases}
+ x_i  + x_j \geq 1 \;& , \forall (v_i,v_j) \in E\\
+0  \leq x_i \leq 1 \; & , \textcolor{red}{x_i \in \mathbb{Z}}
+\end{cases}
+\]
+</div>
+<p><span>$x_i \in \mathbb{Z}$</span> 這個條件，讓問題是困難的 ILP (which is NPC) ，在此我們把拿掉 (<strong>LP relaxation</strong>)，轉成 LP 。</p>
 <h2 id="2-approx-algorithm">2-Approx Algorithm</h2>
-<p>Run 過 LP solver 後，可得到一組滿足限制式的解 <!-- raw HTML omitted -->$\mathbf{x}^{\star}$<!-- raw HTML omitted -->
+<p>Run 過 LP solver 後，可得到一組滿足限制式的解 <span>$\mathbf{x}^{\star}$</span>
 \<br>
-但這並不是原問題的答案，我們需要利用它找出滿足條件的 <!-- raw HTML omitted -->$\mathbf{x}^{\prime}$<!-- raw HTML omitted -->，
+但這並不是原問題的答案，我們需要利用它找出滿足條件的 <span>$\mathbf{x}^{\prime}$</span>，
 有個簡單的演算法</p>
-<!-- raw HTML omitted -->
+<div>
+\[
+\text{choose all}\, v_i \, \text{subject to} \; x_i^{\star} \geq 0.5
+\]
+</div>
 <h3 id="correctness">Correctness</h3>
-<p><!-- raw HTML omitted -->$\because x_i + x_j \geq 1$<!-- raw HTML omitted -->，<!-- raw HTML omitted -->$x_i, x_j$<!-- raw HTML omitted --> 中至少有一個
-<!-- raw HTML omitted -->$\geq \frac{1}{2}$<!-- raw HTML omitted -->，所以每條邊至少會有一個端點被選</p>
+<p><span>$\because x_i + x_j \geq 1$</span>，<span>$x_i, x_j$</span> 中至少有一個
+<span>$\geq \frac{1}{2}$</span>，所以每條邊至少會有一個端點被選</p>
 <h3 id="approx-ratio">Approx. Ratio</h3>
-<!-- raw HTML omitted -->
-<p>Worst Case 就是所有 <!-- raw HTML omitted -->$x_i = \frac{1}{2}$<!-- raw HTML omitted -->，那麼便會每條邊的兩個端點都會被選起來。</p>
+<div>
+\[
+\text{cost}(x_i^{\prime})\leq \textcolor{red}{2} \sum x_i^{\star} \leq 2 \mathbf{OPT}
+\]
+</div>
+<p>Worst Case 就是所有 <span>$x_i = \frac{1}{2}$</span>，那麼便會每條邊的兩個端點都會被選起來。</p>
 <h2 id="heading">推廣</h2>
-<p>可以視為 Set Cover Problem with every element is covered by <!-- raw HTML omitted -->$\leq l$<!-- raw HTML omitted --> 個 subset 的特例 (<!-- raw HTML omitted -->$l = 2$<!-- raw HTML omitted -->)，\<br>
-由此也可推知Set Cover Problem 的 <!-- raw HTML omitted -->$l$<!-- raw HTML omitted -->-approx algorithm。</p>
+<p>可以視為 Set Cover Problem with every element is covered by <span>$\leq l$</span> 個 subset 的特例 (<span>$l = 2$</span>)，\<br>
+由此也可推知Set Cover Problem 的 <span>$l$</span>-approx algorithm。</p>
   
   
 <ul class="share-buttons">

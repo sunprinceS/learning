@@ -295,15 +295,19 @@
 <p>像是說，如果沒有定義好股市的遊戲規則，那就不能怪罪有能力的商人去 exploit ，攫取自身的最大利益；又或是，若政府及企業沒有提供給人才適合的 pay 及發展環境，就不該冀望在人才外流時，他們還能能懷著愛國的情操留下來為國家奉獻一樣&hellip;</p>
 <h2 id="can-selfish-behavior-be-near-optimal">Can selfish behavior be near optimal</h2>
 <p>我們定義 <strong>Price of Anarchy (POA)</strong> 來描述自利行為與最優解 (everything is under control) 之間的比例 (一個 approx. ratio 的概念)</p>
-<!-- raw HTML omitted -->
+<div>
+\[
+ POA = \frac{cost(REAL)}{cost(OPT)}
+\]
+</div>
 <p>當 POA 越趨近於 1，表示自利行為越接近 optimal。</p>
 <h3 id="example--braesss-paradox">Example : Braess's paradox</h3>
-<p>考慮一群人要從 <!-- raw HTML omitted -->$ s \rightarrow t$<!-- raw HTML omitted -->，有兩種 type 的道路可選，其中一條 cost 為 constant 1，另一條的 cost 則是根據在其上的 agent 之比例 (如果全部的agent都通過此，則 cost = 1)決定。</p>
-<!-- raw HTML omitted -->
+<p>考慮一群人要從 <span>$ s \rightarrow t$</span>，有兩種 type 的道路可選，其中一條 cost 為 constant 1，另一條的 cost 則是根據在其上的 agent 之比例 (如果全部的agent都通過此，則 cost = 1)決定。</p>
+<img src="https://sunprinces.github.io/learning/img/post/baraessParadox.png" width="80%" style="border-radius: 0%;">
 <p>(The figure is from <a href="http://theory.stanford.edu/~tim/f13/l/l1.pdf">here</a>)</p>
-<p>未加中間的通道之前為 <strong>everything is under control</strong> (i.e 禁止 agent 走此 teleport )，其中 <!-- raw HTML omitted -->$c(x) = x$<!-- raw HTML omitted --> 跟 <!-- raw HTML omitted -->$c(x) = 1$<!-- raw HTML omitted --> 相比，至少都是前者較好，所以每個 agent 在<strong>可以選擇</strong>的時候，都會湧向 <!-- raw HTML omitted -->$c(x) = x$<!-- raw HTML omitted --> 的道路。</p>
-<p>(此例的 <!-- raw HTML omitted -->$POA = \frac{1 + 1}{1 + 0.5} = \frac{4}{3}$<!-- raw HTML omitted -->)</p>
-<p>原因: Nash Eq. <!-- raw HTML omitted -->$\neq$<!-- raw HTML omitted --> 社會最優</p>
+<p>未加中間的通道之前為 <strong>everything is under control</strong> (i.e 禁止 agent 走此 teleport )，其中 <span>$c(x) = x$</span> 跟 <span>$c(x) = 1$</span> 相比，至少都是前者較好，所以每個 agent 在<strong>可以選擇</strong>的時候，都會湧向 <span>$c(x) = x$</span> 的道路。</p>
+<p>(此例的 <span>$POA = \frac{1 + 1}{1 + 0.5} = \frac{4}{3}$<span>)</p>
+<p>原因: Nash Eq. <span>$\neq$</span> 社會最優</p>
 <p>Corollary: Selfish routing <strong>DOESN'T</strong> minimize commute time</p>
 <h2 id="how-do-strategic-players-reach-an-equilbrium">How do strategic players reach an equilbrium</h2>
 <p>在說明<strong>如何</strong>達到 eq. 之前，得先考慮該 eq. 是否存在</p>
@@ -311,20 +315,20 @@
 <blockquote>
 <p>If we allow <strong>mixed strategy</strong>, then every game with finite number of players who can choose finite number of actions has <strong>at least</strong> one Nash Eq.</p>
 </blockquote>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!--據此 Theorem，考慮 2-player game，我們有-->
+<!--Every bimatrix game has **at least** one Nash Eq.-->
 <p>確定了存在性，那 agent 該如何達到此 Eq. ?</p>
 <p>課堂上概略提到了幾個 facts:</p>
 <ul>
 <li>
-<p>若是零和賽局，存在 <!-- raw HTML omitted -->$\mathbf{POLY}$<!-- raw HTML omitted --> 時間的演算法求出 Nash Eq.</p>
+<p>若是零和賽局，存在 <span>$\mathbf{POLY}$</span> 時間的演算法求出 Nash Eq.</p>
 </li>
 <li>
-<p>對非零和賽局而言，找 Nash Eq. 非 <!-- raw HTML omitted -->$\mathbf{NP-hard}$<!-- raw HTML omitted --> 除非 <!-- raw HTML omitted -->$NP = coNP$<!-- raw HTML omitted --></p>
-<p><!-- raw HTML omitted -->$\rightarrow \mathbf{PPAD-hard}$<!-- raw HTML omitted --></p>
+<p>對非零和賽局而言，找 Nash Eq. 非 <span>$\mathbf{NP-hard}$</span> 除非 <span>$NP = coNP$</span></p>
+<p><span>$\rightarrow \mathbf{PPAD-hard}$</span></p>
 </li>
 </ul>
-<p>我們利用 Nash Eq. 來作為預測 agent 行為的 predictor (同理，完全理性的 agent 在做出 action 時，也會考慮其他 agent based on 此而做出的的 action)。但第二個 fact 說明了一件事情，若我們承許 <!-- raw HTML omitted -->$P \neq NP$<!-- raw HTML omitted --> ，則 Turing Machine 不存在有效率的解法找到均衡點，那算力不如它的 agent 更不可能找到均衡點，所以把 Nash Eq. 當作 agent behavior 的 predictor 就顯得沒有意義了&hellip; ☹</p>
+<p>我們利用 Nash Eq. 來作為預測 agent 行為的 predictor (同理，完全理性的 agent 在做出 action 時，也會考慮其他 agent based on 此而做出的的 action)。但第二個 fact 說明了一件事情，若我們承許 <span>$P \neq NP$</span> ，則 Turing Machine 不存在有效率的解法找到均衡點，那算力不如它的 agent 更不可能找到均衡點，所以把 Nash Eq. 當作 agent behavior 的 predictor 就顯得沒有意義了&hellip; ☹</p>
   
   
 <ul class="share-buttons">

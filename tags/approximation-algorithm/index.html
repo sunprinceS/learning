@@ -294,7 +294,7 @@
 
   <p>
   <p>前面提到過一個較為複雜的優化問題， <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/">Metric Facility Location Problem</a> ，並給出了一個 4-Approx. Algorithm ，於這講中，我們要來利用前面提到的 Primal-Dual method 來設計演算法。</p>
-<!-- raw HTML omitted -->
+<!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)-->
   </p>
 
   
@@ -412,7 +412,7 @@
   </header>
 
   <p>
-  <p>接續<a href="https://sunprinces.github.io/learning/tags/linear-programming/">前面幾講</a>，一個常用的技巧是，利用 LP solver 得出來的解 <!-- raw HTML omitted -->$\mathbf{x}^{\star}$<!-- raw HTML omitted -->， 拿去做 rounding 推出原先問題的解 <!-- raw HTML omitted -->$\mathbf{x}^{\prime}$<!-- raw HTML omitted --> (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (<strong>MFL</strong>)。</p>
+  <p>接續<a href="https://sunprinces.github.io/learning/tags/linear-programming/">前面幾講</a>，一個常用的技巧是，利用 LP solver 得出來的解 <span>$\mathbf{x}^{\star}$</span>， 拿去做 rounding 推出原先問題的解 <span>$\mathbf{x}^{\prime}$</span> (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (<strong>MFL</strong>)。</p>
   </p>
 
   
@@ -473,7 +473,7 @@
   </header>
 
   <p>
-  <p>呈前一講，我們對<strong>有限制的</strong> WSC 問題有 <!-- raw HTML omitted -->$l$<!-- raw HTML omitted -->-approx. algorithm，但可能並不是太好(比方說 <!-- raw HTML omitted -->$l=|U|$<!-- raw HTML omitted --> 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在<strong>大部分</strong>時候，都可以得到一個<strong>還不錯</strong> (approx. ratio ISN'T too bad)的結果。</p>
+  <p>呈前一講，我們對<strong>有限制的</strong> WSC 問題有 <span>$l$</span>-approx. algorithm，但可能並不是太好(比方說 <span>$l=|U|$</span> 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在<strong>大部分</strong>時候，都可以得到一個<strong>還不錯</strong> (approx. ratio ISN'T too bad)的結果。</p>
   </p>
 
   
@@ -591,7 +591,7 @@
   </header>
 
   <p>
-  <p>**Definition:**<!-- raw HTML omitted -->
+  <p>**Definition:**<br/>
 A linear programming is a problem of <em>maximizing</em> or <em>minimizing</em> a <strong>linear
 multivariate function</strong> subject to some <strong>linear constraints</strong></p>
   </p>

@@ -281,19 +281,19 @@
 
 </div>
 
-  <p>在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &ldquo;ground-truth&rdquo; agent) 與 environment 互動的<!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> pairs 去 train 我們的 agent/actor。那麼該如何利用這些 <!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> pair 呢？</p>
+  <p>在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &ldquo;ground-truth&rdquo; agent) 與 environment 互動的<span>$(s,a)$</span> pairs 去 train 我們的 agent/actor。那麼該如何利用這些 <span>$(s,a)$</span> pair 呢？</p>
 <h2 id="behavior-cloning">Behavior cloning</h2>
-<p>Make training set <!-- raw HTML omitted -->$D = \lbrace \mathcal{X}, \mathcal{Y} \rbrace$<!-- raw HTML omitted --> be <!-- raw HTML omitted -->$\lbrace (s_1,\hat{a_1}),\cdots,(s_N,\hat{a_N}) \rbrace$<!-- raw HTML omitted --></p>
+<p>Make training set <span>$D = \lbrace \mathcal{X}, \mathcal{Y} \rbrace$</span> be <span>$\lbrace (s_1,\hat{a_1}),\cdots,(s_N,\hat{a_N}) \rbrace$</span></p>
 <h3 id="issue1---distribution-drift">Issue#1 - Distribution Drift</h3>
 <p>Unlike conventional supervised learning setting，在 RL 中每個 training data 並非是 i.i.d (白話來說，在某個時間點所作的決策，會影響到後續所收到的 sample)，也因此，儘管在每個 step 都只犯了小小錯誤，這些<strong>錯誤卻會 accumulate</strong> 。</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/behavior-cloning-error.jpg" width="90%" style="border-radius: 0%;"></center>
 <p><code>$$ p_D(s_t) \not = p_\pi(s_t) $$</code></p>
 <h4 id="error-analysis">Error Analysis</h4>
-<p>Assume <!-- raw HTML omitted -->$\pi(a\not = \hat{a}|s) \leq \epsilon$<!-- raw HTML omitted -->, then <!-- raw HTML omitted -->$\forall
-s , \text{in one episode (length T)}$<!-- raw HTML omitted --></p>
+<p>Assume <span>$\pi(a\not = \hat{a}|s) \leq \epsilon$</span>, then <span>$\forall
+s , \text{in one episode (length T)}$</span></p>
 <p><code>$$ \mathbb{E}\lbrack \sum_t 1\!\!1[a_t \not = \hat{a_t}]\rbrack \leq \epsilon T + (1-\epsilon)[\epsilon(T-1)+(1-\epsilon)\cdots]  \color{red}{\Rightarrow \mathcal{O}(\epsilon T^2)} $$</code></p>
 <h3 id="solution1-dagger---dataset-aggregation">Solution#1 DAgger - Dataset Aggregation</h3>
-<p>In brief, colect training data from <!-- raw HTML omitted -->$p_\pi(s_t)$<!-- raw HTML omitted --> instead of <!-- raw HTML omitted -->$p_D(s_t)$<!-- raw HTML omitted -->，就是 run 現在的 policy 去收集 data ，再由 human expert 去 label，最後再將其與原先的 training set 聯集起來，再重複此步驟。</p>
+<p>In brief, colect training data from <span>$p_\pi(s_t)$</span> instead of <span>$p_D(s_t)$</span>，就是 run 現在的 policy 去收集 data ，再由 human expert 去 label，最後再將其與原先的 training set 聯集起來，再重複此步驟。</p>
 <p><strong>Remark:</strong></p>
 <ul>
 <li>就像是讓學生回去寫作業，遇到不會的再拿來學校問老師。\</li>
@@ -304,7 +304,7 @@ s , \text{in one episode (length T)}$<!-- raw HTML omitted --></p>
 <li>Non-Markovian: 考慮到 data 間 sequential 的關係，以 recurrent-type 的 model 作為 agent model (e.g RNN)。</li>
 <li>Multimodal: Given same state, 人類可能會做出不同決定
 <ul>
-<li>Mixture Model: 最後 output 的並非一個 action <!-- raw HTML omitted -->$a$<!-- raw HTML omitted -->，而是一個 distribution。簡單來說，以 GMM 來 model 該 distribution，讓 model output GMM 所需的參數。</li>
+<li>Mixture Model: 最後 output 的並非一個 action <span>$a$</span>，而是一個 distribution。簡單來說，以 GMM 來 model 該 distribution，讓 model output GMM 所需的參數。</li>
 <li>Latent Variable Models: 待補</li>
 </ul>
 </li>
@@ -313,10 +313,10 @@ s , \text{in one episode (length T)}$<!-- raw HTML omitted --></p>
 <p>許多 expert 無意義的習慣(?) 也會被 model 學進去， 若 learning capacity 是 limited 的話，重要的 behavior 反而沒學到 (因 label 並沒有 split 哪些不同的 sub-behavior 是沒關係，哪些又有關係)</p>
 <p><strong>Remark</strong>: 如果對 domain 有些了解，可以利用人工 augment noise 進去，再用 adversarial 去 alleviate 這個 issue。不過更根本的問題在於 factorize 這件事現在的方法都還不是做的 generally 非常好</p>
 <h2 id="inverse-reinforcement-learning">Inverse Reinforcement Learning</h2>
-<p>In brief, 藉由 <!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> pairs 去 model 可能的 reward function <!-- raw HTML omitted -->$R$<!-- raw HTML omitted -->，而有了 <!-- raw HTML omitted -->$R$<!-- raw HTML omitted --> 後，便可套用前面 4 講提到的 RL algorithm 去 update <!-- raw HTML omitted -->$\pi$<!-- raw HTML omitted -->。</p>
+<p>In brief, 藉由 <span>$(s,a)$</span> pairs 去 model 可能的 reward function <span>$R$</span>，而有了 <span>$R$</span> 後，便可套用前面 4 講提到的 RL algorithm 去 update <span>$\pi$</span>。</p>
 <p><strong>Remark:</strong> Simple reward function can cause <strong>complex policy</strong>，算是有點找出源頭的味道。</p>
-<!-- raw HTML omitted -->
-<p>With constraint <!-- raw HTML omitted -->$\sum r(\hat{\tau}) \geq \sum r(\tau)$<!-- raw HTML omitted --></p>
+<center><img src="https://sunprinces.github.io/learning/img/post/irl.png" width="70%" style="border-radius: 0%;"></center>
+<p>With constraint <span>$\sum r(\hat{\tau}) \geq \sum r(\tau)$</span></p>
 <p><strong>Remark:</strong> 這裡的 insight 在於跟 GAN 的類比。</p>
 <h2 id="some-thoughts">Some Thoughts</h2>
 <ul>

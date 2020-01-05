@@ -288,36 +288,36 @@
 <blockquote>
 <p>While linear programs are efficiently solvable, and algorithms for them are quick in practice, <strong>special purpose algorithms</strong> are often much <strong>faster</strong></p>
 </blockquote>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!--而我自己的一點點感覺是，如此證明 ratio 可以用更簡便的方式，去用上題目所給的已知條件 ( 利用-->
+<!--**relaxed** complentary slackness 直接 include 進來 ) 。-->
 <h2 id="rewrite-to-dual-form">Rewrite to Dual Form</h2>
 <p>As <a href="http://localhost:1313/learning/2017/08/advanced-algorithm---linear-programming/">primal-dual LP</a> mentioned, the dual LP is</p>
 <p><code>$$ \max \sum_{j=1}^{n} \alpha_j \quad s.t. \begin{cases} \sum_{e_j \in S_i} \alpha_j \leq \text{cost}(S_i) \; \forall i \\ \alpha_j \geq 0 \end{cases} $$</code></p>
 <p><strong>Remark:</strong> \<br>
 <strong>寫出 dual form 的直觀方法是，原先的 constraint 會變 objective ，而 objective 會變 constraint 。</strong> \<br>
-像這個例子為 <strong>我們想儘量 maximize 原先 constraint 中</strong> <!-- raw HTML omitted -->$\underset{i: e_j \in S_i}{\sum} x_i \geq 1$<!-- raw HTML omitted --> 乘上的那個係數 <!-- raw HTML omitted -->$\alpha_j$<!-- raw HTML omitted --> ( 想讓原 objective 的下界越 tight 越好，而我們有 <!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> 個這樣的式子)，但對每個 <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 來說，係數合不能超過原先 objective 的 <!-- raw HTML omitted -->$x_i$<!-- raw HTML omitted --> 係數 (也就是上方的 constraint ，而我們有 <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 個這樣的限制)。</p>
+像這個例子為 <strong>我們想儘量 maximize 原先 constraint 中</strong> <span>$\underset{i: e_j \in S_i}{\sum} x_i \geq 1$</span> 乘上的那個係數 <span>$\alpha_j$</span> ( 想讓原 objective 的下界越 tight 越好，而我們有 <span>$j$</span> 個這樣的式子)，但對每個 <span>$i$</span> 來說，係數合不能超過原先 objective 的 <span>$x_i$</span> 係數 (也就是上方的 constraint ，而我們有 <span>$i$</span> 個這樣的限制)。</p>
 <h2 id="correctness-of-approx-ratio">Correctness of Approx. Ratio</h2>
-<p>利用 Weak Duality Theorem, <!-- raw HTML omitted -->$\forall , \text{feasible} , \mathbf{x}, \mathbf{\alpha}$<!-- raw HTML omitted -->我們有</p>
+<p>利用 Weak Duality Theorem, <span>$\forall , \text{feasible} , \mathbf{x}, \mathbf{\alpha}$</span>我們有</p>
 <p><code>$$ \sum_{i=1}^m \, \text{cost}(S_i) \cdot x_i \color{red}{\geq} \sum_{(i,j): e_j \in S_i} \, \alpha_j \cdot x_i \color{green}{\geq} \, \sum_{j=1}^{n} \, \alpha_j $$</code></p>
 <p>雖然 form 看起來簡單一些了，但要找出符合 complentary slackness 的 dual OPT 還是很難，所以我們做些 relaxation。</p>
 <h3 id="relaxed-complementary-slackness">Relaxed Complementary Slackness</h3>
 <p><code>$$ \begin{cases} \color{red}{\geq}: \forall i, \, \text{either} \, x_i = 0 \, \text{or} \, \boxed{\color{red}{\frac{1}{A} \, \text{cost}(S_i)} \leq \sum_{j: e_j \in S_i} \alpha_j \, \leq \text{cost}(S_i)}\\ \color{green}{\geq}: \forall j, \, \text{either} \, \alpha_j = 0 \, \text{or} \, \boxed{\color{green}{B} \, \geq \, \sum_{i: e_j \in S_i} x_i \, \geq \, 1} \end{cases} $$</code></p>
 <p>Then, we have</p>
 <p><code>$$ \boxed{\sum_j \alpha_j \, \leq \, \sum_{i}\text{cost}(S_i) \cdot x_i \leq \color{red}{A}\color{green}{B} \sum_{j}\alpha_j} $$</code></p>
-<p>如我們之前對題目做的假設，如果每個 element 都被 <!-- raw HTML omitted -->$\leq l$<!-- raw HTML omitted --> 個 subset
-蓋住的話，相當於是設 <!-- raw HTML omitted -->$A = 1, B = l$<!-- raw HTML omitted -->，可以 derive 出一個 <!-- raw HTML omitted -->$l$<!-- raw HTML omitted -->-approx. algorithm。</p>
+<p>如我們之前對題目做的假設，如果每個 element 都被 <span>$\leq l$</span> 個 subset
+蓋住的話，相當於是設 <span>$A = 1, B = l$</span>，可以 derive 出一個 <span>$l$</span>-approx. algorithm。</p>
 <h2 id="algorithm---primal-dual-method">Algorithm - Primal-Dual Method</h2>
 <h3 id="core-concept">Core Concept</h3>
 <blockquote>
-<p>慢慢更動 dual solution 的 variable <!-- raw HTML omitted -->$\alpha_j$<!-- raw HTML omitted --> 並搭配 complentary slackness (儘量去 satisfy，不行就 relax 得更鬆) ，利用此去轉換出 primal solution 。</p>
+<p>慢慢更動 dual solution 的 variable <span>$\alpha_j$</span> 並搭配 complentary slackness (儘量去 satisfy，不行就 relax 得更鬆) ，利用此去轉換出 primal solution 。</p>
 </blockquote>
 <h3 id="-algorithm">一個可行的 Algorithm</h3>
-<p>Initially, <!-- raw HTML omitted -->$\alpha_j = 0 ; \forall j$<!-- raw HTML omitted --></p>
+<p>Initially, <span>$\alpha_j = 0 ; \forall j$</span></p>
 <ol>
-<li>Pick any uncovered element <!-- raw HTML omitted -->$e_j$<!-- raw HTML omitted --></li>
-<li>Increase <!-- raw HTML omitted -->$\alpha_j$<!-- raw HTML omitted --> until <!-- raw HTML omitted -->$\exists , i ; s.t ; \underset{e_j \in S_i}{\sum} \alpha_j , = , \text{cost}(S_i)$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\Rightarrow , \color{green}{ S_i , \text{is tight}}$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$\color{red}{\text{更動 dual sol. } , \land , \text{搭配 C.S.}}$<!-- raw HTML omitted -->)</li>
-<li>Add all <!-- raw HTML omitted -->$\color{green}{\text{tight}} , S_i$<!-- raw HTML omitted --> to set cover
-(<!-- raw HTML omitted -->$\color{red}{\text{轉換出 primal sol.}}$<!-- raw HTML omitted -->)</li>
+<li>Pick any uncovered element <span>$e_j$</span></li>
+<li>Increase <span>$\alpha_j$</span> until <span>$\exists , i ; s.t ; \underset{e_j \in S_i}{\sum} \alpha_j , = , \text{cost}(S_i)$</span> <span>$\Rightarrow , \color{green}{ S_i , \text{is tight}}$</span> (<span>$\color{red}{\text{更動 dual sol. } , \land , \text{搭配 C.S.}}$</span>)</li>
+<li>Add all <span>$\color{green}{\text{tight}} , S_i$</span> to set cover
+(<span>$\color{red}{\text{轉換出 primal sol.}}$</span>)</li>
 </ol>
 <p>Repeat above procedure until all elements are covered</p>
   

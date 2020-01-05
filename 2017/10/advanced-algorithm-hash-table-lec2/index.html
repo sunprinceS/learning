@@ -283,37 +283,37 @@
 
 </div>
 
-  <p>Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 <!-- raw HTML omitted -->$\mathcal{O}(1)$<!-- raw HTML omitted --> lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？</p>
+  <p>Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 <span>$\mathcal{O}(1)$</span> lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？</p>
 <h3 id="def"><em>Def.</em></h3>
-<!-- raw HTML omitted -->
+<center>A **Perfect Hash Function** is a hash function w/o collision</center>
 <p>想法的共通性是利用空間換取時間。</p>
-<h2 id="naive-method---spanmathcalon2-space-method">Naive method - <!-- raw HTML omitted -->$\mathcal{O}(N^2)$ space method</h2>
-<p><strong>(w/ <!-- raw HTML omitted -->$\mathcal{O}(1)$<!-- raw HTML omitted -->time)<!-- raw HTML omitted --></strong></p>
-<p>Let the number of slots be <!-- raw HTML omitted -->$N^2$<!-- raw HTML omitted -->, then</p>
-<p>任意從 2-Universal Hash Family <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 中抽一個 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> 出來
+<h2 id="naive-method---spanmathcalon2-space-method">Naive method - <span>$\mathcal{O}(N^2)$ space method</h2>
+<p><strong>(w/ <span>$\mathcal{O}(1)$</span>time)</span></strong></p>
+<p>Let the number of slots be <span>$N^2$</span>, then</p>
+<p>任意從 2-Universal Hash Family <span>$\mathcal{H}$</span> 中抽一個 <span>$h$</span> 出來
 <code>$$ \Pr_{h \in \mathcal{H}}[\,\text{collision happened}\,] = \binom{N}{2} \cdot \frac{1}{N^2} \leq \frac{1}{2} $$</code></p>
-<p>抽取次數的期望值為 <!-- raw HTML omitted -->$2$<!-- raw HTML omitted --> (成功率的倒數)</p>
-<h2 id="spanmathcalon-space-method"><!-- raw HTML omitted -->$\mathcal{O}(N)$ space method</h2>
-<p><strong>(w/ <!-- raw HTML omitted -->$\mathcal{O}(N)$<!-- raw HTML omitted --> time)<!-- raw HTML omitted --></strong></p>
+<p>抽取次數的期望值為 <span>$2$</span> (成功率的倒數)</p>
+<h2 id="spanmathcalon-space-method"><span>$\mathcal{O}(N)$ space method</h2>
+<p><strong>(w/ <span>$\mathcal{O}(N)$</span> time)</span></strong></p>
 <ol>
 <li>
-<p>從 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 中抽出 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> 將 <!-- raw HTML omitted -->$N$<!-- raw HTML omitted --> 個
-element hash 到 <!-- raw HTML omitted -->$N$<!-- raw HTML omitted --> 個 slot 當中 (Note: 這裡會發生 collision) \<br>
-Denote <!-- raw HTML omitted -->$m_i$<!-- raw HTML omitted --> be the number of elements with hash value <!-- raw HTML omitted -->$= i$<!-- raw HTML omitted --></p>
+<p>從 <span>$\mathcal{H}$</span> 中抽出 <span>$h$</span> 將 <span>$N$</span> 個
+element hash 到 <span>$N$</span> 個 slot 當中 (Note: 這裡會發生 collision) \<br>
+Denote <span>$m_i$</span> be the number of elements with hash value <span>$= i$</span></p>
 </li>
 <li>
-<p>Redo Step1. until <!-- raw HTML omitted -->$\sum m_i^2 \leq 4 N$<!-- raw HTML omitted --></p>
+<p>Redo Step1. until <span>$\sum m_i^2 \leq 4 N$</span></p>
 </li>
 <li>
-<p>For each slot <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> with number of elements <!-- raw HTML omitted -->$m_i$<!-- raw HTML omitted -->\<br>
-Pick a hash function from 2-Universal Hash family <!-- raw HTML omitted -->$\mathcal{H}_i: , \text{slot} , i \rightarrow \lbrace 0, 1, \cdots, m_i^2 - 1\rbrace$<!-- raw HTML omitted -->\<br>
+<p>For each slot <span>$i$</span> with number of elements <span>$m_i$</span>\<br>
+Pick a hash function from 2-Universal Hash family <span>$\mathcal{H}_i: , \text{slot} , i \rightarrow \lbrace 0, 1, \cdots, m_i^2 - 1\rbrace$</span>\<br>
 Repeat until no collision happened\<br>
-Note: Need to do for every slots (from <!-- raw HTML omitted -->$0 \sim N-1$<!-- raw HTML omitted -->)</p>
+Note: Need to do for every slots (from <span>$0 \sim N-1$</span>)</p>
 </li>
 </ol>
-<p>所以最後每個元素 <!-- raw HTML omitted -->$x$<!-- raw HTML omitted -->的鍵值會是一個 pair (<!-- raw HTML omitted -->$h(x),h_{h(x)} \normalsize(x)$<!-- raw HTML omitted -->) ，所需總 slot 數 <!-- raw HTML omitted -->$\leq 4 N$<!-- raw HTML omitted --></p>
+<p>所以最後每個元素 <span>$x$</span>的鍵值會是一個 pair (<span>$h(x),h_{h(x)} \normalsize(x)$</span>) ，所需總 slot 數 <span>$\leq 4 N$</span></p>
 <h3 id="running-time">Running Time</h3>
-<p>先來看 Step3.，跟上面 Naive method 的方法一樣，每個 slot 抽取 no collision hash function 的次數期望值 <!-- raw HTML omitted -->$\leq 2$<!-- raw HTML omitted --></p>
+<p>先來看 Step3.，跟上面 Naive method 的方法一樣，每個 slot 抽取 no collision hash function 的次數期望值 <span>$\leq 2$</span></p>
 <p>再來看 Step1. ， Number of total collision is</p>
 <p><code>$$ \sum_{i=1}^N \frac{(m_i)(m_i - 1)}{2} = \frac{1}{2}\sum_{i=1}^N m_i^2 - \frac{N}{2} $$</code></p>
 <p>又已知</p>
@@ -322,7 +322,7 @@ Note: Need to do for every slots (from <!-- raw HTML omitted -->$0 \sim N-1$<!--
 <p><code>$$ \mathbb{E}[\, \sum_{i=1}^N m_i^2 \,] \leq 2 N $$</code></p>
 <p>根據 <a href="https://sunprinces.github.io/learning/2017/08/advanced-algorithm---weighted-set-cover/#markov_ineq">Markov Ineq.</a></p>
 <p><code>$$ \Pr[\, \sum_{i=1}^N m_i^2 \, &gt; 4 N] \leq \frac{1}{2} $$</code></p>
-<p><!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> 抽取次數的期望值 <!-- raw HTML omitted -->$\leq 2$<!-- raw HTML omitted --></p>
+<p><span>$\Rightarrow$</span> 抽取次數的期望值 <span>$\leq 2$</span></p>
   
   
 <ul class="share-buttons">

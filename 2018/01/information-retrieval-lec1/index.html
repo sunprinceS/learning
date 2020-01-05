@@ -292,21 +292,29 @@
 <p><strong>Remark:</strong> In brief, DB 是蘊含在 IR system 中的一個模塊。</p>
 <h2 id="key-idea">Key Idea</h2>
 <h3 id="inverted-index">Inverted Index</h3>
-<p>像是參考書背後的索引，會列出哪些名詞在哪些章節、第幾頁出現，在閱讀的時候，可以想成是看到一個 page <!-- raw HTML omitted -->$\rightarrow$<!-- raw HTML omitted --> word/phrase 的 mapping ， Inverted Index 則是建構一個<strong>反向</strong>的 mapping。</p>
+<p>像是參考書背後的索引，會列出哪些名詞在哪些章節、第幾頁出現，在閱讀的時候，可以想成是看到一個 page <span>$\rightarrow$</span> word/phrase 的 mapping ， Inverted Index 則是建構一個<strong>反向</strong>的 mapping。</p>
 <h3 id="ranking">Ranking</h3>
 <p>決定當我們有大量的 return 結果時，該如何以怎樣的排序呈現給使用者。 (Ja&hellip;  Nowadays, the most successful application of ranking algorithm in the world is Google&hellip;lol)</p>
 <h3 id="evaluation">Evaluation</h3>
 <ul>
 <li>Precision</li>
 </ul>
-<!-- raw HTML omitted -->
+<div>
+\[
+p = \frac{|\text{ret} \, \bigcap \, \text{rel}|}{|\text{ret}|}
+\]
+</div>
 <p>回傳的結果中，真的有關係的比例</p>
 <ul>
 <li>Recall</li>
 </ul>
-<!-- raw HTML omitted -->
+<div>
+\[
+r = \frac{|\text{ret} \, \bigcap \, \text{rel}|}{|\text{rel}|}
+\]
+</div>
 <p>關於有關連的那些文本，有被回傳結果的比例，實務上是無法計算的(我們不知道相關的文本到底有哪些)</p>
-<p>Remark: 這兩個 criteria 其實有點互相矛盾，比方說得到 <!-- raw HTML omitted -->$100 %$<!-- raw HTML omitted --> recall 的一個方法是回傳全部的文本，便可確保沒有漏網之魚 (但這太 87)。而得到僅可能高的precision 的方法則是只回傳那些 <!-- raw HTML omitted -->$100 %$<!-- raw HTML omitted --> 確定關聯的文本 (但如此回傳的量太少，不夠使用者抉擇)</p>
+<p>Remark: 這兩個 criteria 其實有點互相矛盾，比方說得到 <span>$100 %$</span> recall 的一個方法是回傳全部的文本，便可確保沒有漏網之魚 (但這太 87)。而得到僅可能高的precision 的方法則是只回傳那些 <span>$100 %$</span> 確定關聯的文本 (但如此回傳的量太少，不夠使用者抉擇)</p>
 <h2 id="why-ir-matter">Why IR matter</h2>
 <ul>
 <li>How many times you use Google Search every day? 😉</li>
@@ -316,11 +324,11 @@ algorithm&hellip;lol)</li>
 good part, I think)</li>
 </ul>
 <h2 id="a-first-example---boolean-search">A first example - Boolean Search</h2>
-<p>構建一個 Term-document matrix <!-- raw HTML omitted -->$M \in \mathbb{R}^{W \times D}$<!-- raw HTML omitted -->，
-<!-- raw HTML omitted -->$W$<!-- raw HTML omitted -->
-為 query 的單詞數， <!-- raw HTML omitted -->$D$<!-- raw HTML omitted --> 為文本數。\<br>
-<!-- raw HTML omitted -->$M[w][d]= $<!-- raw HTML omitted --> 𝟙[word <!-- raw HTML omitted -->$w$<!-- raw HTML omitted --> appears
-in document <!-- raw HTML omitted -->$d$<!-- raw HTML omitted -->]</p>
+<p>構建一個 Term-document matrix <span>$M \in \mathbb{R}^{W \times D}$</span>，
+<span>$W$</span>
+為 query 的單詞數， <span>$D$</span> 為文本數。\<br>
+<span>$M[w][d]= $</span> 𝟙[word <span>$w$</span> appears
+in document <span>$d$</span>]</p>
 <h3 id="advantage">Advantage</h3>
 <p>Useful, simple, fast and intuitive in doing boolean operation \<br>
 (often used in <strong>well-defined</strong> documents )</p>
@@ -344,8 +352,8 @@ the query)</li>
 </blockquote>
 <p>必須支援以下操作 <code>Intersection</code>, <code>weighted union</code>, <code>Intersection(Neighbor)</code>
 (下圖範例為 intersection)</p>
-<!-- raw HTML omitted -->
-<p>可以在 <!-- raw HTML omitted -->$O(n+m)$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$n,m$<!-- raw HTML omitted --> are the size of 2 posting lists) 解決！</p>
+<center><img src="https://sunprinces.github.io/learning/img/post/ir-intersection.png" width="70%" style="border-radius: 0%;"></center>
+<p>可以在 <span>$O(n+m)$</span> (<span>$n,m$</span> are the size of 2 posting lists) 解決！</p>
 <h3 id="hardware-issue">Hardware Issue</h3>
 <p>可以想見文本和 term 何其多，不太可能單純地全部 load 進 Memory 來處理，在 Lab 中用到的方法是將每個 term 先 hash 到一個 dictionary file，而當中的每個 entry 會指向另一個存 PostingList 的檔案。 (會需要另外存 dictinoary file 之因為 PostingList 大小不一，不知道該給每個 entry 多少空間，而這樣就無法確定 從 term 到記憶體位置的 hash mapping)。</p>
 <p><strong>Remark:</strong> 這招蠻常用到的&hellip;，不管在哪個領域</p>

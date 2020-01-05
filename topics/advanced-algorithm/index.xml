@@ -18,7 +18,7 @@
       <pubDate>Sat, 14 Oct 2017 00:24:36 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec3/</guid>
-      <description>&lt;p&gt;在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/&#34;&gt;第一講&lt;/a&gt;中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 &lt;!-- raw HTML omitted --&gt;$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$&lt;!-- raw HTML omitted --&gt; ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same &lt;!-- raw HTML omitted --&gt;$\mathcal{H}$&lt;!-- raw HTML omitted --&gt;)可以選，每次我們就看哪一個 &lt;!-- raw HTML omitted --&gt;$h$&lt;!-- raw HTML omitted --&gt; 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 &lt;!-- raw HTML omitted --&gt;$\mathbb{E}[, \text{max num of elements in any slots} , ]$&lt;!-- raw HTML omitted --&gt; ?&lt;/p&gt;</description>
+      <description>&lt;p&gt;在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/&#34;&gt;第一講&lt;/a&gt;中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 &lt;span&gt;$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$&lt;/span&gt; ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same &lt;span&gt;$\mathcal{H}$&lt;/span&gt;)可以選，每次我們就看哪一個 &lt;span&gt;$h$&lt;/span&gt; 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 &lt;span&gt;$\mathbb{E}[, \text{max num of elements in any slots} , ]$&lt;/span&gt; ?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -27,7 +27,7 @@
       <pubDate>Thu, 05 Oct 2017 00:20:42 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec2/</guid>
-      <description>&lt;p&gt;Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 &lt;!-- raw HTML omitted --&gt;$\mathcal{O}(1)$&lt;!-- raw HTML omitted --&gt; lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 &lt;span&gt;$\mathcal{O}(1)$&lt;/span&gt; lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -37,7 +37,7 @@
       
       <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-revisited/</guid>
       <description>&lt;p&gt;前面提到過一個較為複雜的優化問題， &lt;a href=&#34;https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/&#34;&gt;Metric Facility Location Problem&lt;/a&gt; ，並給出了一個 4-Approx. Algorithm ，於這講中，我們要來利用前面提到的 Primal-Dual method 來設計演算法。&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;</description>
+&lt;!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)--&gt;</description>
     </item>
     
     <item>
@@ -55,7 +55,7 @@
       <pubDate>Sat, 16 Sep 2017 20:49:15 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-problem/</guid>
-      <description>&lt;p&gt;接續&lt;a href=&#34;https://sunprinces.github.io/learning/tags/linear-programming/&#34;&gt;前面幾講&lt;/a&gt;，一個常用的技巧是，利用 LP solver 得出來的解 &lt;!-- raw HTML omitted --&gt;$\mathbf{x}^{\star}$&lt;!-- raw HTML omitted --&gt;， 拿去做 rounding 推出原先問題的解 &lt;!-- raw HTML omitted --&gt;$\mathbf{x}^{\prime}$&lt;!-- raw HTML omitted --&gt; (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (&lt;strong&gt;MFL&lt;/strong&gt;)。&lt;/p&gt;</description>
+      <description>&lt;p&gt;接續&lt;a href=&#34;https://sunprinces.github.io/learning/tags/linear-programming/&#34;&gt;前面幾講&lt;/a&gt;，一個常用的技巧是，利用 LP solver 得出來的解 &lt;span&gt;$\mathbf{x}^{\star}$&lt;/span&gt;， 拿去做 rounding 推出原先問題的解 &lt;span&gt;$\mathbf{x}^{\prime}$&lt;/span&gt; (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (&lt;strong&gt;MFL&lt;/strong&gt;)。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -64,7 +64,7 @@
       <pubDate>Fri, 18 Aug 2017 21:19:19 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-weighted-set-cover/</guid>
-      <description>&lt;p&gt;呈前一講，我們對&lt;strong&gt;有限制的&lt;/strong&gt; WSC 問題有 &lt;!-- raw HTML omitted --&gt;$l$&lt;!-- raw HTML omitted --&gt;-approx. algorithm，但可能並不是太好(比方說 &lt;!-- raw HTML omitted --&gt;$l=|U|$&lt;!-- raw HTML omitted --&gt; 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在&lt;strong&gt;大部分&lt;/strong&gt;時候，都可以得到一個&lt;strong&gt;還不錯&lt;/strong&gt; (approx. ratio ISN&#39;T too bad)的結果。&lt;/p&gt;</description>
+      <description>&lt;p&gt;呈前一講，我們對&lt;strong&gt;有限制的&lt;/strong&gt; WSC 問題有 &lt;span&gt;$l$&lt;/span&gt;-approx. algorithm，但可能並不是太好(比方說 &lt;span&gt;$l=|U|$&lt;/span&gt; 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在&lt;strong&gt;大部分&lt;/strong&gt;時候，都可以得到一個&lt;strong&gt;還不錯&lt;/strong&gt; (approx. ratio ISN&#39;T too bad)的結果。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -82,7 +82,7 @@
       <pubDate>Mon, 14 Aug 2017 20:36:01 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-linear-programming/</guid>
-      <description>&lt;p&gt;**Definition:**&lt;!-- raw HTML omitted --&gt;
+      <description>&lt;p&gt;**Definition:**&lt;br/&gt;
 A linear programming is a problem of &lt;em&gt;maximizing&lt;/em&gt; or &lt;em&gt;minimizing&lt;/em&gt; a &lt;strong&gt;linear
 multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constraints&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
@@ -122,7 +122,7 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
       <pubDate>Sun, 21 May 2017 08:52:55 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/05/advanced-algorithm-hash-table-lec1/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
+      <description>&lt;!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。--&gt;
 &lt;p&gt;Hashing 可以想成是一種 &lt;strong&gt;renaming&lt;/strong&gt; 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 &lt;strong&gt;Hashing&lt;/strong&gt; 的方式，重新命名 key&amp;rsquo; ，並依據 key&amp;rsquo; 將資料放到 size 跟資料個數差不多的 Hash Table 中。&lt;/p&gt;</description>
     </item>
     

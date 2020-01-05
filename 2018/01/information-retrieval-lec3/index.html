@@ -281,7 +281,7 @@
 
 </div>
 
-  <p>前面提過 Boolearn Search 的其中一個問題在於， machine 是<strong>無腦</strong>地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 <!-- raw HTML omitted -->$10^6$<!-- raw HTML omitted --> 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 <strong>ranked retrieval</strong> 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。</p>
+  <p>前面提過 Boolearn Search 的其中一個問題在於， machine 是<strong>無腦</strong>地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 <span>$10^6$</span> 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 <strong>ranked retrieval</strong> 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。</p>
 <h2 id="vector-space-model">Vector Space Model</h2>
 <p>這裡引進了在 NLP 各類應用中，相當常見的一個將離散的 symbol (word, sentence, document&hellip;) map 到數值空間的模型 - Vector Space Model (VSM)。對於 word ，目前最耳熟能詳的 Word Embedding 有 Word2Vec, GloVe &hellip;.等等，而 sentence vector ( word的集合) 除了簡單的 Bag-of-Word (BOW) ，亦有用各類型的 recurrent/recursive NN 去 compose vector 的方法，而這裡我們要處理的對象是 document (sentence 的集合)，考量到一般的 IR scenerio ，通常不太要用到 syntactic 或 detailed 的 semantic 的資訊，僅採用最簡單的 BOW 搭配 tf-idf 做 weighting 的方法。</p>
 <p><strong>Remark</strong>: 我的理解是，每個使用者心中想查詢 query 的 semantics 各有不同， in
@@ -300,7 +300,7 @@ NN-based 的方法做的一些 smoothing 性質 (比方說歌手/影星的名字
 <h2 id="pagerank">PageRank</h2>
 <p>除了文本當中具有的<strong>interior 的性質</strong> (e.g term freq.)， modern IR 中有鑑於 web 的蓬勃發展，各個文本 (網站) 之間的 link (<strong>exterior 的性質</strong>) 也是相當有價值的排序參考來源。</p>
 <p><code>$$ \text{PR}(d) = c(\sum_{s \in in(d)} \frac{\text{PR}(d)}{\text{out_deg}(d)}) + \frac{1-c}{\text{# of document}} $$</code></p>
-<p>上述的式子描述的是一個 <strong>random surfer model</strong>，使用者從某一網站 (node) 開始，會 uniform 選擇其 out edge 連向的任一網站，而若該 node 為 sink (#out edge = 0)，則隨機訪問任意一個網站。要從這個遞迴式中解出 PR ，我們需要利用 Markov Chain 計算其 stationary prob. dist. ，同時為了保證該機率存在的唯一性，我們加入 <!-- raw HTML omitted -->$c$<!-- raw HTML omitted --> 這個 term ， 數學上是為了保證最後得到的 prob. dist. 所有 term 都是非零，以使唯一性存在。 直觀解釋上叫做 <strong>boring probability</strong> ，就是使用者有一定的機率不管當前所在的 node， random 從任一個網站開始，</p>
+<p>上述的式子描述的是一個 <strong>random surfer model</strong>，使用者從某一網站 (node) 開始，會 uniform 選擇其 out edge 連向的任一網站，而若該 node 為 sink (#out edge = 0)，則隨機訪問任意一個網站。要從這個遞迴式中解出 PR ，我們需要利用 Markov Chain 計算其 stationary prob. dist. ，同時為了保證該機率存在的唯一性，我們加入 <span>$c$</span> 這個 term ， 數學上是為了保證最後得到的 prob. dist. 所有 term 都是非零，以使唯一性存在。 直觀解釋上叫做 <strong>boring probability</strong> ，就是使用者有一定的機率不管當前所在的 node， random 從任一個網站開始，</p>
 <p><strong>Remark</strong>: Lab 中，我們會將兩個 score 作加權平均</p>
 <h3 id="implementation-sparse-matirx-version">Implementation (Sparse Matirx Version)</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">iterate</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> numberOfDocs<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> maxIterations<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>

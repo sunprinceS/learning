@@ -565,7 +565,7 @@
   </header>
 
   <p>
-  <p>Linear Model 的核心在於 feature 分量的 weighted sum <!-- raw HTML omitted -->$\mathbf{w}^T \mathbf{x}$<!-- raw HTML omitted -->， 在 binary classification ，我們用 step function 將其二分 (<!-- raw HTML omitted -->$\mathcal{Y} = \lbrace , -1,1,\rbrace$<!-- raw HTML omitted -->)，而在 linear regression 中，我們將其直接作為輸出。而這一講要介紹的則是將 <!-- raw HTML omitted -->$\mathbf{w}^T \mathbf{x}$<!-- raw HTML omitted --> 通過一個 nonlinear function mapping 到[<!-- raw HTML omitted -->$0,1$<!-- raw HTML omitted -->]，賦予他機率的意義 (<!-- raw HTML omitted -->$\Pr[y = +1 | \mathbf{x}]$<!-- raw HTML omitted -->)。</p>
+  <p>Linear Model 的核心在於 feature 分量的 weighted sum <span>$\mathbf{w}^T \mathbf{x}$</span>， 在 binary classification ，我們用 step function 將其二分 (<span>$\mathcal{Y} = \lbrace , -1,1,\rbrace$</span>)，而在 linear regression 中，我們將其直接作為輸出。而這一講要介紹的則是將 <span>$\mathbf{w}^T \mathbf{x}$</span> 通過一個 nonlinear function mapping 到[<span>$0,1$</span>]，賦予他機率的意義 (<span>$\Pr[y = +1 | \mathbf{x}]$</span>)。</p>
   </p>
 
   
@@ -620,7 +620,7 @@
   </header>
 
   <p>
-  <p>在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space <!-- raw HTML omitted -->$\mathcal{Y}$<!-- raw HTML omitted --> 只是單純的 {<!-- raw HTML omitted -->$1, -1$<!-- raw HTML omitted -->}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。</p>
+  <p>在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space <span>$\mathcal{Y}$</span> 只是單純的 {<span>$1, -1$</span>}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。</p>
   </p>
 
   
@@ -675,7 +675,7 @@
   </header>
 
   <p>
-  <p>前面幾講的討論中，我們都假設有一個 ground truth function <!-- raw HTML omitted -->$f$<!-- raw HTML omitted --> 去 generate data，且我們所拿到的 <!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted --> 是乾淨的，然而在真實世界中，無可避免地會遇到 <strong>noise</strong> 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？</p>
+  <p>前面幾講的討論中，我們都假設有一個 ground truth function <span>$f$</span> 去 generate data，且我們所拿到的 <span>$\mathcal{D}$</span> 是乾淨的，然而在真實世界中，無可避免地會遇到 <strong>noise</strong> 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？</p>
   </p>
 
   
@@ -730,7 +730,7 @@
   </header>
 
   <p>
-  <p>於前一講中，我們證明了 growth function 為 <strong>POLY(N)</strong> iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 <!-- raw HTML omitted -->$E_i(h) \approx E_o(h)$<!-- raw HTML omitted -->  (if 數據點夠多 <!-- raw HTML omitted -->$N$<!-- raw HTML omitted --> )。而這一講中，我們由 break point 引進 <strong>VC Dimension</strong> <!-- raw HTML omitted -->$d \scriptscriptstyle VC$<!-- raw HTML omitted --> ，來當作衡量 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 複雜度的一個指標。</p>
+  <p>於前一講中，我們證明了 growth function 為 <strong>POLY(N)</strong> iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 <span>$E_i(h) \approx E_o(h)$</span>  (if 數據點夠多 <span>$N$</span> )。而這一講中，我們由 break point 引進 <strong>VC Dimension</strong> <span>$d \scriptscriptstyle VC$</span> ，來當作衡量 <span>$\mathcal{H}$</span> 複雜度的一個指標。</p>
   </p>
 
   
@@ -785,7 +785,7 @@
   </header>
 
   <p>
-  <p>前一講中講述了 break point 的存在，壓制了 growth function <!-- raw HTML omitted -->$m_H(N)$<!-- raw HTML omitted --> 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，<!-- raw HTML omitted -->$m_H(N)$<!-- raw HTML omitted --> 便會是 <strong>POLY(N)</strong> 。</p>
+  <p>前一講中講述了 break point 的存在，壓制了 growth function <span>$m_H(N)$</span> 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，<span>$m_H(N)$</span> 便會是 <strong>POLY(N)</strong> 。</p>
   </p>
 
   
@@ -840,7 +840,7 @@
   </header>
 
   <p>
-  <p>上一講提到了在 hypothesis set <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 為有限，且sample size <!-- raw HTML omitted -->$|\mathcal{D}|$<!-- raw HTML omitted --> 足夠大的情況下，是 PAC-learnable 的。但當 <!-- raw HTML omitted -->$|\mathcal{H}| , \rightarrow , \infty$<!-- raw HTML omitted -->的時候呢？ (e.g 2D linear perceptron)</p>
+  <p>上一講提到了在 hypothesis set <span>$\mathcal{H}$</span> 為有限，且sample size <span>$|\mathcal{D}|$</span> 足夠大的情況下，是 PAC-learnable 的。但當 <span>$|\mathcal{H}| , \rightarrow , \infty$</span>的時候呢？ (e.g 2D linear perceptron)</p>
   </p>
 
   

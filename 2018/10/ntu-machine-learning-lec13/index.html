@@ -285,7 +285,7 @@
 data 則如同不平的路面，有限的 data 則是我們所觀察到的 partial 視野。
 那更細部來看， <strong>noise</strong> 及 <strong>limited dataset size</strong> 是怎麼造成 overfitting 的呢？</p>
 <h2 id="heading-1">實驗</h2>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/L13-overfitting.png" width="70%" style="border-radius: 0%;"></center>
 <p>上面的圖呈現了兩個實驗，並介紹了一個較不直覺的發現。</p>
 <p>我們分別拿 2 次及 10 次的 polynomial model 去 fit 有 noise 的 10 次 polynomial 及
 noiseless 的 50 次 polynomial，發現 10 次的 function 都表現的比較差。對於第一個
@@ -299,7 +299,7 @@ noiseless 的 50 次 polynomial，發現 10 次的 function 都表現的比較�
 <h2 id="complete-analysis">Complete Analysis</h2>
 <p>以下兩張圖分別以 Noise 的大小及 Target function 作為變因，觀察 model complexity
 與 overfitting 之間的關係。</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/overfit-test.png" width="70%" style="border-radius: 0%;"></center>
 <ul>
 <li>
 <p>Noise 為變因的實驗：隨著 noise 的增強，複雜的 model 需要更多 data 才能避免

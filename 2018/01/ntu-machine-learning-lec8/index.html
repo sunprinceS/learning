@@ -279,15 +279,15 @@
 
 </div>
 
-  <p>前面幾講的討論中，我們都假設有一個 ground truth function <!-- raw HTML omitted -->$f$<!-- raw HTML omitted --> 去 generate data，且我們所拿到的 <!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted --> 是乾淨的，然而在真實世界中，無可避免地會遇到 <strong>noise</strong> 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？</p>
+  <p>前面幾講的討論中，我們都假設有一個 ground truth function <span>$f$</span> 去 generate data，且我們所拿到的 <span>$\mathcal{D}$</span> 是乾淨的，然而在真實世界中，無可避免地會遇到 <strong>noise</strong> 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？</p>
 <h2 id="noise">Noise</h2>
-<p>再度回到以前的 bin model， model noise 的方式是，今天抽取出一個 ball 時，他的顏色不再是是一個固定的顏色，而是一個機率分佈 <!-- raw HTML omitted -->$\sim \Pr[y | \mathbf{x}]$<!-- raw HTML omitted --> (i.e given input <!-- raw HTML omitted -->$\mathbf{x}$<!-- raw HTML omitted -->， label <!-- raw HTML omitted -->$y$<!-- raw HTML omitted --> is probabilistic rather than deterministic)。對應到 learning ，則是今天 learn 的 target 不再是一個deterministic 的 <!-- raw HTML omitted -->$y = f(\mathbf{x})$<!-- raw HTML omitted -->，而是一個機率分佈 <!-- raw HTML omitted -->$\Pr[y | \mathbf{x} ]$<!-- raw HTML omitted --> (deterministic 可以想成機率分佈為只在一個值為 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted -->，其他全 <!-- raw HTML omitted -->$0$<!-- raw HTML omitted --> 的 special case)</p>
+<p>再度回到以前的 bin model， model noise 的方式是，今天抽取出一個 ball 時，他的顏色不再是是一個固定的顏色，而是一個機率分佈 <span>$\sim \Pr[y | \mathbf{x}]$</span> (i.e given input <span>$\mathbf{x}$</span>， label <span>$y$</span> is probabilistic rather than deterministic)。對應到 learning ，則是今天 learn 的 target 不再是一個deterministic 的 <span>$y = f(\mathbf{x})$</span>，而是一個機率分佈 <span>$\Pr[y | \mathbf{x} ]$</span> (deterministic 可以想成機率分佈為只在一個值為 <span>$1$</span>，其他全 <span>$0$</span> 的 special case)</p>
 <p>而因為 Hoeffeding Ineq. hold for arbitary, unknowm target function，所以 VC
-bound 還是成立(從相同的 joint distribution <!-- raw HTML omitted -->$\sim \Pr(\mathbf{x},y)$<!-- raw HTML omitted --> sample， <!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted --> 夠大的情況下，在 <!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted --> 衡量的量 (e.g error) 跟真實世界不會差太多)，但 learning 的同時， 在 noisy 的情況下，我們可能找不到好的演算法去選出 hypothesis <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> 使得 <!-- raw HTML omitted -->$E_i$<!-- raw HTML omitted --> 足夠小 (e.g 如果原先線性可分的資料中有 noise ，使其線性不可分，那麼便只能借助 Pocket Learning Algorithm，除了 running time 比較長之外，也不保證一定能找到跟沒有 noise 情況下， PLA 找到的最佳解一樣好的解)</p>
+bound 還是成立(從相同的 joint distribution <span>$\sim \Pr(\mathbf{x},y)$</span> sample， <span>$\mathcal{D}$</span> 夠大的情況下，在 <span>$\mathcal{D}$</span> 衡量的量 (e.g error) 跟真實世界不會差太多)，但 learning 的同時， 在 noisy 的情況下，我們可能找不到好的演算法去選出 hypothesis <span>$h$</span> 使得 <span>$E_i$</span> 足夠小 (e.g 如果原先線性可分的資料中有 noise ，使其線性不可分，那麼便只能借助 Pocket Learning Algorithm，除了 running time 比較長之外，也不保證一定能找到跟沒有 noise 情況下， PLA 找到的最佳解一樣好的解)</p>
 <h2 id="error-measure">Error Measure</h2>
 <p>隨著應用場景不同，想學的 target 不同， error metric 亦有所不同 (而如何選定合適的
 objective function 又是另一門學問了 &hellip;lol)，簡言之，對大多數的 hypothesis set
-<!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 及 error metric ， VC theory 均會成立。</p>
+<span>$\mathcal{H}$</span> 及 error metric ， VC theory 均會成立。</p>
 <p>講義中給出了一個 Weighted 0/1 error 的 metric ，可以利用 virtual copy 的概念去將新的演算法 reduce 回原先介紹的 PLA (類似的 reduce 想法可以推廣到其他 error metric)。</p>
 <h2 id="reference">Reference</h2>
 <ul>

@@ -285,9 +285,9 @@
 
   <p>從前兩講關於<strong>分配</strong> (在一堆物品中，決定哪些是要拿的一群，哪些不拿) 的最佳化問題中，我們延伸出新的問題，<strong>Bin Packing Problem</strong>。不同於在 <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/">Knapsack Problem</a> 中，我們只有一個箱子(可以想成你聘了一個工人搬一個箱子)；在Bin Packing 問題中，要取走<strong>所有</strong>寶物(所有寶物的重量都小於 1 單位)，而你需要聘請一些工人來搬，但今天每個工人都只帶了一個負重為 1 單位的箱子，該如何分配這些寶物(雖說是寶物，但其實我們不care價值惹)，使得需帶的箱子(聘請的工人)為最少？</p>
 <p>簡單的 formulation 如下：</p>
-<p>Given <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> items with sizes <!-- raw HTML omitted -->$a_1 , a_2 , \cdots a_n$<!-- raw HTML omitted --> ,
-<!-- raw HTML omitted -->$a_i \in [0,1] ; \forall i$<!-- raw HTML omitted --></p>
-<p>Want: Find a packing in unit-sized bins to minimize # of bins<!-- raw HTML omitted -->
+<p>Given <span>$n$</span> items with sizes <span>$a_1 , a_2 , \cdots a_n$</span> ,
+<span>$a_i \in [0,1] ; \forall i$</span></p>
+<p>Want: Find a packing in unit-sized bins to minimize # of bins<br/>
 (WLOG, we can turn any problem instance to this formulation, omit those tedious rounding
 overflow issue :p )</p>
 <h2 id="2-approx-algorithm">2-Approx Algorithm</h2>
@@ -306,69 +306,76 @@ overflow issue :p )</p>
     <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> b_fit:
       bin_ls<span style="color:#f92672">.</span>append(it<span style="color:#f92672">.</span>weight)
   <span style="color:#66d9ef">return</span> len(bin_ls) <span style="color:#75715e"># of bins used</span>
-</code></pre></div><p><strong>Claim: If First-Fit Algorithm uses <!-- raw HTML omitted -->$m$<!-- raw HTML omitted --> bins, at least</strong> <!-- raw HTML omitted -->$m - 1$<!-- raw HTML omitted --> <strong>bins has</strong> <!-- raw HTML omitted -->$\sum \text{size} \geq \frac{1}{2}$<!-- raw HTML omitted --></p>
-<p>假設唯一那個負重小於 <!-- raw HTML omitted -->$\frac{1}{2}$<!-- raw HTML omitted --> 的容器在第 <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 個位置，在它之前的 bins 一定都負重超過 <!-- raw HTML omitted -->$\frac{1}{2}$<!-- raw HTML omitted --> (否則i-th bin 必可以整個放到前面的 bins)，而在它之後的 bins 也一定都超過 <!-- raw HTML omitted -->$\frac{1}{2}$<!-- raw HTML omitted --> (否則就可以放到 i-th bin 了)。</p>
-<p><!-- raw HTML omitted -->$\text{OPT}$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\geq$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\sum_i a_i$<!-- raw HTML omitted --> &gt; <!-- raw HTML omitted -->$\frac{1}{2} (m-1)$<!-- raw HTML omitted -->\<br>
-<!-- raw HTML omitted -->$\Rightarrow 2\text{OPT} &gt; m - 1$<!-- raw HTML omitted -->\<br>
-<!-- raw HTML omitted -->$\Rightarrow 2\text{OPT} \geq m$<!-- raw HTML omitted --></p>
+</code></pre></div><p><strong>Claim: If First-Fit Algorithm uses <span>$m$</span> bins, at least</strong> <span>$m - 1$</span> <strong>bins has</strong> <span>$\sum \text{size} \geq \frac{1}{2}$</span></p>
+<p>假設唯一那個負重小於 <span>$\frac{1}{2}$</span> 的容器在第 <span>$i$</span> 個位置，在它之前的 bins 一定都負重超過 <span>$\frac{1}{2}$</span> (否則i-th bin 必可以整個放到前面的 bins)，而在它之後的 bins 也一定都超過 <span>$\frac{1}{2}$</span> (否則就可以放到 i-th bin 了)。</p>
+<p><span>$\text{OPT}$</span> <span>$\geq$</span> <span>$\sum_i a_i$</span> &gt; <span>$\frac{1}{2} (m-1)$</span>\<br>
+<span>$\Rightarrow 2\text{OPT} &gt; m - 1$</span>\<br>
+<span>$\Rightarrow 2\text{OPT} \geq m$</span></p>
 <h2 id="np-hard">NP-Hard</h2>
 <p>Bin Packing 是一個 NPC ， 但實際上在設計 Approximation Algorithm 時，也有一些先天的限制。</p>
-<p><strong>Thm. There is no <!-- raw HTML omitted -->$(\frac{3}{2} - \epsilon)$<!-- raw HTML omitted -->-Approx. Algorithm unless P=NP</strong></p>
-<p>*Proof:*<!-- raw HTML omitted -->
-If total size is 2, OPT = 2 iff <!-- raw HTML omitted -->$\exists$<!-- raw HTML omitted --> subset <!-- raw HTML omitted -->$S , \sum_S\text{size} = 1$<!-- raw HTML omitted -->; otherwise, OPT <!-- raw HTML omitted -->$\geq$<!-- raw HTML omitted --> 3 <!-- raw HTML omitted -->
-But if the poly-time algorithm can distinguish which case it is (i.e better ratio than <!-- raw HTML omitted -->$\frac{3}{2}$<!-- raw HTML omitted -->),<!-- raw HTML omitted -->then we can use this algorithm to solve the 2-partition problem, which is NPC</p>
-<p><!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> There is no PTAS for Bin Packing Problem unless P=NP</p>
+<p><strong>Thm. There is no <span>$(\frac{3}{2} - \epsilon)$</span>-Approx. Algorithm unless P=NP</strong></p>
+<p>*Proof:*<br/>
+If total size is 2, OPT = 2 iff <span>$\exists$</span> subset <span>$S , \sum_S\text{size} = 1$</span>; otherwise, OPT <span>$\geq$</span> 3 <br/>
+But if the poly-time algorithm can distinguish which case it is (i.e better ratio than <span>$\frac{3}{2}$</span>),<br/>then we can use this algorithm to solve the 2-partition problem, which is NPC</p>
+<p><span>$\Rightarrow$</span> There is no PTAS for Bin Packing Problem unless P=NP</p>
 <h2 id="asymptotic-ptas">Asymptotic PTAS</h2>
 <p>上例用一個 OPT 很小的例子來 claim 說 PTAS 不存在，但其實我們只不過才多用了一個箱子而已，但因為 OPT 小，所以多一兩個很嚴重。直覺來想，我們在 OPT 大一點時(差一兩個箱子沒差很多時)，可以得到更好的 approx ratio ，甚至能 derive 出 PTAS。對於這類問題，我們並不悲觀的認為找不到PTAS，但我們需要放鬆原先 PTAS 的限制，只在意那些 size 夠大的 instance， Asymptotic PTAS (<em>APTAS</em>) 應運而生。</p>
 <h3 id="definition">Definition:</h3>
-<p>Given an <!-- raw HTML omitted -->$\epsilon &gt; 0 \enspace \exists , \text{algorithm} , \mathcal{A} , n \in \mathbb{N} $<!-- raw HTML omitted -->  
-<!-- raw HTML omitted -->$\text{s.t} , \mathcal{A} , \text{is a } (1+\epsilon)\text{-approx. algorithm if OPT} \geq n$<!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<h2 id="span1--2epsilonspan-approx-algorithm">(<!-- raw HTML omitted -->$1 + 2\epsilon$<!-- raw HTML omitted -->)-Approx Algorithm</h2>
-<p>與之前的想法一樣，我們希望透由將原先的 problem instance 轉成方便我們求解的 formulation ，同時保有不太差的 performance guarantee 。這裡我們一樣要用到 rounding 的技巧，但在介紹如何 rounding 之前，我們先來想一下如何將問題變得比較簡單。<!-- raw HTML omitted -->
+<p>Given an <span>$\epsilon &gt; 0 \enspace \exists , \text{algorithm} , \mathcal{A} , n \in \mathbb{N} $</span>  
+<span>$\text{s.t} , \mathcal{A} , \text{is a } (1+\epsilon)\text{-approx. algorithm if OPT} \geq n$</span></p>
+<!--Given any <span>$\epsilon  >  0 \exists A_\epsilon , n_\epsilon \in \mathbb{N}$</span>-->
+<h2 id="span1--2epsilonspan-approx-algorithm">(<span>$1 + 2\epsilon$</span>)-Approx Algorithm</h2>
+<p>與之前的想法一樣，我們希望透由將原先的 problem instance 轉成方便我們求解的 formulation ，同時保有不太差的 performance guarantee 。這裡我們一樣要用到 rounding 的技巧，但在介紹如何 rounding 之前，我們先來想一下如何將問題變得比較簡單。</br>
 這裡的想法是直接窮舉所有的可能解，並從中挑出所需箱數最少者，但解的數目如果不做處理會是<strong>EXP</strong>，所以我們先丟掉某些 size 較小的物品( Intuitively, size 大者才會是 bottleneck 所在)，且同時減少不同的 item size (與之前 Knapsack, Subset Sum 在設計演算法時的想法相同)。</p>
-<p>**Lemma:**<!-- raw HTML omitted -->If there only <!-- raw HTML omitted -->$k$<!-- raw HTML omitted --> different item sizes (且 size <!-- raw HTML omitted -->$\geq ,\epsilon$<!-- raw HTML omitted -->)，
+<p>**Lemma:**<br/>If there only <span>$k$</span> different item sizes (且 size <span>$\geq ,\epsilon$</span>)，
 then exists poly-time algorithm can find the OPT</p>
-<p>*proof:*<!-- raw HTML omitted --></p>
+<p>*proof:*<br/></p>
 <ol>
 <li>
-<p>number of ties in a bin <!-- raw HTML omitted -->$\leq M = \lfloor \frac{1}{\epsilon} \rfloor$<!-- raw HTML omitted --> ( <!-- raw HTML omitted -->$\because \text{minimum size is} , \epsilon$<!-- raw HTML omitted --> )</p>
+<p>number of ties in a bin <span>$\leq M = \lfloor \frac{1}{\epsilon} \rfloor$</span> ( <span>$\because \text{minimum size is} , \epsilon$</span> )</p>
 </li>
 <li>
-<p>Only <!-- raw HTML omitted -->$\leq {H}^{k}_{M} = R$<!-- raw HTML omitted --> different possible contents in each bin (那 <!-- raw HTML omitted -->$M$<!-- raw HTML omitted --> 個位置選 <!-- raw HTML omitted -->$k$<!-- raw HTML omitted --> 個物品)</p>
+<p>Only <span>$\leq {H}^{k}_{M} = R$</span> different possible contents in each bin (那 <span>$M$</span> 個位置選 <span>$k$</span> 個物品)</p>
 </li>
 <li>
-<p>Total number of bin <!-- raw HTML omitted -->$\leq , n$<!-- raw HTML omitted --> (最多也才 <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 個物品)</p>
+<p>Total number of bin <span>$\leq , n$</span> (最多也才 <span>$n$</span> 個物品)</p>
 </li>
 </ol>
-<p><!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> Total possible output <!-- raw HTML omitted -->$ \leq , H^{R}_n , \leq \binom{n+R}{n} , \leq , n^R$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 個箱子，每種都有 <!-- raw HTML omitted -->$R$<!-- raw HTML omitted --> 種可能的物品重量組合可選)</p>
-<p>雖然複雜度是 <!-- raw HTML omitted -->$\mathcal{O}(n^R)$<!-- raw HTML omitted -->( <!-- raw HTML omitted -->$R$<!-- raw HTML omitted --> 還是一個很大的常數)，但至少我們把它壓在了 polynomial ✌</p>
+<p><span>$\Rightarrow$</span> Total possible output <span>$ \leq , H^{R}_n , \leq \binom{n+R}{n} , \leq , n^R$</span> (<span>$n$</span> 個箱子，每種都有 <span>$R$</span> 種可能的物品重量組合可選)</p>
+<p>雖然複雜度是 <span>$\mathcal{O}(n^R)$</span>( <span>$R$</span> 還是一個很大的常數)，但至少我們把它壓在了 polynomial ✌</p>
 <h3 id="how-to-transform-">How to transform ?</h3>
-<p>所以現在我們該如何將任意的 problem instance <!-- raw HTML omitted -->$\textcolor{green}{\tilde{I}}$<!-- raw HTML omitted --> ，轉成符合此 lemma 的 instance <!-- raw HTML omitted -->$J$<!-- raw HTML omitted --> 呢？</p>
-<p>首先我們將 size <!-- raw HTML omitted -->$ &lt; \epsilon$<!-- raw HTML omitted --> 者移掉得到 <!-- raw HTML omitted -->$I$<!-- raw HTML omitted -->，同時將剩下的物品依重量排序好，<strong>等個數</strong>地切分區間，每個區間有 <!-- raw HTML omitted -->$\lfloor n\epsilon^2 \rfloor$<!-- raw HTML omitted --> 個物品 (最後一個區間可能會少，但不管)，將區間的物品重量都放大到下一區間的 minimum (最後一個直接設成 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted -->)。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p>從這裡可以觀察到 <!-- raw HTML omitted -->$J$<!-- raw HTML omitted --> 跟 <!-- raw HTML omitted -->$J^{\prime}$<!-- raw HTML omitted --> 的差別只在 <!-- raw HTML omitted -->$J$<!-- raw HTML omitted --> 多了 <!-- raw HTML omitted -->$\lfloor n\epsilon^2 \rfloor$<!-- raw HTML omitted -->  個 size 為 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted --> 的元素。</p>
-<p><!-- raw HTML omitted -->$OPT(I) , \geq , \sum_{I}size , \geq , n\epsilon$<!-- raw HTML omitted -->\<br>
-<!-- raw HTML omitted -->$\Rightarrow \epsilon , OPT(I) \geq \lfloor n \epsilon^2 \rfloor$<!-- raw HTML omitted --></p>
-<p><!-- raw HTML omitted -->$OPT(I) \leq OPT(J)$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$\because J$<!-- raw HTML omitted --> 是往上 rounding，所以在 <!-- raw HTML omitted -->$J$<!-- raw HTML omitted --> 合法的解在 <!-- raw HTML omitted -->$I$<!-- raw HTML omitted --> 中也會合法)\<br>
-<!-- raw HTML omitted -->$= OPT(J^\prime) + \lfloor n \epsilon^2 \rfloor$<!-- raw HTML omitted -->\<br>
-<!-- raw HTML omitted -->$\leq OPT(I) + \lfloor n \epsilon^2 \rfloor$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$\because J^\prime$ 是往下 rounding<!-- raw HTML omitted -->)\<br>
-<!-- raw HTML omitted -->$\leq (1+\epsilon) OPT(I)$<!-- raw HTML omitted --> (根據上一個推導)</p>
+<p>所以現在我們該如何將任意的 problem instance <span>$\textcolor{green}{\tilde{I}}$</span> ，轉成符合此 lemma 的 instance <span>$J$</span> 呢？</p>
+<p>首先我們將 size <span>$ &lt; \epsilon$</span> 者移掉得到 <span>$I$</span>，同時將剩下的物品依重量排序好，<strong>等個數</strong>地切分區間，每個區間有 <span>$\lfloor n\epsilon^2 \rfloor$</span> 個物品 (最後一個區間可能會少，但不管)，將區間的物品重量都放大到下一區間的 minimum (最後一個直接設成 <span>$1$</span>)。</p>
+<div>
+\[
+\begin{cases}
+J: \text{將區間的元素放大到下一個區間的 minimum} \, \small \textcolor{red}{\text{(演算法所使用的)}}\\
+J^{\prime}: \text{將區間的元素縮小到同一群的 minimum (第一個區間直接縮到0)} \, \small \textcolor{red}{(\text{用來證明bound})}
+\end{cases}
+\]
+</div>
+<img src="https://sunprinces.github.io/learning/img/post/bp.png" width="80%" style="border-radius: 0%;">
+<p>從這裡可以觀察到 <span>$J$</span> 跟 <span>$J^{\prime}$</span> 的差別只在 <span>$J$</span> 多了 <span>$\lfloor n\epsilon^2 \rfloor$</span>  個 size 為 <span>$1$</span> 的元素。</p>
+<p><span>$OPT(I) , \geq , \sum_{I}size , \geq , n\epsilon$</span>\<br>
+<span>$\Rightarrow \epsilon , OPT(I) \geq \lfloor n \epsilon^2 \rfloor$</span></p>
+<p><span>$OPT(I) \leq OPT(J)$</span> (<span>$\because J$</span> 是往上 rounding，所以在 <span>$J$</span> 合法的解在 <span>$I$</span> 中也會合法)\<br>
+<span>$= OPT(J^\prime) + \lfloor n \epsilon^2 \rfloor$</span>\<br>
+<span>$\leq OPT(I) + \lfloor n \epsilon^2 \rfloor$</span> (<span>$\because J^\prime$ 是往下 rounding</span>)\<br>
+<span>$\leq (1+\epsilon) OPT(I)$</span> (根據上一個推導)</p>
 <p><strong>到這裡我們還不算成功，別忘了我們先移掉了那些比較小的物品(但我們直覺假設最後結果不太受影響)</strong></p>
 <p>接下來要把這些物品一個個加回去，使用我們前面的 2-Approx. algorithm:
 <strong>First-Fit</strong></p>
 <ol>
 <li>
-<p>First-Fit do not require any new bins <!-- raw HTML omitted -->$\Rightarrow OPT(J) , \leq , (1+\epsilon)\textcolor{green}{OPT(\tilde{I})}$<!-- raw HTML omitted --></p>
+<p>First-Fit do not require any new bins <span>$\Rightarrow OPT(J) , \leq , (1+\epsilon)\textcolor{green}{OPT(\tilde{I})}$</span></p>
 </li>
 <li>
-<p>First-Fit uses <!-- raw HTML omitted -->$\geq , 1$<!-- raw HTML omitted --> extra bins，<!-- raw HTML omitted -->
-假設最後用了 <!-- raw HTML omitted -->$L$<!-- raw HTML omitted --> 個 bins ，那麼 <strong>all but the last bin must</strong>
-<!-- raw HTML omitted -->$\mathbf{\geq , 1 - \epsilon}$<!-- raw HTML omitted --> (否則可放至前面的 bins 中)<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->$\Rightarrow \textcolor{green}{OPT(\tilde{I})} , \geq ,\sum_{\textcolor{green}{\tilde{I}}}size &gt; (L-1)(1-\epsilon)$<!-- raw HTML omitted -->\<br>
-<!-- raw HTML omitted -->$\Rightarrow \frac{\textcolor{green}{OPT(\tilde{I})}}{1 - \epsilon} &gt; L - 1$<!-- raw HTML omitted -->\<br>
-<!-- raw HTML omitted -->$\Rightarrow L \leq \frac{\textcolor{green}{OPT(\tilde{I})}}{1-\epsilon} + 1 \leq (1+2\epsilon)\textcolor{green}{OPT(\tilde{I})} + 1 , \square$<!-- raw HTML omitted --></p>
+<p>First-Fit uses <span>$\geq , 1$</span> extra bins，<br/>
+假設最後用了 <span>$L$</span> 個 bins ，那麼 <strong>all but the last bin must</strong>
+<span>$\mathbf{\geq , 1 - \epsilon}$</span> (否則可放至前面的 bins 中)<br/>
+<span>$\Rightarrow \textcolor{green}{OPT(\tilde{I})} , \geq ,\sum_{\textcolor{green}{\tilde{I}}}size &gt; (L-1)(1-\epsilon)$</span>\<br>
+<span>$\Rightarrow \frac{\textcolor{green}{OPT(\tilde{I})}}{1 - \epsilon} &gt; L - 1$</span>\<br>
+<span>$\Rightarrow L \leq \frac{\textcolor{green}{OPT(\tilde{I})}}{1-\epsilon} + 1 \leq (1+2\epsilon)\textcolor{green}{OPT(\tilde{I})} + 1 , \square$</span></p>
 </li>
 </ol>
 <h2 id="heading">延伸問題</h2>

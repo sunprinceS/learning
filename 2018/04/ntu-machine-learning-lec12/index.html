@@ -283,20 +283,20 @@
 <h2 id="feature-transform">Feature Transform</h2>
 <p>既然 linear function 不夠用，一個很直觀的想法是引進更高 order 的函數。</p>
 <p><a href="https://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=&amp;seed=0.19036&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">Tensorflow playground</a></p>
-<p>上面那個例子中，展示了 circular data 的分類問題，如果只取 <!-- raw HTML omitted -->$x_1, x_2$<!-- raw HTML omitted --> 無法 separate ，但如果多考慮 <!-- raw HTML omitted -->$x_1^2, x_2^2$<!-- raw HTML omitted --> 便能成功 (而且依然能處理原先 linear separable 的 data , i.e 退化的情形同時可以考慮，亦即 <!-- raw HTML omitted -->$\mathcal{H}\scriptsize old \normalsize \subset \mathcal{H} \scriptsize new$<!-- raw HTML omitted -->)。</p>
-<p>從另一個角度看，相當於是我們將 data 做了 feature transform (<!-- raw HTML omitted -->$\phi(\mathbf{x})$<!-- raw HTML omitted -->) 到新的空間，而在這個空間中，其是 linear separable 的。\<br>
+<p>上面那個例子中，展示了 circular data 的分類問題，如果只取 <span>$x_1, x_2$</span> 無法 separate ，但如果多考慮 <span>$x_1^2, x_2^2$</span> 便能成功 (而且依然能處理原先 linear separable 的 data , i.e 退化的情形同時可以考慮，亦即 <span>$\mathcal{H}\scriptsize old \normalsize \subset \mathcal{H} \scriptsize new$</span>)。</p>
+<p>從另一個角度看，相當於是我們將 data 做了 feature transform (<span>$\phi(\mathbf{x})$</span>) 到新的空間，而在這個空間中，其是 linear separable 的。\<br>
 e.g General Quadratic Hypothesis Set</p>
 <p><code>$$ \mathbf{x} \in \mathbb{R}^2 \stackrel{\phi}{\longmapsto} \mathbf{z} \in \mathbb{R}^6 $$</code></p>
 <p><code>$$ \text{其中}\quad \phi(\mathbf{x}) = (1,x_1,x_2,x_1^2,x_2^2,x_1x_2) $$</code></p>
 <p>而在新的 space 中，因資料滿足了 linear separable 的特性，前幾講討論的方法都可以適用。而在這個 space 中找到一個好的 hyper-plane ，相當於在原資料中找到好的 quadratic plane。</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/nonlineartransform.png" width="90%" style="border-radius: 0%;"></center>
 <h2 id="feasibility-of-learning">Feasibility of Learning</h2>
 <p>前方曾經提過，model complexity 雖然能 minimize 在 training data 上的 error ，使
 得 hypothesis function fit data 的程度越好，但相對應的代價是不太能做
 generalization (後面會提到，這就是 overfitting 原因的其中一種)。</p>
 <p>而衡量這些代價，可以從在新空間中 hyper-plane 的 VC dimension 去想。\<br>
-對一般 <!-- raw HTML omitted -->$Q \scriptsize th$<!-- raw HTML omitted --> order 的 POLY transform ，<!-- raw HTML omitted -->$d \scriptsize \text{vc}$<!-- raw HTML omitted --> 為 <!-- raw HTML omitted -->$H_Q^{d+1}$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$\mathbf{x} \in \mathbb{R}^d$<!-- raw HTML omitted -->)，複雜度依 <!-- raw HTML omitted -->$\mathcal{O}(Q^d)$<!-- raw HTML omitted --> 上升。</p>
-<!-- raw HTML omitted -->
+對一般 <span>$Q \scriptsize th$</span> order 的 POLY transform ，<span>$d \scriptsize \text{vc}$</span> 為 <span>$H_Q^{d+1}$</span> (<span>$\mathbf{x} \in \mathbb{R}^d$</span>)，複雜度依 <span>$\mathcal{O}(Q^d)$</span> 上升。</p>
+<img src="https://sunprinces.github.io/learning/img/post/vc_2.png" width="90%" style="border-radius: 0%;">
 <p><strong>Remark:</strong> 實務上都先從最簡單的 linear model 開始，再去逐步增加 model
 complexity ，並利用 validation set 找出最適合的維度</p>
 <h2 id="reference">Reference</h2>

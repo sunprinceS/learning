@@ -283,27 +283,27 @@
 
   <p>我覺得自己之前做的<a href="https://drive.google.com/file/d/152rJZPdCl1k4IqLgr7frwWXeE6lCHjO0/view?usp=sharing">投影片</a>真的蠻好的XD (自己講)，因此這一講中，只會偏重在原本寫的比較簡略的 Learning Problem ， Evaluation 及 Decoding Problem 僅會附上程式碼及做定義。</p>
 <h2 id="3-problems-of-hmm">3 Problems of HMM</h2>
-<p>Given observation sequence <!-- raw HTML omitted -->$X$<!-- raw HTML omitted --> and model parameter <!-- raw HTML omitted -->$\Theta$<!-- raw HTML omitted --></p>
-<p><!-- raw HTML omitted -->$\Theta$<!-- raw HTML omitted --> 包含了以下幾個 component: <!-- raw HTML omitted -->$\pi$<!-- raw HTML omitted --> (initial
-probability), <!-- raw HTML omitted -->$A$<!-- raw HTML omitted --> (transition matrix), <!-- raw HTML omitted -->$\phi$<!-- raw HTML omitted -->
+<p>Given observation sequence <span>$X$</span> and model parameter <span>$\Theta$</span></p>
+<p><span>$\Theta$</span> 包含了以下幾個 component: <span>$\pi$</span> (initial
+probability), <span>$A$</span> (transition matrix), <span>$\phi$</span>
 (emission probability)</p>
 <ul>
 <li>
-<p>Evaluation Problem: <!-- raw HTML omitted -->$\Pr(X|\Theta)$<!-- raw HTML omitted -->，即是一開始我們想求的，該
+<p>Evaluation Problem: <span>$\Pr(X|\Theta)$</span>，即是一開始我們想求的，該
 sequence 與特定 HMM match 的 likelihood，可用於 isolated word recognition 。</p>
 </li>
 <li>
-<p>Decoding Problem: Find the optimal state sequence <!-- raw HTML omitted -->$\Pr(Z|X,\Theta)$<!-- raw HTML omitted --> (在之後的 continuous ASR ，我們需要知道一路走來的 state sequence，才能據此還原出對應的 word sequence)</p>
+<p>Decoding Problem: Find the optimal state sequence <span>$\Pr(Z|X,\Theta)$</span> (在之後的 continuous ASR ，我們需要知道一路走來的 state sequence，才能據此還原出對應的 word sequence)</p>
 </li>
 <li>
-<p>Learning Problem: Find the optimal parameter <!-- raw HTML omitted -->$\Theta^\star$<!-- raw HTML omitted -->,
+<p>Learning Problem: Find the optimal parameter <span>$\Theta^\star$</span>,
 which satisfies some criteria</p>
 </li>
 </ul>
 <h2 id="evaluation-problem">Evaluation Problem</h2>
 <p>Solution: Forward Algorithm</p>
 <p><code>$$ \alpha_t(i) \triangleq \Pr(x_1,x_2,\cdots,x_t \land z_t = s_i | \Theta) $$</code></p>
-<p>因為在最後一個 frame 中， <!-- raw HTML omitted -->$\alpha_T(i)$<!-- raw HTML omitted --> 跟 <!-- raw HTML omitted -->$\alpha_T(j) , (i \not = j)$<!-- raw HTML omitted --> 中的事件互斥，所以我們可以對 <!-- raw HTML omitted -->$\Pr(X|\Theta)$<!-- raw HTML omitted --> marginalize over states</p>
+<p>因為在最後一個 frame 中， <span>$\alpha_T(i)$</span> 跟 <span>$\alpha_T(j) , (i \not = j)$</span> 中的事件互斥，所以我們可以對 <span>$\Pr(X|\Theta)$</span> marginalize over states</p>
 <p><code>$$ \Pr(X|\Theta) = \sum_{i=1}^M \alpha_T(i) $$</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">logalpha <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((num_frame,num_state))
 
@@ -337,31 +337,31 @@ best_path[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</spa
 
 <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>max(logdelta[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,:]), best_path
 </code></pre></div><p><strong>Remark:</strong> 亦可利用 Viterbi 算出來的機率，去近似  forward algorithm 所計算的結果 (從下圖 Viterbi 的best path 之走勢與 logalpha 的變化可略知一二)</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/viterbialpha.png" width="90%" style="border-radius: 0%;"></center>
 <h2 id="learning-problem">Learning Problem</h2>
 <p>Solution: Baum-Welch Algorithm (a special case of EM algorithm)</p>
-<p>一個 HMM model <!-- raw HTML omitted -->$\Theta = \lbrace \pi, A, \phi \rbrace$<!-- raw HTML omitted -->
-我們想根據 data 去調整 <!-- raw HTML omitted -->$\Theta$<!-- raw HTML omitted --> ，使得其能 exploit 去選出較好的參數
-<!-- raw HTML omitted -->$\Theta^\prime$<!-- raw HTML omitted -->，而所謂的<strong>好</strong>，可能是</p>
+<p>一個 HMM model <span>$\Theta = \lbrace \pi, A, \phi \rbrace$</span>
+我們想根據 data 去調整 <span>$\Theta$</span> ，使得其能 exploit 去選出較好的參數
+<span>$\Theta^\prime$</span>，而所謂的<strong>好</strong>，可能是</p>
 <ul>
 <li>fit data (e.g likelihood, posterior) -&gt; ML, MAP criteria</li>
 <li>classification performance (discriminitive training)</li>
 </ul>
 <p>在此我們考慮 ML (<em>Maximum Likelihood</em>) criteria ，也就是想找到
-<!-- raw HTML omitted -->$\Theta^\star = \underset{\Theta}{\arg \max} \Pr(X|\Theta)$<!-- raw HTML omitted --></p>
-<p>對 HMM 來說，直接從 <!-- raw HTML omitted -->$\Theta$<!-- raw HTML omitted --> 是不能直接去估 <!-- raw HTML omitted -->$X$<!-- raw HTML omitted --> 的分佈的，必須要先確定所對應的 state sequence <!-- raw HTML omitted -->$Z$<!-- raw HTML omitted --> 才行，但今天難點就在 state 是 <strong>hidden</strong> 的。\<br>
+<span>$\Theta^\star = \underset{\Theta}{\arg \max} \Pr(X|\Theta)$</span></p>
+<p>對 HMM 來說，直接從 <span>$\Theta$</span> 是不能直接去估 <span>$X$</span> 的分佈的，必須要先確定所對應的 state sequence <span>$Z$</span> 才行，但今天難點就在 state 是 <strong>hidden</strong> 的。\<br>
 EM Algorithm (Expectation-Maximization) 常用來解決這類問題，大概的思想就是:</p>
 <ul>
-<li>E-step: 利用現在的 parameter <!-- raw HTML omitted -->$\Theta$<!-- raw HTML omitted --> 去算背後 state 分佈的<strong>期望值</strong> (白話來說就是假設知道了 state)</li>
+<li>E-step: 利用現在的 parameter <span>$\Theta$</span> 去算背後 state 分佈的<strong>期望值</strong> (白話來說就是假設知道了 state)</li>
 <li>M-step: 知道了 state 的分佈，去估計 HMM 的參數 (to <strong>maximize</strong> some criteria)。</li>
 </ul>
 <p>E, M iteratively 交錯去更新參數。</p>
 <h3 id="e-step">E-step</h3>
 <p>先定義一些值</p>
 <h4 id="backward-probability">Backward Probability</h4>
-<p>跟 forward probability <!-- raw HTML omitted -->$\alpha_t(i)$<!-- raw HTML omitted --> 很類似，不過是考慮後半</p>
+<p>跟 forward probability <span>$\alpha_t(i)$</span> 很類似，不過是考慮後半</p>
 <p><code>$$ \beta_t(i) \triangleq \Pr(x_{t+1},x_{t+2},\cdots,x_{T}|z_t = s_i, \Theta) $$</code></p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/forwardbackward.png" width="70%" style="border-radius: 0%;"></center>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">logbeta <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((num_frame,num_state))
 
 <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(num_state<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
@@ -375,12 +375,12 @@ EM Algorithm (Expectation-Maximization) 常用來解決這類問題，大概的�
 </code></pre></div><h4 id="posterior-probability">Posterior Probability</h4>
 <h5 id="gamma-probability">Gamma Probability</h5>
 <p><code>$$ \gamma_t(i) \triangleq \Pr(z_t = s_i | X,\Theta) = \frac{\Pr(z_t = s_i ,X | \Theta)}{\Pr(X|\Theta)} = \frac{\alpha_t(i) \beta_t(i)}{\underbrace{\sum_j \alpha_T(j)}_{\text{Evaluation Problem 算過}}} $$</code></p>
-<p><strong>Remark:</strong> <!-- raw HTML omitted -->$\sum_{t=1}^{T-1} \gamma_t(i)$<!-- raw HTML omitted -->: <!-- raw HTML omitted -->$\mathbb{E}[X$<!-- raw HTML omitted -->中有拜訪過 <!-- raw HTML omitted -->$s_i$<!-- raw HTML omitted --><!-- raw HTML omitted -->$]$<!-- raw HTML omitted -->，同時也是在 <!-- raw HTML omitted -->$s_i$<!-- raw HTML omitted --> 中**有發生 transition** 的期望值。</p>
+<p><strong>Remark:</strong> <span>$\sum_{t=1}^{T-1} \gamma_t(i)$</span>: <span>$\mathbb{E}[X$</span>中有拜訪過 <span>$s_i$</span><span>$]$</span>，同時也是在 <span>$s_i$</span> 中**有發生 transition** 的期望值。</p>
 <h5 id="epsilon-probability">Epsilon Probability</h5>
 <p><code>$$ \epsilon_t(i,j) \triangleq \Pr(z_t = i \land z_{t+1} = j | X,\Theta) $$</code></p>
 <p><code>$$ \epsilon_t(i,j) = \frac{\alpha_t(i) A_{ij} \phi_j(x_{t+1}) \beta_{t+1}(j)}{\Pr(X|\Theta)} $$</code></p>
-<p><strong>Remark:</strong> <!-- raw HTML omitted -->$\sum_{t=1}^{T-1} \epsilon_t(i,j)$<!-- raw HTML omitted -->: <!-- raw HTML omitted -->$\mathbb{E}[s_i \rightarrow s_j]$<!-- raw HTML omitted --></p>
-<p><strong>Note:</strong> 上述這兩個機率都是 conditioned on 整個 observation sequence <!-- raw HTML omitted -->$X$<!-- raw HTML omitted --> ，而非只有那個時間點的 <!-- raw HTML omitted -->$x_t$<!-- raw HTML omitted --></p>
+<p><strong>Remark:</strong> <span>$\sum_{t=1}^{T-1} \epsilon_t(i,j)$</span>: <span>$\mathbb{E}[s_i \rightarrow s_j]$</span></p>
+<p><strong>Note:</strong> 上述這兩個機率都是 conditioned on 整個 observation sequence <span>$X$</span> ，而非只有那個時間點的 <span>$x_t$</span></p>
 <h3 id="m-step">M-step</h3>
 <h4 id="initial-probability">Initial Probability</h4>
 <p><code>$$ \pi_i = \gamma_1(i) $$</code></p>
@@ -389,13 +389,13 @@ EM Algorithm (Expectation-Maximization) 常用來解決這類問題，大概的�
 <h4 id="emission-probability">Emission Probability</h4>
 <p>前面提到，我們利用 GMM 來 model emission probability (mixture 數夠多可以近似任何的連續函數，我想也是有 optimization feasibility 的考量)</p>
 <p>在選定該時間點對應到哪個 state 後，還要在從一把 gaussian 中抽出一個去 sample
-observation <!-- raw HTML omitted -->$x_t$<!-- raw HTML omitted -->。(pretty hierachical XD)\</p>
-<!-- raw HTML omitted -->
+observation <span>$x_t$</span>。(pretty hierachical XD)\</p>
+<!--簡單討論起見，先將 mixture 數目設為兩個，-->
 <p><code>$$ \phi_j(x) = \sum_i w_{jk} \mathcal{N}(x;\mu_k,\sigma_k^2) \quad(w_{jk} \, \text{為 k-th Gaussian 在 state j 的 GMM 中所佔的比例}) $$</code></p>
 <p>要重估的參數有每個 gaussian 的 mean 和 covariance 以及 在某個 mixture 的比例
-<!-- raw HTML omitted -->$w_{jk}$<!-- raw HTML omitted --></p>
-<p><strong>Note:</strong> 上面的 <!-- raw HTML omitted -->$x_t, \mu, \sigma^2$<!-- raw HTML omitted --> 都可以是向量形式</p>
-<p><strong>Remark:</strong> 我們假設 <!-- raw HTML omitted -->$d \times d$<!-- raw HTML omitted --> 的 covariance matrix 是 diagonal
+<span>$w_{jk}$</span></p>
+<p><strong>Note:</strong> 上面的 <span>$x_t, \mu, \sigma^2$</span> 都可以是向量形式</p>
+<p><strong>Remark:</strong> 我們假設 <span>$d \times d$</span> 的 covariance matrix 是 diagonal
 (based on 前面抽 feature 時，用 DCT uncoorelate feature 的各個 dimension)</p>
 <h5 id="posterior-probability-of-choosing-k-th-mixture">Posterior Probability of choosing k-th mixture</h5>
 <p><code>$$ \begin{aligned} \gamma_t(j,k) &amp;= \Pr(z_t = s_j \land \text{choose k-th mixture in state j} |z_t = s_j, X, \Theta)\\ &amp;= \underbrace{\quad \gamma_t(j) \quad}_{\text{gamma probability}} \cdot \underbrace{\frac{w_{jk}\mathcal{N}(x_t;\mu_{jk},\sigma_{jk}^2)}{\sum_m w_{jm}\mathcal{N}(x_t;\mu_{jm},\sigma_{jm}^2)}}_{\text{k-th mixture 佔的比例}} \end{aligned} $$</code></p>
@@ -403,8 +403,8 @@ observation <!-- raw HTML omitted -->$x_t$<!-- raw HTML omitted -->。(pretty hi
 <p><code>$$ \begin{aligned} w_{jk} &amp;= \frac{\mathbb{E}[\text{# of choosing k-th mixture in state j}]}{\mathbb{E}[\text{# of visit}\, s_j]} = \frac{\sum_t \gamma_t(j,k)}{\sum_t \gamma_t(j)}\\ \mu_{jk} &amp;= \frac{\sum_t \gamma_t(j,k) x_t}{\sum_t \gamma_t(j,k)}\\ \sigma_{jk}^2 &amp;= \frac{\sum_t \gamma_t(j,k)(x_t - \mu_{jk})^T (x_t - \mu_{jk})}{\sum_t \gamma_t(j,k)} \end{aligned} $$</code></p>
 <p><strong>Remark:</strong> 跟一般沒有跟 HMM bind 在一起的 Gaussian Mixture 更新基本上一樣，但</p>
 <ul>
-<li>sample 數 <!-- raw HTML omitted -->$N$<!-- raw HTML omitted --> 改為 <!-- raw HTML omitted -->$\mathbb{E}[\text{number of visit}, s_j]$<!-- raw HTML omitted --> (因為這個 mixture 不是每次都會被抽到，要拜訪 <!-- raw HTML omitted -->$s_j$<!-- raw HTML omitted --> 才是它負責的);</li>
-<li><!-- raw HTML omitted -->$\gamma(j,k)$<!-- raw HTML omitted --> 多了一個下標 <!-- raw HTML omitted -->$t$<!-- raw HTML omitted --> (時間 <!-- raw HTML omitted -->$t$<!-- raw HTML omitted --> 在 state <!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> 且抽中該 Gaussian 的期望值)，表示其會隨 time evolve</li>
+<li>sample 數 <span>$N$</span> 改為 <span>$\mathbb{E}[\text{number of visit}, s_j]$</span> (因為這個 mixture 不是每次都會被抽到，要拜訪 <span>$s_j$</span> 才是它負責的);</li>
+<li><span>$\gamma(j,k)$</span> 多了一個下標 <span>$t$</span> (時間 <span>$t$</span> 在 state <span>$j$</span> 且抽中該 Gaussian 的期望值)，表示其會隨 time evolve</li>
 </ul>
 <p><strong>Remark:</strong> 而 GMM 的更新，就是根據想 maximize 的 criteria 定義 loss function ，去微分求極值發生點。</p>
   

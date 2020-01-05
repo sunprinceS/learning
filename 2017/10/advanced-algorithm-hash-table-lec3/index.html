@@ -283,62 +283,66 @@
 
 </div>
 
-  <p>在 <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">第一講</a>中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 <!-- raw HTML omitted -->$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$<!-- raw HTML omitted --> ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted -->)可以選，每次我們就看哪一個 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 <!-- raw HTML omitted -->$\mathbb{E}[, \text{max num of elements in any slots} , ]$<!-- raw HTML omitted --> ?</p>
+  <p>在 <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">第一講</a>中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 <span>$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$</span> ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same <span>$\mathcal{H}$</span>)可以選，每次我們就看哪一個 <span>$h$</span> 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 <span>$\mathbb{E}[, \text{max num of elements in any slots} , ]$</span> ?</p>
 <h2 id="chernoff-bound">Chernoff Bound</h2>
-<p><!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 個 identical R.V. 的相加，想 measure 其偏離平均值的機率</p>
-<p>Let <!-- raw HTML omitted -->$X_1, X_2, \cdots, X_n$<!-- raw HTML omitted --> be independent binary R.V with <!-- raw HTML omitted -->$\mathbb{E}[X_i] = p_i$<!-- raw HTML omitted --></p>
-<p><!-- raw HTML omitted -->$X = \sum_i X_i$<!-- raw HTML omitted -->, <!-- raw HTML omitted -->$; \mu = \mathbb{E}[X] = \sum_i p_i$<!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<p><span>$n$</span> 個 identical R.V. 的相加，想 measure 其偏離平均值的機率</p>
+<p>Let <span>$X_1, X_2, \cdots, X_n$</span> be independent binary R.V with <span>$\mathbb{E}[X_i] = p_i$</span></p>
+<p><span>$X = \sum_i X_i$</span>, <span>$; \mu = \mathbb{E}[X] = \sum_i p_i$</span></p>
+<!--<span>$\; p = \frac{\mu}{n} = \text{avg}(p_i)$</span>-->
+<div>
+\[
+\boxed{\Pr[X \geq e \mu] \leq e^{- \mu}}
+\]
+</div>
 <h2 id="power-of-2-choices">Power of 2 choices</h2>
-<p>Throw <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> balls into <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> bins, \<br>
+<p>Throw <span>$n$</span> balls into <span>$n$</span> bins, \<br>
 For every ball, we pick 2 bins uniformly at random, throw the ball into the bin with less load</p>
-<p>Let <!-- raw HTML omitted -->$B_k = | ;\lbrace i , | ,b_i \geq k \rbrace;|$<!-- raw HTML omitted --> (有 <!-- raw HTML omitted -->$\geq k$<!-- raw HTML omitted --> 顆球的 bin 數)\</p>
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted -->$\beta_k$<!-- raw HTML omitted --> 為 <!-- raw HTML omitted -->$B_k$<!-- raw HTML omitted --> 的 upper bound ; <!-- raw HTML omitted -->$ \quad \mathcal{E}_k$<!-- raw HTML omitted --> 為 <!-- raw HTML omitted -->$\beta_k &gt; B_k$<!-- raw HTML omitted --> (上限符合要求) 的 event
+<p>Let <span>$B_k = | ;\lbrace i , | ,b_i \geq k \rbrace;|$</span> (有 <span>$\geq k$</span> 顆球的 bin 數)\</p>
+<!--<span>$\beta_k$</span> 為 <span>$B_k$</span> 的 upper bound (with <span>$\Pr[\underset{\text{event} \, \mathcal{E}_k}{\underbrace{B_k > \beta_k}}] \leq \frac{1}{n^2}$</span>)，\\-->
+<p><span>$\beta_k$</span> 為 <span>$B_k$</span> 的 upper bound ; <span>$ \quad \mathcal{E}_k$</span> 為 <span>$\beta_k &gt; B_k$</span> (上限符合要求) 的 event
 \<br>
-假定我們已經有了 <!-- raw HTML omitted -->$B_k \leq \beta_k$<!-- raw HTML omitted --> 這個條件 (<!-- raw HTML omitted -->$\mathcal{E}_k$<!-- raw HTML omitted --> 成立)，該如何 inductively 去找 <!-- raw HTML omitted -->$\beta \scriptstyle k+1$<!-- raw HTML omitted --> ?</p>
+假定我們已經有了 <span>$B_k \leq \beta_k$</span> 這個條件 (<span>$\mathcal{E}_k$</span> 成立)，該如何 inductively 去找 <span>$\beta \scriptstyle k+1$</span> ?</p>
 <ol>
 <li>
-<p>For any balls <!-- raw HTML omitted -->$j$<!-- raw HTML omitted -->, we say <!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> is <!-- raw HTML omitted -->$\color{red}{red}$<!-- raw HTML omitted --> if the number of balls below it <!-- raw HTML omitted -->$\leq k$<!-- raw HTML omitted --></p>
+<p>For any balls <span>$j$</span>, we say <span>$j$</span> is <span>$\color{red}{red}$</span> if the number of balls below it <span>$\leq k$</span></p>
 </li>
 <li>
-<p><!-- raw HTML omitted -->$\Pr[ , j , \text{is red} ,] \leq (\frac{\beta_k}{n})^2$<!-- raw HTML omitted --> (兩個 bin 球數都要 <!-- raw HTML omitted -->$\geq k$<!-- raw HTML omitted -->)</p>
+<p><span>$\Pr[ , j , \text{is red} ,] \leq (\frac{\beta_k}{n})^2$</span> (兩個 bin 球數都要 <span>$\geq k$</span>)</p>
 </li>
 <li>
-<p><!-- raw HTML omitted -->$\mathbb{E}[B\scriptstyle k+1 \normalsize , | \mathcal{E}_k] \leq \mathbb{E}[\text{num of red balls} , | \mathcal{E}_k] \leq n \cdot (\frac{\beta_k}{n})^2$<!-- raw HTML omitted --> \<br>
-(第一個等號因為有紅色球的 bin 一定有 <!-- raw HTML omitted -->$\geq$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$k+1$<!-- raw HTML omitted --> 個球，後面那個等號是因為 Union Bound)</p>
+<p><span>$\mathbb{E}[B\scriptstyle k+1 \normalsize , | \mathcal{E}_k] \leq \mathbb{E}[\text{num of red balls} , | \mathcal{E}_k] \leq n \cdot (\frac{\beta_k}{n})^2$</span> \<br>
+(第一個等號因為有紅色球的 bin 一定有 <span>$\geq$</span> <span>$k+1$</span> 個球，後面那個等號是因為 Union Bound)</p>
 </li>
 <li>
-<p>Using <!-- raw HTML omitted -->$\color{blue}{\text{Chernoff Bound}}$<!-- raw HTML omitted -->， <!-- raw HTML omitted -->$\Pr[B \scriptstyle k+1 \normalsize \geq e \frac{\beta_k^2}{n} | \mathcal{E}_k] \leq \exp(-\frac{\beta_k^2}{n})$<!-- raw HTML omitted --> \<br>
+<p>Using <span>$\color{blue}{\text{Chernoff Bound}}$</span>， <span>$\Pr[B \scriptstyle k+1 \normalsize \geq e \frac{\beta_k^2}{n} | \mathcal{E}_k] \leq \exp(-\frac{\beta_k^2}{n})$</span> \<br>
 \<br>
-(如果 <!-- raw HTML omitted -->$\exp(-\frac{\beta_k^2}{n}) \leq \frac{1}{n^2}$<!-- raw HTML omitted -->) ， 則我們可以選 <!-- raw HTML omitted -->$\beta \scriptstyle k+1  \normalsize = e , \frac{\beta_k^2}{n}$<!-- raw HTML omitted -->\<br>
+(如果 <span>$\exp(-\frac{\beta_k^2}{n}) \leq \frac{1}{n^2}$</span>) ， 則我們可以選 <span>$\beta \scriptstyle k+1  \normalsize = e , \frac{\beta_k^2}{n}$</span>\<br>
 整理一下此遞迴式，我們有了以下關係式</p>
 </li>
 </ol>
 <p><code>$$ \boxed{\frac{\beta_{k+m}}{n} = \frac{1}{e} \, (\frac{e \beta_k}{n})^{2^m}} $$</code>
-接下來要選定初始值 <!-- raw HTML omitted -->$k$<!-- raw HTML omitted -->，就可以確定 <!-- raw HTML omitted -->$\beta$<!-- raw HTML omitted --> 的值了，\<br>
-注意到 <!-- raw HTML omitted -->$\beta_6 \leq \lfloor \frac{n}{6} \rfloor \leq \frac{n}{2e}$<!-- raw HTML omitted --> (顯然會超過 6 顆球
+接下來要選定初始值 <span>$k$</span>，就可以確定 <span>$\beta$</span> 的值了，\<br>
+注意到 <span>$\beta_6 \leq \lfloor \frac{n}{6} \rfloor \leq \frac{n}{2e}$</span> (顯然會超過 6 顆球
 的bin數 一定會小於均分的 case)\<br>
 代回上式，可得</p>
 <p><code>$$ \frac{\beta_{6+m}}{n} \leq \frac{1}{e} \, \frac{1}{2^{2^m}} $$</code></p>
-<p>當 <!-- raw HTML omitted -->$m = \mathcal{O}(\ln \ln n)$<!-- raw HTML omitted -->， we can find that <!-- raw HTML omitted -->$\beta \scriptstyle 6+m \normalsize &lt; 1$<!-- raw HTML omitted --> \<br>
-(亦即超過 <!-- raw HTML omitted -->$\mathcal{O}(1) + \ln \ln n $<!-- raw HTML omitted --> 顆球的 bin 出現的機率極小)</p>
-<p>這裡只的機率很小是指 <!-- raw HTML omitted -->$\Pr[\neg , \mathcal{E}_m]$<!-- raw HTML omitted --> 很小，根據上方的遞迴式，我們可以給出一個明確的上界</p>
+<p>當 <span>$m = \mathcal{O}(\ln \ln n)$</span>， we can find that <span>$\beta \scriptstyle 6+m \normalsize &lt; 1$</span> \<br>
+(亦即超過 <span>$\mathcal{O}(1) + \ln \ln n $</span> 顆球的 bin 出現的機率極小)</p>
+<p>這裡只的機率很小是指 <span>$\Pr[\neg , \mathcal{E}_m]$</span> 很小，根據上方的遞迴式，我們可以給出一個明確的上界</p>
 <h3 id="fact">Fact</h3>
 <p><code>$$ \boxed{\Pr[ \neg \, \mathcal{E}_{k+1}] \leq \Pr[\neg \, \mathcal{E}_{k+1} \,| \, \mathcal{E}_k] \cdot \Pr[\mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k]} $$</code></p>
 <p><strong>proof.</strong></p>
 <p><code>$$ \begin{align} \text{RHS} \, &amp;= \, \Pr[\neg \, \mathcal{E}_{k+1} \,| \, \mathcal{E}_k] \cdot \Pr[\mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k] \\ &amp; = \Pr[\neg \, \mathcal{E}_{k+1} \, \land \, \mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k]\\ &amp; = \underbrace{\Pr[\neg \, \mathcal{E}_{k+1} \, \land \, \mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k \, \land \, \neg \, \mathcal{E}_{k+1}]}_{\Pr[\neg \, \mathcal{E}_{k+1}]} + \Pr[\neg \, \mathcal{E}_k \, \land \, \mathcal{E}_{k+1}] \\ &amp; \geq \text{LHS} \end{align} $$</code></p>
-<p><!-- raw HTML omitted -->$\Rightarrow \Pr[\neg , \mathcal{E} \scriptstyle k \normalsize] \leq \frac{1}{n} \quad$<!-- raw HTML omitted --> (利用 <!-- raw HTML omitted -->$\Pr[\neg , \mathcal{E}_6 ] = 0$<!-- raw HTML omitted -->，遞迴求出)</p>
+<p><span>$\Rightarrow \Pr[\neg , \mathcal{E} \scriptstyle k \normalsize] \leq \frac{1}{n} \quad$</span> (利用 <span>$\Pr[\neg , \mathcal{E}_6 ] = 0$</span>，遞迴求出)</p>
 <h2 id="more-discussion">More Discussion</h2>
-<h3 id="spanlspan-choice"><!-- raw HTML omitted -->$l$<!-- raw HTML omitted -->-choice</h3>
-<p>第 2 步變為 <!-- raw HTML omitted -->$\Pr[ , j , \text{is red} ,] \leq (\frac{\beta_k}{n})^l$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$l$<!-- raw HTML omitted --> 個 bin 球數都要 <!-- raw HTML omitted -->$\geq k$<!-- raw HTML omitted -->)</p>
+<h3 id="spanlspan-choice"><span>$l$</span>-choice</h3>
+<p>第 2 步變為 <span>$\Pr[ , j , \text{is red} ,] \leq (\frac{\beta_k}{n})^l$</span> (<span>$l$</span> 個 bin 球數都要 <span>$\geq k$</span>)</p>
 <p><code>$$ \boxed{\frac{\beta_{k+m}}{n} = \frac{1}{e} \, (\frac{e \beta_k}{n})^{l^m}} $$</code></p>
-<p>當 <!-- raw HTML omitted -->$m = \mathcal{O}(\frac{\ln \ln n}{\ln l})$<!-- raw HTML omitted -->， we can find that <!-- raw HTML omitted -->$\beta \scriptstyle 6+m \normalsize &lt; 1$<!-- raw HTML omitted --> ，但其實還是在同個 order</p>
-<h3 id="what-if-spanbeta-kspan-is-so-small">What if <!-- raw HTML omitted -->$\beta_k$<!-- raw HTML omitted --> is so small</h3>
-<p>That is, 第 4 步的 bound 並不足夠小，也就是隨著 <!-- raw HTML omitted -->$\beta_k$<!-- raw HTML omitted --> 的 decay， <!-- raw HTML omitted -->$\exp(-\frac{\beta_k^2}{n})$<!-- raw HTML omitted --> 終會 <!-- raw HTML omitted -->$ &gt; \frac{1}{n^2}$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\Rightarrow \beta_k &lt; \sqrt{2n \ln n}$<!-- raw HTML omitted --> \<br>
-Pick 使得此式成立的 min. <!-- raw HTML omitted -->$k^\star$<!-- raw HTML omitted -->， <!-- raw HTML omitted -->$k^\star = \frac{\ln \ln n}{\ln 2} + \mathcal{O}(1)$<!-- raw HTML omitted --></p>
-<p>可以證明有 bin 超過 <!-- raw HTML omitted -->$k^\star + 2$<!-- raw HTML omitted --> 的機率足夠小 (但證明我沒看懂QQ)</p>
+<p>當 <span>$m = \mathcal{O}(\frac{\ln \ln n}{\ln l})$</span>， we can find that <span>$\beta \scriptstyle 6+m \normalsize &lt; 1$</span> ，但其實還是在同個 order</p>
+<h3 id="what-if-spanbeta-kspan-is-so-small">What if <span>$\beta_k$</span> is so small</h3>
+<p>That is, 第 4 步的 bound 並不足夠小，也就是隨著 <span>$\beta_k$</span> 的 decay， <span>$\exp(-\frac{\beta_k^2}{n})$</span> 終會 <span>$ &gt; \frac{1}{n^2}$</span> <span>$\Rightarrow \beta_k &lt; \sqrt{2n \ln n}$</span> \<br>
+Pick 使得此式成立的 min. <span>$k^\star$</span>， <span>$k^\star = \frac{\ln \ln n}{\ln 2} + \mathcal{O}(1)$</span></p>
+<p>可以證明有 bin 超過 <span>$k^\star + 2$</span> 的機率足夠小 (但證明我沒看懂QQ)</p>
   
   
 <ul class="share-buttons">

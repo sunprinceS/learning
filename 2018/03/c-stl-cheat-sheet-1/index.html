@@ -345,7 +345,7 @@ for(vector&lt;int&gt;::iterator it = vec.begin(); it!= vec.end(); ++i){
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">for</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span>const_iterator it <span style="color:#f92672">=</span> vec.begin(); it<span style="color:#f92672">!</span><span style="color:#f92672">=</span> vec.end(); <span style="color:#f92672">+</span><span style="color:#f92672">+</span>i){
   foo(<span style="color:#f92672">*</span>it); <span style="color:#75715e">// * is de-reference, but can not modify the value
 </span><span style="color:#75715e"></span>}
-</code></pre></div><h3 id="---spanonspan">加入/移除 元素 : <!-- raw HTML omitted -->$O(N)$<!-- raw HTML omitted --></h3>
+</code></pre></div><h3 id="---spanonspan">加入/移除 元素 : <span>$O(N)$</span></h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vec.insert(<span style="color:#f92672">&lt;</span>pos iterator<span style="color:#f92672">&gt;</span>,<span style="color:#ae81ff">123</span>);
 <span style="color:#75715e">//會加在 pos 前面，故若為 begin()，則 123 變第一個，若為 end()，則 123 變最後一個
 </span><span style="color:#75715e"></span><span style="color:#75715e">// 記法是新的vector中，pos 位置為方才插入的 element
@@ -354,7 +354,7 @@ vec.erase(vec.begin()<span style="color:#f92672">+</span><span style="color:#ae8
 </span><span style="color:#75715e"></span>vec.erase(vec.begin(),vec.end()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>); <span style="color:#75715e">//remove [0,end-1) 中的元素
 </span><span style="color:#75715e"></span>
 vec.clear();<span style="color:#75715e">//destroy all elements, size = 0
-</span></code></pre></div><p>Note: <code>erase()</code>的複雜度跟元素位置有關係(因需要移動其後的element)，而 <code>pop_front()</code>則保證是 <!-- raw HTML omitted -->$O(1)$<!-- raw HTML omitted --></p>
+</span></code></pre></div><p>Note: <code>erase()</code>的複雜度跟元素位置有關係(因需要移動其後的element)，而 <code>pop_front()</code>則保證是 <span>$O(1)$</span></p>
 <h3 id="misc">MISC</h3>
 <ul>
 <li><code>size()</code>,<code>back()</code>,<code>front()</code>是 method，不是member，要記得加括號。</li>

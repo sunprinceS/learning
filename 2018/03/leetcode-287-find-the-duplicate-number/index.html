@@ -282,13 +282,13 @@
   <p><a href="https://leetcode.com/problems/find-the-duplicate-number/description/">題目連結</a></p>
 <p>最近開始刷 LeetCode 練習思考，這題討論串的某個解法蠻神的，因此來紀錄一下。</p>
 <h2 id="heading">題目敘述</h2>
-<p>Given an array nums containing <strong>n + 1</strong> integers where each integer <!-- raw HTML omitted -->$\in [1,n]$<!-- raw HTML omitted -->，
+<p>Given an array nums containing <strong>n + 1</strong> integers where each integer <span>$\in [1,n]$</span>，
 Assume that there is <strong>only one duplicate number</strong> (but can be repeated many times), find the duplicate one.</p>
 <h2 id="heading-1">限制</h2>
 <ul>
 <li>You must <strong>not modify the array</strong> (assume the array is read only).</li>
 <li>You must use only constant, <strong>O(1) extra space</strong>.</li>
-<li>Your runtime complexity should be less than <!-- raw HTML omitted -->$O(n^2)$<!-- raw HTML omitted -->.</li>
+<li>Your runtime complexity should be less than <span>$O(n^2)$</span>.</li>
 </ul>
 <h2 id="on--w-modifying-array">O(n) 簡單算法 (W/ modifying array)</h2>
 <p>與 <a href="https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/">LeetCode448 - FindDisappearedNumber</a>一樣，在保有原先 array 資訊的情況下立 Flag。</p>
@@ -301,11 +301,11 @@ Assume that there is <strong>only one duplicate number</strong> (but can be repe
 </code></pre></div><p>簡單！但是不合題目要求XD
 (如果沒加 read-only 這個條件，只說跑完該 function ，array 不能變其實可以用，反正
 就再跑個一輪加 <code>abs()</code> 😛)</p>
-<h2 id="on-spanlogspan-n---">O(n <!-- raw HTML omitted -->$log$<!-- raw HTML omitted --> n) - 利用鴿籠原理的想法</h2>
-<p>看到題目限 <!-- raw HTML omitted -->$O(n^2)$<!-- raw HTML omitted --> 複雜度，可以想到二分搜或排序，但不能開另外的
+<h2 id="on-spanlogspan-n---">O(n <span>$log$</span> n) - 利用鴿籠原理的想法</h2>
+<p>看到題目限 <span>$O(n^2)$</span> 複雜度，可以想到二分搜或排序，但不能開另外的
 container ，所以應該是二分搜。</p>
 <p>每次都砍半，去 check [1,mid] 中 element 的個數，如果比 mid 還大，代表裡頭有重
-複，反之就是另一個沒被檢查到的區間，每次都要 iterate 一輪，但 <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --> 輪便可找到答案。 (我想這題被放在 <code>medium</code> 應該是因為存在這個簡單的算法XD)</p>
+複，反之就是另一個沒被檢查到的區間，每次都要 iterate 一輪，但 <span>$O(\log N)$</span> 輪便可找到答案。 (我想這題被放在 <code>medium</code> 應該是因為存在這個簡單的算法XD)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findDuplicate</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&amp;</span> nums){
 <span style="color:#66d9ef">int</span> low <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,high <span style="color:#f92672">=</span> nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 <span style="color:#66d9ef">int</span> mid,cnt;
@@ -322,30 +322,30 @@ container ，所以應該是二分搜。</p>
 }
 </code></pre></div><h2 id="on---tortoise-and-hare-algorithm">O(n) - Tortoise and Hare Algorithm</h2>
 <p>沒寫過當場想的出來真的是大神&hellip;\<br>
-In Brief，觀察到區間是 <!-- raw HTML omitted -->$[1,n]$<!-- raw HTML omitted -->，且沒有缺漏的元素，在不存在重複元
-素的情況下， index 與 value ，可以想成 <!-- raw HTML omitted -->$[1,n] \mapsto [1,n]$<!-- raw HTML omitted --> (Permutation!)，
+In Brief，觀察到區間是 <span>$[1,n]$</span>，且沒有缺漏的元素，在不存在重複元
+素的情況下， index 與 value ，可以想成 <span>$[1,n] \mapsto [1,n]$</span> (Permutation!)，
 所以 <code>nums[0]</code>, <code>nums[nums[0]]</code>, <code>nums[nums[nums[0]]]</code>&hellip; 可以把元素都 iterate
 一遍，也就是一個 path。
 好！但今天我們確定有一個(也是唯一一個)元素重複了，對這個性質會造成什麼影響呢？
-WLOG，我們從眾多可能 permutation 挑出一個最好思考的(照順序的)，已知今天是有 <!-- raw HTML omitted -->$n+1$<!-- raw HTML omitted --> 個元素，假定我們今天在 <!-- raw HTML omitted -->$[1,n]$<!-- raw HTML omitted --> 的最後接上<!-- raw HTML omitted -->$[1,n]$<!-- raw HTML omitted -->中的任一個值，如以下紅色部份</p>
-<!-- raw HTML omitted -->
-<p>會將原先一條依序 iterate 過所有元素的 path ，變成一個 path 與 cycle 的 混合路徑(?)。因為 <!-- raw HTML omitted -->$0$<!-- raw HTML omitted --> 不存在元素裡頭，所以首位元素為一個 source。 由此可確定這個路徑中至少有一單位長度的 path 。</p>
+WLOG，我們從眾多可能 permutation 挑出一個最好思考的(照順序的)，已知今天是有 <span>$n+1$</span> 個元素，假定我們今天在 <span>$[1,n]$</span> 的最後接上<span>$[1,n]$</span>中的任一個值，如以下紅色部份</p>
+<center><img src="https://sunprinces.github.io/learning/img/post/leetcode287.png" width="70%" style="border-radius: 0%;"></center>
+<p>會將原先一條依序 iterate 過所有元素的 path ，變成一個 path 與 cycle 的 混合路徑(?)。因為 <span>$0$</span> 不存在元素裡頭，所以首位元素為一個 source。 由此可確定這個路徑中至少有一單位長度的 path 。</p>
 <p>過來是這個演算法精華的部份，如以下示意圖，<strong>重複的元素為 path 進入 cycle 的 entry point</strong> (注意到根本輪不到第三個重複元素，兩個就會形成cycle) ，那該如何偵測呢？</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/leetcode287-1.png" width="40%" style="border-radius: 0%;"></center>
 <p>maintain 兩個 pointer，其中一個(hare)一次走兩步 (i.e <code>nums[nums[i]]</code>)，另一個(turtle)一次走一
-步(e.g <code>nums[i]</code>)，因為迴圈存在，步數公因數又為 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted --> 所以最後一定會
-相遇於 cycle 上一點 <!-- raw HTML omitted -->$M$<!-- raw HTML omitted -->，這點具有什麼特性？ 整理下我們有的式子。</p>
+步(e.g <code>nums[i]</code>)，因為迴圈存在，步數公因數又為 <span>$1$</span> 所以最後一定會
+相遇於 cycle 上一點 <span>$M$</span>，這點具有什麼特性？ 整理下我們有的式子。</p>
 <p><code>$$ 2\times (\underbrace{n_1 C + L_1 + \overline{SE}}_{turtle 走的長度})  = \underbrace{n_2 C+L_1 + \overline{SE}}_{hare 走的長度} $$</code></p>
 <p>移項可得</p>
 <p><code>$$ L_1 + \overline{SE} = (n_2 - 2n_1)C = nC, \quad n \in \mathbb{N} $$</code></p>
 <ul>
 <li>
-<p><!-- raw HTML omitted -->$n = 1$<!-- raw HTML omitted -->， <!-- raw HTML omitted -->$\overline{SE} = L_2$<!-- raw HTML omitted -->，令兩個 pointer 分別從
-M 和起始點出發(但這次步伐相同！)，交會點即是 <!-- raw HTML omitted -->$E$<!-- raw HTML omitted --> 。</p>
+<p><span>$n = 1$</span>， <span>$\overline{SE} = L_2$</span>，令兩個 pointer 分別從
+M 和起始點出發(但這次步伐相同！)，交會點即是 <span>$E$</span> 。</p>
 </li>
 <li>
-<p><!-- raw HTML omitted -->$n = k$<!-- raw HTML omitted -->， <!-- raw HTML omitted -->$\overline{SE} = (k-1)C + L_2$<!-- raw HTML omitted -->，與上面一樣，會
-發現交會點亦是 <!-- raw HTML omitted -->$E$<!-- raw HTML omitted --> 。</p>
+<p><span>$n = k$</span>， <span>$\overline{SE} = (k-1)C + L_2$</span>，與上面一樣，會
+發現交會點亦是 <span>$E$</span> 。</p>
 </li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findDuplicate</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&amp;</span> nums)

@@ -283,17 +283,21 @@
 
 </div>
 
-  <p><!-- raw HTML omitted -->題目連結<!-- raw HTML omitted --></p>
+  <p><a href="https://kth.kattis.com/problemgroups/641" target="_blank">題目連結</a></p>
 <h2 id="pa---white-water-rafting">pA - White Water Rafting</h2>
 <p>給一個簡單內多邊形和外多邊形，求中間圍起來的部份，寬度最小為多少。\<br>
-枚舉每個邊的組合，<strong>求兩線段之距離</strong>，取最小者，複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(n^2)$<!-- raw HTML omitted -->。</p>
+枚舉每個邊的組合，<strong>求兩線段之距離</strong>，取最小者，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
 <h2 id="pb---colliding-traffic">pB - Colliding Traffic</h2>
-<p>在平面上，有 <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 個點，各自以定速朝定方向前進 (i.e 射線)，當兩個點間距
-<!-- raw HTML omitted -->$&lt; r$<!-- raw HTML omitted --> 時，定義他們 collide ，想問第一個 collide 發生在什麼時候。
-枚舉每條射線的組合，先看距離是否已小於 <!-- raw HTML omitted -->$r$<!-- raw HTML omitted --> ，如果是就輸出 <!-- raw HTML omitted -->$0$<!-- raw HTML omitted -->。
+<p>在平面上，有 <span>$n$</span> 個點，各自以定速朝定方向前進 (i.e 射線)，當兩個點間距
+<span>$&lt; r$</span> 時，定義他們 collide ，想問第一個 collide 發生在什麼時候。
+枚舉每條射線的組合，先看距離是否已小於 <span>$r$</span> ，如果是就輸出 <span>$0$</span>。
 不是的話，由兩條射線的參數方程相減得到其距離的參數方程，</p>
-<!-- raw HTML omitted -->
-<p>找是否存在 <!-- raw HTML omitted -->$t &gt; 0$<!-- raw HTML omitted --> 滿足 <!-- raw HTML omitted -->$|\vec{d}_{i,j}| \leq r$<!-- raw HTML omitted -->，然後從所有射線組合中，找出最小的 <!-- raw HTML omitted -->$t$<!-- raw HTML omitted -->，複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(n^2)$<!-- raw HTML omitted -->。</p>
+<div>
+\[
+\vec{d}_{i,j} = (\vec{s}_j - \vec{s}_i) + (\vec{v}_j - \vec{v}_i) t \quad (\, \vec{s} \; \text{為起始位置}\,)
+\]
+</div>
+<p>找是否存在 <span>$t &gt; 0$</span> 滿足 <span>$|\vec{d}_{i,j}| \leq r$</span>，然後從所有射線組合中，找出最小的 <span>$t$</span>，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">get_collision_t</span>(Obj i,Obj j,<span style="color:#66d9ef">double</span> r_sq){
   <span style="color:#66d9ef">double</span> a,b,c;
   a <span style="color:#f92672">=</span> i.vel.distance_square(j.vel);
@@ -315,13 +319,13 @@
   }
 }
 </code></pre></div><h2 id="pc---pesky-mosquitoes">pC - Pesky Mosquitoes</h2>
-<p>圖上散落了一些點，給定一個定直徑 <!-- raw HTML omitted -->$d$<!-- raw HTML omitted --> 的圓，想找出最多可以蓋住幾個點。\<br>
+<p>圖上散落了一些點，給定一個定直徑 <span>$d$</span> 的圓，想找出最多可以蓋住幾個點。\<br>
 觀察到若想蓋住最多點的話，至少有兩個點會在圓的邊上(否則總是可以再移動，
 看能否再蓋住更多點)。</p>
-<p>枚舉所有點的組合，找出過那兩點 <!-- raw HTML omitted -->$A, B$<!-- raw HTML omitted --> 且直徑為 <!-- raw HTML omitted -->$d$<!-- raw HTML omitted --> 的圓，再來看剩下的點是
-否在此圓裡面，複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(n^3)$<!-- raw HTML omitted -->。\<br>
+<p>枚舉所有點的組合，找出過那兩點 <span>$A, B$</span> 且直徑為 <span>$d$</span> 的圓，再來看剩下的點是
+否在此圓裡面，複雜度為 <span>$\mathcal{O}(n^3)$</span>。\<br>
 而找圓心的話，算是高中數學的範疇，應該很簡單。但注意到這樣定義的圓會有兩個，方便起見我們統一
-一個方向，法向量指向 <!-- raw HTML omitted -->$\overrightarrow{AB}$<!-- raw HTML omitted --> 的右邊 (如此算 <!-- raw HTML omitted -->$\overrightarrow{BA}$<!-- raw HTML omitted --> 時，就會得到另一個圓了)。</p>
+一個方向，法向量指向 <span>$\overrightarrow{AB}$</span> 的右邊 (如此算 <span>$\overrightarrow{BA}$</span> 時，就會得到另一個圓了)。</p>
 <h2 id="pd---unusual-darts">pD - Unusual Darts</h2>
 <p>吃了兩個 WA ，真難玩&hellip;</p>
 <h2 id="pe---meltdown">pE - Meltdown</h2>

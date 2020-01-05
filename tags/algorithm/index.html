@@ -293,7 +293,7 @@
   </header>
 
   <p>
-  <p>在 <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">第一講</a>中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 <!-- raw HTML omitted -->$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$<!-- raw HTML omitted --> ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted -->)可以選，每次我們就看哪一個 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 <!-- raw HTML omitted -->$\mathbb{E}[, \text{max num of elements in any slots} , ]$<!-- raw HTML omitted --> ?</p>
+  <p>在 <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">第一講</a>中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 <span>$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$</span> ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same <span>$\mathcal{H}$</span>)可以選，每次我們就看哪一個 <span>$h$</span> 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 <span>$\mathbb{E}[, \text{max num of elements in any slots} , ]$</span> ?</p>
   </p>
 
   
@@ -352,7 +352,7 @@
   </header>
 
   <p>
-  <p>Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 <!-- raw HTML omitted -->$\mathcal{O}(1)$<!-- raw HTML omitted --> lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？</p>
+  <p>Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 <span>$\mathcal{O}(1)$</span> lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？</p>
   </p>
 
   
@@ -412,7 +412,7 @@
 
   <p>
   <p>前面提到過一個較為複雜的優化問題， <a href="https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/">Metric Facility Location Problem</a> ，並給出了一個 4-Approx. Algorithm ，於這講中，我們要來利用前面提到的 Primal-Dual method 來設計演算法。</p>
-<!-- raw HTML omitted -->
+<!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)-->
   </p>
 
   
@@ -530,7 +530,7 @@
   </header>
 
   <p>
-  <p>接續<a href="https://sunprinces.github.io/learning/tags/linear-programming/">前面幾講</a>，一個常用的技巧是，利用 LP solver 得出來的解 <!-- raw HTML omitted -->$\mathbf{x}^{\star}$<!-- raw HTML omitted -->， 拿去做 rounding 推出原先問題的解 <!-- raw HTML omitted -->$\mathbf{x}^{\prime}$<!-- raw HTML omitted --> (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (<strong>MFL</strong>)。</p>
+  <p>接續<a href="https://sunprinces.github.io/learning/tags/linear-programming/">前面幾講</a>，一個常用的技巧是，利用 LP solver 得出來的解 <span>$\mathbf{x}^{\star}$</span>， 拿去做 rounding 推出原先問題的解 <span>$\mathbf{x}^{\prime}$</span> (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (<strong>MFL</strong>)。</p>
   </p>
 
   
@@ -587,7 +587,7 @@
   </header>
 
   <p>
-  <p>前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 <!-- raw HTML omitted -->$V$<!-- raw HTML omitted --> 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。</p>
+  <p>前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 <span>$V$</span> 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。</p>
   </p>
 
   
@@ -644,7 +644,7 @@
   </header>
 
   <p>
-  <p>呈前一講的討論，我們有了個求單源最短路徑的演算法<a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> (複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(VE)$<!-- raw HTML omitted --> )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法</p>
+  <p>呈前一講的討論，我們有了個求單源最短路徑的演算法<a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> (複雜度為 <span>$\mathcal{O}(VE)$</span> )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法</p>
   </p>
 
   
@@ -702,7 +702,7 @@
 
   <p>
   <p>圖的一個常見應用場合是想找出某兩點之間的最短(/長)路徑，此時的邊權重又視為兩節點之間的距離。</p>
-<!-- raw HTML omitted -->
+<!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。-->
   </p>
 
   
@@ -816,8 +816,8 @@
   </header>
 
   <p>
-  <p>Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets <!-- raw HTML omitted -->$S_1,S_2,\cdots,S_k$<!-- raw HTML omitted -->，而每個 <!-- raw HTML omitted -->$S_i$<!-- raw HTML omitted --> (每個 category) 以一個代表值 (<em>representative</em>) 去紀錄。</p>
-<!-- raw HTML omitted -->
+  <p>Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets <span>$S_1,S_2,\cdots,S_k$</span>，而每個 <span>$S_i$</span> (每個 category) 以一個代表值 (<em>representative</em>) 去紀錄。</p>
+<!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。-->
   </p>
 
   
@@ -878,7 +878,7 @@
   </header>
 
   <p>
-  <p>呈前一講，我們對<strong>有限制的</strong> WSC 問題有 <!-- raw HTML omitted -->$l$<!-- raw HTML omitted -->-approx. algorithm，但可能並不是太好(比方說 <!-- raw HTML omitted -->$l=|U|$<!-- raw HTML omitted --> 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在<strong>大部分</strong>時候，都可以得到一個<strong>還不錯</strong> (approx. ratio ISN'T too bad)的結果。</p>
+  <p>呈前一講，我們對<strong>有限制的</strong> WSC 問題有 <span>$l$</span>-approx. algorithm，但可能並不是太好(比方說 <span>$l=|U|$</span> 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在<strong>大部分</strong>時候，都可以得到一個<strong>還不錯</strong> (approx. ratio ISN'T too bad)的結果。</p>
   </p>
 
   
@@ -996,7 +996,7 @@
   </header>
 
   <p>
-  <p>**Definition:**<!-- raw HTML omitted -->
+  <p>**Definition:**<br/>
 A linear programming is a problem of <em>maximizing</em> or <em>minimizing</em> a <strong>linear
 multivariate function</strong> subject to some <strong>linear constraints</strong></p>
   </p>
@@ -1352,7 +1352,7 @@ multivariate function</strong> subject to some <strong>linear constraints</stron
   </header>
 
   <p>
-  <!-- raw HTML omitted -->
+  <!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。-->
 <p>Hashing 可以想成是一種 <strong>renaming</strong> 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 <strong>Hashing</strong> 的方式，重新命名 key&rsquo; ，並依據 key&rsquo; 將資料放到 size 跟資料個數差不多的 Hash Table 中。</p>
   </p>
 

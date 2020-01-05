@@ -285,37 +285,41 @@
 sample 的 variance 及 off-policy (使得 data 更有效地被利用)。</p>
 <h2 id="reduce-variance">Reduce Variance</h2>
 <h3 id="baseline">Baseline</h3>
-<p>原先的 gradient 是以 <!-- raw HTML omitted -->$r(\tau)$<!-- raw HTML omitted --> 作為 weight ，現在則是減去一個常數
-<!-- raw HTML omitted -->$b \approx \mathbb{E}[r(\tau)]$<!-- raw HTML omitted -->。
-想法是可能每個 <!-- raw HTML omitted -->$\tau$<!-- raw HTML omitted -->所收到的 reward 都是正的，在下一次更新後，
-policy 更會 prefer 去選擇這些 <!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> ，但因為畢竟我們是用 sample 的方式，尚有許多 <!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> 沒有遇到，reward 相當於是 <!-- raw HTML omitted -->$0$<!-- raw HTML omitted --> ，但其<strong>可能</strong>是個比平均好的選擇，在原先的 policy update 卻不會被 explore 。\<br>
+<p>原先的 gradient 是以 <span>$r(\tau)$</span> 作為 weight ，現在則是減去一個常數
+<span>$b \approx \mathbb{E}[r(\tau)]$</span>。
+想法是可能每個 <span>$\tau$</span>所收到的 reward 都是正的，在下一次更新後，
+policy 更會 prefer 去選擇這些 <span>$(s,a)$</span> ，但因為畢竟我們是用 sample 的方式，尚有許多 <span>$(s,a)$</span> 沒有遇到，reward 相當於是 <span>$0$</span> ，但其<strong>可能</strong>是個比平均好的選擇，在原先的 policy update 卻不會被 explore 。\<br>
 簡單來說就是要 normlize reward。</p>
 <p><strong>Remark:</strong> 減去這個項所得的新 weight ，相較原先的 final reward 是 unbiased sample。</p>
-<!-- raw HTML omitted -->
+<div>
+\[
+\int_\tau \pi_\theta(\tau)\nabla_\theta \log_\theta(\tau) \textcolor{red}{b} \; d\tau \, = \, \int_\tau \nabla_\theta \pi_\theta (\tau) \textcolor{red}{b} \; d\tau \, = \, \textcolor{red}{b}\nabla_\theta \textcolor{blue}{\int_\tau \pi_\theta(\tau)} \, = \, \textcolor{red}{b} \nabla_\theta \textcolor{blue}{1} = 0
+\]
+</div>
 <h3 id="causality">Causality</h3>
-<p>Action taken at <!-- raw HTML omitted -->$t^{\prime} (&gt; t)$<!-- raw HTML omitted --> cannot affect reward at <!-- raw HTML omitted -->$t$<!-- raw HTML omitted --></p>
-<p>將原先的 <!-- raw HTML omitted -->$r(\tau)$<!-- raw HTML omitted --> 取代成 <!-- raw HTML omitted -->$\sum_{t=t^{\prime}}^T \gamma^{t - t^{\prime}}r_t$<!-- raw HTML omitted --></p>
-<p><strong>Note:</strong> <!-- raw HTML omitted -->$\gamma$<!-- raw HTML omitted --> 為 discount factor (of time)</p>
-<p><strong>Remark:</strong> 把 gradient 的 weight 稱為 <strong>Advantage function</strong> <!-- raw HTML omitted -->$A^\pi(s_t,a_t)$<!-- raw HTML omitted -->\<br>
-意義上為 &ldquo;How good it is if we take <!-- raw HTML omitted -->$a_t$<!-- raw HTML omitted --> than other action at
-<!-- raw HTML omitted -->$s_t$<!-- raw HTML omitted -->&rdquo; 。</p>
+<p>Action taken at <span>$t^{\prime} (&gt; t)$</span> cannot affect reward at <span>$t$</span></p>
+<p>將原先的 <span>$r(\tau)$</span> 取代成 <span>$\sum_{t=t^{\prime}}^T \gamma^{t - t^{\prime}}r_t$</span></p>
+<p><strong>Note:</strong> <span>$\gamma$</span> 為 discount factor (of time)</p>
+<p><strong>Remark:</strong> 把 gradient 的 weight 稱為 <strong>Advantage function</strong> <span>$A^\pi(s_t,a_t)$</span>\<br>
+意義上為 &ldquo;How good it is if we take <span>$a_t$</span> than other action at
+<span>$s_t$</span>&rdquo; 。</p>
 <h2 id="off-policy">Off-policy</h2>
-<p>原先 naive 的 REINFORCE ，在學/要更新的 agent (parametrized by <!-- raw HTML omitted -->$\theta$<!-- raw HTML omitted -->) 跟與環境互動的 agent/actor 是同一個，我們稱此為 <strong>on-policy</strong>，但這樣的壞處在於 trajectory collection 耗時，而且一旦參數更新了，又要再次 resample ，非常沒有效率。</p>
+<p>原先 naive 的 REINFORCE ，在學/要更新的 agent (parametrized by <span>$\theta$</span>) 跟與環境互動的 agent/actor 是同一個，我們稱此為 <strong>on-policy</strong>，但這樣的壞處在於 trajectory collection 耗時，而且一旦參數更新了，又要再次 resample ，非常沒有效率。</p>
 <p>故引進 <strong>off-policy</strong> 的方法，重複使用之前獲得的 trajectory，但這樣的 tradeoff 在於所計算的 gradient 可能不精確 (不適合現在的 agent)，所以需要的 constraint 去減緩這件事情的影響。</p>
 <h3 id="importance-sampling">Importance Sampling</h3>
-<p>假設現在我們有兩組 trajectory distribution <!-- raw HTML omitted -->$p,q$<!-- raw HTML omitted -->，我們想利用從
-<!-- raw HTML omitted -->$q$<!-- raw HTML omitted --> 所 sample/collect 的 trajectory 去更新 <!-- raw HTML omitted -->$p$<!-- raw HTML omitted -->
-(will update coresponding polcy)，那麼該如何估測 Policy Gradient 所需要的 expected reward <!-- raw HTML omitted -->$\mathbb{E}_{\tau \sim p}[r(\tau)]$<!-- raw HTML omitted -->? 這時候就需要用到 Importance sampling，推導如以下</p>
+<p>假設現在我們有兩組 trajectory distribution <span>$p,q$</span>，我們想利用從
+<span>$q$</span> 所 sample/collect 的 trajectory 去更新 <span>$p$</span>
+(will update coresponding polcy)，那麼該如何估測 Policy Gradient 所需要的 expected reward <span>$\mathbb{E}_{\tau \sim p}[r(\tau)]$</span>? 這時候就需要用到 Importance sampling，推導如以下</p>
 <p><code>$$ \begin{aligned} \mathbb{E}_{\tau \sim p}[r(\tau)] &amp;= \int_\tau p(\tau) r(\tau) d \tau\\ &amp;= \int_\tau r(\tau) \frac{p(\tau)}{q(\tau)} q(\tau) d\tau \\ &amp;= \mathbb{E}_{\tau \sim q}[r(\tau) \color{blue}{\frac{p(\tau)}{q(\tau)}}] \end{aligned} $$</code></p>
-<p><strong>Remark:</strong> <!-- raw HTML omitted -->$\frac{p(\tau)}{q(\tau)}$<!-- raw HTML omitted --> 稱為 importance weight ，用此
+<p><strong>Remark:</strong> <span>$\frac{p(\tau)}{q(\tau)}$</span> 稱為 importance weight ，用此
 去 scale 相對應的 reward。</p>
-<p><strong>Remark:</strong> 儘管期望值相同，但 <!-- raw HTML omitted -->$\text{Var}\scriptstyle{\tau \sim p}\textstyle[r(\tau)]$<!-- raw HTML omitted --> 和 <!-- raw HTML omitted -->$\text{Var}\scriptstyle{\tau \sim q} \textstyle[r(\tau) \frac{p(\tau)}{q(\tau)}]$<!-- raw HTML omitted -->還是不同的。兩個 distribution 還是不能差太多，這也是 要加 constraint 的所在。</p>
+<p><strong>Remark:</strong> 儘管期望值相同，但 <span>$\text{Var}\scriptstyle{\tau \sim p}\textstyle[r(\tau)]$</span> 和 <span>$\text{Var}\scriptstyle{\tau \sim q} \textstyle[r(\tau) \frac{p(\tau)}{q(\tau)}]$</span>還是不同的。兩個 distribution 還是不能差太多，這也是 要加 constraint 的所在。</p>
 <p>下面有一張簡單的示意圖（不過 notation 有點小不同😅）</p>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/importance-sampling.png" width="70%" style="border-radius: 0%;"></center>
 <h3 id="proximal-policy-optimization-ppo">Proximal Policy Optimization (PPO)</h3>
-<p>將原先的 objective function <!-- raw HTML omitted -->$J^{\theta^\prime}(\theta)$<!-- raw HTML omitted --> 加上一個衡量 <!-- raw HTML omitted -->$\theta,\theta^\prime$<!-- raw HTML omitted --> 對應 policy 的 KL divergence\<br>
-(拿上面的例子來看的話，就是 <!-- raw HTML omitted -->$\text{KL}(p,q)$<!-- raw HTML omitted -->)</p>
-<p><strong>Remark:</strong> 另外有一個變形，不是考慮 policy 的 KL divergence，而是用一個 function 去 clip <!-- raw HTML omitted -->$\frac{p(\tau)}{q(\tau)}$<!-- raw HTML omitted --> 差太多的情況。</p>
+<p>將原先的 objective function <span>$J^{\theta^\prime}(\theta)$</span> 加上一個衡量 <span>$\theta,\theta^\prime$</span> 對應 policy 的 KL divergence\<br>
+(拿上面的例子來看的話，就是 <span>$\text{KL}(p,q)$</span>)</p>
+<p><strong>Remark:</strong> 另外有一個變形，不是考慮 policy 的 KL divergence，而是用一個 function 去 clip <span>$\frac{p(\tau)}{q(\tau)}$</span> 差太多的情況。</p>
 <p><strong>Remark:</strong> 不過實務上 update 幾次後，不可避免地還是要重新 sample。</p>
 <h2 id="reference">Reference</h2>
 <ul>

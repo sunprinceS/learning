@@ -463,7 +463,7 @@
   </header>
 
   <p>
-  <p>前面提過 Boolearn Search 的其中一個問題在於， machine 是<strong>無腦</strong>地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 <!-- raw HTML omitted -->$10^6$<!-- raw HTML omitted --> 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 <strong>ranked retrieval</strong> 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。</p>
+  <p>前面提過 Boolearn Search 的其中一個問題在於， machine 是<strong>無腦</strong>地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 <span>$10^6$</span> 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 <strong>ranked retrieval</strong> 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。</p>
   </p>
 
   
@@ -575,7 +575,7 @@
   </header>
 
   <p>
-  <p>前面幾講的討論中，我們都假設有一個 ground truth function <!-- raw HTML omitted -->$f$<!-- raw HTML omitted --> 去 generate data，且我們所拿到的 <!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted --> 是乾淨的，然而在真實世界中，無可避免地會遇到 <strong>noise</strong> 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？</p>
+  <p>前面幾講的討論中，我們都假設有一個 ground truth function <span>$f$</span> 去 generate data，且我們所拿到的 <span>$\mathcal{D}$</span> 是乾淨的，然而在真實世界中，無可避免地會遇到 <strong>noise</strong> 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？</p>
   </p>
 
   
@@ -687,7 +687,7 @@
   </header>
 
   <p>
-  <p>於前一講中，我們證明了 growth function 為 <strong>POLY(N)</strong> iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 <!-- raw HTML omitted -->$E_i(h) \approx E_o(h)$<!-- raw HTML omitted -->  (if 數據點夠多 <!-- raw HTML omitted -->$N$<!-- raw HTML omitted --> )。而這一講中，我們由 break point 引進 <strong>VC Dimension</strong> <!-- raw HTML omitted -->$d \scriptscriptstyle VC$<!-- raw HTML omitted --> ，來當作衡量 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 複雜度的一個指標。</p>
+  <p>於前一講中，我們證明了 growth function 為 <strong>POLY(N)</strong> iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 <span>$E_i(h) \approx E_o(h)$</span>  (if 數據點夠多 <span>$N$</span> )。而這一講中，我們由 break point 引進 <strong>VC Dimension</strong> <span>$d \scriptscriptstyle VC$</span> ，來當作衡量 <span>$\mathcal{H}$</span> 複雜度的一個指標。</p>
   </p>
 
   
@@ -742,7 +742,7 @@
   </header>
 
   <p>
-  <p>前一講中講述了 break point 的存在，壓制了 growth function <!-- raw HTML omitted -->$m_H(N)$<!-- raw HTML omitted --> 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，<!-- raw HTML omitted -->$m_H(N)$<!-- raw HTML omitted --> 便會是 <strong>POLY(N)</strong> 。</p>
+  <p>前一講中講述了 break point 的存在，壓制了 growth function <span>$m_H(N)$</span> 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，<span>$m_H(N)$</span> 便會是 <strong>POLY(N)</strong> 。</p>
   </p>
 
   
@@ -797,7 +797,7 @@
   </header>
 
   <p>
-  <p>上一講提到了在 hypothesis set <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 為有限，且sample size <!-- raw HTML omitted -->$|\mathcal{D}|$<!-- raw HTML omitted --> 足夠大的情況下，是 PAC-learnable 的。但當 <!-- raw HTML omitted -->$|\mathcal{H}| , \rightarrow , \infty$<!-- raw HTML omitted -->的時候呢？ (e.g 2D linear perceptron)</p>
+  <p>上一講提到了在 hypothesis set <span>$\mathcal{H}$</span> 為有限，且sample size <span>$|\mathcal{D}|$</span> 足夠大的情況下，是 PAC-learnable 的。但當 <span>$|\mathcal{H}| , \rightarrow , \infty$</span>的時候呢？ (e.g 2D linear perceptron)</p>
   </p>
 
   

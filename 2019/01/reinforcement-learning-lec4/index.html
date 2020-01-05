@@ -281,45 +281,49 @@
 
 </div>
 
-  <p>在這講中，要討論的是 non-tabular case 的問題 (就是上一講中無法保證收斂的那些QQ)，我們選定 Neural Network 作為拿來 approximate <!-- raw HTML omitted -->$Q(s,a)$<!-- raw HTML omitted --> 的 function family，且不是用一般 regression 的方法找 <!-- raw HTML omitted -->$\phi$<!-- raw HTML omitted --> (畢竟它的 target <!-- raw HTML omitted -->$y$<!-- raw HTML omitted --> 也只是中間產物，並非 optimal Q)，而是 N-step 的 gradient descent。</p>
+  <p>在這講中，要討論的是 non-tabular case 的問題 (就是上一講中無法保證收斂的那些QQ)，我們選定 Neural Network 作為拿來 approximate <span>$Q(s,a)$</span> 的 function family，且不是用一般 regression 的方法找 <span>$\phi$</span> (畢竟它的 target <span>$y$</span> 也只是中間產物，並非 optimal Q)，而是 N-step 的 gradient descent。</p>
 <h2 id="online-q-learning-alg-n--1">Online Q-learning Alg. (N = 1)</h2>
 <ol>
 <li>Take action to collect data</li>
-<li><!-- raw HTML omitted -->$y_i = r(s_i,a_i) + \gamma \max_{a^\prime} Q_\phi (s_i^\prime,a_i^\prime)$<!-- raw HTML omitted --></li>
-<li><!-- raw HTML omitted -->$\phi \leftarrow \phi - \alpha \frac{dQ_\phi}{d\phi}(s_i,a_i)(Q_\phi(s_i,a_i) - y_i)$<!-- raw HTML omitted --></li>
+<li><span>$y_i = r(s_i,a_i) + \gamma \max_{a^\prime} Q_\phi (s_i^\prime,a_i^\prime)$</span></li>
+<li><span>$\phi \leftarrow \phi - \alpha \frac{dQ_\phi}{d\phi}(s_i,a_i)(Q_\phi(s_i,a_i) - y_i)$</span></li>
 </ol>
 <h3 id="issue">Issue</h3>
 <ul>
 <li>
-<p><!-- raw HTML omitted -->$y_i$<!-- raw HTML omitted --> relate to current param <!-- raw HTML omitted -->$\phi$<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->$\rightarrow$<!-- raw HTML omitted --> non-stable</p>
+<p><span>$y_i$</span> relate to current param <span>$\phi$</span>
+<span>$\rightarrow$</span> non-stable</p>
 </li>
 <li>
 <p>Q value 通常會 overestimate (因 max 的選擇，會 prefer overestimate 的 noise)</p>
 </li>
 </ul>
 <h2 id="double-dqn-target-network">Double DQN (Target Network)</h2>
-<p>簡單來說，就是使用兩個 Q value NN，一個用來產生 target <!-- raw HTML omitted -->$y_i$<!-- raw HTML omitted --> ，一個用來選擇 action ，實務上不會真的 train 兩個 network，而是用不同時間點的 network 參數 <!-- raw HTML omitted -->$\phi$<!-- raw HTML omitted -->, <!-- raw HTML omitted -->$\phi^\prime$<!-- raw HTML omitted --> (等 <!-- raw HTML omitted -->$\phi$<!-- raw HTML omitted --> 更新過幾輪之後，再 copy 給 <!-- raw HTML omitted -->$\phi^\prime$<!-- raw HTML omitted -->)</p>
-<!-- raw HTML omitted -->
+<p>簡單來說，就是使用兩個 Q value NN，一個用來產生 target <span>$y_i$</span> ，一個用來選擇 action ，實務上不會真的 train 兩個 network，而是用不同時間點的 network 參數 <span>$\phi$</span>, <span>$\phi^\prime$</span> (等 <span>$\phi$</span> 更新過幾輪之後，再 copy 給 <span>$\phi^\prime$</span>)</p>
+<div>
+\[
+y = r(s,a) + \gamma Q_{\textcolor{red}{\phi^\prime}}(s^\prime, \arg\max_{a^\prime} Q_\textcolor{blue}{\phi}(s^\prime,a^\prime))
+\]
+</div>
 <h3 id="some-intuition">Some intuition</h3>
 <ul>
 <li>在更新的過程中， target 會是 fixed 的，有助於 training 的穩定性</li>
-<li><!-- raw HTML omitted -->$Q_\phi$<!-- raw HTML omitted -->, <!-- raw HTML omitted -->$Q_{\phi^\prime}$<!-- raw HTML omitted --> 引進的 noise 同樣都是
+<li><span>$Q_\phi$</span>, <span>$Q_{\phi^\prime}$</span> 引進的 noise 同樣都是
 overestimate 的機率較原先小，更能準確的估 Q value</li>
 </ul>
-<!-- raw HTML omitted -->
+<center><img src="https://sunprinces.github.io/learning/img/post/double-dqn.png" width="80%" style="border-radius: 0%;"></center>
 <h2 id="prioritized-replay">Prioritized Replay</h2>
-<p>一般來說，為了 <strong>batch training</strong> 需要，除了同時放多個 worker 下去更新<!-- raw HTML omitted -->$\phi$<!-- raw HTML omitted --> 外，亦會將 sample 出的 training data collect 起來，存到 replay buffer 裡頭，每次 sample 一個batch 出來 update Q network</p>
+<p>一般來說，為了 <strong>batch training</strong> 需要，除了同時放多個 worker 下去更新<span>$\phi$</span> 外，亦會將 sample 出的 training data collect 起來，存到 replay buffer 裡頭，每次 sample 一個batch 出來 update Q network</p>
 <p>除了 uniformly sample from replay buffer 之外，也可以用以下 criteria 來決定sample 的 preference</p>
 <ul>
 <li>large TD error 者 (需要加強訓練的 sample)</li>
 <li>large Q value 者 (imply 好的經驗)</li>
 </ul>
 <h2 id="multi-step">Multi-step</h2>
-<p>balance between TD (step = 1) and MC (step <!-- raw HTML omitted -->$\rightarrow \infty$<!-- raw HTML omitted -->)</p>
+<p>balance between TD (step = 1) and MC (step <span>$\rightarrow \infty$</span>)</p>
 <h2 id="noisy-net">Noisy Net</h2>
-<p>Instead of <!-- raw HTML omitted -->$\epsilon$<!-- raw HTML omitted -->-greedy when choosing action, add noise to <!-- raw HTML omitted -->$Q_\phi$<!-- raw HTML omitted --> (will explore in consistent way)</p>
-<!-- raw HTML omitted -->
+<p>Instead of <span>$\epsilon$</span>-greedy when choosing action, add noise to <span>$Q_\phi$</span> (will explore in consistent way)</p>
+<!--## Distributional Q-function-->
 <h2 id="reference">Reference</h2>
 <ul>
 <li>[CS294 - Lec8] (<a href="http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-8.pdf">http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-8.pdf</a>)</li>

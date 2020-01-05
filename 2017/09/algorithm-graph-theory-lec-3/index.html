@@ -281,13 +281,18 @@
 
 </div>
 
-  <p>呈前一講的討論，我們有了個求單源最短路徑的演算法<a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> (複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(VE)$<!-- raw HTML omitted --> )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法</p>
+  <p>呈前一講的討論，我們有了個求單源最短路徑的演算法<a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> (複雜度為 <span>$\mathcal{O}(VE)$</span> )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法</p>
 <h2 id="heading">三角不等式</h2>
-<!-- raw HTML omitted -->
-<p>其中 <!-- raw HTML omitted -->$\delta(u,v)$<!-- raw HTML omitted --> 表示 <!-- raw HTML omitted -->$u, v$<!-- raw HTML omitted --> 間的<strong>最短距離</strong>。\<br>
+<div>
+\[
+\forall u,v,x \in V, \, \text{we have} \, \delta(u,v) \leq \delta(u,x) +
+\delta(x,v)
+\]
+</div>
+<p>其中 <span>$\delta(u,v)$</span> 表示 <span>$u, v$</span> 間的<strong>最短距離</strong>。\<br>
 此為 Dijkstra 所根據的直觀原理，也是其為何不能處理負邊問題的原因(只有正邊時顯然成立)。</p>
 <p>之前討論在 <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> 中的一些觀察討論到 <code>relax</code> 邊的順序，決定了演算法運行的時間。而根據上方的論述，我們可以找到一個最優的訪問邊之順序。簡單來說，我們將節點分為兩個集合，一個集合表示最短路已被設好的節點，另一個表示還未確定者，而每一次都從<strong>還未確定者中，選出當前 d 值最小的節點</strong>來做 <code>relax</code>。</p>
-<p>根據三角不等式，這樣的 Greedy 策略是沒有問題的，因我們選出的節點 <!-- raw HTML omitted -->$v$<!-- raw HTML omitted --> ，所對應的 d[<!-- raw HTML omitted -->$v$<!-- raw HTML omitted -->] 已經不可能再更動了 (無法找到經由其他點的路徑使得距離成本 <!-- raw HTML omitted -->$&lt;$<!-- raw HTML omitted --> d[<!-- raw HTML omitted -->$v$<!-- raw HTML omitted -->])。</p>
+<p>根據三角不等式，這樣的 Greedy 策略是沒有問題的，因我們選出的節點 <span>$v$</span> ，所對應的 d[<span>$v$</span>] 已經不可能再更動了 (無法找到經由其他點的路徑使得距離成本 <span>$&lt;$</span> d[<span>$v$</span>])。</p>
 <h2 id="psuedo-code">Psuedo Code</h2>
 <p>其實跟 Bellman-Ford 非常相像。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Init</span>
@@ -303,17 +308,17 @@ remove u
 </code></pre></div><h3 id="complexity-analysis">Complexity Analysis</h3>
 <p>通常以 heap 來實做，但效率如何則取決於我們使用何種 heap。需要</p>
 <ol>
-<li><!-- raw HTML omitted -->$\mathcal{\Theta}(V)$<!-- raw HTML omitted --> <code>INS</code></li>
-<li><!-- raw HTML omitted -->$\mathcal{\Theta}(V)$<!-- raw HTML omitted --> <code>Extract-Min</code></li>
-<li><!-- raw HTML omitted -->$\mathcal{\Theta}(E)$<!-- raw HTML omitted --> <code>Decrease(v,*)</code></li>
+<li><span>$\mathcal{\Theta}(V)$</span> <code>INS</code></li>
+<li><span>$\mathcal{\Theta}(V)$</span> <code>Extract-Min</code></li>
+<li><span>$\mathcal{\Theta}(E)$</span> <code>Decrease(v,*)</code></li>
 </ol>
-<p>若用 binary heap 的話，複雜度為 <!-- raw HTML omitted -->$\mathcal{\Theta}(E \log E + V\ log V) = \mathcal{\Theta}((E+V) \log V)$<!-- raw HTML omitted --> \<br>
-若用 Fibonacci heap 的話，均攤複雜度為 <!-- raw HTML omitted -->$\mathcal{\Theta}(E + V \log V)$<!-- raw HTML omitted --></p>
+<p>若用 binary heap 的話，複雜度為 <span>$\mathcal{\Theta}(E \log E + V\ log V) = \mathcal{\Theta}((E+V) \log V)$</span> \<br>
+若用 Fibonacci heap 的話，均攤複雜度為 <span>$\mathcal{\Theta}(E + V \log V)$</span></p>
 <h2 id="implementation">Implementation</h2>
 <p>在 C++ 中以 <code>priority_queue</code> 來實做 heap。
 在 Relax 時，會希望用 <code>Decrease</code>，而非 insert 一個新的 vertex 進去之因，是為了不希望 <code>priority_queue</code> 中有太多元素(別忘了 <code>ExtractMin</code>，也就是 <code>pop()</code> 需要成本)，但實做上因為不能透由 iterator 去 traverse 看 queue 中 是否已經存在該 vertex ，還是得把可能已經在 <code>queue</code> 中的 vertex 給放進去&hellip;</p>
-<p>但如果不管該 vertex 是否已 <code>pop</code> 出來，還繼續去檢查它的每個邊，看是否可以 <code>Relax</code> (透由上方的討論，我們知道這不可能)的話，就是浪費了。如此 <code>queue</code> 中至多 <!-- raw HTML omitted -->$\mathcal{\Theta}(E)$<!-- raw HTML omitted --> 個元素，每 <code>pop</code> 出一個 vertex ，至多要做 <!-- raw HTML omitted -->$\mathcal{\Theta}(V)$<!-- raw HTML omitted --> 次檢查是否可以 <code>Relax</code> 的判斷 (最差就完全圖的情況)，所以複雜度 total 為 <!-- raw HTML omitted -->$\mathcal{\Theta}(E \log E + EV )$<!-- raw HTML omitted -->。但如果我們注意到這件事，不再去對已經 <code>pop</code> 過的邊做 <code>Relax</code> 與否的檢查，那麼複雜度則會降為 <!-- raw HTML omitted -->$\mathcal{\Theta}(E \log E + V^2)$<!-- raw HTML omitted --> ，而這也是下方 code 中， <code>b_set</code> 的功能。 ( <!-- raw HTML omitted -->$\mathcal{\rightarrow}$<!-- raw HTML omitted --> <a href="https://kth.kattis.com/problems/shortestpath1">練習</a>，如果你 running time 超過 0.3 秒的話，大概就是寫成 <!-- raw HTML omitted -->$\mathcal{O}(EV)$<!-- raw HTML omitted --> 了😅)。</p>
-<!-- raw HTML omitted -->
+<p>但如果不管該 vertex 是否已 <code>pop</code> 出來，還繼續去檢查它的每個邊，看是否可以 <code>Relax</code> (透由上方的討論，我們知道這不可能)的話，就是浪費了。如此 <code>queue</code> 中至多 <span>$\mathcal{\Theta}(E)$</span> 個元素，每 <code>pop</code> 出一個 vertex ，至多要做 <span>$\mathcal{\Theta}(V)$</span> 次檢查是否可以 <code>Relax</code> 的判斷 (最差就完全圖的情況)，所以複雜度 total 為 <span>$\mathcal{\Theta}(E \log E + EV )$</span>。但如果我們注意到這件事，不再去對已經 <code>pop</code> 過的邊做 <code>Relax</code> 與否的檢查，那麼複雜度則會降為 <span>$\mathcal{\Theta}(E \log E + V^2)$</span> ，而這也是下方 code 中， <code>b_set</code> 的功能。 ( <span>$\mathcal{\rightarrow}$</span> <a href="https://kth.kattis.com/problems/shortestpath1">練習</a>，如果你 running time 超過 0.3 秒的話，大概就是寫成 <span>$\mathcal{O}(EV)$</span> 了😅)。</p>
+<script src="https://gist.github.com/sunprinceS/dea6b01e77cb3fe1f40c6779569d592e.js"></script>
 <h2 id="reference">Reference</h2>
 <ul>
 <li>[Visualization] (<a href="https://www.cs.usfca.edu/~galles/visualization/Dijkstra.html">https://www.cs.usfca.edu/~galles/visualization/Dijkstra.html</a>)</li>

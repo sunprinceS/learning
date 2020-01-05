@@ -300,72 +300,88 @@
 <h3 id="single-parameter-environments">Single-Parameter Environments</h3>
 <p>首先我們將 single-item auction 推廣到更一般的 auction。</p>
 <ul>
-<li>n bidders, with valuation <!-- raw HTML omitted -->$v_i$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$v_i$<!-- raw HTML omitted --> 表示 bidder 的 max willingness for <strong>1 unit</strong> stuff)</li>
-<li>feasible allocation <!-- raw HTML omitted -->$X = ( x_1,x_2,\cdots,x_n ) $<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$x_i$<!-- raw HTML omitted --> 表示 i-th bidder 可以拿到幾單位的 stuff ， 在 single-item auction 中，X 為一個只有一個 slot 為 1，其他全 0 的 vector)</li>
+<li>n bidders, with valuation <span>$v_i$</span> (<span>$v_i$</span> 表示 bidder 的 max willingness for <strong>1 unit</strong> stuff)</li>
+<li>feasible allocation <span>$X = ( x_1,x_2,\cdots,x_n ) $</span> (<span>$x_i$</span> 表示 i-th bidder 可以拿到幾單位的 stuff ， 在 single-item auction 中，X 為一個只有一個 slot 為 1，其他全 0 的 vector)</li>
 </ul>
 <h3 id="allocation-and-payment-rules">Allocation and Payment Rules</h3>
 <p><strong>Sealed-bid auction</strong> :</p>
 <ol>
-<li>收集 bids <!-- raw HTML omitted -->$\vec{b} = (b_1, b_2, \cdots, b_n)$<!-- raw HTML omitted --></li>
-<li><strong>[allocation rule]</strong> Choose a feasible allocation <!-- raw HTML omitted -->$\vec{x}(b) \in X \subseteq \mathbb{R}^n$<!-- raw HTML omitted --></li>
-<li><strong>[payment rule]</strong> Choose payments <!-- raw HTML omitted -->$\vec{p}(\vec{b}) \in \mathbb{R}^n$<!-- raw HTML omitted --></li>
+<li>收集 bids <span>$\vec{b} = (b_1, b_2, \cdots, b_n)$</span></li>
+<li><strong>[allocation rule]</strong> Choose a feasible allocation <span>$\vec{x}(b) \in X \subseteq \mathbb{R}^n$</span></li>
+<li><strong>[payment rule]</strong> Choose payments <span>$\vec{p}(\vec{b}) \in \mathbb{R}^n$</span></li>
 </ol>
 <p>Quasilinear utility model</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted --><strong>Definition</strong><!-- raw HTML omitted --></p>
+<div>
+\[
+u_i(\vec{b}) = v_i \cdotp x_i(\vec{b}) - p_i(\vec{b}) ~~~~~\text{subject to} ~p_i(\vec{b}) \in [0 , \stackrel{\color{blue}{s.t \; U \, \geq \, 0}}{b_i \cdotp x_i(\vec{b})}] ~~\forall i
+\]
+</div>
+<!--<span>$p_i$</span> 的 constraint 保證了 non-negative utility-->
+<p><u><strong>Definition</strong></u></p>
 <p><strong>Implementable Allocation Rule</strong></p>
 <blockquote>
-<p>An allocation rule <!-- raw HTML omitted -->$\vec{x}$<!-- raw HTML omitted --> for single-parameter environment is <strong>implementable</strong><!-- raw HTML omitted --> if <!-- raw HTML omitted -->$~\exists$<!-- raw HTML omitted --> payment rule <!-- raw HTML omitted -->$\vec{p}$<!-- raw HTML omitted --> such that the auction is <strong>DSIC</strong></p>
+<p>An allocation rule <span>$\vec{x}$</span> for single-parameter environment is <strong>implementable</strong><br/> if <span>$~\exists$</span> payment rule <span>$\vec{p}$</span> such that the auction is <strong>DSIC</strong></p>
 </blockquote>
 <p><strong>Monotone Allocation Rule</strong></p>
 <blockquote>
-<p>An allocation rule <!-- raw HTML omitted -->$\vec{x}$<!-- raw HTML omitted --> for single-parameter environment is <strong>monotone</strong> <!-- raw HTML omitted -->
-if for every bidder <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> and other bids <!-- raw HTML omitted -->$b\scriptscriptstyle{-i}$<!-- raw HTML omitted -->,
-the allocation rule <!-- raw HTML omitted -->$x_i(z,b\scriptstyle{-i}$<!-- raw HTML omitted --><!-- raw HTML omitted -->$)$<!-- raw HTML omitted --> to <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> is <strong>non-decreasing</strong> in its bid <!-- raw HTML omitted -->$z$<!-- raw HTML omitted --></p>
+<p>An allocation rule <span>$\vec{x}$</span> for single-parameter environment is <strong>monotone</strong> <br/>
+if for every bidder <span>$i$</span> and other bids <span>$b\scriptscriptstyle{-i}$</span>,
+the allocation rule <span>$x_i(z,b\scriptstyle{-i}$</span><span>$)$</span> to <span>$i$</span> is <strong>non-decreasing</strong> in its bid <span>$z$</span></p>
 </blockquote>
 <p>直觀意義上就是說喊價喊的越高，可以得到較多的 stuff，稍後的定理會證明以上兩個關於 allocation 的性質是等價的。</p>
 <h3 id="myersons-lemma">Myerson's Lemma</h3>
 <p>Fix a single-parameter environment</p>
 <ol>
-<li>An allocation rule <!-- raw HTML omitted -->$\vec{x}$<!-- raw HTML omitted --> is implementable <strong>iff</strong> it is monotone</li>
-<li>If <!-- raw HTML omitted -->$\vec{x}$<!-- raw HTML omitted --> is monotone, then <!-- raw HTML omitted -->$\exists$<!-- raw HTML omitted --> a <strong>unique</strong> payment tule such that the sealed-bid mechanism <!-- raw HTML omitted -->$(\vec{x},\vec{p})$<!-- raw HTML omitted --> is <strong>DSIC</strong> (WLOG, assume <!-- raw HTML omitted -->$p_i(b_i) = 0$<!-- raw HTML omitted -->)</li>
+<li>An allocation rule <span>$\vec{x}$</span> is implementable <strong>iff</strong> it is monotone</li>
+<li>If <span>$\vec{x}$</span> is monotone, then <span>$\exists$</span> a <strong>unique</strong> payment tule such that the sealed-bid mechanism <span>$(\vec{x},\vec{p})$</span> is <strong>DSIC</strong> (WLOG, assume <span>$p_i(b_i) = 0$</span>)</li>
 <li>The payment rule is given by explicit formula</li>
 </ol>
 <h3 id="proof">Proof</h3>
 <p><strong>利用 DSIC 的性質 (誠實為 dominant strategy)，去列出不等式</strong></p>
-<p>Fix bidder <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> and other bids <!-- raw HTML omitted -->$b\scriptstyle{-i}$<!-- raw HTML omitted -->，<!-- raw HTML omitted -->$0 \leq y &lt; z$<!-- raw HTML omitted --></p>
+<p>Fix bidder <span>$i$</span> and other bids <span>$b\scriptstyle{-i}$</span>，<span>$0 \leq y &lt; z$</span></p>
 <blockquote>
-<p>case 1: &lsquo;underbidding&rsquo; (<!-- raw HTML omitted -->$v_i$<!-- raw HTML omitted --> 為 <!-- raw HTML omitted -->$z$<!-- raw HTML omitted --> , 實際喊價 <!-- raw HTML omitted -->$y$<!-- raw HTML omitted -->)</p>
+<p>case 1: &lsquo;underbidding&rsquo; (<span>$v_i$</span> 為 <span>$z$</span> , 實際喊價 <span>$y$</span>)</p>
 </blockquote>
-<!-- raw HTML omitted -->
+<div>
+\[
+  \stackrel{\color{blue}{U~ \text{of bidding}~ z}}{z \cdotp x(z) - p(z)} \quad \geq  \quad \stackrel{ \color{blue}{U~ \text{of bidding}~ y}}{z \cdotp x(y) - p(y)}
+\]
+</div>
 <blockquote>
-<p>case 2: &lsquo;overbidding&rsquo; (<!-- raw HTML omitted -->$v_i$<!-- raw HTML omitted --> 為 <!-- raw HTML omitted -->$y$<!-- raw HTML omitted --> , 實際喊價 <!-- raw HTML omitted -->$z$<!-- raw HTML omitted -->)</p>
+<p>case 2: &lsquo;overbidding&rsquo; (<span>$v_i$</span> 為 <span>$y$</span> , 實際喊價 <span>$z$</span>)</p>
 </blockquote>
-<!-- raw HTML omitted -->
+<div>
+\[
+  \stackrel{\color{blue}{U~ \text{of bidding}~ y}}{y \cdotp x(y) - p(y)} \quad \geq  \quad \stackrel{ \color{blue}{U~ \text{of bidding}~ z}}{y \cdotp x(z) - p(z)}
+\]
+</div>
 <blockquote>
 <p>在兩個 case 下都需要滿足，移項整理可得</p>
 </blockquote>
-<!-- raw HTML omitted -->
+<div>
+\[
+\stackrel{\color{blue}{}}{z \cdotp [x(y) - x(z)] \enspace \leq \enspace \stackrel{\color{blue}{\Delta p}}{p(y) - p(z)} \enspace \leq y \enspace \cdotp [x(y) - x(z)]}
+\]
+</div>
 <blockquote>
-<p>利用夾擠定理，使得在某實數軸上每一點，<a href="#payment"><!-- raw HTML omitted -->$p(\cdotp)$<!-- raw HTML omitted --></a> 都只有唯一的值</p>
+<p>利用夾擠定理，使得在某實數軸上每一點，<a href="#payment"><span>$p(\cdotp)$</span></a> 都只有唯一的值</p>
 </blockquote>
 <blockquote>
-<p>&lsquo;<!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted -->&rsquo;  : <!-- raw HTML omitted -->$\vec{x}$<!-- raw HTML omitted --> is monotone <!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> x is implementable: <!-- raw HTML omitted --></p>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>Fix <!-- raw HTML omitted -->$z$<!-- raw HTML omitted --> and take the limit <!-- raw HTML omitted -->$y \rightarrow z$<!-- raw HTML omitted -->, 假設 <!-- raw HTML omitted -->$\vec{x}(\cdotp)$<!-- raw HTML omitted --> is piecewise constant function</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>If there is no jump in <!-- raw HTML omitted -->$\vec{x}$<!-- raw HTML omitted --> at <!-- raw HTML omitted -->$z$<!-- raw HTML omitted -->, <!-- raw HTML omitted -->$\Delta p = 0$<!-- raw HTML omitted --></p>
-</blockquote>
+<p>&lsquo;<span>$\Rightarrow$</span>&rsquo;  : <span>$\vec{x}$</span> is monotone <span>$\Rightarrow$</span> x is implementable: <br/></p>
 </blockquote>
 <blockquote>
 <blockquote>
-<p>If there is a jump of magnitude <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> at <!-- raw HTML omitted -->$z$<!-- raw HTML omitted -->,   (<!-- raw HTML omitted -->$\Delta p$<!-- raw HTML omitted --> at <!-- raw HTML omitted -->$z$<!-- raw HTML omitted -->) = (<!-- raw HTML omitted -->$z \cdotp$<!-- raw HTML omitted --> jump in <!-- raw HTML omitted -->$x$<!-- raw HTML omitted --> at <!-- raw HTML omitted -->$z$<!-- raw HTML omitted -->)</p>
+<p>Fix <span>$z$</span> and take the limit <span>$y \rightarrow z$</span>, 假設 <span>$\vec{x}(\cdotp)$</span> is piecewise constant function</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>If there is no jump in <span>$\vec{x}$</span> at <span>$z$</span>, <span>$\Delta p = 0$</span></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>If there is a jump of magnitude <span>$h$</span> at <span>$z$</span>,   (<span>$\Delta p$</span> at <span>$z$</span>) = (<span>$z \cdotp$</span> jump in <span>$x$</span> at <span>$z$</span>)</p>
 </blockquote>
 </blockquote>
 <blockquote>
@@ -373,33 +389,41 @@ the allocation rule <!-- raw HTML omitted -->$x_i(z,b\scriptstyle{-i}$<!-- raw H
 <p>monotone 保證了 jump &gt; 0，所以可以寫下 payment formula 為</p>
 </blockquote>
 </blockquote>
-<!-- raw HTML omitted -->
+<div>
+\[
+  p_i(b_i,b_{-i}) = \sum_{j=1}^{l} z_j \cdotp \text{jump in} \; x_i( \cdotp ,b_{-i}) \; \text{at} \; z_j
+\]
+</div>
 <blockquote>
 <blockquote>
-<p>其中 <!-- raw HTML omitted -->$z_1, z_2, \cdots, z_l$ 為 $x_i(\cdotp,$$b\scriptstyle{-i}$$)$<!-- raw HTML omitted --> 在 <!-- raw HTML omitted -->$[0, b\scriptstyle{-i}$$]$<!-- raw HTML omitted --> 的跳躍點</p>
+<p>其中 <span>$z_1, z_2, \cdots, z_l$ 為 $x_i(\cdotp,$$b\scriptstyle{-i}$$)$</span> 在 <span>$[0, b\scriptstyle{-i}$$]$</span> 的跳躍點</p>
 </blockquote>
 </blockquote>
 <blockquote>
 <blockquote>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted -->[Note]<!-- raw HTML omitted --><!-- raw HTML omitted --> 可以將 payment formula 推廣到一般的 non-decreasing <!-- raw HTML omitted -->$\vec{x}(\cdotp)$<!-- raw HTML omitted --></p>
+<p><a name="payment"><font color="#777">[Note]</font></a> 可以將 payment formula 推廣到一般的 non-decreasing <span>$\vec{x}(\cdotp)$</span></p>
 </blockquote>
 </blockquote>
-<!-- raw HTML omitted -->
+<div>
+\[
+  p_i(b_i,b_{-i}) = \int_0^{b_i} z \cdotp \frac{d}{dz} x_i (z, b_{-i})dz
+\]
+</div>
 <blockquote>
 <blockquote>
 <p>(2), (3)被證明</p>
 </blockquote>
 </blockquote>
 <blockquote>
-<p>&lsquo;<!-- raw HTML omitted -->$\Leftarrow$<!-- raw HTML omitted -->&rsquo;: if <!-- raw HTML omitted -->$\vec{x}$<!-- raw HTML omitted --> is NOT monotone <!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> x is NOT implementable (there is no way DSIC)</p>
+<p>&lsquo;<span>$\Leftarrow$</span>&rsquo;: if <span>$\vec{x}$</span> is NOT monotone <span>$\Rightarrow$</span> x is NOT implementable (there is no way DSIC)</p>
 </blockquote>
 <blockquote>
 <blockquote>
-<p>Just pick the points <!-- raw HTML omitted -->$a &lt; b$<!-- raw HTML omitted -->, but <!-- raw HTML omitted -->$x(a) &gt; x(b)$<!-- raw HTML omitted --> as <!-- raw HTML omitted -->$y$<!-- raw HTML omitted --> and <!-- raw HTML omitted -->$z$<!-- raw HTML omitted -->,<!-- raw HTML omitted --> then the inequality of <!-- raw HTML omitted -->$\Delta p$<!-- raw HTML omitted --> is broken</p>
+<p>Just pick the points <span>$a &lt; b$</span>, but <span>$x(a) &gt; x(b)$</span> as <span>$y$</span> and <span>$z$</span>,<br/> then the inequality of <span>$\Delta p$</span> is broken</p>
 </blockquote>
 </blockquote>
-<p>下圖以圖示證明 mechanism <!-- raw HTML omitted -->$(\vec{x},\vec{p})$<!-- raw HTML omitted --> is <strong>DSIC</strong> (the figure is from the <a href="http://theory.stanford.edu/~tim/f13/l/l3.pdf">lecture</a>)
-<!-- raw HTML omitted --></p>
+<p>下圖以圖示證明 mechanism <span>$(\vec{x},\vec{p})$</span> is <strong>DSIC</strong> (the figure is from the <a href="http://theory.stanford.edu/~tim/f13/l/l3.pdf">lecture</a>)
+<img src="https://sunprinces.github.io/learning/img/post/Myerson.png" width="80%" style="border-radius: 0%;"></p>
   
   
 <ul class="share-buttons">

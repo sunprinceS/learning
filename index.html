@@ -292,7 +292,7 @@
   </header>
 
   <p>
-  <p>在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &ldquo;ground-truth&rdquo; agent) 與 environment 互動的<!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> pairs 去 train 我們的 agent/actor。那麼該如何利用這些 <!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> pair 呢？</p>
+  <p>在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &ldquo;ground-truth&rdquo; agent) 與 environment 互動的<span>$(s,a)$</span> pairs 去 train 我們的 agent/actor。那麼該如何利用這些 <span>$(s,a)$</span> pair 呢？</p>
   </p>
 
   
@@ -408,7 +408,7 @@
   </header>
 
   <p>
-  <p>在這講中，要討論的是 non-tabular case 的問題 (就是上一講中無法保證收斂的那些QQ)，我們選定 Neural Network 作為拿來 approximate <!-- raw HTML omitted -->$Q(s,a)$<!-- raw HTML omitted --> 的 function family，且不是用一般 regression 的方法找 <!-- raw HTML omitted -->$\phi$<!-- raw HTML omitted --> (畢竟它的 target <!-- raw HTML omitted -->$y$<!-- raw HTML omitted --> 也只是中間產物，並非 optimal Q)，而是 N-step 的 gradient descent。</p>
+  <p>在這講中，要討論的是 non-tabular case 的問題 (就是上一講中無法保證收斂的那些QQ)，我們選定 Neural Network 作為拿來 approximate <span>$Q(s,a)$</span> 的 function family，且不是用一般 regression 的方法找 <span>$\phi$</span> (畢竟它的 target <span>$y$</span> 也只是中間產物，並非 optimal Q)，而是 N-step 的 gradient descent。</p>
   </p>
 
   
@@ -466,7 +466,7 @@
 
   <p>
   <p>前兩講 focus 在 policy-based 的 RL 演算法，直接 learn 一組參數去 parametrize
-policy。而後續兩講則會 focus 在 value-based 的方法，想法是算出 <!-- raw HTML omitted -->$V^\pi(s), Q^\pi(s,a)$<!-- raw HTML omitted --> (同樣可以 approximately parametrized by <!-- raw HTML omitted -->$\theta$<!-- raw HTML omitted -->)，而所對應的 policy 則是去選擇 Given <!-- raw HTML omitted -->$s$<!-- raw HTML omitted -->，好度最高的 action <!-- raw HTML omitted -->$a$<!-- raw HTML omitted --> (w/ appropriate exploration)。</p>
+policy。而後續兩講則會 focus 在 value-based 的方法，想法是算出 <span>$V^\pi(s), Q^\pi(s,a)$</span> (同樣可以 approximately parametrized by <span>$\theta$</span>)，而所對應的 policy 則是去選擇 Given <span>$s$</span>，好度最高的 action <span>$a$</span> (w/ appropriate exploration)。</p>
   </p>
 
   
@@ -808,11 +808,11 @@ Berkeley 開的 CS294。</p>
   <p>
   <p>ASR 做的其實就是以下這件事，</p>
 <p><code>$$ \Pr(\text{words|sounds}) = \frac{\Pr(\text{sounds|words})}{\Pr(\text{sounds})} $$</code></p>
-<p>當中我們視 <!-- raw HTML omitted -->$\Pr(\text{sounds})$<!-- raw HTML omitted --> 為 uniform distribution ，不管它。
+<p>當中我們視 <span>$\Pr(\text{sounds})$</span> 為 uniform distribution ，不管它。
 \<br>
-<!-- raw HTML omitted -->$\Pr(\text{words})$<!-- raw HTML omitted --> 由 <strong>Language Model</strong> 負責，評估產生的
+<span>$\Pr(\text{words})$</span> 由 <strong>Language Model</strong> 負責，評估產生的
 transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)\<br>
-<!-- raw HTML omitted -->$\Pr(\text{sounds|words})$<!-- raw HTML omitted --> 則是 <strong>Acoustic Model</strong>， 也就是前一講中用 Viterbi 所算的 Likelihood 。</p>
+<span>$\Pr(\text{sounds|words})$</span> 則是 <strong>Acoustic Model</strong>， 也就是前一講中用 Viterbi 所算的 Likelihood 。</p>
   </p>
 
   

@@ -285,19 +285,19 @@
 
   <p>Subset Sum Problem 與 Knapsack Problem 相同，也是一個 NPC 問題(可以想成 Knapsack Problem weight 均為 1 的特例)。而在 Knapsack Problem 中，我們發展出<strong>等差</strong> 的rounding 技巧，犧牲精確度去換取更低的時間複雜度，而這一講中，將利用<strong>等比</strong>的方式去做 rounding 。</p>
 <h2 id="algorithm">Algorithm</h2>
-<p>Computer <!-- raw HTML omitted -->$S_i$<!-- raw HTML omitted --> : possible subset sum of {<!-- raw HTML omitted -->$v_1, v_2, \cdots ,v_i$<!-- raw HTML omitted -->}</p>
-<p><!-- raw HTML omitted -->$S_0 = $<!-- raw HTML omitted -->{<!-- raw HTML omitted -->$0$<!-- raw HTML omitted -->}</p>
-<p><!-- raw HTML omitted -->$S_1 = $<!-- raw HTML omitted -->{<!-- raw HTML omitted -->$\color{red}{S_0}, \color{blue}{S_0+v_1}$<!-- raw HTML omitted -->} = {<!-- raw HTML omitted -->$\color{red}{0}, \color{blue}{v_1}$<!-- raw HTML omitted -->}</p>
-<p><!-- raw HTML omitted -->$S_2 = $<!-- raw HTML omitted -->{<!-- raw HTML omitted -->$\color{red}{S_1}, \color{blue}{S_1+v_2}$<!-- raw HTML omitted -->} = {<!-- raw HTML omitted -->$\color{red}{0}, \color{red}{v_1}, \color{blue}{v_2}, \color{blue}{v_1+v_2}$<!-- raw HTML omitted -->}</p>
+<p>Computer <span>$S_i$</span> : possible subset sum of {<span>$v_1, v_2, \cdots ,v_i$</span>}</p>
+<p><span>$S_0 = $</span>{<span>$0$</span>}</p>
+<p><span>$S_1 = $</span>{<span>$\color{red}{S_0}, \color{blue}{S_0+v_1}$</span>} = {<span>$\color{red}{0}, \color{blue}{v_1}$</span>}</p>
+<p><span>$S_2 = $</span>{<span>$\color{red}{S_1}, \color{blue}{S_1+v_2}$</span>} = {<span>$\color{red}{0}, \color{red}{v_1}, \color{blue}{v_2}, \color{blue}{v_1+v_2}$</span>}</p>
 <p>.\<br>
 .\<br>
 .\<br>
-<!-- raw HTML omitted -->$S_{n} = $<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\color{red}{S\scriptstyle{n-1}}$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\bigcup , (\color{blue}{S\scriptstyle{n-1}}$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\color{blue}{+ , v\scriptstyle{n-1}}$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$)$<!-- raw HTML omitted --></p>
-<p>由 <!-- raw HTML omitted -->$S_{i}$<!-- raw HTML omitted --> 計算 <!-- raw HTML omitted -->$S\scriptstyle{i+1}$<!-- raw HTML omitted --> 以 <!-- raw HTML omitted -->$\mathsf{MergeSort}$<!-- raw HTML omitted --> 來實做，並移除 <!-- raw HTML omitted -->$&gt;W$<!-- raw HTML omitted -->的元素和 (複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(|S_i|)$<!-- raw HTML omitted -->)，又 <!-- raw HTML omitted -->$|S_i| &lt; W , (\forall i=1 \sim n)$<!-- raw HTML omitted -->， 所以 Running time 為 <!-- raw HTML omitted -->$\mathcal{O}(nW)$<!-- raw HTML omitted -->。</p>
-<p>可以發現複雜度與 <!-- raw HTML omitted -->$W$<!-- raw HTML omitted --> 成正比，故充其量這個 Algorithm 也只是 psuedo-polynomial 而已，與前面的想法類似，造成複雜度的主因在每一個 Merge 的過程中，我們留下了太多元素(而 Merge 的複雜度又與元素個數呈線性)，如果<strong>只取幾個代表性的元素</strong>(e.g <!-- raw HTML omitted -->$|S_i| = \mathcal{O}(\log W)$<!-- raw HTML omitted -->)，便可將複雜度再往下壓。</p>
-<!-- raw HTML omitted -->
-<p>Pick <!-- raw HTML omitted -->$x_1$<!-- raw HTML omitted -->, remove elements <!-- raw HTML omitted -->$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$<!-- raw HTML omitted --> in the list (say, <!-- raw HTML omitted -->$x_2 , \text{and} , x_3$<!-- raw HTML omitted -->). \<br>
-Then, pick <!-- raw HTML omitted -->$x_4$<!-- raw HTML omitted --> and remove elements <!-- raw HTML omitted -->$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$<!-- raw HTML omitted --> in the list. Repeat this procedure until the last element.</p>
+<span>$S_{n} = $</span> <span>$\color{red}{S\scriptstyle{n-1}}$</span> <span>$\bigcup , (\color{blue}{S\scriptstyle{n-1}}$</span> <span>$\color{blue}{+ , v\scriptstyle{n-1}}$</span> <span>$)$</span></p>
+<p>由 <span>$S_{i}$</span> 計算 <span>$S\scriptstyle{i+1}$</span> 以 <span>$\mathsf{MergeSort}$</span> 來實做，並移除 <span>$&gt;W$</span>的元素和 (複雜度為 <span>$\mathcal{O}(|S_i|)$</span>)，又 <span>$|S_i| &lt; W , (\forall i=1 \sim n)$</span>， 所以 Running time 為 <span>$\mathcal{O}(nW)$</span>。</p>
+<p>可以發現複雜度與 <span>$W$</span> 成正比，故充其量這個 Algorithm 也只是 psuedo-polynomial 而已，與前面的想法類似，造成複雜度的主因在每一個 Merge 的過程中，我們留下了太多元素(而 Merge 的複雜度又與元素個數呈線性)，如果<strong>只取幾個代表性的元素</strong>(e.g <span>$|S_i| = \mathcal{O}(\log W)$</span>)，便可將複雜度再往下壓。</p>
+<img src="https://sunprinces.github.io/learning/img/post/trim.png" width="80%" style="border-radius: 0%;">
+<p>Pick <span>$x_1$</span>, remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list (say, <span>$x_2 , \text{and} , x_3$</span>). \<br>
+Then, pick <span>$x_4$</span> and remove elements <span>$\leq \frac{x_1}{(1-\frac{\epsilon}{n})}$</span> in the list. Repeat this procedure until the last element.</p>
 <h3 id="psuedocode-for-trimming">PsuedoCode for Trimming</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">trim</span>(s_list,delta):
   ret <span style="color:#f92672">=</span> [] <span style="color:#75715e"># trimmed list</span>
@@ -308,12 +308,16 @@ Then, pick <!-- raw HTML omitted -->$x_4$<!-- raw HTML omitted --> and remove el
       ret<span style="color:#f92672">.</span>append(elm)
       last <span style="color:#f92672">=</span> elm
   <span style="color:#66d9ef">return</span> ret
-</code></pre></div><p>Now, <!-- raw HTML omitted -->$|S_i| \leq \log_M W = \mathcal{O}(\frac{n\ln W}{\epsilon})
-\Rightarrow \text{Total running time: } \mathcal{O}(\frac{n^2 \ln W}{\epsilon})$<!-- raw HTML omitted --></p>
+</code></pre></div><p>Now, <span>$|S_i| \leq \log_M W = \mathcal{O}(\frac{n\ln W}{\epsilon})
+\Rightarrow \text{Total running time: } \mathcal{O}(\frac{n^2 \ln W}{\epsilon})$</span></p>
 <h3 id="correctness-check">Correctness Check</h3>
-<!-- raw HTML omitted -->
-<p>可以將 Trimming 視為改小某一 range 中的元素們(將其改至該 range 內最小的元素)，OPT 在 trimming &amp; merge 的過程中不斷地被改小，最多最多會被等比縮小 <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 次。</p>
-<!-- raw HTML omitted -->
+<img src="https://sunprinces.github.io/learning/img/post/trim_approx.png" width="80%" style="border-radius: 0%;">
+<p>可以將 Trimming 視為改小某一 range 中的元素們(將其改至該 range 內最小的元素)，OPT 在 trimming &amp; merge 的過程中不斷地被改小，最多最多會被等比縮小 <span>$n$</span> 次。</p>
+<div>
+\[
+  \text{Output} \, \geq \, \text{OPT} \cdotp (1-\frac{\epsilon}{n})^n \stackrel{\color{blue}{n=1}}{\geq} \, \text{OPT} \cdotp (1-\epsilon)
+\]
+</div>
   
   
 <ul class="share-buttons">

@@ -284,27 +284,43 @@
 </div>
 
   <p>上一講利用 <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/">Myerson's Lemma</a> 闡述了給定在「好」的 allocation rule 下，該如何定價，使得 auction 具有 DSIC property; 而這講則要說明該如何 derive 出「好」的 allocation rule。</p>
-<!-- raw HTML omitted -->
+<!--<u>**Corollary**</u>: Here is an awesome auction for sponsored search-->
 <h3 id="knapsack-auction">Knapsack Auction</h3>
-<p>上一講定義了 single-parameter environment ，其中的 allocation set <!-- raw HTML omitted -->$X$<!-- raw HTML omitted --> 需滿足元素和 <!-- raw HTML omitted -->$ \leq k$<!-- raw HTML omitted --> (in single-item, <!-- raw HTML omitted -->$k=1$<!-- raw HTML omitted -->)。這裡再將此推廣成更一般的形式。</p>
+<p>上一講定義了 single-parameter environment ，其中的 allocation set <span>$X$</span> 需滿足元素和 <span>$ \leq k$</span> (in single-item, <span>$k=1$</span>)。這裡再將此推廣成更一般的形式。</p>
 <ul>
-<li>bidder <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> has <strong>public</strong> size <!-- raw HTML omitted -->$w_i$<!-- raw HTML omitted --> and <strong>private</strong> valuation <!-- raw HTML omitted -->$v_i$<!-- raw HTML omitted --></li>
-<li>The allocation set <!-- raw HTML omitted -->$X$<!-- raw HTML omitted --> contains 0-1 vectors subject to <!-- raw HTML omitted -->$\sum_{i=1}^n w_i , x_i \leq W$<!-- raw HTML omitted --></li>
+<li>bidder <span>$i$</span> has <strong>public</strong> size <span>$w_i$</span> and <strong>private</strong> valuation <span>$v_i$</span></li>
+<li>The allocation set <span>$X$</span> contains 0-1 vectors subject to <span>$\sum_{i=1}^n w_i , x_i \leq W$</span></li>
 </ul>
 <p>我們想要找的 allocation 需能最大化 social surplus</p>
-<!-- raw HTML omitted -->
+<div>
+\[
+  \vec{x}(\vec{b}) = \arg \max_{\vec{x}} \sum_{i=1}^{n} b_i \, x_i
+\]
+</div>
 <p>若想說明其具備 DSIC property，我們可以先<strong>證明該 allocation rule 為 monotone</strong> ，再利用 Myerson's Lemma 得出其 payment rule</p>
 <p><strong>[Theorem]</strong></p>
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted -->$\underline{~Proof.}$<!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<div>
+\[
+ \text{If} \: \vec{x}(\cdotp,\vec{b}_{-i}) \: \text{is NOT monotome in } [0,b_{max}] \Rightarrow \exists \: \vec{x^{\prime}} \quad \text{s.t} \: \sum_{i=1}^{n} \: b_i \, x^{\prime}_i \: > \: \sum_{i=1}^{n} \: b_i \, x_i
+\]
+</div>
+<p><span>$\underline{~Proof.}$</span></p>
+<div>
+\[
+\begin{aligned}
+& \text{For bidder} \, i, \text{we construct an example that} \, \beta_1 < \beta_2 = b_i \, \text{, but} \, \vec{x}(\beta_1) > \vec{x}(\beta_2) \\
+& \text{we pick} \, \vec{x^{\prime}}(\beta_2) = \vec{x}(\beta_1) \, \text{and} \, \vec{x^{\prime}}(\beta_1) = \vec{x}(\beta_2) \\
+& \text{It is easy to check that} \, \vec{x^{\prime}} \cdotp \vec{b} > \vec{x} \cdotp \vec{b} \quad \square
+\end{aligned}
+\]
+</div>
 <p>但目前為止看起來非常完美，但真是如此嗎？別忘了我們希望整個 mechanism 能在 <strong>POLY</strong> time 內結束，然而，尋找 max allocation 的問題(等價於找到 Knapsack problem 的最佳解)卻是一個 NPC &hellip;QQ，也就是說，對一般的 k-item auction 而言，不存在多項式時間的 mechanism。所以類似於在 approximation algorithm 所學的，我們的 objective 如以下。</p>
 <blockquote>
-<p><!-- raw HTML omitted -->Relax optimal surplus constraint as little as possible, subject to DSIC and POLY-time constraint<!-- raw HTML omitted --></p>
+<p><font color="blue">Relax optimal surplus constraint as little as possible, subject to DSIC and POLY-time constraint</font></p>
 </blockquote>
 <p>利用 Myerson's Lemma，以下敘述也等價</p>
 <blockquote>
-<p><!-- raw HTML omitted --> Design POLY-time alg. and monotone allocation rule as close as possible to maximize the social surplus<!-- raw HTML omitted --></p>
+<p><font  color="blue"> Design POLY-time alg. and monotone allocation rule as close as possible to maximize the social surplus</font></p>
 </blockquote>
 <p>至此，在 approximation alg. 中學到的當前 state-of-the-art 的演算法，可用於解決 AGT 的問題 (W/ 還不錯的 ratio )，但有件事情需要注意</p>
 <blockquote>
@@ -314,15 +330,15 @@
 <p>以下定理證明用於 Knapsack problem 的 2-approx algorithm 所設計的 allocation rule 不會造成額外的 cost ，同時保持 monotone 的性質。</p>
 <p><strong>[Theorem]</strong> The greedy allocation rule for Knapsack auction is monotone</p>
 <blockquote>
-<p><!-- raw HTML omitted -->2-approx Algorithm<!-- raw HTML omitted -->:   Sort bidders according to <!-- raw HTML omitted -->$ \frac{b_i}{w_i}$<!-- raw HTML omitted --> in decending order <!-- raw HTML omitted -->
-Choose bidders in that order until constranit DOESN'T satisfy,<!-- raw HTML omitted --> then
-pick <!-- raw HTML omitted -->$max(b_1 + b_2 + \cdots +b_i,$ $b\scriptstyle{i+1}$$)$<!-- raw HTML omitted --></p>
+<p><u>2-approx Algorithm</u>:   Sort bidders according to <span>$ \frac{b_i}{w_i}$</span> in decending order <br/>
+Choose bidders in that order until constranit DOESN'T satisfy,</br> then
+pick <span>$max(b_1 + b_2 + \cdots +b_i,$ $b\scriptstyle{i+1}$$)$</span></p>
 </blockquote>
 <blockquote>
-<p>For every bidder <!-- raw HTML omitted -->$i$<!-- raw HTML omitted -->, <!-- raw HTML omitted -->$\exists$<!-- raw HTML omitted --> critical bid <!-- raw HTML omitted --> $b^{\star}$<!-- raw HTML omitted --> (depending on its <!-- raw HTML omitted -->$w_i$<!-- raw HTML omitted --> and <!-- raw HTML omitted -->$b\scriptstyle{-i}$<!-- raw HTML omitted -->) s.t <!-- raw HTML omitted -->$x_i$<!-- raw HTML omitted --> jump from 0 to 1 。</p>
+<p>For every bidder <span>$i$</span>, <span>$\exists$</span> critical bid <span> $b^{\star}$</span> (depending on its <span>$w_i$</span> and <span>$b\scriptstyle{-i}$</span>) s.t <span>$x_i$</span> jump from 0 to 1 。</p>
 </blockquote>
 <blockquote>
-<p>It is easy to check that such allocation rule for arbitary bidder <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> is monotone 0-1 curve 。<!-- raw HTML omitted --></p>
+<p>It is easy to check that such allocation rule for arbitary bidder <span>$i$</span> is monotone 0-1 curve 。<br/></p>
 </blockquote>
   
   

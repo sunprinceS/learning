@@ -18,7 +18,7 @@
       <pubDate>Thu, 10 Jan 2019 11:59:24 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec6/</guid>
-      <description>&lt;p&gt;在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &amp;ldquo;ground-truth&amp;rdquo; agent) 與 environment 互動的&lt;!-- raw HTML omitted --&gt;$(s,a)$&lt;!-- raw HTML omitted --&gt; pairs 去 train 我們的 agent/actor。那麼該如何利用這些 &lt;!-- raw HTML omitted --&gt;$(s,a)$&lt;!-- raw HTML omitted --&gt; pair 呢？&lt;/p&gt;</description>
+      <description>&lt;p&gt;在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &amp;ldquo;ground-truth&amp;rdquo; agent) 與 environment 互動的&lt;span&gt;$(s,a)$&lt;/span&gt; pairs 去 train 我們的 agent/actor。那麼該如何利用這些 &lt;span&gt;$(s,a)$&lt;/span&gt; pair 呢？&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -38,7 +38,7 @@
       <pubDate>Sun, 06 Jan 2019 15:59:24 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec4/</guid>
-      <description>&lt;p&gt;在這講中，要討論的是 non-tabular case 的問題 (就是上一講中無法保證收斂的那些QQ)，我們選定 Neural Network 作為拿來 approximate &lt;!-- raw HTML omitted --&gt;$Q(s,a)$&lt;!-- raw HTML omitted --&gt; 的 function family，且不是用一般 regression 的方法找 &lt;!-- raw HTML omitted --&gt;$\phi$&lt;!-- raw HTML omitted --&gt; (畢竟它的 target &lt;!-- raw HTML omitted --&gt;$y$&lt;!-- raw HTML omitted --&gt; 也只是中間產物，並非 optimal Q)，而是 N-step 的 gradient descent。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在這講中，要討論的是 non-tabular case 的問題 (就是上一講中無法保證收斂的那些QQ)，我們選定 Neural Network 作為拿來 approximate &lt;span&gt;$Q(s,a)$&lt;/span&gt; 的 function family，且不是用一般 regression 的方法找 &lt;span&gt;$\phi$&lt;/span&gt; (畢竟它的 target &lt;span&gt;$y$&lt;/span&gt; 也只是中間產物，並非 optimal Q)，而是 N-step 的 gradient descent。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -48,7 +48,7 @@
       
       <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec3/</guid>
       <description>&lt;p&gt;前兩講 focus 在 policy-based 的 RL 演算法，直接 learn 一組參數去 parametrize
-policy。而後續兩講則會 focus 在 value-based 的方法，想法是算出 &lt;!-- raw HTML omitted --&gt;$V^\pi(s), Q^\pi(s,a)$&lt;!-- raw HTML omitted --&gt; (同樣可以 approximately parametrized by &lt;!-- raw HTML omitted --&gt;$\theta$&lt;!-- raw HTML omitted --&gt;)，而所對應的 policy 則是去選擇 Given &lt;!-- raw HTML omitted --&gt;$s$&lt;!-- raw HTML omitted --&gt;，好度最高的 action &lt;!-- raw HTML omitted --&gt;$a$&lt;!-- raw HTML omitted --&gt; (w/ appropriate exploration)。&lt;/p&gt;</description>
+policy。而後續兩講則會 focus 在 value-based 的方法，想法是算出 &lt;span&gt;$V^\pi(s), Q^\pi(s,a)$&lt;/span&gt; (同樣可以 approximately parametrized by &lt;span&gt;$\theta$&lt;/span&gt;)，而所對應的 policy 則是去選擇 Given &lt;span&gt;$s$&lt;/span&gt;，好度最高的 action &lt;span&gt;$a$&lt;/span&gt; (w/ appropriate exploration)。&lt;/p&gt;</description>
     </item>
     
     <item>

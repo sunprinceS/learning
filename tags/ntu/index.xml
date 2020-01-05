@@ -18,7 +18,7 @@
       <pubDate>Thu, 10 Jan 2019 11:59:24 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec6/</guid>
-      <description>&lt;p&gt;在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &amp;ldquo;ground-truth&amp;rdquo; agent) 與 environment 互動的&lt;!-- raw HTML omitted --&gt;$(s,a)$&lt;!-- raw HTML omitted --&gt; pairs 去 train 我們的 agent/actor。那麼該如何利用這些 &lt;!-- raw HTML omitted --&gt;$(s,a)$&lt;!-- raw HTML omitted --&gt; pair 呢？&lt;/p&gt;</description>
+      <description>&lt;p&gt;在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &amp;ldquo;ground-truth&amp;rdquo; agent) 與 environment 互動的&lt;span&gt;$(s,a)$&lt;/span&gt; pairs 去 train 我們的 agent/actor。那麼該如何利用這些 &lt;span&gt;$(s,a)$&lt;/span&gt; pair 呢？&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -38,7 +38,7 @@
       <pubDate>Sun, 06 Jan 2019 15:59:24 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec4/</guid>
-      <description>&lt;p&gt;在這講中，要討論的是 non-tabular case 的問題 (就是上一講中無法保證收斂的那些QQ)，我們選定 Neural Network 作為拿來 approximate &lt;!-- raw HTML omitted --&gt;$Q(s,a)$&lt;!-- raw HTML omitted --&gt; 的 function family，且不是用一般 regression 的方法找 &lt;!-- raw HTML omitted --&gt;$\phi$&lt;!-- raw HTML omitted --&gt; (畢竟它的 target &lt;!-- raw HTML omitted --&gt;$y$&lt;!-- raw HTML omitted --&gt; 也只是中間產物，並非 optimal Q)，而是 N-step 的 gradient descent。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在這講中，要討論的是 non-tabular case 的問題 (就是上一講中無法保證收斂的那些QQ)，我們選定 Neural Network 作為拿來 approximate &lt;span&gt;$Q(s,a)$&lt;/span&gt; 的 function family，且不是用一般 regression 的方法找 &lt;span&gt;$\phi$&lt;/span&gt; (畢竟它的 target &lt;span&gt;$y$&lt;/span&gt; 也只是中間產物，並非 optimal Q)，而是 N-step 的 gradient descent。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -48,7 +48,7 @@
       
       <guid>https://sunprinces.github.io/learning/2019/01/reinforcement-learning-lec3/</guid>
       <description>&lt;p&gt;前兩講 focus 在 policy-based 的 RL 演算法，直接 learn 一組參數去 parametrize
-policy。而後續兩講則會 focus 在 value-based 的方法，想法是算出 &lt;!-- raw HTML omitted --&gt;$V^\pi(s), Q^\pi(s,a)$&lt;!-- raw HTML omitted --&gt; (同樣可以 approximately parametrized by &lt;!-- raw HTML omitted --&gt;$\theta$&lt;!-- raw HTML omitted --&gt;)，而所對應的 policy 則是去選擇 Given &lt;!-- raw HTML omitted --&gt;$s$&lt;!-- raw HTML omitted --&gt;，好度最高的 action &lt;!-- raw HTML omitted --&gt;$a$&lt;!-- raw HTML omitted --&gt; (w/ appropriate exploration)。&lt;/p&gt;</description>
+policy。而後續兩講則會 focus 在 value-based 的方法，想法是算出 &lt;span&gt;$V^\pi(s), Q^\pi(s,a)$&lt;/span&gt; (同樣可以 approximately parametrized by &lt;span&gt;$\theta$&lt;/span&gt;)，而所對應的 policy 則是去選擇 Given &lt;span&gt;$s$&lt;/span&gt;，好度最高的 action &lt;span&gt;$a$&lt;/span&gt; (w/ appropriate exploration)。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -98,11 +98,11 @@ Berkeley 開的 CS294。&lt;/p&gt;
       <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec6/</guid>
       <description>&lt;p&gt;ASR 做的其實就是以下這件事，&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;$$ \Pr(\text{words|sounds}) = \frac{\Pr(\text{sounds|words})}{\Pr(\text{sounds})} $$&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;當中我們視 &lt;!-- raw HTML omitted --&gt;$\Pr(\text{sounds})$&lt;!-- raw HTML omitted --&gt; 為 uniform distribution ，不管它。
+&lt;p&gt;當中我們視 &lt;span&gt;$\Pr(\text{sounds})$&lt;/span&gt; 為 uniform distribution ，不管它。
 \&lt;br&gt;
-&lt;!-- raw HTML omitted --&gt;$\Pr(\text{words})$&lt;!-- raw HTML omitted --&gt; 由 &lt;strong&gt;Language Model&lt;/strong&gt; 負責，評估產生的
+&lt;span&gt;$\Pr(\text{words})$&lt;/span&gt; 由 &lt;strong&gt;Language Model&lt;/strong&gt; 負責，評估產生的
 transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)\&lt;br&gt;
-&lt;!-- raw HTML omitted --&gt;$\Pr(\text{sounds|words})$&lt;!-- raw HTML omitted --&gt; 則是 &lt;strong&gt;Acoustic Model&lt;/strong&gt;， 也就是前一講中用 Viterbi 所算的 Likelihood 。&lt;/p&gt;</description>
+&lt;span&gt;$\Pr(\text{sounds|words})$&lt;/span&gt; 則是 &lt;strong&gt;Acoustic Model&lt;/strong&gt;， 也就是前一講中用 Viterbi 所算的 Likelihood 。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -149,7 +149,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Fri, 13 Apr 2018 12:59:24 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning-lec10/</guid>
-      <description>&lt;p&gt;Linear Model 的核心在於 feature 分量的 weighted sum &lt;!-- raw HTML omitted --&gt;$\mathbf{w}^T \mathbf{x}$&lt;!-- raw HTML omitted --&gt;， 在 binary classification ，我們用 step function 將其二分 (&lt;!-- raw HTML omitted --&gt;$\mathcal{Y} = \lbrace , -1,1,\rbrace$&lt;!-- raw HTML omitted --&gt;)，而在 linear regression 中，我們將其直接作為輸出。而這一講要介紹的則是將 &lt;!-- raw HTML omitted --&gt;$\mathbf{w}^T \mathbf{x}$&lt;!-- raw HTML omitted --&gt; 通過一個 nonlinear function mapping 到[&lt;!-- raw HTML omitted --&gt;$0,1$&lt;!-- raw HTML omitted --&gt;]，賦予他機率的意義 (&lt;!-- raw HTML omitted --&gt;$\Pr[y = +1 | \mathbf{x}]$&lt;!-- raw HTML omitted --&gt;)。&lt;/p&gt;</description>
+      <description>&lt;p&gt;Linear Model 的核心在於 feature 分量的 weighted sum &lt;span&gt;$\mathbf{w}^T \mathbf{x}$&lt;/span&gt;， 在 binary classification ，我們用 step function 將其二分 (&lt;span&gt;$\mathcal{Y} = \lbrace , -1,1,\rbrace$&lt;/span&gt;)，而在 linear regression 中，我們將其直接作為輸出。而這一講要介紹的則是將 &lt;span&gt;$\mathbf{w}^T \mathbf{x}$&lt;/span&gt; 通過一個 nonlinear function mapping 到[&lt;span&gt;$0,1$&lt;/span&gt;]，賦予他機率的意義 (&lt;span&gt;$\Pr[y = +1 | \mathbf{x}]$&lt;/span&gt;)。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -158,7 +158,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Thu, 12 Apr 2018 22:59:24 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning-lec9/</guid>
-      <description>&lt;p&gt;在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space &lt;!-- raw HTML omitted --&gt;$\mathcal{Y}$&lt;!-- raw HTML omitted --&gt; 只是單純的 {&lt;!-- raw HTML omitted --&gt;$1, -1$&lt;!-- raw HTML omitted --&gt;}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space &lt;span&gt;$\mathcal{Y}$&lt;/span&gt; 只是單純的 {&lt;span&gt;$1, -1$&lt;/span&gt;}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -194,7 +194,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Wed, 17 Jan 2018 22:59:24 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec8/</guid>
-      <description>&lt;p&gt;前面幾講的討論中，我們都假設有一個 ground truth function &lt;!-- raw HTML omitted --&gt;$f$&lt;!-- raw HTML omitted --&gt; 去 generate data，且我們所拿到的 &lt;!-- raw HTML omitted --&gt;$\mathcal{D}$&lt;!-- raw HTML omitted --&gt; 是乾淨的，然而在真實世界中，無可避免地會遇到 &lt;strong&gt;noise&lt;/strong&gt; 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？&lt;/p&gt;</description>
+      <description>&lt;p&gt;前面幾講的討論中，我們都假設有一個 ground truth function &lt;span&gt;$f$&lt;/span&gt; 去 generate data，且我們所拿到的 &lt;span&gt;$\mathcal{D}$&lt;/span&gt; 是乾淨的，然而在真實世界中，無可避免地會遇到 &lt;strong&gt;noise&lt;/strong&gt; 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -203,7 +203,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Thu, 04 Jan 2018 17:13:44 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec7/</guid>
-      <description>&lt;p&gt;於前一講中，我們證明了 growth function 為 &lt;strong&gt;POLY(N)&lt;/strong&gt; iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 &lt;!-- raw HTML omitted --&gt;$E_i(h) \approx E_o(h)$&lt;!-- raw HTML omitted --&gt;  (if 數據點夠多 &lt;!-- raw HTML omitted --&gt;$N$&lt;!-- raw HTML omitted --&gt; )。而這一講中，我們由 break point 引進 &lt;strong&gt;VC Dimension&lt;/strong&gt; &lt;!-- raw HTML omitted --&gt;$d \scriptscriptstyle VC$&lt;!-- raw HTML omitted --&gt; ，來當作衡量 &lt;!-- raw HTML omitted --&gt;$\mathcal{H}$&lt;!-- raw HTML omitted --&gt; 複雜度的一個指標。&lt;/p&gt;</description>
+      <description>&lt;p&gt;於前一講中，我們證明了 growth function 為 &lt;strong&gt;POLY(N)&lt;/strong&gt; iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 &lt;span&gt;$E_i(h) \approx E_o(h)$&lt;/span&gt;  (if 數據點夠多 &lt;span&gt;$N$&lt;/span&gt; )。而這一講中，我們由 break point 引進 &lt;strong&gt;VC Dimension&lt;/strong&gt; &lt;span&gt;$d \scriptscriptstyle VC$&lt;/span&gt; ，來當作衡量 &lt;span&gt;$\mathcal{H}$&lt;/span&gt; 複雜度的一個指標。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -212,7 +212,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Tue, 02 Jan 2018 19:02:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec6/</guid>
-      <description>&lt;p&gt;前一講中講述了 break point 的存在，壓制了 growth function &lt;!-- raw HTML omitted --&gt;$m_H(N)$&lt;!-- raw HTML omitted --&gt; 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，&lt;!-- raw HTML omitted --&gt;$m_H(N)$&lt;!-- raw HTML omitted --&gt; 便會是 &lt;strong&gt;POLY(N)&lt;/strong&gt; 。&lt;/p&gt;</description>
+      <description>&lt;p&gt;前一講中講述了 break point 的存在，壓制了 growth function &lt;span&gt;$m_H(N)$&lt;/span&gt; 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，&lt;span&gt;$m_H(N)$&lt;/span&gt; 便會是 &lt;strong&gt;POLY(N)&lt;/strong&gt; 。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -221,7 +221,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Sat, 30 Dec 2017 19:02:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec5/</guid>
-      <description>&lt;p&gt;上一講提到了在 hypothesis set &lt;!-- raw HTML omitted --&gt;$\mathcal{H}$&lt;!-- raw HTML omitted --&gt; 為有限，且sample size &lt;!-- raw HTML omitted --&gt;$|\mathcal{D}|$&lt;!-- raw HTML omitted --&gt; 足夠大的情況下，是 PAC-learnable 的。但當 &lt;!-- raw HTML omitted --&gt;$|\mathcal{H}| , \rightarrow , \infty$&lt;!-- raw HTML omitted --&gt;的時候呢？ (e.g 2D linear perceptron)&lt;/p&gt;</description>
+      <description>&lt;p&gt;上一講提到了在 hypothesis set &lt;span&gt;$\mathcal{H}$&lt;/span&gt; 為有限，且sample size &lt;span&gt;$|\mathcal{D}|$&lt;/span&gt; 足夠大的情況下，是 PAC-learnable 的。但當 &lt;span&gt;$|\mathcal{H}| , \rightarrow , \infty$&lt;/span&gt;的時候呢？ (e.g 2D linear perceptron)&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -266,7 +266,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Sat, 14 Oct 2017 00:24:36 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec3/</guid>
-      <description>&lt;p&gt;在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/&#34;&gt;第一講&lt;/a&gt;中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 &lt;!-- raw HTML omitted --&gt;$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$&lt;!-- raw HTML omitted --&gt; ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same &lt;!-- raw HTML omitted --&gt;$\mathcal{H}$&lt;!-- raw HTML omitted --&gt;)可以選，每次我們就看哪一個 &lt;!-- raw HTML omitted --&gt;$h$&lt;!-- raw HTML omitted --&gt; 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 &lt;!-- raw HTML omitted --&gt;$\mathbb{E}[, \text{max num of elements in any slots} , ]$&lt;!-- raw HTML omitted --&gt; ?&lt;/p&gt;</description>
+      <description>&lt;p&gt;在 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/&#34;&gt;第一講&lt;/a&gt;中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 &lt;span&gt;$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$&lt;/span&gt; ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same &lt;span&gt;$\mathcal{H}$&lt;/span&gt;)可以選，每次我們就看哪一個 &lt;span&gt;$h$&lt;/span&gt; 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 &lt;span&gt;$\mathbb{E}[, \text{max num of elements in any slots} , ]$&lt;/span&gt; ?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -275,7 +275,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Thu, 05 Oct 2017 00:20:42 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/10/advanced-algorithm-hash-table-lec2/</guid>
-      <description>&lt;p&gt;Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 &lt;!-- raw HTML omitted --&gt;$\mathcal{O}(1)$&lt;!-- raw HTML omitted --&gt; lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？&lt;/p&gt;</description>
+      <description>&lt;p&gt;Hashing 的一個 criteria 是希望儘可能不要發生 collision (也就是 Worst Case 也在 &lt;span&gt;$\mathcal{O}(1)$&lt;/span&gt; lookup)，今天假設我們已知元素的個數，該如何設計一個 hash function 使得不會有任何 collition 發生？&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -285,7 +285,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       
       <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-revisited/</guid>
       <description>&lt;p&gt;前面提到過一個較為複雜的優化問題， &lt;a href=&#34;https://sunprinces.github.io/learning/2017/09/advanced-algorithm---metric-facility-location-problem/&#34;&gt;Metric Facility Location Problem&lt;/a&gt; ，並給出了一個 4-Approx. Algorithm ，於這講中，我們要來利用前面提到的 Primal-Dual method 來設計演算法。&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;</description>
+&lt;!--Note: 我覺得真的有點複雜 😂 (整理筆記的時候)--&gt;</description>
     </item>
     
     <item>
@@ -303,7 +303,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Sat, 16 Sep 2017 20:49:15 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/advanced-algorithm-metric-facility-location-problem/</guid>
-      <description>&lt;p&gt;接續&lt;a href=&#34;https://sunprinces.github.io/learning/tags/linear-programming/&#34;&gt;前面幾講&lt;/a&gt;，一個常用的技巧是，利用 LP solver 得出來的解 &lt;!-- raw HTML omitted --&gt;$\mathbf{x}^{\star}$&lt;!-- raw HTML omitted --&gt;， 拿去做 rounding 推出原先問題的解 &lt;!-- raw HTML omitted --&gt;$\mathbf{x}^{\prime}$&lt;!-- raw HTML omitted --&gt; (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (&lt;strong&gt;MFL&lt;/strong&gt;)。&lt;/p&gt;</description>
+      <description>&lt;p&gt;接續&lt;a href=&#34;https://sunprinces.github.io/learning/tags/linear-programming/&#34;&gt;前面幾講&lt;/a&gt;，一個常用的技巧是，利用 LP solver 得出來的解 &lt;span&gt;$\mathbf{x}^{\star}$&lt;/span&gt;， 拿去做 rounding 推出原先問題的解 &lt;span&gt;$\mathbf{x}^{\prime}$&lt;/span&gt; (with 一個還不錯的 approx. ratio)。而這講會講述一個較為複雜的問題 - Metric Facility Location Problem (&lt;strong&gt;MFL&lt;/strong&gt;)。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -312,7 +312,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Fri, 08 Sep 2017 22:29:20 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-4/</guid>
-      <description>&lt;p&gt;前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 &lt;!-- raw HTML omitted --&gt;$V$&lt;!-- raw HTML omitted --&gt; 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。&lt;/p&gt;</description>
+      <description>&lt;p&gt;前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 &lt;span&gt;$V$&lt;/span&gt; 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -321,7 +321,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Sun, 03 Sep 2017 21:28:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/algorithm-graph-theory-lec-3/</guid>
-      <description>&lt;p&gt;呈前一講的討論，我們有了個求單源最短路徑的演算法&lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/&#34;&gt;Bellman-Ford&lt;/a&gt; (複雜度為 &lt;!-- raw HTML omitted --&gt;$\mathcal{O}(VE)$&lt;!-- raw HTML omitted --&gt; )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法&lt;/p&gt;</description>
+      <description>&lt;p&gt;呈前一講的討論，我們有了個求單源最短路徑的演算法&lt;a href=&#34;https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/&#34;&gt;Bellman-Ford&lt;/a&gt; (複雜度為 &lt;span&gt;$\mathcal{O}(VE)$&lt;/span&gt; )，現下我們考慮額外的限制條件(邊權重為非負)，想找出是否存在更有效率的演算法&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -331,7 +331,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       
       <guid>https://sunprinces.github.io/learning/2017/08/algorithm-graph-theory-lec-2/</guid>
       <description>&lt;p&gt;圖的一個常見應用場合是想找出某兩點之間的最短(/長)路徑，此時的邊權重又視為兩節點之間的距離。&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;</description>
+&lt;!--一般來說，這兩個問題都是 NPC ，只有加上某些限制後，才會是在多項式時間可解的問題 (最短路 ─ 不存在負環；最長路  ─ 不存在正環)。--&gt;</description>
     </item>
     
     <item>
@@ -349,8 +349,8 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Tue, 22 Aug 2017 20:44:58 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/algorithm-disjoint-set/</guid>
-      <description>&lt;p&gt;Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets &lt;!-- raw HTML omitted --&gt;$S_1,S_2,\cdots,S_k$&lt;!-- raw HTML omitted --&gt;，而每個 &lt;!-- raw HTML omitted --&gt;$S_i$&lt;!-- raw HTML omitted --&gt; (每個 category) 以一個代表值 (&lt;em&gt;representative&lt;/em&gt;) 去紀錄。&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;</description>
+      <description>&lt;p&gt;Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets &lt;span&gt;$S_1,S_2,\cdots,S_k$&lt;/span&gt;，而每個 &lt;span&gt;$S_i$&lt;/span&gt; (每個 category) 以一個代表值 (&lt;em&gt;representative&lt;/em&gt;) 去紀錄。&lt;/p&gt;
+&lt;!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--&gt;</description>
     </item>
     
     <item>
@@ -359,7 +359,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Fri, 18 Aug 2017 21:19:19 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-weighted-set-cover/</guid>
-      <description>&lt;p&gt;呈前一講，我們對&lt;strong&gt;有限制的&lt;/strong&gt; WSC 問題有 &lt;!-- raw HTML omitted --&gt;$l$&lt;!-- raw HTML omitted --&gt;-approx. algorithm，但可能並不是太好(比方說 &lt;!-- raw HTML omitted --&gt;$l=|U|$&lt;!-- raw HTML omitted --&gt; 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在&lt;strong&gt;大部分&lt;/strong&gt;時候，都可以得到一個&lt;strong&gt;還不錯&lt;/strong&gt; (approx. ratio ISN&#39;T too bad)的結果。&lt;/p&gt;</description>
+      <description>&lt;p&gt;呈前一講，我們對&lt;strong&gt;有限制的&lt;/strong&gt; WSC 問題有 &lt;span&gt;$l$&lt;/span&gt;-approx. algorithm，但可能並不是太好(比方說 &lt;span&gt;$l=|U|$&lt;/span&gt; 之類)，於是我們嘗試引進一些隨機性，雖然犧牲了 deterministic 的 approx. ratio ，有時候甚至會得到更爛的結果(甚至不滿足 constraint @@)，但可以證明在&lt;strong&gt;大部分&lt;/strong&gt;時候，都可以得到一個&lt;strong&gt;還不錯&lt;/strong&gt; (approx. ratio ISN&#39;T too bad)的結果。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -377,7 +377,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Mon, 14 Aug 2017 20:36:01 +0200</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/08/advanced-algorithm-linear-programming/</guid>
-      <description>&lt;p&gt;**Definition:**&lt;!-- raw HTML omitted --&gt;
+      <description>&lt;p&gt;**Definition:**&lt;br/&gt;
 A linear programming is a problem of &lt;em&gt;maximizing&lt;/em&gt; or &lt;em&gt;minimizing&lt;/em&gt; a &lt;strong&gt;linear
 multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constraints&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
@@ -417,7 +417,7 @@ multivariate function&lt;/strong&gt; subject to some &lt;strong&gt;linear constr
       <pubDate>Sun, 21 May 2017 08:52:55 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/05/advanced-algorithm-hash-table-lec1/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
+      <description>&lt;!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。--&gt;
 &lt;p&gt;Hashing 可以想成是一種 &lt;strong&gt;renaming&lt;/strong&gt; 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 &lt;strong&gt;Hashing&lt;/strong&gt; 的方式，重新命名 key&amp;rsquo; ，並依據 key&amp;rsquo; 將資料放到 size 跟資料個數差不多的 Hash Table 中。&lt;/p&gt;</description>
     </item>
     
