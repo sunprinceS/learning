@@ -25,6 +25,7 @@ paginate = 10
   disqus = "tonyhsu822"
   katex = true
   mathjax = true
+  rss = false
   # CSS name for highlight.js
   highlightjs = "monokai"
   dateFormat = "02 Jan 2006"
@@ -69,4 +70,5 @@ paginate = 10
   instagram = "sunprince822"
   github = "sunprinceS"
   life = "sunprincelife"
+  twitter = "sunprinceS_0822"
   
