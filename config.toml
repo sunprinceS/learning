@@ -72,3 +72,7 @@ paginate = 10
   life = "sunprincelife"
   twitter = "sunprinceS_0822"
   
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
