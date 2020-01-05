@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Computational Geometry">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Problem Solving and Programming- hw11 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>05 Dec 2017</time>
   </div>
+
   
 
   
@@ -280,71 +280,89 @@
 
 </div>
 
-
-  <p><a href="https://kth.kattis.com/problemgroups/641" target="_blank">題目連結</a></p>
-
-<h2 id="pa-white-water-rafting">pA - White Water Rafting</h2>
-
-<p>給一個簡單內多邊形和外多邊形，求中間圍起來的部份，寬度最小為多少。<br />
-枚舉每個邊的組合，<strong>求兩線段之距離</strong>，取最小者，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
-
-<h2 id="pb-colliding-traffic">pB - Colliding Traffic</h2>
-
-<p>在平面上，有 <span>$n$</span> 個點，各自以定速朝定方向前進 (i.e 射線)，當兩個點間距
-<span>$&lt; r$</span> 時，定義他們 collide ，想問第一個 collide 發生在什麼時候。
-枚舉每條射線的組合，先看距離是否已小於 <span>$r$</span> ，如果是就輸出 <span>$0$</span>。
+  <p><!-- raw HTML omitted -->題目連結<!-- raw HTML omitted --></p>
+<h2 id="pa---white-water-rafting">pA - White Water Rafting</h2>
+<p>給一個簡單內多邊形和外多邊形，求中間圍起來的部份，寬度最小為多少。\<br>
+枚舉每個邊的組合，<strong>求兩線段之距離</strong>，取最小者，複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(n^2)$<!-- raw HTML omitted -->。</p>
+<h2 id="pb---colliding-traffic">pB - Colliding Traffic</h2>
+<p>在平面上，有 <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 個點，各自以定速朝定方向前進 (i.e 射線)，當兩個點間距
+<!-- raw HTML omitted -->$&lt; r$<!-- raw HTML omitted --> 時，定義他們 collide ，想問第一個 collide 發生在什麼時候。
+枚舉每條射線的組合，先看距離是否已小於 <!-- raw HTML omitted -->$r$<!-- raw HTML omitted --> ，如果是就輸出 <!-- raw HTML omitted -->$0$<!-- raw HTML omitted -->。
 不是的話，由兩條射線的參數方程相減得到其距離的參數方程，</p>
+<!-- raw HTML omitted -->
+<p>找是否存在 <!-- raw HTML omitted -->$t &gt; 0$<!-- raw HTML omitted --> 滿足 <!-- raw HTML omitted -->$|\vec{d}_{i,j}| \leq r$<!-- raw HTML omitted -->，然後從所有射線組合中，找出最小的 <!-- raw HTML omitted -->$t$<!-- raw HTML omitted -->，複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(n^2)$<!-- raw HTML omitted -->。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">get_collision_t</span>(Obj i,Obj j,<span style="color:#66d9ef">double</span> r_sq){
+  <span style="color:#66d9ef">double</span> a,b,c;
+  a <span style="color:#f92672">=</span> i.vel.distance_square(j.vel);
+  b <span style="color:#f92672">=</span> (j.pos <span style="color:#f92672">-</span> i.pos).dot(j.vel <span style="color:#f92672">-</span> i.vel);
+  c <span style="color:#f92672">=</span> i.pos.distance_square(j.pos) <span style="color:#f92672">-</span> r_sq;
 
-<div>
-\[
-\vec{d}_{i,j} = (\vec{s}_j - \vec{s}_i) + (\vec{v}_j - \vec{v}_i) t \quad (\, \vec{s} \; \text{為起始位置}\,)
-\]
-</div>
-
-<p>找是否存在 <span>$t &gt; 0$</span> 滿足 <span>$|\vec{d}_{i,j}| \leq r$</span>，然後從所有射線組合中，找出最小的 <span>$t$</span>，複雜度為 <span>$\mathcal{O}(n^2)$</span>。</p>
-
-<pre><code class="language-cpp">double get_collision_t(Obj i,Obj j,double r_sq){
-  double a,b,c;
-  a = i.vel.distance_square(j.vel);
-  b = (j.pos - i.pos).dot(j.vel - i.vel);
-  c = i.pos.distance_square(j.pos) - r_sq;
-
-  double D = b*b - a*c;
-  if(isz(D)){
-    return (-b/a);
+  <span style="color:#66d9ef">double</span> D <span style="color:#f92672">=</span> b<span style="color:#f92672">*</span>b <span style="color:#f92672">-</span> a<span style="color:#f92672">*</span>c;
+  <span style="color:#66d9ef">if</span>(isz(D)){
+    <span style="color:#66d9ef">return</span> (<span style="color:#f92672">-</span>b<span style="color:#f92672">/</span>a);
   }
-  else if(D&lt;0){
-    return -100;
+  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(D<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">0</span>){
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>;
   }
-  else{
-    if(b+sqrt(D) &gt; 0)
-      return ((-b+sqrt(D))/a);
-    else
-      return ((-b-sqrt(D))/a);
+  <span style="color:#66d9ef">else</span>{
+    <span style="color:#66d9ef">if</span>(b<span style="color:#f92672">+</span>sqrt(D) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
+      <span style="color:#66d9ef">return</span> ((<span style="color:#f92672">-</span>b<span style="color:#f92672">+</span>sqrt(D))<span style="color:#f92672">/</span>a);
+    <span style="color:#66d9ef">else</span>
+      <span style="color:#66d9ef">return</span> ((<span style="color:#f92672">-</span>b<span style="color:#f92672">-</span>sqrt(D))<span style="color:#f92672">/</span>a);
   }
 }
-</code></pre>
-
-<h2 id="pc-pesky-mosquitoes">pC - Pesky Mosquitoes</h2>
-
-<p>圖上散落了一些點，給定一個定直徑 <span>$d$</span> 的圓，想找出最多可以蓋住幾個點。<br />
+</code></pre></div><h2 id="pc---pesky-mosquitoes">pC - Pesky Mosquitoes</h2>
+<p>圖上散落了一些點，給定一個定直徑 <!-- raw HTML omitted -->$d$<!-- raw HTML omitted --> 的圓，想找出最多可以蓋住幾個點。\<br>
 觀察到若想蓋住最多點的話，至少有兩個點會在圓的邊上(否則總是可以再移動，
 看能否再蓋住更多點)。</p>
-
-<p>枚舉所有點的組合，找出過那兩點 <span>$A, B$</span> 且直徑為 <span>$d$</span> 的圓，再來看剩下的點是
-否在此圓裡面，複雜度為 <span>$\mathcal{O}(n^3)$</span>。<br />
+<p>枚舉所有點的組合，找出過那兩點 <!-- raw HTML omitted -->$A, B$<!-- raw HTML omitted --> 且直徑為 <!-- raw HTML omitted -->$d$<!-- raw HTML omitted --> 的圓，再來看剩下的點是
+否在此圓裡面，複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(n^3)$<!-- raw HTML omitted -->。\<br>
 而找圓心的話，算是高中數學的範疇，應該很簡單。但注意到這樣定義的圓會有兩個，方便起見我們統一
-一個方向，法向量指向 <span>$\overrightarrow{AB}$</span> 的右邊 (如此算 <span>$\overrightarrow{BA}$</span> 時，就會得到另一個圓了)。</p>
-
-<h2 id="pd-unusual-darts">pD - Unusual Darts</h2>
-
+一個方向，法向量指向 <!-- raw HTML omitted -->$\overrightarrow{AB}$<!-- raw HTML omitted --> 的右邊 (如此算 <!-- raw HTML omitted -->$\overrightarrow{BA}$<!-- raw HTML omitted --> 時，就會得到另一個圓了)。</p>
+<h2 id="pd---unusual-darts">pD - Unusual Darts</h2>
 <p>吃了兩個 WA ，真難玩&hellip;</p>
-
-<h2 id="pe-meltdown">pE - Meltdown</h2>
-
+<h2 id="pe---meltdown">pE - Meltdown</h2>
 <p>我看我是沒理解題意&hellip;</p>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fproblem-solving-and-programming-hw11%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fproblem-solving-and-programming-hw11%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fproblem-solving-and-programming-hw11%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fproblem-solving-and-programming-hw11%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fproblem-solving-and-programming-hw11%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fproblem-solving-and-programming-hw11%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -400,8 +418,8 @@
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -410,10 +428,8 @@
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -430,24 +446,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

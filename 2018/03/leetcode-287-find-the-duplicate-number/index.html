@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>LeetCode 287 - Find the Duplicate Number &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>18 Mar 2018</time>
   </div>
+
   
 
   
@@ -276,124 +276,132 @@
 
 </div>
 
-
   <p><a href="https://leetcode.com/problems/find-the-duplicate-number/description/">題目連結</a></p>
-
 <p>最近開始刷 LeetCode 練習思考，這題討論串的某個解法蠻神的，因此來紀錄一下。</p>
-
-<h2 id="題目敘述">題目敘述</h2>
-
-<p>Given an array nums containing <strong>n + 1</strong> integers where each integer <span>$\in [1,n]$</span>，
+<h2 id="heading">題目敘述</h2>
+<p>Given an array nums containing <strong>n + 1</strong> integers where each integer <!-- raw HTML omitted -->$\in [1,n]$<!-- raw HTML omitted -->，
 Assume that there is <strong>only one duplicate number</strong> (but can be repeated many times), find the duplicate one.</p>
-
-<h2 id="限制">限制</h2>
-
+<h2 id="heading-1">限制</h2>
 <ul>
 <li>You must <strong>not modify the array</strong> (assume the array is read only).</li>
 <li>You must use only constant, <strong>O(1) extra space</strong>.</li>
-<li>Your runtime complexity should be less than <span>$O(n^2)$</span>.</li>
+<li>Your runtime complexity should be less than <!-- raw HTML omitted -->$O(n^2)$<!-- raw HTML omitted -->.</li>
 </ul>
-
-<h2 id="o-n-簡單算法-w-modifying-array">O(n) 簡單算法 (W/ modifying array)</h2>
-
+<h2 id="on--w-modifying-array">O(n) 簡單算法 (W/ modifying array)</h2>
 <p>與 <a href="https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/">LeetCode448 - FindDisappearedNumber</a>一樣，在保有原先 array 資訊的情況下立 Flag。</p>
-
-<pre><code class="language-cpp">int findDuplicate(vector&lt;int&gt;&amp; nums) {
-  for(size_t i=0;i&lt;nums.size();++i){
-    if(nums[abs(nums[i])-1] &lt; 0) return abs(nums[i]);
-    else nums[abs(nums[i])-1] *= -1; 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findDuplicate</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&amp;</span> nums) {
+  <span style="color:#66d9ef">for</span>(size_t i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>nums.size();<span style="color:#f92672">+</span><span style="color:#f92672">+</span>i){
+    <span style="color:#66d9ef">if</span>(nums[abs(nums[i])<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> abs(nums[i]);
+    <span style="color:#66d9ef">else</span> nums[abs(nums[i])<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">*</span><span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; 
   }
 }
-</code></pre>
-
-<p>簡單！但是不合題目要求XD
+</code></pre></div><p>簡單！但是不合題目要求XD
 (如果沒加 read-only 這個條件，只說跑完該 function ，array 不能變其實可以用，反正
 就再跑個一輪加 <code>abs()</code> 😛)</p>
-
-<h2 id="o-n-span-log-span-n-利用鴿籠原理的想法">O(n <span>$log$</span> n) - 利用鴿籠原理的想法</h2>
-
-<p>看到題目限 <span>$O(n^2)$</span> 複雜度，可以想到二分搜或排序，但不能開另外的
+<h2 id="on-spanlogspan-n---">O(n <!-- raw HTML omitted -->$log$<!-- raw HTML omitted --> n) - 利用鴿籠原理的想法</h2>
+<p>看到題目限 <!-- raw HTML omitted -->$O(n^2)$<!-- raw HTML omitted --> 複雜度，可以想到二分搜或排序，但不能開另外的
 container ，所以應該是二分搜。</p>
-
 <p>每次都砍半，去 check [1,mid] 中 element 的個數，如果比 mid 還大，代表裡頭有重
-複，反之就是另一個沒被檢查到的區間，每次都要 iterate 一輪，但 <span>$O(\log N)$</span> 輪便可找到答案。 (我想這題被放在 <code>medium</code> 應該是因為存在這個簡單的算法XD)</p>
-
-<pre><code class="language-cpp">int findDuplicate(vector&lt;int&gt;&amp; nums){
-int low = 1,high = nums.size()-1;
-int mid,cnt;
-while(low &lt;= high){
-  cnt = 0;
-  mid = (low + high) /2;
-  for(auto n: nums){
-    if(n &lt;= mid) ++cnt;
+複，反之就是另一個沒被檢查到的區間，每次都要 iterate 一輪，但 <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --> 輪便可找到答案。 (我想這題被放在 <code>medium</code> 應該是因為存在這個簡單的算法XD)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findDuplicate</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&amp;</span> nums){
+<span style="color:#66d9ef">int</span> low <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,high <span style="color:#f92672">=</span> nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+<span style="color:#66d9ef">int</span> mid,cnt;
+<span style="color:#66d9ef">while</span>(low <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> high){
+  cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  mid <span style="color:#f92672">=</span> (low <span style="color:#f92672">+</span> high) <span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> n: nums){
+    <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> mid) <span style="color:#f92672">+</span><span style="color:#f92672">+</span>cnt;
   }
-  if(cnt &lt;= mid) low = mid +1;
-  else high = mid - 1;
+  <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> mid) low <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">else</span> high <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
 }
-return low;
+<span style="color:#66d9ef">return</span> low;
 }
-</code></pre>
-
-<h2 id="o-n-tortoise-and-hare-algorithm">O(n) - Tortoise and Hare Algorithm</h2>
-
-<p>沒寫過當場想的出來真的是大神&hellip;<br />
-In Brief，觀察到區間是 <span>$[1,n]$</span>，且沒有缺漏的元素，在不存在重複元
-素的情況下， index 與 value ，可以想成 <span>$[1,n] \mapsto [1,n]$</span> (Permutation!)，
+</code></pre></div><h2 id="on---tortoise-and-hare-algorithm">O(n) - Tortoise and Hare Algorithm</h2>
+<p>沒寫過當場想的出來真的是大神&hellip;\<br>
+In Brief，觀察到區間是 <!-- raw HTML omitted -->$[1,n]$<!-- raw HTML omitted -->，且沒有缺漏的元素，在不存在重複元
+素的情況下， index 與 value ，可以想成 <!-- raw HTML omitted -->$[1,n] \mapsto [1,n]$<!-- raw HTML omitted --> (Permutation!)，
 所以 <code>nums[0]</code>, <code>nums[nums[0]]</code>, <code>nums[nums[nums[0]]]</code>&hellip; 可以把元素都 iterate
 一遍，也就是一個 path。
 好！但今天我們確定有一個(也是唯一一個)元素重複了，對這個性質會造成什麼影響呢？
-WLOG，我們從眾多可能 permutation 挑出一個最好思考的(照順序的)，已知今天是有 <span>$n+1$</span> 個元素，假定我們今天在 <span>$[1,n]$</span> 的最後接上<span>$[1,n]$</span>中的任一個值，如以下紅色部份
-<center><img src="https://sunprinces.github.io/learning/img/post/leetcode287.png" width="70%" style="border-radius: 0%;"></center></p>
-
-<p>會將原先一條依序 iterate 過所有元素的 path ，變成一個 path 與 cycle 的 混合路徑(?)。因為 <span>$0$</span> 不存在元素裡頭，所以首位元素為一個 source。 由此可確定這個路徑中至少有一單位長度的 path 。</p>
-
+WLOG，我們從眾多可能 permutation 挑出一個最好思考的(照順序的)，已知今天是有 <!-- raw HTML omitted -->$n+1$<!-- raw HTML omitted --> 個元素，假定我們今天在 <!-- raw HTML omitted -->$[1,n]$<!-- raw HTML omitted --> 的最後接上<!-- raw HTML omitted -->$[1,n]$<!-- raw HTML omitted -->中的任一個值，如以下紅色部份</p>
+<!-- raw HTML omitted -->
+<p>會將原先一條依序 iterate 過所有元素的 path ，變成一個 path 與 cycle 的 混合路徑(?)。因為 <!-- raw HTML omitted -->$0$<!-- raw HTML omitted --> 不存在元素裡頭，所以首位元素為一個 source。 由此可確定這個路徑中至少有一單位長度的 path 。</p>
 <p>過來是這個演算法精華的部份，如以下示意圖，<strong>重複的元素為 path 進入 cycle 的 entry point</strong> (注意到根本輪不到第三個重複元素，兩個就會形成cycle) ，那該如何偵測呢？</p>
-
-<p><center><img src="https://sunprinces.github.io/learning/img/post/leetcode287-1.png" width="40%" style="border-radius: 0%;"></center></p>
-
+<!-- raw HTML omitted -->
 <p>maintain 兩個 pointer，其中一個(hare)一次走兩步 (i.e <code>nums[nums[i]]</code>)，另一個(turtle)一次走一
-步(e.g <code>nums[i]</code>)，因為迴圈存在，步數公因數又為 <span>$1$</span> 所以最後一定會
-相遇於 cycle 上一點 <span>$M$</span>，這點具有什麼特性？ 整理下我們有的式子。</p>
-
-<p><code>$$
-2\times (\underbrace{n_1 C + L_1 + \overline{SE}}_{turtle 走的長度})  = \underbrace{n_2 C+L_1 + \overline{SE}}_{hare 走的長度}
-$$</code></p>
-
+步(e.g <code>nums[i]</code>)，因為迴圈存在，步數公因數又為 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted --> 所以最後一定會
+相遇於 cycle 上一點 <!-- raw HTML omitted -->$M$<!-- raw HTML omitted -->，這點具有什麼特性？ 整理下我們有的式子。</p>
+<p><code>$$ 2\times (\underbrace{n_1 C + L_1 + \overline{SE}}_{turtle 走的長度})  = \underbrace{n_2 C+L_1 + \overline{SE}}_{hare 走的長度} $$</code></p>
 <p>移項可得</p>
-
-<p><code>$$
-L_1 + \overline{SE} = (n_2 - 2n_1)C = nC, \quad n \in \mathbb{N}
-$$</code></p>
-
+<p><code>$$ L_1 + \overline{SE} = (n_2 - 2n_1)C = nC, \quad n \in \mathbb{N} $$</code></p>
 <ul>
-<li><p><span>$n = 1$</span>， <span>$\overline{SE} = L_2$</span>，令兩個 pointer 分別從
-M 和起始點出發(但這次步伐相同！)，交會點即是 <span>$E$</span> 。</p></li>
+<li>
+<p><!-- raw HTML omitted -->$n = 1$<!-- raw HTML omitted -->， <!-- raw HTML omitted -->$\overline{SE} = L_2$<!-- raw HTML omitted -->，令兩個 pointer 分別從
+M 和起始點出發(但這次步伐相同！)，交會點即是 <!-- raw HTML omitted -->$E$<!-- raw HTML omitted --> 。</p>
+</li>
+<li>
+<p><!-- raw HTML omitted -->$n = k$<!-- raw HTML omitted -->， <!-- raw HTML omitted -->$\overline{SE} = (k-1)C + L_2$<!-- raw HTML omitted -->，與上面一樣，會
+發現交會點亦是 <!-- raw HTML omitted -->$E$<!-- raw HTML omitted --> 。</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findDuplicate</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&amp;</span> nums)
+{
+  <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+  <span style="color:#66d9ef">int</span> h <span style="color:#f92672">=</span> nums[nums[<span style="color:#ae81ff">0</span>]];
+  <span style="color:#66d9ef">while</span> (t <span style="color:#f92672">!</span><span style="color:#f92672">=</span> h){
+    t <span style="color:#f92672">=</span> nums[t];
+    h <span style="color:#f92672">=</span> nums[nums[h]];
+  }
 
-<li><p><span>$n = k$</span>， <span>$\overline{SE} = (k-1)C + L_2$</span>，與上面一樣，會
-發現交會點亦是 <span>$E$</span> 。</p></li>
+  h <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">while</span> (t <span style="color:#f92672">!</span><span style="color:#f92672">=</span> h){
+    t <span style="color:#f92672">=</span> nums[t];
+    h <span style="color:#f92672">=</span> nums[h];
+  }
+  <span style="color:#66d9ef">return</span> t;
+}
+</code></pre></div><p>很精闢的演算法！</p>
+  
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fleetcode-287-find-the-duplicate-number%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fleetcode-287-find-the-duplicate-number%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fleetcode-287-find-the-duplicate-number%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fleetcode-287-find-the-duplicate-number%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fleetcode-287-find-the-duplicate-number%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fleetcode-287-find-the-duplicate-number%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
 </ul>
 
-<pre><code class="language-cpp">int findDuplicate(vector&lt;int&gt;&amp; nums)
-{
-  int t = nums[0];
-  int h = nums[nums[0]];
-  while (t != h){
-    t = nums[t];
-    h = nums[nums[h]];
-  }
 
-  h = 0;
-  while (t != h){
-    t = nums[t];
-    h = nums[h];
-  }
-  return t;
-}
-</code></pre>
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
 
-<p>很精闢的演算法！</p>
-  
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -449,8 +457,8 @@ M 和起始點出發(但這次步伐相同！)，交會點即是 <span>$E$</span
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -459,10 +467,8 @@ M 和起始點出發(但這次步伐相同！)，交會點即是 <span>$E$</span
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -479,24 +485,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

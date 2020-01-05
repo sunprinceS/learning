@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="The VC Dimension">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>NTU Machine Learning - Lec7 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>04 Jan 2018</time>
   </div>
+
   
 
   
@@ -276,112 +276,123 @@
 
 </div>
 
-
-  <p>於前一講中，我們證明了 growth function 為 <strong>POLY(N)</strong> iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 <span>$E_i(h) \approx E_o(h)$</span>  (if 數據點夠多 <span>$N$</span> )。而這一講中，我們由 break point 引進 <strong>VC Dimension</strong> <span>$d \scriptscriptstyle VC$</span> ，來當作衡量 <span>$\mathcal{H}$</span> 複雜度的一個指標。</p>
-
+  <p>於前一講中，我們證明了 growth function 為 <strong>POLY(N)</strong> iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 <!-- raw HTML omitted -->$E_i(h) \approx E_o(h)$<!-- raw HTML omitted -->  (if 數據點夠多 <!-- raw HTML omitted -->$N$<!-- raw HTML omitted --> )。而這一講中，我們由 break point 引進 <strong>VC Dimension</strong> <!-- raw HTML omitted -->$d \scriptscriptstyle VC$<!-- raw HTML omitted --> ，來當作衡量 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 複雜度的一個指標。</p>
 <h2 id="vc-dimension">VC Dimension</h2>
-
-<div>
-\[
-\text{largest N for which }\, m_H(N) = 2^N
-\]
-</div>
-
-<p>其實就是 (minimum) break point <span>$k$</span> 的前一點罷了。</p>
-
-<h2 id="general-pla-w-higher-dimension-span-d-span">General PLA (w/ higher dimension <span>$d$</span>)</h2>
-
-<p><code>$$
-\boxed{d_{VC} = d + 1}
-$$</code></p>
-
+<!-- raw HTML omitted -->
+<p>其實就是 (minimum) break point <!-- raw HTML omitted -->$k$<!-- raw HTML omitted --> 的前一點罷了。</p>
+<h2 id="general-pla-w-higher-dimension-spandspan">General PLA (w/ higher dimension <!-- raw HTML omitted -->$d$<!-- raw HTML omitted -->)</h2>
+<p><code>$$ \boxed{d_{VC} = d + 1} $$</code></p>
 <p><strong>proof</strong>:</p>
-
 <ul>
-<li><span>$d \scriptscriptstyle VC$</span> <span>$\geq d + 1$</span>:<br />
-That is, for hypothesis <span>$\mathcal{H}$</span>， <span>$\exists$</span> some
-<span>$d+1$</span> 個數據點 can be shattered，所以我們就構造一組這樣的
-<span>$\mathcal{D}$</span> 就可以得證了！</li>
+<li><!-- raw HTML omitted -->$d \scriptscriptstyle VC$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\geq d + 1$<!-- raw HTML omitted -->:\<br>
+That is, for hypothesis <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted -->， <!-- raw HTML omitted -->$\exists$<!-- raw HTML omitted --> some
+<!-- raw HTML omitted -->$d+1$<!-- raw HTML omitted --> 個數據點 can be shattered，所以我們就構造一組這樣的
+<!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted --> 就可以得證了！</li>
 </ul>
-
 <blockquote>
-<p><img src="https://sunprinces.github.io/learning/img/post/dvc_1.png" width="70%" style="border-radius: 0%;"></p>
-
-<p>一個可以選擇的數據是在原點及單位正交基底向量 (簡單起見，選擇 <span>$\mathbf{e}_i$</span>)
-(會這樣想，可以回到<a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec5/">第五講</a>中提到，那些退化的 case 反而是不能被 shatter 的特例，所以我們應該是要找能展出整個 input space 的基底才是)</p>
-
-<p>而 <strong>shatter</strong> 表示什麼呢？表示 given 一組任意的 label <span>$\mathbf{y}$</span>，我們都能找到一組係數與 <span>$X$</span> 乘一乘後得到它。</p>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/dvc_2.png" width="80%" style="border-radius: 0%;"></p>
-
-<p>因為 <span>$\det(X) = 1$</span>，所以其 invertible !</p>
+<!-- raw HTML omitted -->
 </blockquote>
-
+<blockquote>
+<p>一個可以選擇的數據是在原點及單位正交基底向量 (簡單起見，選擇 <!-- raw HTML omitted -->$\mathbf{e}_i$<!-- raw HTML omitted -->)
+(會這樣想，可以回到<a href="https://sunprinces.github.io/learning/2017/12/ntu-machine-learning---lec5/">第五講</a>中提到，那些退化的 case 反而是不能被 shatter 的特例，所以我們應該是要找能展出整個 input space 的基底才是)</p>
+</blockquote>
+<blockquote>
+<p>而 <strong>shatter</strong> 表示什麼呢？表示 given 一組任意的 label <!-- raw HTML omitted -->$\mathbf{y}$<!-- raw HTML omitted -->，我們都能找到一組係數與 <!-- raw HTML omitted -->$X$<!-- raw HTML omitted --> 乘一乘後得到它。</p>
+</blockquote>
+<blockquote>
+<!-- raw HTML omitted -->
+</blockquote>
+<blockquote>
+<p>因為 <!-- raw HTML omitted -->$\det(X) = 1$<!-- raw HTML omitted -->，所以其 invertible !</p>
+</blockquote>
 <ul>
-<li><span>$d \scriptscriptstyle VC$</span> <span>$\leq d + 1$</span>: <br />
-That is, for hypothesis <span>$\mathcal{H}$</span>， <span>$\forall d+2$</span>
+<li><!-- raw HTML omitted -->$d \scriptscriptstyle VC$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\leq d + 1$<!-- raw HTML omitted -->: \<br>
+That is, for hypothesis <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted -->， <!-- raw HTML omitted -->$\forall d+2$<!-- raw HTML omitted -->
 個數據點都不能被 shatter 。</li>
 </ul>
-
 <blockquote>
-<p>而這裡的想法是利用反證法，一樣構造一組 <span>$d+2$</span> 個 row 的資料矩陣 <span>$X$</span> ，先假設存在一組 <span>$\mathbf{w}$</span> 滿足我們所給定的 label assignment。<br />
-但因為 <code>null</code>(<span>$X$</span>) <span>$\not = 0$</span>，所以最後一筆數據不能完全隨心所欲的 assign ，而是 depend on 前 <span>$d+1$</span> 個，而正是利用此矛盾點，在最後加入一個使得整筆資料不能被 shatter 的老鼠屎 (從 2D 的例子來看，就是找出會讓資料們變成線性不可分的點，在更高維也是)，便能得證！</p>
+<p>而這裡的想法是利用反證法，一樣構造一組 <!-- raw HTML omitted -->$d+2$<!-- raw HTML omitted --> 個 row 的資料矩陣 <!-- raw HTML omitted -->$X$<!-- raw HTML omitted --> ，先假設存在一組 <!-- raw HTML omitted -->$\mathbf{w}$<!-- raw HTML omitted --> 滿足我們所給定的 label assignment。\<br>
+但因為 <code>null</code>(<!-- raw HTML omitted -->$X$<!-- raw HTML omitted -->) <!-- raw HTML omitted -->$\not = 0$<!-- raw HTML omitted -->，所以最後一筆數據不能完全隨心所欲的 assign ，而是 depend on 前 <!-- raw HTML omitted -->$d+1$<!-- raw HTML omitted --> 個，而正是利用此矛盾點，在最後加入一個使得整筆資料不能被 shatter 的老鼠屎 (從 2D 的例子來看，就是找出會讓資料們變成線性不可分的點，在更高維也是)，便能得證！</p>
 </blockquote>
-
 <h3 id="exploiting-linear-dependence">Exploiting Linear dependence</h3>
-
 <blockquote>
-<p>Assume the labels for previous <span>$d+1$</span> points are <span>$\lbrace \textcolor{blue}{\texttt{o}},\textcolor{red}{\texttt{x}},\cdots,\textcolor{red}{\texttt{x}} \rbrace$</span></p>
-
-<p><code>$$
-\mathbf{x}_{d+2} = \color{blue}{a_1}\mathbf{x}_1 + \color{red}{a_2}\mathbf{x_2}
-+ \cdots + \color{red}{a_{d+1}}\mathbf{x}_{d+1}
-$$</code></p>
-
-<p>Then, multiply by <span>$\mathbf{w}^T$</span>, we can find contradiction if the
-label for <span>$\mathbf{x} \scriptscriptstyle d+2$</span> is <span>$\textcolor{red}{\texttt{x}}$</span></p>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/dvc_3.png" width="70%" style="border-radius: 0%;"></p>
+<p>Assume the labels for previous <!-- raw HTML omitted -->$d+1$<!-- raw HTML omitted --> points are <!-- raw HTML omitted -->$\lbrace \textcolor{blue}{\texttt{o}},\textcolor{red}{\texttt{x}},\cdots,\textcolor{red}{\texttt{x}} \rbrace$<!-- raw HTML omitted --></p>
 </blockquote>
-
-<h2 id="interpretation-of-vc-dimension">Interpretation of VC Dimension</h2>
-
+<blockquote>
+<p>``$$
+\mathbf{x}_{d+2} = \color{blue}{a_1}\mathbf{x}_1 + \color{red}{a_2}\mathbf{x_2}</p>
+</blockquote>
 <ul>
-<li><strong>Effective</strong> Degree of Freedom (<span>$\approx$</span> number of free params)</li>
+<li>\cdots + \color{red}{a_{d+1}}\mathbf{x}_{d+1}
+$$``</li>
+</ul>
+<blockquote>
+<p>Then, multiply by <!-- raw HTML omitted -->$\mathbf{w}^T$<!-- raw HTML omitted -->, we can find contradiction if the
+label for <!-- raw HTML omitted -->$\mathbf{x} \scriptscriptstyle d+2$<!-- raw HTML omitted --> is <!-- raw HTML omitted -->$\textcolor{red}{\texttt{x}}$<!-- raw HTML omitted --></p>
+</blockquote>
+<blockquote>
+<!-- raw HTML omitted -->
+</blockquote>
+<h2 id="interpretation-of-vc-dimension">Interpretation of VC Dimension</h2>
+<ul>
+<li><strong>Effective</strong> Degree of Freedom (<!-- raw HTML omitted -->$\approx$<!-- raw HTML omitted --> number of free params)</li>
 <li>Model Complexity</li>
 </ul>
-
 <p>We can rewrite the VC Bound as follows</p>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/vc_1.png" width="70%" style="border-radius: 0%;"></p>
-
-<p><span>$\textcolor{purple}{\text{with prob.}  \, \geq 1 - \delta }$</span>， The
-error tolerance <span>$\epsilon$</span> will be</p>
-
-<p><code>$$
-\sqrt{\frac{8}{N}\ln(\frac{4 \, (2N)^{d_{VC}}}{\color{purple}{\delta}})}
-$$</code></p>
-
-<p>And we also call it <strong>penalty for model complexity</strong> <span>$\Omega(N,\mathcal{H},\delta)$</span></p>
-
-<p><code>$$
-\boxed{E_o(g) \leq E_i(g) + \underset{\color{red}{\Omega(N,\mathcal{H},\delta)}}{\underbrace{\sqrt{\frac{8}{N}\ln(\frac{4 \, (2N)^{d_{VC}}}{\delta})}}}}
-$$</code></p>
-
-<p><strong>Conclusion</strong>: powerful <span>$\mathcal{H}$</span> IS NOT always good! <br />
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted -->$\textcolor{purple}{\text{with prob.}  , \geq 1 - \delta }$<!-- raw HTML omitted -->， The
+error tolerance <!-- raw HTML omitted -->$\epsilon$<!-- raw HTML omitted --> will be</p>
+<p><code>$$ \sqrt{\frac{8}{N}\ln(\frac{4 \, (2N)^{d_{VC}}}{\color{purple}{\delta}})} $$</code></p>
+<p>And we also call it <strong>penalty for model complexity</strong> <!-- raw HTML omitted -->$\Omega(N,\mathcal{H},\delta)$<!-- raw HTML omitted --></p>
+<p><code>$$ \boxed{E_o(g) \leq E_i(g) + \underset{\color{red}{\Omega(N,\mathcal{H},\delta)}}{\underbrace{\sqrt{\frac{8}{N}\ln(\frac{4 \, (2N)^{d_{VC}}}{\delta})}}}} $$</code></p>
+<p><strong>Conclusion</strong>: powerful <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> IS NOT always good! \<br>
 不能只追求在 training data 上能完全 fit ，而引進過高的模型複雜度導致 <strong>overfitting</strong> 。</p>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/vc_2.png" width="90%" style="border-radius: 0%;"></p>
-
+<!-- raw HTML omitted -->
 <p><strong>Some Remark</strong>: VC bound 因為處理的情況很 general ，其是相當 <strong>LOOSE</strong> 的，實務上要達到夠小的 error rate ，不一定需要其所給出所需要的那麼多 data 量</p>
-
 <h2 id="reference">Reference</h2>
-
 <ul>
 <li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/07_handout.pdf">林軒田老師的講義</a></li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f01%2fntu-machine-learning-lec7%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f01%2fntu-machine-learning-lec7%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f01%2fntu-machine-learning-lec7%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f01%2fntu-machine-learning-lec7%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f01%2fntu-machine-learning-lec7%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f01%2fntu-machine-learning-lec7%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -437,8 +448,8 @@ $$</code></p>
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -447,10 +458,8 @@ $$</code></p>
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -467,24 +476,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

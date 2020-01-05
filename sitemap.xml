@@ -1,35 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/cs294/</loc>
     <lastmod>2019-01-10T11:59:24+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/ntu/</loc>
     <lastmod>2019-01-10T11:59:24+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/post/</loc>
     <lastmod>2019-01-10T11:59:24+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://sunprinces.github.io/learning/tags/rl/</loc>
-    <lastmod>2019-01-10T11:59:24+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/reinforcement-learning/</loc>
     <lastmod>2019-01-10T11:59:24+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -38,21 +28,23 @@
   </url>
   
   <url>
+    <loc>https://sunprinces.github.io/learning/tags/rl/</loc>
+    <lastmod>2019-01-10T11:59:24+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/</loc>
     <lastmod>2019-01-10T11:59:24+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/</loc>
     <lastmod>2019-01-10T11:59:24+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/</loc>
     <lastmod>2019-01-10T11:59:24+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -83,13 +75,11 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/machine-learning/</loc>
     <lastmod>2018-11-02T10:23:24+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/machine-learning-foundation/</loc>
     <lastmod>2018-11-02T10:23:24+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -105,7 +95,6 @@
   <url>
     <loc>https://sunprinces.github.io/learning/topics/beyond-rnn/</loc>
     <lastmod>2018-05-20T16:45:08+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -116,25 +105,21 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/rnn/</loc>
     <lastmod>2018-05-20T16:45:08+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/asr/</loc>
     <lastmod>2018-04-21T16:45:08+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/kth/</loc>
     <lastmod>2018-04-21T16:45:08+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/speech-processing/</loc>
     <lastmod>2018-04-21T16:45:08+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -190,7 +175,6 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/leetcode/</loc>
     <lastmod>2018-03-18T15:44:33+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -201,19 +185,16 @@
   <url>
     <loc>https://sunprinces.github.io/learning/topics/online-judge/</loc>
     <lastmod>2018-03-18T15:44:33+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/programming/</loc>
     <lastmod>2018-03-18T15:44:33+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/c&#43;&#43;/</loc>
     <lastmod>2018-03-13T20:44:58+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -224,13 +205,11 @@
   <url>
     <loc>https://sunprinces.github.io/learning/topics/cheatsheet/</loc>
     <lastmod>2018-03-13T20:44:58+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/stl/</loc>
     <lastmod>2018-03-13T20:44:58+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -244,15 +223,8 @@
   </url>
   
   <url>
-    <loc>https://sunprinces.github.io/learning/tags/ir/</loc>
-    <lastmod>2018-01-31T23:14:08+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://sunprinces.github.io/learning/topics/information-retrieval/</loc>
     <lastmod>2018-01-31T23:14:08+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -261,9 +233,13 @@
   </url>
   
   <url>
+    <loc>https://sunprinces.github.io/learning/tags/ir/</loc>
+    <lastmod>2018-01-31T23:14:08+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sunprinces.github.io/learning/tags/nlp/</loc>
     <lastmod>2018-01-31T23:14:08+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -319,13 +295,11 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/computational-geometry/</loc>
     <lastmod>2017-12-05T09:56:56+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/kattis/</loc>
     <lastmod>2017-12-05T09:56:56+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -336,7 +310,6 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/graph-theory/</loc>
     <lastmod>2017-10-31T08:32:38+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -347,7 +320,6 @@
   <url>
     <loc>https://sunprinces.github.io/learning/topics/advanced-algorithm/</loc>
     <lastmod>2017-10-14T00:24:36+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -358,19 +330,16 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/algorithm/</loc>
     <lastmod>2017-10-14T00:24:36+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/data-structure/</loc>
     <lastmod>2017-10-14T00:24:36+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/randomized-algorithm/</loc>
     <lastmod>2017-10-14T00:24:36+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -386,13 +355,11 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/approximation-algorithm/</loc>
     <lastmod>2017-09-29T21:19:19+02:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/linear-programming/</loc>
     <lastmod>2017-09-29T21:19:19+02:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -413,13 +380,11 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/dp/</loc>
     <lastmod>2017-09-12T08:32:38+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/greedy/</loc>
     <lastmod>2017-09-12T08:32:38+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -430,7 +395,6 @@
   <url>
     <loc>https://sunprinces.github.io/learning/topics/algorithm/</loc>
     <lastmod>2017-09-08T22:29:20+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -461,7 +425,6 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/git/</loc>
     <lastmod>2017-08-20T08:01:34+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -472,13 +435,11 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/%E5%B0%8F%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2017-08-20T08:01:34+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/topics/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2017-08-20T08:01:34+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -504,7 +465,6 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/rounding-data-dp/</loc>
     <lastmod>2017-08-12T20:39:07+02:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -520,7 +480,6 @@
   <url>
     <loc>https://sunprinces.github.io/learning/topics/algorithmic-game-theory/</loc>
     <lastmod>2017-05-27T17:06:53+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -531,19 +490,16 @@
   <url>
     <loc>https://sunprinces.github.io/learning/tags/game-theory/</loc>
     <lastmod>2017-05-27T17:06:53+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/open-course/</loc>
     <lastmod>2017-05-27T17:06:53+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/stanford/</loc>
     <lastmod>2017-05-27T17:06:53+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -567,21 +523,18 @@
   </url>
   
   <url>
-    <loc>https://sunprinces.github.io/learning/topics/web-development/</loc>
-    <lastmod>2017-05-11T17:54:03+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://sunprinces.github.io/learning/tags/hugo/</loc>
     <lastmod>2017-05-11T17:54:03+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://sunprinces.github.io/learning/tags/static-site-generator/</loc>
     <lastmod>2017-05-11T17:54:03+08:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://sunprinces.github.io/learning/topics/web-development/</loc>
+    <lastmod>2017-05-11T17:54:03+08:00</lastmod>
   </url>
   
   <url>

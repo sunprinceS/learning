@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Neural Turing Machine (NTM)">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Beyond RNN - Lec1 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>20 May 2018</time>
   </div>
+
   
 
   
@@ -276,249 +276,196 @@
 
 </div>
 
-
   <p>Beyond RNN 這個系列會 focus 在近年來各式各樣我覺得有趣的 RNN 變形，及其相關的實做。</p>
-
 <p>這篇文章的相關程式碼，放在<a href="https://github.com/sunprinceS/Neural-Turing-Machine">這裡</a>。</p>
-
 <p>最近剛好在學習 PyTorch，便想找個適合的題目來練手，但一昧地 implement 或看論文都有些乏味，希望自己能同時鞏固實做能力又學習新的知識，也因此有了這個系列 - Beyond RNN。</p>
-
 <p>有接觸過 DL 的讀者，想必對 RNN (<em>Recurrent Neural Network</em>) 並不陌生，它主要應用在<strong>資料有順序性</strong>的 scenerio (e.g 語音,文字,股票走勢(?😛)等等 &hellip;)，除了 single cell 的變形如 LSTM (Long Short Term Memory) 和 GRU (Gated Recurrent Unit)之外，另外有許多將其 equip 在不同的架構上，強化其功能的延伸。</p>
-
 <h2 id="introduction">Introduction</h2>
-
 <p>這一篇 Post 會介紹的是 <a href="https://arxiv.org/abs/1410.5401">Neural Turing Machine</a> ，是 DeepMind 在 2014 年
 所發表的研究。</p>
-
 <p>RNN-type 的 network ，之所以能處理 sequence 的問題，關鍵在它 keep 了 hidden
-state (對應到 LSTM 的 <span>$h,c$</span>&hellip; )，可以理解成當作到目前為止，綜合了<strong>所有 input 的
+state (對應到 LSTM 的 <!-- raw HTML omitted -->$h,c$<!-- raw HTML omitted -->&hellip; )，可以理解成當作到目前為止，綜合了<strong>所有 input 的
 representation</strong> ，而其又會隨著新的 input 進來而有所改變。</p>
-
 <h2 id="motivation">Motivation</h2>
-
 <p>一個很自然的問題是，對於那些很長的 sequence ，我們需要開多大的 hidden state 去
 maintain？ 直覺應該是 dimension 要更大，可以想成我們要用一條幾千維的 vector 來當 hidden state。</p>
-
 <p>而就像 <strong>CNN</strong> 的 motivation 一樣，我們希望我們的 model 能引進多一點先備的資訊。在 CNN 中，對於 structured 的影像，直接把每個 pixel 展平成 1D vector 作為 model 的 input，其 performance 比不上將其 treat 成 2D Tensor ，考慮鄰近 pixel 的 額外 information。(工商時間: 這裡有我之前當 TA 時出給同學的<a href="https://sunprinces.github.io/ML-Assignment3/">練習</a>，在 FER 這個 dataset 上比較 CNN 跟 DNN 的 performance 優劣)</p>
-
 <p>而 NTM 的 idea 也是類似，藉由引進 extra memory ，把原先那個上千維的 1D hidden vector，折成 2D Tensor 作為 memory 。並仿效現在電腦的架構，構造其與 input interact 的 mechanism，把 sequence 先後的資訊給考慮進來。</p>
-
 <h2 id="basic-structure">Basic Structure</h2>
-
-<p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-structure.png" width="60%" style="border-radius: 0%;"></center></p>
-
-<p>讀寫 memory 這件事分成兩個步驟，<strong>內容</strong>及<strong>位置</strong>。<br />
-仔細想想，「位置」在 memory 中，是<strong>離散</strong>的存在，該如何把從哪裡讀/寫這件事變成可以用 NN 可以 train 呢？<br />
+<!-- raw HTML omitted -->
+<p>讀寫 memory 這件事分成兩個步驟，<strong>內容</strong>及<strong>位置</strong>。\<br>
+仔細想想，「位置」在 memory 中，是<strong>離散</strong>的存在，該如何把從哪裡讀/寫這件事變成可以用 NN 可以 train 呢？\<br>
 想法就是讓其<strong>可微</strong>，這裡的作法是每次在讀寫時，不是對 specific 位置的 memory cell 做操作，而
-是對一個 specific distribution <span>$w$</span> 的 memory cell 們做操作 (簡單來說，就是同時考慮所有
+是對一個 specific distribution <!-- raw HTML omitted -->$w$<!-- raw HTML omitted --> 的 memory cell 們做操作 (簡單來說，就是同時考慮所有
 的 memory cell，但根據裡頭內容的不同，決定其所佔的 weight)。</p>
-
-<h2 id="read-write">Read &amp; Write</h2>
-
-<p>假設時間點 <span>$t$</span> ，我們有了一個 address distribution <span>$w_t$</span>，讀出來的內容很簡單就是</p>
-
-<div>
-\[
-\mathbf{r}_t \leftarrow \sum_i w_t(i)\mathbf{M}(i)
-\]
-</div>
-
-<pre><code class="language-python"> def read(self, w):
-        &quot;&quot;&quot; Read memory corresponding to the address weighting
-        Arguments:
-            w: shape = (batch_size,N)
-        Outputs:
-            shape = (batch_size,M)
-        &quot;&quot;&quot;
-        return torch.matmul(w.unsqueeze(1), self.memory).squeeze(1)
-</code></pre>
-
-<p>寫入 memory 就是</p>
-
-<div>
-\[
-\mathbf{M}_t(i) \leftarrow \tilde \mathbf{M}_t(i)[\mathbf{1} - w_t(i) \mathbf{e}_t] + w_t(i)\mathbf{a}_t
-\]
-</div>
-
-<pre><code class="language-python">def write(self, w, e, a):
-        &quot;&quot;&quot; Erase/Add memory corresponding to the address weighting
-        Arguments:
-            w: shape = (batch_size,N)
-            e,a: shape = (batch_size,M)
-        &quot;&quot;&quot;
-        self.prev_mem = self.memory
-        erase = torch.matmul(w.unsqueeze(-1), e.unsqueeze(1))
-        add = torch.matmul(w.unsqueeze(-1), a.unsqueeze(1))
-        self.memory = self.prev_mem * (1 - erase) + add
-</code></pre>
-
-<h2 id="address-mechanism">Address Mechanism</h2>
-
+<h2 id="read--write">Read &amp; Write</h2>
+<p>假設時間點 <!-- raw HTML omitted -->$t$<!-- raw HTML omitted --> ，我們有了一個 address distribution <!-- raw HTML omitted -->$w_t$<!-- raw HTML omitted -->，讀出來的內容很簡單就是</p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">read</span>(self, w):
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> Read memory corresponding to the address weighting</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        Arguments:</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">            w: shape = (batch_size,N)</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        Outputs:</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">            shape = (batch_size,M)</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+        <span style="color:#66d9ef">return</span> torch<span style="color:#f92672">.</span>matmul(w<span style="color:#f92672">.</span>unsqueeze(<span style="color:#ae81ff">1</span>), self<span style="color:#f92672">.</span>memory)<span style="color:#f92672">.</span>squeeze(<span style="color:#ae81ff">1</span>)
+</code></pre></div><p>寫入 memory 就是</p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">write</span>(self, w, e, a):
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74"> Erase/Add memory corresponding to the address weighting</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        Arguments:</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">            w: shape = (batch_size,N)</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">            e,a: shape = (batch_size,M)</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">        </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+        self<span style="color:#f92672">.</span>prev_mem <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>memory
+        erase <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>matmul(w<span style="color:#f92672">.</span>unsqueeze(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>), e<span style="color:#f92672">.</span>unsqueeze(<span style="color:#ae81ff">1</span>))
+        add <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>matmul(w<span style="color:#f92672">.</span>unsqueeze(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>), a<span style="color:#f92672">.</span>unsqueeze(<span style="color:#ae81ff">1</span>))
+        self<span style="color:#f92672">.</span>memory <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>prev_mem <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> erase) <span style="color:#f92672">+</span> add
+</code></pre></div><h2 id="address-mechanism">Address Mechanism</h2>
 <p>我覺得這部份就是 NTM 中最精華的一段了，討論了如何得到 address distribution
-<span>$w_t$</span>，所用到的概念，也是之後 attention-based model 的 motivation。</p>
-
+<!-- raw HTML omitted -->$w_t$<!-- raw HTML omitted -->，所用到的概念，也是之後 attention-based model 的 motivation。</p>
 <h3 id="content-based-attention">Content-based Attention</h3>
-
-<p>根據 memory cell 現在所紀錄的內容與 controller 的 output key vector <span>$\mathbf{k}$</span> (亦即 <span>$f$</span>(input))做比較，決定該 memory cell 所要佔的比重 (越類似者，權重越高)。</p>
-
-<div>
-\[
-w_c(i) \leftarrow \frac{e^{\beta K[\textbf{k},\textbf{M}(i)] } }{ \sum_{j} e^{ \beta K[\textbf{k},\textbf{M}(j)] } }
-\]
-</div>
-
-<p><strong>Note:</strong> <span>$K[u,v]$</span>是 similarity 的 measure，一般用 cosine
+<p>根據 memory cell 現在所紀錄的內容與 controller 的 output key vector <!-- raw HTML omitted -->$\mathbf{k}$<!-- raw HTML omitted --> (亦即 <!-- raw HTML omitted -->$f$<!-- raw HTML omitted -->(input))做比較，決定該 memory cell 所要佔的比重 (越類似者，權重越高)。</p>
+<!-- raw HTML omitted -->
+<p><strong>Note:</strong> <!-- raw HTML omitted -->$K[u,v]$<!-- raw HTML omitted -->是 similarity 的 measure，一般用 cosine
 similarity</p>
-
 <h3 id="location-based-attention">Location-based Attention</h3>
-
-<p>As title，我們從上一步中，得到了 <span>$w_c$</span>，但根據不同的 input ，又再多考慮這些 moemory cell 與其鄰近者的 distribution 。</p>
-
+<p>As title，我們從上一步中，得到了 <!-- raw HTML omitted -->$w_c$<!-- raw HTML omitted -->，但根據不同的 input ，又再多考慮這些 moemory cell 與其鄰近者的 distribution 。</p>
 <h4 id="interpolation">Interpolation</h4>
-
 <p>考慮上一個時間點 address weighting 的影響</p>
-
-<div>
-\[
-\textbf{w}_{t} \leftarrow g \textbf{w}_{t} + (1-g) \textbf{w}_{t-1}
-\]
-</div>
-
+<!-- raw HTML omitted -->
 <h4 id="convolution-shift">Convolution Shift</h4>
-
 <p>將某一位置的 memory cell 之 weighting 上，再考慮其與鄰近 memory cell 的
-distribution (在此我們考慮左右各一個 memory，如果 weight 是 <span>$(0,0,1)$</span> 的話，意思
+distribution (在此我們考慮左右各一個 memory，如果 weight 是 <!-- raw HTML omitted -->$(0,0,1)$<!-- raw HTML omitted --> 的話，意思
 就是原先該 cell 得到的所有 weight 都 apply 給其右邊的 cell)</p>
+<!-- raw HTML omitted -->
+<h4 id="reweighting---sharpening">Reweighting - Sharpening</h4>
+<!-- raw HTML omitted -->
+<p>綜合起來，整個 mechanism 是這樣運作的。</p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">address</span>(self, k, beta, g, s, gamma, w_prev):
+       <span style="color:#75715e"># Content focus</span>
+       wc <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_similarity(k, beta)
 
-<div>
-\[
-w(i) \leftarrow w(i+1) s(-1) + w(i)s(0) + w(i-1)s(1)
-\]
-</div>
+       <span style="color:#75715e"># Location focus</span>
+       wg <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_interpolate(w_prev, wc, g)
+       w_hat <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_shift(wg, s)
+       w <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_sharpen(w_hat, gamma)
 
-<h4 id="reweighting-sharpening">Reweighting - Sharpening</h4>
+       <span style="color:#66d9ef">return</span> w
 
-<div>
-\[
-w(i) \leftarrow \frac{w(i)^{\gamma}}{\sum_{j}w(j)^{\gamma}}
-\]
-</div>
+   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_similarity</span>(self, k, beta):
+       cos_sim <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>cosine_similarity(self<span style="color:#f92672">.</span>memory <span style="color:#f92672">+</span> <span style="color:#ae81ff">1e-16</span>, k<span style="color:#f92672">.</span>unsqueeze(<span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1e-16</span>, dim<span style="color:#f92672">=</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+       w <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>softmax(beta <span style="color:#f92672">*</span> cos_sim , dim<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+       <span style="color:#66d9ef">return</span> w
 
-<p>綜合起來，整個 mechanism 是這樣運作的。
-<center><img src="https://sunprinces.github.io/learning/img/post/ntm-address-mechanism.png" width="80%" style="border-radius: 0%;"></center></p>
+   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_interpolate</span>(self, w_prev, wc, g):
+       <span style="color:#66d9ef">return</span> g <span style="color:#f92672">*</span> wc <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> g) <span style="color:#f92672">*</span> w_prev
 
-<pre><code class="language-python">def address(self, k, beta, g, s, gamma, w_prev):
-       # Content focus
-       wc = self._similarity(k, beta)
+   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_shift</span>(self, wg, s):
+       <span style="color:#75715e">#consider 3 locations together</span>
+       conved <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>cat([wg[:,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:],wg,wg[:,:<span style="color:#ae81ff">1</span>]],dim<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) <span style="color:#75715e">#pad in the beginning and end</span>
+       result <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>conv1d(conved<span style="color:#f92672">.</span>unsqueeze(<span style="color:#ae81ff">1</span>),s<span style="color:#f92672">.</span>unsqueeze(<span style="color:#ae81ff">1</span>))
+       <span style="color:#66d9ef">return</span> torch<span style="color:#f92672">.</span>cat([result[i:i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>,i,:] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(self<span style="color:#f92672">.</span>batch_size)])
 
-       # Location focus
-       wg = self._interpolate(w_prev, wc, g)
-       w_hat = self._shift(wg, s)
-       w = self._sharpen(w_hat, gamma)
-
-       return w
-
-   def _similarity(self, k, beta):
-       cos_sim = F.cosine_similarity(self.memory + 1e-16, k.unsqueeze(1) + 1e-16, dim=-1)
-       w = F.softmax(beta * cos_sim , dim=1)
-       return w
-
-   def _interpolate(self, w_prev, wc, g):
-       return g * wc + (1 - g) * w_prev
-
-   def _shift(self, wg, s):
-       #consider 3 locations together
-       conved = torch.cat([wg[:,-1:],wg,wg[:,:1]],dim=1) #pad in the beginning and end
-       result = F.conv1d(conved.unsqueeze(1),s.unsqueeze(1))
-       return torch.cat([result[i:i+1,i,:] for i in range(self.batch_size)])
-
-   def _sharpen(self, w_hat, gamma):
-       w = w_hat ** gamma
-       w = torch.div(w, torch.sum(w, dim=1).view(-1, 1) + 1e-16)
-       return w
-</code></pre>
-
-<h2 id="experiment-discussion">Experiment &amp; Discussion</h2>
-
+   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_sharpen</span>(self, w_hat, gamma):
+       w <span style="color:#f92672">=</span> w_hat <span style="color:#f92672">*</span><span style="color:#f92672">*</span> gamma
+       w <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>div(w, torch<span style="color:#f92672">.</span>sum(w, dim<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>view(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1e-16</span>)
+       <span style="color:#66d9ef">return</span> w
+</code></pre></div><h2 id="experiment--discussion">Experiment &amp; Discussion</h2>
 <p>相關實驗可以在 <a href="https://github.com/sunprinceS/Neural-Turing-Machine/blob/master/NTM-Copy-Analysis.ipynb">ipython notebook</a> 找到</p>
-
 <h3 id="copy-task">Copy Task</h3>
-
 <p>這是我隨機用長度為 3 ~ 20 的 sequence 訓練的結果，並拿長度為 30 的 sequence 當作
-validation data。
-<center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-cost-0320.png" width="80%" style="border-radius: 0%;"></center>
-其實到 20k 以後，就可以 fit training data 了，但對於更長的 sequence 之 generalization ，偶爾會有爛掉的可能。</p>
-
+validation data。</p>
+<!-- raw HTML omitted -->
 <p>從 output 的 posterior 來看，也可以看出 model 其實蠻肯定的</p>
-
-<p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-pred-0320.png" width="80%" style="border-radius: 0%;"></center></p>
-
-<p>一個有趣的問題是，如果用更短的 sequence 做 training 呢？<br />
+<!-- raw HTML omitted -->
+<p>一個有趣的問題是，如果用更短的 sequence 做 training 呢？\<br>
 比方說 3 ~ 10 的 sequence ，其還能夠類推到長度為 30 的 sequence 嗎？</p>
-
-<p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-cost-0310.png" width="80%" style="border-radius: 0%;"></center>
-<center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-pred-0310-L20.png" width="80%" style="border-radius: 0%;"></center>
-<center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-pred-0310-L30.png" width="80%" style="border-radius: 0%;"></center></p>
-
-<p>實驗結果看起來是不行😅。<br />
+<!-- raw HTML omitted -->
+<p>實驗結果看起來是不行😅。\<br>
 而且長度 20 的 sequence 也學不起來，這樣是否代表 NTM 沒有 generalization 的能力呢？</p>
-
-<p>讓我們把 train 在 長度為 3 ~ 20 的 sequence 之 model，拿來 predict 在長度 <span>$\geq 20$</span>的 sequence 上。</p>
-
-<p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-copy-error-curve.png" width="60%" style="border-radius: 0%;"></center></p>
-
-<p>看起來它是有學到 generalization 的，<br />
+<p>讓我們把 train 在 長度為 3 ~ 20 的 sequence 之 model，拿來 predict 在長度 <!-- raw HTML omitted -->$\geq 20$<!-- raw HTML omitted -->的 sequence 上。</p>
+<!-- raw HTML omitted -->
+<p>看起來它是有學到 generalization 的，\<br>
 而且對於 memory 已經不夠放的部份，也不是一口氣爛掉，還是有盡量記到一些值。</p>
-
 <p><strong>Remark:</strong> model generalization 的能力與其看過的 training data 有關，但不是簡單的線性關係而已。</p>
-
 <h3 id="some-training-detail">Some Training Detail</h3>
-
 <ul>
 <li>Memory 的使用及 R/W weight 變化</li>
 </ul>
-
-<p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-memory-use.png" width="100%" style="border-radius: 0%;"></center></p>
-
-<p><center><img src="https://sunprinces.github.io/learning/img/post/ntm-head-weight.png" width="100%" style="border-radius: 0%;"></center></p>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <ul>
-<li>這裡實做的 NTM ，contoller 在輸出 final output 時，同時考慮了 read head 以及 input 的值。<br />
-在 prediction 階段， current input 都是 dummy 的 <span>$\mathbf{0}$</span> vector，但如果不考慮它的話，NTM 就無法 train 起來，推測可能是在那個 dummy vector ，對 model 而言就是僅有讀而沒有寫的指令(如同上方所提到的 R/W mode 切換)。</li>
+<li>這裡實做的 NTM ，contoller 在輸出 final output 時，同時考慮了 read head 以及 input 的值。\<br>
+在 prediction 階段， current input 都是 dummy 的 <!-- raw HTML omitted -->$\mathbf{0}$<!-- raw HTML omitted --> vector，但如果不考慮它的話，NTM 就無法 train 起來，推測可能是在那個 dummy vector ，對 model 而言就是僅有讀而沒有寫的指令(如同上方所提到的 R/W mode 切換)。</li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forward</span>(self,x):
+       <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">NTM forward</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+       prev_reads,prev_ctrl_state,prev_heads_state <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>prev_state
+       inp <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>cat([x] <span style="color:#f92672">+</span> prev_reads,dim<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+       ctrl_outp,ctrl_state <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>controller(inp,prev_ctrl_state)
+       reads <span style="color:#f92672">=</span> []
+       heads_state <span style="color:#f92672">=</span> []
+       <span style="color:#66d9ef">for</span> head,prev_head_state <span style="color:#f92672">in</span> zip(self<span style="color:#f92672">.</span>heads,prev_heads_state):
+           <span style="color:#66d9ef">if</span> head<span style="color:#f92672">.</span>is_read_head():
+               r,head_state <span style="color:#f92672">=</span> head(ctrl_outp,prev_head_state)
+               reads <span style="color:#f92672">+</span><span style="color:#f92672">=</span> [r]
+           <span style="color:#66d9ef">else</span>:
+               head_state <span style="color:#f92672">=</span> head(ctrl_outp,prev_head_state)
+           heads_state <span style="color:#f92672">+</span><span style="color:#f92672">=</span> [head_state]
 
-<pre><code class="language-python">def forward(self,x):
-       &quot;&quot;&quot;NTM forward&quot;&quot;&quot;
-       prev_reads,prev_ctrl_state,prev_heads_state = self.prev_state
-       inp = torch.cat([x] + prev_reads,dim=1)
-       ctrl_outp,ctrl_state = self.controller(inp,prev_ctrl_state)
-       reads = []
-       heads_state = []
-       for head,prev_head_state in zip(self.heads,prev_heads_state):
-           if head.is_read_head():
-               r,head_state = head(ctrl_outp,prev_head_state)
-               reads += [r]
-           else:
-               head_state = head(ctrl_outp,prev_head_state)
-           heads_state += [head_state]
+       <span style="color:#75715e"># Retrieve output according to current reads</span>
+       inp2 <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>cat([x] <span style="color:#f92672">+</span> reads, dim<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+       o <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>sigmoid(self<span style="color:#f92672">.</span>fc(inp2)) <span style="color:#75715e"># range: [0,1]</span>
+       self<span style="color:#f92672">.</span>prev_state <span style="color:#f92672">=</span> (reads,ctrl_state,heads_state)
 
-       # Retrieve output according to current reads
-       inp2 = torch.cat([x] + reads, dim=1)
-       o = F.sigmoid(self.fc(inp2)) # range: [0,1]
-       self.prev_state = (reads,ctrl_state,heads_state)
-
-       return o, self.prev_state
-</code></pre>
-
-<h2 id="reference">Reference</h2>
-
+       <span style="color:#66d9ef">return</span> o, self<span style="color:#f92672">.</span>prev_state
+</code></pre></div><h2 id="reference">Reference</h2>
 <ul>
 <li><a href="https://distill.pub/2016/augmented-rnns/">Distill 上的文章</a></li>
 <li><a href="https://arxiv.org/abs/1410.5401">原始論文</a></li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f05%2fbeyond-rnn-lec1%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f05%2fbeyond-rnn-lec1%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f05%2fbeyond-rnn-lec1%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f05%2fbeyond-rnn-lec1%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f05%2fbeyond-rnn-lec1%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f05%2fbeyond-rnn-lec1%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -574,8 +521,8 @@ validation data。
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -584,10 +531,8 @@ validation data。
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -604,24 +549,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

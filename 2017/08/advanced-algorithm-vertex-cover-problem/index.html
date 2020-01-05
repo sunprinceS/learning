@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="An example of deterministic rounding from LP">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Advanced Algorithm - Vertex Cover Problem &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>16 Aug 2017</time>
   </div>
+
   
 
   
@@ -280,65 +280,70 @@
 
 </div>
 
-
   <p>這一講會展示將問題轉化為線性規劃的 form (但可能是 ILP)，利用 LP solver 得到解，做 <strong>LP relaxation</strong> 並證明這個解不會太差 (approx. ratio 不太大)。</p>
-
 <h2 id="vertex-cover-problem">Vertex Cover Problem</h2>
-
-<p>Given a graph <span>$G$</span>, a vertex cover is a set of vertices <span>$S$</span><br />
-s.t. <span>$\forall (u,v) \in E, \; \text{either} \, u \in S \, \text{or} \, v \in S$</span></p>
-
-<p>Want: Find the vertex cover <span>$S$</span> with <span>$\min$</span> # of nodes</p>
-
+<p>Given a graph <!-- raw HTML omitted -->$G$<!-- raw HTML omitted -->, a vertex cover is a set of vertices <!-- raw HTML omitted -->$S$<!-- raw HTML omitted -->\<br>
+s.t. <!-- raw HTML omitted -->$\forall (u,v) \in E, ; \text{either} , u \in S , \text{or} , v \in S$<!-- raw HTML omitted --></p>
+<p>Want: Find the vertex cover <!-- raw HTML omitted -->$S$<!-- raw HTML omitted --> with <!-- raw HTML omitted -->$\min$<!-- raw HTML omitted --> # of nodes</p>
 <h2 id="formulation">Formulation</h2>
-
-<p>For each <span>$v_i \in V$</span>, assign a variable <span>$x_i = $</span>𝟙[<span>$v_i$</span> is chosen]</p>
-
-<div>
-\[
-\min \sum_i x_i \quad s.t. \begin{cases}
- x_i  + x_j \geq 1 \;& , \forall (v_i,v_j) \in E\\
-0  \leq x_i \leq 1 \; & , \textcolor{red}{x_i \in \mathbb{Z}}
-\end{cases}
-\]
-</div>
-
-<p><span>$x_i \in \mathbb{Z}$</span> 這個條件，讓問題是困難的 ILP (which is NPC) ，在此我們把拿掉 (<strong>LP relaxation</strong>)，轉成 LP 。</p>
-
+<p>For each <!-- raw HTML omitted -->$v_i \in V$<!-- raw HTML omitted -->, assign a variable <!-- raw HTML omitted -->$x_i = $<!-- raw HTML omitted -->𝟙[<!-- raw HTML omitted -->$v_i$<!-- raw HTML omitted --> is chosen]</p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted -->$x_i \in \mathbb{Z}$<!-- raw HTML omitted --> 這個條件，讓問題是困難的 ILP (which is NPC) ，在此我們把拿掉 (<strong>LP relaxation</strong>)，轉成 LP 。</p>
 <h2 id="2-approx-algorithm">2-Approx Algorithm</h2>
-
-<p>Run 過 LP solver 後，可得到一組滿足限制式的解 <span>$\mathbf{x}^{\star}$</span>
-<br />
-但這並不是原問題的答案，我們需要利用它找出滿足條件的 <span>$\mathbf{x}^{\prime}$</span>，
+<p>Run 過 LP solver 後，可得到一組滿足限制式的解 <!-- raw HTML omitted -->$\mathbf{x}^{\star}$<!-- raw HTML omitted -->
+\<br>
+但這並不是原問題的答案，我們需要利用它找出滿足條件的 <!-- raw HTML omitted -->$\mathbf{x}^{\prime}$<!-- raw HTML omitted -->，
 有個簡單的演算法</p>
-
-<div>
-\[
-\text{choose all}\, v_i \, \text{subject to} \; x_i^{\star} \geq 0.5
-\]
-</div>
-
+<!-- raw HTML omitted -->
 <h3 id="correctness">Correctness</h3>
-
-<p><span>$\because x_i + x_j \geq 1$</span>，<span>$x_i, x_j$</span> 中至少有一個
-<span>$\geq \frac{1}{2}$</span>，所以每條邊至少會有一個端點被選</p>
-
+<p><!-- raw HTML omitted -->$\because x_i + x_j \geq 1$<!-- raw HTML omitted -->，<!-- raw HTML omitted -->$x_i, x_j$<!-- raw HTML omitted --> 中至少有一個
+<!-- raw HTML omitted -->$\geq \frac{1}{2}$<!-- raw HTML omitted -->，所以每條邊至少會有一個端點被選</p>
 <h3 id="approx-ratio">Approx. Ratio</h3>
-
-<div>
-\[
-\text{cost}(x_i^{\prime})\leq \textcolor{red}{2} \sum x_i^{\star} \leq 2 \mathbf{OPT}
-\]
-</div>
-
-<p>Worst Case 就是所有 <span>$x_i = \frac{1}{2}$</span>，那麼便會每條邊的兩個端點都會被選起來。</p>
-
-<h2 id="推廣">推廣</h2>
-
-<p>可以視為 Set Cover Problem with every element is covered by <span>$\leq l$</span> 個 subset 的特例 (<span>$l = 2$</span>)，<br />
-由此也可推知Set Cover Problem 的 <span>$l$</span>-approx algorithm。</p>
+<!-- raw HTML omitted -->
+<p>Worst Case 就是所有 <!-- raw HTML omitted -->$x_i = \frac{1}{2}$<!-- raw HTML omitted -->，那麼便會每條邊的兩個端點都會被選起來。</p>
+<h2 id="heading">推廣</h2>
+<p>可以視為 Set Cover Problem with every element is covered by <!-- raw HTML omitted -->$\leq l$<!-- raw HTML omitted --> 個 subset 的特例 (<!-- raw HTML omitted -->$l = 2$<!-- raw HTML omitted -->)，\<br>
+由此也可推知Set Cover Problem 的 <!-- raw HTML omitted -->$l$<!-- raw HTML omitted -->-approx algorithm。</p>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-vertex-cover-problem%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-vertex-cover-problem%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-vertex-cover-problem%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-vertex-cover-problem%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-vertex-cover-problem%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-vertex-cover-problem%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -394,8 +399,8 @@ s.t. <span>$\forall (u,v) \in E, \; \text{either} \, u \in S \, \text{or} \, v \
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -404,10 +409,8 @@ s.t. <span>$\forall (u,v) \in E, \; \text{either} \, u \in S \, \text{or} \, v \
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -424,24 +427,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

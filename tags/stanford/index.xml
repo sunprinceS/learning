@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Stanford on Stay hungry. Stay foolish </title>
@@ -18,7 +18,7 @@
       <pubDate>Sat, 27 May 2017 17:06:53 +0800</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory-lecture4/</guid>
-      <description>&lt;p&gt;上一講利用 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/&#34;&gt;Myerson&amp;rsquo;s Lemma&lt;/a&gt; 闡述了給定在「好」的 allocation rule 下，該如何定價，使得 auction 具有 DSIC property; 而這講則要說明該如何 derive 出「好」的 allocation rule。&lt;/p&gt;</description>
+      <description>&lt;p&gt;上一講利用 &lt;a href=&#34;https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture3/&#34;&gt;Myerson&#39;s Lemma&lt;/a&gt; 闡述了給定在「好」的 allocation rule 下，該如何定價，使得 auction 具有 DSIC property; 而這講則要說明該如何 derive 出「好」的 allocation rule。&lt;/p&gt;</description>
     </item>
     
     <item>

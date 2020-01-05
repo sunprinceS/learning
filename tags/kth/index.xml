@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>KTH on Stay hungry. Stay foolish </title>
@@ -19,16 +19,12 @@
       
       <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec6/</guid>
       <description>&lt;p&gt;ASR 做的其實就是以下這件事，&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;$$
-\Pr(\text{words|sounds}) = \frac{\Pr(\text{sounds|words})}{\Pr(\text{sounds})}
-$$&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;當中我們視 &lt;span&gt;$\Pr(\text{sounds})$&lt;/span&gt; 為 uniform distribution ，不管它。
-&lt;br /&gt;
-&lt;span&gt;$\Pr(\text{words})$&lt;/span&gt; 由 &lt;strong&gt;Language Model&lt;/strong&gt; 負責，評估產生的
-transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)&lt;br /&gt;
-&lt;span&gt;$\Pr(\text{sounds|words})$&lt;/span&gt; 則是 &lt;strong&gt;Acoustic Model&lt;/strong&gt;， 也就是前一講中用 Viterbi 所算的 Likelihood 。&lt;/p&gt;</description>
+&lt;p&gt;&lt;code&gt;$$ \Pr(\text{words|sounds}) = \frac{\Pr(\text{sounds|words})}{\Pr(\text{sounds})} $$&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;當中我們視 &lt;!-- raw HTML omitted --&gt;$\Pr(\text{sounds})$&lt;!-- raw HTML omitted --&gt; 為 uniform distribution ，不管它。
+\&lt;br&gt;
+&lt;!-- raw HTML omitted --&gt;$\Pr(\text{words})$&lt;!-- raw HTML omitted --&gt; 由 &lt;strong&gt;Language Model&lt;/strong&gt; 負責，評估產生的
+transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)\&lt;br&gt;
+&lt;!-- raw HTML omitted --&gt;$\Pr(\text{sounds|words})$&lt;!-- raw HTML omitted --&gt; 則是 &lt;strong&gt;Acoustic Model&lt;/strong&gt;， 也就是前一講中用 Viterbi 所算的 Likelihood 。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -46,7 +42,7 @@ transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)&lt;br /&gt;
       <pubDate>Tue, 17 Apr 2018 19:32:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/speech-recognition-lec4/</guid>
-      <description>&lt;p&gt;在能夠將聲音訊號轉為數值向量給 machine 處理後，我們要怎麼判斷這串 vector 是 mapping 到哪一段文字呢？ &lt;br /&gt;
+      <description>&lt;p&gt;在能夠將聲音訊號轉為數值向量給 machine 處理後，我們要怎麼判斷這串 vector 是 mapping 到哪一段文字呢？ \&lt;br&gt;
 在進入 continuous ASR 前，讓我們先來想一想怎麼辨識一個 word ？想法是針對這個 word 建一個 model ，給定一段聲音訊號， output 該訊號 map 到此
 word 的機率為多少。&lt;/p&gt;</description>
     </item>
@@ -84,7 +80,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Wed, 31 Jan 2018 23:14:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec3/</guid>
-      <description>&lt;p&gt;前面提過 Boolearn Search 的其中一個問題在於， machine 是&lt;strong&gt;無腦&lt;/strong&gt;地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 &lt;span&gt;$10^6$&lt;/span&gt; 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 &lt;strong&gt;ranked retrieval&lt;/strong&gt; 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。&lt;/p&gt;</description>
+      <description>&lt;p&gt;前面提過 Boolearn Search 的其中一個問題在於， machine 是&lt;strong&gt;無腦&lt;/strong&gt;地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 &lt;!-- raw HTML omitted --&gt;$10^6$&lt;!-- raw HTML omitted --&gt; 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 &lt;strong&gt;ranked retrieval&lt;/strong&gt; 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -111,7 +107,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Tue, 05 Dec 2017 09:56:56 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/12/problem-solving-and-programming-hw11/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/641&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;!-- raw HTML omitted --&gt;題目連結&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -120,7 +116,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Tue, 31 Oct 2017 08:32:38 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/10/problem-solving-and-programming-hw6/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/632&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;!-- raw HTML omitted --&gt;題目連結&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -129,7 +125,7 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Tue, 19 Sep 2017 08:32:38 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw2/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://kth.kattis.com/problemgroups/624&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;!-- raw HTML omitted --&gt;題目連結&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -138,8 +134,8 @@ word 的機率為多少。&lt;/p&gt;</description>
       <pubDate>Tue, 12 Sep 2017 08:32:38 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/09/problem-solving-and-programming-hw1/</guid>
-      <description>&lt;p&gt;在 KTH 交換時選到的神課！想說把題解稍微紀錄一下 ✌️&lt;br /&gt;
-&lt;a href=&#34;https://kth.kattis.com/problemgroups/617&#34; target=&#34;_blank&#34;&gt;題目連結&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;在 KTH 交換時選到的神課！想說把題解稍微紀錄一下 ✌️\&lt;br&gt;
+&lt;!-- raw HTML omitted --&gt;題目連結&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

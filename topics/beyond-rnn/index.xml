@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Beyond RNN on Stay hungry. Stay foolish </title>
@@ -19,7 +19,6 @@
       
       <guid>https://sunprinces.github.io/learning/2018/05/beyond-rnn-lec1/</guid>
       <description>&lt;p&gt;Beyond RNN 這個系列會 focus 在近年來各式各樣我覺得有趣的 RNN 變形，及其相關的實做。&lt;/p&gt;
-
 &lt;p&gt;這篇文章的相關程式碼，放在&lt;a href=&#34;https://github.com/sunprinceS/Neural-Turing-Machine&#34;&gt;這裡&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     

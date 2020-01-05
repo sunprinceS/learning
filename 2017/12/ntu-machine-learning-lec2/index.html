@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Learning to Answer Yes/No">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>NTU Machine Learning - Lec2 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>22 Dec 2017</time>
   </div>
+
   
 
   
@@ -276,147 +276,94 @@
 
 </div>
 
-
   <p>於前一講講述了 ML 的 framework ，於這一講中，我們會利用一個簡單的 learning model ， 去解決 binary classification 的問題。</p>
-
 <h2 id="hypothesis-set-linear-perceptron">Hypothesis Set: Linear Perceptron</h2>
-
-<div>
-\[
-\textcolor{red}{h}(x) = \texttt{sgn}(\sum_{i=1}^{d}\textcolor{red}{w_i}x_i - \textcolor{red}{\text{threshold}}) = \texttt{sgn}(\textcolor{red}{\mathbf{w}^T}\mathbf{x})
-\]
-</div>
-
-<p>其中，<span>$\mathbf{x} \in \mathcal{X}, \mathcal{X} = \lbrace 1 \rbrace \times \mathbb{R}^d $</span> (把 threshold 放進 <span>$\mathbf{w}$</span> 的第 0 維，以簡便表示)</p>
-
+<!-- raw HTML omitted -->
+<p>其中，<!-- raw HTML omitted -->$\mathbf{x} \in \mathcal{X}, \mathcal{X} = \lbrace 1 \rbrace \times \mathbb{R}^d $<!-- raw HTML omitted --> (把 threshold 放進 <!-- raw HTML omitted -->$\mathbf{w}$<!-- raw HTML omitted --> 的第 0 維，以簡便表示)</p>
 <p>其實就是一個將空間一分為二的 hyperplane 。</p>
-
 <h2 id="learning-algorithm">Learning Algorithm</h2>
-
 <h3 id="objective">Objective</h3>
-
-<div>
-\[
-  \text{learned function} \, g \approx \text{ground truth function} \, f
-\]
-</div>
-
+<!-- raw HTML omitted -->
 <p>至少在看過的 training data 上做到一致，亦即</p>
-
-<div>
-\[
-g(x_n) = f(x_n) = y_n \quad \forall (x_n,y_n)\in \mathcal{D} 
-\]
-</div>
-
-<h3 id="how-to-select-span-g-span-from-span-mathcal-h-span">How to select <span>$g$</span> from <span>$\mathcal{H}$</span></h3>
-
+<!-- raw HTML omitted -->
+<h3 id="how-to-select-spangspan-from-spanmathcalhspan">How to select <!-- raw HTML omitted -->$g$<!-- raw HTML omitted --> from <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --></h3>
 <p>隨便抽取一個起始權重，去看看在 training data 上是否會有與 label mismatch 的情況
 ，若有的話，便去修正權重。</p>
-
-<div>
-\[
- \text{If} \enspace \texttt{sgn}(\textcolor{red}{\mathbf{w}_t^T}\mathbf{x}_n) \not = y_n ,
- \enspace \text{then} \enspace \textcolor{orange}{\mathbf{w}_{t+1}} \leftarrow
- \textcolor{red}{\mathbf{w}_t} + y_n\mathbf{x}_n
-\]
-</div>
-
+<!-- raw HTML omitted -->
 <h3 id="correctness-of-updating">Correctness of Updating</h3>
-
-<p>若有錯誤發生，表示 <span>$y_n\underset{\text{predict}}{\mathbf{w}_t^T\mathbf{x}_n} &lt; 0$</span>，<br />
-目標是將其更正為 <span>$&gt; 0$</span> 。 我們想確定更新 <span>$\mathcal{w}$</span> 的過程中，<span>$y_n\mathbf{w}_t^T\mathbf{x}_n$</span> 會 <strong>遞增</strong>, which is trivial to prove</p>
-
+<p>若有錯誤發生，表示 <!-- raw HTML omitted -->$y_n\underset{\text{predict}}{\mathbf{w}_t^T\mathbf{x}_n} &lt; 0$<!-- raw HTML omitted -->，\<br>
+目標是將其更正為 <!-- raw HTML omitted -->$&gt; 0$<!-- raw HTML omitted --> 。 我們想確定更新 <!-- raw HTML omitted -->$\mathcal{w}$<!-- raw HTML omitted --> 的過程中，<!-- raw HTML omitted -->$y_n\mathbf{w}_t^T\mathbf{x}_n$<!-- raw HTML omitted --> 會 <strong>遞增</strong>, which is trivial to prove</p>
 <h3 id="running-time">Running Time</h3>
-
-<p>承上，<span>$\mathbf{w}$</span> 的更新，會使得它更接近 ground truth，也就是其單位向量的內積越來越接近 <span>$1$</span>。</p>
-
-<h4 id="growth-of-span-mathbf-w-span-isn-t-too-fast">Growth of <span>$||\mathbf{w}||$</span> ISN&rsquo;T too fast</h4>
-
-<p><code>$$
-\begin{align}
-||\mathbf{w}_{t+1}||^2 &amp;= ||\mathbf{w}_t + y_n \mathbf{x}_n || ^2 \\
-&amp;= ||\mathbf{w}_{t}||^2 + 2\underset{\leq 0}{\color{blue}{y_n\mathbf{w}_t^T\mathbf{x}_n}} + ||y_n\mathbf{x}_n||^2\\
-&amp;\color{blue}{\leq}  ||\mathbf{w}_{t}||^2 + \color{blue}{0} + \color{red}{||y_n\mathbf{x}_n||^2} \\
-&amp;\color{red}{\leq} ||\mathbf{w}_{t}||^2 + \color{red}{\max_j ||x_j||^2}
-\end{align}
-$$</code></p>
-
-<div>
-\[
-\Rightarrow ||\mathbf{w}_T||^2 \leq \underset{=0}{||\mathbf{w}_0||^2} + T \times \max_j
-||x_j||^2
-\]
-</div>
-
-<div>
-\[
-\Rightarrow \boxed{||\mathbf{w}_T|| \leq \sqrt{T} \times \max_j||x_j||}
-\]
-</div>
-
+<p>承上，<!-- raw HTML omitted -->$\mathbf{w}$<!-- raw HTML omitted --> 的更新，會使得它更接近 ground truth，也就是其單位向量的內積越來越接近 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted -->。</p>
+<h4 id="growth-of-spanmathbfwspan-isnt-too-fast">Growth of <!-- raw HTML omitted -->$||\mathbf{w}||$<!-- raw HTML omitted --> ISN'T too fast</h4>
+<p><code>$$ \begin{align} ||\mathbf{w}_{t+1}||^2 &amp;= ||\mathbf{w}_t + y_n \mathbf{x}_n || ^2 \\ &amp;= ||\mathbf{w}_{t}||^2 + 2\underset{\leq 0}{\color{blue}{y_n\mathbf{w}_t^T\mathbf{x}_n}} + ||y_n\mathbf{x}_n||^2\\ &amp;\color{blue}{\leq}  ||\mathbf{w}_{t}||^2 + \color{blue}{0} + \color{red}{||y_n\mathbf{x}_n||^2} \\ &amp;\color{red}{\leq} ||\mathbf{w}_{t}||^2 + \color{red}{\max_j ||x_j||^2} \end{align} $$</code></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <h4 id="convergence-after-t-rounds">Convergence after T rounds</h4>
-
-<p>假設 <span>$\mathbf{w}_0 = \mathbf{0}$</span>，並觀察到 ground truth
-<span>$\mathbf{w}_f$</span> 滿足 <span>$\boxed{y_n\mathbf{w}_f^T\mathbf{x}_n \geq \min_n y_n\mathbf{w}_f^T\mathbf{x}_n \geq 0}$</span></p>
-
-<p><code>$$
-\require{cancel}
-\begin{align}
-\mathbf{w}_f^T\mathbf{w}_T &amp;= \cancel{\mathbf{w}_f^T\mathbf{w}_{T-1}} + y_{n_T}\mathbf{w}_f^T\mathbf{x}_{n_T} \\
-\cancel{\mathbf{w}_f^T\mathbf{w}_{T-1}} &amp;= \cancel{\mathbf{w}_f^T\mathbf{w}_{T-2}} + y_{n_{T-1}}\mathbf{w}_f^T\mathbf{x}_{n_{T-1}} \\
-.\\
-.\\
-\cancel{\mathbf{w}_f^T\mathbf{w}_1} &amp;= \underset{=0}{\mathbf{w}_f^T\mathbf{w}_{0}} + y_{n_1}\mathbf{w}_f^T\mathbf{x}_{n_{1}} 
-\end{align}
-$$</code></p>
-
-<div>
-\[
-\Rightarrow \boxed{\mathbf{w}_f^T\mathbf{w}_T  \geq T \times \min_n y_n\mathbf{w}_f^T\mathbf{x}_n}
-\]
-</div>
-
+<p>假設 <!-- raw HTML omitted -->$\mathbf{w}_0 = \mathbf{0}$<!-- raw HTML omitted -->，並觀察到 ground truth
+<!-- raw HTML omitted -->$\mathbf{w}_f$<!-- raw HTML omitted --> 滿足 <!-- raw HTML omitted -->$\boxed{y_n\mathbf{w}_f^T\mathbf{x}_n \geq \min_n y_n\mathbf{w}_f^T\mathbf{x}_n \geq 0}$<!-- raw HTML omitted --></p>
+<p><code>$$ \require{cancel} \begin{align} \mathbf{w}_f^T\mathbf{w}_T &amp;= \cancel{\mathbf{w}_f^T\mathbf{w}_{T-1}} + y_{n_T}\mathbf{w}_f^T\mathbf{x}_{n_T} \\ \cancel{\mathbf{w}_f^T\mathbf{w}_{T-1}} &amp;= \cancel{\mathbf{w}_f^T\mathbf{w}_{T-2}} + y_{n_{T-1}}\mathbf{w}_f^T\mathbf{x}_{n_{T-1}} \\ .\\ .\\ \cancel{\mathbf{w}_f^T\mathbf{w}_1} &amp;= \underset{=0}{\mathbf{w}_f^T\mathbf{w}_{0}} + y_{n_1}\mathbf{w}_f^T\mathbf{x}_{n_{1}}  \end{align} $$</code></p>
+<!-- raw HTML omitted -->
 <p>因此，</p>
-
-<p><code>$$
-1 \geq \frac{\mathbf{w}_f^T\mathbf{w}_T}{||\mathbf{w}_f|| \, ||\mathbf{w}_T||}
-\geq \frac{T\times \underset{n}{\min} y_n\mathbf{w}_f^T\mathbf{x}_n}{||\mathbf{w}_f|| \, ||\mathbf{w}_T||} \geq \sqrt{T} \times \frac{\stackrel{\color{blue}{\rho}}{\overbrace{\underset{n}{\min}y_n\frac{\mathbf{w}_f^T}{||\mathbf{w}_f||}\mathbf{x_n}}}}{\underset{\color{red}{R}}{\underbrace{\underset{j}{\max}||x_j||}}}
-$$</code></p>
-
-<div>
-\[
-\Rightarrow \boxed{T \leq \frac{R^2}{\rho^2} = \text{const.}}
-\]
-</div>
-
-<!--T &\leq \frac{\mathbf{w}_f^T\mathbf{w}_T}{\underset{n}{\min} y_n\mathbf{w}_f^T\mathbf{x}_n} \times \frac{||\mathbf{w}_f|| \, ||\mathbf{w}_T||}{||\mathbf{w}_f||\,||\mathbf{w}_T||}\\-->
-
-<!--& \leq 1 \times \frac{}{}-->
-
-<h3 id="limitation-modification">Limitation &amp; Modification</h3>
-
+<p><code>$$ 1 \geq \frac{\mathbf{w}_f^T\mathbf{w}_T}{||\mathbf{w}_f|| \, ||\mathbf{w}_T||} \geq \frac{T\times \underset{n}{\min} y_n\mathbf{w}_f^T\mathbf{x}_n}{||\mathbf{w}_f|| \, ||\mathbf{w}_T||} \geq \sqrt{T} \times \frac{\stackrel{\color{blue}{\rho}}{\overbrace{\underset{n}{\min}y_n\frac{\mathbf{w}_f^T}{||\mathbf{w}_f||}\mathbf{x_n}}}}{\underset{\color{red}{R}}{\underbrace{\underset{j}{\max}||x_j||}}} $$</code></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h3 id="limitation--modification">Limitation &amp; Modification</h3>
 <ol>
 <li>資料必須是線性可分的(<em>Linear Separable</em>)，亦即對資料不能一無所知，如此方能做此假設。</li>
 <li>對 running time 僅知道會在有限時間內結束，但還是不知道要跑多久</li>
 </ol>
-
-<p>另外，有時候資料夾雜了一些雜訊，使得空間因少數數據點而無法線性可分，<br />
-此時我們利用 Pocket PLA 去找出一個 <strong>還不錯</strong> 的 <span>$g$</span> ，使得 label mismatch 的數據點為最少。<br />
-簡單來說，就是每更新一次 <span>$\mathbf{w}$</span>，便去跑過<strong>所有</strong>的數據點，來看是否比前一個更好，並把對應的 <span>$w$</span> 記起來<br />
-再 run 過一定回合數後中止，running time 為<span>$\mathcal{O}(|\mathcal{D}|T)$</span>，不保證找到最佳解。</p>
-
-<p><strong>Remark:</strong> <span>$w$</span> 的更新方式跟 PLA 是一樣的，不是表現進步才更新！</p>
-
+<p>另外，有時候資料夾雜了一些雜訊，使得空間因少數數據點而無法線性可分，\<br>
+此時我們利用 Pocket PLA 去找出一個 <strong>還不錯</strong> 的 <!-- raw HTML omitted -->$g$<!-- raw HTML omitted --> ，使得 label mismatch 的數據點為最少。\<br>
+簡單來說，就是每更新一次 <!-- raw HTML omitted -->$\mathbf{w}$<!-- raw HTML omitted -->，便去跑過<strong>所有</strong>的數據點，來看是否比前一個更好，並把對應的 <!-- raw HTML omitted -->$w$<!-- raw HTML omitted --> 記起來\<br>
+再 run 過一定回合數後中止，running time 為<!-- raw HTML omitted -->$\mathcal{O}(|\mathcal{D}|T)$<!-- raw HTML omitted -->，不保證找到最佳解。</p>
+<p><strong>Remark:</strong> <!-- raw HTML omitted -->$w$<!-- raw HTML omitted --> 的更新方式跟 PLA 是一樣的，不是表現進步才更新！</p>
 <p><a href="https://github.com/sunprinceS/NTU-Machine-Learning/blob/master/hw1/PLA.py"><strong>Implementation</strong></a></p>
-
 <h2 id="reference">Reference</h2>
-
 <ul>
 <li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/02_handout.pdf">林軒田老師的講義</a></li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec2%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec2%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec2%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec2%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec2%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec2%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -472,8 +419,8 @@ $$</code></p>
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -482,10 +429,8 @@ $$</code></p>
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -502,24 +447,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="The Learning Problem">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>NTU Machine Learning - Lec1 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>20 Dec 2017</time>
   </div>
+
   
 
   
@@ -276,52 +276,74 @@
 
 </div>
 
-
   <p>其實是大一升大二的暑假，閒來無事找的開放式課程，那時也做了一些筆記，沒想到兩三年過後，自己做專題也走向了這個領域XD，於是順手把它整理上來囉！</p>
-
 <h2 id="what-is-machine-learning">What is Machine Learning</h2>
-
 <p>ML 簡單來說，是希望於機器上實現如同人類的學習，目標是習得一些如何<strong>決策</strong>的技能(e.g Chatbot 根據之前的對話內容，下一個時間點應該要回什麼；下棋的過程中，下一步棋應該怎麼走；收到一串野外鳥叫的錄音，該如何辨別出當中有哪些品種&hellip;)。通常會適用的問題主要有以下特徵。</p>
-
 <ol>
 <li>存在 pattern (問題也才有被 <strong>解決</strong> 的意義)</li>
-<li>不存在明確的定義 <span>$\rightarrow$</span> non-programmble</li>
+<li>不存在明確的定義 <!-- raw HTML omitted -->$\rightarrow$<!-- raw HTML omitted --> non-programmble</li>
 <li>有 data (不然從人類的角度看，就是不用學習就會的本能了 lol)</li>
 </ol>
-
 <h2 id="components-of-learning">Components of Learning</h2>
-
 <ul>
-<li>input <span>$\vec{x} \in \mathcal{X}$</span></li>
-<li>output <span>$y \in \mathcal{Y}$</span></li>
-<li><strong>target function</strong> <span>$f: \mathcal{X} \rightarrow \mathcal{Y}$</span></li>
-<li>data <span>$\mathcal{D} = \lbrace(\vec{x_1},y_1),(\vec{x_2},y_2)\cdots,(\vec{x_N},y_N)\rbrace$</span></li>
-<li>hypothesis set <span>$\mathcal{H}$</span> (從中選出接近 <span>$f$</span> 的 function <span>$g$</span>)</li>
+<li>input <!-- raw HTML omitted -->$\vec{x} \in \mathcal{X}$<!-- raw HTML omitted --></li>
+<li>output <!-- raw HTML omitted -->$y \in \mathcal{Y}$<!-- raw HTML omitted --></li>
+<li><strong>target function</strong> <!-- raw HTML omitted -->$f: \mathcal{X} \rightarrow \mathcal{Y}$<!-- raw HTML omitted --></li>
+<li>data <!-- raw HTML omitted -->$\mathcal{D} = \lbrace(\vec{x_1},y_1),(\vec{x_2},y_2)\cdots,(\vec{x_N},y_N)\rbrace$<!-- raw HTML omitted --></li>
+<li>hypothesis set <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> (從中選出接近 <!-- raw HTML omitted -->$f$<!-- raw HTML omitted --> 的 function <!-- raw HTML omitted -->$g$<!-- raw HTML omitted -->)</li>
 </ul>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/ml-arch.png" width="800px"></p>
-
-<p>其中 <span>$\mathcal{A}$</span> 和 <span>$\mathcal{H}$</span> 合稱為 <em>learning model</em></p>
-
-<h3 id="補記">補記</h3>
-
-<p>這裡提到的 <span>$\vec{x}$</span> 經歷了<strong>將真實世界中的數據轉成數值向量</strong>的過程，考慮到計算複雜度，有些時候我們不能餵進原始數據，所以抽取適當的特徵 (<em>feature</em>) 便是一個重要的技巧 (好比推薦系統常見的一種作法是將消費者與產品的某些屬性化成數值向量再去算匹配度，但無法用此數值向量 rebuild 出消費者或產品，然而這種 ambiguity 也正是在這個任務中所需要的)；但這也不是一定，在影像辨識裡，深度學習是直接餵進 raw image 去做 classification ， 相當於是利用 NN 將 feature extraction 及 classification 這兩個任務 end-to-end 地串接在一起。</p>
-
+<!-- raw HTML omitted -->
+<p>其中 <!-- raw HTML omitted -->$\mathcal{A}$<!-- raw HTML omitted --> 和 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 合稱為 <em>learning model</em></p>
+<h3 id="heading">補記</h3>
+<p>這裡提到的 <!-- raw HTML omitted -->$\vec{x}$<!-- raw HTML omitted --> 經歷了<strong>將真實世界中的數據轉成數值向量</strong>的過程，考慮到計算複雜度，有些時候我們不能餵進原始數據，所以抽取適當的特徵 (<em>feature</em>) 便是一個重要的技巧 (好比推薦系統常見的一種作法是將消費者與產品的某些屬性化成數值向量再去算匹配度，但無法用此數值向量 rebuild 出消費者或產品，然而這種 ambiguity 也正是在這個任務中所需要的)；但這也不是一定，在影像辨識裡，深度學習是直接餵進 raw image 去做 classification ， 相當於是利用 NN 將 feature extraction 及 classification 這兩個任務 end-to-end 地串接在一起。</p>
 <h2 id="and-more">And more</h2>
-
 <p>在 2017 的今日，又經過了這麼多年的發展，幾乎每個領域都可以看到 ML 的身影，在只需用到<strong>一種</strong>技能的決策上，機器已經超越了人類 (日趨成熟的語音，影像辨識及其衍生出的各個分支(e.g <a href="https://research.googleblog.com/2017/03/assisting-pathologists-in-detecting.html">breast cancer prediction</a>)、甚至連搜索空間極大的圍棋也被攻破)、也改變了許多職業、領域的運作。Think with Google 就提到了許多其在推薦系統上的應用(推播最適廣告的決策，就像是在了解每個消費者呀！)，而股票買賣等需要高速決策的領域也因為 ML 的引進而改變 (Zero-sum game 必定有輸有贏，但當大家都用了同套 AI 的時候，誰又該輸該贏呢？)</p>
-
 <p>但在需要用到複數技能(真實世界中絕大部分問題)及在學習時學會舉一反三(人類學習的重要關鍵)，則還有相當長的一段路要走(但長不代表久，who knows the speed XD)，像是聊天型 Chatbot 回話的決策，除了要考慮先前的對話內容，還要判斷使用者的眼神、心情、語氣、甚至個性等等(所謂社交技巧)，但我們只會將問題簡化成僅從對話內容去推出一二 (所以常常覺得它們笨笨的XD)；又或著像前述的 breast cancer prediction，文末也提到了關於其他可能異常症狀的觀察，機器是無法回答的 (但當然也是可以跑好幾個分類器，一一去做 binary classification 啦&hellip;但對某些未被定義到的異常症狀就無法判斷了)；而像學習技能的推廣，如打電動的時候，人類通常精通某遊戲後，相似類型的遊戲也可能很快上手(甚至連不同類型遊戲也會比較快上手&hellip;但這就有點複雜了)，但就我所知，現在的 RL 只要 reward 或環境稍有不同，便需要重新訓練，而訓練完精通新的後，原本會的遊戲又變得不會玩了&hellip;</p>
-
 <p>身處在一個時代的浪頭，思考得真的要有新的維度，才能生存下來呢！ (筆記打一打變成心情抒發了XD)</p>
-
 <h2 id="reference">Reference</h2>
-
 <ul>
 <li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/01_handout.pdf">林軒田老師的講義</a></li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec1%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec1%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec1%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec1%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec1%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec1%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -377,8 +399,8 @@
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -387,10 +409,8 @@
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -407,24 +427,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

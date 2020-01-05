@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Intro &amp; Analysis/ 2-Universal Family">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Advanced Algorithm - Hash Table - Lec1 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>21 May 2017</time>
   </div>
+
   
 
   
@@ -278,151 +278,110 @@
 
 </div>
 
-
-  <!--以下會介紹 **Hash Table** 的基本定義與概念，以及 **2-Universal Family** 的性質，並說明發生壞事(單一 slot 擠滿了 elements) 的機率很低及更 improve 它的方法 - **Power of 2 choices** 、不希望有 collision 發生的 **Perfect Hashing** ，及動態調整 table size 的 **Dynamic Resizing** 及 **Consistent Hashing**。-->
-
+  <!-- raw HTML omitted -->
 <p>Hashing 可以想成是一種 <strong>renaming</strong> 的方式，原先的名字 (key) 可能很長，但可能的組合並不完全隨機，且數量相對整個宇集少上不少，若我們要建立一個跟宇集一樣大的 Hash Table 並不符合成本(且大部份 slot 是空的)，所以想透由 <strong>Hashing</strong> 的方式，重新命名 key&rsquo; ，並依據 key&rsquo; 將資料放到 size 跟資料個數差不多的 Hash Table 中。</p>
-
-<h2 id="定義">定義</h2>
-
-<p>Given each data with key in <span>$U = \lbrace 0,1, \cdots, t-1 \rbrace$</span>,</p>
-
-<p>A <strong>Hash Table</strong> is capable of performing the following operations in <span>$\mathcal{O}(1)$</span></p>
-
+<h2 id="heading">定義</h2>
+<p>Given each data with key in <!-- raw HTML omitted -->$U = \lbrace 0,1, \cdots, t-1 \rbrace$<!-- raw HTML omitted -->,</p>
+<p>A <strong>Hash Table</strong> is capable of performing the following operations in <!-- raw HTML omitted -->$\mathcal{O}(1)$<!-- raw HTML omitted --></p>
 <ol>
 <li><code>Insert(x)</code></li>
 <li><code>Delete(x)</code></li>
 <li><code>Search(x)</code></li>
 </ol>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/hashTable.png" width="400px"></p>
-
-<p>如同前面所述，<span>$m \ll |U|$</span>，所以hash function 必是 many-to-one mapping ，<br/>也就是說，會有 collision 發生。而通常以下圖所示的 <strong>Chaining</strong> 來處理。</p>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/chaining.png" height="350px"></p>
-
+<!-- raw HTML omitted -->
+<p>如同前面所述，<!-- raw HTML omitted -->$m \ll |U|$<!-- raw HTML omitted -->，所以hash function 必是 many-to-one mapping ，<!-- raw HTML omitted -->也就是說，會有 collision 發生。而通常以下圖所示的 <strong>Chaining</strong> 來處理。</p>
+<!-- raw HTML omitted -->
 <p>Hash Table 中所存的 element 為指向一個個 linked list 的 pointer。</p>
-
-<p>在考慮 Chaining ，做複雜度的分析前，先假設我們有一 uniform hash function <span>$h$</span>，滿足以下性質</p>
-
+<p>在考慮 Chaining ，做複雜度的分析前，先假設我們有一 uniform hash function <!-- raw HTML omitted -->$h$<!-- raw HTML omitted -->，滿足以下性質</p>
 <ul>
-<li><span>$\Pr[h(k) = x] = \frac{1}{m}, x \in \lbrace 0,1,\cdots, m-1 \rbrace$</span></li>
-<li><span>$h(K_1),h(K_2),\cdots,h(K_n) \text{~are independent if} ~K_1,K_2,\cdots,K_n \text{~are independent}$</span></li>
+<li><!-- raw HTML omitted -->$\Pr[h(k) = x] = \frac{1}{m}, x \in \lbrace 0,1,\cdots, m-1 \rbrace$<!-- raw HTML omitted --></li>
+<li><!-- raw HTML omitted -->$h(K_1),h(K_2),\cdots,h(K_n) \text{~are independent if} ~K_1,K_2,\cdots,K_n \text{~are independent}$<!-- raw HTML omitted --></li>
 </ul>
-
 <h2 id="average-time-complexity">Average time complexity</h2>
-
-<p><strong>[Theorem 1]</strong> Assume Uniform Hashing, <span>$\mathbb{E}[op] = \mathcal{O}(\alpha)~~$</span> (Load Factor <span>$~\alpha = \frac{ |\text{elements}|}{ |\text{slots}|} = \frac{n}{m}$</span>)</p>
-
-<p>可以觀察到，若 m = <span>$\mathcal{O}(n)$</span>，則 <span>$\mathbb{E}[op] = \mathcal{O}(\alpha) = \mathcal{O}(1)$</span>，<br/>也就是說，只要 table size 跟元素個數是同個 order ，<strong>平均</strong> 來說，每個 operation 的 cost 還是 <span>$\mathcal{O}(1)$</span>。</p>
-
+<p><strong>[Theorem 1]</strong> Assume Uniform Hashing, <!-- raw HTML omitted -->$\mathbb{E}[op] = \mathcal{O}(\alpha)~~$<!-- raw HTML omitted --> (Load Factor <!-- raw HTML omitted -->$~\alpha = \frac{ |\text{elements}|}{ |\text{slots}|} = \frac{n}{m}$<!-- raw HTML omitted -->)</p>
+<p>可以觀察到，若 m = <!-- raw HTML omitted -->$\mathcal{O}(n)$<!-- raw HTML omitted -->，則 <!-- raw HTML omitted -->$\mathbb{E}[op] = \mathcal{O}(\alpha) = \mathcal{O}(1)$<!-- raw HTML omitted -->，<!-- raw HTML omitted -->也就是說，只要 table size 跟元素個數是同個 order ，<strong>平均</strong> 來說，每個 operation 的 cost 還是 <!-- raw HTML omitted -->$\mathcal{O}(1)$<!-- raw HTML omitted -->。</p>
 <h2 id="worst-case-time-complexity">Worst-case time complexity</h2>
-
-<p>現在我們想考慮在<strong>最差</strong>情況下的複雜度，<br/>
-考慮一個類似的問題，將 <span>$n$</span> 顆球 uniformly at random 地分到 <span>$n$</span> 個 bin 中，<br/>“<strong>the expected # of balls in the most loaded bin</strong>” 為何 ？</p>
-
-<p><strong>[Theorem 2] The max # of balls in any bin <span>$\mathbf{\leq \frac{3\ln n}{\ln(\ln n)}}$</span> with probability <span>$\mathbf{\geq 1 - \frac{1}{n}}$</span></strong></p>
-
-<p><span>$\underline{~Proof.} ~~~Let~k = \frac{3 \ln n}{\ln(\ln n)}~ \text{and}~ [S]^k \triangleq \lbrace A \subseteq S~ | ~|A| = k \rbrace$</span>, <span>$S$</span> is the set of balls</p>
-
-<p><code>$$
-\begin{aligned}
-\Pr[\text{Bin} \; i \; \text{has}\, \geq k \; \text{balls}] &amp; \leq \sum_{A \in [S]^k} \Pr[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\
-&amp; = \binom{n}{k} (\frac{1}{n})^k ~~(\because \textbf{uniform hashing}) \\\\
-&amp; = \frac{n!}{k!(n-k)!} ~ \frac{1}{n^k} = \frac{1}{k!} ~ \frac{n!}{(n-k)!n^k} \\
-&amp; \leq \frac{1}{k!} ~~(~\because~ \prod_{i=0}^{k-1}n-i \leq n^k) \\
-&amp; \leq (\frac{e}{k})^k \, (\because \, \text{Stirling formula as follows})\\
-&amp; \leq \color{red}{\frac{1}{n^2}} \, (\color{red}{\text{when} \; k = \frac{3 \ln n}{\ln(\ln n)}} \; \text{and according to the following lemma})
-\end{aligned}
-$$</code></p>
-
-<p><strong>[Theorem 3] Stirling&rsquo;s approx. formula</strong></p>
-
-<div>
-\[
-k! = \sqrt{2 \pi k}~ (\frac{k}{e})^k (1 + \mathcal{O}( \frac{1}{k} ))
-\]
-</div>
-
-<p><strong>[Lemma]</strong> <span>$\forall \epsilon \in \mathbb{R}^{+} \; \exists \, n_0 \, s.t.  \, \forall n &gt; n_0 \, \boxed{\ln (\ln n) \leq \epsilon \ln n}$</span></p>
-
-<p>Let <span>$k = \textcolor{red}{\frac{3 \ln n}{\ln (\ln n)}}$</span>
-<code>$$
-\begin{align}
-\therefore \ln (\frac{e}{k})^k &amp;= k(1 - \ln k)\\
-&amp;= k[ \underset{\leq 0}{\underbrace{1 - \ln 3}} - \ln(\ln n) + \underset{\leq \frac{1}{3}\ln(\ln n)}{\underbrace{\ln(\ln(\ln n))}}] \\
-&amp;\leq k \cdot -\frac{2}{3} \ln(\ln n) = -2 \ln n \, \square\\
-&amp;\color{red}{\Rightarrow (\frac{e}{k})^k \leq \frac{1}{n^2}}
-\end{align}
-$$</code></p>
-
+<p>現在我們想考慮在<strong>最差</strong>情況下的複雜度，<!-- raw HTML omitted -->
+考慮一個類似的問題，將 <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 顆球 uniformly at random 地分到 <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 個 bin 中，<!-- raw HTML omitted -->“<strong>the expected # of balls in the most loaded bin</strong>” 為何 ？</p>
+<p><strong>[Theorem 2] The max # of balls in any bin <!-- raw HTML omitted -->$\mathbf{\leq \frac{3\ln n}{\ln(\ln n)}}$<!-- raw HTML omitted --> with probability <!-- raw HTML omitted -->$\mathbf{\geq 1 - \frac{1}{n}}$<!-- raw HTML omitted --></strong></p>
+<p><!-- raw HTML omitted -->$\underline{~Proof.} ~~~Let~k = \frac{3 \ln n}{\ln(\ln n)}~ \text{and}~ [S]^k \triangleq \lbrace A \subseteq S~ | ~|A| = k \rbrace$<!-- raw HTML omitted -->, <!-- raw HTML omitted -->$S$<!-- raw HTML omitted --> is the set of balls</p>
+<p><code>$$ \begin{aligned} \Pr[\text{Bin} \; i \; \text{has}\, \geq k \; \text{balls}] &amp; \leq \sum_{A \in [S]^k} \Pr[\text{Every ball in}~ A~ \text{is in Bin}~ i~] ~~(\because \textbf{Union Bound}) \\\\ &amp; = \binom{n}{k} (\frac{1}{n})^k ~~(\because \textbf{uniform hashing}) \\\\ &amp; = \frac{n!}{k!(n-k)!} ~ \frac{1}{n^k} = \frac{1}{k!} ~ \frac{n!}{(n-k)!n^k} \\ &amp; \leq \frac{1}{k!} ~~(~\because~ \prod_{i=0}^{k-1}n-i \leq n^k) \\ &amp; \leq (\frac{e}{k})^k \, (\because \, \text{Stirling formula as follows})\\ &amp; \leq \color{red}{\frac{1}{n^2}} \, (\color{red}{\text{when} \; k = \frac{3 \ln n}{\ln(\ln n)}} \; \text{and according to the following lemma}) \end{aligned} $$</code></p>
+<p><strong>[Theorem 3] Stirling's approx. formula</strong></p>
+<!-- raw HTML omitted -->
+<p><strong>[Lemma]</strong> <!-- raw HTML omitted -->$\forall \epsilon \in \mathbb{R}^{+} ; \exists , n_0 , s.t.  , \forall n &gt; n_0 , \boxed{\ln (\ln n) \leq \epsilon \ln n}$<!-- raw HTML omitted --></p>
+<p>Let <!-- raw HTML omitted -->$k = \textcolor{red}{\frac{3 \ln n}{\ln (\ln n)}}$<!-- raw HTML omitted -->
+<code>$$ \begin{align} \therefore \ln (\frac{e}{k})^k &amp;= k(1 - \ln k)\\ &amp;= k[ \underset{\leq 0}{\underbrace{1 - \ln 3}} - \ln(\ln n) + \underset{\leq \frac{1}{3}\ln(\ln n)}{\underbrace{\ln(\ln(\ln n))}}] \\ &amp;\leq k \cdot -\frac{2}{3} \ln(\ln n) = -2 \ln n \, \square\\ &amp;\color{red}{\Rightarrow (\frac{e}{k})^k \leq \frac{1}{n^2}} \end{align} $$</code></p>
 <h2 id="uniform-hashing">Uniform Hashing?</h2>
-
-<p>看起來很合理，但當中我們做的一個假設其實是不合理的，也就是存在 uniform hashing function <span>$h$</span> 這件事情，想完成這個條件只有以下兩種可能</p>
-
+<p>看起來很合理，但當中我們做的一個假設其實是不合理的，也就是存在 uniform hashing function <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> 這件事情，想完成這個條件只有以下兩種可能</p>
 <ul>
 <li>input is random (<strong>impossible !!</strong>)</li>
 <li>input is arbitary, but hash function is random</li>
 </ul>
-
-<p>random hash function? 意思是說，我們希望有一組 hash function 的集合 <span>$\mathcal{H}$</span>，當每次要用到 hashing 時，便從中抽一個 <span>$h: U \rightarrow \lbrace 0,1,\cdots,m-1 \rbrace$</span> 出來，可能結果很不好 ( collision 很嚴重， 可以想成總是可以構造出某些 input sequence ，讓特定的 <span>$h$</span> 壞掉)，在這種情況可以再重新抽，<strong>平均而言</strong> collision 發生的機率很小即可 (i.e 不用太常重抽)。</p>
-
-<p>我們希望 <span>$\mathcal{H}$</span> 有以下性質:<br/>
-<span>$\forall x_1,x_2,\cdots,x_n \in S,~S \subset U,~ \text{and}~ a_1,a_2,\cdots,a_n \in \lbrace 0,1,\cdots,m-1 \rbrace$</span></p>
-
+<p>random hash function? 意思是說，我們希望有一組 hash function 的集合 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted -->，當每次要用到 hashing 時，便從中抽一個 <!-- raw HTML omitted -->$h: U \rightarrow \lbrace 0,1,\cdots,m-1 \rbrace$<!-- raw HTML omitted --> 出來，可能結果很不好 ( collision 很嚴重， 可以想成總是可以構造出某些 input sequence ，讓特定的 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> 壞掉)，在這種情況可以再重新抽，<strong>平均而言</strong> collision 發生的機率很小即可 (i.e 不用太常重抽)。</p>
+<p>我們希望 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 有以下性質:<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->$\forall x_1,x_2,\cdots,x_n \in S,~S \subset U,~ \text{and}~ a_1,a_2,\cdots,a_n \in \lbrace 0,1,\cdots,m-1 \rbrace$<!-- raw HTML omitted --></p>
 <ul>
-<li><span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1] = \frac{1}{m}$</span></li>
-<li><span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ] = \frac{1}{m^2}$</span> <strong>[Pairwise independence]</strong></li>
-<li><span>$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ~\land~ \cdots ~\land~ h(x_n) = a_n ] = \frac{1}{m^k}$</span> <strong>[k-wise independence]</strong></li>
+<li><!-- raw HTML omitted -->$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1] = \frac{1}{m}$<!-- raw HTML omitted --></li>
+<li><!-- raw HTML omitted -->$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ] = \frac{1}{m^2}$<!-- raw HTML omitted --> **[Pairwise independence]**</li>
+<li><!-- raw HTML omitted -->$\displaystyle \Pr_{h \in \mathcal{H}}[h(x_1) = a_1 ~\land~ h(x_2) = a_2 ~\land~ \cdots ~\land~ h(x_n) = a_n ] = \frac{1}{m^k}$<!-- raw HTML omitted --> **[k-wise independence]**</li>
+</ul>
+<p>若想有 k-wise indep. 性質，則我們需要 <!-- raw HTML omitted -->$m^k$<!-- raw HTML omitted --> 個 hash function <!-- raw HTML omitted -->$h$<!-- raw HTML omitted -->，需要 <!-- raw HTML omitted -->$\log |\mathcal{H}| = k \log m$<!-- raw HTML omitted --> 個 bits 去記 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> ，也就是說，若想要更好的隨機性， compute hashing 的成本就越高。</p>
+<p><!-- raw HTML omitted -->Let $L_x ~\text{be the length of linked list containing}~ x$<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>&amp; \text{Then},~ L_x = 1 + \sum_{y \in S ;y \neq x} I_y \</p>
+<p>&amp; \text{We know~} \mathbb{E}[L_x] = 1 + \sum_{y \in S ;y \neq x} \mathbb{E}[I_y] = 1 + \frac{n-1}{m} \leq 1 + \alpha
+\end{aligned}
+]</p>
+<!-- raw HTML omitted -->
+<p>上例不需要用到 k-wise independence 這麼強的性質， pairwise independence 即符合我們的需要，<!-- raw HTML omitted -->也因此 <strong>2-Universal Hash Family</strong> 應運而生。</p>
+<h2 id="2-universal-hash-family">2-Universal Hash Family</h2>
+<p><!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> is 2-Universal iff for and two elements <!-- raw HTML omitted -->$x,y \in U ~\land~ x \neq y$<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p><em>Example</em>: <!-- raw HTML omitted -->
+Given <!-- raw HTML omitted -->$x=x_0 x_1 \cdots x_r~,y=y_0 y_1 \cdots y_r$<!-- raw HTML omitted -->,
+<!-- raw HTML omitted -->$a = &lt; a_1,a_2,\cdots,a_r&gt;,~a_i \in \lbrace 0,1,\cdots,m-1 \rbrace $<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+  
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2fadvanced-algorithm-hash-table-lec1%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2fadvanced-algorithm-hash-table-lec1%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2fadvanced-algorithm-hash-table-lec1%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2fadvanced-algorithm-hash-table-lec1%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2fadvanced-algorithm-hash-table-lec1%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2fadvanced-algorithm-hash-table-lec1%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
 </ul>
 
-<p>若想有 k-wise indep. 性質，則我們需要 <span>$m^k$</span> 個 hash function <span>$h$</span>，需要 <span>$\log |\mathcal{H}| = k \log m$</span> 個 bits 去記 <span>$\mathcal{H}$</span> ，也就是說，若想要更好的隨機性， compute hashing 的成本就越高。</p>
 
-<p><span>Let $L_x ~\text{be the length of linked list containing}~ x$</span></p>
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
 
-<div>
-\[
-I_y = \left\{ \begin{array}{ll}
-           1, ~\text{if}~ h(y) = h(x) \\
-           0, ~\text{otherwise}
-        \end{array} \right.
-\]
-</div>
+	ul.share-buttons li{
+	  display: inline;
+	}
 
-<div>
-\[
-\begin{aligned}
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
 
-& \text{Then},~ L_x = 1 + \sum_{y \in S ;y \neq x} I_y \\
-
-& \text{We know~} \mathbb{E}[L_x] = 1 + \sum_{y \in S ;y \neq x} \mathbb{E}[I_y] = 1 + \frac{n-1}{m} \leq 1 + \alpha
-\end{aligned}
-\]
-</div>
-
-<p>上例不需要用到 k-wise independence 這麼強的性質， pairwise independence 即符合我們的需要，</br>也因此 <strong>2-Universal Hash Family</strong> 應運而生。</p>
-
-<h2 id="2-universal-hash-family">2-Universal Hash Family</h2>
-
-<p><span>$\mathcal{H}$</span> is 2-Universal iff for and two elements <span>$x,y \in U ~\land~ x \neq y$</span></p>
-
-<div>
-\[
-\Pr_{h \in \mathcal{H}}[h(x) = h(y)] \leq \frac{1}{m} \Leftrightarrow |\mathcal{H'}| \leq \frac{|\mathcal{H}|}{m}_ ~,~ \mathcal{H'} = \lbrace h ~|~ h(x) = h(y) \rbrace 
-\]
-</div>
-
-<p><em>Example</em>: </br>
-Given <span>$x=x_0 x_1 \cdots x_r~,y=y_0 y_1 \cdots y_r$</span>,
-<span>$a = &lt; a_1,a_2,\cdots,a_r&gt;,~a_i \in \lbrace 0,1,\cdots,m-1 \rbrace $</span></p>
-
-<div>
-\[
-h_a(x) = \sum_{i=0}^n a_i x_i \mod m
-\]
-</div>
-  
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
   
 <div class="prev-next-post pure-g">
@@ -478,8 +437,8 @@ h_a(x) = \sum_{i=0}^n a_i x_i \mod m
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -488,10 +447,8 @@ h_a(x) = \sum_{i=0}^n a_i x_i \mod m
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -508,24 +465,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

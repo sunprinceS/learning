@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Training vs Testing">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>NTU Machine Learning - Lec5 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>30 Dec 2017</time>
   </div>
+
   
 
   
@@ -276,96 +276,93 @@
 
 </div>
 
-
-  <p>上一講提到了在 hypothesis set <span>$\mathcal{H}$</span> 為有限，且sample size <span>$|\mathcal{D}|$</span> 足夠大的情況下，是 PAC-learnable 的。但當 <span>$|\mathcal{H}| \, \rightarrow \, \infty$</span>的時候呢？ (e.g 2D linear perceptron)</p>
-
+  <p>上一講提到了在 hypothesis set <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 為有限，且sample size <!-- raw HTML omitted -->$|\mathcal{D}|$<!-- raw HTML omitted --> 足夠大的情況下，是 PAC-learnable 的。但當 <!-- raw HTML omitted -->$|\mathcal{H}| , \rightarrow , \infty$<!-- raw HTML omitted -->的時候呢？ (e.g 2D linear perceptron)</p>
 <h2 id="recap-of-feasibility-of-learning">Recap of Feasibility of Learning</h2>
-
 <ol>
-<li><span>$E_o(g) \approx E_i(g)$</span> ?</li>
-<li><span>$E_i(g) \rightarrow 0$</span> ?</li>
+<li><!-- raw HTML omitted -->$E_o(g) \approx E_i(g)$<!-- raw HTML omitted --> ?</li>
+<li><!-- raw HTML omitted -->$E_i(g) \rightarrow 0$<!-- raw HTML omitted --> ?</li>
 </ol>
-
-<p>Hoeffding Ineq. 對於再複雜的 ground truth function <span>$f$</span> 及 hypothesis function <span>$h$</span> 均是成立的，1. 據此必是正確，但這僅能 verify 我們得到的結果，還是沒有告訴我們在複雜的 <span>$f$</span> (usually 不能只依靠一個 hypothesis candidate <span>$h$</span>，而是必須從 size 無限大的 hypothesis set <span>$\mathcal{H}$</span> 去挑選)下，學習是否可行？</p>
-
+<p>Hoeffding Ineq. 對於再複雜的 ground truth function <!-- raw HTML omitted -->$f$<!-- raw HTML omitted --> 及 hypothesis function <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> 均是成立的，1. 據此必是正確，但這僅能 verify 我們得到的結果，還是沒有告訴我們在複雜的 <!-- raw HTML omitted -->$f$<!-- raw HTML omitted --> (usually 不能只依靠一個 hypothesis candidate <!-- raw HTML omitted -->$h$<!-- raw HTML omitted -->，而是必須從 size 無限大的 hypothesis set <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 去挑選)下，學習是否可行？</p>
 <h2 id="some-observation-does-the-union-bound-too-loose">Some observation: Does the Union Bound too loose?</h2>
-
 <p>From 前一講最後，</p>
-
-<div>
-\[
-
-\Pr_D[\text{BAD} \, \text{for} \, \textcolor{orange}{\mathcal{H}}] \leq 2 \, M \, \exp(-2 \epsilon^2 N)
-\]
-</div>
-
-<p>其中，<span>$M$</span> 是來自 Union Bound 將各個 <span>$\underset{D}{\Pr}\,[\text{BAD} \, \text{for} \, \textcolor{orange}{h_n}]$</span> 做加總，等號成立於事件彼此互斥。</p>
-
-<p>事件彼此互斥？也就是說會讓 <span>$h_n$</span> 壞掉的 <span>$\mathcal{D}$</span> 各自不同，但想想這其實不合理。就拿 perceptron 來說好了，若 <span>$h_1 \approx h_2$</span> ，幾何上來說，這兩個 hyperplane 其實是非常<strong>靠近</strong>的，對大部分的數據點，均會給出一樣的 perdiction ，所以會讓 <span>$h_1$</span> 壞掉的 <span>$\mathcal{D}$</span> ，也 <strong>probably</strong> 會讓 <span>$h_2$</span> 壞掉。</p>
-
+<!-- raw HTML omitted -->
+<p>\Pr_D[\text{BAD} , \text{for} , \textcolor{orange}{\mathcal{H}}] \leq 2 , M , \exp(-2 \epsilon^2 N)
+]</p>
+<!-- raw HTML omitted -->
+<p>其中，<!-- raw HTML omitted -->$M$<!-- raw HTML omitted --> 是來自 Union Bound 將各個 <!-- raw HTML omitted -->$\underset{D}{\Pr},[\text{BAD} , \text{for} , \textcolor{orange}{h_n}]$<!-- raw HTML omitted --> 做加總，等號成立於事件彼此互斥。</p>
+<p>事件彼此互斥？也就是說會讓 <!-- raw HTML omitted -->$h_n$<!-- raw HTML omitted --> 壞掉的 <!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted --> 各自不同，但想想這其實不合理。就拿 perceptron 來說好了，若 <!-- raw HTML omitted -->$h_1 \approx h_2$<!-- raw HTML omitted --> ，幾何上來說，這兩個 hyperplane 其實是非常<strong>靠近</strong>的，對大部分的數據點，均會給出一樣的 perdiction ，所以會讓 <!-- raw HTML omitted -->$h_1$<!-- raw HTML omitted --> 壞掉的 <!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted --> ，也 <strong>probably</strong> 會讓 <!-- raw HTML omitted -->$h_2$<!-- raw HTML omitted --> 壞掉。</p>
 <h2 id="effective-number-of-hypotheses">Effective number of Hypotheses</h2>
-
-<p>首先，我們先將 <span>$h$</span> 們做適當的分群，從數據點的角度來看，會 predict 出相同結果的 hypothesis set 視為<strong>相同</strong>的一群 (詳細範例可以看講義👀)，對 binary classification 來說，每一群又稱為一個二元分類器 (<em>dichotomy</em>)。<br />
-給定數據點 <span>$\mathbf{x}_1 \sim \mathbf{x}_N$</span>，我們可以定義不同的 dichotomy ， <span>$\mathcal{H}(\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N)$</span> 為這些 dichotomies 的集合(跟原先的 <span>$\mathcal{H}$</span> 有何不同呢？可以想成若 <span>$h_i, h_j$</span> 在 training data 上結果相同，則只會對應到當中的 <strong>一個</strong> dichotomy)。而我們想以這個集合的大小 (也就是分群數)，去取代原先的 <span>$M$</span> 。</p>
-
-<h3 id="growth-function-span-m-h-span">Growth Function <span>$m_H$</span></h3>
-
-<p>可以發現，隨著 sample 的 <span>$\mathcal{D}$</span> 不同，分群的結果也會不同，
-in order to generalization ，我們定義 growth function <span>$m_H$</span> 為當中
-的 upper bound ，也是我們之後要拿來取代 <span>$M$</span> 的量。</p>
-
-<p><code>$$
-m_H(N) = \underset{\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N \in \mathcal{X}}{\max} |\mathcal{H}(\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N)|
-$$</code></p>
-
-<p>其中 <span>$m_H(N) \leq 2^N$</span> (which is easy to see)</p>
-
-<h2 id="span-m-h-span-is-poly"><span>$m_H$</span> is POLY?</h2>
-
-<p>回到最上方的式子，隨著 sample size <span>$N$</span> 的增長，其壓低壞事發生機率的能力是 <strong>EXP</strong> ，所以我們只要能證明 <span>$m_H$</span> 為 <strong>POLY</strong> ，便可以 claim 說，在 <span>$N$</span> 足夠大的情況下， PAC-learnable (even <span>$\mathcal{H}$</span> is infinite)!</p>
-
+<p>首先，我們先將 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> 們做適當的分群，從數據點的角度來看，會 predict 出相同結果的 hypothesis set 視為<strong>相同</strong>的一群 (詳細範例可以看講義👀)，對 binary classification 來說，每一群又稱為一個二元分類器 (<em>dichotomy</em>)。\<br>
+給定數據點 <!-- raw HTML omitted -->$\mathbf{x}_1 \sim \mathbf{x}_N$<!-- raw HTML omitted -->，我們可以定義不同的 dichotomy ， <!-- raw HTML omitted -->$\mathcal{H}(\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N)$<!-- raw HTML omitted --> 為這些 dichotomies 的集合(跟原先的 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 有何不同呢？可以想成若 <!-- raw HTML omitted -->$h_i, h_j$<!-- raw HTML omitted --> 在 training data 上結果相同，則只會對應到當中的 <strong>一個</strong> dichotomy)。而我們想以這個集合的大小 (也就是分群數)，去取代原先的 <!-- raw HTML omitted -->$M$<!-- raw HTML omitted --> 。</p>
+<h3 id="growth-function-spanm-hspan">Growth Function <!-- raw HTML omitted -->$m_H$<!-- raw HTML omitted --></h3>
+<p>可以發現，隨著 sample 的 <!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted --> 不同，分群的結果也會不同，
+in order to generalization ，我們定義 growth function <!-- raw HTML omitted -->$m_H$<!-- raw HTML omitted --> 為當中
+的 upper bound ，也是我們之後要拿來取代 <!-- raw HTML omitted -->$M$<!-- raw HTML omitted --> 的量。</p>
+<p><code>$$ m_H(N) = \underset{\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N \in \mathcal{X}}{\max} |\mathcal{H}(\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_N)| $$</code></p>
+<p>其中 <!-- raw HTML omitted -->$m_H(N) \leq 2^N$<!-- raw HTML omitted --> (which is easy to see)</p>
+<h2 id="spanm-hspan-is-poly"><!-- raw HTML omitted -->$m_H$<!-- raw HTML omitted --> is POLY?</h2>
+<p>回到最上方的式子，隨著 sample size <!-- raw HTML omitted -->$N$<!-- raw HTML omitted --> 的增長，其壓低壞事發生機率的能力是 <strong>EXP</strong> ，所以我們只要能證明 <!-- raw HTML omitted -->$m_H$<!-- raw HTML omitted --> 為 <strong>POLY</strong> ，便可以 claim 說，在 <!-- raw HTML omitted -->$N$<!-- raw HTML omitted --> 足夠大的情況下， PAC-learnable (even <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> is infinite)!</p>
 <p>可以在講義看到幾個簡單的例子(👀 1D perceptron, 1D interval, 2D contour)，並求出其 growth function 的 analytical form，但很多時候要寫下這個 form 並不那麼簡單，然而，其實我們關心的只是它的 order，或者說他是否為 <strong>POLY</strong> 罷了。為了方便討論，以下做幾個定義。</p>
-
 <h3 id="shatter">Shatter</h3>
-
-<div>
-\[
-\text{If} \: \mathcal{H} \: \text{can \textbf{shatter} N points} \Leftrightarrow m_H(N) = 2^N
-\]
-</div>
-
-<p>解釋是說，所擁有的 dichotomies ，可以應付training data中所有可能的分群情況。<br />
-(<span>$\exists \, h $</span>  s.t <span>$h(\mathbf{x}_i) = f(\mathbf{x}_i) \; \forall i=1 \sim N$</span>)，直覺來想，這代表了這個 Hypothesis set 很強，但同時也表示了需要搜索的數量很多，呈現在 growth function 為 <strong>EXP</strong> 。</p>
-
-<p>※注意到 <span>$m_H(N)$</span> 是指<strong>最大</strong>的 dichotomies set size，所以 <span>$m_H(N)$</span>只能說明存在<strong>至少一組</strong> data 可被 shatter ，但不是<strong>所有</strong>的 data 都可以被 shatter。<br />
+<!-- raw HTML omitted -->
+<p>解釋是說，所擁有的 dichotomies ，可以應付training data中所有可能的分群情況。\<br>
+(<!-- raw HTML omitted -->$\exists , h $<!-- raw HTML omitted -->  s.t <!-- raw HTML omitted -->$h(\mathbf{x}_i) = f(\mathbf{x}_i) ; \forall i=1 \sim N$<!-- raw HTML omitted -->)，直覺來想，這代表了這個 Hypothesis set 很強，但同時也表示了需要搜索的數量很多，呈現在 growth function 為 <strong>EXP</strong> 。</p>
+<p>※注意到 <!-- raw HTML omitted -->$m_H(N)$<!-- raw HTML omitted --> 是指<strong>最大</strong>的 dichotomies set size，所以 <!-- raw HTML omitted -->$m_H(N)$<!-- raw HTML omitted -->只能說明存在<strong>至少一組</strong> data 可被 shatter ，但不是<strong>所有</strong>的 data 都可以被 shatter。\<br>
 那些<strong>退化</strong>的情況反而是不能被 shatter 的特例，像是 2 維平面上，點為 colinear 的話， 3 個點 linear perceptron 便無法處理了，又或者像是 convex set 中，點如果沒有落在圓上，也是無法被 shatter 的</p>
-
 <h3 id="break-point">Break Point</h3>
-
 <p>然而，很多時候我們對資料有些洞見，知道他滿足某種性質，不一定要找那種可以應付所有情況的 Hypothesis set，拿 Linear perceptron 所處理的對象為例，我們假設資料是線性可分(i.e 對線性不可分的資料無法 shatter)，那麼便不需要用到 convex set 這麼強的 Hypothesis set 了 (所謂殺雞焉用牛刀)</p>
-
-<div>
-\[
-\text{If no data set of size } \, k \, \text{can be \textbf{shattered} by} \, \mathcal{H}, \;  k \, \text{is the \textbf{break point} for } \, \mathcal{H}
-\]
-</div>
-
-<p>簡單來說就是， <span>$\exists \; k \in \mathbb{N} \, s.t. \, m_H(k) &lt; 2^{k}$</span> ,which is <strong>POLY</strong><br />
-(當 <span>$N \geq k$</span> 時，開始出現 <span>$\mathcal{H}$</span> 無法處理，或者說不考慮的情況)</p>
-
-<p>※承 shatter 的討論，這裡必須要確保 <strong>對所有</strong> size 為 <span>$k$</span> 的 data，
-都無法被 shatter (不存在只有特例才有的那些<strong>特性</strong> )，才能說 <span>$k$</span> 為
-hypothesis set 的 break point 。<br />
+<!-- raw HTML omitted -->
+<p>簡單來說就是， <!-- raw HTML omitted -->$\exists ; k \in \mathbb{N} , s.t. , m_H(k) &lt; 2^{k}$<!-- raw HTML omitted --> ,which is <strong>POLY</strong>\<br>
+(當 <!-- raw HTML omitted -->$N \geq k$<!-- raw HTML omitted --> 時，開始出現 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 無法處理，或者說不考慮的情況)</p>
+<p>※承 shatter 的討論，這裡必須要確保 <strong>對所有</strong> size 為 <!-- raw HTML omitted -->$k$<!-- raw HTML omitted --> 的 data，
+都無法被 shatter (不存在只有特例才有的那些<strong>特性</strong> )，才能說 <!-- raw HTML omitted -->$k$<!-- raw HTML omitted --> 為
+hypothesis set 的 break point 。\<br>
 所以如果今天只知道某一組 data ，無法被
-<span>$\mathcal{H}$</span> 給 shatter ，<strong>是無法判定 break point 為多少的</strong> (有可能是 <span>$k \geq N$</span>中，被造出的特例；亦有可能如同我們直覺想的，因為 <span>$k &lt; N$</span>，所以任一組當然找不到)。</p>
-
+<!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 給 shatter ，<strong>是無法判定 break point 為多少的</strong> (有可能是 <!-- raw HTML omitted -->$k \geq N$<!-- raw HTML omitted -->中，被造出的特例；亦有可能如同我們直覺想的，因為 <!-- raw HTML omitted -->$k &lt; N$<!-- raw HTML omitted -->，所以任一組當然找不到)。</p>
 <h2 id="reference">Reference</h2>
-
 <ul>
 <li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/05_handout.pdf">林軒田老師的講義</a></li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec5%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec5%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec5%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec5%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec5%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec5%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -421,8 +418,8 @@ hypothesis set 的 break point 。<br />
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -431,10 +428,8 @@ hypothesis set 的 break point 。<br />
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -451,24 +446,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

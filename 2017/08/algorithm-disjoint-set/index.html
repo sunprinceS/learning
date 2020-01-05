@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Implementation &amp; Analysis">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Algorithm - Disjoint Set &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>22 Aug 2017</time>
   </div>
+
   
 
   
@@ -278,94 +278,104 @@
 
 </div>
 
-
-  <p>Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets <span>$S_1,S_2,\cdots,S_k$</span>，而每個 <span>$S_i$</span> (每個 category) 以一個代表值 (<em>representative</em>) 去紀錄。
-<!--這個系列是末學大三時候修 Holin 演算法時所整理的筆記，在 KTH DD2458 的課程中，用到了不少學過的東西，也算彌補了當時不足了實做部份，順道以此為複習。--></p>
-
-<h2 id="支援的-operations">支援的 Operations</h2>
-
+  <p>Disjoint Set 顧名思義，代表了一群兩兩交集為空的集合們，常用於處理依據某種關係將元素們「分類」的問題。我們的目標是去 maintain collection of disjoint sets <!-- raw HTML omitted -->$S_1,S_2,\cdots,S_k$<!-- raw HTML omitted -->，而每個 <!-- raw HTML omitted -->$S_i$<!-- raw HTML omitted --> (每個 category) 以一個代表值 (<em>representative</em>) 去紀錄。</p>
+<!-- raw HTML omitted -->
+<h2 id="-operations">支援的 Operations</h2>
 <ol>
-<li><code>Make-Set(x)</code>: create a new set {<span>$x$</span>}</li>
-<li><code>Find(x)</code>: Find the leader of <span>$x$</span>&rsquo;s set</li>
-<li><code>Union(x,y)</code>: Union <span>$x$</span>&rsquo;s set and <span>$y$</span>&rsquo;s set</li>
+<li><code>Make-Set(x)</code>: create a new set {<!-- raw HTML omitted -->$x$<!-- raw HTML omitted -->}</li>
+<li><code>Find(x)</code>: Find the leader of <!-- raw HTML omitted -->$x$<!-- raw HTML omitted -->'s set</li>
+<li><code>Union(x,y)</code>: Union <!-- raw HTML omitted -->$x$<!-- raw HTML omitted -->'s set and <!-- raw HTML omitted -->$y$<!-- raw HTML omitted -->'s set</li>
 </ol>
-
 <h2 id="linked-list-implementation">Linked List Implementation</h2>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/djs-linked-list.jpg" width="800px"></p>
-
+<!-- raw HTML omitted -->
 <ul>
-<li><code>Make-Set(x)</code>: <span>$\mathcal{O}(1)$</span> (create <code>HEAD</code> and representative，也就是自己)</li>
-<li><code>Find(x)</code>: <span>$\mathcal{O}(1)$</span> (back to <code>HEAD</code>，go to representative)</li>
-<li><code>Union(x,y)</code>: <span>$\mathcal{O}(n)$</span> <br />
-可以發現 Union 非常慢，要依序將 <span>$S_2$</span> 中的元素依序指到 <span>$S_1$</span> 的 <code>HEAD</code> ，同時將 <span>$S_1$</span> 的最後一個元素之 <code>ptr</code> 指到原先 <span>$S_2$</span> 中的第一個。(當然可以在 <code>HEAD</code> 中多存一個指向最後一個元素的 <code>ptr</code> ，但複雜度還是 <span>$\mathcal{O}(m)$</span>, where <span>$m = |S_2|$</span>)</li>
+<li><code>Make-Set(x)</code>: <!-- raw HTML omitted -->$\mathcal{O}(1)$<!-- raw HTML omitted --> (create <code>HEAD</code> and representative，也就是自己)</li>
+<li><code>Find(x)</code>: <!-- raw HTML omitted -->$\mathcal{O}(1)$<!-- raw HTML omitted --> (back to <code>HEAD</code>，go to representative)</li>
+<li><code>Union(x,y)</code>: <!-- raw HTML omitted -->$\mathcal{O}(n)$<!-- raw HTML omitted --> \<br>
+可以發現 Union 非常慢，要依序將 <!-- raw HTML omitted -->$S_2$<!-- raw HTML omitted --> 中的元素依序指到 <!-- raw HTML omitted -->$S_1$<!-- raw HTML omitted --> 的 <code>HEAD</code> ，同時將 <!-- raw HTML omitted -->$S_1$<!-- raw HTML omitted --> 的最後一個元素之 <code>ptr</code> 指到原先 <!-- raw HTML omitted -->$S_2$<!-- raw HTML omitted --> 中的第一個。(當然可以在 <code>HEAD</code> 中多存一個指向最後一個元素的 <code>ptr</code> ，但複雜度還是 <!-- raw HTML omitted -->$\mathcal{O}(m)$<!-- raw HTML omitted -->, where <!-- raw HTML omitted -->$m = |S_2|$<!-- raw HTML omitted -->)</li>
 </ul>
-
 <p>雖說單看 <code>Union</code> 的複雜度似乎不太妙，但考慮一系列操作( <strong>Amortized Analysis</strong> ，也是一種常見的分析複雜度方式)，同時利用上方提到的 trick ，在做 <code>Union</code> 時，都是去合併<strong>較小</strong>的那個集合，再來做分析。</p>
-
 <h3 id="lemma">Lemma</h3>
-
 <p>Starting from 0 sets</p>
-
-<div>
-
-\[
-\text{operations} \left\{ \begin{array}{ll}
-           n \quad \text{make-set} (\, \therefore \, n \; \text{elements})\\
-           m \quad \text{find}\\
-           \leq n-1 \quad \text{union}
-        \end{array} \right.
-\]
-
-</div>
-
-<p><span>$\Rightarrow \, \text{total cost}: \mathcal{O}(m+n \log n)$</span><br />
-其中 <span>$n\log n$</span> 顯然是來自 <code>Union</code> 的 cost，而細看操作會發現，這亦為 <span>$\mathcal{\Theta}(\text{total number of times that element&rsquo;s top ptr changes})$</span>，<br />
-所以今天我們想證明，改動 <code>ptr</code> 的次數為 <span>$\mathcal{O}(n \log n)$</span></p>
-
-<p><strong>Claim</strong>: If an element has changes <code>ptr</code> <span>$k$</span> times, then it belongs to a set of
-size <span>$\geq 2^{k}$</span></p>
-
-<p>用數學歸納法可以簡單證明，假設 <span>$k=t$</span> 時成立，那在 <span>$k=t+1$</span> 時，如果該 set 還需改動 <code>ptr</code> ，表示其跟 size 比他大的 set 做 <code>Union</code> ，之後 size <span>$\geq 2^{t+1}$</span> ， Claim 依然成立 (<span>$k=0$</span> 時，只有 make-set， size 為 <span>$1$</span> 亦成立)</p>
-
-<p>而利用該 Claim ，又已知 size of any set <span>$\leq n$</span>，所以任何元素都只能改動 <code>ptr</code> <span>$\leq \log n$</span> 次，所以 total <code>ptr</code> 改動次數 <span>$\leq
-n \log n \quad \square$</span></p>
-
+<!-- raw HTML omitted -->
+<p>[
+\text{operations} \left{ \begin{array}{ll}
+n \quad \text{make-set} (, \therefore , n ; \text{elements})\<br>
+m \quad \text{find}\<br>
+\leq n-1 \quad \text{union}
+\end{array} \right.
+]</p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted -->$\Rightarrow , \text{total cost}: \mathcal{O}(m+n \log n)$<!-- raw HTML omitted -->\<br>
+其中 <!-- raw HTML omitted -->$n\log n$<!-- raw HTML omitted --> 顯然是來自 <code>Union</code> 的 cost，而細看操作會發現，這亦為 <!-- raw HTML omitted -->$\mathcal{\Theta}(\text{total number of times that element's top ptr changes})$<!-- raw HTML omitted -->，\<br>
+所以今天我們想證明，改動 <code>ptr</code> 的次數為 <!-- raw HTML omitted -->$\mathcal{O}(n \log n)$<!-- raw HTML omitted --></p>
+<p><strong>Claim</strong>: If an element has changes <code>ptr</code> <!-- raw HTML omitted -->$k$<!-- raw HTML omitted --> times, then it belongs to a set of
+size <!-- raw HTML omitted -->$\geq 2^{k}$<!-- raw HTML omitted --></p>
+<p>用數學歸納法可以簡單證明，假設 <!-- raw HTML omitted -->$k=t$<!-- raw HTML omitted --> 時成立，那在 <!-- raw HTML omitted -->$k=t+1$<!-- raw HTML omitted --> 時，如果該 set 還需改動 <code>ptr</code> ，表示其跟 size 比他大的 set 做 <code>Union</code> ，之後 size <!-- raw HTML omitted -->$\geq 2^{t+1}$<!-- raw HTML omitted --> ， Claim 依然成立 (<!-- raw HTML omitted -->$k=0$<!-- raw HTML omitted --> 時，只有 make-set， size 為 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted --> 亦成立)</p>
+<p>而利用該 Claim ，又已知 size of any set <!-- raw HTML omitted -->$\leq n$<!-- raw HTML omitted -->，所以任何元素都只能改動 <code>ptr</code> <!-- raw HTML omitted -->$\leq \log n$<!-- raw HTML omitted --> 次，所以 total <code>ptr</code> 改動次數 <!-- raw HTML omitted -->$\leq
+n \log n \quad \square$<!-- raw HTML omitted --></p>
 <h2 id="forest-implementation">Forest Implementation</h2>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/djs-forest.jpg" width="300px"></p>
-
+<!-- raw HTML omitted -->
 <ul>
-<li><code>Make-Set(x)</code>: <span>$\mathcal{O}(1)$</span> (建一顆只有一個節點的樹，root指向自己)</li>
-<li><code>Find(x)</code>: <span>$\mathcal{O}(\text{height})$</span> (trace back to root)</li>
-<li><code>Union(x,y)</code>: <span>$\mathcal{O}(\text{height})$</span> (單純改變被合併集 root 的指向為 <span>$\mathcal{O}(1)$</span> ，但要先用 <code>Find</code> 找到 root)</li>
+<li><code>Make-Set(x)</code>: <!-- raw HTML omitted -->$\mathcal{O}(1)$<!-- raw HTML omitted --> (建一顆只有一個節點的樹，root指向自己)</li>
+<li><code>Find(x)</code>: <!-- raw HTML omitted -->$\mathcal{O}(\text{height})$<!-- raw HTML omitted --> (trace back to root)</li>
+<li><code>Union(x,y)</code>: <!-- raw HTML omitted -->$\mathcal{O}(\text{height})$<!-- raw HTML omitted --> (單純改變被合併集 root 的指向為 <!-- raw HTML omitted -->$\mathcal{O}(1)$<!-- raw HTML omitted --> ，但要先用 <code>Find</code> 找到 root)</li>
 </ul>
-
-<p>稍微觀察一下發現，如果今天這個樹長的很傾斜(最爛的情況就是 skewed tree ，直接退化成 list)，那麼 height 為 <span>$\mathcal{O}(n)$</span> ，複雜度沒有任何改進。但若仿效前面 linked list 的想法，在做 <code>Union</code> 時，去合併比較小的 set ，則可以避免這個問題 (skewed tree會發生，就是每次都是拿一個 size 非 <span>$1$</span> 的 set 去接在 size 為 <span>$1$</span> 的 set 後面&hellip;)。</p>
-
-<h3 id="theorem-the-height-of-every-tree-span-leq-log-n-span">Theorem: The height of every tree <span>$\leq \log n$</span></h3>
-
-<p><strong>Claim:</strong> every tree with height <span>$k$</span> has at least <span>$2^{k-1}$</span> elements</p>
-
+<p>稍微觀察一下發現，如果今天這個樹長的很傾斜(最爛的情況就是 skewed tree ，直接退化成 list)，那麼 height 為 <!-- raw HTML omitted -->$\mathcal{O}(n)$<!-- raw HTML omitted --> ，複雜度沒有任何改進。但若仿效前面 linked list 的想法，在做 <code>Union</code> 時，去合併比較小的 set ，則可以避免這個問題 (skewed tree會發生，就是每次都是拿一個 size 非 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted --> 的 set 去接在 size 為 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted --> 的 set 後面&hellip;)。</p>
+<h3 id="theorem-the-height-of-every-tree-spanleq-log-nspan">Theorem: The height of every tree <!-- raw HTML omitted -->$\leq \log n$<!-- raw HTML omitted --></h3>
+<p><strong>Claim:</strong> every tree with height <!-- raw HTML omitted -->$k$<!-- raw HTML omitted --> has at least <!-- raw HTML omitted -->$2^{k-1}$<!-- raw HTML omitted --> elements</p>
 <ul>
-<li><span>$k=1$</span>, trivial</li>
-<li>假設 <span>$k=t$</span> 成立，考慮兩個高度同為 $t$ 的樹(如果不一樣的話，那合併後的樹高度為原先兩者中較高的那個，但元素個數又增加了，Claim 必成立)，各自至少有 <span>$2^{t-1}$</span> 個元素，合併後高度變為 <span>$t+1$</span> ，元素個數 <span>$\geq 2^{t-1} \times 2 = 2^{t}$</span>， Claim 依然成立</li>
+<li><!-- raw HTML omitted -->$k=1$<!-- raw HTML omitted -->, trivial</li>
+<li>假設 <!-- raw HTML omitted -->$k=t$<!-- raw HTML omitted --> 成立，考慮兩個高度同為 $t$ 的樹(如果不一樣的話，那合併後的樹高度為原先兩者中較高的那個，但元素個數又增加了，Claim 必成立)，各自至少有 <!-- raw HTML omitted -->$2^{t-1}$<!-- raw HTML omitted --> 個元素，合併後高度變為 <!-- raw HTML omitted -->$t+1$<!-- raw HTML omitted --> ，元素個數 <!-- raw HTML omitted -->$\geq 2^{t-1} \times 2 = 2^{t}$<!-- raw HTML omitted -->， Claim 依然成立</li>
 </ul>
-
-<p>所以當已知每顆樹至多 <span>$n$</span> 個元素的情況下，我們可以證明其高度必
-<span>$\leq \log n \quad \square$</span></p>
-
+<p>所以當已知每顆樹至多 <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 個元素的情況下，我們可以證明其高度必
+<!-- raw HTML omitted -->$\leq \log n \quad \square$<!-- raw HTML omitted --></p>
 <h3 id="implementation">Implementation</h3>
-
-<script src="https://gist.github.com/sunprinceS/ba6415fdef340c1b97377d286a0ff402.js"></script>
-
+<!-- raw HTML omitted -->
 <h2 id="reference">Reference</h2>
-
 <ul>
 <li><a href="https://www.csie.ntu.edu.tw/~hsinmu/courses/_media/dsa_12spring/disjoint_set.pdf">台大資工 - DSA</a></li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2falgorithm-disjoint-set%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2falgorithm-disjoint-set%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2falgorithm-disjoint-set%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2falgorithm-disjoint-set%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2falgorithm-disjoint-set%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2falgorithm-disjoint-set%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -421,8 +431,8 @@ n \log n \quad \square$</span></p>
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -431,10 +441,8 @@ n \log n \quad \square$</span></p>
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -451,24 +459,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

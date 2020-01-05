@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="All Pairs Shortest Path - Floyd Warshall &amp; Johnson Algorithm">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Algorithm - Graph Theory - Lec 4 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>08 Sep 2017</time>
   </div>
+
   
 
   
@@ -278,121 +278,95 @@
 
 </div>
 
-
-  <p>前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 <span>$V$</span> 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。</p>
-
+  <p>前兩講討論的是給定起點，問到其他點的最短距離，稱為單源最短路徑問題，而現在我們想考慮 <!-- raw HTML omitted -->$V$<!-- raw HTML omitted --> 中兩兩點對彼此間的最短距離，又稱全點對最短路徑問題。</p>
 <p>一個簡單的想法是對每一個點都跑一遍單源最短路徑的 Algorithm，複雜度如下：</p>
-
 <ul>
-<li>Bellman-Ford: <span>$\mathcal{O}(V*EV) = \mathcal{O}(EV^2)$</span></li>
-<li>Dijkstra (W/ Fib. Heap): <span>$\mathcal{O}(V*(E+V \log V)) = \mathcal{O}(EV + V^2 \log V)$</span></li>
+<li>Bellman-Ford: <!-- raw HTML omitted -->$\mathcal{O}(V*EV) = \mathcal{O}(EV^2)$<!-- raw HTML omitted --></li>
+<li>Dijkstra (W/ Fib. Heap): <!-- raw HTML omitted -->$\mathcal{O}(V*(E+V \log V)) = \mathcal{O}(EV + V^2 \log V)$<!-- raw HTML omitted --></li>
 </ul>
-
 <p><strong>Note: Dijkstra 不能處理負邊</strong></p>
-
 <h2 id="floyd-warshaall-algorithm">Floyd-Warshaall Algorithm</h2>
-
-<p>在此我們發展一個專用於找全點對最短路徑的演算法。核心想法是將 <span>$u \rightarrow v$</span> 的路徑依照經過的中繼點做分類(有/無經過)，一次增加一個可用的中繼點，並更新所有路徑。</p>
-
-<h3 id="優點-與-bellman-ford-https-sunprinces-github-io-learning-2017-08-algorithm-graph-theory-lec-2-一樣">優點 (與 <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> 一樣):</h3>
-
+<p>在此我們發展一個專用於找全點對最短路徑的演算法。核心想法是將 <!-- raw HTML omitted -->$u \rightarrow v$<!-- raw HTML omitted --> 的路徑依照經過的中繼點做分類(有/無經過)，一次增加一個可用的中繼點，並更新所有路徑。</p>
+<h3 id="--bellman-fordhttpssunprincesgithubiolearning201708algorithm---graph-theory---lec-2-">優點 (與 <a href="https://sunprinces.github.io/learning/2017/08/algorithm---graph-theory---lec-2/">Bellman-Ford</a> 一樣):</h3>
 <ul>
 <li>可以處理有負邊的圖</li>
 <li>檢測是否存在負環</li>
 </ul>
-
 <h3 id="dynamic-programming">Dynamic Programming</h3>
-
-<div>
-\[
-d_{ij}^k \, : \, \text{the cost of shortest path from} \, v_i \rightarrow v_j \, \text{using only} \, \{v_1, v_2,\cdots,v_k\}
-\]
-</div>
-
-<div>
-\[
-d_{ij}^k = \min\{\underbrace{d_{ij}^{k-1}}_{\text{\color{blue}{DOESN'T go through}} \, \color{blue}{v_k}}, \underbrace{{d_{ik}^{k-1} + d_{kj}^{k-1}}}_{\text{\color{blue}{go through}} \,\color{blue}{v_k} \,\text{\color{blue}{exactly once}}}\}
-\]
-</div>
-
-<p><span>$\displaystyle \Rightarrow$</span> Final answer: <span>$\displaystyle d_{ij}^n$</span></p>
-
-<p>複雜度為 <span>$\mathcal{O}(V^3)$</span></p>
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted -->$\displaystyle \Rightarrow$<!-- raw HTML omitted --> Final answer: <!-- raw HTML omitted -->$\displaystyle d_{ij}^n$<!-- raw HTML omitted --></p>
+<p>複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(V^3)$<!-- raw HTML omitted --></p>
 <h3 id="implementation">Implementation</h3>
-
-<script src="https://gist.github.com/sunprinceS/dea6b01e77cb3fe1f40c6779569d592e.js"></script>
-
-<h2 id="johnson-s-algorithm">Johnson&rsquo;s Algorithm</h2>
-
-<p>相比於 Bellman-Ford 跑 <span>$|V|$</span> 次的複雜度， Floyd-Warshall 可算是樂勝了；但對 Dijkstra 卻不盡然，如果說今天圖上的邊不多時(e.g <span>$|E| = \mathcal{O}(V \log V)$</span>)，跑 Dijkstra <span>$|V|$</span> 次的複雜度還比較好。<br />
-<strong>Note: 完全圖: <span>$|E| = \mathcal{O}(V^2)$</span></strong></p>
-
-<p>但注意到，<a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Dijkstra</a> 只能處理沒有負邊的圖，所以直接使用是不行的。而 Johnson&rsquo;s Algorithm 的核心概念在於<strong>重新調整邊的權重使其為非負，再來對每個節點跑Dijkstra</strong> 。</p>
-
-<h3 id="更改邊權重">更改邊權重</h3>
-
+<!-- raw HTML omitted -->
+<h2 id="johnsons-algorithm">Johnson's Algorithm</h2>
+<p>相比於 Bellman-Ford 跑 <!-- raw HTML omitted -->$|V|$<!-- raw HTML omitted --> 次的複雜度， Floyd-Warshall 可算是樂勝了；但對 Dijkstra 卻不盡然，如果說今天圖上的邊不多時(e.g <!-- raw HTML omitted -->$|E| = \mathcal{O}(V \log V)$<!-- raw HTML omitted -->)，跑 Dijkstra <!-- raw HTML omitted -->$|V|$<!-- raw HTML omitted --> 次的複雜度還比較好。\<br>
+<strong>Note: 完全圖: <!-- raw HTML omitted -->$|E| = \mathcal{O}(V^2)$<!-- raw HTML omitted --></strong></p>
+<p>但注意到，<a href="https://sunprinces.github.io/learning/2017/09/algorithm---graph-theory---lec-3/">Dijkstra</a> 只能處理沒有負邊的圖，所以直接使用是不行的。而 Johnson's Algorithm 的核心概念在於<strong>重新調整邊的權重使其為非負，再來對每個節點跑Dijkstra</strong> 。</p>
+<h3 id="heading">更改邊權重</h3>
 <p>Want: 不影響最短路徑及負環的位置</p>
-
-<p>方法: 對於圖上每個節點賦予一個權重 <span>$h(v)$</span> ，而每條邊的權重更新為</p>
-
-<div>
-\[
-w^{\prime} (u,v) = w(u,v) + h(u) - h(v)
-\]
-</div>
-
+<p>方法: 對於圖上每個節點賦予一個權重 <!-- raw HTML omitted -->$h(v)$<!-- raw HTML omitted --> ，而每條邊的權重更新為</p>
+<!-- raw HTML omitted -->
 <h4 id="correctness">Correctness</h4>
-
 <ul>
-<li><span>$s \rightarrow v$</span> 的最短路徑不變</li>
+<li><!-- raw HTML omitted -->$s \rightarrow v$<!-- raw HTML omitted --> 的最短路徑不變</li>
 </ul>
-
-<div>
-\[
-\begin{aligned}
-w^{\prime} (s,v) & = w^{\prime}(s,v_1) + w^{\prime}(v_1,v_2) + \cdots + w^{\prime}(v_{k-1},v)\\
-& = [w(s,v_1) + h(s) - h(v_1)] + [w(v_1,v_2) + h(v_1) - h(v_2)] + \cdots + [w(v_{k-1},v) + h(v_{k-1}) - h(v)] \\
-& = [w(s,v_1) + h(s) - \cancel{h(v_1)}] + [w(v_1,v_2) + \cancel{h(v_1)} - \cancel{h(v_2)}] + \cdots + [w(v_{k-1},v) + \cancel{h(v_{k-1})} - h(v)] \\
-& = [w(s,v_1) + w(v_1,v_2) + \cdots + w(v_{k-1},v)] + h(s) - h(v)\\
-& = w(s,v) + \underbrace{h(s) - h(v)}_{\text{定值}}\\
-\end{aligned}
-\]
-</div>
-
+<!-- raw HTML omitted -->
 <ul>
-<li>負環還會是負環 (∵ <span>$h(s) - h(v) = 0 \, \Rightarrow \, w^{\prime}(s,v) = w(s,v)$</span>)</li>
+<li>負環還會是負環 (∵ <!-- raw HTML omitted -->$h(s) - h(v) = 0 , \Rightarrow , w^{\prime}(s,v) = w(s,v)$<!-- raw HTML omitted -->)</li>
 </ul>
-
-<p>那麼接下來的問題是，該如何 assign <span>$h(v)$</span> ，使得邊的權重均為非負呢？</p>
-
-<h3 id="決定節點權重">決定節點權重</h3>
-
+<p>那麼接下來的問題是，該如何 assign <!-- raw HTML omitted -->$h(v)$<!-- raw HTML omitted --> ，使得邊的權重均為非負呢？</p>
+<h3 id="heading-1">決定節點權重</h3>
 <p>我們回到 Bellman-Ford 完成後(所有點均不能再被 relax )來看 ，滿足的不等式為</p>
-
-<div>
-\[
-\begin{aligned}
-d(u) + w(u,v) & \geq d(v) \; \forall \,u,v \in V \\
-\Rightarrow w^{\prime}(u,v) & \geq 0
-\end{aligned}
-\]
-</div>
-
-<p>移項之後可以發現，用<strong>任一起點到其他節點的最短路徑值作為 <span>$h$</span></strong> ，可以滿足邊權重為非負的要求😄</p>
-
+<!-- raw HTML omitted -->
+<p>移項之後可以發現，用<strong>任一起點到其他節點的最短路徑值作為 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --></strong> ，可以滿足邊權重為非負的要求😄</p>
 <h3 id="combine-together">Combine Together</h3>
-
 <ol>
 <li>先用 Bellman-Ford 跑一遍去賦予節點值，並以此更新權重</li>
-<li>對每個點跑 Dijkstra ， 並減去 <span>$h(s) - h(t)$</span> 得到原先的最短路徑值</li>
+<li>對每個點跑 Dijkstra ， 並減去 <!-- raw HTML omitted -->$h(s) - h(t)$<!-- raw HTML omitted --> 得到原先的最短路徑值</li>
 </ol>
-
-<p><strong>實做細節: 考慮 <span>$G$</span> 並非 connected，我們額外加一個超級起點連接到所有節點(W/ 權重 0)，確保每個邊都可被更新到</strong>。</p>
-
-<p>複雜度: <span>$\mathcal{O}(VE + V^2 \log V)$</span></p>
+<p><strong>實做細節: 考慮 <!-- raw HTML omitted -->$G$<!-- raw HTML omitted --> 並非 connected，我們額外加一個超級起點連接到所有節點(W/ 權重 0)，確保每個邊都可被更新到</strong>。</p>
+<p>複雜度: <!-- raw HTML omitted -->$\mathcal{O}(VE + V^2 \log V)$<!-- raw HTML omitted --></p>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f09%2falgorithm-graph-theory-lec-4%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f09%2falgorithm-graph-theory-lec-4%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f09%2falgorithm-graph-theory-lec-4%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f09%2falgorithm-graph-theory-lec-4%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f09%2falgorithm-graph-theory-lec-4%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f09%2falgorithm-graph-theory-lec-4%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -448,8 +422,8 @@ d(u) + w(u,v) & \geq d(v) \; \forall \,u,v \in V \\
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -458,10 +432,8 @@ d(u) + w(u,v) & \geq d(v) \; \forall \,u,v \in V \\
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -478,24 +450,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

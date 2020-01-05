@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Power of 2-choices">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Advanced Algorithm - Hash Table - Lec3 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>14 Oct 2017</time>
   </div>
+
   
 
   
@@ -280,105 +280,102 @@
 
 </div>
 
-
-  <p>在 <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">第一講</a>中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 <span>$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$</span> ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same <span>$\mathcal{H}$</span>)可以選，每次我們就看哪一個 <span>$h$</span> 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 <span>$\mathbb{E}[\, \text{max num of elements in any slots} \, ]$</span> ?</p>
-
+  <p>在 <a href="https://sunprinces.github.io/learning/2017/05/advanced-algorithm---hash-table---lec1/">第一講</a>中，我們證明了有很高的機率，任意 slot 中 element 的個數均為 <!-- raw HTML omitted -->$\mathcal{\Theta}(\frac{\ln n}{\ln (\ln n)})$<!-- raw HTML omitted --> ，而這一講想討論的是，如果今天我們手上有兩個 hash function (from same <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted -->)可以選，每次我們就看哪一個 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> 回傳的 slot 中元素比較少，就將 element hash 到 slot，那麼現在 <!-- raw HTML omitted -->$\mathbb{E}[, \text{max num of elements in any slots} , ]$<!-- raw HTML omitted --> ?</p>
 <h2 id="chernoff-bound">Chernoff Bound</h2>
-
-<p><span>$n$</span> 個 identical R.V. 的相加，想 measure 其偏離平均值的機率</p>
-
-<p>Let <span>$X_1, X_2, \cdots, X_n$</span> be independent binary R.V with <span>$\mathbb{E}[X_i] = p_i$</span></p>
-
-<p><span>$X = \sum_i X_i$</span>, <span>$\; \mu = \mathbb{E}[X] = \sum_i p_i$</span>
-<!--<span>$\; p = \frac{\mu}{n} = \text{avg}(p_i)$</span>--></p>
-
-<div>
-\[
-\boxed{\Pr[X \geq e \mu] \leq e^{- \mu}}
-\]
-</div>
-
+<p><!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 個 identical R.V. 的相加，想 measure 其偏離平均值的機率</p>
+<p>Let <!-- raw HTML omitted -->$X_1, X_2, \cdots, X_n$<!-- raw HTML omitted --> be independent binary R.V with <!-- raw HTML omitted -->$\mathbb{E}[X_i] = p_i$<!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted -->$X = \sum_i X_i$<!-- raw HTML omitted -->, <!-- raw HTML omitted -->$; \mu = \mathbb{E}[X] = \sum_i p_i$<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <h2 id="power-of-2-choices">Power of 2 choices</h2>
-
-<p>Throw <span>$n$</span> balls into <span>$n$</span> bins, <br />
+<p>Throw <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> balls into <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> bins, \<br>
 For every ball, we pick 2 bins uniformly at random, throw the ball into the bin with less load</p>
-
-<p>Let <span>$B_k = | \;\lbrace i \, | \,b_i \geq k \rbrace\;|$</span> (有 <span>$\geq k$</span> 顆球的 bin 數)<br />
-<!--<span>$\beta_k$</span> 為 <span>$B_k$</span> 的 upper bound (with <span>$\Pr[\underset{\text{event} \, \mathcal{E}_k}{\underbrace{B_k > \beta_k}}] \leq \frac{1}{n^2}$</span>)，\\-->
-<span>$\beta_k$</span> 為 <span>$B_k$</span> 的 upper bound ; <span>$ \quad \mathcal{E}_k$</span> 為 <span>$\beta_k &gt; B_k$</span> (上限符合要求) 的 event
-<br />
-假定我們已經有了 <span>$B_k \leq \beta_k$</span> 這個條件 (<span>$\mathcal{E}_k$</span> 成立)，該如何 inductively 去找 <span>$\beta \scriptstyle k+1$</span> ?</p>
-
+<p>Let <!-- raw HTML omitted -->$B_k = | ;\lbrace i , | ,b_i \geq k \rbrace;|$<!-- raw HTML omitted --> (有 <!-- raw HTML omitted -->$\geq k$<!-- raw HTML omitted --> 顆球的 bin 數)\</p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted -->$\beta_k$<!-- raw HTML omitted --> 為 <!-- raw HTML omitted -->$B_k$<!-- raw HTML omitted --> 的 upper bound ; <!-- raw HTML omitted -->$ \quad \mathcal{E}_k$<!-- raw HTML omitted --> 為 <!-- raw HTML omitted -->$\beta_k &gt; B_k$<!-- raw HTML omitted --> (上限符合要求) 的 event
+\<br>
+假定我們已經有了 <!-- raw HTML omitted -->$B_k \leq \beta_k$<!-- raw HTML omitted --> 這個條件 (<!-- raw HTML omitted -->$\mathcal{E}_k$<!-- raw HTML omitted --> 成立)，該如何 inductively 去找 <!-- raw HTML omitted -->$\beta \scriptstyle k+1$<!-- raw HTML omitted --> ?</p>
 <ol>
-<li><p>For any balls <span>$j$</span>, we say <span>$j$</span> is <span>$\color{red}{red}$</span> if the number of balls below it <span>$\leq k$</span></p></li>
-
-<li><p><span>$\Pr[ \, j \, \text{is red} \,] \leq (\frac{\beta_k}{n})^2$</span> (兩個 bin 球數都要 <span>$\geq k$</span>)</p></li>
-
-<li><p><span>$\mathbb{E}[B\scriptstyle k+1 \normalsize \, | \mathcal{E}_k] \leq \mathbb{E}[\text{num of red balls} \, | \mathcal{E}_k] \leq n \cdot (\frac{\beta_k}{n})^2$</span> <br />
-(第一個等號因為有紅色球的 bin 一定有 <span>$\geq$</span> <span>$k+1$</span> 個球，後面那個等號是因為 Union Bound)</p></li>
-
-<li><p>Using <span>$\color{blue}{\text{Chernoff Bound}}$</span>， <span>$\Pr[B \scriptstyle k+1 \normalsize \geq e \frac{\beta_k^2}{n} | \mathcal{E}_k] \leq \exp(-\frac{\beta_k^2}{n})$</span> <br />
-<br />
-(如果 <span>$\exp(-\frac{\beta_k^2}{n}) \leq \frac{1}{n^2}$</span>) ， 則我們可以選 <span>$\beta \scriptstyle k+1  \normalsize = e \, \frac{\beta_k^2}{n}$</span><br />
-整理一下此遞迴式，我們有了以下關係式</p></li>
+<li>
+<p>For any balls <!-- raw HTML omitted -->$j$<!-- raw HTML omitted -->, we say <!-- raw HTML omitted -->$j$<!-- raw HTML omitted --> is <!-- raw HTML omitted -->$\color{red}{red}$<!-- raw HTML omitted --> if the number of balls below it <!-- raw HTML omitted -->$\leq k$<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p><!-- raw HTML omitted -->$\Pr[ , j , \text{is red} ,] \leq (\frac{\beta_k}{n})^2$<!-- raw HTML omitted --> (兩個 bin 球數都要 <!-- raw HTML omitted -->$\geq k$<!-- raw HTML omitted -->)</p>
+</li>
+<li>
+<p><!-- raw HTML omitted -->$\mathbb{E}[B\scriptstyle k+1 \normalsize , | \mathcal{E}_k] \leq \mathbb{E}[\text{num of red balls} , | \mathcal{E}_k] \leq n \cdot (\frac{\beta_k}{n})^2$<!-- raw HTML omitted --> \<br>
+(第一個等號因為有紅色球的 bin 一定有 <!-- raw HTML omitted -->$\geq$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$k+1$<!-- raw HTML omitted --> 個球，後面那個等號是因為 Union Bound)</p>
+</li>
+<li>
+<p>Using <!-- raw HTML omitted -->$\color{blue}{\text{Chernoff Bound}}$<!-- raw HTML omitted -->， <!-- raw HTML omitted -->$\Pr[B \scriptstyle k+1 \normalsize \geq e \frac{\beta_k^2}{n} | \mathcal{E}_k] \leq \exp(-\frac{\beta_k^2}{n})$<!-- raw HTML omitted --> \<br>
+\<br>
+(如果 <!-- raw HTML omitted -->$\exp(-\frac{\beta_k^2}{n}) \leq \frac{1}{n^2}$<!-- raw HTML omitted -->) ， 則我們可以選 <!-- raw HTML omitted -->$\beta \scriptstyle k+1  \normalsize = e , \frac{\beta_k^2}{n}$<!-- raw HTML omitted -->\<br>
+整理一下此遞迴式，我們有了以下關係式</p>
+</li>
 </ol>
-
-<p><code>$$
-\boxed{\frac{\beta_{k+m}}{n} = \frac{1}{e} \, (\frac{e \beta_k}{n})^{2^m}}
-$$</code>
- 接下來要選定初始值 <span>$k$</span>，就可以確定 <span>$\beta$</span> 的值了，<br />
- 注意到 <span>$\beta_6 \leq \lfloor \frac{n}{6} \rfloor \leq \frac{n}{2e}$</span> (顯然會超過 6 顆球
- 的bin數 一定會小於均分的 case)<br />
- 代回上式，可得</p>
-
-<p><code>$$
-\frac{\beta_{6+m}}{n} \leq \frac{1}{e} \, \frac{1}{2^{2^m}}
-$$</code></p>
-
-<p>當 <span>$m = \mathcal{O}(\ln \ln n)$</span>， we can find that <span>$\beta \scriptstyle 6+m \normalsize &lt; 1$</span> <br />
-(亦即超過 <span>$\mathcal{O}(1) + \ln \ln n $</span> 顆球的 bin 出現的機率極小)</p>
-
-<p>這裡只的機率很小是指 <span>$\Pr[\neg \, \mathcal{E}_m]$</span> 很小，根據上方的遞迴式，我們可以給出一個明確的上界</p>
-
+<p><code>$$ \boxed{\frac{\beta_{k+m}}{n} = \frac{1}{e} \, (\frac{e \beta_k}{n})^{2^m}} $$</code>
+接下來要選定初始值 <!-- raw HTML omitted -->$k$<!-- raw HTML omitted -->，就可以確定 <!-- raw HTML omitted -->$\beta$<!-- raw HTML omitted --> 的值了，\<br>
+注意到 <!-- raw HTML omitted -->$\beta_6 \leq \lfloor \frac{n}{6} \rfloor \leq \frac{n}{2e}$<!-- raw HTML omitted --> (顯然會超過 6 顆球
+的bin數 一定會小於均分的 case)\<br>
+代回上式，可得</p>
+<p><code>$$ \frac{\beta_{6+m}}{n} \leq \frac{1}{e} \, \frac{1}{2^{2^m}} $$</code></p>
+<p>當 <!-- raw HTML omitted -->$m = \mathcal{O}(\ln \ln n)$<!-- raw HTML omitted -->， we can find that <!-- raw HTML omitted -->$\beta \scriptstyle 6+m \normalsize &lt; 1$<!-- raw HTML omitted --> \<br>
+(亦即超過 <!-- raw HTML omitted -->$\mathcal{O}(1) + \ln \ln n $<!-- raw HTML omitted --> 顆球的 bin 出現的機率極小)</p>
+<p>這裡只的機率很小是指 <!-- raw HTML omitted -->$\Pr[\neg , \mathcal{E}_m]$<!-- raw HTML omitted --> 很小，根據上方的遞迴式，我們可以給出一個明確的上界</p>
 <h3 id="fact">Fact</h3>
-
-<p><code>$$
-\boxed{\Pr[ \neg \, \mathcal{E}_{k+1}] \leq \Pr[\neg \, \mathcal{E}_{k+1} \,| \, \mathcal{E}_k] \cdot \Pr[\mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k]}
-$$</code></p>
-
+<p><code>$$ \boxed{\Pr[ \neg \, \mathcal{E}_{k+1}] \leq \Pr[\neg \, \mathcal{E}_{k+1} \,| \, \mathcal{E}_k] \cdot \Pr[\mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k]} $$</code></p>
 <p><strong>proof.</strong></p>
-
-<p><code>$$
-\begin{align}
-\text{RHS} \, &amp;= \, \Pr[\neg \, \mathcal{E}_{k+1} \,| \, \mathcal{E}_k] \cdot \Pr[\mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k] \\
-&amp; = \Pr[\neg \, \mathcal{E}_{k+1} \, \land \, \mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k]\\
-&amp; = \underbrace{\Pr[\neg \, \mathcal{E}_{k+1} \, \land \, \mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k \, \land \, \neg \, \mathcal{E}_{k+1}]}_{\Pr[\neg \, \mathcal{E}_{k+1}]} + \Pr[\neg \, \mathcal{E}_k \, \land \, \mathcal{E}_{k+1}] \\
-&amp; \geq \text{LHS}
-\end{align}
-$$</code></p>
-
-<p><span>$\Rightarrow \Pr[\neg \, \mathcal{E} \scriptstyle k \normalsize] \leq \frac{1}{n} \quad$</span> (利用 <span>$\Pr[\neg \, \mathcal{E}_6 ] = 0$</span>，遞迴求出)</p>
-
+<p><code>$$ \begin{align} \text{RHS} \, &amp;= \, \Pr[\neg \, \mathcal{E}_{k+1} \,| \, \mathcal{E}_k] \cdot \Pr[\mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k] \\ &amp; = \Pr[\neg \, \mathcal{E}_{k+1} \, \land \, \mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k]\\ &amp; = \underbrace{\Pr[\neg \, \mathcal{E}_{k+1} \, \land \, \mathcal{E}_k] + \Pr[\neg \, \mathcal{E}_k \, \land \, \neg \, \mathcal{E}_{k+1}]}_{\Pr[\neg \, \mathcal{E}_{k+1}]} + \Pr[\neg \, \mathcal{E}_k \, \land \, \mathcal{E}_{k+1}] \\ &amp; \geq \text{LHS} \end{align} $$</code></p>
+<p><!-- raw HTML omitted -->$\Rightarrow \Pr[\neg , \mathcal{E} \scriptstyle k \normalsize] \leq \frac{1}{n} \quad$<!-- raw HTML omitted --> (利用 <!-- raw HTML omitted -->$\Pr[\neg , \mathcal{E}_6 ] = 0$<!-- raw HTML omitted -->，遞迴求出)</p>
 <h2 id="more-discussion">More Discussion</h2>
-
-<h3 id="span-l-span-choice"><span>$l$</span>-choice</h3>
-
-<p>第 2 步變為 <span>$\Pr[ \, j \, \text{is red} \,] \leq (\frac{\beta_k}{n})^l$</span> (<span>$l$</span> 個 bin 球數都要 <span>$\geq k$</span>)</p>
-
-<p><code>$$
-\boxed{\frac{\beta_{k+m}}{n} = \frac{1}{e} \, (\frac{e \beta_k}{n})^{l^m}}
-$$</code></p>
-
-<p>當 <span>$m = \mathcal{O}(\frac{\ln \ln n}{\ln l})$</span>， we can find that <span>$\beta \scriptstyle 6+m \normalsize &lt; 1$</span> ，但其實還是在同個 order</p>
-
-<h3 id="what-if-span-beta-k-span-is-so-small">What if <span>$\beta_k$</span> is so small</h3>
-
-<p>That is, 第 4 步的 bound 並不足夠小，也就是隨著 <span>$\beta_k$</span> 的 decay， <span>$\exp(-\frac{\beta_k^2}{n})$</span> 終會 <span>$ &gt; \frac{1}{n^2}$</span> <span>$\Rightarrow \beta_k &lt; \sqrt{2n \ln n}$</span> <br />
-Pick 使得此式成立的 min. <span>$k^\star$</span>， <span>$k^\star = \frac{\ln \ln n}{\ln 2} + \mathcal{O}(1)$</span></p>
-
-<p>可以證明有 bin 超過 <span>$k^\star + 2$</span> 的機率足夠小 (但證明我沒看懂QQ)</p>
+<h3 id="spanlspan-choice"><!-- raw HTML omitted -->$l$<!-- raw HTML omitted -->-choice</h3>
+<p>第 2 步變為 <!-- raw HTML omitted -->$\Pr[ , j , \text{is red} ,] \leq (\frac{\beta_k}{n})^l$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$l$<!-- raw HTML omitted --> 個 bin 球數都要 <!-- raw HTML omitted -->$\geq k$<!-- raw HTML omitted -->)</p>
+<p><code>$$ \boxed{\frac{\beta_{k+m}}{n} = \frac{1}{e} \, (\frac{e \beta_k}{n})^{l^m}} $$</code></p>
+<p>當 <!-- raw HTML omitted -->$m = \mathcal{O}(\frac{\ln \ln n}{\ln l})$<!-- raw HTML omitted -->， we can find that <!-- raw HTML omitted -->$\beta \scriptstyle 6+m \normalsize &lt; 1$<!-- raw HTML omitted --> ，但其實還是在同個 order</p>
+<h3 id="what-if-spanbeta-kspan-is-so-small">What if <!-- raw HTML omitted -->$\beta_k$<!-- raw HTML omitted --> is so small</h3>
+<p>That is, 第 4 步的 bound 並不足夠小，也就是隨著 <!-- raw HTML omitted -->$\beta_k$<!-- raw HTML omitted --> 的 decay， <!-- raw HTML omitted -->$\exp(-\frac{\beta_k^2}{n})$<!-- raw HTML omitted --> 終會 <!-- raw HTML omitted -->$ &gt; \frac{1}{n^2}$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\Rightarrow \beta_k &lt; \sqrt{2n \ln n}$<!-- raw HTML omitted --> \<br>
+Pick 使得此式成立的 min. <!-- raw HTML omitted -->$k^\star$<!-- raw HTML omitted -->， <!-- raw HTML omitted -->$k^\star = \frac{\ln \ln n}{\ln 2} + \mathcal{O}(1)$<!-- raw HTML omitted --></p>
+<p>可以證明有 bin 超過 <!-- raw HTML omitted -->$k^\star + 2$<!-- raw HTML omitted --> 的機率足夠小 (但證明我沒看懂QQ)</p>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f10%2fadvanced-algorithm-hash-table-lec3%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f10%2fadvanced-algorithm-hash-table-lec3%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f10%2fadvanced-algorithm-hash-table-lec3%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f10%2fadvanced-algorithm-hash-table-lec3%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f10%2fadvanced-algorithm-hash-table-lec3%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f10%2fadvanced-algorithm-hash-table-lec3%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -434,8 +431,8 @@ Pick 使得此式成立的 min. <span>$k^\star$</span>， <span>$k^\star = \frac
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -444,10 +441,8 @@ Pick 使得此式成立的 min. <span>$k^\star$</span>， <span>$k^\star = \frac
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -464,24 +459,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

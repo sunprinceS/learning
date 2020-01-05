@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Machine Learning on Stay hungry. Stay foolish </title>
@@ -37,7 +37,6 @@
       
       <guid>https://sunprinces.github.io/learning/2018/05/beyond-rnn-lec1/</guid>
       <description>&lt;p&gt;Beyond RNN 這個系列會 focus 在近年來各式各樣我覺得有趣的 RNN 變形，及其相關的實做。&lt;/p&gt;
-
 &lt;p&gt;這篇文章的相關程式碼，放在&lt;a href=&#34;https://github.com/sunprinceS/Neural-Turing-Machine&#34;&gt;這裡&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     
@@ -65,7 +64,7 @@
       <pubDate>Fri, 13 Apr 2018 12:59:24 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning-lec10/</guid>
-      <description>&lt;p&gt;Linear Model 的核心在於 feature 分量的 weighted sum &lt;span&gt;$\mathbf{w}^T \mathbf{x}$&lt;/span&gt;， 在 binary classification ，我們用 step function 將其二分 (&lt;span&gt;$\mathcal{Y} = \lbrace \, -1,1\,\rbrace$&lt;/span&gt;)，而在 linear regression 中，我們將其直接作為輸出。而這一講要介紹的則是將 &lt;span&gt;$\mathbf{w}^T \mathbf{x}$&lt;/span&gt; 通過一個 nonlinear function mapping 到[&lt;span&gt;$0,1$&lt;/span&gt;]，賦予他機率的意義 (&lt;span&gt;$\Pr[y = +1 | \mathbf{x}]$&lt;/span&gt;)。&lt;/p&gt;</description>
+      <description>&lt;p&gt;Linear Model 的核心在於 feature 分量的 weighted sum &lt;!-- raw HTML omitted --&gt;$\mathbf{w}^T \mathbf{x}$&lt;!-- raw HTML omitted --&gt;， 在 binary classification ，我們用 step function 將其二分 (&lt;!-- raw HTML omitted --&gt;$\mathcal{Y} = \lbrace , -1,1,\rbrace$&lt;!-- raw HTML omitted --&gt;)，而在 linear regression 中，我們將其直接作為輸出。而這一講要介紹的則是將 &lt;!-- raw HTML omitted --&gt;$\mathbf{w}^T \mathbf{x}$&lt;!-- raw HTML omitted --&gt; 通過一個 nonlinear function mapping 到[&lt;!-- raw HTML omitted --&gt;$0,1$&lt;!-- raw HTML omitted --&gt;]，賦予他機率的意義 (&lt;!-- raw HTML omitted --&gt;$\Pr[y = +1 | \mathbf{x}]$&lt;!-- raw HTML omitted --&gt;)。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -74,7 +73,7 @@
       <pubDate>Thu, 12 Apr 2018 22:59:24 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/04/ntu-machine-learning-lec9/</guid>
-      <description>&lt;p&gt;在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space &lt;span&gt;$\mathcal{Y}$&lt;/span&gt; 只是單純的 {&lt;span&gt;$1, -1$&lt;/span&gt;}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在前幾講的討論中，我們討論了 binary classification 的問題，及這個問題在機器學習上的可行性。但很多時候，我們不希望機器只會說是或不是，亦即不希望它的 output space &lt;!-- raw HTML omitted --&gt;$\mathcal{Y}$&lt;!-- raw HTML omitted --&gt; 只是單純的 {&lt;!-- raw HTML omitted --&gt;$1, -1$&lt;!-- raw HTML omitted --&gt;}。舉例來說，給定一些資料，請你預測明天的股價，除了想預測會漲或會跌之外，到底漲多少或跌多少也是我們有興趣知道的事情，而這也是接下來兩講想解決的事情 - Regression。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -83,7 +82,7 @@
       <pubDate>Wed, 17 Jan 2018 22:59:24 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec8/</guid>
-      <description>&lt;p&gt;前面幾講的討論中，我們都假設有一個 ground truth function &lt;span&gt;$f$&lt;/span&gt; 去 generate data，且我們所拿到的 &lt;span&gt;$\mathcal{D}$&lt;/span&gt; 是乾淨的，然而在真實世界中，無可避免地會遇到 &lt;strong&gt;noise&lt;/strong&gt; 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？&lt;/p&gt;</description>
+      <description>&lt;p&gt;前面幾講的討論中，我們都假設有一個 ground truth function &lt;!-- raw HTML omitted --&gt;$f$&lt;!-- raw HTML omitted --&gt; 去 generate data，且我們所拿到的 &lt;!-- raw HTML omitted --&gt;$\mathcal{D}$&lt;!-- raw HTML omitted --&gt; 是乾淨的，然而在真實世界中，無可避免地會遇到 &lt;strong&gt;noise&lt;/strong&gt; 加在 data 上，如此情況下 learning 是否還是可行？ (VC bound 是否還是 work ?) 另外，前方討論時，我們都以 0/1-error 作為衡量 model 好壞的 metric，如果換成不同的 metric 呢？&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -92,7 +91,7 @@
       <pubDate>Thu, 04 Jan 2018 17:13:44 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec7/</guid>
-      <description>&lt;p&gt;於前一講中，我們證明了 growth function 為 &lt;strong&gt;POLY(N)&lt;/strong&gt; iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 &lt;span&gt;$E_i(h) \approx E_o(h)$&lt;/span&gt;  (if 數據點夠多 &lt;span&gt;$N$&lt;/span&gt; )。而這一講中，我們由 break point 引進 &lt;strong&gt;VC Dimension&lt;/strong&gt; &lt;span&gt;$d \scriptscriptstyle VC$&lt;/span&gt; ，來當作衡量 &lt;span&gt;$\mathcal{H}$&lt;/span&gt; 複雜度的一個指標。&lt;/p&gt;</description>
+      <description>&lt;p&gt;於前一講中，我們證明了 growth function 為 &lt;strong&gt;POLY(N)&lt;/strong&gt; iff break point 存在，而這件事可以說明在 training data 上的表現不會和 testing data 差的太多 &lt;!-- raw HTML omitted --&gt;$E_i(h) \approx E_o(h)$&lt;!-- raw HTML omitted --&gt;  (if 數據點夠多 &lt;!-- raw HTML omitted --&gt;$N$&lt;!-- raw HTML omitted --&gt; )。而這一講中，我們由 break point 引進 &lt;strong&gt;VC Dimension&lt;/strong&gt; &lt;!-- raw HTML omitted --&gt;$d \scriptscriptstyle VC$&lt;!-- raw HTML omitted --&gt; ，來當作衡量 &lt;!-- raw HTML omitted --&gt;$\mathcal{H}$&lt;!-- raw HTML omitted --&gt; 複雜度的一個指標。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -101,7 +100,7 @@
       <pubDate>Tue, 02 Jan 2018 19:02:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/ntu-machine-learning-lec6/</guid>
-      <description>&lt;p&gt;前一講中講述了 break point 的存在，壓制了 growth function &lt;span&gt;$m_H(N)$&lt;/span&gt; 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，&lt;span&gt;$m_H(N)$&lt;/span&gt; 便會是 &lt;strong&gt;POLY(N)&lt;/strong&gt; 。&lt;/p&gt;</description>
+      <description>&lt;p&gt;前一講中講述了 break point 的存在，壓制了 growth function &lt;!-- raw HTML omitted --&gt;$m_H(N)$&lt;!-- raw HTML omitted --&gt; 的成長速度，於這一講中，我們想嚴格地說明只要存在 break point ，&lt;!-- raw HTML omitted --&gt;$m_H(N)$&lt;!-- raw HTML omitted --&gt; 便會是 &lt;strong&gt;POLY(N)&lt;/strong&gt; 。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -110,7 +109,7 @@
       <pubDate>Sat, 30 Dec 2017 19:02:37 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2017/12/ntu-machine-learning-lec5/</guid>
-      <description>&lt;p&gt;上一講提到了在 hypothesis set &lt;span&gt;$\mathcal{H}$&lt;/span&gt; 為有限，且sample size &lt;span&gt;$|\mathcal{D}|$&lt;/span&gt; 足夠大的情況下，是 PAC-learnable 的。但當 &lt;span&gt;$|\mathcal{H}| \, \rightarrow \, \infty$&lt;/span&gt;的時候呢？ (e.g 2D linear perceptron)&lt;/p&gt;</description>
+      <description>&lt;p&gt;上一講提到了在 hypothesis set &lt;!-- raw HTML omitted --&gt;$\mathcal{H}$&lt;!-- raw HTML omitted --&gt; 為有限，且sample size &lt;!-- raw HTML omitted --&gt;$|\mathcal{D}|$&lt;!-- raw HTML omitted --&gt; 足夠大的情況下，是 PAC-learnable 的。但當 &lt;!-- raw HTML omitted --&gt;$|\mathcal{H}| , \rightarrow , \infty$&lt;!-- raw HTML omitted --&gt;的時候呢？ (e.g 2D linear perceptron)&lt;/p&gt;</description>
     </item>
     
     <item>

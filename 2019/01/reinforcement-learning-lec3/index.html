@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Value-Based Algorithm - MC &amp; TD">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Reinforcement Learning - Lec3 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>05 Jan 2019</time>
   </div>
+
   
 
   
@@ -278,124 +278,117 @@
 
 </div>
 
-
   <p>前兩講 focus 在 policy-based 的 RL 演算法，直接 learn 一組參數去 parametrize
-policy。而後續兩講則會 focus 在 value-based 的方法，想法是算出 <span>$V^\pi(s), Q^\pi(s,a)$</span> (同樣可以 approximately parametrized by <span>$\theta$</span>)，而所對應的 policy 則是去選擇 Given <span>$s$</span>，好度最高的 action <span>$a$</span> (w/ appropriate exploration)。</p>
-
+policy。而後續兩講則會 focus 在 value-based 的方法，想法是算出 <!-- raw HTML omitted -->$V^\pi(s), Q^\pi(s,a)$<!-- raw HTML omitted --> (同樣可以 approximately parametrized by <!-- raw HTML omitted -->$\theta$<!-- raw HTML omitted -->)，而所對應的 policy 則是去選擇 Given <!-- raw HTML omitted -->$s$<!-- raw HTML omitted -->，好度最高的 action <!-- raw HTML omitted -->$a$<!-- raw HTML omitted --> (w/ appropriate exploration)。</p>
 <h2 id="monte-carlo-learning">Monte-Carlo Learning</h2>
-
-<p>回顧 Lec1，<span>$V^\pi(s)$</span> 的定義是 expected return from state <span>$s$</span>， Monte-Carlo 的想法是直接 simulate 一個 trajectory from state <span>$s$</span>，然後去 reward 是多少， Value function 每一個 episode 更新一次。</p>
-
-<div>
-\[
-V(s_t) \leftarrow V(s_t) + \alpha(r(\tau) - V(s_t))
-\]
-</div>
-
+<p>回顧 Lec1，<!-- raw HTML omitted -->$V^\pi(s)$<!-- raw HTML omitted --> 的定義是 expected return from state <!-- raw HTML omitted -->$s$<!-- raw HTML omitted -->， Monte-Carlo 的想法是直接 simulate 一個 trajectory from state <!-- raw HTML omitted -->$s$<!-- raw HTML omitted -->，然後去 reward 是多少， Value function 每一個 episode 更新一次。</p>
+<!-- raw HTML omitted -->
 <ul>
 <li>Variance is high</li>
 <li>Unbiased estimate</li>
 </ul>
-
 <h2 id="temporal-difference-learning">Temporal Difference Learning</h2>
-
-<p>Use <strong>bootstrapping</strong> to estimate final reward by <span>$r(s,a) + V(s \scriptscriptstyle t+1 \textstyle)$</span>，每走一步Value
+<p>Use <strong>bootstrapping</strong> to estimate final reward by <!-- raw HTML omitted -->$r(s,a) + V(s \scriptscriptstyle t+1 \textstyle)$<!-- raw HTML omitted -->，每走一步Value
 function 都會更新</p>
-
-<div>
-\[
-V(s_t) \leftarrow V(s_t) + \alpha(\underbrace{r(s,a) + \gamma V(s_{t+1})}_{\text{estimated} \; r(\tau)} - V(s_t))
-\]
-</div>
-
+<!-- raw HTML omitted -->
 <ul>
 <li>Variance is low</li>
 <li>Biased estimate</li>
 <li>Efficient (and even suitable for non-episodic game)</li>
 </ul>
-
 <p><strong>Remark:</strong></p>
-
 <ul>
-<li><p>如此的迭代，又稱為 value iteration (如果過程中有 explicitly 表示出 policy ，又叫做 policy iteration)</p></li>
-
-<li><p>如前所述，這裡的 policy 是根據 <span>$V(s \scriptscriptstyle t+1 \textstyle)$</span> 或 <span>$Q(s,a)$</span> 決定 (直接 greedily 選 argmax)</p></li>
-
-<li><p>在 training 時，會希望增加 對 env. 的 exploration</p>
-
+<li>
+<p>如此的迭代，又稱為 value iteration (如果過程中有 explicitly 表示出 policy ，又叫做 policy iteration)</p>
+</li>
+<li>
+<p>如前所述，這裡的 policy 是根據 <!-- raw HTML omitted -->$V(s \scriptscriptstyle t+1 \textstyle)$<!-- raw HTML omitted --> 或 <!-- raw HTML omitted -->$Q(s,a)$<!-- raw HTML omitted --> 決定 (直接 greedily 選 argmax)</p>
+</li>
+<li>
+<p>在 training 時，會希望增加 對 env. 的 exploration</p>
 <ul>
-<li><span>$\epsilon$</span>-greedy: 加上一個<span>$\epsilon$</span> 的機率選擇其他非 argmax 的 action</li>
-<li>Boltzmann exploration: follow <span>$\exp(Q(s,a))$</span>，並可用 temperature <span>$T$</span> (a hyperparameter) 調整 exploration/exploition 的比重</li>
-</ul></li>
-
-<li><p>用 <span>$V$</span> 做 criteria 的話，需要先知道 MDP 的 transition (但通常我們不知道)，<br />
-所以一般來說是利用 <span>$Q^\pi(s,a)$</span> 當成 criteria，也是眾所周知的 <strong>Q-learning</strong> (Q-value iteration)</p></li>
+<li><!-- raw HTML omitted -->$\epsilon$<!-- raw HTML omitted -->-greedy: 加上一個<!-- raw HTML omitted -->$\epsilon$<!-- raw HTML omitted --> 的機率選擇其他非 argmax 的 action</li>
+<li>Boltzmann exploration: follow <!-- raw HTML omitted -->$\exp(Q(s,a))$<!-- raw HTML omitted -->，並可用 temperature <!-- raw HTML omitted -->$T$<!-- raw HTML omitted --> (a hyperparameter) 調整 exploration/exploition 的比重</li>
 </ul>
-
-<div>
-\[
-Q(s_t,a_t) \leftarrow Q(s_t,a_t) + \alpha (r(s_t,a_t) + \gamma Q(s_{t+1},a_{t+1}) - Q(s_t,a_t))
-\]
-</div>
-
-<ul>
-<li>一般在 <span>$|\mathcal{S}|$</span>, <span>$|\mathcal{A}|$</span> 不小的情況下，會用 function family (parameterized by <span>$\phi$</span>) 去表示 <span>$Q(s,a)$</span>，而如何找到 <span>$\phi$</span> 則是一個 regression problem</li>
+</li>
+<li>
+<p>用 <!-- raw HTML omitted -->$V$<!-- raw HTML omitted --> 做 criteria 的話，需要先知道 MDP 的 transition (但通常我們不知道)，\<br>
+所以一般來說是利用 <!-- raw HTML omitted -->$Q^\pi(s,a)$<!-- raw HTML omitted --> 當成 criteria，也是眾所周知的 <strong>Q-learning</strong> (Q-value iteration)</p>
+</li>
 </ul>
-
-<div>
-\[
-\phi \leftarrow \arg \min_\phi \sum_n \sum_t ||Q_\phi(s^n_t,a^n_t) - y^n_t||
-\]
-</div>
-
-<p><strong>Note:</strong> <span>$\alpha$</span> 表示 value 隨新 data 更新的敏感度</p>
-
+<!-- raw HTML omitted -->
+<ul>
+<li>一般在 <!-- raw HTML omitted -->$|\mathcal{S}|$<!-- raw HTML omitted -->, <!-- raw HTML omitted -->$|\mathcal{A}|$<!-- raw HTML omitted --> 不小的情況下，會用 function family (parameterized by <!-- raw HTML omitted -->$\phi$<!-- raw HTML omitted -->) 去表示 <!-- raw HTML omitted -->$Q(s,a)$<!-- raw HTML omitted -->，而如何找到 <!-- raw HTML omitted -->$\phi$<!-- raw HTML omitted --> 則是一個 regression problem</li>
+</ul>
+<!-- raw HTML omitted -->
+<p><strong>Note:</strong> <!-- raw HTML omitted -->$\alpha$<!-- raw HTML omitted --> 表示 value 隨新 data 更新的敏感度</p>
 <h2 id="convergence-to-optimal-policy-tabular-case">Convergence to optimal policy (tabular case)</h2>
-
 <p>條件:</p>
-
 <ul>
 <li>MDP is known</li>
-<li><span>$|\mathcal{S}|, |\mathcal{A}|$</span> is small</li>
+<li><!-- raw HTML omitted -->$|\mathcal{S}|, |\mathcal{A}|$<!-- raw HTML omitted --> is small</li>
 </ul>
-
 <p><strong>Remark</strong></p>
-
-<p>所對應的 optimal value function 為下列 equation (先不管 <span>$\alpha$</span>)</p>
-
-<div>
-\[
-\begin{aligned}
-V_{\ast}(s) &= \max_\pi V_\pi(s) = \max_a Q_{\ast}(s,a)\\
-Q_{\ast}(s,a) &= \max_\pi Q_\pi(s,a) = r(s,a) + \sum_{s^\prime}
-\mathbb{P}[s^\prime|a,s] V_{\ast}(s)
-\end{aligned}
-\]
-</div>
-
+<p>所對應的 optimal value function 為下列 equation (先不管 <!-- raw HTML omitted -->$\alpha$<!-- raw HTML omitted -->)</p>
+<!-- raw HTML omitted -->
 <ul>
-<li><p>由上方 equation 可知 <span>$Q_\ast$</span>  是上述 TD learning iteration operator <span>$\mathcal{B}$</span> 的 fixed point (前提是知道 <span>$\mathbb{P}[s^\prime|s,a]$</span>)，<span>$Q_\ast = \mathcal{B} Q_\ast$</span></p></li>
-
-<li><p><span>$\mathcal{B}$</span> is a <em>contraction</em>, <span>$||\mathcal{B}Q -
-\mathcal{B} \bar{Q}||_{\infty} \leq \gamma ||Q - \bar{Q}||_{\infty}$</span></p></li>
+<li>
+<p>由上方 equation 可知 <!-- raw HTML omitted -->$Q_\ast$<!-- raw HTML omitted -->  是上述 TD learning iteration operator <!-- raw HTML omitted -->$\mathcal{B}$<!-- raw HTML omitted --> 的 fixed point (前提是知道 <!-- raw HTML omitted -->$\mathbb{P}[s^\prime|s,a]$<!-- raw HTML omitted -->)，<!-- raw HTML omitted -->$Q_\ast = \mathcal{B} Q_\ast$<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p><!-- raw HTML omitted -->$\mathcal{B}$<!-- raw HTML omitted --> is a <em>contraction</em>, <!-- raw HTML omitted -->$||\mathcal{B}Q -
+\mathcal{B} \bar{Q}||_{\infty} \leq \gamma ||Q - \bar{Q}||_{\infty}$<!-- raw HTML omitted --></p>
+</li>
+</ul>
+<p>由 <strong>Contraction Mapping Theorem</strong> 可知，<!-- raw HTML omitted -->$Q(s,a)$<!-- raw HTML omitted --> 會以<!-- raw HTML omitted -->$\gamma$<!-- raw HTML omitted --> 的 rate converge 到 <!-- raw HTML omitted -->$Q_\ast$<!-- raw HTML omitted --></p>
+<h2 id="non-convergence-to-optimal-policy-approx-spanq-phisaspan-case">Non-convergence to optimal policy (approx. <!-- raw HTML omitted -->$Q_\phi(s,a)$<!-- raw HTML omitted --> case)</h2>
+<p>現在我們把一個條件放寬，假設 <!-- raw HTML omitted -->$|\mathcal{S}|$<!-- raw HTML omitted -->, <!-- raw HTML omitted -->$|\mathcal{A}|$<!-- raw HTML omitted --> 大到無法以 table 儲存，只能以一個 function family 去表示 <!-- raw HTML omitted -->$Q(s,a)$<!-- raw HTML omitted --></p>
+<p>在做 regression 找當前 iteration 最好的 <!-- raw HTML omitted -->$\phi$<!-- raw HTML omitted --> 時，其實引進了一個 projection operator <!-- raw HTML omitted -->$\Pi$<!-- raw HTML omitted --><br>
+(project on function family, <strong>with l2-norm</strong>)</p>
+<p>可以證明 <!-- raw HTML omitted -->$\Pi$<!-- raw HTML omitted --> 也是一個 <em>contraction</em> (w.r.t l2-norm)，但
+<!-- raw HTML omitted -->$\mathcal{B}$<!-- raw HTML omitted --> 卻是 contraction w.r.t <!-- raw HTML omitted -->$\infty$<!-- raw HTML omitted -->-norm<br>
+所以 <!-- raw HTML omitted -->$\mathcal{B}\Pi$<!-- raw HTML omitted --> 並不是 contraction，也就不保證會收斂。</p>
+<p><strong>Remark:</strong> 有人可能會想說，那這樣不如就把 regression 改成 w.r.t <!-- raw HTML omitted -->$\infty$<!-- raw HTML omitted -->-norm  的 optimization 問題，但這樣的 optimization 是 intractable 的 (belong to NPC)</p>
+  
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec3%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec3%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec3%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec3%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec3%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec3%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
 </ul>
 
-<p>由 <strong>Contraction Mapping Theorem</strong> 可知，<span>$Q(s,a)$</span> 會以<span>$\gamma$</span> 的 rate converge 到 <span>$Q_\ast$</span></p>
 
-<h2 id="non-convergence-to-optimal-policy-approx-span-q-phi-s-a-span-case">Non-convergence to optimal policy (approx. <span>$Q_\phi(s,a)$</span> case)</h2>
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
 
-<p>現在我們把一個條件放寬，假設 <span>$|\mathcal{S}|$</span>, <span>$|\mathcal{A}|$</span> 大到無法以 table 儲存，只能以一個 function family 去表示 <span>$Q(s,a)$</span></p>
+	ul.share-buttons li{
+	  display: inline;
+	}
 
-<p>在做 regression 找當前 iteration 最好的 <span>$\phi$</span> 時，其實引進了一個 projection operator <span>$\Pi$</span> <br />
-(project on function family, <strong>with l2-norm</strong>)</p>
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
 
-<p>可以證明 <span>$\Pi$</span> 也是一個 <em>contraction</em> (w.r.t l2-norm)，但
-<span>$\mathcal{B}$</span> 卻是 contraction w.r.t <span>$\infty$</span>-norm <br />
-所以 <span>$\mathcal{B}\Pi$</span> 並不是 contraction，也就不保證會收斂。</p>
-
-<p><strong>Remark:</strong> 有人可能會想說，那這樣不如就把 regression 改成 w.r.t <span>$\infty$</span>-norm  的 optimization 問題，但這樣的 optimization 是 intractable 的 (belong to NPC)</p>
-  
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
 
   
 <div class="prev-next-post pure-g">
@@ -451,8 +444,8 @@ Q_{\ast}(s,a) &= \max_\pi Q_\pi(s,a) = r(s,a) + \sum_{s^\prime}
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -461,10 +454,8 @@ Q_{\ast}(s,a) &= \max_\pi Q_\pi(s,a) = r(s,a) + \sum_{s^\prime}
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -481,24 +472,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

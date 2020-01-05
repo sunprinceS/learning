@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Mechanism Design Basics">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Algorithmic Game Theory - Lecture2 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>19 May 2017</time>
   </div>
+
   
 
   
@@ -280,109 +280,109 @@
 
 </div>
 
-
   <p>Lecture1 提到了我們需要透由好的 mechanism，使得 agent 與 designer 的 incentive 彼此 aligned。這講從最簡單的 <strong>Single-item Auction</strong> 開始，探討該如何設計合理的 mechanism。</p>
-
 <h3 id="single-item-auction">Single-Item Auction</h3>
-
 <p>1 seller wants to sell 1 good.</p>
-
 <p>There are n strategic bidders want to buy the good with their own preferences (unknown to the seller).</p>
-
 <p>在討論之前，我們先以簡單的 model 來描述 bidder 的行為。</p>
-
-<p>Let <strong>valuation</strong> <span>$v_i$</span>: bidder i&rsquo;s max willingness-to-pay for the item</p>
-
-<p>定義 <em>quasilinear utility model</em> <span>$U$</span> 如以下</p>
-
-<div>
-\[
-U = \left\{ \begin{array}{ll}
-           0, \text{if not win} \\
-           v_i - p, \text{if wins at price} ~p
-        \end{array} \right.
-\]
-</div>
-
-<p>而 bidder 的 objective is to maximize <span>$U$</span></p>
-
+<p>Let <strong>valuation</strong> <!-- raw HTML omitted -->$v_i$<!-- raw HTML omitted -->: bidder i's max willingness-to-pay for the item</p>
+<p>定義 <em>quasilinear utility model</em> <!-- raw HTML omitted -->$U$<!-- raw HTML omitted --> 如以下</p>
+<!-- raw HTML omitted -->
+<p>而 bidder 的 objective is to maximize <!-- raw HTML omitted -->$U$<!-- raw HTML omitted --></p>
 <h3 id="sealed-bid-auction">Sealed-Bid Auction</h3>
-
 <p>對 designer 而言，需要設計適合的機制。而這裡所謂適合，即是能獲得整體<a href="#p2">最大收益</a>(包括 seller 和 bidder)</p>
-
 <p>而Sealed-Bid Auction 有以下幾個步驟:</p>
-
 <ol>
-<li><p>Each bidder <span>$i$</span> <strong>privately</strong> communicates a bid <span>$b_i$</span> to the seller</p></li>
-
-<li><p>The seller decide who can get the good</p></li>
-
-<li><p>The seller decide the selling price</p></li>
+<li>
+<p>Each bidder <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> <strong>privately</strong> communicates a bid <!-- raw HTML omitted -->$b_i$<!-- raw HTML omitted --> to the seller</p>
+</li>
+<li>
+<p>The seller decide who can get the good</p>
+</li>
+<li>
+<p>The seller decide the selling price</p>
+</li>
 </ol>
-
 <p>(2) 很直觀來想，就是<strong>給出價最高的 bidder</strong> (more selection rule will come later)，
 這裡主要討論 (3), eBay的作法是以下的 second-price auction (得標者付第二高價的 bid 即可)。</p>
-
 <h3 id="second-price-vickery-auction">Second-Price (Vickery) Auction</h3>
-
 <ol>
-<li><p>[<strong>strong incentive guarantees</strong>] It is dominant-strategy incentive-compatible (<strong>DSIC</strong>)</p></li>
-
-<li><p><a name="p2"><font color="#777">[<strong>computational efficiency</strong>]</font></a> The auction can be implemented in <span>$\mathbf{POLY}$</span> time (indeed, we want it to be <strong>linear</strong>)</p></li>
-
-<li><p><a name="p3"><font color="#777">[<strong>strong performance guarantees</strong>]</font></a> If bidder report truthfully, then the auction maximizes the <strong>social surplus</strong></p></li>
+<li>
+<p>[<strong>strong incentive guarantees</strong>] It is dominant-strategy incentive-compatible (<strong>DSIC</strong>)</p>
+</li>
+<li>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted -->[<strong>computational efficiency</strong>]<!-- raw HTML omitted --><!-- raw HTML omitted --> The auction can be implemented in <!-- raw HTML omitted -->$\mathbf{POLY}$<!-- raw HTML omitted --> time (indeed, we want it to be <strong>linear</strong>)</p>
+</li>
+<li>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted -->[<strong>strong performance guarantees</strong>]<!-- raw HTML omitted --><!-- raw HTML omitted --> If bidder report truthfully, then the auction maximizes the <strong>social surplus</strong></p>
+</li>
 </ol>
-
-<div>
-\[
-\sum\limits_{i=1}^n \mathbb{1}[\text{bidder i wins}],
-
-\text{subject to } \sum\limits_{i=1}^n \mathbb{1}[\text{bidder i wins}] \lneq 1
-
-\]
-</div>
-
+<!-- raw HTML omitted -->
+<p>\text{subject to } \sum\limits_{i=1}^n \mathbb{1}[\text{bidder i wins}] \lneq 1</p>
+<p>]</p>
+<!-- raw HTML omitted -->
 <p>回顧 <a href="https://sunprinces.github.io/learning/2017/05/algorithmic-game-theory---lecture1/">Lecture1</a>，可以發現最一開始講到的 3 個部份一一對應 XD</p>
-
 <p>從 bidder 的觀點來看， <strong>DSIC</strong> property，保證了誠實是最佳策略 (無論其他的 bidder 如何報價)，因此對 seller 來說，只要組成是<strong>完全理性</strong>的 bidder，便可預測其行為 (這裡先忽略 collusion 或非理性的情況 :p)。</p>
-
-<h4 id="u-claim-u"><u>Claim</u></h4>
-
-<h4 id="every-bidder-has-a-dominant-strategy-set-its-bid-span-b-i-v-i-span-and-guaranteed-to-have-utility-span-gneq-0-span">Every bidder has a dominant strategy: set its bid <span>$b_i = v_i$<span>, and guaranteed to have utility <span> $\gneq 0$</span>.</h4>
-
-<!--現在我們想證明此策略可 maximize <span>$U$</span>。-->
-
-<p>考慮 bidder i, let <span>$B = max_{j \neq i}b_j$</span></p>
-
-<div>
-\[
-\text{payoff of bidder i} = \left\{ \begin{array}{ll}
-           v_i - B, \text{if} ~b_i > B \\
-           0, \text{otherwise}
-        \end{array} \right.
-\]
-</div>
-
-<p>若為了拿到 good，而高報 bid (i.e <span>$b_i &gt; v_i$<span>)，有以下 cases:</p>
-
+<h4 id="uclaimu"><!-- raw HTML omitted -->Claim<!-- raw HTML omitted --></h4>
+<h4 id="every-bidder-has-a-dominant-strategy-set-its-bid-spanb-i--v-ispan-and-guaranteed-to-have-utility-span-gneq-0span">Every bidder has a dominant strategy: set its bid <!-- raw HTML omitted -->$b_i = v_i$<!-- raw HTML omitted -->, and guaranteed to have utility <!-- raw HTML omitted --> $\gneq 0$<!-- raw HTML omitted -->.</h4>
+<!-- raw HTML omitted -->
+<p>考慮 bidder i, let <!-- raw HTML omitted -->$B = max_{j \neq i}b_j$<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>若為了拿到 good，而高報 bid (i.e <!-- raw HTML omitted -->$b_i &gt; v_i$<!-- raw HTML omitted -->)，有以下 cases:</p>
 <ol>
-<li><p><span>$B &lt; v_i$</span> or <span>$B &gt; b_i$</span>，與誠實報的 payoff 相同。</p></li>
-
-<li><p><span>$v_i &lt; B &lt; b_i$</span>， bidder 會贏得 good ，但 payoff 是負的☹，而誠實報的 payoff 為0 (然後輸掉)，故會選擇誠實。</p></li>
+<li>
+<p><!-- raw HTML omitted -->$B &lt; v_i$<!-- raw HTML omitted --> or <!-- raw HTML omitted -->$B &gt; b_i$<!-- raw HTML omitted -->，與誠實報的 payoff 相同。</p>
+</li>
+<li>
+<p><!-- raw HTML omitted -->$v_i &lt; B &lt; b_i$<!-- raw HTML omitted -->， bidder 會贏得 good ，但 payoff 是負的☹，而誠實報的 payoff 為0 (然後輸掉)，故會選擇誠實。</p>
+</li>
 </ol>
-
 <p>同理，低報 bid 比不上誠實報 (直覺來想就是，低報可能使原先會贏的拍賣，到最後反而將商品拱手讓人 :p)</p>
-
-<p>對那些沒拿到 good 的人， <span>$U = 0$</span>; 而贏家 (imply <span>$v \gneq B$<span>) 的 utility <span>$~U = v -B \gneq 0 ~\blacksquare$</span></p>
-
-<p>3 個 property的 <a href="#p3">(3)</a> 可簡單地用 greedy 常見的方法證明，而 <a href="#p2">(2)</a> 對seller而言只要簡單的掃過一遍 bid vector就可決定誰贏得 auction 及成交價格，複雜度為 <span>$\mathcal{O}(n)$</span></p>
-
-<h4 id="思考">思考</h4>
-
-<p>另一種可能的定價方式為 <strong>first-price auction</strong>，在這個情況下， winner 需付自己所喊的價碼，所以其傾向於會低報(誠實報保證了 payoff 為 0)，但問題是該低報多少，又跟其他 bidder 有關&hellip; (留著之後來想XD)
-<!--若 <span>$v_i < B $<span>， bidder 會誠實 report <span>$b_i = v_i$</span> (事前不知道會輸，但如果低報，原先能拿到的 good 反而可能被搶走，所以想報越高越好); 若 <span>$v_i > B$</span>--></p>
+<p>對那些沒拿到 good 的人， <!-- raw HTML omitted -->$U = 0$<!-- raw HTML omitted -->; 而贏家 (imply <!-- raw HTML omitted -->$v \gneq B$<!-- raw HTML omitted -->) 的 utility <!-- raw HTML omitted -->$~U = v -B \gneq 0 ~\blacksquare$<!-- raw HTML omitted --></p>
+<p>3 個 property的 <a href="#p3">(3)</a> 可簡單地用 greedy 常見的方法證明，而 <a href="#p2">(2)</a> 對seller而言只要簡單的掃過一遍 bid vector就可決定誰贏得 auction 及成交價格，複雜度為 <!-- raw HTML omitted -->$\mathcal{O}(n)$<!-- raw HTML omitted --></p>
+<h4 id="heading">思考</h4>
+<p>另一種可能的定價方式為 <strong>first-price auction</strong>，在這個情況下， winner 需付自己所喊的價碼，所以其傾向於會低報(誠實報保證了 payoff 為 0)，但問題是該低報多少，又跟其他 bidder 有關&hellip; (留著之後來想XD)</p>
+<!-- raw HTML omitted -->
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2falgorithmic-game-theory-lecture2%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2falgorithmic-game-theory-lecture2%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2falgorithmic-game-theory-lecture2%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2falgorithmic-game-theory-lecture2%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2falgorithmic-game-theory-lecture2%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2falgorithmic-game-theory-lecture2%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -438,8 +438,8 @@ U = \left\{ \begin{array}{ll}
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -448,10 +448,8 @@ U = \left\{ \begin{array}{ll}
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -468,24 +466,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

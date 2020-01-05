@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Imitation Learning">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Reinforcement Learning - Lec6 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>10 Jan 2019</time>
   </div>
+
   
 
   
@@ -278,92 +278,95 @@
 
 </div>
 
-
-  <p>在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &ldquo;ground-truth&rdquo; agent) 與 environment 互動的<span>$(s,a)$</span> pairs 去 train 我們的 agent/actor。那麼該如何利用這些 <span>$(s,a)$</span> pair 呢？</p>
-
+  <p>在這一講中，要介紹的是 RL 中的 supervised 系方法 - Imitation Learning。想法是收集 expert (or say, &ldquo;ground-truth&rdquo; agent) 與 environment 互動的<!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> pairs 去 train 我們的 agent/actor。那麼該如何利用這些 <!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> pair 呢？</p>
 <h2 id="behavior-cloning">Behavior cloning</h2>
-
-<p>Make training set <span>$D = \lbrace \mathcal{X}, \mathcal{Y} \rbrace$</span> be <span>$\lbrace (s_1,\hat{a_1}),\cdots,(s_N,\hat{a_N}) \rbrace$</span></p>
-
-<h3 id="issue-1-distribution-drift">Issue#1 - Distribution Drift</h3>
-
+<p>Make training set <!-- raw HTML omitted -->$D = \lbrace \mathcal{X}, \mathcal{Y} \rbrace$<!-- raw HTML omitted --> be <!-- raw HTML omitted -->$\lbrace (s_1,\hat{a_1}),\cdots,(s_N,\hat{a_N}) \rbrace$<!-- raw HTML omitted --></p>
+<h3 id="issue1---distribution-drift">Issue#1 - Distribution Drift</h3>
 <p>Unlike conventional supervised learning setting，在 RL 中每個 training data 並非是 i.i.d (白話來說，在某個時間點所作的決策，會影響到後續所收到的 sample)，也因此，儘管在每個 step 都只犯了小小錯誤，這些<strong>錯誤卻會 accumulate</strong> 。</p>
-
-<p><center><img src="https://sunprinces.github.io/learning/img/post/behavior-cloning-error.jpg" width="90%" style="border-radius: 0%;"></center></p>
-
-<p><code>$$
-p_D(s_t) \not = p_\pi(s_t)
-$$</code></p>
-
+<!-- raw HTML omitted -->
+<p><code>$$ p_D(s_t) \not = p_\pi(s_t) $$</code></p>
 <h4 id="error-analysis">Error Analysis</h4>
-
-<p>Assume <span>$\pi(a\not = \hat{a}|s) \leq \epsilon$</span>, then <span>$\forall
-s \, \text{in one episode (length T)}$</span></p>
-
-<p><code>$$
-\mathbb{E}\lbrack \sum_t 1\!\!1[a_t \not = \hat{a_t}]\rbrack \leq \epsilon T +
-(1-\epsilon)[\epsilon(T-1)+(1-\epsilon)\cdots] 
-\color{red}{\Rightarrow \mathcal{O}(\epsilon T^2)}
-$$</code></p>
-
-<h3 id="solution-1-dagger-dataset-aggregation">Solution#1 DAgger - Dataset Aggregation</h3>
-
-<p>In brief, colect training data from <span>$p_\pi(s_t)$</span> instead of <span>$p_D(s_t)$</span>，就是 run 現在的 policy 去收集 data ，再由 human expert 去 label，最後再將其與原先的 training set 聯集起來，再重複此步驟。</p>
-
+<p>Assume <!-- raw HTML omitted -->$\pi(a\not = \hat{a}|s) \leq \epsilon$<!-- raw HTML omitted -->, then <!-- raw HTML omitted -->$\forall
+s , \text{in one episode (length T)}$<!-- raw HTML omitted --></p>
+<p><code>$$ \mathbb{E}\lbrack \sum_t 1\!\!1[a_t \not = \hat{a_t}]\rbrack \leq \epsilon T + (1-\epsilon)[\epsilon(T-1)+(1-\epsilon)\cdots]  \color{red}{\Rightarrow \mathcal{O}(\epsilon T^2)} $$</code></p>
+<h3 id="solution1-dagger---dataset-aggregation">Solution#1 DAgger - Dataset Aggregation</h3>
+<p>In brief, colect training data from <!-- raw HTML omitted -->$p_\pi(s_t)$<!-- raw HTML omitted --> instead of <!-- raw HTML omitted -->$p_D(s_t)$<!-- raw HTML omitted -->，就是 run 現在的 policy 去收集 data ，再由 human expert 去 label，最後再將其與原先的 training set 聯集起來，再重複此步驟。</p>
 <p><strong>Remark:</strong></p>
-
 <ul>
-<li>就像是讓學生回去寫作業，遇到不會的再拿來學校問老師。<br /></li>
+<li>就像是讓學生回去寫作業，遇到不會的再拿來學校問老師。\</li>
 <li>中間牽涉到 human labelling 的 interaction，為效率的 bottleneck</li>
 </ul>
-
-<h3 id="solution-2-make-model-equipped-with-some-property">Solution#2 Make model equipped with some property</h3>
-
+<h3 id="solution2-make-model-equipped-with-some-property">Solution#2 Make model equipped with some property</h3>
 <ul>
 <li>Non-Markovian: 考慮到 data 間 sequential 的關係，以 recurrent-type 的 model 作為 agent model (e.g RNN)。</li>
 <li>Multimodal: Given same state, 人類可能會做出不同決定
-
 <ul>
-<li>Mixture Model: 最後 output 的並非一個 action <span>$a$</span>，而是一個 distribution。簡單來說，以 GMM 來 model 該 distribution，讓 model output GMM 所需的參數。</li>
+<li>Mixture Model: 最後 output 的並非一個 action <!-- raw HTML omitted -->$a$<!-- raw HTML omitted -->，而是一個 distribution。簡單來說，以 GMM 來 model 該 distribution，讓 model output GMM 所需的參數。</li>
 <li>Latent Variable Models: 待補</li>
-</ul></li>
 </ul>
-
-<h3 id="issue-2-limited-capacity">Issue#2 - Limited Capacity</h3>
-
+</li>
+</ul>
+<h3 id="issue2---limited-capacity">Issue#2 - Limited Capacity</h3>
 <p>許多 expert 無意義的習慣(?) 也會被 model 學進去， 若 learning capacity 是 limited 的話，重要的 behavior 反而沒學到 (因 label 並沒有 split 哪些不同的 sub-behavior 是沒關係，哪些又有關係)</p>
-
 <p><strong>Remark</strong>: 如果對 domain 有些了解，可以利用人工 augment noise 進去，再用 adversarial 去 alleviate 這個 issue。不過更根本的問題在於 factorize 這件事現在的方法都還不是做的 generally 非常好</p>
-
 <h2 id="inverse-reinforcement-learning">Inverse Reinforcement Learning</h2>
-
-<p>In brief, 藉由 <span>$(s,a)$</span> pairs 去 model 可能的 reward function <span>$R$</span>，而有了 <span>$R$</span> 後，便可套用前面 4 講提到的 RL algorithm 去 update <span>$\pi$</span>。</p>
-
+<p>In brief, 藉由 <!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> pairs 去 model 可能的 reward function <!-- raw HTML omitted -->$R$<!-- raw HTML omitted -->，而有了 <!-- raw HTML omitted -->$R$<!-- raw HTML omitted --> 後，便可套用前面 4 講提到的 RL algorithm 去 update <!-- raw HTML omitted -->$\pi$<!-- raw HTML omitted -->。</p>
 <p><strong>Remark:</strong> Simple reward function can cause <strong>complex policy</strong>，算是有點找出源頭的味道。</p>
-
-<p><center><img src="https://sunprinces.github.io/learning/img/post/irl.png" width="70%" style="border-radius: 0%;"></center></p>
-
-<p>With constraint <span>$\sum r(\hat{\tau}) \geq \sum r(\tau)$</span></p>
-
+<!-- raw HTML omitted -->
+<p>With constraint <!-- raw HTML omitted -->$\sum r(\hat{\tau}) \geq \sum r(\tau)$<!-- raw HTML omitted --></p>
 <p><strong>Remark:</strong> 這裡的 insight 在於跟 GAN 的類比。</p>
-
 <h2 id="some-thoughts">Some Thoughts</h2>
-
 <ul>
 <li>很多時候不知道該如何訂做了哪個 action ，該給多少 reward (usually in complex
 task)，下一講則會介紹如何處理 Sparse reward 的問題。</li>
 <li>Provide 較為明顯的 training signal，讓機器在學習的過程中，更善加利用人類發現的結果，站在巨人的肩膀上。</li>
 <li>Ditribution drift 的問題，跟之前 Off-policy 想處理的問題類似，可否利用 Importance Sampling 去改進？</li>
 </ul>
-
 <h2 id="reference">Reference</h2>
-
 <ul>
-<li><a href="http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-2.pdf">CS294-Lec2</a></li>
-<li><a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses/MLDS_2018/Lecture/IRL%20(v2).pdf">NTU-MLDS</a></li>
+<li>[CS294-Lec2] (<a href="http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-2.pdf">http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-2.pdf</a>)</li>
+<li>[NTU-MLDS] (<a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses/MLDS_2018/Lecture/IRL%20(v2).pdf">http://speech.ee.ntu.edu.tw/~tlkagk/courses/MLDS_2018/Lecture/IRL%20(v2).pdf</a>)</li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec6%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec6%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec6%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec6%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec6%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec6%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -413,8 +416,8 @@ task)，下一講則會介紹如何處理 Sparse reward 的問題。</li>
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -423,10 +426,8 @@ task)，下一講則會介紹如何處理 Sparse reward 的問題。</li>
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -443,24 +444,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

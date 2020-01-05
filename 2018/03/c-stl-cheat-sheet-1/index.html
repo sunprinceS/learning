@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="資料結構 - Pair &amp; Vector">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>C&#43;&#43; STL Cheat Sheet - 1 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>10 Mar 2018</time>
   </div>
+
   
 
   
@@ -278,125 +278,125 @@
 
 </div>
 
-
   <p>這個系列主要會整理一些自己刷 judge 常使用到的 STL 用法，cppreference 好是好，但就是有點太詳細了XD，首篇介紹的 vetor 和 pair，絕對是我最常用到的 STL 資料結構 XD !</p>
-
 <h2 id="pair">Pair</h2>
-
-<h3 id="賦值">賦值</h3>
-
-<pre><code class="language-cpp">pair&lt;int,int&gt; p = {1,2};
-pair&lt;int,int&gt; p = make_pair(1,2);
-</code></pre>
-
-<p>Note:</p>
-
+<h3 id="heading">賦值</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>};
+pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p <span style="color:#f92672">=</span> make_pair(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>);
+</code></pre></div><p>Note:</p>
 <ol>
 <li>比大小時，根據 lexicographical order</li>
 <li>first,second 是 member ，不用加括號</li>
 </ol>
-
 <h2 id="vector">Vector</h2>
+<h3 id="heading-1">初始化</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec; <span style="color:#75715e">//empty vec
+</span><span style="color:#75715e"></span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec(<span style="color:#ae81ff">3</span>); <span style="color:#75715e">//[0,0,0], int default coonstructor
+</span><span style="color:#75715e"></span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>}; <span style="color:#75715e">//實際上做了 int array 的型別轉換
+</span><span style="color:#75715e"></span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">123</span>); <span style="color:#75715e">//[123,123,123]
+</span><span style="color:#75715e"></span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec(ALL(other)); <span style="color:#75715e">//can be other containers (like vector, set...), copy from [start,end)
+</span><span style="color:#75715e"></span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vec(other_vec);<span style="color:#75715e">//copy from other vec
+</span></code></pre></div><h3 id="heading-2">賦值</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> from_arr <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>];
+vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> to_vec;
+to_vec.assign(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">123</span>); <span style="color:#75715e">//to_vec: [123,123,123]
+</span><span style="color:#75715e"></span>to_vec.assign(from_vec.begin(),from_vec.end());
+to_vec.assign(from_arr,from_arr<span style="color:#f92672">+</span><span style="color:#ae81ff">3</span>); <span style="color:#75715e">//to_vec: [1,2,3]
+</span></code></pre></div><h4 id="-2--vector">應用: 2 維 vector</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//Method 1
+</span><span style="color:#75715e"></span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> vec2d(num_row);
+<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> row: vec2d) row <span style="color:#f92672">=</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(num_col,<span style="color:#ae81ff">123</span>); <span style="color:#75715e">// 注意一定要是 reference
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">//Method 1&#39;
+</span><span style="color:#75715e"></span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> vec2d(num_row,vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(num_col,<span style="color:#ae81ff">123</span>));
 
-<h3 id="初始化">初始化</h3>
-
-<pre><code class="language-cpp">vector&lt;int&gt; vec; //empty vec
-vector&lt;int&gt; vec(3); //[0,0,0], int default coonstructor
-vector&lt;int&gt; vec = {1,2,3}; //實際上做了 int array 的型別轉換
-vector&lt;int&gt; vec(3,123); //[123,123,123]
-vector&lt;int&gt; vec(ALL(other)); //can be other containers (like vector, set...), copy from [start,end)
-vector&lt;int&gt; vec(other_vec);//copy from other vec
-</code></pre>
-
-<h3 id="賦值-1">賦值</h3>
-
-<pre><code class="language-cpp">int from_arr = [1,2,3,4,5];
-vector&lt;int&gt; to_vec;
-to_vec.assign(3,123); //to_vec: [123,123,123]
-to_vec.assign(from_vec.begin(),from_vec.end());
-to_vec.assign(from_arr,from_arr+3); //to_vec: [1,2,3]
-</code></pre>
-
-<h4 id="應用-2-維-vector">應用: 2 維 vector</h4>
-
-<pre><code class="language-cpp">//Method 1
-vector&lt;vector&lt;int&gt; &gt; vec2d(num_row);
-for(auto&amp; row: vec2d) row = vector&lt;int&gt;(num_col,123); // 注意一定要是 reference
-
-//Method 1'
-vector&lt;vector&lt;int&gt; &gt; vec2d(num_row,vector&lt;int&gt;(num_col,123));
-
-//Method 2
-vector&lt;int&gt; row(num_col,123);
-vector&lt;vector&lt;int&gt; &gt; vec2d;
+<span style="color:#75715e">//Method 2
+</span><span style="color:#75715e"></span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> row(num_col,<span style="color:#ae81ff">123</span>);
+vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> vec2d;
 vec2d.assign(num_row,row);
-</code></pre>
-
-<h3 id="存取元素">存取元素</h3>
-
-<pre><code class="language-cpp">int a = vec.at(i);
-int a = vec[i];
-</code></pre>
-
-<p>Note: <code>at()</code> 會做邊界檢查，出現越界的 idx 時，會丟出例外，而不是直接 SIGSEV 。</p>
-
-<h3 id="空間操作">空間操作</h3>
-
-<pre><code class="language-cpp">// 保留空間 W/ size 不變
-vec.reserve(123); //capacity = 123, vec.size() is the same
-
-// 伸縮 size
-vec.resize(100,123);
-//如果原 size &lt; 100，則[size+1,100)會填入 123
-//如果原 size &gt; 100，則只保留[0,100)，其他 destroy
-</code></pre>
-
-<p>Note: capacity 只能增加不能縮小，另外其會隨著 size 的更動而動態調整。</p>
-
+</code></pre></div><h3 id="heading-3">存取元素</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> vec.at(i);
+<span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> vec[i];
+</code></pre></div><p>Note: <code>at()</code> 會做邊界檢查，出現越界的 idx 時，會丟出例外，而不是直接 SIGSEV 。</p>
+<h3 id="heading-4">空間操作</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// 保留空間 W/ size 不變
+</span><span style="color:#75715e"></span>vec.reserve(<span style="color:#ae81ff">123</span>); <span style="color:#75715e">//capacity = 123, vec.size() is the same
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 伸縮 size
+</span><span style="color:#75715e"></span>vec.resize(<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">123</span>);
+<span style="color:#75715e">//如果原 size &lt; 100，則[size+1,100)會填入 123
+</span><span style="color:#75715e"></span><span style="color:#75715e">//如果原 size &gt; 100，則只保留[0,100)，其他 destroy
+</span></code></pre></div><p>Note: capacity 只能增加不能縮小，另外其會隨著 size 的更動而動態調整。</p>
 <h3 id="iterate">Iterate</h3>
-
 <pre><code>//Method 1: array 法
 //Method 2:
 for(vector&lt;int&gt;::iterator it = vec.begin(); it!= vec.end(); ++i){
   foo(*it); // * is de-reference
 }
 //Method 3: 見 好用 function 的 traverse
-</code></pre>
-
-<p>Note:</p>
-
+</code></pre><p>Note:</p>
 <ul>
 <li><code>rbegin()</code>, <code>rend()</code> 用法一樣， 概念上 <code>rend()</code>  是指到 <code>begin()</code> 的前一個。</li>
 <li>如果 vec 是 const，則要用 <code>const_iterator</code> or array 法，如以下</li>
 </ul>
-
-<pre><code class="language-cpp">for(vector&lt;int&gt;::const_iterator it = vec.begin(); it!= vec.end(); ++i){
-  foo(*it); // * is de-reference, but can not modify the value
-}
-</code></pre>
-
-<h3 id="加入-移除-元素-span-o-n-span">加入/移除 元素 : <span>$O(N)$</span></h3>
-
-<pre><code class="language-cpp">vec.insert(&lt;pos iterator&gt;,123);
-//會加在 pos 前面，故若為 begin()，則 123 變第一個，若為 end()，則 123 變最後一個
-// 記法是新的vector中，pos 位置為方才插入的 element
-
-vec.erase(vec.begin()+2);// remove idx=2 的元素
-vec.erase(vec.begin(),vec.end()-1); //remove [0,end-1) 中的元素
-
-vec.clear();//destroy all elements, size = 0
-</code></pre>
-
-<p>Note: <code>erase()</code>的複雜度跟元素位置有關係(因需要移動其後的element)，而 <code>pop_front()</code>則保證是 <span>$O(1)$</span></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">for</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span>const_iterator it <span style="color:#f92672">=</span> vec.begin(); it<span style="color:#f92672">!</span><span style="color:#f92672">=</span> vec.end(); <span style="color:#f92672">+</span><span style="color:#f92672">+</span>i){
+  foo(<span style="color:#f92672">*</span>it); <span style="color:#75715e">// * is de-reference, but can not modify the value
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="---spanonspan">加入/移除 元素 : <!-- raw HTML omitted -->$O(N)$<!-- raw HTML omitted --></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vec.insert(<span style="color:#f92672">&lt;</span>pos iterator<span style="color:#f92672">&gt;</span>,<span style="color:#ae81ff">123</span>);
+<span style="color:#75715e">//會加在 pos 前面，故若為 begin()，則 123 變第一個，若為 end()，則 123 變最後一個
+</span><span style="color:#75715e"></span><span style="color:#75715e">// 記法是新的vector中，pos 位置為方才插入的 element
+</span><span style="color:#75715e"></span>
+vec.erase(vec.begin()<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);<span style="color:#75715e">// remove idx=2 的元素
+</span><span style="color:#75715e"></span>vec.erase(vec.begin(),vec.end()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>); <span style="color:#75715e">//remove [0,end-1) 中的元素
+</span><span style="color:#75715e"></span>
+vec.clear();<span style="color:#75715e">//destroy all elements, size = 0
+</span></code></pre></div><p>Note: <code>erase()</code>的複雜度跟元素位置有關係(因需要移動其後的element)，而 <code>pop_front()</code>則保證是 <!-- raw HTML omitted -->$O(1)$<!-- raw HTML omitted --></p>
 <h3 id="misc">MISC</h3>
-
 <ul>
 <li><code>size()</code>,<code>back()</code>,<code>front()</code>是 method，不是member，要記得加括號。</li>
 <li><code>vector&lt;bool&gt;</code> 用在單純紀錄或 query 定長度的 flag 就好，因為其會做空間優化，所以無法回傳 element 的 reference (因為實際上他不是存 bool var ，而是僅僅一個 bit )，所以有些 STL method 會 fail (但反正簡單的 task 還是可以用)；另一個缺點是其運算效率比一般的 type 差得多。</li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-1%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-1%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-1%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-1%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-1%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-1%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -452,8 +452,8 @@ vec.clear();//destroy all elements, size = 0
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -462,10 +462,8 @@ vec.clear();//destroy all elements, size = 0
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -482,24 +480,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

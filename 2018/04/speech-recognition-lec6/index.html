@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Acoustic Modeling">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Speech Recognition- Lec6 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>21 Apr 2018</time>
   </div>
+
   
 
   
@@ -278,55 +278,74 @@
 
 </div>
 
-
   <p>ASR 做的其實就是以下這件事，</p>
-
-<p><code>$$
-\Pr(\text{words|sounds}) = \frac{\Pr(\text{sounds|words})}{\Pr(\text{sounds})}
-$$</code></p>
-
-<p>當中我們視 <span>$\Pr(\text{sounds})$</span> 為 uniform distribution ，不管它。
-<br />
-<span>$\Pr(\text{words})$</span> 由 <strong>Language Model</strong> 負責，評估產生的
-transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)<br />
-<span>$\Pr(\text{sounds|words})$</span> 則是 <strong>Acoustic Model</strong>， 也就是前一講中用 Viterbi 所算的 Likelihood 。</p>
-
+<p><code>$$ \Pr(\text{words|sounds}) = \frac{\Pr(\text{sounds|words})}{\Pr(\text{sounds})} $$</code></p>
+<p>當中我們視 <!-- raw HTML omitted -->$\Pr(\text{sounds})$<!-- raw HTML omitted --> 為 uniform distribution ，不管它。
+\<br>
+<!-- raw HTML omitted -->$\Pr(\text{words})$<!-- raw HTML omitted --> 由 <strong>Language Model</strong> 負責，評估產生的
+transcription 之合理性 (e.g 電腦聽聲音 vs 點老天呻吟)\<br>
+<!-- raw HTML omitted -->$\Pr(\text{sounds|words})$<!-- raw HTML omitted --> 則是 <strong>Acoustic Model</strong>， 也就是前一講中用 Viterbi 所算的 Likelihood 。</p>
 <h2 id="basic-unit-choice">Basic Unit Choice</h2>
-
 <p>前面提到，我們利用發音規則所建的 lexical model 去串接 phoneme 的 HMM model 形成
-word 的 HMM model ， 不同word 的相同 phoneme 會使用同一個 model 。但是 phoneme 彼此間亦會有所影響 (<span>$\rightarrow$</span> coarticalution )，所以會造成 mixing&hellip;，但是選擇對 word 建 HMM model 又會面臨對應到每個 model 的 data 數不夠的問題，參數太多又容易 overfitting ，也因此目前最常使用的 <strong>tri-phone</strong> 應運而生。</p>
-
-<p><code>$$
-d-a+g, \quad d-a+f
-$$</code></p>
-
+word 的 HMM model ， 不同word 的相同 phoneme 會使用同一個 model 。但是 phoneme 彼此間亦會有所影響 (<!-- raw HTML omitted -->$\rightarrow$<!-- raw HTML omitted --> coarticalution )，所以會造成 mixing&hellip;，但是選擇對 word 建 HMM model 又會面臨對應到每個 model 的 data 數不夠的問題，參數太多又容易 overfitting ，也因此目前最常使用的 <strong>tri-phone</strong> 應運而生。</p>
+<p><code>$$ d-a+g, \quad d-a+f $$</code></p>
 <p>上圖中的 &lsquo;a&rsquo; 對應到不同的 tri-phone ，但 tri-phone 不是去串接這三個 phone 的 model ，而是對有不同 context 的相同 phone 去訓練不同的 model 。</p>
-
 <p>但這麼一來，會遇到把 word 當 basic unit 使得每個 unit sample 都不夠多的問題 (雖然沒那麼嚴重)，因此，我們想對
 發音類似的那些 tri-phone 中的某些 state 做 weight sharing (e.g 上例中，prefix 相同，第一個和第二個 state 或許就可以 share)</p>
-
 <p>可以用 data-driven 的方法 automatically 決定如何 share (e.g Hierarchical
 Clustering 去 merge state emission probability 相近的那些)，但現行最常用的還是比
 較 engineering 的方法 - CART (<em>Clasification and Regression Tree</em>) 。</p>
-
 <p>利用語音學的語法規則，設計在這棵 decision tree 上 branching 的 criteria ，分到相同 branch 下面的 state 們就可以共用 (我們把最後被 cluster 在一塊的那些稱作 senone )</p>
-
-<p><center><img src="https://sunprinces.github.io/learning/img/post/cart.png" width="50%" style="border-radius: 0%;"></center>
-(From HTK Book)</p>
-
-<!--## Some comment on Lexical Model-->
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <h2 id="misc">MISC</h2>
-
 <ul>
 <li>衡量 performace 的好壞常使用 WER (<em>Word Error Rate</em>)，會需要對辨識出來的結果做
 realign 再去跟 ground truth 算這個值 (by DP)。</li>
 <li>增加 Sampling Rate 到 16 kHz 可以降低 WER，再高就沒什麼幫助了</li>
-<li>考慮 MFCC 的 <span>$\Delta$</span> 和 <span>$\Delta \Delta$</span> feature
+<li>考慮 MFCC 的 <!-- raw HTML omitted -->$\Delta$<!-- raw HTML omitted --> 和 <!-- raw HTML omitted -->$\Delta \Delta$<!-- raw HTML omitted --> feature
 可以降低 WER (也是最常見的 39-dim MFCC)</li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f04%2fspeech-recognition-lec6%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f04%2fspeech-recognition-lec6%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f04%2fspeech-recognition-lec6%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f04%2fspeech-recognition-lec6%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f04%2fspeech-recognition-lec6%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f04%2fspeech-recognition-lec6%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -382,8 +401,8 @@ realign 再去跟 ground truth 算這個值 (by DP)。</li>
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -392,10 +411,8 @@ realign 再去跟 ground truth 算這個值 (by DP)。</li>
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -412,24 +429,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

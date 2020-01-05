@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>IR on Stay hungry. Stay foolish </title>
@@ -18,7 +18,7 @@
       <pubDate>Wed, 31 Jan 2018 23:14:08 +0100</pubDate>
       
       <guid>https://sunprinces.github.io/learning/2018/01/information-retrieval-lec3/</guid>
-      <description>&lt;p&gt;前面提過 Boolearn Search 的其中一個問題在於， machine 是&lt;strong&gt;無腦&lt;/strong&gt;地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 &lt;span&gt;$10^6$&lt;/span&gt; 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 &lt;strong&gt;ranked retrieval&lt;/strong&gt; 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。&lt;/p&gt;</description>
+      <description>&lt;p&gt;前面提過 Boolearn Search 的其中一個問題在於， machine 是&lt;strong&gt;無腦&lt;/strong&gt;地回傳文本，其回傳的順序並沒有任何意義 (可以試想一下使用 Google 搜尋時，一次動輒 &lt;!-- raw HTML omitted --&gt;$10^6$&lt;!-- raw HTML omitted --&gt; 數量級以上的文本量，如果無序的話，你想要檢閱查找相關文件是一件多痛苦的事，那麼這個 IR system 有跟沒有是差不多的😅)。因此，我們引進 &lt;strong&gt;ranked retrieval&lt;/strong&gt; 的概念，目標是讓文本能以其跟搜尋 query 的關聯性大小來做排序。&lt;/p&gt;</description>
     </item>
     
     <item>

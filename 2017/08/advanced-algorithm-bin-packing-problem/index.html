@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Rounding Data &amp; Asymptotic PTAS">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Advanced Algorithm - Bin Packing Problem &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>12 Aug 2017</time>
   </div>
+
   
 
   
@@ -280,146 +280,140 @@
 
 </div>
 
-
   <p>從前兩講關於<strong>分配</strong> (在一堆物品中，決定哪些是要拿的一群，哪些不拿) 的最佳化問題中，我們延伸出新的問題，<strong>Bin Packing Problem</strong>。不同於在 <a href="https://sunprinces.github.io/learning/2017/07/advanced-algorithm---knapsack-problem/">Knapsack Problem</a> 中，我們只有一個箱子(可以想成你聘了一個工人搬一個箱子)；在Bin Packing 問題中，要取走<strong>所有</strong>寶物(所有寶物的重量都小於 1 單位)，而你需要聘請一些工人來搬，但今天每個工人都只帶了一個負重為 1 單位的箱子，該如何分配這些寶物(雖說是寶物，但其實我們不care價值惹)，使得需帶的箱子(聘請的工人)為最少？</p>
-
 <p>簡單的 formulation 如下：</p>
-
-<p>Given <span>$n$</span> items with sizes <span>$a_1 , a_2 , \cdots a_n$</span> ,
-<span>$a_i \in [0,1] \; \forall i$</span></p>
-
-<p>Want: Find a packing in unit-sized bins to minimize # of bins<br/>
+<p>Given <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> items with sizes <!-- raw HTML omitted -->$a_1 , a_2 , \cdots a_n$<!-- raw HTML omitted --> ,
+<!-- raw HTML omitted -->$a_i \in [0,1] ; \forall i$<!-- raw HTML omitted --></p>
+<p>Want: Find a packing in unit-sized bins to minimize # of bins<!-- raw HTML omitted -->
 (WLOG, we can turn any problem instance to this formulation, omit those tedious rounding
 overflow issue :p )</p>
-
 <h2 id="2-approx-algorithm">2-Approx Algorithm</h2>
-
 <p>依序 iterate 過每個物品，將物品放到的一個可以放的下的箱子中(都放不下，就再開新的)。</p>
-
 <h3 id="psuedocode-for-first-fit-algorithm">PsuedoCode for First-Fit Algorithm</h3>
-
-<pre><code class="language-python">def first_fit(s_list):
-  bin_ls = [0]
-  for it in s_list:
-    b_fit = False
-    for bin in bin_ls:
-      if bin + it.weight &lt;= 1:
-        bin += it.weight # put a_i into current bin
-        b_fit = True
-        break
-    # no bins fit, open new one
-    if not b_fit:
-      bin_ls.append(it.weight)
-  return len(bin_ls) # of bins used
-</code></pre>
-
-<p><strong>Claim: If First-Fit Algorithm uses <span>$m$</span> bins, at least</strong> <span>$m - 1$</span> <strong>bins has</strong> <span>$\sum \text{size} \geq \frac{1}{2}$</span></p>
-
-<p>假設唯一那個負重小於 <span>$\frac{1}{2}$</span> 的容器在第 <span>$i$</span> 個位置，在它之前的 bins 一定都負重超過 <span>$\frac{1}{2}$</span> (否則i-th bin 必可以整個放到前面的 bins)，而在它之後的 bins 也一定都超過 <span>$\frac{1}{2}$</span> (否則就可以放到 i-th bin 了)。</p>
-
-<p><span>$\text{OPT}$</span> <span>$\geq$</span> <span>$\sum_i a_i$</span> &gt; <span>$\frac{1}{2} (m-1)$</span><br />
-<span>$\Rightarrow 2\text{OPT} &gt; m - 1$</span><br />
-<span>$\Rightarrow 2\text{OPT} \geq m$</span></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">first_fit</span>(s_list):
+  bin_ls <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>]
+  <span style="color:#66d9ef">for</span> it <span style="color:#f92672">in</span> s_list:
+    b_fit <span style="color:#f92672">=</span> False
+    <span style="color:#66d9ef">for</span> bin <span style="color:#f92672">in</span> bin_ls:
+      <span style="color:#66d9ef">if</span> bin <span style="color:#f92672">+</span> it<span style="color:#f92672">.</span>weight <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>:
+        bin <span style="color:#f92672">+</span><span style="color:#f92672">=</span> it<span style="color:#f92672">.</span>weight <span style="color:#75715e"># put a_i into current bin</span>
+        b_fit <span style="color:#f92672">=</span> True
+        <span style="color:#66d9ef">break</span>
+    <span style="color:#75715e"># no bins fit, open new one</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> b_fit:
+      bin_ls<span style="color:#f92672">.</span>append(it<span style="color:#f92672">.</span>weight)
+  <span style="color:#66d9ef">return</span> len(bin_ls) <span style="color:#75715e"># of bins used</span>
+</code></pre></div><p><strong>Claim: If First-Fit Algorithm uses <!-- raw HTML omitted -->$m$<!-- raw HTML omitted --> bins, at least</strong> <!-- raw HTML omitted -->$m - 1$<!-- raw HTML omitted --> <strong>bins has</strong> <!-- raw HTML omitted -->$\sum \text{size} \geq \frac{1}{2}$<!-- raw HTML omitted --></p>
+<p>假設唯一那個負重小於 <!-- raw HTML omitted -->$\frac{1}{2}$<!-- raw HTML omitted --> 的容器在第 <!-- raw HTML omitted -->$i$<!-- raw HTML omitted --> 個位置，在它之前的 bins 一定都負重超過 <!-- raw HTML omitted -->$\frac{1}{2}$<!-- raw HTML omitted --> (否則i-th bin 必可以整個放到前面的 bins)，而在它之後的 bins 也一定都超過 <!-- raw HTML omitted -->$\frac{1}{2}$<!-- raw HTML omitted --> (否則就可以放到 i-th bin 了)。</p>
+<p><!-- raw HTML omitted -->$\text{OPT}$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\geq$<!-- raw HTML omitted --> <!-- raw HTML omitted -->$\sum_i a_i$<!-- raw HTML omitted --> &gt; <!-- raw HTML omitted -->$\frac{1}{2} (m-1)$<!-- raw HTML omitted -->\<br>
+<!-- raw HTML omitted -->$\Rightarrow 2\text{OPT} &gt; m - 1$<!-- raw HTML omitted -->\<br>
+<!-- raw HTML omitted -->$\Rightarrow 2\text{OPT} \geq m$<!-- raw HTML omitted --></p>
 <h2 id="np-hard">NP-Hard</h2>
-
 <p>Bin Packing 是一個 NPC ， 但實際上在設計 Approximation Algorithm 時，也有一些先天的限制。</p>
-
-<p><strong>Thm. There is no <span>$(\frac{3}{2} - \epsilon)$</span>-Approx. Algorithm unless P=NP</strong></p>
-
-<p><em>Proof:</em><br/>
-If total size is 2, OPT = 2 iff <span>$\exists$</span> subset <span>$S \, \sum_S\text{size} = 1$</span>; otherwise, OPT <span>$\geq$</span> 3 <br/>
-But if the poly-time algorithm can distinguish which case it is (i.e better ratio than <span>$\frac{3}{2}$</span>),<br/>then we can use this algorithm to solve the 2-partition problem, which is NPC</p>
-
-<p><span>$\Rightarrow$</span> There is no PTAS for Bin Packing Problem unless P=NP</p>
-
+<p><strong>Thm. There is no <!-- raw HTML omitted -->$(\frac{3}{2} - \epsilon)$<!-- raw HTML omitted -->-Approx. Algorithm unless P=NP</strong></p>
+<p>*Proof:*<!-- raw HTML omitted -->
+If total size is 2, OPT = 2 iff <!-- raw HTML omitted -->$\exists$<!-- raw HTML omitted --> subset <!-- raw HTML omitted -->$S , \sum_S\text{size} = 1$<!-- raw HTML omitted -->; otherwise, OPT <!-- raw HTML omitted -->$\geq$<!-- raw HTML omitted --> 3 <!-- raw HTML omitted -->
+But if the poly-time algorithm can distinguish which case it is (i.e better ratio than <!-- raw HTML omitted -->$\frac{3}{2}$<!-- raw HTML omitted -->),<!-- raw HTML omitted -->then we can use this algorithm to solve the 2-partition problem, which is NPC</p>
+<p><!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> There is no PTAS for Bin Packing Problem unless P=NP</p>
 <h2 id="asymptotic-ptas">Asymptotic PTAS</h2>
-
 <p>上例用一個 OPT 很小的例子來 claim 說 PTAS 不存在，但其實我們只不過才多用了一個箱子而已，但因為 OPT 小，所以多一兩個很嚴重。直覺來想，我們在 OPT 大一點時(差一兩個箱子沒差很多時)，可以得到更好的 approx ratio ，甚至能 derive 出 PTAS。對於這類問題，我們並不悲觀的認為找不到PTAS，但我們需要放鬆原先 PTAS 的限制，只在意那些 size 夠大的 instance， Asymptotic PTAS (<em>APTAS</em>) 應運而生。</p>
-
 <h3 id="definition">Definition:</h3>
-
-<p>Given an <span>$\epsilon &gt; 0 \enspace \exists \, \text{algorithm} \, \mathcal{A} , n \in \mathbb{N} $</span> &nbsp;
-<span>$\text{s.t} \, \mathcal{A} \, \text{is a } (1+\epsilon)\text{-approx. algorithm if OPT} \geq n$</span></p>
-
-<!--Given any <span>$\epsilon  >  0 \exists A_\epsilon , n_\epsilon \in \mathbb{N}$</span>-->
-
-<h2 id="span-1-2-epsilon-span-approx-algorithm">(<span>$1 + 2\epsilon$</span>)-Approx Algorithm</h2>
-
-<p>與之前的想法一樣，我們希望透由將原先的 problem instance 轉成方便我們求解的 formulation ，同時保有不太差的 performance guarantee 。這裡我們一樣要用到 rounding 的技巧，但在介紹如何 rounding 之前，我們先來想一下如何將問題變得比較簡單。</br>
+<p>Given an <!-- raw HTML omitted -->$\epsilon &gt; 0 \enspace \exists , \text{algorithm} , \mathcal{A} , n \in \mathbb{N} $<!-- raw HTML omitted -->  
+<!-- raw HTML omitted -->$\text{s.t} , \mathcal{A} , \text{is a } (1+\epsilon)\text{-approx. algorithm if OPT} \geq n$<!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<h2 id="span1--2epsilonspan-approx-algorithm">(<!-- raw HTML omitted -->$1 + 2\epsilon$<!-- raw HTML omitted -->)-Approx Algorithm</h2>
+<p>與之前的想法一樣，我們希望透由將原先的 problem instance 轉成方便我們求解的 formulation ，同時保有不太差的 performance guarantee 。這裡我們一樣要用到 rounding 的技巧，但在介紹如何 rounding 之前，我們先來想一下如何將問題變得比較簡單。<!-- raw HTML omitted -->
 這裡的想法是直接窮舉所有的可能解，並從中挑出所需箱數最少者，但解的數目如果不做處理會是<strong>EXP</strong>，所以我們先丟掉某些 size 較小的物品( Intuitively, size 大者才會是 bottleneck 所在)，且同時減少不同的 item size (與之前 Knapsack, Subset Sum 在設計演算法時的想法相同)。</p>
-
-<p><strong>Lemma:</strong><br/>If there only <span>$k$</span> different item sizes (且 size <span>$\geq \,\epsilon$</span>)，
+<p>**Lemma:**<!-- raw HTML omitted -->If there only <!-- raw HTML omitted -->$k$<!-- raw HTML omitted --> different item sizes (且 size <!-- raw HTML omitted -->$\geq ,\epsilon$<!-- raw HTML omitted -->)，
 then exists poly-time algorithm can find the OPT</p>
-
-<p><em>proof:</em><br/></p>
-
+<p>*proof:*<!-- raw HTML omitted --></p>
 <ol>
-<li><p>number of ties in a bin <span>$\leq M = \lfloor \frac{1}{\epsilon} \rfloor$</span> ( <span>$\because \text{minimum size is} \, \epsilon$</span> )</p></li>
-
-<li><p>Only <span>$\leq {H}^{k}_{M} = R$</span> different possible contents in each bin (那 <span>$M$</span> 個位置選 <span>$k$</span> 個物品)</p></li>
-
-<li><p>Total number of bin <span>$\leq \, n$</span> (最多也才 <span>$n$</span> 個物品)</p></li>
+<li>
+<p>number of ties in a bin <!-- raw HTML omitted -->$\leq M = \lfloor \frac{1}{\epsilon} \rfloor$<!-- raw HTML omitted --> ( <!-- raw HTML omitted -->$\because \text{minimum size is} , \epsilon$<!-- raw HTML omitted --> )</p>
+</li>
+<li>
+<p>Only <!-- raw HTML omitted -->$\leq {H}^{k}_{M} = R$<!-- raw HTML omitted --> different possible contents in each bin (那 <!-- raw HTML omitted -->$M$<!-- raw HTML omitted --> 個位置選 <!-- raw HTML omitted -->$k$<!-- raw HTML omitted --> 個物品)</p>
+</li>
+<li>
+<p>Total number of bin <!-- raw HTML omitted -->$\leq , n$<!-- raw HTML omitted --> (最多也才 <!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 個物品)</p>
+</li>
 </ol>
-
-<p><span>$\Rightarrow$</span> Total possible output <span>$ \leq \, H^{R}_n \, \leq \binom{n+R}{n} \, \leq \, n^R$</span> (<span>$n$</span> 個箱子，每種都有 <span>$R$</span> 種可能的物品重量組合可選)</p>
-
-<p>雖然複雜度是 <span>$\mathcal{O}(n^R)$</span>( <span>$R$</span> 還是一個很大的常數)，但至少我們把它壓在了 polynomial ✌</p>
-
-<h3 id="how-to-transform">How to transform ?</h3>
-
-<p>所以現在我們該如何將任意的 problem instance <span>$\textcolor{green}{\tilde{I}}$</span> ，轉成符合此 lemma 的 instance <span>$J$</span> 呢？</p>
-
-<p>首先我們將 size <span>$ &lt; \epsilon$</span> 者移掉得到 <span>$I$</span>，同時將剩下的物品依重量排序好，<strong>等個數</strong>地切分區間，每個區間有 <span>$\lfloor n\epsilon^2 \rfloor$</span> 個物品 (最後一個區間可能會少，但不管)，將區間的物品重量都放大到下一區間的 minimum (最後一個直接設成 <span>$1$</span>)。</p>
-
-<div>
-\[
-\begin{cases}
-J: \text{將區間的元素放大到下一個區間的 minimum} \, \small \textcolor{red}{\text{(演算法所使用的)}}\\
-J^{\prime}: \text{將區間的元素縮小到同一群的 minimum (第一個區間直接縮到0)} \, \small \textcolor{red}{(\text{用來證明bound})}
-\end{cases}
-\]
-</div>
-
-<p><img src="https://sunprinces.github.io/learning/img/post/bp.png" width="80%" style="border-radius: 0%;"></p>
-
-<p>從這裡可以觀察到 <span>$J$</span> 跟 <span>$J^{\prime}$</span> 的差別只在 <span>$J$</span> 多了 <span>$\lfloor n\epsilon^2 \rfloor$</span>  個 size 為 <span>$1$</span> 的元素。</p>
-
-<p><span>$OPT(I) \, \geq \, \sum_{I}size \, \geq \, n\epsilon$</span><br />
-<span>$\Rightarrow \epsilon \, OPT(I) \geq \lfloor n \epsilon^2 \rfloor$</span></p>
-
-<p><span>$OPT(I) \leq OPT(J)$</span> (<span>$\because J$</span> 是往上 rounding，所以在 <span>$J$</span> 合法的解在 <span>$I$</span> 中也會合法)<br />
-<span>$= OPT(J^\prime) + \lfloor n \epsilon^2 \rfloor$</span><br />
-<span>$\leq OPT(I) + \lfloor n \epsilon^2 \rfloor$</span> (<span>$\because J^\prime$ 是往下 rounding</span>)<br />
-<span>$\leq (1+\epsilon) OPT(I)$</span> (根據上一個推導)</p>
-
+<p><!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> Total possible output <!-- raw HTML omitted -->$ \leq , H^{R}_n , \leq \binom{n+R}{n} , \leq , n^R$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$n$<!-- raw HTML omitted --> 個箱子，每種都有 <!-- raw HTML omitted -->$R$<!-- raw HTML omitted --> 種可能的物品重量組合可選)</p>
+<p>雖然複雜度是 <!-- raw HTML omitted -->$\mathcal{O}(n^R)$<!-- raw HTML omitted -->( <!-- raw HTML omitted -->$R$<!-- raw HTML omitted --> 還是一個很大的常數)，但至少我們把它壓在了 polynomial ✌</p>
+<h3 id="how-to-transform-">How to transform ?</h3>
+<p>所以現在我們該如何將任意的 problem instance <!-- raw HTML omitted -->$\textcolor{green}{\tilde{I}}$<!-- raw HTML omitted --> ，轉成符合此 lemma 的 instance <!-- raw HTML omitted -->$J$<!-- raw HTML omitted --> 呢？</p>
+<p>首先我們將 size <!-- raw HTML omitted -->$ &lt; \epsilon$<!-- raw HTML omitted --> 者移掉得到 <!-- raw HTML omitted -->$I$<!-- raw HTML omitted -->，同時將剩下的物品依重量排序好，<strong>等個數</strong>地切分區間，每個區間有 <!-- raw HTML omitted -->$\lfloor n\epsilon^2 \rfloor$<!-- raw HTML omitted --> 個物品 (最後一個區間可能會少，但不管)，將區間的物品重量都放大到下一區間的 minimum (最後一個直接設成 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted -->)。</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>從這裡可以觀察到 <!-- raw HTML omitted -->$J$<!-- raw HTML omitted --> 跟 <!-- raw HTML omitted -->$J^{\prime}$<!-- raw HTML omitted --> 的差別只在 <!-- raw HTML omitted -->$J$<!-- raw HTML omitted --> 多了 <!-- raw HTML omitted -->$\lfloor n\epsilon^2 \rfloor$<!-- raw HTML omitted -->  個 size 為 <!-- raw HTML omitted -->$1$<!-- raw HTML omitted --> 的元素。</p>
+<p><!-- raw HTML omitted -->$OPT(I) , \geq , \sum_{I}size , \geq , n\epsilon$<!-- raw HTML omitted -->\<br>
+<!-- raw HTML omitted -->$\Rightarrow \epsilon , OPT(I) \geq \lfloor n \epsilon^2 \rfloor$<!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted -->$OPT(I) \leq OPT(J)$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$\because J$<!-- raw HTML omitted --> 是往上 rounding，所以在 <!-- raw HTML omitted -->$J$<!-- raw HTML omitted --> 合法的解在 <!-- raw HTML omitted -->$I$<!-- raw HTML omitted --> 中也會合法)\<br>
+<!-- raw HTML omitted -->$= OPT(J^\prime) + \lfloor n \epsilon^2 \rfloor$<!-- raw HTML omitted -->\<br>
+<!-- raw HTML omitted -->$\leq OPT(I) + \lfloor n \epsilon^2 \rfloor$<!-- raw HTML omitted --> (<!-- raw HTML omitted -->$\because J^\prime$ 是往下 rounding<!-- raw HTML omitted -->)\<br>
+<!-- raw HTML omitted -->$\leq (1+\epsilon) OPT(I)$<!-- raw HTML omitted --> (根據上一個推導)</p>
 <p><strong>到這裡我們還不算成功，別忘了我們先移掉了那些比較小的物品(但我們直覺假設最後結果不太受影響)</strong></p>
-
 <p>接下來要把這些物品一個個加回去，使用我們前面的 2-Approx. algorithm:
 <strong>First-Fit</strong></p>
-
 <ol>
-<li><p>First-Fit do not require any new bins <span>$\Rightarrow OPT(J) \, \leq \, (1+\epsilon)\textcolor{green}{OPT(\tilde{I})}$</span></p></li>
-
-<li><p>First-Fit uses <span>$\geq \, 1$</span> extra bins，<br/>
-假設最後用了 <span>$L$</span> 個 bins ，那麼 <strong>all but the last bin must</strong>
-<span>$\mathbf{\geq \, 1 - \epsilon}$</span> (否則可放至前面的 bins 中)<br/>
-<span>$\Rightarrow \textcolor{green}{OPT(\tilde{I})} \, \geq \,\sum_{\textcolor{green}{\tilde{I}}}size &gt; (L-1)(1-\epsilon)$</span><br />
-<span>$\Rightarrow \frac{\textcolor{green}{OPT(\tilde{I})}}{1 - \epsilon} &gt; L - 1$</span><br />
-<span>$\Rightarrow L \leq \frac{\textcolor{green}{OPT(\tilde{I})}}{1-\epsilon} + 1 \leq (1+2\epsilon)\textcolor{green}{OPT(\tilde{I})} + 1 \, \square$</span></p></li>
+<li>
+<p>First-Fit do not require any new bins <!-- raw HTML omitted -->$\Rightarrow OPT(J) , \leq , (1+\epsilon)\textcolor{green}{OPT(\tilde{I})}$<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>First-Fit uses <!-- raw HTML omitted -->$\geq , 1$<!-- raw HTML omitted --> extra bins，<!-- raw HTML omitted -->
+假設最後用了 <!-- raw HTML omitted -->$L$<!-- raw HTML omitted --> 個 bins ，那麼 <strong>all but the last bin must</strong>
+<!-- raw HTML omitted -->$\mathbf{\geq , 1 - \epsilon}$<!-- raw HTML omitted --> (否則可放至前面的 bins 中)<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->$\Rightarrow \textcolor{green}{OPT(\tilde{I})} , \geq ,\sum_{\textcolor{green}{\tilde{I}}}size &gt; (L-1)(1-\epsilon)$<!-- raw HTML omitted -->\<br>
+<!-- raw HTML omitted -->$\Rightarrow \frac{\textcolor{green}{OPT(\tilde{I})}}{1 - \epsilon} &gt; L - 1$<!-- raw HTML omitted -->\<br>
+<!-- raw HTML omitted -->$\Rightarrow L \leq \frac{\textcolor{green}{OPT(\tilde{I})}}{1-\epsilon} + 1 \leq (1+2\epsilon)\textcolor{green}{OPT(\tilde{I})} + 1 , \square$<!-- raw HTML omitted --></p>
+</li>
 </ol>
-
-<h2 id="延伸問題">延伸問題</h2>
-
+<h2 id="heading">延伸問題</h2>
 <p>考慮另一個 NP-hard 問題，<a href="http://www.cs.toronto.edu/~lalla/373s16/notes/makespan.pdf">Minimum Makespan Scheduling Problem</a> ，不同於 BP 的 constraint 在背包/箱子負重固定，希望 minimize 背包/箱子的數目；MSP 則是在可用的背包/箱子固定，但希望負重最大者負重不要太大。</p>
-
 <h2 id="reference">Reference</h2>
-
 <ul>
 <li><a href="http://pages.cs.wisc.edu/~shuchi/courses/880-S07/scribe-notes/lecture05.pdf">Lecture in Wisconsin</a></li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-bin-packing-problem%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-bin-packing-problem%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-bin-packing-problem%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-bin-packing-problem%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-bin-packing-problem%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f08%2fadvanced-algorithm-bin-packing-problem%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -475,8 +469,8 @@ J^{\prime}: \text{將區間的元素縮小到同一群的 minimum (第一個區�
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -485,10 +479,8 @@ J^{\prime}: \text{將區間的元素縮小到同一群的 minimum (第一個區�
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -505,24 +497,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

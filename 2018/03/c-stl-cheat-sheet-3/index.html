@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="資料結構 - Heap/ BST/ Hash Table">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>C&#43;&#43; STL Cheat Sheet - 3 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>13 Mar 2018</time>
   </div>
+
   
 
   
@@ -278,50 +278,34 @@
 
 </div>
 
-
   <p>這講所介紹的資料結構 (Heap, BST, Hash Table)，用途在為了保證 container <strong>存在某些性質</strong> 時使用。</p>
-
-<h2 id="max-binary-heap-priority-queue">MAX Binary Heap - Priority Queue</h2>
-
-<h3 id="性質">性質</h3>
-
+<h2 id="max-binary-heap---priority-queue">MAX Binary Heap - Priority Queue</h2>
+<h3 id="heading">性質</h3>
 <ul>
-<li><strong>top() 恆為當前資料中最大者， query 複雜度 <span>$O(1)$</span></strong></li>
-<li>push/pop 複雜度為 <span>$O(\log N)$</span></li>
+<li><strong>top() 恆為當前資料中最大者， query 複雜度 <!-- raw HTML omitted -->$O(1)$<!-- raw HTML omitted --></strong></li>
+<li>push/pop 複雜度為 <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --></li>
 </ul>
+<h3 id="heading-1">型態宣告</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span> <span style="color:#f92672">=</span> vector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>, less<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> Container<span style="color:#f92672">:</span><span style="color:#f92672">:</span>value_type<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> pq;
+<span style="color:#75715e">//正常使用
+</span><span style="color:#75715e"></span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pq; <span style="color:#75715e">// 
+</span><span style="color:#75715e"></span>priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> pq;
 
-<h3 id="型態宣告">型態宣告</h3>
-
-<pre><code class="language-cpp">&lt;class T, class Container = vector&lt;T&gt;, less&lt;typename Container::value_type&gt; &gt; pq;
-//正常使用
-priority_queue&lt;int&gt; pq; // 
-priority_queue&lt;pair&lt;int,int&gt; &gt; pq;
-
-//e.g 若想改為 Min Binary Heap
-priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; pq;
-priority_queue&lt;pair&lt;int,int&gt;,vector&lt;pair&lt;int,int&gt; &gt;,greater&lt;pair&lt;int,int&gt; &gt; &gt; pq;
-</code></pre>
-
-<h3 id="initialization">Initialization</h3>
-
-<pre><code class="language-cpp">priority_queue&lt;int&gt; pq;
-priority_queue&lt;int&gt; pq(vec.begin(),vec.end()); //copy [start,end)
-</code></pre>
-
-<p>Note: 直接在 constructor 做這件事，背後他會去 call <code>make_heap</code>，複雜度為 <span>$O(N)$</span>，<br />
-如果依序 push element 進來，複雜度為 <span>$)(N \log N)$</span>。</p>
-
-<h2 id="binary-search-tree-set">Binary Search Tree - set</h2>
-
-<h3 id="性質-1">性質</h3>
-
+<span style="color:#75715e">//e.g 若想改為 Min Binary Heap
+</span><span style="color:#75715e"></span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>,greater<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> pq;
+priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>,vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>,greater<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> pq;
+</code></pre></div><h3 id="initialization">Initialization</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pq;
+priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pq(vec.begin(),vec.end()); <span style="color:#75715e">//copy [start,end)
+</span></code></pre></div><p>Note: 直接在 constructor 做這件事，背後他會去 call <code>make_heap</code>，複雜度為 <!-- raw HTML omitted -->$O(N)$<!-- raw HTML omitted -->，\<br>
+如果依序 push element 進來，複雜度為 <!-- raw HTML omitted -->$)(N \log N)$<!-- raw HTML omitted -->。</p>
+<h2 id="binary-search-tree---set">Binary Search Tree - set</h2>
+<h3 id="heading-2">性質</h3>
 <ul>
 <li>container 中的 element 恆 follow 某個 order (default 是 ascending)</li>
 <li>element 為 unique ([cf] <code>multi_set</code> element 可 repeat)</li>
 </ul>
-
-<h3 id="宣告-initialization">宣告 &amp; Initialization</h3>
-
+<h3 id="--initialization">宣告 &amp; Initialization</h3>
 <pre><code>set&lt;int&gt; s;
 set&lt;int&gt; s(other_set);  //copy from other set
 set&lt;int&gt; s(ALL(other)); // can be other containers (like vector, set...) from [start, end)
@@ -335,122 +319,121 @@ struct mycomp {
   {return lhs&gt;rhs;} // descending
 };
 set&lt;int,mycomp&gt; s;
-</code></pre>
+</code></pre><h3 id="-spanolog-nspan">計數/查找: <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span>iterator it <span style="color:#f92672">=</span> s.find(<span style="color:#ae81ff">123</span>); <span style="color:#75715e">// return iterator，找不到回傳 s.end()
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> b_exist <span style="color:#f92672">=</span> s.count(<span style="color:#ae81ff">123</span>); <span style="color:#75715e">//either 0 or 1;
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">//**lower_bound, upper_bound**
+</span><span style="color:#75715e"></span><span style="color:#75715e">// 注意：若今天查找的值，不在 set 裡頭，此兩者等價
+</span><span style="color:#75715e"></span><span style="color:#75715e">// Assume s = [1,2,3,5,6]
+</span><span style="color:#75715e"></span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span> iterator l_it <span style="color:#f92672">=</span> s.lower_bound(<span style="color:#ae81ff">5</span>); <span style="color:#75715e">//*l_it = 5, 若all element &lt; val ，回傳 s.end()
+</span><span style="color:#75715e"></span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span> iterator u_it <span style="color:#f92672">=</span> s.upper_bound(<span style="color:#ae81ff">5</span>); <span style="color:#75715e">//*u_it = 6,               &lt;=  
+</span></code></pre></div><p>Note: <code>lower_bound()</code> 回傳的為 dereference 後 <!-- raw HTML omitted -->$\geq$<!-- raw HTML omitted --> val 者，\<br>
+而 <code>upper_bound()</code> 回傳的為 dereference 後 <!-- raw HTML omitted -->$&gt;$<!-- raw HTML omitted --> val 者 ([cf] <code>multi_set</code> 的圖解)</p>
+<h3 id="-spanolog-nspan-1">插入/刪除: <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">s.insert(<span style="color:#ae81ff">123</span>);
 
-<h3 id="計數-查找-span-o-log-n-span">計數/查找: <span>$O(\log N)$</span></h3>
-
-<pre><code class="language-cpp">set&lt;int&gt;::iterator it = s.find(123); // return iterator，找不到回傳 s.end()
-int b_exist = s.count(123); //either 0 or 1;
-
-//**lower_bound, upper_bound**
-// 注意：若今天查找的值，不在 set 裡頭，此兩者等價
-// Assume s = [1,2,3,5,6]
-set&lt;int&gt;:: iterator l_it = s.lower_bound(5); //*l_it = 5, 若all element &lt; val ，回傳 s.end()
-set&lt;int&gt;:: iterator u_it = s.upper_bound(5); //*u_it = 6,               &lt;=  
-</code></pre>
-
-<p>Note: <code>lower_bound()</code> 回傳的為 dereference 後 <span>$\geq$</span> val 者，<br />
-而 <code>upper_bound()</code> 回傳的為 dereference 後 <span>$&gt;$</span> val 者 ([cf] <code>multi_set</code> 的圖解)</p>
-
-<h3 id="插入-刪除-span-o-log-n-span">插入/刪除: <span>$O(\log N)$</span></h3>
-
-<pre><code class="language-cpp">s.insert(123);
-
-s.erase(123);
-s.erase(it); //*it = 123, O(1)
-s.erase(s.begin(),s.end()); //O(interval width)
-</code></pre>
-
-<p>Note:</p>
-
+s.erase(<span style="color:#ae81ff">123</span>);
+s.erase(it); <span style="color:#75715e">//*it = 123, O(1)
+</span><span style="color:#75715e"></span>s.erase(s.begin(),s.end()); <span style="color:#75715e">//O(interval width)
+</span></code></pre></div><p>Note:</p>
 <ul>
 <li>可以想見 <code>erase(val)</code> 實際上是去 call <code>find()</code> 拿到 iterator 後，再去 erase</li>
 <li>在 container 中的元素是不能被更改的 ([cf] map 可改 val，不能改 key)</li>
 <li>元素保證 unique ，若重複插入，<code>insert()</code> 不會插入 (關於其 return 值請查 cppreference)</li>
 </ul>
-
 <h3 id="misc">MISC</h3>
-
 <ul>
-<li>access <code>begin()</code>, <code>end()</code> 是 <span>$O(1)$</span> ，網路上某些參考資料有誤。</li>
+<li>access <code>begin()</code>, <code>end()</code> 是 <!-- raw HTML omitted -->$O(1)$<!-- raw HTML omitted --> ，網路上某些參考資料有誤。</li>
 <li>基本上是下方 map 的一個 <strong>key = val</strong> 之特例。</li>
 </ul>
-
-<h2 id="binary-search-tree-map">Binary Search Tree - Map</h2>
-
-<h3 id="性質-2">性質:</h3>
-
+<h2 id="binary-search-tree---map">Binary Search Tree - Map</h2>
+<h3 id="heading-3">性質:</h3>
 <p>跟上述的 set 相同</p>
-
-<h3 id="宣告-initialization-1">宣告 &amp; Initialization</h3>
-
-<pre><code class="language-cpp">//同於 set
-map&lt;char,int&gt; mp;
-</code></pre>
-
-<h3 id="新增-修改-值-span-o-log-n-span">新增 / 修改 值: <span>$O(\log N)$</span></h3>
-
+<h3 id="--initialization-1">宣告 &amp; Initialization</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//同於 set
+</span><span style="color:#75715e"></span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</code></pre></div><h3 id="----spanolog-nspan">新增 / 修改 值: <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --></h3>
 <p>不同於 set 的不可更改， map 中我們可更改 val。</p>
-
-<pre><code class="language-cpp">//[],at()
-mp['h'] = 1; // if 'h ' exist, modify value to 1; if not, insert {'h',1}
-mp.at('h') = 1; //                              ; if not, 丟出例外
-</code></pre>
-
-<p>Note: 注意到若只想 query， e.g 使用<code>['o']</code>去查找不存在的 key 值 &lsquo;o&rsquo;，它會自動新增一個 key 值為 &lsquo;o&rsquo;，值為 default constructor 的 reference 。<br />
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//[],at()
+</span><span style="color:#75715e"></span>mp[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">h</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// if &#39;h &#39; exist, modify value to 1; if not, insert {&#39;h&#39;,1}
+</span><span style="color:#75715e"></span>mp.at(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">h</span><span style="color:#e6db74">&#39;</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">//                              ; if not, 丟出例外
+</span></code></pre></div><p>Note: 注意到若只想 query， e.g 使用<code>['o']</code>去查找不存在的 key 值 &lsquo;o&rsquo;，它會自動新增一個 key 值為 &lsquo;o&rsquo;，值為 default constructor 的 reference 。\<br>
 在 init 表格紀錄時，使用 <code>[]</code>，便可以不用去 take care 例外，但 query 時，使用 <code>at()</code> 比較妥當。</p>
-
-<h3 id="插入-刪除-span-o-log-n-span-1">插入/刪除: <span>$O(\log N)$</span></h3>
-
+<h3 id="-spanolog-nspan-2">插入/刪除: <!-- raw HTML omitted -->$O(\log N)$<!-- raw HTML omitted --></h3>
 <p>注意到這時候要以 <strong>pair</strong> 來操作</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">mp.insert({<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">h</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">1</span>});
+mp.insert(pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">h</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">1</span>));
 
-<pre><code class="language-cpp">mp.insert({'h',1});
-mp.insert(pair&lt;char,int&gt;('h',1));
-
-mp.insert(other_mp.begin(),other_mp.find('o'));// 注意這裡的 container element 需為 pair 型態
-mp.erase('h'); // 以下類似
-</code></pre>
-
-<p>Note: <code>erase</code> 只能根據位置及 key 值來刪除，不能透由 value (想想也有道理，為了保持對數複雜度)</p>
-
-<h2 id="binary-search-tree-multiset-multimap">Binary Search Tree - Multiset, Multimap</h2>
-
-<h3 id="性質-3">性質：</h3>
-
+mp.insert(other_mp.begin(),other_mp.find(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">o</span><span style="color:#e6db74">&#39;</span>));<span style="color:#75715e">// 注意這裡的 container element 需為 pair 型態
+</span><span style="color:#75715e"></span>mp.erase(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">h</span><span style="color:#e6db74">&#39;</span>); <span style="color:#75715e">// 以下類似
+</span></code></pre></div><p>Note: <code>erase</code> 只能根據位置及 key 值來刪除，不能透由 value (想想也有道理，為了保持對數複雜度)</p>
+<h2 id="binary-search-tree---multiset-multimap">Binary Search Tree - Multiset, Multimap</h2>
+<h3 id="heading-4">性質：</h3>
 <ul>
 <li>允許重複值的 set</li>
 </ul>
+<h3 id="heading-5">計數/查找</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">mp.insert({<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">h</span><span style="color:#e6db74">&#39;</span>,<span style="color:#ae81ff">1</span>}); <span style="color:#75715e">// 注意不能使用 mp[&#39;h&#39;] = 1 的 insert 方式
+</span><span style="color:#75715e"></span>s.find(<span style="color:#ae81ff">123</span>); <span style="color:#75715e">// 注意若 123 有多個，會回傳哪一個不一定 [故 multimap 使用它不太恰當]
+</span><span style="color:#75715e"></span>s.count(<span style="color:#ae81ff">123</span>); <span style="color:#75715e">// O(lg N + equal range length)
+</span><span style="color:#75715e"></span>s.equal_range(<span style="color:#ae81ff">123</span>); <span style="color:#960050;background-color:#1e0010">會</span><span style="color:#960050;background-color:#1e0010">回</span><span style="color:#960050;background-color:#1e0010">傳</span><span style="color:#960050;background-color:#1e0010">一</span><span style="color:#960050;background-color:#1e0010">個</span> {start,end} pair <span style="color:#960050;background-color:#1e0010">，</span><span style="color:#960050;background-color:#1e0010">其</span><span style="color:#960050;background-color:#1e0010">中</span>[start,end) <span style="color:#960050;background-color:#1e0010">為</span> <span style="color:#ae81ff">123</span>
 
-<h3 id="計數-查找">計數/查找</h3>
-
-<pre><code class="language-cpp">mp.insert({'h',1}); // 注意不能使用 mp['h'] = 1 的 insert 方式
-s.find(123); // 注意若 123 有多個，會回傳哪一個不一定 [故 multimap 使用它不太恰當]
-s.count(123); // O(lg N + equal range length)
-s.equal_range(123); 會回傳一個 {start,end} pair ，其中[start,end) 為 123
-
-// 圖解
-// 1 1 2 2 2 3
-//     ^       lower_bound(2)
-//           ^ upper_bound(2)
-</code></pre>
-
-<p>Note:</p>
-
+<span style="color:#75715e">// 圖解
+</span><span style="color:#75715e"></span><span style="color:#75715e">// 1 1 2 2 2 3
+</span><span style="color:#75715e"></span><span style="color:#75715e">//     ^       lower_bound(2)
+</span><span style="color:#75715e"></span><span style="color:#75715e">//           ^ upper_bound(2)
+</span></code></pre></div><p>Note:</p>
 <ul>
 <li><code>equal_range()</code> 其實就是叫了 <code>lower_bound()</code> 及 <code>upper_bound()</code></li>
 <li><code>erase(val)</code> 會抹除所有值為 val 的元素，複雜度跟 <code>equal_range()</code> 相同</li>
 </ul>
-
-<h2 id="hash-table-unordered-set-unordered-map-及其-multi-類">Hash Table - Unordered_set, Unordered_map 及其 multi 類</h2>
-
+<h2 id="hash-table---unordered-set-unordered-map--multi-">Hash Table - Unordered_set, Unordered_map 及其 multi 類</h2>
 <h3 id="misc-1">Misc:</h3>
-
 <ul>
-<li>計數 / 查找 / 新增 / 刪除 : Average Case <span>$O(1)$</span>，Worst Case <span>$O(N)$</span></li>
+<li>計數 / 查找 / 新增 / 刪除 : Average Case <!-- raw HTML omitted -->$O(1)$<!-- raw HTML omitted -->，Worst Case <!-- raw HTML omitted -->$O(N)$<!-- raw HTML omitted --></li>
 <li>儘量在插入元素前先 <code>reserve()</code> ，開好足夠大的表，避免 <code>rehash()</code> 發生。</li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-3%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-3%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-3%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-3%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-3%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2018%2f03%2fc-stl-cheat-sheet-3%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -506,8 +489,8 @@ s.equal_range(123); 會回傳一個 {start,end} pair ，其中[start,end) 為 12
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -516,10 +499,8 @@ s.equal_range(123); 會回傳一個 {start,end} pair ，其中[start,end) 為 12
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -536,24 +517,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

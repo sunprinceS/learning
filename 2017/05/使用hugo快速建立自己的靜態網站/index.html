@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Hugo 101">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>使用Hugo快速建立自己的靜態網站 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>11 May 2017</time>
   </div>
+
   
 
   
@@ -276,117 +276,113 @@
 
 </div>
 
-
   <p>像 Hugo 這類 static site generator 的好處是可以用簡單的語法(如 Markdown)來寫網站，其會根據寫好的模板，自己幫你渲染成 html ，而前人也已經寫好許多功能，如 topic , tag 管理等，算是集一般部落格的方便上手，與自幹 html 的 flexibility 於一身，而且整個網頁都是靜態的緣故，可以直接免費託管在 github page 等免費的網頁空間上，維護上可說是十分方便。</p>
-
 <h2 id="basic">Basic</h2>
-
 <p>我們利用以下指令建置一個簡單的 Hugo-managed website 的 scaffold (先裝好 Hugo)。</p>
-
-<pre><code class="language-bash">hugo new site [資料夾名稱]
-</code></pre>
-
-<p>其中的 <strong>config.toml</strong> 定義了一些會套用到整個網站的參數，可以自己去設定。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo new site <span style="color:#f92672">[</span>資料夾名稱<span style="color:#f92672">]</span>
+</code></pre></div><p>其中的 <strong>config.toml</strong> 定義了一些會套用到整個網站的參數，可以自己去設定。</p>
 <p><strong>layout</strong> 與 <strong>themes</strong> 資料夾下的眾 html ，則是定義了我們的 md 檔要如何被 render 成 html。</p>
-
 <p>Github 上已經有非常多漂亮的 themes 可供使用，也附帶了許多部落格該有的管理功能，在 themes 下把他們 clone下來，並在 config.toml 的 theme 中設定該主題的名稱。(我是使用 <a href="https://github.com/sunprinceS/blackburn">blackburn</a> 這個主題，但通常想做一些客製化的更動，比方說加入 $\KaTeX$ 或是加自己的 icon 之類，所以就 fork 了一份來維護囉！)</p>
-
 <p>完成好基本的外觀設定後，我們可以利用以下指令新增文章</p>
-
-<pre><code class="language-bash">hugo new post/[文章名稱].md
-</code></pre>
-
-<p>如果打開剛剛產生的 md 檔，以現在這篇為例，會看到以下產生的內容</p>
-
-<pre><code class="language-markdown">+++
-date = &quot;2017-05-11T17:54:03+08:00&quot;
-description = &quot;&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo new post/<span style="color:#f92672">[</span>文章名稱<span style="color:#f92672">]</span>.md
+</code></pre></div><p>如果打開剛剛產生的 md 檔，以現在這篇為例，會看到以下產生的內容</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">+++
+date = &#34;2017-05-11T17:54:03+08:00&#34;
+description = &#34;&#34;
 draft = true
 tags = []
-title = &quot;文章名稱&quot;
+title = &#34;文章名稱&#34;
 topics = []
 +++
-</code></pre>
-
-<p>依樣畫葫蘆地填上各欄位的 attribute， 其中 draft 若為 true 的話，在生成 html 的過程中，是不會被 render 的，工作流程如以下</p>
-
-<pre><code class="language-bash"># 在 local 端同步顯示，確定文章顯示與內容符合所想
+</code></pre></div><p>依樣畫葫蘆地填上各欄位的 attribute， 其中 draft 若為 true 的話，在生成 html 的過程中，是不會被 render 的，工作流程如以下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 在 local 端同步顯示，確定文章顯示與內容符合所想</span>
 hugo server --buildDrafts
-# hugo undraft content/post/[文章名稱].md # deprecated after hugo ver&gt;=0.37
-# 以後直接在 md 檔中修改即可！
-</code></pre>
-
-<h2 id="git-worktree">Git worktree</h2>
-
+<span style="color:#75715e"># hugo undraft content/post/[文章名稱].md # deprecated after hugo ver&gt;=0.37</span>
+<span style="color:#75715e"># 以後直接在 md 檔中修改即可！</span>
+</code></pre></div><h2 id="git-worktree">Git worktree</h2>
 <p>為了方便管理我們原先的 source 檔案與生成的 html 檔，我們將生成的 html 都放在單一個資料夾下(在 config.toml 中的 publishdir 設定)，我們想在 master 這個 branch 管理各種設定檔與 markdown，而 gh-pages 則是管理生成的 html ，那如何在同一個 repo 下完成這件事情呢？這時候 <strong>git worktree</strong> 就派上用場了！他可以讓我們藉由 <code>cd</code> 到不同的資料夾， checkout 至不同的 branch 上。</p>
-
 <p>如前面所說，在 master 上，我們不希望 html 檔案們在這個 branch 被 track，所以先將 publishdir 加入 .gitignore 中。接著利用以下指令創建之後要用來管理 html 的 gh-pages 。</p>
-
-<pre><code class="language-bash"># gh-pages 和 master 是完全獨立的兩分支
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># gh-pages 和 master 是完全獨立的兩分支</span>
 git checkout --orphan gh-pages
 git reset --hard
-git commit --allow-empty -m &quot;Initializing gh-pages branch&quot;
+git commit --allow-empty -m <span style="color:#e6db74">&#34;Initializing gh-pages branch&#34;</span>
 git push origin gh-pages
-git checkout master # 回到 master 上做事
-</code></pre>
-
-<p>使用 worktree 來 maintain gh-pages 這個 branch</p>
-
-<pre><code class="language-bash">git worktree add -B gh-pages [publishdir] origin/gh-pages
-</code></pre>
-
-<p>到此準備完成，在確認完我們的文章顯示與內容都符合我們的需求後，就可以正式 publish 了✌</p>
-
+git checkout master <span style="color:#75715e"># 回到 master 上做事</span>
+</code></pre></div><p>使用 worktree 來 maintain gh-pages 這個 branch</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git worktree add -B gh-pages <span style="color:#f92672">[</span>publishdir<span style="color:#f92672">]</span> origin/gh-pages
+</code></pre></div><p>到此準備完成，在確認完我們的文章顯示與內容都符合我們的需求後，就可以正式 publish 了✌</p>
 <h2 id="how-to-publish">How to publish</h2>
-
 <p>以下是每產生一篇新的文章後，將文章 publish 的流程</p>
-
-<pre><code class="language-bash">hugo # generate html，這時候 publishdir下會 generate 新文章的 html
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo <span style="color:#75715e"># generate html，這時候 publishdir下會 generate 新文章的 html</span>
 git add .
-git commit -m &quot;add new post [文章名稱]&quot;
-# publish on gh-pages
-cd [publishdir] # 你會發現你已經在不同 branch 上了
+git commit -m <span style="color:#e6db74">&#34;add new post [文章名稱]&#34;</span>
+<span style="color:#75715e"># publish on gh-pages</span>
+cd <span style="color:#f92672">[</span>publishdir<span style="color:#f92672">]</span> <span style="color:#75715e"># 你會發現你已經在不同 branch 上了</span>
 git add .
-git commit -m &quot;add new post [文章名稱]&quot;
+git commit -m <span style="color:#e6db74">&#34;add new post [文章名稱]&#34;</span>
 cd ..
-git push origin gh-pages # 大功告成！
-</code></pre>
-
-<h2 id="clean">Clean</h2>
-
+git push origin gh-pages <span style="color:#75715e"># 大功告成！</span>
+</code></pre></div><h2 id="clean">Clean</h2>
 <p>如果改動過標題，原先 publishdir 下已產生的檔案不會刪除，需利用以下指令刪除</p>
-
-<pre><code class="language-bash">hugo --cleanDestinationDir
-</code></pre>
-
-<h2 id="clone-to-new-workspace">Clone to new workspace</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">hugo --cleanDestinationDir
+</code></pre></div><h2 id="clone-to-new-workspace">Clone to new workspace</h2>
 <p>如果想在不同的電腦間寫 blog 的話，請仿以下步驟</p>
-
-<pre><code class="language-bash">git clone --recurse-submodules -j8 [repo] # clone from remote
-git co master # 因為我 default branch 是 gh-pages
-git worktree add -B gh-pages public origin/gh-pages # 重新 set worktree
-git submodule update --init # track submodule (因 [theme] 是另一個 repo 在維護的)
-# 上述那步沒做的話， hugo server 後會發現什麼都沒 render ^^&quot; (因為 [theme] 是空的)
-# 而 hugo 並不會再次 render，所以 publish 到 github page 並不會有任何更新
-</code></pre>
-
-<h2 id="post-changelog">Post ChangeLog</h2>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone --recurse-submodules -j8 <span style="color:#f92672">[</span>repo<span style="color:#f92672">]</span> <span style="color:#75715e"># clone from remote</span>
+git co master <span style="color:#75715e"># 因為我 default branch 是 gh-pages</span>
+git worktree add -B gh-pages public origin/gh-pages <span style="color:#75715e"># 重新 set worktree</span>
+git submodule update --init <span style="color:#75715e"># track submodule (因 [theme] 是另一個 repo 在維護的)</span>
+<span style="color:#75715e"># 上述那步沒做的話， hugo server 後會發現什麼都沒 render ^^&#34; (因為 [theme] 是空的)</span>
+<span style="color:#75715e"># 而 hugo 並不會再次 render，所以 publish 到 github page 並不會有任何更新</span>
+</code></pre></div><h2 id="post-changelog">Post ChangeLog</h2>
 <ul>
-<li>2018/03/16: 更新 <code>hugo clean</code>, <code>hugo undraft</code> 的指令 (Hugo ver <span>$\geq$</span> 0.36)</li>
+<li>2018/03/16: 更新 <code>hugo clean</code>, <code>hugo undraft</code> 的指令 (Hugo ver <!-- raw HTML omitted -->$\geq$<!-- raw HTML omitted --> 0.36)</li>
 <li>2018/10/18: 新增如何 clone 到新的 workspace</li>
 </ul>
-
 <h2 id="reference">Reference</h2>
-
 <ul>
 <li><a href="https://gohugo.io/overview/quickstart/">Quick Start</a></li>
 <li><a href="https://gohugo.io/tutorials/github-pages-blog/">Hosting on GitHub Pages</a></li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2f%25E4%25BD%25BF%25E7%2594%25A8hugo%25E5%25BF%25AB%25E9%2580%259F%25E5%25BB%25BA%25E7%25AB%258B%25E8%2587%25AA%25E5%25B7%25B1%25E7%259A%2584%25E9%259D%259C%25E6%2585%258B%25E7%25B6%25B2%25E7%25AB%2599%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2f%25E4%25BD%25BF%25E7%2594%25A8hugo%25E5%25BF%25AB%25E9%2580%259F%25E5%25BB%25BA%25E7%25AB%258B%25E8%2587%25AA%25E5%25B7%25B1%25E7%259A%2584%25E9%259D%259C%25E6%2585%258B%25E7%25B6%25B2%25E7%25AB%2599%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2f%25E4%25BD%25BF%25E7%2594%25A8hugo%25E5%25BF%25AB%25E9%2580%259F%25E5%25BB%25BA%25E7%25AB%258B%25E8%2587%25AA%25E5%25B7%25B1%25E7%259A%2584%25E9%259D%259C%25E6%2585%258B%25E7%25B6%25B2%25E7%25AB%2599%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2f%25E4%25BD%25BF%25E7%2594%25A8hugo%25E5%25BF%25AB%25E9%2580%259F%25E5%25BB%25BA%25E7%25AB%258B%25E8%2587%25AA%25E5%25B7%25B1%25E7%259A%2584%25E9%259D%259C%25E6%2585%258B%25E7%25B6%25B2%25E7%25AB%2599%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2f%25E4%25BD%25BF%25E7%2594%25A8hugo%25E5%25BF%25AB%25E9%2580%259F%25E5%25BB%25BA%25E7%25AB%258B%25E8%2587%25AA%25E5%25B7%25B1%25E7%259A%2584%25E9%259D%259C%25E6%2585%258B%25E7%25B6%25B2%25E7%25AB%2599%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f05%2f%25E4%25BD%25BF%25E7%2594%25A8hugo%25E5%25BF%25AB%25E9%2580%259F%25E5%25BB%25BA%25E7%25AB%258B%25E8%2587%25AA%25E5%25B7%25B1%25E7%259A%2584%25E9%259D%259C%25E6%2585%258B%25E7%25B6%25B2%25E7%25AB%2599%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -436,8 +432,8 @@ git submodule update --init # track submodule (因 [theme] 是另一個 repo 在
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -446,10 +442,8 @@ git submodule update --init # track submodule (因 [theme] 是另一個 repo 在
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -466,24 +460,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

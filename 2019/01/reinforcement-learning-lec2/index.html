@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Improvements of naive REINFORCE algorithm">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>Reinforcement Learning - Lec2 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>03 Jan 2019</time>
   </div>
+
   
 
   
@@ -278,84 +278,86 @@
 
 </div>
 
-
   <p>上回提到了 policy gradint 的方法，及其缺點，這一講會介紹各種改進的方法。包括降低
 sample 的 variance 及 off-policy (使得 data 更有效地被利用)。</p>
-
 <h2 id="reduce-variance">Reduce Variance</h2>
-
 <h3 id="baseline">Baseline</h3>
-
-<p>原先的 gradient 是以 <span>$r(\tau)$</span> 作為 weight ，現在則是減去一個常數
-<span>$b \approx \mathbb{E}[r(\tau)]$</span>。
-想法是可能每個 <span>$\tau$</span>所收到的 reward 都是正的，在下一次更新後，
-policy 更會 prefer 去選擇這些 <span>$(s,a)$</span> ，但因為畢竟我們是用 sample 的方式，尚有許多 <span>$(s,a)$</span> 沒有遇到，reward 相當於是 <span>$0$</span> ，但其<strong>可能</strong>是個比平均好的選擇，在原先的 policy update 卻不會被 explore 。<br />
+<p>原先的 gradient 是以 <!-- raw HTML omitted -->$r(\tau)$<!-- raw HTML omitted --> 作為 weight ，現在則是減去一個常數
+<!-- raw HTML omitted -->$b \approx \mathbb{E}[r(\tau)]$<!-- raw HTML omitted -->。
+想法是可能每個 <!-- raw HTML omitted -->$\tau$<!-- raw HTML omitted -->所收到的 reward 都是正的，在下一次更新後，
+policy 更會 prefer 去選擇這些 <!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> ，但因為畢竟我們是用 sample 的方式，尚有許多 <!-- raw HTML omitted -->$(s,a)$<!-- raw HTML omitted --> 沒有遇到，reward 相當於是 <!-- raw HTML omitted -->$0$<!-- raw HTML omitted --> ，但其<strong>可能</strong>是個比平均好的選擇，在原先的 policy update 卻不會被 explore 。\<br>
 簡單來說就是要 normlize reward。</p>
-
 <p><strong>Remark:</strong> 減去這個項所得的新 weight ，相較原先的 final reward 是 unbiased sample。</p>
-
-<div>
-\[
-\int_\tau \pi_\theta(\tau)\nabla_\theta \log_\theta(\tau) \textcolor{red}{b} \; d\tau \, = \, \int_\tau \nabla_\theta \pi_\theta (\tau) \textcolor{red}{b} \; d\tau \, = \, \textcolor{red}{b}\nabla_\theta \textcolor{blue}{\int_\tau \pi_\theta(\tau)} \, = \, \textcolor{red}{b} \nabla_\theta \textcolor{blue}{1} = 0
-\]
-</div>
-
+<!-- raw HTML omitted -->
 <h3 id="causality">Causality</h3>
-
-<p>Action taken at <span>$t^{\prime} (&gt; t)$</span> cannot affect reward at <span>$t$</span></p>
-
-<p>將原先的 <span>$r(\tau)$</span> 取代成 <span>$\sum_{t=t^{\prime}}^T \gamma^{t - t^{\prime}}r_t$</span></p>
-
-<p><strong>Note:</strong> <span>$\gamma$</span> 為 discount factor (of time)</p>
-
-<p><strong>Remark:</strong> 把 gradient 的 weight 稱為 <strong>Advantage function</strong> <span>$A^\pi(s_t,a_t)$</span><br />
-意義上為 &ldquo;How good it is if we take <span>$a_t$</span> than other action at
-<span>$s_t$</span>&rdquo; 。</p>
-
+<p>Action taken at <!-- raw HTML omitted -->$t^{\prime} (&gt; t)$<!-- raw HTML omitted --> cannot affect reward at <!-- raw HTML omitted -->$t$<!-- raw HTML omitted --></p>
+<p>將原先的 <!-- raw HTML omitted -->$r(\tau)$<!-- raw HTML omitted --> 取代成 <!-- raw HTML omitted -->$\sum_{t=t^{\prime}}^T \gamma^{t - t^{\prime}}r_t$<!-- raw HTML omitted --></p>
+<p><strong>Note:</strong> <!-- raw HTML omitted -->$\gamma$<!-- raw HTML omitted --> 為 discount factor (of time)</p>
+<p><strong>Remark:</strong> 把 gradient 的 weight 稱為 <strong>Advantage function</strong> <!-- raw HTML omitted -->$A^\pi(s_t,a_t)$<!-- raw HTML omitted -->\<br>
+意義上為 &ldquo;How good it is if we take <!-- raw HTML omitted -->$a_t$<!-- raw HTML omitted --> than other action at
+<!-- raw HTML omitted -->$s_t$<!-- raw HTML omitted -->&rdquo; 。</p>
 <h2 id="off-policy">Off-policy</h2>
-
-<p>原先 naive 的 REINFORCE ，在學/要更新的 agent (parametrized by <span>$\theta$</span>) 跟與環境互動的 agent/actor 是同一個，我們稱此為 <strong>on-policy</strong>，但這樣的壞處在於 trajectory collection 耗時，而且一旦參數更新了，又要再次 resample ，非常沒有效率。</p>
-
+<p>原先 naive 的 REINFORCE ，在學/要更新的 agent (parametrized by <!-- raw HTML omitted -->$\theta$<!-- raw HTML omitted -->) 跟與環境互動的 agent/actor 是同一個，我們稱此為 <strong>on-policy</strong>，但這樣的壞處在於 trajectory collection 耗時，而且一旦參數更新了，又要再次 resample ，非常沒有效率。</p>
 <p>故引進 <strong>off-policy</strong> 的方法，重複使用之前獲得的 trajectory，但這樣的 tradeoff 在於所計算的 gradient 可能不精確 (不適合現在的 agent)，所以需要的 constraint 去減緩這件事情的影響。</p>
-
 <h3 id="importance-sampling">Importance Sampling</h3>
-
-<p>假設現在我們有兩組 trajectory distribution <span>$p,q$</span>，我們想利用從
-<span>$q$</span> 所 sample/collect 的 trajectory 去更新 <span>$p$</span>
-(will update coresponding polcy)，那麼該如何估測 Policy Gradient 所需要的 expected reward <span>$\mathbb{E}_{\tau \sim p}[r(\tau)]$</span>? 這時候就需要用到 Importance sampling，推導如以下</p>
-
-<p><code>$$
-\begin{aligned}
-\mathbb{E}_{\tau \sim p}[r(\tau)] &amp;= \int_\tau p(\tau) r(\tau) d \tau\\
-&amp;= \int_\tau r(\tau) \frac{p(\tau)}{q(\tau)} q(\tau) d\tau \\
-&amp;= \mathbb{E}_{\tau \sim q}[r(\tau) \color{blue}{\frac{p(\tau)}{q(\tau)}}]
-\end{aligned}
-$$</code></p>
-
-<p><strong>Remark:</strong> <span>$\frac{p(\tau)}{q(\tau)}$</span> 稱為 importance weight ，用此
+<p>假設現在我們有兩組 trajectory distribution <!-- raw HTML omitted -->$p,q$<!-- raw HTML omitted -->，我們想利用從
+<!-- raw HTML omitted -->$q$<!-- raw HTML omitted --> 所 sample/collect 的 trajectory 去更新 <!-- raw HTML omitted -->$p$<!-- raw HTML omitted -->
+(will update coresponding polcy)，那麼該如何估測 Policy Gradient 所需要的 expected reward <!-- raw HTML omitted -->$\mathbb{E}_{\tau \sim p}[r(\tau)]$<!-- raw HTML omitted -->? 這時候就需要用到 Importance sampling，推導如以下</p>
+<p><code>$$ \begin{aligned} \mathbb{E}_{\tau \sim p}[r(\tau)] &amp;= \int_\tau p(\tau) r(\tau) d \tau\\ &amp;= \int_\tau r(\tau) \frac{p(\tau)}{q(\tau)} q(\tau) d\tau \\ &amp;= \mathbb{E}_{\tau \sim q}[r(\tau) \color{blue}{\frac{p(\tau)}{q(\tau)}}] \end{aligned} $$</code></p>
+<p><strong>Remark:</strong> <!-- raw HTML omitted -->$\frac{p(\tau)}{q(\tau)}$<!-- raw HTML omitted --> 稱為 importance weight ，用此
 去 scale 相對應的 reward。</p>
-
-<p><strong>Remark:</strong> 儘管期望值相同，但 <span>$\text{Var}\scriptstyle{\tau \sim p}\textstyle[r(\tau)]$</span> 和 <span>$\text{Var}\scriptstyle{\tau \sim q} \textstyle[r(\tau) \frac{p(\tau)}{q(\tau)}]$</span>還是不同的。兩個 distribution 還是不能差太多，這也是 要加 constraint 的所在。</p>
-
-<p>下面有一張簡單的示意圖（不過 notation 有點小不同😅）
-<center><img src="https://sunprinces.github.io/learning/img/post/importance-sampling.png" width="70%" style="border-radius: 0%;"></center></p>
-
+<p><strong>Remark:</strong> 儘管期望值相同，但 <!-- raw HTML omitted -->$\text{Var}\scriptstyle{\tau \sim p}\textstyle[r(\tau)]$<!-- raw HTML omitted --> 和 <!-- raw HTML omitted -->$\text{Var}\scriptstyle{\tau \sim q} \textstyle[r(\tau) \frac{p(\tau)}{q(\tau)}]$<!-- raw HTML omitted -->還是不同的。兩個 distribution 還是不能差太多，這也是 要加 constraint 的所在。</p>
+<p>下面有一張簡單的示意圖（不過 notation 有點小不同😅）</p>
+<!-- raw HTML omitted -->
 <h3 id="proximal-policy-optimization-ppo">Proximal Policy Optimization (PPO)</h3>
-
-<p>將原先的 objective function <span>$J^{\theta^\prime}(\theta)$</span> 加上一個衡量 <span>$\theta,\theta^\prime$</span> 對應 policy 的 KL divergence<br />
-(拿上面的例子來看的話，就是 <span>$\text{KL}(p,q)$</span>)</p>
-
-<p><strong>Remark:</strong> 另外有一個變形，不是考慮 policy 的 KL divergence，而是用一個 function 去 clip <span>$\frac{p(\tau)}{q(\tau)}$</span> 差太多的情況。</p>
-
+<p>將原先的 objective function <!-- raw HTML omitted -->$J^{\theta^\prime}(\theta)$<!-- raw HTML omitted --> 加上一個衡量 <!-- raw HTML omitted -->$\theta,\theta^\prime$<!-- raw HTML omitted --> 對應 policy 的 KL divergence\<br>
+(拿上面的例子來看的話，就是 <!-- raw HTML omitted -->$\text{KL}(p,q)$<!-- raw HTML omitted -->)</p>
+<p><strong>Remark:</strong> 另外有一個變形，不是考慮 policy 的 KL divergence，而是用一個 function 去 clip <!-- raw HTML omitted -->$\frac{p(\tau)}{q(\tau)}$<!-- raw HTML omitted --> 差太多的情況。</p>
 <p><strong>Remark:</strong> 不過實務上 update 幾次後，不可避免地還是要重新 sample。</p>
-
 <h2 id="reference">Reference</h2>
-
 <ul>
-<li><a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses/MLDS_2018/Lecture/PPO%20(v3).pdf">李宏毅老師的投影片</a></li>
+<li>[李宏毅老師的投影片] (<a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses/MLDS_2018/Lecture/PPO%20(v3).pdf">http://speech.ee.ntu.edu.tw/~tlkagk/courses/MLDS_2018/Lecture/PPO%20(v3).pdf</a>)</li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec2%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec2%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec2%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec2%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec2%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2019%2f01%2freinforcement-learning-lec2%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -411,8 +413,8 @@ $$</code></p>
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -421,10 +423,8 @@ $$</code></p>
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -441,24 +441,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 

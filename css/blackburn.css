@@ -47,6 +47,14 @@ article > footer {
   overflow: hidden;
 }
 
+#menu {
+  overflow-y: visible;
+}
+
+#menu a {
+  padding: 0.6em;
+}
+
 #menu .brand {
   font-family: Raleway;
   font-weight: bold;
@@ -62,6 +70,10 @@ article > footer {
   font-size: 0.9em;
 }
 
+#menu .pure-menu ul.pure-menu-children {
+  border-top: none;
+}
+
 i {
   display: inline-block;
   margin-right: 0.2em;
@@ -75,9 +87,3 @@ i {
 .pagination a {
   color: #265778;
 }
-
-.gist{font-size:13px;line-height:18px;margin-bottom:20px;width:100%}
-.gist pre{font-family:Menlo,Monaco,'Bitstream Vera Sans Mono','Courier New',monospace !important}
-.gist-meta{font-family:Helvetica,Arial,sans-serif;font-size:13px !important}
-.gist-meta a{color:#26a !important;text-decoration:none}
-.gist-meta a:hover{color:#0e4071 !important}

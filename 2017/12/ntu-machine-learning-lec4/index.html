@@ -5,9 +5,11 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Feasibility of Learning">
-  <meta name="generator" content="Hugo 0.55.3" />
+  <meta name="generator" content="Hugo 0.62.0" />
 
   <title>NTU Machine Learning - Lec4 &middot; Stay hungry. Stay foolish </title>
+
+    
 
   
   
@@ -30,27 +32,27 @@
   <link rel="stylesheet" href="https://sunprinces.github.io/learning/css/blackburn.css">
 
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
   
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
 
   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/monokai.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.css" integrity="sha384-8QOKbPtTFvh/lMY0qPVbXj9hDh+v8US0pD//FcoYFst2lCIf0BmT58+Heqj0IGyx" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
   
-  
-  
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+
   <link rel="shortcut icon" href="https://sunprinces.github.io/learning/img/favicon.ico" type="image/x-icon" />
 
   
@@ -124,6 +126,10 @@
     
 
     
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/sunprinceS_0822" rel="me" target="_blank"><i class="fab fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
 
     
 
@@ -139,7 +145,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://instagram.com/sunprince822" target="_blank"><i class="fa fa-instagram fa-fw"></i>Instagram</a>
+      <a class="pure-menu-link" href="https://instagram.com/sunprince822" rel="me" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
     </li>
     
 
@@ -173,7 +179,7 @@
 
     
     <li class="pure-menu-item">
-      <a class="pure-menu-link" href="https://github.com/sunprinceS" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+      <a class="pure-menu-link" href="https://github.com/sunprinceS" rel="me" target="_blank"><i class="fab fa-github-square fa-fw"></i>GitHub</a>
     </li>
     
 
@@ -204,7 +210,6 @@
     
     <li class="pure-menu-item">
       <a class="pure-menu-link" href="https://sunprincelife.wordpress.com/" target="_blank"><i class="fa fa-coffee fa-fw"></i>Life</a>
-
     </li>
     
 
@@ -214,17 +219,11 @@
 
   <div>
   <div class="small-print">
-    <span id="busuanzi_container_site_pv">&nbsp;&nbsp;&nbsp;View &nbsp;&nbsp;<b><span id="busuanzi_value_site_pv"></b></span> &nbsp;times</span></span>
+    <small>&copy; 2017. All rights reserved.</small>
   </div>
   <div class="small-print">
-    <a href="https://gohugo.io/" target="_blank">Hugo</a>&nbsp;&nbsp;&#9830;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a>
-  </div>
-  <div class="small-print">
-    <small>&nbsp;&nbsp;&copy; 2017. All rights reserved.</small>
-  </div>
-
-  <div class="small-print">
-  <small>Icons from Flaticon<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></small>
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
   </div>
 </div>
 
@@ -246,6 +245,7 @@
     <i class="fa fa-calendar fa-fw"></i>
     <time>28 Dec 2017</time>
   </div>
+
   
 
   
@@ -276,80 +276,83 @@
 
 </div>
 
-
   <p>這一講要討論的是<strong>機器學習真的是可行的嗎</strong>？能推廣到所有 scenerio 嗎？或是只有部份？是否需要某些假設才能證明可行呢？</p>
-
-<h2 id="前言">前言</h2>
-
-<p>課堂中給出了一個 learning puzzle 的例子，簡單來說，對於那些 training data 以外的資料，總是有個小惡魔設計與我們找到的 <span>$g$</span> 之 predction，恰恰相反的 label ，來反駁 ML 並沒有學到任何事情(儘管在 training data 上全部 align 了&hellip;)。對我們未知的部份，我們只能任人擺佈，但這些未知，也正是需要 ML 發揮價值的地方。</p>
-
+<h2 id="heading">前言</h2>
+<p>課堂中給出了一個 learning puzzle 的例子，簡單來說，對於那些 training data 以外的資料，總是有個小惡魔設計與我們找到的 <!-- raw HTML omitted -->$g$<!-- raw HTML omitted --> 之 predction，恰恰相反的 label ，來反駁 ML 並沒有學到任何事情(儘管在 training data 上全部 align 了&hellip;)。對我們未知的部份，我們只能任人擺佈，但這些未知，也正是需要 ML 發揮價值的地方。</p>
 <h2 id="infer-sth-unknown">Infer sth unknown</h2>
-
 <p>讓我們先跳出 learning 的框架，想一想從 training data 中，我們能否去推估關於未知部份的一些統計量？從已知連向未知的過程中，嘗試解決(partially)上方遇到的困難。
 這裡以簡單的 bin model 作為介紹。</p>
-
 <h3 id="bin-model">Bin Model</h3>
-
-<p>A bin consist many <span>$\textcolor{orange}{\text{orange}}$</span> and <span>$\textcolor{green}{\text{green}}$</span> balls <br />
-Want: estimate the portion of <span>$\textcolor{orange}{\text{orange}}$</span> balls <span>$\mu$</span></p>
-
-<p>先隨機抓取一把球，算出當中 <span>$\textcolor{orange}{\text{orange}}$</span> ball 的比例 <span>$\upsilon$</span>，是否能以<span>$\upsilon$</span> 去 estimate 未知的 <span>$\mu$</span>？</p>
-
-<h3 id="hoeffding-s-inequality">Hoeffding&rsquo;s Inequality</h3>
-
-<div>
-\[
-\Pr[|\upsilon - \mu| > \textcolor{red}{\epsilon}] \leq 2 \,
-\exp(-2\textcolor{red}{\epsilon}^2\textcolor{blue}{N})
-\]
-</div>
-
+<p>A bin consist many <!-- raw HTML omitted -->$\textcolor{orange}{\text{orange}}$<!-- raw HTML omitted --> and <!-- raw HTML omitted -->$\textcolor{green}{\text{green}}$<!-- raw HTML omitted --> balls \<br>
+Want: estimate the portion of <!-- raw HTML omitted -->$\textcolor{orange}{\text{orange}}$<!-- raw HTML omitted --> balls <!-- raw HTML omitted -->$\mu$<!-- raw HTML omitted --></p>
+<p>先隨機抓取一把球，算出當中 <!-- raw HTML omitted -->$\textcolor{orange}{\text{orange}}$<!-- raw HTML omitted --> ball 的比例 <!-- raw HTML omitted -->$\upsilon$<!-- raw HTML omitted -->，是否能以<!-- raw HTML omitted -->$\upsilon$<!-- raw HTML omitted --> 去 estimate 未知的 <!-- raw HTML omitted -->$\mu$<!-- raw HTML omitted -->？</p>
+<h3 id="hoeffdings-inequality">Hoeffding's Inequality</h3>
+<!-- raw HTML omitted -->
 <h3 id="probably-approximately-correct-pac">Probably approximately correct (PAC)</h3>
-
-<p>When <span>$\Pr[|\upsilon - \mu| &gt; \textcolor{red}{\epsilon}]$</span> is small enough,<br />
-we say the statement <span>$\upsilon = \mu$</span> is <strong>PAC</strong> (which can
-be achieved by sampling large <span>$\textcolor{blue}{N}$</span>)</p>
-
+<p>When <!-- raw HTML omitted -->$\Pr[|\upsilon - \mu| &gt; \textcolor{red}{\epsilon}]$<!-- raw HTML omitted --> is small enough,\<br>
+we say the statement <!-- raw HTML omitted -->$\upsilon = \mu$<!-- raw HTML omitted --> is <strong>PAC</strong> (which can
+be achieved by sampling large <!-- raw HTML omitted -->$\textcolor{blue}{N}$<!-- raw HTML omitted -->)</p>
 <h3 id="connect-with-learning-framework">Connect with learning framework</h3>
-
-<p>Given fixed hypothesis function <span>$\textcolor{orange}{h}(x)$</span></p>
-
+<p>Given fixed hypothesis function <!-- raw HTML omitted -->$\textcolor{orange}{h}(x)$<!-- raw HTML omitted --></p>
 <ul>
-<li><span>$h$</span> is <span>$\textcolor{orange}{\text{wrong}}$</span>，mark as
-<span>$\textcolor{orange}{\text{orange}}$</span></li>
-<li><span>$h$</span> is <span>$\textcolor{green}{\text{correct}}$</span>，mark as
-<span>$\textcolor{green}{\text{green}}$</span></li>
+<li><!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> is <!-- raw HTML omitted -->$\textcolor{orange}{\text{wrong}}$<!-- raw HTML omitted -->，mark as
+<!-- raw HTML omitted -->$\textcolor{orange}{\text{orange}}$<!-- raw HTML omitted --></li>
+<li><!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> is <!-- raw HTML omitted -->$\textcolor{green}{\text{correct}}$<!-- raw HTML omitted -->，mark as
+<!-- raw HTML omitted -->$\textcolor{green}{\text{green}}$<!-- raw HTML omitted --></li>
 </ul>
-
-<p>bin 可以想成是 input space <span>$\mathcal{X}$</span>，但我們僅從中 sample 出
-<span>$\mathcal{D}$</span> 作為 training data ，當<span>$|\mathcal{D}|$</span> (i.e <span>$\textcolor{blue}{N}$</span>) 夠大時，可以說 <span>$\textcolor{orange}{h}$</span> 在 training data 與未知的世界表現是 <strong>probably</strong> consistent 的 (<span>$\Pr[|E_i(h) - E_o(h)| &gt; \textcolor{red}{\epsilon}]$</span> is sufficiently small)。</p>
-
-<h2 id="how-to-find-sufficiently-good-span-h-span">How to find sufficiently good <span>$h$</span></h2>
-
-<p>我們的目標是要找一個 <span>$E_o(h)$</span> 夠小的 <span>$h$</span> ，而能推估<span>$E_o(h)$</span> 的唯一已知量便是 <span>$E_i(h)$</span> 了，而 Hoeffding Ineq. 告訴我們對於單一 <span>$h$</span>，這件事是 PAC。但 <span>$\mathcal{H}$</span> 不會只有一個 <span>$h$</span> ，學習的流程是對每一個 <span>$h$</span> 都去做 sample，並從中挑選出 sample error rate <span>$E_i(h)$</span> 最小者。然而，這件事情會放大 Hoeffding Ineq. 的 upper bound。舉例來說，對 150 個公平銅板，各作 5 次隨機試驗，其中有一個銅板連續 5 次都是正面的機率 &gt; 99% ，但我們能因此便說該銅板正面的機率為 1 嗎？我們把這類使得對給定銅板(<span>$\textcolor{orange}{h}$</span>) <span>$E_i$</span> 跟 <span>$E_o$</span> 差很多的試驗(<span>$\mathcal{D}$</span>)稱作 <span>$\textcolor{red}{\text{BAD}} \, \text{sample}$</span>(也就是說，雖然單看一個銅板，<span>$\Pr[\textcolor{red}{\text{BAD}}]$</span> 很小，但對 150 個銅板而言， <span>$\Pr[\textcolor{red}{\text{BAD}}]$</span> 便超高。</p>
-
-<p>從 learning 的角度來看，就是給定 <span>$\mathcal{D}$</span>， 它對各個 <span>$\textcolor{orange}{h}$</span> 為 <span>$\textcolor{red}{\text{BAD}}$</span> 的機率雖小，但對 <span>$\mathcal{H}$</span> 中至少一個 <span>$\textcolor{orange}{h}$</span> 是 <span>$\textcolor{red}{\text{BAD}}$</span> 的機率卻是不小的。</p>
-
-<p><code>$$
-\begin{align}
-\Pr_D[\color{red}{\text{BAD}} \, \text{for} \, \mathcal{H}] &amp;= 
-\Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_1 \, \lor \color{red}{\text{BAD}} \, \text{for}\, h_2  \, \lor \, \cdots \, \color{red}{\text{BAD}} \, \text{for}\, h_M ] \\
-&amp; \leq \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_1] \, + \, \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_2]  \, + \, \cdots \, \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_M] \, (\because \, \text{Union Bound}) \\
-&amp; \leq 2 \, M \, \exp(-2 \color{red}{\epsilon}^2 \color{blue}{N}) (\because \, \text{Hoeffding Ineq.})
-\end{align}
-$$</code></p>
-
-<p><span>$\Rightarrow$</span> learning is possible when <span>$|\mathcal{H}|$</span> is finite and <span>$E_i(h)$</span> is small <br />
-所謂 <strong>possible</strong> 是指，在 data 足夠的情況下，是可以找到 <span>$E_o$</span>
-probably approximately and sufficiently small 的 <span>$\textcolor{orange}{h}$</span> 。</p>
-
+<p>bin 可以想成是 input space <!-- raw HTML omitted -->$\mathcal{X}$<!-- raw HTML omitted -->，但我們僅從中 sample 出
+<!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted --> 作為 training data ，當<!-- raw HTML omitted -->$|\mathcal{D}|$<!-- raw HTML omitted --> (i.e <!-- raw HTML omitted -->$\textcolor{blue}{N}$<!-- raw HTML omitted -->) 夠大時，可以說 <!-- raw HTML omitted -->$\textcolor{orange}{h}$<!-- raw HTML omitted --> 在 training data 與未知的世界表現是 <strong>probably</strong> consistent 的 (<!-- raw HTML omitted -->$\Pr[|E_i(h) - E_o(h)| &gt; \textcolor{red}{\epsilon}]$<!-- raw HTML omitted --> is sufficiently small)。</p>
+<h2 id="how-to-find-sufficiently-good-spanhspan">How to find sufficiently good <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --></h2>
+<p>我們的目標是要找一個 <!-- raw HTML omitted -->$E_o(h)$<!-- raw HTML omitted --> 夠小的 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> ，而能推估<!-- raw HTML omitted -->$E_o(h)$<!-- raw HTML omitted --> 的唯一已知量便是 <!-- raw HTML omitted -->$E_i(h)$<!-- raw HTML omitted --> 了，而 Hoeffding Ineq. 告訴我們對於單一 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted -->，這件事是 PAC。但 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 不會只有一個 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> ，學習的流程是對每一個 <!-- raw HTML omitted -->$h$<!-- raw HTML omitted --> 都去做 sample，並從中挑選出 sample error rate <!-- raw HTML omitted -->$E_i(h)$<!-- raw HTML omitted --> 最小者。然而，這件事情會放大 Hoeffding Ineq. 的 upper bound。舉例來說，對 150 個公平銅板，各作 5 次隨機試驗，其中有一個銅板連續 5 次都是正面的機率 &gt; 99% ，但我們能因此便說該銅板正面的機率為 1 嗎？我們把這類使得對給定銅板(<!-- raw HTML omitted -->$\textcolor{orange}{h}$<!-- raw HTML omitted -->) <!-- raw HTML omitted -->$E_i$<!-- raw HTML omitted --> 跟 <!-- raw HTML omitted -->$E_o$<!-- raw HTML omitted --> 差很多的試驗(<!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted -->)稱作 <!-- raw HTML omitted -->$\textcolor{red}{\text{BAD}} , \text{sample}$<!-- raw HTML omitted -->(也就是說，雖然單看一個銅板，<!-- raw HTML omitted -->$\Pr[\textcolor{red}{\text{BAD}}]$<!-- raw HTML omitted --> 很小，但對 150 個銅板而言， <!-- raw HTML omitted -->$\Pr[\textcolor{red}{\text{BAD}}]$<!-- raw HTML omitted --> 便超高。</p>
+<p>從 learning 的角度來看，就是給定 <!-- raw HTML omitted -->$\mathcal{D}$<!-- raw HTML omitted -->， 它對各個 <!-- raw HTML omitted -->$\textcolor{orange}{h}$<!-- raw HTML omitted --> 為 <!-- raw HTML omitted -->$\textcolor{red}{\text{BAD}}$<!-- raw HTML omitted --> 的機率雖小，但對 <!-- raw HTML omitted -->$\mathcal{H}$<!-- raw HTML omitted --> 中至少一個 <!-- raw HTML omitted -->$\textcolor{orange}{h}$<!-- raw HTML omitted --> 是 <!-- raw HTML omitted -->$\textcolor{red}{\text{BAD}}$<!-- raw HTML omitted --> 的機率卻是不小的。</p>
+<p><code>$$ \begin{align} \Pr_D[\color{red}{\text{BAD}} \, \text{for} \, \mathcal{H}] &amp;=  \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_1 \, \lor \color{red}{\text{BAD}} \, \text{for}\, h_2  \, \lor \, \cdots \, \color{red}{\text{BAD}} \, \text{for}\, h_M ] \\ &amp; \leq \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_1] \, + \, \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_2]  \, + \, \cdots \, \Pr_D[\color{red}{\text{BAD}} \, \text{for}\, h_M] \, (\because \, \text{Union Bound}) \\ &amp; \leq 2 \, M \, \exp(-2 \color{red}{\epsilon}^2 \color{blue}{N}) (\because \, \text{Hoeffding Ineq.}) \end{align} $$</code></p>
+<p><!-- raw HTML omitted -->$\Rightarrow$<!-- raw HTML omitted --> learning is possible when <!-- raw HTML omitted -->$|\mathcal{H}|$<!-- raw HTML omitted --> is finite and <!-- raw HTML omitted -->$E_i(h)$<!-- raw HTML omitted --> is small \<br>
+所謂 <strong>possible</strong> 是指，在 data 足夠的情況下，是可以找到 <!-- raw HTML omitted -->$E_o$<!-- raw HTML omitted -->
+probably approximately and sufficiently small 的 <!-- raw HTML omitted -->$\textcolor{orange}{h}$<!-- raw HTML omitted --> 。</p>
 <h2 id="reference">Reference</h2>
-
 <ul>
 <li><a href="https://www.csie.ntu.edu.tw/~htlin/course/ml15fall/doc/04_handout.pdf">林軒田老師的講義</a></li>
 </ul>
   
-  <div align="right"><i class="fa fa-users fa-fw"></i>&nbsp;<span id="busuanzi_container_page_pv">View &nbsp;<b><span id="busuanzi_value_page_pv"></span></b> &nbsp;times</span></div>
+  
+<ul class="share-buttons">
+	<li><a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec4%2f" target="_blank" title="Share on Facebook"><i class="fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://twitter.com/intent/tweet?source=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec4%2f&via=HorribleGeek" target="_blank" title="Tweet"><i class="fa-twitter" aria-hidden="true"></i><span class="sr-only">Tweet</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="https://plus.google.com/share?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec4%2f" target="_blank" title="Share on Google+"><i class="fa-google-plus" aria-hidden="true"></i><span class="sr-only">Share on Google+</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.tumblr.com/share?v=3&u=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec4%2f" target="_blank" title="Post to Tumblr"><i class="fa-tumblr" aria-hidden="true"></i><span class="sr-only">Post to Tumblr</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec4%2f" target="_blank" title="Pin it"><i class="fa-pinterest-p" aria-hidden="true"></i><span class="sr-only">Pin it</span></a>
+	</li>&nbsp;&nbsp;&nbsp;
+	<li><a href="http://www.reddit.com/submit?url=https%3a%2f%2fsunprinces.github.io%2flearning%2f2017%2f12%2fntu-machine-learning-lec4%2f" target="_blank" title="Submit to Reddit"><i class="fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a>
+	</li>
+</ul>
+
+
+<style>
+	ul.share-buttons{
+	  list-style: none;
+	  padding: 0;
+	}
+
+	ul.share-buttons li{
+	  display: inline;
+	}
+
+	ul.share-buttons .sr-only{
+	  position: absolute;
+	  clip: rect(1px 1px 1px 1px);
+	  clip: rect(1px, 1px, 1px, 1px);
+	  padding: 0;
+	  border: 0;
+	  height: 1px;
+	  width: 1px;
+	  overflow: hidden;
+	}
+</style>
+
 
   
 <div class="prev-next-post pure-g">
@@ -405,8 +408,8 @@ probably approximately and sufficiently small 的 <span>$\textcolor{orange}{h}$<
 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/katex.min.js" integrity="sha384-GR8SEkOO1rBN/jnOcQDFcFmwXAevSLx7/Io9Ps1rkxWp983ZIuUGfxivlF/5f5eJ" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha1/contrib/auto-render.min.js" integrity="sha384-cXpztMJlr2xFXyDSIfRWYSMVCXZ9HeGXvzyKTYrn03rsMAlOtIQVzjty5ULbaP8L" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
  <script>renderMathInElement(document.body, {
    delimiters: [
      {left: "\\[", right: "\\]", display: true},
@@ -415,10 +418,8 @@ probably approximately and sufficiently small 的 <span>$\textcolor{orange}{h}$<
  });</script>
 
 
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -435,24 +436,27 @@ MathJax.Hub.Config({
 
 
 
-
 </div>
 
 </div>
 </div>
 <script src="https://sunprinces.github.io/learning/js/ui.js"></script>
+<script src="https://sunprinces.github.io/learning/js/menus.js"></script>
 
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  if (window.location.hostname != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-59748795-3', 'auto');
-  ga('send', 'pageview');
-
+    ga('create', 'UA-59748795-3', 'auto');
+    ga('send', 'pageview');
+  }
 </script>
+
 
 
 
