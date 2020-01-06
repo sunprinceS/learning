@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>實驗管理 on Stay hungry. Stay foolish </title>
+    <link>https://sunprinces.github.io/learning/tags/%E5%AF%A6%E9%A9%97%E7%AE%A1%E7%90%86/</link>
+    <description>Recent content in 實驗管理 on Stay hungry. Stay foolish </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017. All rights reserved.</copyright>
+    <lastBuildDate>Sun, 05 Jan 2020 17:04:09 +0800</lastBuildDate>
+    
+	<atom:link href="https://sunprinces.github.io/learning/tags/%E5%AF%A6%E9%A9%97%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Comet ML - 你必須知道的 ML 實驗管理神器</title>
+      <link>https://sunprinces.github.io/learning/2020/01/comet-ml-%E4%BD%A0%E5%BF%85%E9%A0%88%E7%9F%A5%E9%81%93%E7%9A%84-ml-%E5%AF%A6%E9%A9%97%E7%AE%A1%E7%90%86%E7%A5%9E%E5%99%A8/</link>
+      <pubDate>Sun, 05 Jan 2020 17:04:09 +0800</pubDate>
+      
+      <guid>https://sunprinces.github.io/learning/2020/01/comet-ml-%E4%BD%A0%E5%BF%85%E9%A0%88%E7%9F%A5%E9%81%93%E7%9A%84-ml-%E5%AF%A6%E9%A9%97%E7%AE%A1%E7%90%86%E7%A5%9E%E5%99%A8/</guid>
+      <description>&lt;p&gt;「機器學習相關實驗」管理的想法，是去年在 Apple 實習萌芽的，那時覺得公司內部相關工具 overhead 不少，doc 也不全，加上界面太好看(?)，就沒有使用，而是用相當土炮的方法 (自己存數據到檔案裡以及一些工人智慧)來做實驗彙整。最近手上 project 要跑的實驗量已經大到這種管理方式會很吃力 (500 exp up)，便開始找尋現成的工具，而 Comet.ml (以下簡稱 Comet ) 在眾多框架之中脫穎而出，我想之後我寫的扣要 import tensorboard 的機會微乎其微了(吧) ，而這麼好用的工具網路上卻沒什麼中文的介紹文，於是來跟大家分享 😎&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
