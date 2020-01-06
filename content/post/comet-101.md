@@ -1,7 +1,7 @@
 +++
 title = "Comet ML - 你必須知道的 ML 實驗管理神器"
 date = "2020-01-05T17:04:09+08:00"
-draft = true
+draft = false
 tags = ["小工具","實驗管理"]
 topics = ["工具"]
 description = "用 comet 後，loss 都起飛了，人也壯了，自信心都回到我身邊ㄌ"
