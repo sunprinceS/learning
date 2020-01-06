@@ -6,7 +6,7 @@ contentdir = "content"
 layoutdir = "layouts"
 publishdir = "public"
 author = "Jui-Yang Hsu"
-copyright = "&copy; 2017. All rights reserved."
+copyright = "&copy; 2017-2020. All rights reserved."
 canonifyurls = true
 paginate = 10
 
